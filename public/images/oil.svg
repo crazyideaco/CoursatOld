@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="23" height="23" viewBox="0 0 23 23">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_694" data-name="Rectangle 694" width="23" height="23" transform="translate(3 3)" fill="#2f3640" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="oil" transform="translate(-3 -3)" clip-path="url(#clip-path)">
+    <g id="package" transform="translate(3 3)">
+      <path id="Path_3054" data-name="Path 3054" d="M20.072,9.6,11.5,6.755,2.928,9.6,0,14.246,2.7,15.14v4.942L11.5,23l8.8-2.919V15.14L23,14.246Zm-2.583.564L11.5,12.146,5.511,10.16,11.5,8.175ZM2.058,13.508l1.6-2.542,6.813,2.259-1.6,2.542Zm1.985,2.078,5.406,1.792,1.377-2.187v6.166L4.043,19.108Zm8.131,5.771V15.191l1.377,2.187,5.406-1.792v3.522Zm1.955-5.59-1.6-2.542,6.813-2.259,1.6,2.542Z" fill="#2f3640"/>
+      <path id="Path_3055" data-name="Path 3055" d="M10.826,0h1.348V4.5H10.826Z" fill="#2f3640"/>
+      <path id="Path_3056" data-name="Path 3056" d="M5.523,1.421H6.871v4.5H5.523Z" transform="translate(-1.005 3.59) rotate(-30.001)" fill="#2f3640"/>
+      <path id="Path_3057" data-name="Path 3057" d="M14.552,3h4.5V4.345h-4.5Z" transform="translate(5.222 16.387) rotate(-59.999)" fill="#2f3640"/>
+    </g>
+  </g>
+</svg>
