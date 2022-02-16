@@ -138,7 +138,6 @@
         <tbody>
                     @foreach($doctors as $doctor)
                     <tr id="c{{$doctor->id}}">
-                      
 						<th >{{$doctor->id}}</th>
               <td scope="col" class='text-center'>
 				 <a href="{{route('doctorprofile',$doctor->id)}}"> {{$doctor['name']}}
