@@ -103,7 +103,7 @@ public function storestupoints(Request $request){
     $stu->save();
   	$not = new Notification;
     $not->title ='صرف نقاط';
-    $not->text = 'تم صرف نقاط لك بنجاح';
+    $not->text = 'تم صرف' .' '. $stu->points . ' ' . 'نقاط لك بنجاح ';
     $not->user_id = $stu->id;
     $not->save();
     $to = $stu->device_token;
