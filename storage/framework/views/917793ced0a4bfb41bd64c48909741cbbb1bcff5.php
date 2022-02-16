@@ -148,6 +148,7 @@
 						<?php if($doctor->code): ?>
 							<?php echo QrCode::size(80)->backgroundColor(255,255,204)->generate($doctor->code); ?>
 
+                            <img href="data:image/png;base64, <?php echo base64_encode(QrCode::size(100)->generate('Make me into an QrCode!')); ?>" download>
 						<?php else: ?> 
 					
 							لايوجد كود  للدكتور
