@@ -102,7 +102,7 @@ public function storestupoints(Request $request){
     $stu->points = intval($point) + intval($request->points);
     $stu->save();
   	$not = new Notification;
-    $not->title ='صرف نقاط';
+    $not->title ='صرف نقاط'; 
     $not->text = 'تم صرف' .' '. $request->points . ' ' . 'نقاط لك بنجاح ';
     $not->user_id = $stu->id;
     $not->save();
