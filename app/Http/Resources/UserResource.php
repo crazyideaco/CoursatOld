@@ -43,7 +43,8 @@ class UserResource extends JsonResource
         'college' => ($this->college)  ? $this->college['name_ar'] : null,
         'department' => ($this->division) ? $this->division['name_ar'] : null,
         'college_year' => ($this->section) ? $this->section['name_ar'] : null, 
-        'centers' => CenterResource::collection($centers) 
+        'centers' => CenterResource::collection($centers),
+        'points' => $this->points ?? 0
            
             
         ];
