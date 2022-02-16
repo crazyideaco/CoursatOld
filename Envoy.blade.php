@@ -14,6 +14,7 @@
 @task('pull_repository')
     echo 'Pulling repository'
     cd {{ $app_dir }}
+    git stash
     git pull origin master
 
 
