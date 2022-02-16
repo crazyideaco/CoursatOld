@@ -14,8 +14,8 @@
 @task('pull_repository')
     echo 'Pulling repository'
     cd {{ $app_dir }}
-    <!-- git add . 
-    git commit -m "add" -->
+    git add . 
+    git commit -m "add"
     git stash
     git pull origin master
 
