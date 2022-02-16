@@ -199,7 +199,6 @@ $duration =  $file['playtime_seconds'];
   
       $video->save();
       $students = $lesson->typescollege->studentscollege; 
-      dd($students);
       foreach($students as $user){
 				$not = new Notification;
         $text = 'لديك فيديو جديد فى كورس ' . $lesson->typescollege->name_ar;
