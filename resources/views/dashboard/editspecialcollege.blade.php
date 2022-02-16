@@ -245,6 +245,14 @@ span.btn{
                            </div>
                            @endforeach
        </section>
+       <div class="row">
+                               <div class="form-group col-md-6 col-12">
+                                   <label>الوصف</label>
+                                   <textarea class="form-control"
+                                    rows="5" id="description" 
+                                    name="description">{{$sp->description}}</textarea>
+                               </div>
+                           </div>
                         <div class="save text-center mt-6">
                             <div class="row save">
                                 <div class="col-12 text-center">

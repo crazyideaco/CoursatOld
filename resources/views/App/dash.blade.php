@@ -421,7 +421,9 @@
                     <div id="products" class="collapse @if(request()->is('stages') || request()->is('years')
                     || request()->is('types') || request()->is('subtypes') || request()->is('subjects') || request()->is('addvideo')
                     || request()->is('videos')  || request()->is('addpaqabasic') || request()->is('userpaqabasic') || request()->is('subjectquestionsscenter') || 
-                                              request()->is('alltypeexamresults') || request()->is('allsubtypeexamresults')) show  @endif">
+                                              request()->is('alltypeexamresults') || 
+                                              request()->is('allsubtypeexamresults') ||
+                                               request()->is('typecollege_joins')) show  @endif">
                                 @if(Auth::user() && Auth::user()->isAdmin == 'admin')                    
                                <a href="{{route('stages')}}" class="@if(request()->is('stages'))active @endif">المراحل</a>
                                <a href="{{route('years')}}" class="@if(request()->is('years'))active @endif">السنوات</a>
@@ -527,9 +529,13 @@
                             نتائج امتحانات الحصص </a> 
                            
                            @endif
-                             
-                              <a href="{{route('subjectscollegequestionscenter')}}" class="@if(request()->is('subjectscollegequestionscenter'))active @endif">
-                            بنك الاسئله</a>
+                               
+                           <a href="{{route('subjectscollegequestionscenter')}}"
+                            class="@if(request()->is('subjectscollegequestionscenter'))active @endif">
+                              بنك الاسئله</a>
+                              <a href="{{route('typecollege_joins')}}" class="
+                              @if(request()->is('typecollege_joins'))active @endif">
+                              طلبات الانضمام</a>
                            
                             </div>
                         </div>

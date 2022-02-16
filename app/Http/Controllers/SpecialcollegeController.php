@@ -104,8 +104,7 @@ class SpecialcollegeController extends Controller
      with('sections',$sections)->with('subcolleges',$subcolleges)->with('typescolleges',$typescolleges)
      ->with('lessons',$lessons)->with('universities',University::all())->with('id',$id)->with("videos",$videos)->with("type",$type);
  }public function storespecialcollege(Request $request,$id){
-  
- 
+
        $request->validate([
         'image' => 'required|mimes:jpeg,jpg,png,gif'
          ],[
@@ -117,7 +116,7 @@ class SpecialcollegeController extends Controller
       $sp->name_ar = $request->name_ar;
       $sp->status = 1;
     $sp->name_en = $request->name_en;
-
+    $sp->description = $request->description;
   $sp->typescollege_id  = $id;
      if($request->hasFile('image'))
         {
@@ -219,6 +218,7 @@ class SpecialcollegeController extends Controller
     $typescollege = TypesCollege::where("id",$sp->typescollege_id)->first();
       $sp->name_ar = $request->name_ar;
     $sp->name_en = $request->name_en;
+    $sp->description = $request->description;
      if($request->hasFile('image'))
         {
         $image = $request->image;

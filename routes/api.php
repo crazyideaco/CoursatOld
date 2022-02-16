@@ -83,6 +83,9 @@ Route::post('fetch_live_lessons','SkipLessonController@fetch_live_lessons')->mid
   Route::post('build_custom_exam','ExamController@build_custom_exam')->middleware('auth:api');
    Route::post('sendcourse_exam_result','ExamController@sendcourse_exam_result')->middleware('auth:api');
   Route::post('sendlesson_exam_result','ExamController@sendlesson_exam_result')->middleware('auth:api');
+
+  //
+  Route::post('add_course_join','TypecollegeJoinController@index')->middleware('auth:api');
 ###########################################################
 Route::get('offers','api\HomeController@offers');
 

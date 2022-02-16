@@ -202,7 +202,7 @@ console.log(id);
     });
     $.ajax({
        type:"get",
-       url: `getcolleges/${id}`,
+       url: `../getcolleges/${id}`,
    //    contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){

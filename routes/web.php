@@ -3,21 +3,25 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/cache', function() {
-  Artisan::call('config:clear');
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-    return "Cache is cleared";
-});
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/cache', function() {
+//   Artisan::call('config:clear');
+//     Artisan::call('cache:clear');
+//     Artisan::call('view:clear');
+//     return "Cache is cleared";
+// });
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('dashLogin','LoginController@dashlogin')->name('dashlogin')->middleware("guest");
 Route::post('startlogin','LoginController@startlogin')->name('startlogin');
+
+
+  //tags
+
+  Route::resource("tags",'TagController'); 
 //Route::group(['middleware' => ['auth','isAdmin']],function(){
 Route::group(['middleware' => ['auth']],function(){
-  //tags
-Route::resource("tags",'TagController');  
+ 
 Route::get('deleteuser/{id}','userscontroller@deleteuser')->name('deleteuser');
   //courses_students
   Route::get('studentstype/{id}','StudentController@studentstype')->name('studentstype');
@@ -241,7 +245,7 @@ Route::get('deletetype/{id}','TypeController@deletetype')->name('deletetype');
 
     //ajax in add video
     Route::get('getteacher/{id}','TeacherController@getteacher')->name('getteacher');
-        Route::get('gettype/{id}/{value}','dashboardcontroller@gettype')->name('gettype');
+        Route::get('gettype/{id}/{value}','dashboardcontroller@gettype');//->name('gettype');
 
     Route::get('getyear/{id}','YearController@getyear')->name('getyear');
 Route::get('getsubtype/{id}','SubtypeController@getsubtype')->name('getsubtype');
@@ -426,6 +430,13 @@ Route::get('getdocsection/{id}','SectionController@getdocsection')->name('getdoc
 Route::get('getdocsubcollege/{id}','SubjectsCollegeController@getdocsubcollege')->name('getdocsubcollege');
 
 Route::get('getdoctypescollege/{id}','TypesCollegeController@getdoctypescollege')->name('getdoctypescollege');
+
+//typecollege_joins
+
+Route::get('typecollege_joins','TypecollegeJoinController@index')->name('typecollege_joins');
+Route::get('accept_typecollege_join/{id}','TypecollegeJoinController@accept_typecollege_join')->name('accept_typecollege_join');
+Route::get('refuse_typecollege_join/{id}','TypecollegeJoinController@refuse_typecollege_join')->name('refuse_typecollege_join');
+
 });
 
 

@@ -184,7 +184,7 @@ class DoctorController extends Controller
      ->with('states',State::all())->with('cities',City::all())->with('subcolleges',SubjectsCollege::all())->with('universities',University::all())->with('doctor',$doctor);
  }
  public function updatedoctor($id,Request $request){
-   
+   dd($request->all());
     $validator = Validator::make($request->all(),[
         'name' => "required|unique:users,name,$id",
         'phone' => "required|unique:users,phone,$id|numeric",

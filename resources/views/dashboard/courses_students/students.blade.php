@@ -80,7 +80,7 @@
                     <div class="container">
                         <div class="row def">
 
-                            <img src="images/all-products.svg">
+                            <img src="{{asset('images/all-products.svg')}}">
                             <h5>الطلاب</h5>
 
                            

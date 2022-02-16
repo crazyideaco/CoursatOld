@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
       	<meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
+          <meta name="csrf-token" content="{{ csrf_token() }}">
          <link rel="icon" href="{!! asset('images/logooo.svg')!!}" type="image/ico"/>
         <title>coursat</title>
    
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label>البريد الالكتروني</label>
                     <div class="login-frm">
-                        <input type="email" class="form-control" placeholder="البريد الالكترونى" name="email">
+                        <input type="email" required class="form-control" placeholder="البريد الالكترونى" name="email">
                         <span class="login-icon"><i class="far fa-envelope"></i></span>
                     </div>
                        @error('email')
@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label>الرمز السرى</label>
                     <div class="login-frm">
-                        <input type="password" class="form-control" placeholder="الرمز السرى" name="password">
+                        <input type="password" class="form-control" required placeholder="الرمز السرى" name="password">
                         <span class="login-icon"><i class="fas fa-lock"></i></span>
                     </div>
                      @error('password')

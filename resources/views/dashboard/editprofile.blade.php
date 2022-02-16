@@ -114,7 +114,8 @@
                            <div class="row">
                                <div class="form-group col-12">
                                    <label>الوصف</label>
-                                   <textarea class="form-control" rows="5" id="description"  name="description">{{auth()->user()->description}}</textarea>
+                                   <textarea class="form-control" rows="5" 
+                                   id="description"  name="description">{{auth()->user()->description}}</textarea>
                                </div>
                            </div>
 

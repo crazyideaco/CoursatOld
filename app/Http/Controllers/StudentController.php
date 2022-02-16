@@ -297,7 +297,7 @@ class StudentController extends Controller
      $students1 = User::whereIn('id',$students_ids)->get();
      $students = $students1->merge($user->centerstudents);
      }
-        return view("dashboard.courses_students.studentstype",compact("students"));
+        return view("dashboard.courses_students.students",compact("students"));
   }public function deletestudentcourse(Request $request){
     if($request->status == 0){
      $studenttype = Student_Type::where([['student_id','=',$request->student_id],['type_id','=',$request->course_id]])->first();

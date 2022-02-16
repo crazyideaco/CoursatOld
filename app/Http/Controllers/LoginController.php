@@ -60,7 +60,6 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
      public function startlogin(Request $request){
-  //   dd($request->all());
     if(auth()->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
          
            $user= User::where('email',$request->email)->first();
