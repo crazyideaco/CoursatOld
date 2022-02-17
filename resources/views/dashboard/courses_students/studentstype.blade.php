@@ -104,6 +104,7 @@
 					<th>id</th>
                      <th scope="col" class="text-center">الاسم</th>
 					<th scope="col" class="text-center">الكود</th>
+                    <th scope="col" class="text-center">رقم الهاتف</th>
 					<th scope="col" class="text-center">المحافظه</th>
 					<th scope="col" class="text-center">المدينه</th>
                   
@@ -118,6 +119,7 @@
 						<th>{{$student->id}}</th>
                       <td scope="col" class='text-center'><a href="{{route('studentprofile',$student->id)}}">{{$student->name}}</a></td>
 				<td scope="col" class='text-center'>{{$student->code}}</td>
+                <td scope="col" class='text-center'>{{$student->phone}}</td>
              <td scope="col" class="text-center">
                 @if($student->state)     
                    {{$student->state['state']}}
