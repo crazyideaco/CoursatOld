@@ -121,6 +121,7 @@
 					<th>id</th>
                      <th scope="col" class="text-center">اسم الطالب</th>
                      <th scope="col" class="text-center"> الكورس</th>
+                     <th scope="col" class="text-center"> الادمن</th>
                       <th scope="col" class="text-center"> الاعدادات</th>
                 </tr>
                         </thead>
@@ -130,6 +131,7 @@
         <td class="text-center">{{$join->id}}</td>
         <td class="text-center">{{$join->student->name ?? ""}}</td>
         <td class="text-center">{{$join->typescollege->name_ar ?? ""}}</td>
+        <td class="text-center">{{$join->user->name ?? ""}}</td>
         <td class="tex-center">
         <div id="status{{$join->id}}">
             @if($join->status == 0)

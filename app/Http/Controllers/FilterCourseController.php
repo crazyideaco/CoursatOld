@@ -105,23 +105,76 @@ class FilterCourseController extends Controller
     }
     return response()->json(['status' => true,'data' => $text]);
   }public function filtertypescollege(Request $request){
-  if($request->university_id && $request->college_id && $request->division_id && $request->section_id && $request->subjectscollege_id){
-       $typescolleges = TypesCollege::where("subjectscollege_id",$request->subjectscollege_id)->get();
-  }elseif($request->university_id && $request->college_id && $request->division_id && $request->section_id){
-       $typescolleges = TypesCollege::where("section_id",$request->section_id)->get();
-  }elseif($request->university_id && $request->college_id && $request->division_id){
-       $typescolleges = TypesCollege::where("division_id",$request->division_id)->get();
-  }elseif($request->university_id && $request->college_id){
-       $typescolleges = TypesCollege::where("college_id",$request->college_id)->get();
-  }elseif($request->university_id){
-       $typescolleges = TypesCollege::where("university_id",$request->university_id)->get();
-  }else{
-    $typescolleges = TypesCollege::all();
-  }
+ // dd($request->all());
+  // if($request->university_id && $request->college_id && $request->division_id &&  $request->section_id && $request->subjectscollege_id){
+  //      $typescolleges = TypesCollege::where("subjectscollege_id",$request->subjectscollege_id)->get();
+  // }elseif($request->university_id && $request->college_id && $request->division_id && $request->section_id){
+  //      $typescolleges = TypesCollege::where("section_id",$request->section_id)->get();
+  // }elseif($request->university_id && $request->college_id && $request->division_id){
+  //      $typescolleges = TypesCollege::where("division_id",$request->division_id)->get();
+  // }elseif($request->university_id && $request->college_id){
+  //      $typescolleges = TypesCollege::where("college_id",$request->college_id)->get();
+  // }elseif($request->university_id){
+  //      $typescolleges = TypesCollege::where("university_id",$request->university_id)->get();
+  // }else{
+  //   $typescolleges = TypesCollege::all();
+  // }
+  if(Auth::user() && Auth::user()->isAdmin == 'admin'){
+  $typescolleges = TypesCollege::where(function ($query) use ($request) {
+    $query->when($request->university_id != 0,function($q) use($request){
+                return $q->where("university_id",$request->university_id);
+        });
+        $query->when($request->college_id != 0,function($q) use($request){
+          return $q->where("college_id",$request->college_id);
+        });
+        $query->when($request->division_id != 0,function($q) use($request){
+          return $q->where("division_id",$request->division_id);
+        });
+        $query->when($request->section_id != 0,function($q) use($request){
+          return $q->where("section_id",$request->section_id);
+        }); $query->when($request->subjectscollege_id != 0,function($q) use($request){
+          return $q->where("subjectscollege_id",$request->subjectscollege_id);
+        });
+})->get();
+}else if(Auth::user() &&Auth::user()->is_student == 3){
+  $typescolleges = TypesCollege::where("doctor_id",auth()->id())->where(function ($query) use ($request) {
+    $query->when($request->university_id != 0,function($q) use($request){
+                return $q->where("university_id",$request->university_id);
+        });
+        $query->when($request->college_id != 0,function($q) use($request){
+          return $q->where("college_id",$request->college_id);
+        });
+        $query->when($request->division_id != 0,function($q) use($request){
+          return $q->where("division_id",$request->division_id);
+        });
+        $query->when($request->section_id != 0,function($q) use($request){
+          return $q->where("section_id",$request->section_id);
+        }); $query->when($request->subjectscollege_id != 0,function($q) use($request){
+          return $q->where("subjectscollege_id",$request->subjectscollege_id);
+        });
+})->get();
+}elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
+  $typescolleges = TypesCollege::where("center_id",auth()->id())->where(function ($query) use ($request) {
+    $query->when($request->university_id != 0,function($q) use($request){
+                return $q->where("university_id",$request->university_id);
+        });
+        $query->when($request->college_id != 0,function($q) use($request){
+          return $q->where("college_id",$request->college_id);
+        });
+        $query->when($request->division_id != 0,function($q) use($request){
+          return $q->where("division_id",$request->division_id);
+        });
+        $query->when($request->section_id != 0,function($q) use($request){
+          return $q->where("section_id",$request->section_id);
+        }); $query->when($request->subjectscollege_id != 0,function($q) use($request){
+          return $q->where("subjectscollege_id",$request->subjectscollege_id);
+        });
+})->get();
+}
     $text = "";
                         foreach($typescolleges as $typescollege){
                      $text .= '<tr id="un'.$typescollege->id.'">
-					<!--	<td>'.$typescollege->id.'</td>-->
+						<td>'.$typescollege->id.'</td>
                           <td scope="row" class="text-center">
                    <a href="'.route("lessons",$typescollege).'"> '.$typescollege->name_ar.'</a></td>
                    
