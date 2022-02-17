@@ -22,7 +22,6 @@
 body {
     margin: 0px;
     padding: 0px;
-    font-family: ;
 }
 .bootstrap-select>select{
 	left: unset !important;
@@ -105,7 +104,7 @@ a {
 .side-bar .lists #points a,
 .side-bar .lists #nots a
 {
-    color: #aa7700; 
+    color: #aa7700;
     font-family: med;
     font-size: 12px;
     margin-top: 8px;
@@ -960,9 +959,9 @@ textarea{
 }
 
 .all-products button {
-    width:230px; !important;
-    color: #ffffff;
-    font-family: bld;
+    width: 230px !important;
+    color: #fff;
+    font-family: "bld";
     font-size: 18px;
 }
 
@@ -1711,7 +1710,7 @@ textarea{
     padding-top: 5%;
     padding-bottom: 7%;
 
-    
+
 }
 
 .login-detials{
@@ -1721,9 +1720,9 @@ textarea{
     margin-left: auto;
     background-color: #FCFCFC;
     border-radius: 8px;
-    
-    
-    
+
+
+
 }
 
 .login-title{
@@ -1798,7 +1797,7 @@ input::placeholder{
 .login-check input{
     margin-right: 0px;
     margin-left: 5px;
-    
+
 }
 .login-check label{
     margin-right: 10px;
@@ -1874,7 +1873,7 @@ div#example_filter {
 }
 
 .table-bordered td, .table-bordered th {
-    
+
     border: none;
 }
 
