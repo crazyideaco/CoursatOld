@@ -39,6 +39,7 @@ class TypeResource extends JsonResource
        }else{
           $center_name = $this->user['name']; 
        }
+       $status = 0;
          $duration = array_sum($this->videos->pluck('seconds')->toArray());
            return [
            'id'  => $this->id,
@@ -59,6 +60,7 @@ class TypeResource extends JsonResource
            'allow' => $allow,
            'rate'=> $rate,
            'category_id' => 1,
+           "status" => $status,
           'tags' => TagResource::collection($this->tags)
             
         ];
