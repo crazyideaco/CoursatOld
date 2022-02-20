@@ -18,10 +18,11 @@ Route::post('startlogin','LoginController@startlogin')->name('startlogin');
 
   //tags
 
-  Route::resource("tags",'TagController'); 
+  Route::resource("tags",'TagController');
 //Route::group(['middleware' => ['auth','isAdmin']],function(){
 Route::group(['middleware' => ['auth']],function(){
- 
+    Route::get('main_page','MainPageController@main_page')->name('main_page');
+
 Route::get('deleteuser/{id}','userscontroller@deleteuser')->name('deleteuser');
   //courses_students
   Route::get('studentstype/{id}','StudentController@studentstype')->name('studentstype');
@@ -63,7 +64,7 @@ Route::get('teacherprofile/{id}','ProfileController@teacherprofile')->name('teac
 Route::get('centerprofile/{id}','ProfileController@centerprofile')->name('centerprofile');
 Route::get('doctorprofile/{id}','ProfileController@doctorprofile')->name('doctorprofile');
 Route::get('lecturerprofile/{id}','ProfileController@lecturerprofile')->name('lecturerprofile');
-Route::get('messages','dashboardcontroller@messages')->name('messages');	
+Route::get('messages','dashboardcontroller@messages')->name('messages');
 Route::get('editpassword','ProfileController@editpassword')->name('editpassword');
 Route::post('updatepassword','ProfileController@updatepassword')->name('updatepassword');
 Route::get('states','StateController@states')->name('states');
@@ -127,7 +128,7 @@ Route::post('updateoffer/{id}','OfferController@updateoffer')->name('updateoffer
 Route::get('deleteoffer/{id}','OfferController@deleteoffer')->name('deleteoffer');
 
 
-//logout 
+//logout
 //ajax city
 Route::get('getcity/{id}','CityController@getcity')->name('getcity');
 //ajax subtype
@@ -233,7 +234,7 @@ Route::post('storespecialbasic/{id}','SpecialbasicController@storespecialbasic')
 Route::post('updatespecialbasic/{id}','SpecialbasicController@updatespecialbasic')->name('updatespecialbasic');
     Route::get('deletespecialbasic/{id}','SpecialbasicController@deletespecialbasic')->name('deletespecialbasic');
 Route::get('givetypecourse','CourseController@givetypecourse')->name('givetypecourse');
-Route::post('addtypecourse','dashboardcontroller@addtypecourse');  
+Route::post('addtypecourse','dashboardcontroller@addtypecourse');
     //types
 Route::get('types','TypeController@types')->name('types');
 Route::get('addtype','TypeController@addtype')->name('addtype');
@@ -258,7 +259,7 @@ Route::get('editsubtype/{id}','SubtypeController@editsubtype')->name('editsubtyp
 Route::post('updatesubtype/{id}','SubtypeController@updatesubtype')->name('updatesubtype');
   Route::get('deletesubtype/{id}','SubtypeController@deletesubtype')->name('deletesubtype');
   Route::get('subtypeattendstudents/{id}','SubtypeController@subtypeattendstudents')->name('subtypeattendstudents');
- 
+
 //grouptypes
 Route::get('grouptypes/{id}','GroupTypeController@grouptypes')->name('grouptypes');
 Route::get('addgrouptype/{id}','GroupTypeController@addgrouptype')->name('addgrouptype');
@@ -307,7 +308,7 @@ Route::get('addsubtypeexam/{id}','SubtypeExamController@addsubtypeexam')->name('
 Route::post('storesubtypeexam/{id}','SubtypeExamController@storesubtypeexam')->name('storesubtypeexam');
 Route::get('editsubtypeexam/{id}','SubtypeExamController@editsubtypeexam')->name('editsubtypeexam');
 Route::post('updatesubtypeexam/{id}','SubtypeExamController@updatesubtypeexam')->name('updatesubtypeexam');
-  Route::get('deletesubtypeexam/{id}','SubtypeExamController@deletesubtypeexam')->name('deletesubtypeexam');  
+  Route::get('deletesubtypeexam/{id}','SubtypeExamController@deletesubtypeexam')->name('deletesubtypeexam');
   Route::get('subtypeexamresults/{id}','SubtypeExamController@subtypeexamresults')->name('subtypeexamresults');
   Route::get('allsubtypeexamresults','SubtypeExamController@allsubtypeexamresults')->name('allsubtypeexamresults');
   //videoexams
@@ -316,7 +317,7 @@ Route::get('addvideoexam/{id}','VideoExamController@addvideoexam')->name('addvid
 Route::post('storevideoexam/{id}','VideoExamController@storevideoexam')->name('storevideoexam');
 Route::get('editvideoexam/{id}','VideoExamController@editvideoexam')->name('editvideoexam');
 Route::post('updatevideoexam/{id}','VideoExamController@updatevideoexam')->name('updatevideoexam');
-  Route::get('deletevideoexam/{id}','VideoExamController@deletevideoexam')->name('deletevideoexam');  
+  Route::get('deletevideoexam/{id}','VideoExamController@deletevideoexam')->name('deletevideoexam');
 //videos
 Route::get('addvideo/{id}','VideoController@addvideo')->name('addvideo');
 Route::get('editvideo/{id}','VideoController@editvideo')->name('editvideo');
@@ -327,7 +328,7 @@ Route::post('updatevideo/{id}','VideoController@updatevideo')->name('updatevideo
 });
 
 Route::group(['middleware' => ['auth','college']],function(){
-    
+
    // Route::get('logoutall','dashboardcontroller@logoutall')->name('logoutall');
 
 Route::get('givetypecollegecourse','CourseController@givetypecollegecourse')->name('givetypecollegecourse');
@@ -339,8 +340,8 @@ Route::post('storesubcollege','SubjectsCollegeController@storesubcollege')->name
 Route::get('subcolleges','SubjectsCollegeController@subcolleges')->name('subcolleges');
 Route::get('editsubcollege/{id}','SubjectsCollegeController@editsubcollege')->name('editsubcollege');
 Route::post('updatesubcollege/{id}','SubjectsCollegeController@updatesubcollege')->name('updatesubcollege');
-Route::get('deletesubcollege/{id}','SubjectsCollegeController@deletesubcollege')->name('deletesubcollege');    
-    
+Route::get('deletesubcollege/{id}','SubjectsCollegeController@deletesubcollege')->name('deletesubcollege');
+
     Route::get('getdivision/{id}','DivisionController@getdivision')->name('getdivision');
 
     //groupstypescolleges
@@ -400,7 +401,7 @@ Route::get('addvideoscollegeexam/{id}','VideoscollegeExamController@addvideoscol
 Route::post('storevideoscollegeexam/{id}','VideoscollegeExamController@storevideoscollegeexam')->name('storevideoscollegeexam');
 Route::get('editvideoscollegeexam/{id}','VideoscollegeExamController@editvideoscollegeexam')->name('editvideoscollegeexam');
 Route::post('updatevideoscollegeexam/{id}','VideoscollegeExamController@updatevideoscollegeexam')->name('updatevideoscollegeexam');
-  Route::get('deletevideoscollegeexam/{id}','VideoscollegeExamController@deletevideoscollegeexam')->name('deletevideoscollegeexam'); 
+  Route::get('deletevideoscollegeexam/{id}','VideoscollegeExamController@deletevideoscollegeexam')->name('deletevideoscollegeexam');
 //addtypescollege
 Route::get('addtypescollege','TypesCollegeController@addtypescollege')->name('addtypescollege');
 Route::post('storetypescollege','TypesCollegeController@storetypescollege')->name('storetypescollege');
@@ -408,7 +409,7 @@ Route::get('typescolleges','TypesCollegeController@typescolleges')->name('typesc
 Route::get('edittypescollege/{id}','TypesCollegeController@edittypescollege')->name('edittypescollege');
 Route::post('updatetypescollege/{id}','TypesCollegeController@updatetypescollege')->name('updatetypescollege');
 Route::get('deletetypescollege/{id}','TypesCollegeController@deletetypescollege')->name('deletetypescollege');
-    
+
 //addlesson
 Route::get('addlesson/{id}','LessonController@addlesson')->name('addlesson');
 Route::post('storelesson/{id}','LessonController@storelesson')->name('storelesson');
@@ -499,18 +500,18 @@ Route::post('storecourse','CourseController@storecourse')->name('storecourse');
 Route::get('course','CourseController@course')->name('course');
 Route::get('editcourse/{id}','CourseController@editcourse')->name('editcourse');
 Route::post('updatecourse/{id}','CourseController@updatecourse')->name('updatecourse');
-   Route::get('deletecourse/{id}','CourseController@deletecourse')->name('deletecourse'); 
+   Route::get('deletecourse/{id}','CourseController@deletecourse')->name('deletecourse');
 	Route::get('givecourse','CourseController@givecourse')->name('givecourse');
 Route::post('addcourses','CourseController@addcourses');
 //videosgeneral
 Route::get('addvideosgeneral/{id}','VideosGeneralController@addvideosgeneral')->name('addvideosgeneral');
 Route::post('storevideosgeneral/{id}','VideosGeneralController@storevideosgeneral')->name('storevideosgeneral');
-Route::get('videosgeneral/{id}','VideosGeneralController@videosgeneral')->name('videosgeneral');  
+Route::get('videosgeneral/{id}','VideosGeneralController@videosgeneral')->name('videosgeneral');
 Route::get('editvideosgeneral/{id}','VideosGeneralController@editvideosgeneral')->name('editvideosgeneral');
   Route::get('deletevideosgeneral/{id}','VideosGeneralController@deletevideosgeneral')->name('deletevideosgeneral');
 Route::post('updatevideosgeneral/{id}','VideosGeneralController@updatevideosgeneral')->name('updatevideosgeneral');
   //deletegeneral
-  Route::get('deletegeneral/{id}','GeneralController@deletegeneral')->name('deletegeneral'); 
+  Route::get('deletegeneral/{id}','GeneralController@deletegeneral')->name('deletegeneral');
 });
 
 
