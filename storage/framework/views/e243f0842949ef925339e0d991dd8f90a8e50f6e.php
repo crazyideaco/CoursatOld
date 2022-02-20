@@ -97,7 +97,7 @@
                             <div class="row">
                           
                              
-                     <div class="form-group col-3">
+                     <div class="form-group col-6">
                                      
                               <label for="pay">اكواد الطلاب</label><br >
                                <select class="form-control qeno-select selectpicker"
@@ -114,7 +114,7 @@
                                 });
                                         </script>
                                </div>
-                                 <div class="form-group col-3">
+                                 <div class="form-group col-6">
                                      
                               <label for="type"> الكورسات</label><br >
                                <select class="form-control qeno-select selectpicker"

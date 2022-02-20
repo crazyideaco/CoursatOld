@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
   <!--start page-body-->
         <div class="page-body">
@@ -135,7 +134,8 @@ unset($__errorArgs, $__bag); ?>
                            <div class="row">
                                <div class="form-group col-12">
                                    <label>الوصف</label>
-                                   <textarea class="form-control" rows="5" id="description"  name="description"><?php echo e(auth()->user()->description); ?></textarea>
+                                   <textarea class="form-control" rows="5" 
+                                   id="description"  name="description"><?php echo e(auth()->user()->description); ?></textarea>
                                </div>
                            </div>
 

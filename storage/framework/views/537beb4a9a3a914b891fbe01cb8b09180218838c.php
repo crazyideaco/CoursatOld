@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('style'); ?>
 <style>
     #example_wrapper{
@@ -174,10 +173,13 @@ unset($__errorArgs, $__bag); ?>
                       </div>
 
       <div class="row">
-                            <div class="col-3 mx-auto">
                               
                         
-                            <span class="btn btn-primary" onclick="filtertypescollege()">بحث</span>    </div>
+                            <span class="btn btn-primary"
+                             onclick="filtertypescollege()" style="width: 23%;
+    display: block;
+    margin: 0 auto;"><i class="fas fa-search" style="margin-left: 10px;"></i>بحث</span>  
+                              </div>
                           </div>
                         <div class="pt-5">
                             <div class="row">
@@ -274,8 +276,8 @@ unset($__errorArgs, $__bag); ?>
 	"order": [[ 0, "desc" ]], // Order on init. # is the column, starting at 0});
   columnDefs: [
       {
-          targets: 0,
-        visible : false,
+       //   targets: 0,
+      //  visible : false,
         
      
       },]
