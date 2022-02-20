@@ -6,21 +6,21 @@
             <div class="card_static card alert-info">
                 <i class="fas fa-user-graduate text-info"></i>
                 <h5>عدد الطلاب</h5>
-                <h4 class="counter">1000</h4>
+                <h4 class="counter">{{$students}}</h4>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-12">
             <div class="card_static card alert-light">
                 <i class="fas fa-book-open"></i>
                 <h5>عدد الكورسات</h5>
-                <h4 class="counter">500</h4>
+                <h4 class="counter">{{$types}}</h4>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-12">
             <div class="card_static card alert-warning">
                 <i class="fas fa-university text-warning"></i>
-                <h5>عدد الحصص</h5>
-                <h4 class="counter">700</h4>
+                <h5>عدد المدرسين</h5>
+                <h4 class="counter">{{$teachers}}</h4>
             </div>
         </div>
     </div>
@@ -31,16 +31,12 @@
 
             <script>
                 const zyx = document.getElementById("myChart").getContext('2d');
-                const labels2 = [
-                    'محمد',
-                    'حوام',
-                    'ايهاب',
-                ];
+                const labels2 = <?php echo json_encode($teachers_names);?>;
                 const data2 = {
                     labels: labels2,
                     datasets: [{
                         label: 'المدرسين / الكورسات',
-                        data: [65, 59, 80],
+                        data: <?php echo json_encode($types_numbers);?>,
                         backgroundColor: [
                             'rgba(54, 162, 235, 0.2)',
                         ],
@@ -77,16 +73,12 @@
 
             <script>
                 const zyx2 = document.getElementById("myChart2").getContext('2d');
-                const labels3 = [
-                    'محمد',
-                    'ايهاب',
-                    'حوام',
-                ];
+                const labels3 = <?php echo json_encode($teachers2_names);?>;
                 const data3 = {
                     labels: labels3,
                     datasets: [{
                         label: 'المدرسين / الاشتراكات',
-                        data: [100, 75, 110],
+                        data:  <?php echo json_encode($types2_numbers);?>,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                         ],
@@ -123,16 +115,12 @@
 
             <script>
                 const zyx3 = document.getElementById("myChart3").getContext('2d');
-                const labels4 = [
-                    'IS',
-                    'CS',
-                    'IT',
-                ];
+                const labels4 = <?php echo json_encode($types1_names);?>;
                 const data4 = {
                     labels: labels4,
                     datasets: [{
                         label: 'الكورس / الاشتراكات',
-                        data: [100, 75, 110],
+                        data:<?php echo json_encode($types1_numbers);?>,
                         backgroundColor: [
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 99, 132, 0.2)',
@@ -172,16 +160,12 @@
             <canvas id="myChart4" style="transform: scale(.8);"></canvas>
             <script>
                 const zyx4 = document.getElementById("myChart4").getContext('2d');
-                const labels5 = [
-                    'محمد',
-                    'ايهاب',
-                    'حوام',
-                ];
+                const labels5 = <?php echo json_encode($students1_names);?>;
                 const data5 = {
                     labels: labels5,
                     datasets: [{
-                        label: 'أكثر المدرسين طلبا',
-                        data: [100, 75, 110],
+                        label: 'أكثر الطلاب طلبا',
+                        data: <?php echo json_encode($students1_numbers);?>,
                         backgroundColor: [
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 99, 132, 0.2)',
@@ -216,7 +200,7 @@
         </div>
         <!--  أكثر المدرسين طلبا -->
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <table class="table w-100" id="example">
             <thead>
                 <tr>
@@ -231,14 +215,14 @@
                     <td>Computer science</td>
                     <td class="text-center">
                         <a href="#"> <img src="{{asset('images/pen.svg')}}" id="pen" style="cursor: pointer"></a>
-                        @if(auth()->user()->hasPermission("stages-delete"))
-                        <img src="{{asset('images/trash.svg')}}" id="trash" style="cursor:pointer;">
-                        @endif
+                         @if(auth()->user()->hasPermission("stages-delete")) -->
+                        <!-- <img src="{{asset('images/trash.svg')}}" id="trash" style="cursor:pointer;"> -->
+                        <!-- @endif -->
                     </td>
                 </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
 </div>
 @endsection
 

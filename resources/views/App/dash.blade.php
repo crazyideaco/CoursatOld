@@ -337,7 +337,11 @@
                                 <img src="{{asset('images/qenoicon/setting.svg')}}" id="img">
                             </div>
                             <div class="col-8">
+                                @if(Auth::user() &&Auth::user()->is_student == 3)
+                               <a href="{{route('main_page_college')}}"> <p>الرئيسية</p></a>
+                                @else
                                 <p>الرئيسية</p>
+                                @endif
                             </div>
                         </div>
                         <div class="row sub-side">

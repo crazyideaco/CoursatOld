@@ -337,7 +337,11 @@
                                 <img src="<?php echo e(asset('images/qenoicon/setting.svg')); ?>" id="img">
                             </div>
                             <div class="col-8">
+                                <?php if(Auth::user() &&Auth::user()->is_student == 3): ?>
+                               <a href="<?php echo e(route('main_page_college')); ?>"> <p>الرئيسية</p></a>
+                                <?php else: ?>
                                 <p>الرئيسية</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="row sub-side">

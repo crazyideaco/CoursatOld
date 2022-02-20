@@ -152,5 +152,23 @@ class User extends Authenticatable
         return $this->belongsToMany(GroupCourse::class, 'groupscourses_students','student_id','groupcourse_id');
     }public function typecollege_joins(){
         return $this->belongsToMany(TypesCollege::class, 'typecollege_joins','student_id','typecollege_id ')->withPivot('status');
+    }public function getTypeSellNumberAttribute(){
+        $number = 0;
+        if($this->types){
+            foreach($this->types as $type){
+                $number +=count($type->studentstype);
+            }
+        }
+        return  $number;
+        
+    }public function getTypecollegeSellNumberAttribute(){
+        $number = 0;
+        if($this->typescollege){
+            foreach($this->typescollege as $type){
+                $number +=count($type->studentscollege);
+            }
+        }
+        return  $number;
+        
     }
 }
