@@ -330,6 +330,7 @@ Route::post('updatevideo/{id}','VideoController@updatevideo')->name('updatevideo
 Route::group(['middleware' => ['auth','college']],function(){
 
    // Route::get('logoutall','dashboardcontroller@logoutall')->name('logoutall');
+   Route::get('main_page_college','MainPageController@main_page_college')->name('main_page_college');
 
 Route::get('givetypecollegecourse','CourseController@givetypecollegecourse')->name('givetypecollegecourse');
 Route::post('addtypecollegecourse','CourseController@addtypecollegecourse');
