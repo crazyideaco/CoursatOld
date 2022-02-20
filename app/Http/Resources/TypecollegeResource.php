@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\LessonResource;
 use App\Typecollege_Rate;
+use App\TypecollegeJoin;
 class TypecollegeResource extends JsonResource
 {
     /**
@@ -37,6 +38,15 @@ class TypecollegeResource extends JsonResource
        }else{
           $center_name = $this->doctor['name']; 
        }
+       $status = 0;
+       $join = TypecollegeJoin::where([["typecollege_id","=",$this->id],["user_id","=",auth()->id()]])->first();
+       if(!$join){
+           $status = 0;
+       }elseif($join->status == 0){
+        $status = 1;
+       }elseif($join->status == 1){
+        $status = 2;
+       }
        $duration = array_sum($this->videos->pluck('seconds')->toArray());
            return [
            'id'  => $this->id,
@@ -51,12 +61,13 @@ class TypecollegeResource extends JsonResource
            'description' => $this->description ? $this->description : '',
            'name' => $this->name_ar,
            'subject' => $this->subjectscollege['name_ar'],
-                     'mintues' => $duration > 0 ? intval($duration / 60) : 0,
+            'mintues' => $duration > 0 ? intval($duration / 60) : 0,
            //'classes' => LessonResource::collection($this->lessons),
            'is_book' => $is_book,
            'allow' => $allow,
            'rate'=> $rate,
-           'category_id' => 2
+           'category_id' => 2,
+           "status" => $status
          
             
         ];

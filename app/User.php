@@ -26,7 +26,6 @@ use App\Stage;
 use App\User_Owner;
 use App\VideosCollege;
 use App\Video;
-use App\User;
 use App\GroupType;
 use App\GroupTypescollege;
 use App\GroupCourse;
@@ -151,5 +150,7 @@ class User extends Authenticatable
         return $this->belongsToMany(GroupTypescollege::class, 'groupstypescollege_students','student_id','grouptypescollege_id');
     }public function groupscourse(){
         return $this->belongsToMany(GroupCourse::class, 'groupscourses_students','student_id','groupcourse_id');
+    }public function typecollege_joins(){
+        return $this->belongsToMany(TypesCollege::class, 'typecollege_joins','student_id','typecollege_id ')->withPivot('status');
     }
 }
