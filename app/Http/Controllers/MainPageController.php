@@ -6,7 +6,7 @@ use App\Student_Typecollege;
 use Illuminate\Support\Facades\Auth;
 use App\TypesCollege;
 class MainPageController extends Controller{
-public function main_page(){
+public function main_page_basic(){
     if(auth()->user() && auth()->user()->isAdmin == 'admin'){
     $joins = TypecollegeJoin::get();
 }elseif(Auth::user() &&Auth::user()->is_student == 3){

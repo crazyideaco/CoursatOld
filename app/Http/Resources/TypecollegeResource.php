@@ -39,7 +39,9 @@ class TypecollegeResource extends JsonResource
           $center_name = $this->doctor['name']; 
        }
        $status = 0;
-       $join = TypecollegeJoin::where([["typecollege_id","=",$this->id],["user_id","=",auth()->id()]])->first();
+       $join = TypecollegeJoin::where([["typecollege_id","=",$this->id],
+       ["student_id","=",auth()->id()]])->first();
+      
        if(!$join){
            $status = 0;
        }elseif($join->status == 0){
