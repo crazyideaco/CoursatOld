@@ -332,18 +332,71 @@
 
                 <div class="lists">
                     <div>
+                    @if(Auth::user() &&Auth::user()->is_student == 3 || (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2))
                         <div class="row">
                             <div class="col-2">
                                 <img src="{{asset('images/qenoicon/setting.svg')}}" id="img">
                             </div>
                             <div class="col-8">
-                                @if(Auth::user() &&Auth::user()->is_student == 3)
+                               
                                <a href="{{route('main_page_college')}}"> <p>الرئيسية</p></a>
-                                @else
+                               
                                 <p>الرئيسية</p>
-                                @endif
+                                
                             </div>
                         </div>
+                        @elseif(auth()->user()->isAdmin == 'admin')
+                        
+                        @else
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="{{asset('images/qenoicon/setting.svg')}}" id="img">
+                            </div>
+                            <div class="col-8">
+                               
+                               <p>الرئيسية</p>
+                               
+                      
+                                
+                            </div>
+                        </div>
+                        @endif
+
+                        <div class="row sub-side">
+                            <div class="col-2">
+                                <img src="{{asset('images/qenoicon/setting.svg')}}" id="img">
+                            </div>
+                            <div class="col-6">
+                                <a href="#setting2" data-toggle="collapse">الرئيسية</a>
+                                <div id="setting2" class="collapse 
+                                @if(request()->is('main_page_basic')  ||
+                                 request()->is('main_page_college')) show    @endif">
+
+                                    <a href="{{route('main_page_basic')}}" 
+                                    style="color: #aa7700;
+    font-family: med;
+    font-size: 12px;
+    margin-top: 8px;
+    white-space: nowrap !important;" class="@if(request()->is('main_page_basic'))active @endif">
+                                         اساسى</a>
+                                    <a href="{{route('main_page_college')}}" style="color: #aa7700;
+    font-family: med;
+    font-size: 12px;
+    margin-top: 8px;
+    white-space: nowrap !important;" class="@if(request()->is('main_page_college'))
+    active @endif">
+                                         جامعى</a>
+                         
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <a href="#setting2" data-toggle="collapse">
+                                    <img src="{{asset('images/arrow.svg')}}" id="arr"></a>
+                            </div>
+                        </div>
+
+
+
                         <div class="row sub-side">
                             <div class="col-2">
                                 <img src="{{asset('images/qenoicon/setting.svg')}}" id="img">

@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="row">
-        <?php if(auth()->user()->isAdmin == 'admin'): ?>
+        <?php if(auth()->user()->isAdmin == 'admin' || (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2)): ?>
         <!-- المدرسين / الكورسات -->
         <div class="col-lg-6 col-md-6 col-12 mt-5">
             <canvas id="myChart"></canvas>
