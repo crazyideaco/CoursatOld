@@ -22,6 +22,7 @@ Route::post('register_info' , 'AuthController@register_info');
 Route::post('check_phone','AuthController@check_phone');
   Route::post('lecturer_cover','AuthController@lecturer_cover');
 Route::post('forget_password','AuthController@forget_password');
+Route::get('get_points','PointController@get_points')->middleware('auth:api');
 Route::get('tags', 'TagController@tags')->name('tags');
 Route::get('phone_verify','AuthController@phone_verify')->middleware('auth:api');
 Route::post('change_password','AuthController@change_password')->middleware('auth:api');

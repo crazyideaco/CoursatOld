@@ -170,8 +170,11 @@
                          </span>	     
                       <img style="margin-right:20px;" src="{{asset('images/trash.svg')}}" id="trash" onclick="deleteuser('{{$center->id}}')" style="cursor:pointer;"> 
                                   <a href="{{route('editcenter',$center->id)}}">
-                                            <img src="{{asset('images/pen.svg')}}" id="pen"></a></td>
- <a href="{{route('teacherstudents',$center->id)}}" class="btn btn-success btn-sm" >الطلاب</a>
+                                            <img src="{{asset('images/pen.svg')}}"
+                                             id="pen"></a>
+ <a href="{{route('teacherstudents',$center->id)}}" 
+ class="btn btn-success btn-sm" >الطلاب</a>
+</td>
                                         </tr>                            
                                         @endforeach
                                     </tbody>

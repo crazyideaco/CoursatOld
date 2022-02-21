@@ -134,7 +134,45 @@ $joins =TypecollegeJoin::where("typecollege_id",$typescolleges->pluck("id")->toA
 ->where("status",0)->get();
  
 }elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
- 
+    $teachers = count(auth()->user()->doctors);
+   $types = count(TypesCollege::where("center_id",auth()->id())->get());
+   $students = auth()->user()->centerstudents;
+   $user_types = User::withCount("typescollege")->orderByDesc('typescollege_count')
+->take('5')->get();
+$types_users = TypesCollege::withCount("studentscollege")->where("center_id",auth()->id())->orderByDesc('studentscollege_count')
+->take('5')->get();
+$students_type = User::withCount("stutypescollege")->where("name","!=",null)
+->orderByDesc('stutypescollege_count')->whereIn('id',auth()->user()->doctors->pluck("id")->toArray())
+->take('5')->get();
+           $teachers_names =[];
+           $types_numbers=[];
+      foreach($user_types as $user_type){
+          $teachers_names[]= $user_type->name;
+          $types_numbers[]=$user_type->typescollege_count;
+      }
+      $teachers2_names =[];
+      $types2_numbers=[];
+ foreach($user_types as $user_type){
+     $teachers2_names[]= $user_type->name;
+     $types2_numbers[]=$user_type->typecollege_sell_number;
+ }
+
+ $types1_names =[];
+ $types1_numbers=[];
+foreach($types_users as $types_user){
+$types1_names[]= $types_user->name_ar;
+$types1_numbers[]=$types_user->studentscollege_count;
+}
+$students1_names = [];
+$students1_numbers = [];
+foreach($students_type as $student){
+$students1_names[]= $student->name;
+$students1_numbers[]= count($student->stutypescollege()->where("center_id",auth()->id())->get());
+}
+$typescolleges =  TypesCollege::where('center_id',Auth::user()->id)
+   ->orderBy('created_at','Desc')->get();
+$joins =TypecollegeJoin::where("typecollege_id",$typescolleges->pluck("id")->toArray())
+->where("status",0)->get();
 }
 
    return view('dashboard.mainpage.college',compact("teachers","types","students","teachers_names",

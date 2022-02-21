@@ -173,8 +173,11 @@
                          </span>	     
                       <img style="margin-right:20px;" src="<?php echo e(asset('images/trash.svg')); ?>" id="trash" onclick="deleteuser('<?php echo e($center->id); ?>')" style="cursor:pointer;"> 
                                   <a href="<?php echo e(route('editcenter',$center->id)); ?>">
-                                            <img src="<?php echo e(asset('images/pen.svg')); ?>" id="pen"></a></td>
- <a href="<?php echo e(route('teacherstudents',$center->id)); ?>" class="btn btn-success btn-sm" >الطلاب</a>
+                                            <img src="<?php echo e(asset('images/pen.svg')); ?>"
+                                             id="pen"></a>
+ <a href="<?php echo e(route('teacherstudents',$center->id)); ?>" 
+ class="btn btn-success btn-sm" >الطلاب</a>
+</td>
                                         </tr>                            
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
