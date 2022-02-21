@@ -137,7 +137,8 @@ $joins =TypecollegeJoin::where("typecollege_id",$typescolleges->pluck("id")->toA
     $teachers = count(auth()->user()->doctors);
    $types = count(TypesCollege::where("center_id",auth()->id())->get());
    $students = auth()->user()->centerstudents;
-   $user_types = User::withCount("typescollege")->orderByDesc('typescollege_count')
+   $user_types = User::withCount("typescollege")->whereIn('id',auth()->user()->doctors->pluck("id")->toArray())
+   ->orderByDesc('typescollege_count')
 ->take('5')->get();
 $types_users = TypesCollege::withCount("studentscollege")->where("center_id",auth()->id())->orderByDesc('studentscollege_count')
 ->take('5')->get();

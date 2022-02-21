@@ -215,8 +215,8 @@
                     <td>Computer science</td>
                     <td class="text-center">
                         <a href="#"> <img src="<?php echo e(asset('images/pen.svg')); ?>" id="pen" style="cursor: pointer"></a>
-                        <!-- <?php if(auth()->user()->hasPermission("stages-delete")): ?> -->
-                        <img src="<?php echo e(asset('images/trash.svg')); ?>" id="trash" style="cursor:pointer;">
+                         <?php if(auth()->user()->hasPermission("stages-delete")): ?> -->
+                        <!-- <img src="<?php echo e(asset('images/trash.svg')); ?>" id="trash" style="cursor:pointer;"> -->
                         <!-- <?php endif; ?> -->
                     </td>
                 </tr>
