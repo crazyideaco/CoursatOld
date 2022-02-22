@@ -345,7 +345,7 @@ class NotificationController extends Controller
           $not->text = $request->text;
           $not->user_id = $user->id;
           $not->save();
-          $to = $user->device_token;
+          $to = $user->device_token; 
           $data = [
              "to" =>$to,
              'notification'=>[
