@@ -345,32 +345,32 @@ class NotificationController extends Controller
           $not->text = $request->text;
           $not->user_id = $user->id;
           $not->save();
-          $to = $user->device_token;
+          $to = $user->device_token; 
           $data = [
-            "to" =>$to,
-            'notification'=>[
+             "to" =>$to,
+             'notification'=>[
+                 'title' => $not->title,
+                 'body' => $not->text
+                 ],
+             "data" =>[
                 'title' => $not->title,
-                'body' => $not->text
-                ],
-            "data" =>[
-              'title' => $not->title,
-                'body' => $not->text,
-                "click_action" => "FLUTTER_NOTIFICATION_CLICK",
-                'type' => 'general'
-                ], 
-        ];
+                 'body' => $not->text,
+                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                 'type' => 'general'
+                 ], 
+         ];
       $dataString = json_encode($data);
-        $headers = [
-            'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
-            'Content-Type: application/json',
-        ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-      $result=curl_exec($ch);
+         $headers = [
+             'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
+             'Content-Type: application/json',
+         ];
+         $ch = curl_init();
+         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+         curl_setopt($ch, CURLOPT_POST, true);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+       $result=curl_exec($ch);
             }
             return response()->json(['status' => true,'message' => 'تم ارسال الاشعارات بنجاح']);
 			
