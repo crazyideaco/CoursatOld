@@ -265,12 +265,12 @@ if($request->pay){
           $data = [
              "to" =>$to,
              'notification'=>[
-                 'title' => $request->title,
-                 'body' => $request->text
+                 'title' => $not->title,
+                 'body' => $not->text
                  ],
              "data" =>[
-                'title' => $request->title,
-                 'body' => $request->text,
+                'title' => $not->title,
+                 'body' => $not->text,
                  "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                  'type' => 'general'
                  ], 
@@ -438,12 +438,12 @@ if($request->pay){
           $data = [
              "to" =>$to,
              'notification'=>[
-                 'title' => $request->title,
-                 'body' => $request->text
+                 'title' => $not->title,
+                 'body' => $not->text
                  ],
              "data" =>[
-                'title' => $request->title,
-                 'body' => $request->text,
+                'title' => $not->title,
+                 'body' => $not->text,
                  "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                  'type' => 'general'
                  ], 
@@ -603,12 +603,12 @@ if($request->pay){
           $data = [
              "to" =>$to,
              'notification'=>[
-                 'title' => $request->title,
-                 'body' => $request->text
+                 'title' => $not->title,
+                 'body' => $not->text
                  ],
              "data" =>[
-                'title' => $request->title,
-                 'body' => $request->text,
+                'title' => $not->title,
+                 'body' => $not->text,
                  "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                  'type' => 'general'
                  ], 

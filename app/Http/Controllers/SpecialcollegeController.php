@@ -180,12 +180,12 @@ class SpecialcollegeController extends Controller
            $data = [
               "to" =>$to,
               'notification'=>[
-                  'title' => $request->title,
-                  'body' => $request->text
+                  'title' => $not->title,
+                  'body' => $not->text
                   ],
               "data" =>[
-                 'title' => $request->title,
-                  'body' => $request->text,
+                 'title' => $not->title,
+                  'body' => $not->text,
                   "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                   'type' => 'general'
                   ], 
