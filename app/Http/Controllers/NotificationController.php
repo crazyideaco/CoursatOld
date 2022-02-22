@@ -338,27 +338,28 @@ class NotificationController extends Controller
         }else{
 			$students = User::where('is_student',1)->where('is_visitor',0)->get();
             }
+          
 			foreach($students as $user){
 				$not = new Notification;
-    $not->title = $request->title;
-     $not->text = $request->text;
-    $not->user_id = $user->id;
-    $not->save();
-    $to = $user->device_token;
-         $data = [
+          $not->title = $request->title;
+          $not->text = $request->text;
+          $not->user_id = $user->id;
+          $not->save();
+          $to = $user->device_token;
+          $data = [
             "to" =>$to,
             'notification'=>[
-                'title' => $request->title,
-                'body' => $request->text
+                'title' => $not->title,
+                'body' => $not->text
                 ],
             "data" =>[
-               'title' => $request->title,
-                'body' => $request->text,
+              'title' => $not->title,
+                'body' => $not->text,
                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                 'type' => 'general'
                 ], 
         ];
-     $dataString = json_encode($data);
+      $dataString = json_encode($data);
         $headers = [
             'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
             'Content-Type: application/json',
