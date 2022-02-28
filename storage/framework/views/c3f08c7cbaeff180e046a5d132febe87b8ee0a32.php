@@ -1,5 +1,5 @@
-@extends('App.dash')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
 <style>
   .setting .info button{
@@ -76,10 +76,10 @@ input:checked + .slider:before {
                 <div class="profile">
                     <div class="row">
                         <div class="col-3">
-                            <img src="{{asset('images/profile.svg')}}">
+                            <img src="<?php echo e(asset('images/profile.svg')); ?>">
                         </div>
                         <div class="col-6">
-                            <h5>{{auth()->user()->name}}</h5>
+                            <h5><?php echo e(auth()->user()->name); ?></h5>
                             <p>ادمن</p>
                         </div>
                             </div>
@@ -87,7 +87,7 @@ input:checked + .slider:before {
                         <div class="flag">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="{{asset('images/flag.svg')}}">
+                                    <img src="<?php echo e(asset('images/flag.svg')); ?>">
                                 </div>
                                 <div class="col-4">
                                     <h5>العربية</h5>
@@ -118,7 +118,7 @@ input:checked + .slider:before {
                         <div class="datee">
                             <div class="row">
                                 <span><i class="far fa-calendar-alt"></i></span>
-                                <p>{{ Carbon\Carbon::now()->format('d-m-Y')}}</p>
+                                <p><?php echo e(Carbon\Carbon::now()->format('d-m-Y')); ?></p>
                             </div>
                         </div>
 
@@ -134,14 +134,14 @@ input:checked + .slider:before {
                 <div class="setting">
                     <div class="container">
                         <div class="row def">
-                            <img src="{{asset('images/setting.svg')}}">
+                            <img src="<?php echo e(asset('images/setting.svg')); ?>">
                             <h5>اضافه حصه </h5>
                         </div>
-                        <form method="post" action="{{route('storelesson',$id)}}" enctype="multipart/form-data">
-                        	@csrf
+                        <form method="post" action="<?php echo e(route('storelesson',$id)); ?>" enctype="multipart/form-data">
+                        	<?php echo csrf_field(); ?>
                           
                                     <div class="info">
-                                        <!--<input value="{{$id}}" id="id2" type="hidden">-->
+                                        <!--<input value="<?php echo e($id); ?>" id="id2" type="hidden">-->
                                         <div class="row">
                                                      <div class="col-lg-4 col-md-6 col-12 text-center mb-5 set-img">
                                 <video width="200" height="200" controls >
@@ -151,38 +151,66 @@ input:checked + .slider:before {
                       <br><br>
                                <input id="kt" type="file" onchange="getvid()" class="form-control in ehabtalaat" name="intro">
                                         <label for="kt" class="ahmed">اضافة انترو</label>
-                                        @error('intro')
-                                             <p style="color:red;">{{$message}}</p>
-                                        @enderror
+                                        <?php $__errorArgs = ['intro'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                             <p style="color:red;"><?php echo e($message); ?></p>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                        </div>
                                    <div class="col-lg-4 col-md-6 col-12 text-center set-img">
-                                        <img src="{{asset('images/set-img.svg')}}" id="realimg">
+                                        <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="realimg">
                                    <br>
                                <input id="ad" type="file" class="form-control ehabtalaat" name="image">
                                         <label for="ad" class="ahmed">اضافة صوره</label>
-                                        @error('image')
-                                         <p style="color:red;">{{$message}}</p>
-                                        @enderror
+                                        <?php $__errorArgs = ['image'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                         <p style="color:red;"><?php echo e($message); ?></p>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                            </div>
                                                 <div class="col-lg-4 col-md-6 col-12 text-center set-img">
-                                           <img src="{{asset('images/set-img.svg')}}" id="notes1">
+                                           <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="notes1">
                                 <br>
                                <input id="notes" type="file" class="form-control ehabtalaat"  name="notes">
                                         <label for="notes" class="ahmed">اضافة notes</label>
-                                        @error('notes')
-                                         <p style="color:red;">{{$message}}</p>
-                                        @enderror
+                                        <?php $__errorArgs = ['notes'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                         <p style="color:red;"><?php echo e($message); ?></p>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                            </div>   <div class="col-lg-4 col-md-6 col-12 text-center set-img">
-                                                   <img src="{{asset('images/set-img.svg')}}" id="realimg1">
+                                                   <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="realimg1">
                                 <br>
                                <input id="ad1" type="file" class="form-control ehabtalaat" name="part_paper">
                                         <label for="ad1" class="ahmed">اضافة مذكره حصه</label>
-                                        @error('part_paper')
-                                         <p style="color:red;">{{$message}}</p>
-                                        @enderror
+                                        <?php $__errorArgs = ['part_paper'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                         <p style="color:red;"><?php echo e($message); ?></p>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                   </div>
                                        </div>
-                               @if(Auth::user() && Auth::user()->isAdmin == 'admin')
+                               <?php if(Auth::user() && Auth::user()->isAdmin == 'admin'): ?>
                             <div class="row">
                                 <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> اسم الحصه بالعربى </label>
@@ -212,9 +240,9 @@ input:checked + .slider:before {
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " title="التاج" data-live-search="true"  multiple name="tag_id[]">
                                       
-                                  @foreach($tags as $tag)
-                                  <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($tag->id); ?>"><?php echo e($tag->name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                                 <div class="form-group col-lg-4 col-md-6 col-12">
@@ -222,7 +250,7 @@ input:checked + .slider:before {
                                <input style="height: 36px;" min="0" type="number" name="order_number">
                                </div>
                             </div> 
-                            @elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2)
+                            <?php elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2): ?>
                               <div class="row">
                                 <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> اسم الحصه بالعربى </label>
@@ -251,9 +279,9 @@ input:checked + .slider:before {
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
                                       
-                                  @foreach($tags as $tag)
-                                  <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($tag->id); ?>"><?php echo e($tag->name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                                 <div class="form-group col-lg-4 col-md-6 col-12">
@@ -262,7 +290,7 @@ input:checked + .slider:before {
                                </div>
                                
                             </div> 
-                          @elseif(Auth::user() && Auth::user()->is_student == 3)
+                          <?php elseif(Auth::user() && Auth::user()->is_student == 3): ?>
                               <div class="row">
                                 <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> اسم الحصه بالعربى </label>
@@ -290,9 +318,9 @@ input:checked + .slider:before {
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
                                       
-                                  @foreach($tags as $tag)
-                                  <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                  @endforeach
+                                  <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                  <option value="<?php echo e($tag->id); ?>"><?php echo e($tag->name); ?></option>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                               </div>
                                <div class="form-group col-lg-4 col-md-6 col-12">
@@ -303,7 +331,7 @@ input:checked + .slider:before {
                              
                                
                             </div>
-                          @endif
+                          <?php endif; ?>
                        <div class="form-group col-lg-4 col-md-6 col-12">
                                    <label>الوصف </label>
                                    <textarea class="form-control" rows="5" name="description"></textarea>
@@ -319,37 +347,65 @@ input:checked + .slider:before {
           <br>
                    <input id="kt0"  type="file" onchange="getvideo(0)"  class="form-control url ehabtalaat" name="url[]">
                             <label for="kt0" class="ahmed">اضافة فيديو</label>
-                            @error('url')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
+                            <?php $__errorArgs = ['url'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p style="color:red;"><?php echo e($message); ?></p>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                            </div><div class="col-lg-4 col-md-6 col-12 text-center set-img">
                             <canvas class="pdfViewer" style="width:200px;height:200px"></canvas>
                    <input id="myPdf0" type="file" class="form-control pdf ehabtalaat" name="pdf[]">
                    <br>
 <br>
                             <label for="myPdf0" class="ahmed">اضافة pdf</label>
-                            @error('pdf')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
+                            <?php $__errorArgs = ['pdf'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p style="color:red;"><?php echo e($message); ?></p>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                </div>
                            <div class="col-lg-4 col-md-6 col-12 text-center set-img">
-                               <img src="{{asset('images/set-img.svg')}}" id="r0" class="realimg">
+                               <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="r0" class="realimg">
                     <br>
                    <input id="d0" type="file" class="form-control image ehabtalaat" onchange="getimage(0)" name="images[]">
                             <label for="d0" class="ahmed">اضافة صوره</label>
-                            @error('image')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
+                            <?php $__errorArgs = ['image'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p style="color:red;"><?php echo e($message); ?></p>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                </div>
                                     
                             <div class="col-lg-4 col-md-6 col-12 text-center set-img">
-                                <img src="{{asset('images/set-img.svg')}}" id="b0" class="realboard">
+                                <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="b0" class="realboard">
                                 <br>
                                <input id="real0" type="file" class="form-control board ehabtalaat" onchange="getboard(0)" name="boards[]">
                                         <label for="real0" class="ahmed">سبوره الحصه</label>
-                                        @error('board')
-                                        <p style="color:red;">{{$message}}</p>
-                                        @enderror
+                                        <?php $__errorArgs = ['board'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <p style="color:red;"><?php echo e($message); ?></p>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                            </div>
                 
                             </div>                        
@@ -425,7 +481,7 @@ input:checked + .slider:before {
             <div class="foter">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
+                        <h5>Made With <img src="<?php echo e(asset('images/red.svg')); ?>"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
                     </div>
                 </div>
@@ -435,8 +491,8 @@ input:checked + .slider:before {
     </div>
     <!--end page-body-->
 
-@endsection
-@section("scripts")
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("scripts"); ?>
 <script>
     function getdivision(selected){
       let id = selected.value;
@@ -664,37 +720,65 @@ $("#clicked").click(function(){
           <br>
                    <input id="kt${c}" type="file"  onchange="getvideo(${c})"   class="form-control url ehabtalaat" name="url[]">
                             <label for="kt${c}" class="ahmed">اضافة فيديو</label>
-                            @error('url')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
+                            <?php $__errorArgs = ['url'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p style="color:red;"><?php echo e($message); ?></p>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                            </div><div class="col-6 text-center set-img">
                             <canvas class="pdfViewer" style="width:200px;height:200px"></canvas>
                    <input id="myPdf${c}" type="file" class="form-control pdf ehabtalaat" name="pdf[]">
                    <br>
 <br>
                             <label for="myPdf${c}" class="ahmed">اضافة pdf</label>
-                            @error('pdf')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
+                            <?php $__errorArgs = ['pdf'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p style="color:red;"><?php echo e($message); ?></p>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                </div>
                            <div class="col-6 text-center set-img">
-                               <img src="{{asset('images/set-img.svg')}}" id="r${c}" class="realimg">
+                               <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="r${c}" class="realimg">
                     <br>
                    <input id="d${c}" type="file" class="form-control image ehabtalaat" onchange="getimage(${c})"  name="images[]">
                             <label for="d${c}" class="ahmed">اضافة صوره</label>
-                            @error('image')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
+                            <?php $__errorArgs = ['image'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <p style="color:red;"><?php echo e($message); ?></p>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                </div>
                                     
                             <div class="col-6 text-center set-img">
-                                <img src="{{asset('images/set-img.svg')}}" id="b${c}"  class="realboard">
+                                <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="b${c}"  class="realboard">
                                 <br>
                                <input id="real${c}" type="file" onchange="getboard(${c})" class="form-control board ehabtalaat" name="boards[]">
                                         <label for="real${c}" class="ahmed">سبوره الحصه</label>
-                                        @error('board')
-                                        <p style="color:red;">{{$message}}</p>
-                                        @enderror
+                                        <?php $__errorArgs = ['board'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <p style="color:red;"><?php echo e($message); ?></p>
+                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                            </div>
                 
                             </div>                           
@@ -853,4 +937,5 @@ $("#notes").change(function(){
     writerURL1(this);
 })
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('App.dash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Coursat\resources\views/dashboard/addlesson.blade.php ENDPATH**/ ?>

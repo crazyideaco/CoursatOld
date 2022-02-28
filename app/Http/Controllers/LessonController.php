@@ -102,7 +102,7 @@ class LessonController extends Controller
         'name_en' => 'required',
     //    'image' => 'required|mimes:jpeg,jpg,png,gif',
        // 'intro' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
-      'url' => 'required',
+    //  'url' => 'required',
 		//'url.*' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
      //  'images' =>'required',
 //	'images.*' => 'mimes:jpeg,jpg,png,gif',
@@ -199,6 +199,7 @@ if( $videoall > 0){
              if($request->tag_id){
         $lesson->tags()->attach($request->tag_id);
       }
+      if($request->url){
          foreach($request->url as $k => $i){
         $video = new VideosCollege;
              $video->user_id = $type->doctor_id;
@@ -289,6 +290,7 @@ if($request->pay){
        $result=curl_exec($ch);
              }
              }
+            }
             return response()->json(['success' => 'video uploaded','id' => $lesson->typescollege_id]);   }else{
     $msg = 'لقد استهلكت 100% ';
       return response()->json(['status' => false,'errors' => $msg]);
@@ -371,6 +373,7 @@ if( $videoall > 0){
              if($request->tag_id){
         $lesson->tags()->attach($request->tag_id);
       }
+      if($request->url){
          foreach($request->url as $k => $i){
         $video = new VideosCollege;
               $video->user_id = $type->doctor_id;
@@ -462,6 +465,7 @@ if($request->pay){
        $result=curl_exec($ch);
              }
              }
+            }
             return response()->json(['success' => 'video uploaded','id' => $lesson->typescollege_id]);   }else{
 $msg = 'لقد استهلكت 100% ';
       return response()->json(['status' => false,'errors' => $msg]);
@@ -537,6 +541,7 @@ if( $videoall > 0){
              if($request->tag_id){
         $lesson->tags()->attach($request->tag_id);
       }
+      if($request->url){
          foreach($request->url as $k => $i){
         $video = new VideosCollege;
             $video->user_id = $type->doctor_id;
@@ -627,6 +632,7 @@ if($request->pay){
        $result=curl_exec($ch);
              }
              }
+            }
             return response()->json(['success' => 'video uploaded','id' => $lesson->typescollege_id]);   }else{
 $msg = 'لقد استهلكت 100% ';
       return response()->json(['status' => false,'errors' => $msg]);
