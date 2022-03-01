@@ -308,8 +308,13 @@ input:checked + .slider:before {
                                    <label>الوصف </label>
                                    <textarea class="form-control" rows="5" name="description"></textarea>
                       </div></div>
+<<<<<<< HEAD
                             <section id="s0" >
                             <div class="row">
+=======
+                            <section id="s0" >      
+                       <!--     <div class="row">
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                <div class="col-lg-4 col-md-6 col-12 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
               <source src="mov_bbb.mp4" id="video_here0">
@@ -367,8 +372,7 @@ input:checked + .slider:before {
                               <input type="checkbox" name="pay[]" class="pay" value="1">
                               <span class="slider round"></span>
                             </label>
-                               <!-- <label for="pay" class="paylabel">مدفوع</label>
-                               <input class="pay" type="checkbox"  value="1" name="pay[]"> -->
+                              
                                <br>
 
                            </div>
@@ -386,7 +390,7 @@ input:checked + .slider:before {
                                    <label>الوصف بالانجليزي</label>
                                    <textarea class="description_en form-control" name="description_en[]" rows="6"></textarea>
                                </div>
-                              </div>
+                              </div>--->
                           </section>
                                <br><br>
                          <div class="progress">

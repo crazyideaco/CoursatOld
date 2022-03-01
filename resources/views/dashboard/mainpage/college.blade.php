@@ -1,30 +1,31 @@
-
-<?php $__env->startSection('content'); ?>
+@extends('App.dash')
+@section('content')
 <div class="page-body my-5">
     <div class="row">
         <div class="col-lg-4 col-md-4 col-12">
             <div class="card_static card alert-info">
                 <i class="fas fa-user-graduate text-info"></i>
                 <h5>عدد الطلاب</h5>
-                <h4 class="counter"><?php echo e($students); ?></h4>
+                <h4 class="counter">{{$students}}</h4>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-12">
             <div class="card_static card alert-light">
                 <i class="fas fa-book-open"></i>
                 <h5>عدد الكورسات</h5>
-                <h4 class="counter"><?php echo e($types); ?></h4>
+                <h4 class="counter">{{$types}}</h4>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-12">
             <div class="card_static card alert-warning">
                 <i class="fas fa-university text-warning"></i>
                 <h5>عدد المدرسين</h5>
-                <h4 class="counter"><?php echo e($teachers); ?></h4>
+                <h4 class="counter">{{$teachers}}</h4>
             </div>
         </div>
     </div>
     <div class="row">
+        @if(auth()->user()->isAdmin == 'admin' || (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2))
         <!-- المدرسين / الكورسات -->
         <div class="col-lg-6 col-md-6 col-12 mt-5">
             <canvas id="myChart"></canvas>
@@ -108,7 +109,7 @@
             </script>
         </div>
         <!-- المدرسين / الاشتراكات -->
-
+       @endif
         <!--  أكثر الكورسات طلبا  -->
         <div class="col-lg-6 col-md-6 col-12 mt-5">
             <canvas id="myChart3" style="transform: scale(.8);"></canvas>
@@ -200,34 +201,52 @@
         </div>
         <!--  أكثر المدرسين طلبا -->
     </div>
-    <!-- <div class="row">
+     <div class="row">
         <table class="table w-100" id="example">
             <thead>
                 <tr>
-                    <th>اسم الطالب</th>
-                    <th>اسم الكورس</th>
-                    <th>Action</th>
+                	<th>id</th>
+                     <th scope="col" class="text-center">اسم الطالب</th>
+                     <th scope="col" class="text-center"> الكورس</th>
+                     <th scope="col" class="text-center"> الادمن</th>
+                      <th scope="col" class="text-center"> الاعدادات</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>أحمد</td>
-                    <td>Computer science</td>
-                    <td class="text-center">
-                        <a href="#"> <img src="<?php echo e(asset('images/pen.svg')); ?>" id="pen" style="cursor: pointer"></a>
-                         <?php if(auth()->user()->hasPermission("stages-delete")): ?> -->
-                        <!-- <img src="<?php echo e(asset('images/trash.svg')); ?>" id="trash" style="cursor:pointer;"> -->
-                        <!-- <?php endif; ?> -->
-                    </td>
-                </tr>
+                        </thead>
+          <tbody>
+              @foreach($joins as $join)
+        <tr id="join{{$join->id}}">
+        <td class="text-center">{{$join->id}}</td>
+        <td class="text-center">{{$join->student->name ?? ""}}</td>
+        <td class="text-center">{{$join->typescollege->name_ar ?? ""}}</td>
+        <td class="text-center">{{$join->user->name ?? ""}}</td>
+        <td class="tex-center">
+        <div id="status{{$join->id}}">
+            @if($join->status == 0)
+          
+        <button type="button"  class="btn btn-success
+         btn-light-success w-30" onclick="accept_typecollege_join({{$join->id}})">
+                           قبول </button>
+                           <button type="button"  class="btn btn-danger
+         btn-light-danger w-30 "  onclick="refuse_typecollege_join({{$join->id}})">
+                           رفض </button>
+            
+            @elseif($join->status == 1)
+            <span class="badge badge-success p-2">تم القبول</span>
+            @elseif($join->status == 2)
+            <span class="badge badge-danger p-2">تم الرفض</span>
+                           @endif
+                           </div>
+        </td>
+        </tr>
+              @endforeach
             </tbody>
         </table>
-    </div> -->
+    </div>
 </div>
-<?php $__env->stopSection(); ?>
+@endsection
 
 
-<?php $__env->startSection('style'); ?>
+@section('style')
 <style>
     body {
         background-color: #eef0f8;
@@ -267,18 +286,18 @@
     .table td{
         font-family: "reg";
     }
-    @media  only screen and (max-width: 650px) {
+    @media only screen and (max-width: 650px) {
         .card {
             margin-top: 5%;
         }
     }
 </style>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('scripts'); ?>
+@section('scripts')
 <!--begin::Page Scripts(used by this page)-->
-<script src="<?php echo e(asset('js/waypoints.min.js')); ?>"></script>
-<script src="<?php echo e(asset('js/counterup.min.js')); ?>"></script>
+<script src="{{asset('js/waypoints.min.js')}}"></script>
+<script src="{{asset('js/counterup.min.js')}}"></script>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -294,7 +313,61 @@
         delay: 10,
         time: 2000
     });
-</script>
-<?php $__env->stopSection(); ?>
+    function accept_typecollege_join(sel){
+    let id = sel;
+ 
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
 
-<?php echo $__env->make('App.dash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Coursat\resources\views/dashboard/mainpage/basic.blade.php ENDPATH**/ ?>
+    $.ajax({
+       type:"get",
+       url: `accept_typecollege_join/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+           if(result.status == true){
+     Swal.fire(
+      'تم!',
+      result.message,
+      'success'
+         )
+         $(`#status${id}`).empty();
+         $(`#status${id}`).html('<span class="badge badge-success p-2">تم القبول</span>');
+       }
+           }
+        
+    });
+    }function refuse_typecollege_join(sel){
+    let id = sel;
+ 
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+
+    $.ajax({
+       type:"get",
+       url: `refuse_typecollege_join/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+           if(result.status == true){
+     Swal.fire(
+      'تم!',
+         result.message,
+      'success'
+         )
+         $(`#status${id}`).empty();
+         $(`#status${id}`).html('<span class="badge badge-danger p-2">تم الرفض</span>');
+       }
+           }
+        
+    });
+    }
+ 
+</script>
+@endsection

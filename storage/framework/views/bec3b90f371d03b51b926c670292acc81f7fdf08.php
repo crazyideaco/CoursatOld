@@ -1,12 +1,12 @@
-@extends('App.dash')
-@section('style')
+
+<?php $__env->startSection('style'); ?>
 <style>
     #example_wrapper{
         width: 100% !important;
     }
 </style>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
         <!--start page-body-->
         <div class="page-body">
             <div class="container">
@@ -17,10 +17,10 @@
                 <div class="profile">
                     <div class="row">
                         <div class="col-3">
-                            <img src="{{asset('images/profile.svg')}}">
+                            <img src="<?php echo e(asset('images/profile.svg')); ?>">
                         </div>
                         <div class="col-6">
-                            <h5>{{auth()->user()->name}}</h5>
+                            <h5><?php echo e(auth()->user()->name); ?></h5>
                             <p>ادمن</p>
 
                         </div>
@@ -32,7 +32,7 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="{{asset('images/flag.svg')}}">
+                                    <img src="<?php echo e(asset('images/flag.svg')); ?>">
                                 </div>
                                 <div class="col-4">
                                     <h5>العربية</h5>
@@ -63,7 +63,7 @@
                         <div class="datee">
                             <div class="row">
                                 <span><i class="far fa-calendar-alt"></i></span>
-                                <p>{{ Carbon\Carbon::now()->format('d-m-Y')}}</p>
+                                <p><?php echo e(Carbon\Carbon::now()->format('d-m-Y')); ?></p>
                             </div>
                         </div>
 
@@ -91,7 +91,7 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <button class="btn w-100 mx-auto" >
-                                      <a href="{{route('addcenter')}}">  <span><i class="fas fa-plus-circle"></i></span>
+                                      <a href="<?php echo e(route('addcenter')); ?>">  <span><i class="fas fa-plus-circle"></i></span>
                                         اضافة مركز  
                                         </a>
                                     </button>
@@ -134,49 +134,52 @@
                 </tr>
                         </thead>
         <tbody>
-                    @foreach($centers as $center)
-                    <tr id="c{{$center->id}}">
+                    <?php $__currentLoopData = $centers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $center): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr id="c<?php echo e($center->id); ?>">
                       
-						<td>{{$center->id}}</td>
-              <td scope="col" class='text-center'><a href="{{route('centerprofile',$center->id)}}">{{$center->name}}</a></td>
+						<td><?php echo e($center->id); ?></td>
+              <td scope="col" class='text-center'><a href="<?php echo e(route('centerprofile',$center->id)); ?>"><?php echo e($center->name); ?></a></td>
 						<td scope="col" class="text-center">
-						@if($center->code)
-							{!! QrCode::size(80)->backgroundColor(255,255,204)->generate($center->code) !!}
-						@else 
+						<?php if($center->code): ?>
+							<?php echo QrCode::size(80)->backgroundColor(255,255,204)->generate($center->code); ?>
+
+						<?php else: ?> 
 					
 							لايوجد كود  للسنتر
-					@endif</td>
+					<?php endif; ?></td>
              <td scope="row" class='text-center'>
-                 <img src="{{url('uploads/'. $center->image)}}" style="width:120px;height:120px">
+                 <img src="<?php echo e(url('uploads/'. $center->image)); ?>" style="width:120px;height:120px">
              </td>
               <td>
-				  @if($center->category)
-                     {{$center->category['name']}}
-				  @endif
+				  <?php if($center->category): ?>
+                     <?php echo e($center->category['name']); ?>
+
+				  <?php endif; ?>
                   </td>
              
              <td scope="col" class="text-center">
                      
-            {{$center->address}}
+            <?php echo e($center->address); ?>
+
                   </td>
                    <td class="text-center">
-                               <span  class="btn  btn-sm" style="border:1px solid #222; margin-bottom:10px; padding:6px 39px;" id="btn{{$center->id}}" onclick="activeuser({{$center->id}})">
-                             @if($center->active == 1)
+                               <span  class="btn  btn-sm" style="border:1px solid #222; margin-bottom:10px; padding:6px 39px;" id="btn<?php echo e($center->id); ?>" onclick="activeuser(<?php echo e($center->id); ?>)">
+                             <?php if($center->active == 1): ?>
                              الغاء التفعيل
-                             @else
+                             <?php else: ?>
                              تفعيل
-                             @endif
+                             <?php endif; ?>
                                                      	   
                          </span>	     
-                      <img style="margin-right:20px;" src="{{asset('images/trash.svg')}}" id="trash" onclick="deleteuser('{{$center->id}}')" style="cursor:pointer;"> 
-                                  <a href="{{route('editcenter',$center->id)}}">
-                                            <img src="{{asset('images/pen.svg')}}"
+                      <img style="margin-right:20px;" src="<?php echo e(asset('images/trash.svg')); ?>" id="trash" onclick="deleteuser('<?php echo e($center->id); ?>')" style="cursor:pointer;"> 
+                                  <a href="<?php echo e(route('editcenter',$center->id)); ?>">
+                                            <img src="<?php echo e(asset('images/pen.svg')); ?>"
                                              id="pen"></a>
- <a href="{{route('teacherstudents',$center->id)}}" 
+ <a href="<?php echo e(route('teacherstudents',$center->id)); ?>" 
  class="btn btn-success btn-sm" >الطلاب</a>
 </td>
                                         </tr>                            
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
     </table>
                              
@@ -195,7 +198,7 @@
             <div class="foter">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
+                        <h5>Made With <img src="<?php echo e(asset('images/red.svg')); ?>"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
                     </div>
                 </div>
@@ -206,8 +209,8 @@
     <!--end page-body-->
 
 
-@endsection
-@section("scripts")
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("scripts"); ?>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -305,4 +308,5 @@ $(`#btn${id}`).html('الغاء التفعيل');
 }
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('App.dash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Coursat\resources\views/dashboard/centers.blade.php ENDPATH**/ ?>

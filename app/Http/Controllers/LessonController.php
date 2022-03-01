@@ -102,7 +102,7 @@ class LessonController extends Controller
         'name_en' => 'required',
     //    'image' => 'required|mimes:jpeg,jpg,png,gif',
        // 'intro' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
-      'url' => 'required',
+    //  'url' => 'required',
 		//'url.*' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
      //  'images' =>'required',
 //	'images.*' => 'mimes:jpeg,jpg,png,gif',
@@ -199,6 +199,7 @@ if( $videoall > 0){
              if($request->tag_id){
         $lesson->tags()->attach($request->tag_id);
       }
+      if($request->url){
          foreach($request->url as $k => $i){
         $video = new VideosCollege;
              $video->user_id = $type->doctor_id;
@@ -265,12 +266,12 @@ if($request->pay){
           $data = [
              "to" =>$to,
              'notification'=>[
-                 'title' => $request->title,
-                 'body' => $request->text
+                 'title' => $not->title,
+                 'body' => $not->text
                  ],
              "data" =>[
-                'title' => $request->title,
-                 'body' => $request->text,
+                'title' => $not->title,
+                 'body' => $not->text,
                  "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                  'type' => 'general'
                  ], 
@@ -289,6 +290,7 @@ if($request->pay){
        $result=curl_exec($ch);
              }
              }
+            }
             return response()->json(['success' => 'video uploaded','id' => $lesson->typescollege_id]);   }else{
     $msg = 'لقد استهلكت 100% ';
       return response()->json(['status' => false,'errors' => $msg]);
@@ -371,6 +373,7 @@ if( $videoall > 0){
              if($request->tag_id){
         $lesson->tags()->attach($request->tag_id);
       }
+      if($request->url){
          foreach($request->url as $k => $i){
         $video = new VideosCollege;
               $video->user_id = $type->doctor_id;
@@ -426,7 +429,43 @@ if($request->pay){
            $video->user_id = auth()->user()->id;
        }
        $video->save();
+       $students = $lesson->typescollege->studentscollege; 
+       foreach($students as $user){
+         $not = new Notification;
+         $text = 'لديك حصه جديده فى كورس ' . $lesson->typescollege->name_ar;
+     $not->title = 'اشعار جديد';
+      $not->text = $text;
+     $not->user_id = $user->id;
+     $not->save();
+     $to = $user->device_token;
+          $data = [
+             "to" =>$to,
+             'notification'=>[
+                 'title' => $not->title,
+                 'body' => $not->text
+                 ],
+             "data" =>[
+                'title' => $not->title,
+                 'body' => $not->text,
+                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                 'type' => 'general'
+                 ], 
+         ];
+      $dataString = json_encode($data);
+         $headers = [
+             'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
+             'Content-Type: application/json',
+         ];
+         $ch = curl_init();
+         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+         curl_setopt($ch, CURLOPT_POST, true);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+       $result=curl_exec($ch);
              }
+             }
+            }
             return response()->json(['success' => 'video uploaded','id' => $lesson->typescollege_id]);   }else{
 $msg = 'لقد استهلكت 100% ';
       return response()->json(['status' => false,'errors' => $msg]);
@@ -502,6 +541,7 @@ if( $videoall > 0){
              if($request->tag_id){
         $lesson->tags()->attach($request->tag_id);
       }
+      if($request->url){
          foreach($request->url as $k => $i){
         $video = new VideosCollege;
             $video->user_id = $type->doctor_id;
@@ -556,7 +596,43 @@ if($request->pay){
            $video->user_id = auth()->user()->id;
        }
        $video->save();
+       $students = $lesson->typescollege->studentscollege; 
+       foreach($students as $user){
+         $not = new Notification;
+         $text = 'لديك حصه جديده فى كورس ' . $lesson->typescollege->name_ar;
+     $not->title = 'اشعار جديد';
+      $not->text = $text;
+     $not->user_id = $user->id;
+     $not->save();
+     $to = $user->device_token;
+          $data = [
+             "to" =>$to,
+             'notification'=>[
+                 'title' => $not->title,
+                 'body' => $not->text
+                 ],
+             "data" =>[
+                'title' => $not->title,
+                 'body' => $not->text,
+                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+                 'type' => 'general'
+                 ], 
+         ];
+      $dataString = json_encode($data);
+         $headers = [
+             'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
+             'Content-Type: application/json',
+         ];
+         $ch = curl_init();
+         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+         curl_setopt($ch, CURLOPT_POST, true);
+         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+       $result=curl_exec($ch);
              }
+             }
+            }
             return response()->json(['success' => 'video uploaded','id' => $lesson->typescollege_id]);   }else{
 $msg = 'لقد استهلكت 100% ';
       return response()->json(['status' => false,'errors' => $msg]);

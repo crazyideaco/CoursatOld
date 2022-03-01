@@ -93,21 +93,23 @@
                         </div>
                    
    <div class="row">
-     <div class="form-group col-3">
+     <div class="form-group col-4">
                                     <label>اسم الكورس </label>
-                      <select name="type_id" class="form-control selectpicker" required id="type_id"
+                      <select name="type_id" class="form-control selectpicker" 
+                      required id="type_id"
                           >
-                                       <option value="0" disabled="disabled" selected="selected">اختر كورس</option>
+                        <option value="0" 
+                                       disabled="disabled" selected="selected">اختر كورس</option>
                                        @foreach($types as $type)
                                        <option value="{{$type->id}}">{{$type->name_ar}}</option>
                                        @endforeach
                                    </select>
                                 </div>
-     <div class="col-3">
-       <input type="button" class="btn btn-primary" value="اضافه" onclick="addcoursesstudents()">
-     </div>
+     
                       </div>
-
+<div class="row">
+       <input type="button" class="btn btn-primary" style="display: block;margin:auto" value="اضافه" onclick="addcoursesstudents()">
+     </div>
 
                         <div class="pt-5">
                             <div class="row">
@@ -118,9 +120,9 @@
                   <th></th>
                      <th scope="col" class="text-center">الاسم</th>
 					<th scope="col" class="text-center">الكود</th>
+                    <th scope="col" class="text-center">رقم الهاتف</th>
 					<th scope="col" class="text-center">المحافظه</th>
 					<th scope="col" class="text-center">المدينه</th>
-                    <th scope="col" class="text-center">المكان</th>
                 <!--  <th scope="col" class="text_center">السنه</th>-->
                 <!--     <th scope="col" class="text-center">الاعدادات</th>-->
                 </tr>
@@ -133,6 +135,7 @@
                         
                       <td scope="col" class='text-center'><a href="{{route('studentprofile',$student->id)}}">{{$student->name}}</a></td>
 				<td scope="col" class='text-center'>{{$student->code}}</td>
+                <td scope="col" class='text-center'>{{$student->phone}}</td>
              <td scope="col" class="text-center">
                 @if($student->state)     
                    {{$student->state['state']}}
@@ -143,10 +146,7 @@
                    {{$student->city['city']}}
 						@endif
                   </td>     
-						<td scope="col" class="text-center">
-                     
-                   {{$student->address}}
-                  </td>
+						
 					<!--	<td class="text-center">
                                <span class="btn btn-success btn-sm" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
                              @if($student->active == 1)

@@ -38,5 +38,7 @@ class Type extends Model
         return $this->belongsToMany(User::class, 'students_types','type_id','student_id');
     }public function tags(){
         return $this->belongsToMany(Tag::class, 'types_tags','type_id','tag_id');
-    }
+    } public function students(){
+        return $this->hasMany(Student_Type::class,'student_id');
+    } 
 }

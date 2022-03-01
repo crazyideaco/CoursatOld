@@ -21,7 +21,7 @@ Route::post('startlogin','LoginController@startlogin')->name('startlogin');
   Route::resource("tags",'TagController');
 //Route::group(['middleware' => ['auth','isAdmin']],function(){
 Route::group(['middleware' => ['auth']],function(){
-    Route::get('main_page','MainPageController@main_page')->name('main_page');
+    Route::get('main_page_basic','MainPageController@main_page_basic')->name('main_page_basic');
 
 Route::get('deleteuser/{id}','userscontroller@deleteuser')->name('deleteuser');
   //courses_students
@@ -330,6 +330,7 @@ Route::post('updatevideo/{id}','VideoController@updatevideo')->name('updatevideo
 Route::group(['middleware' => ['auth','college']],function(){
 
    // Route::get('logoutall','dashboardcontroller@logoutall')->name('logoutall');
+   Route::get('main_page_college','MainPageController@main_page_college')->name('main_page_college');
 
 Route::get('givetypecollegecourse','CourseController@givetypecollegecourse')->name('givetypecollegecourse');
 Route::post('addtypecollegecourse','CourseController@addtypecollegecourse');

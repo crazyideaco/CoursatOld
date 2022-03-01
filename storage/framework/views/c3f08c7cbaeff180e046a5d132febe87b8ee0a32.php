@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
 <?php $__env->startSection('content'); ?>
 
 <style>
@@ -11,7 +15,11 @@
   height: 34px;
 }
 
+<<<<<<< HEAD
 .switch input {
+=======
+.switch input { 
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
   opacity: 0;
   width: 0;
   height: 0;
@@ -94,7 +102,11 @@ input:checked + .slider:before {
 
                                 </div>
 
+<<<<<<< HEAD
 
+=======
+                         
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
 
                             </div>
 
@@ -138,7 +150,11 @@ input:checked + .slider:before {
                         </div>
                         <form method="post" action="<?php echo e(route('storelesson',$id)); ?>" enctype="multipart/form-data">
                         	<?php echo csrf_field(); ?>
+<<<<<<< HEAD
 
+=======
+                          
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                     <div class="info">
                                         <!--<input value="<?php echo e($id); ?>" id="id2" type="hidden">-->
                                         <div class="row">
@@ -195,7 +211,11 @@ unset($__errorArgs, $__bag); ?>
                            </div>   <div class="col-lg-4 col-md-6 col-12 text-center set-img">
                                                    <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="realimg1">
                                 <br>
+<<<<<<< HEAD
                                <input id="ad1" type="file" class="form-control ehabtalaat" accept="application/pdf" name="part_paper">
+=======
+                               <input id="ad1" type="file" class="form-control ehabtalaat" name="part_paper">
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                         <label for="ad1" class="ahmed">اضافة مذكره حصه</label>
                                         <?php $__errorArgs = ['part_paper'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -219,26 +239,43 @@ unset($__errorArgs, $__bag); ?>
                                     <label> اسم الحصه بالانجليزي </label>
                                     <input class="form-control" type="text" name="name_en" id="name_en">
                                 </div>
+<<<<<<< HEAD
 
 
+=======
+                    
+                            
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                      <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط الحصه</label>
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                        </div>
                                   <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                        </div>
                                  <div class="col-lg-4 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " title="التاج" data-live-search="true"  multiple name="tag_id[]">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                   <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                   <option value="<?php echo e($tag->id); ?>"><?php echo e($tag->name); ?></option>
                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -248,7 +285,11 @@ unset($__errorArgs, $__bag); ?>
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;" min="0" type="number" name="order_number">
                                </div>
+<<<<<<< HEAD
                             </div>
+=======
+                            </div> 
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                             <?php elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2): ?>
                               <div class="row">
                                 <div class="form-group col-lg-4 col-md-6 col-12">
@@ -259,25 +300,41 @@ unset($__errorArgs, $__bag); ?>
                                     <label> اسم الحصه بالانجليزي </label>
                                     <input class="form-control" type="text" name="name_en" id="name_en">
                                 </div>
+<<<<<<< HEAD
 
+=======
+                               
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                       <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط الحصه</label>
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                        </div>
                                   <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                        </div>
                                     <div class="col-lg-4 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                   <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                   <option value="<?php echo e($tag->id); ?>"><?php echo e($tag->name); ?></option>
                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -287,8 +344,13 @@ unset($__errorArgs, $__bag); ?>
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;"   min="0"  type="number" name="order_number">
                                </div>
+<<<<<<< HEAD
 
                             </div>
+=======
+                               
+                            </div> 
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                           <?php elseif(Auth::user() && Auth::user()->is_student == 3): ?>
                               <div class="row">
                                 <div class="form-group col-lg-4 col-md-6 col-12">
@@ -304,19 +366,31 @@ unset($__errorArgs, $__bag); ?>
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                        </div>
                                   <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                        </div>
                                     <div class="col-lg-4 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
+<<<<<<< HEAD
 
+=======
+                                      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                   <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                   <option value="<?php echo e($tag->id); ?>"><?php echo e($tag->name); ?></option>
                                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -326,17 +400,28 @@ unset($__errorArgs, $__bag); ?>
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;"  min="0"   type="number" name="order_number">
                                </div>
+<<<<<<< HEAD
 
 
 
+=======
+                            
+                             
+                               
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                             </div>
                           <?php endif; ?>
                        <div class="form-group col-lg-4 col-md-6 col-12">
                                    <label>الوصف </label>
                                    <textarea class="form-control" rows="5" name="description"></textarea>
                       </div></div>
+<<<<<<< HEAD
                             <section id="s0" >
                             <div class="row">
+=======
+                            <section id="s0" >      
+                       <!--     <div class="row">
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                <div class="col-lg-4 col-md-6 col-12 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
               <source src="mov_bbb.mp4" id="video_here0">
@@ -389,7 +474,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                </div>
+<<<<<<< HEAD
 
+=======
+                                    
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                             <div class="col-lg-4 col-md-6 col-12 text-center set-img">
                                 <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="b0" class="realboard">
                                 <br>
@@ -406,8 +495,13 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                            </div>
+<<<<<<< HEAD
 
                             </div>
+=======
+                
+                            </div>                        
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                             <div class="row mt-5">
                                      <div class="form-group col-lg-4 col-md-6 col-12">
                                   <input id="name_ar" type="text" style="width:100%" class="form-control name_ar" name="names_ar[]"
@@ -422,10 +516,16 @@ unset($__errorArgs, $__bag); ?>
                               <input type="checkbox" name="pay[]" class="pay" value="1">
                               <span class="slider round"></span>
                             </label>
+<<<<<<< HEAD
                                <!-- <label for="pay" class="paylabel">مدفوع</label>
                                <input class="pay" type="checkbox"  value="1" name="pay[]"> -->
                                <br>
 
+=======
+                              
+                               <br>
+                               
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                            </div>
                              <div class="form-group col-lg-4 col-md-6 col-12">
                                <label class="d-block">ترتيب الفيديو </label>
@@ -441,7 +541,11 @@ unset($__errorArgs, $__bag); ?>
                                    <label>الوصف بالانجليزي</label>
                                    <textarea class="description_en form-control" name="description_en[]" rows="6"></textarea>
                                </div>
+<<<<<<< HEAD
                               </div>
+=======
+                              </div>--->
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                           </section>
                                <br><br>
                          <div class="progress">
@@ -709,7 +813,11 @@ function getboard(f){
 }
 let c = 1;
 $("#clicked").click(function(){
+<<<<<<< HEAD
     $('.info').append(`<section id="s${c}">
+=======
+    $('.info').append(`<section id="s${c}">      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
         <div class="row">
                        <div class="col-6 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
@@ -763,7 +871,11 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                </div>
+<<<<<<< HEAD
 
+=======
+                                    
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                             <div class="col-6 text-center set-img">
                                 <img src="<?php echo e(asset('images/set-img.svg')); ?>" id="b${c}"  class="realboard">
                                 <br>
@@ -780,8 +892,13 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                            </div>
+<<<<<<< HEAD
 
                             </div>
+=======
+                
+                            </div>                           
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                             <div class="row mt-5">
                                      <div class="form-group col-4">
                                   <input id="name_ar" type="text" class="form-control name_ar" name="names_ar[]"
@@ -794,8 +911,13 @@ unset($__errorArgs, $__bag); ?>
                                <label for="pay" class="paylabel">مدفوع</label>
                                <input class="pay" type="checkbox"  value="1" name="pay[]">
                                <br>
+<<<<<<< HEAD
 
                            </div>
+=======
+                               
+                           </div> 
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
    <div class="form-group col-3">
                                <label>ترتيب الفيديو </label>
                                <input style="height: 36px;"  min="0"  type="number" name="order[]">
@@ -811,14 +933,24 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="col-4">
+<<<<<<< HEAD
                                    <button class="form-control btn btn-danger btn-sm" onclick="removesection(${c})"
+=======
+                                   <button class="form-control btn btn-danger btn-sm" onclick="removesection(${c})" 
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                     > حذف</button>
                                 </div>
                            </div>
                            </div>
+<<<<<<< HEAD
 
 
 
+=======
+                         
+                            
+                          
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                           </section>`);
                             c++;
 });
@@ -826,16 +958,28 @@ function removesection(c){
     $(`#s${c}`).remove();
     c--;
 }   $('form').ajaxForm({
+<<<<<<< HEAD
 
       beforeSend:function(){
 
         $('#success').empty();
 
+=======
+  
+      beforeSend:function(){
+        
+        $('#success').empty();
+        
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                 <?php
 $msg = null;
 $type = \App\TypesCollege::where('id',$id)->first();
 if(auth()->user() && auth()->user()->isAdmin == 'admin'){
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
     $paqauser= \App\Paqa_User::with("paqa")->where("user_id",$type->doctor_id)->first();
     if($paqauser==null){
      $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
@@ -857,7 +1001,11 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
 //return response()->json(['status' => false,'errors' => $msg]);
 }
 }if(Auth::user() && Auth::user()->is_student == 2){
+<<<<<<< HEAD
 
+=======
+             
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
   $paqauser= \App\Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
   if($paqauser==null){
     $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
@@ -911,7 +1059,11 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
         var reader = new FileReader();
 
         reader.onload = function (e) {
+<<<<<<< HEAD
             $('#realimg1').attr('src', "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/640px-Icon_pdf_file.svg.png");
+=======
+            $('#realimg1').attr('src', e.target.result);
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -938,5 +1090,8 @@ $("#notes").change(function(){
 })
 </script>
 <?php $__env->stopSection(); ?>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
 <?php echo $__env->make('App.dash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Coursat\resources\views/dashboard/addlesson.blade.php ENDPATH**/ ?>
