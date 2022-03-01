@@ -95,7 +95,6 @@ class LessonController extends Controller
      ->with('typescolleges',$typescolleges)->with('users',$users)->with('universities',University::all())->with('id',$id);
  }
  public function storelesson($id,Request $request){
-//dd($request->all());
      $type = TypesCollege::where('id',$id)->first();
           $validator = Validator::make($request->all(),[
       'name_ar' => 'required',
