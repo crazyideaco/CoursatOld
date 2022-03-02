@@ -175,7 +175,7 @@ input:checked + .slider:before {
                            </div>   <div class="col-lg-4 col-md-6 col-12 text-center set-img">
                                                    <img src="{{asset('images/set-img.svg')}}" id="realimg1">
                                 <br>
-                               <input id="ad1" type="file" class="form-control ehabtalaat" name="part_paper">
+                               <input id="ad1" type="file" class="form-control ehabtalaat" accept="application/pdf" name="part_paper">
                                         <label for="ad1" class="ahmed">اضافة مذكره حصه</label>
                                         @error('part_paper')
                                          <p style="color:red;">{{$message}}</p>
@@ -827,7 +827,7 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#realimg1').attr('src', e.target.result);
+            $('#realimg1').attr('src', "https://upload.wikimedia.org/wikipedia/commons/3/38/Icon_pdf_file.svg");
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -842,7 +842,7 @@ $("#ad1").change(function(){
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#notes1').attr('src', e.target.result);
+            $('#notes1').attr('src', "e.target.result");
         }
 
         reader.readAsDataURL(input.files[0]);
