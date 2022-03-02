@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('style'); ?>
 <style>
     #example_wrapper{
@@ -138,7 +137,6 @@
         <tbody>
                     <?php $__currentLoopData = $doctors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr id="c<?php echo e($doctor->id); ?>">
-                      
 						<th ><?php echo e($doctor->id); ?></th>
               <td scope="col" class='text-center'>
 				 <a href="<?php echo e(route('doctorprofile',$doctor->id)); ?>"> <?php echo e($doctor['name']); ?>
@@ -148,6 +146,7 @@
 						<?php if($doctor->code): ?>
 							<?php echo QrCode::size(80)->backgroundColor(255,255,204)->generate($doctor->code); ?>
 
+                            <!-- <img href="data:image/png;base64, <?php echo base64_encode(QrCode::size(100)->generate('Make me into an QrCode!')); ?>" download> -->
 						<?php else: ?> 
 					
 							لايوجد كود  للدكتور

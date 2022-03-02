@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('style'); ?>
 <style>
     #example_wrapper{
@@ -104,6 +103,7 @@
 					<th>id</th>
                      <th scope="col" class="text-center">الاسم</th>
 					<th scope="col" class="text-center">الكود</th>
+                    <th scope="col" class="text-center">رقم الهاتف</th>
 					<th scope="col" class="text-center">المحافظه</th>
 					<th scope="col" class="text-center">المدينه</th>
                   
@@ -118,6 +118,7 @@
 						<th><?php echo e($student->id); ?></th>
                       <td scope="col" class='text-center'><a href="<?php echo e(route('studentprofile',$student->id)); ?>"><?php echo e($student->name); ?></a></td>
 				<td scope="col" class='text-center'><?php echo e($student->code); ?></td>
+                <td scope="col" class='text-center'><?php echo e($student->phone); ?></td>
              <td scope="col" class="text-center">
                 <?php if($student->state): ?>     
                    <?php echo e($student->state['state']); ?>

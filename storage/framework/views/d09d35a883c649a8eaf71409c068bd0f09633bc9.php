@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('style'); ?>
 <style>
 .selectpicker{
@@ -581,6 +580,7 @@ console.log(id);
 	 formdata.append("city_id", $('#city option:selected').val());
 	 formdata.append('division_id',JSON.stringify(arr2))
 	 formdata.append('section_id',JSON.stringify(arr3))
+     formdata.append("description", $('#description').val());
     if($('#ad')[0].files[0] != undefined){
 	formdata.append('image',$('#ad')[0].files[0]);
 	}if($('#ad2')[0].files[0] != "undefined"){
