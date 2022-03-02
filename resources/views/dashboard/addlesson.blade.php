@@ -12,7 +12,7 @@
   height: 34px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -95,7 +95,7 @@ input:checked + .slider:before {
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -139,7 +139,7 @@ input:checked + .slider:before {
                         </div>
                         <form method="post" action="{{route('storelesson',$id)}}" enctype="multipart/form-data">
                         	@csrf
-                          
+
                                     <div class="info">
                                         <!--<input value="{{$id}}" id="id2" type="hidden">-->
                                         <div class="row">
@@ -175,7 +175,7 @@ input:checked + .slider:before {
                            </div>   <div class="col-lg-4 col-md-6 col-12 text-center set-img">
                                                    <img src="{{asset('images/set-img.svg')}}" id="realimg1">
                                 <br>
-                               <input id="ad1" type="file" class="form-control ehabtalaat" name="part_paper">
+                               <input id="ad1" type="file" class="form-control ehabtalaat" accept="application/pdf" name="part_paper">
                                         <label for="ad1" class="ahmed">اضافة مذكره حصه</label>
                                         @error('part_paper')
                                          <p style="color:red;">{{$message}}</p>
@@ -192,26 +192,26 @@ input:checked + .slider:before {
                                     <label> اسم الحصه بالانجليزي </label>
                                     <input class="form-control" type="text" name="name_en" id="name_en">
                                 </div>
-                    
-                            
+
+
                                      <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط الحصه</label>
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                   <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                  <div class="col-lg-4 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " title="التاج" data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}">{{$tag->name}}</option>
                                   @endforeach
@@ -221,7 +221,7 @@ input:checked + .slider:before {
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;" min="0" type="number" name="order_number">
                                </div>
-                            </div> 
+                            </div>
                             @elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2)
                               <div class="row">
                                 <div class="form-group col-lg-4 col-md-6 col-12">
@@ -232,25 +232,25 @@ input:checked + .slider:before {
                                     <label> اسم الحصه بالانجليزي </label>
                                     <input class="form-control" type="text" name="name_en" id="name_en">
                                 </div>
-                               
+
                                       <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط الحصه</label>
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                   <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                     <div class="col-lg-4 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}">{{$tag->name}}</option>
                                   @endforeach
@@ -260,8 +260,8 @@ input:checked + .slider:before {
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;"   min="0"  type="number" name="order_number">
                                </div>
-                               
-                            </div> 
+
+                            </div>
                           @elseif(Auth::user() && Auth::user()->is_student == 3)
                               <div class="row">
                                 <div class="form-group col-lg-4 col-md-6 col-12">
@@ -277,19 +277,19 @@ input:checked + .slider:before {
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                   <div class="form-group col-lg-4 col-md-6 col-12">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                     <div class="col-lg-4 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}">{{$tag->name}}</option>
                                   @endforeach
@@ -299,17 +299,22 @@ input:checked + .slider:before {
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;"  min="0"   type="number" name="order_number">
                                </div>
-                            
-                             
-                               
+
+
+
                             </div>
                           @endif
                        <div class="form-group col-lg-4 col-md-6 col-12">
                                    <label>الوصف </label>
                                    <textarea class="form-control" rows="5" name="description"></textarea>
                       </div></div>
+<<<<<<< HEAD
+                            <section id="s0" >
+                            <div class="row">
+=======
                             <section id="s0" >      
                        <!--     <div class="row">
+>>>>>>> a95b46da21cb7cfcabb18f09d941921aee2ee1da
                                <div class="col-lg-4 col-md-6 col-12 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
               <source src="mov_bbb.mp4" id="video_here0">
@@ -341,7 +346,7 @@ input:checked + .slider:before {
                             <p style="color:red;">{{$message}}</p>
                             @enderror
                </div>
-                                    
+
                             <div class="col-lg-4 col-md-6 col-12 text-center set-img">
                                 <img src="{{asset('images/set-img.svg')}}" id="b0" class="realboard">
                                 <br>
@@ -351,8 +356,8 @@ input:checked + .slider:before {
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
                            </div>
-                
-                            </div>                        
+
+                            </div>
                             <div class="row mt-5">
                                      <div class="form-group col-lg-4 col-md-6 col-12">
                                   <input id="name_ar" type="text" style="width:100%" class="form-control name_ar" name="names_ar[]"
@@ -369,7 +374,7 @@ input:checked + .slider:before {
                             </label>
                               
                                <br>
-                               
+
                            </div>
                              <div class="form-group col-lg-4 col-md-6 col-12">
                                <label class="d-block">ترتيب الفيديو </label>
@@ -653,7 +658,7 @@ function getboard(f){
 }
 let c = 1;
 $("#clicked").click(function(){
-    $('.info').append(`<section id="s${c}">      
+    $('.info').append(`<section id="s${c}">
         <div class="row">
                        <div class="col-6 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
@@ -686,7 +691,7 @@ $("#clicked").click(function(){
                             <p style="color:red;">{{$message}}</p>
                             @enderror
                </div>
-                                    
+
                             <div class="col-6 text-center set-img">
                                 <img src="{{asset('images/set-img.svg')}}" id="b${c}"  class="realboard">
                                 <br>
@@ -696,8 +701,8 @@ $("#clicked").click(function(){
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
                            </div>
-                
-                            </div>                           
+
+                            </div>
                             <div class="row mt-5">
                                      <div class="form-group col-4">
                                   <input id="name_ar" type="text" class="form-control name_ar" name="names_ar[]"
@@ -710,8 +715,8 @@ $("#clicked").click(function(){
                                <label for="pay" class="paylabel">مدفوع</label>
                                <input class="pay" type="checkbox"  value="1" name="pay[]">
                                <br>
-                               
-                           </div> 
+
+                           </div>
    <div class="form-group col-3">
                                <label>ترتيب الفيديو </label>
                                <input style="height: 36px;"  min="0"  type="number" name="order[]">
@@ -727,14 +732,14 @@ $("#clicked").click(function(){
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="col-4">
-                                   <button class="form-control btn btn-danger btn-sm" onclick="removesection(${c})" 
+                                   <button class="form-control btn btn-danger btn-sm" onclick="removesection(${c})"
                                     > حذف</button>
                                 </div>
                            </div>
                            </div>
-                         
-                            
-                          
+
+
+
                           </section>`);
                             c++;
 });
@@ -742,16 +747,16 @@ function removesection(c){
     $(`#s${c}`).remove();
     c--;
 }   $('form').ajaxForm({
-  
+
       beforeSend:function(){
-        
+
         $('#success').empty();
-        
+
                 <?php
 $msg = null;
 $type = \App\TypesCollege::where('id',$id)->first();
 if(auth()->user() && auth()->user()->isAdmin == 'admin'){
-      
+
     $paqauser= \App\Paqa_User::with("paqa")->where("user_id",$type->doctor_id)->first();
     if($paqauser==null){
      $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
@@ -773,7 +778,7 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
 //return response()->json(['status' => false,'errors' => $msg]);
 }
 }if(Auth::user() && Auth::user()->is_student == 2){
-             
+
   $paqauser= \App\Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
   if($paqauser==null){
     $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
@@ -827,7 +832,7 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#realimg1').attr('src', e.target.result);
+            $('#realimg1').attr('src', "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Icon_pdf_file.svg/640px-Icon_pdf_file.svg.png");
         }
 
         reader.readAsDataURL(input.files[0]);
