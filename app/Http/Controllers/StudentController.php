@@ -117,20 +117,23 @@ class StudentController extends Controller
     }  $text = "";
           foreach($students as $student){
                    $text .='<tr id="s'.$student->id.'">
-                      <td>'.$student->id.'</>
+                      
 						
                       <td scope="col" class="text-center"><a href="'.route("studentprofile",$student->id).'">'.$student->name.'</a></td>
 				<td scope="col" class="text-center">'.$student->code.'</td>
              <td scope="col" class="text-center">';
-                if($student->state){    
-                 $text .=  $student->state['state'];
+                  
+                 $text.='<ul>';
+                  if($student->stutypescollege){
+                      foreach($student->stutypescollege as $typecollege){
+                   $text .='<li style="font-size:14px;">'.$typecollege->name_ar.'</li>';
+                  
+                  }
                 }
+                           $text.='</ul>';
+              
                  $text.='</td>   
-						<td scope="col" class="text-center">';
-                     if($student->city){
-                   $text .=$student->city['city'];
-                     }
-                  $text .='</td>     
+					
 						<td class="text-center">
                                <span class="btn btn-success btn-sm" id="btn'.$student->id.'" onclick="activeuser('.$student->id.')">';
                              if($student->active == 1){

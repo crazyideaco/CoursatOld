@@ -104,8 +104,9 @@
 					<th>id</th>
                      <th scope="col" class="text-center">الاسم</th>
 					<th scope="col" class="text-center">الكود</th>
-					<th scope="col" class="text-center">المحافظه</th>
-					<th scope="col" class="text-center">المدينه</th>
+                    <th scope="col" class="text-center">رقم الهاتف</th>
+					<th scope="col" class="text-center">الكورسات</th>
+					
                   
                 <!--  <th scope="col" class="text_center">السنه</th>-->
                     <th scope="col" class="text-center">الاعدادات</th>
@@ -118,16 +119,36 @@
 						<th>{{$student->id}}</th>
                       <td scope="col" class='text-center'><a href="{{route('studentprofile',$student->id)}}">{{$student->name}}</a></td>
 				<td scope="col" class='text-center'>{{$student->code}}</td>
-             <td scope="col" class="text-center">
-                @if($student->state)     
-                   {{$student->state['state']}}
-				 @endif
-                  </td>   
-						<td scope="col" class="text-center">
-                     @if($student->city)
-                   {{$student->city['city']}}
-						@endif
-                  </td>     
+                <td scope="col" class='text-center'>{{$student->phone}}</td>
+                @if($student->year_id != null)
+                <td scope="col" class="text-center">
+               <ul>
+               @if($student->stutypes)
+                      @foreach($student->stutypes as $type)
+                <li style="font-size:14px;">{{$type->name_ar}}</li>
+               
+                      @endforeach
+                      @endif
+                         </ul>
+                  </td>  
+                  @elseif($student->university_id != null)
+                <td scope="col" class="text-center">
+               <ul>
+               @if($student->stutypescollege)
+                      @foreach($student->stutypescollege as $typecollege)
+                <li style="font-size:14px;">{{$typecollege->name_ar}}</li>
+               
+                      @endforeach
+                      @endif
+                         </ul>
+               
+                  </td>  
+                  @else
+                  <td scope="col" class="text-center">
+          
+               
+                  </td>  
+                  @endif
 					<td class="text-center">
                                <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
                              @if($student->active == 1)

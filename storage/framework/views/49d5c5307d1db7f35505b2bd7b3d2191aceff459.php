@@ -1,12 +1,12 @@
-@extends('App.dash')
-@section('style')
+
+<?php $__env->startSection('style'); ?>
 <style>
     #example_wrapper{
         width: 100% !important;
     }
 </style>
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
         <!--start page-body-->
         <div class="page-body">
             <div class="container">
@@ -17,10 +17,10 @@
                 <div class="profile">
                     <div class="row">
                         <div class="col-3">
-                            <img src="{{asset('images/profile.svg')}}">
+                            <img src="<?php echo e(asset('images/profile.svg')); ?>">
                         </div>
                         <div class="col-6">
-                            <h5>{{auth()->user()->name}}</h5>
+                            <h5><?php echo e(auth()->user()->name); ?></h5>
                             <p>ادمن</p>
 
                         </div>
@@ -32,7 +32,7 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="{{asset('images/flag.svg')}}">
+                                    <img src="<?php echo e(asset('images/flag.svg')); ?>">
                                 </div>
                                 <div class="col-4">
                                     <h5>العربية</h5>
@@ -63,7 +63,7 @@
                         <div class="datee">
                             <div class="row">
                                 <span><i class="far fa-calendar-alt"></i></span>
-                                <p>{{ Carbon\Carbon::now()->format('d-m-Y')}}</p>
+                                <p><?php echo e(Carbon\Carbon::now()->format('d-m-Y')); ?></p>
                             </div>
                         </div>
 
@@ -100,41 +100,49 @@
                                     <label>اسم الجامعه </label>
                                    <select name="university_id" required class="form-control" id="university" onchange="getcolleges(this)">
                                        <option value="0" >اختر جامعه</option>
-                                       @foreach($universities as $university)
-                                       <option value="{{$university->id}}">
-                                           {{$university->name_ar}}
+                                       <?php $__currentLoopData = $universities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $university): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                       <option value="<?php echo e($university->id); ?>">
+                                           <?php echo e($university->name_ar); ?>
+
                                            </option>
-                                       @endforeach
+                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                    </select>
-                                    @error('university_id')
-                                    <p style="color:red;">{{$message}}</p>
-                                    @enderror
+                                    <?php $__errorArgs = ['university_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <p style="color:red;"><?php echo e($message); ?></p>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                  <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم الكليه </label>
                                    <select name="college_id" required class="form-control" id="college" onchange="getdivision(this)">
                                        <option value="0"  >اختر كليه</option>
-                                       @foreach($colleges as $college)
-                                       <option value="{{$college->id}}">{{$college->name_ar}}</option>
-                                       @endforeach
+                                       <?php $__currentLoopData = $colleges; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $college): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                       <option value="<?php echo e($college->id); ?>"><?php echo e($college->name_ar); ?></option>
+                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                    </select>
                                 </div>
                                  <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم القسم </label>
                                    <select name="division_id" required class="form-control" id="division" onchange="getsection(this)">
                                        <option value="0"  >اختر قسم</option>
-                                       @foreach($divisions as $division)
-                                       <option value="{{$division->id}}">{{$division->name_ar}}</option>
-                                       @endforeach
+                                       <?php $__currentLoopData = $divisions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $division): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                       <option value="<?php echo e($division->id); ?>"><?php echo e($division->name_ar); ?></option>
+                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                    </select>
                                 </div>
           <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم الفرقه </label>
                                    <select name="section_id" required class="form-control" id="section" onchange="getsubcollege(this)" >
                                        <option value="0"  >اختر فرقه</option>
-                                       @foreach($sections as $section)
-                                       <option value="{{$section->id}}">{{$section->name_ar}}</option>
-                                       @endforeach
+                                       <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                       <option value="<?php echo e($section->id); ?>"><?php echo e($section->name_ar); ?></option>
+                                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                    </select>
                                 </div>
                       </div>
@@ -169,20 +177,20 @@
                 </tr>
                         </thead>
         <tbody id="students">
-                    @foreach($students as $student)
-                    <tr id="s{{$student->id}}">
+                    <?php $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr id="s<?php echo e($student->id); ?>">
                       
 				
-                      <td scope="col" class='text-center'><a href="{{route('studentprofile',$student->id)}}">{{$student->name}}</a></td>
-				<td scope="col" class='text-center'>{{$student->code}}</td>
+                      <td scope="col" class='text-center'><a href="<?php echo e(route('studentprofile',$student->id)); ?>"><?php echo e($student->name); ?></a></td>
+				<td scope="col" class='text-center'><?php echo e($student->code); ?></td>
              <td scope="col" class="text-center">
                <ul>
-               @if($student->stutypescollege)
-                      @foreach($student->stutypescollege as $typecollege)
-                <li style="font-size:14px;">{{$typecollege->name_ar}}</li>
+               <?php if($student->stutypescollege): ?>
+                      <?php $__currentLoopData = $student->stutypescollege; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $typecollege): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li style="font-size:14px;"><?php echo e($typecollege->name_ar); ?></li>
                
-                      @endforeach
-                      @endif
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                      <?php endif; ?>
                          </ul>
                
                   </td>     
@@ -190,20 +198,20 @@
                               ?>
 
 						<td class="text-center">
-                               <span class="btn btn-success btn-sm" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
-                             @if($student->active == 1)
+                               <span class="btn btn-success btn-sm" id="btn<?php echo e($student->id); ?>" onclick="activeuser(<?php echo e($student->id); ?>)">
+                             <?php if($student->active == 1): ?>
                              الغاء التفعيل
-                             @else
+                             <?php else: ?>
                              تفعيل
-                             @endif
+                             <?php endif; ?>
                          </span>
                             <!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary btn-sm" style="font-size:13px;width:52px;" data-toggle="modal" data-target="#myModal{{$student->id}}">
+<button type="button" class="btn btn-primary btn-sm" style="font-size:13px;width:52px;" data-toggle="modal" data-target="#myModal<?php echo e($student->id); ?>">
   كورس 
 </button>
 
 <!-- The Modal -->
-<div class="modal" id="myModal{{$student->id}}">
+<div class="modal" id="myModal<?php echo e($student->id); ?>">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -219,15 +227,15 @@
           <div class="col-8">
             
          
-          <select name="type_id" class="form-control selectpicker" id="course{{$student->id}}">
-       @foreach($types as $type)
-            <option value="{{$type->id}}">{{$type->name_ar}}</option>
-        @endforeach
+          <select name="type_id" class="form-control selectpicker" id="course<?php echo e($student->id); ?>">
+       <?php $__currentLoopData = $types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <option value="<?php echo e($type->id); ?>"><?php echo e($type->name_ar); ?></option>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </select>
            </div>
            </div>
         <div class="row  mt-4">
-          <button type="button text-center" onclick="addtypesollegestudent({{$student->id}})" class="btn btn-success">
+          <button type="button text-center" onclick="addtypesollegestudent(<?php echo e($student->id); ?>)" class="btn btn-success">
             حفظ
           </button>
         </div>
@@ -241,12 +249,12 @@
     </div>
   </div>
 </div>
-                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deleteuser('{{$student->id}}')" style="cursor:pointer;"> 
+                             <img src="<?php echo e(asset('images/trash.svg')); ?>" id="trash" onclick="deleteuser('<?php echo e($student->id); ?>')" style="cursor:pointer;"> 
                        
                                             </td>
 
                                         </tr>                            
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
     </table>
                              
@@ -265,7 +273,7 @@
             <div class="foter">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
+                        <h5>Made With <img src="<?php echo e(asset('images/red.svg')); ?>"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
                     </div>
                 </div>
@@ -276,8 +284,8 @@
     <!--end page-body-->
 
 
-@endsection
-@section("scripts")
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("scripts"); ?>
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
@@ -509,4 +517,5 @@ $(`#myModal${id}`).modal('hide');
       });
   } 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('App.dash', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Coursat\resources\views/dashboard/students/collegestudents.blade.php ENDPATH**/ ?>
