@@ -575,13 +575,23 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
 
 
 Route::get("uploadVideos",function(){
+  $service = new \Google_Service_Drive(new \Google_Client());
   $videos = VideosCollege::all();
   $index = 0;
   foreach($videos as $video){  
     if($index>132){
     $link = asset('uploads/'. $video->url);
     $file = file_get_contents($link);
-    $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
+    $fileMetadata = new \Google_Service_Drive_DriveFile(array(
+         'name' => 'ExpertPHP',
+         'mimeType' => 'application/vnd.google-apps.folder'));
+    $fileId= $service->files->create($fileMetadata, array(
+      'data' => $file,
+      'mimeType' => 'image/jpeg',
+      'uploadType' => 'multipart',
+      'fields' => 'id'));
+      return $fileId;
+    // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
   $index++;
 }
