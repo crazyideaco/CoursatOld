@@ -574,34 +574,32 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
 
 
 
-Route::get("uploadVideos",function(){
-  $videos = VideosCollege::where('storage_type',0)->get();
-  $index = 0;
-  foreach($videos as $video){  
-    try{
-      
-    $file = file_get_contents(base_path() .'/public/uploads/'. $video->url,false);
-    if($file!=null){
-    // $name = \Storage::disk('google')->put('13322.mp4', $file);
-    // dd(\Storage::disk('google')->getMetadata("13322.mp4"));
-    $value = $video->url;
-      $oldName =  $video->url;
-      \Storage::disk('google')->put($value,$file);
-     
-       $video->url  =   \Storage::disk("google")->getMetaData($value)['path'];
-       $video->storage_type = 1;
-       $video->save();
-       if(public_path() . '/uploads/' . $oldName){
+  Route::get("uploadVideos", function () {
+    $videos = VideosCollege::where('storage_type', 0)->get();
+    $index = 0;
+    foreach ($videos as $video) {
+      try {
+        dd($video->url);
+        $file = file_get_contents(base_path() . '/public/uploads/' . $video->url, false);
+        if ($file != null) {
+          // $name = \Storage::disk('google')->put('13322.mp4', $file);
+          // dd(\Storage::disk('google')->getMetadata("13322.mp4"));
+          $value = $video->url;
+          $oldName =  $video->url;
+          \Storage::disk('google')->put($value, $file);
 
-        $link1 = public_path() . '/uploads/' . $oldName;
+          $video->url  =   \Storage::disk("google")->getMetaData($value)['path'];
+          $video->storage_type = 1;
+          $video->save();
+          if (public_path() . '/uploads/' . $oldName) {
+
+            $link1 = public_path() . '/uploads/' . $oldName;
             \File::delete($link1);
+          }
         }
-  }
-  
-    }catch(Exception $e){
-      continue;
+      } catch (Exception $e) {
+        continue;
+      }
+      // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
     }
-    // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
-  }
-
-});
+  });
