@@ -575,7 +575,6 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
 
 
 Route::get("uploadVideos",function(){
-  $service = new \Google_Service_Drive(new \Google_Client());
   $videos = VideosCollege::all();
   $index = 0;
   foreach($videos as $video){  
@@ -584,8 +583,11 @@ Route::get("uploadVideos",function(){
     \Illuminate\Support\Facades\File::get(base_path() .'/public/uploads/'. $video->url);
 
     $file = file_get_contents($link);
+    if($file!=null){
+      
     $name = \Storage::disk('google')->putFileAs("",$file,"122.mp4");
-dd(\Storage::disk('google')->getMetadata("122.mp4"));
+    dd(\Storage::disk('google')->getMetadata("122.mp4"));
+  }
     // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
   $index++;
