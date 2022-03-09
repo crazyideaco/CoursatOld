@@ -580,9 +580,8 @@ Route::get("uploadVideos",function(){
   foreach($videos as $video){  
     if($index>132){
     $link = asset('uploads/'. $video->url);
-    \Illuminate\Support\Facades\File::get(base_path() .'/public/uploads/'. $video->url);
+    $file = \Illuminate\Support\Facades\File::get(base_path() .'/public/uploads/'. $video->url);
 
-    $file = file_get_contents($link);
     if($file!=null){
       
     $name = \Storage::disk('google')->putFileAs("",$file,"122.mp4");
