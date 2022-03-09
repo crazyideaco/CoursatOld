@@ -575,7 +575,7 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
 
 
   Route::get("uploadVideos", function () {
-    $videos = VideosCollege::where('storage_type', 0)->first();
+    $videos = VideosCollege::where('storage_type', 0)->skip(1)->first();
     $index = 0;
     foreach ($videos as $video) {
       try {
