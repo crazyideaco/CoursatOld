@@ -581,17 +581,11 @@ Route::get("uploadVideos",function(){
   foreach($videos as $video){  
     if($index>132){
     $link = asset('uploads/'. $video->url);
+    \Illuminate\Support\Facades\File::get(base_path() .'uploads/'. $video->url);
+
     $file = file_get_contents($link);
-    $fileMetadata = new \Google_Service_Drive_DriveFile(array(
-         'name' => 'ExpertPHP',
-         'mimeType' => 'application/vnd.google-apps.folder'));
-    // $fileId= $service->files->create($fileMetadata, array(
-    //   'data' => $file,
-    //   'mimeType' => 'image/jpeg',
-    //   'uploadType' => 'multipart',
-    //   'fields' => 'id'));
-      return "hey";
-    // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
+    dd($file);
+    $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
   $index++;
 }
