@@ -578,13 +578,22 @@ Route::get("uploadVideos",function(){
   $videos = VideosCollege::all();
   $index = 0;
   foreach($videos as $video){  
-    if($index>132){
-    $link = asset('uploads/'. $video->url);
+    if($index==133){
     $file = file_get_contents(base_path() .'/public/uploads/'. $video->url,false);
   
     if($file!=null){
-    $name = \Storage::disk('google')->put('13322.mp4', $file);
-    dd(\Storage::disk('google')->getMetadata("13322.mp4"));
+    // $name = \Storage::disk('google')->put('13322.mp4', $file);
+    // dd(\Storage::disk('google')->getMetadata("13322.mp4"));
+    $value = $video->url;
+      $oldName =  $video->url;
+       $video->url  =  \Storage::disk("google")->getMetaData( \Storage::disk('google')->put($value,$file))["path"];
+       $video->storage_type = 1;
+       $video->save();
+       if(public_path() . '/uploads/' . $oldName){
+
+        $link1 = public_path() . '/uploads/' . $oldName;
+            \File::delete($link1);
+        }
   }
     // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
