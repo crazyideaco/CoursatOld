@@ -124,7 +124,7 @@
                 <tr>
 					<th>id</th>
                     <th scope="col" class="text-center">عنوان الفيديو</th>
-                     <th scope="col" class="text-center">الفيديو</th>
+                     <!-- <th scope="col" class="text-center">الفيديو</th> -->
                      <th scope="col" class="text-center">الصوره</th>
                      <td scope="col"  class="text-center">الكليه</td>
                      <th scope="col" class="text-center">الماده</th>
@@ -139,9 +139,9 @@
                      <tr id="un{{$video->id}}">
 						    <td scope="col"  class="text-center">{{$video['id']}}</td>
                         <td scope="col"  class="text-center">{{$video['name_ar']}}</td>
-                <td scope="row" class="text-center">
+                <!-- <td scope="row" class="text-center">
                     <video width="120" height="120" src="{{$video->url_video}}" controls></video>
-             </td>
+             </td> -->
              <td scope="row" class='text-center'>
                  <img src="{{url('uploads/'. $video->image)}}" style="width:120px;height:120px">
              </td>
