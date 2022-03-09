@@ -579,6 +579,7 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
     $index = 0;
     foreach ($videos as $video) {
       try {
+        if(base_path() . '/public/uploads/' . $video->url){
         $file = file_get_contents(base_path() . '/public/uploads/' . $video->url, false);
         if ($file != null) {
           // $name = \Storage::disk('google')->put('13322.mp4', $file);
@@ -596,6 +597,7 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
             \File::delete($link1);
           }
         }
+      }
       } catch (Exception $e) {
         continue;
       }
