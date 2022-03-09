@@ -584,8 +584,9 @@ Route::get("uploadVideos",function(){
     \Illuminate\Support\Facades\File::get(base_path() .'/public/uploads/'. $video->url);
 
     $file = file_get_contents($link);
-    dd($file);
-    $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
+    $name = \Storage::disk('google')->putFileAs("",$file,"122.mp4");
+dd(\Storage::disk('google')->getMetadata("122.mp4"));
+    // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
   $index++;
 }
