@@ -580,8 +580,8 @@ Route::get("uploadVideos",function(){
   foreach($videos as $video){  
     if($index>132){
     $link = asset('uploads/'. $video->url);
-    $file = file(base_path() .'/public/uploads/'. $video->url,false);
-    asset('uploads/'. $video->url);
+    //$file = file(base_path() .'/public/uploads/'. $video->url,false);
+    $file =asset('uploads/'. $video->url);
 
     if($file!=null){
       dd($file->getClientOriginalExtension());
