@@ -585,11 +585,11 @@ Route::get("uploadVideos",function(){
     $fileMetadata = new \Google_Service_Drive_DriveFile(array(
          'name' => 'ExpertPHP',
          'mimeType' => 'application/vnd.google-apps.folder'));
-    $fileId= $service->files->create($fileMetadata, array(
-      'data' => $file,
-      'mimeType' => 'image/jpeg',
-      'uploadType' => 'multipart',
-      'fields' => 'id'));
+    // $fileId= $service->files->create($fileMetadata, array(
+    //   'data' => $file,
+    //   'mimeType' => 'image/jpeg',
+    //   'uploadType' => 'multipart',
+    //   'fields' => 'id'));
       return $fileId;
     // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
