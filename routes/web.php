@@ -581,8 +581,9 @@ Route::get("uploadVideos",function(){
     if($index>132){
     $link = asset('uploads/'. $video->url);
     $file = \Illuminate\Support\Facades\File::get(base_path() .'/public/uploads/'. $video->url);
+    
     if($file!=null){
-      
+      dd($file->getClientOriginalExtension());
     $name = \Storage::disk('google')->putFileAs("",$file,"122.mp4");
     dd(\Storage::disk('google')->getMetadata("122.mp4"));
   }
