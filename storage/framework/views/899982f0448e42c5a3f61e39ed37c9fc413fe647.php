@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('style'); ?>
 <style>
     #example_wrapper{
@@ -167,7 +166,7 @@ unset($__errorArgs, $__bag); ?>
          <table id="example" class="table col-12" style="width:100%">
    <thead>
                 <tr>
-					<th>id</th>
+			
                      <th scope="col" class="text-center">الاسم</th>
 					<th scope="col" class="text-center">الكود</th>
 					<th scope="col" class="text-center">الكورسات</th>
@@ -180,7 +179,7 @@ unset($__errorArgs, $__bag); ?>
                     <?php $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $student): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr id="s<?php echo e($student->id); ?>">
                       
-						<th><?php echo e($student->id); ?></th>
+				
                       <td scope="col" class='text-center'><a href="<?php echo e(route('studentprofile',$student->id)); ?>"><?php echo e($student->name); ?></a></td>
 				<td scope="col" class='text-center'><?php echo e($student->code); ?></td>
              <td scope="col" class="text-center">
@@ -295,13 +294,7 @@ unset($__errorArgs, $__bag); ?>
   $(document).ready(function() {
 
 		$('#example').DataTable({
-    "order": [[ 0, "desc" ]],
-			"columnDefs": [
-            {
-                "targets": [ 0 ],
-                "visible": false,
-            },
-        ]// Order on init. # is the column, starting at 0
+
 
 });
 	});function activeuser(id){

@@ -119,6 +119,7 @@
                 <tr>
 					<th>id</th>
                      <th scope="col" class="text-center">اسم الطالب</th>
+                     <th scope="col" class="text-center">رقم الطالب</th>
                      <th scope="col" class="text-center"> الكورس</th>
                      <th scope="col" class="text-center"> الادمن</th>
                       <th scope="col" class="text-center"> الاعدادات</th>
@@ -129,6 +130,7 @@
         <tr id="join<?php echo e($join->id); ?>">
         <td class="text-center"><?php echo e($join->id); ?></td>
         <td class="text-center"><?php echo e($join->student->name ?? ""); ?></td>
+        <td class="text-center"><?php echo e($join->student->phone ?? ""); ?></td>
         <td class="text-center"><?php echo e($join->typescollege->name_ar ?? ""); ?></td>
         <td class="text-center"><?php echo e($join->user->name ?? ""); ?></td>
         <td class="tex-center">

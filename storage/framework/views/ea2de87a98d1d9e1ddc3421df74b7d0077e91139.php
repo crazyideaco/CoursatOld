@@ -101,12 +101,11 @@
    <thead>
                 <tr>
 					<th>id</th>
-                     <th scope="col" class="text-center">الاسم</th>
+                    <th scope="col" class="text-center">الاسم</th>
 					<th scope="col" class="text-center">الكود</th>
                     <th scope="col" class="text-center">رقم الهاتف</th>
-					<th scope="col" class="text-center">المحافظه</th>
-					<th scope="col" class="text-center">المدينه</th>
-                  
+					<th scope="col" class="text-center">الكورسات</th>
+					
                 <!--  <th scope="col" class="text_center">السنه</th>-->
                     <!--  <th scope="col" class="text-center">الاعدادات</th>-->
                 </tr>
@@ -117,20 +116,37 @@
                       
 						<th><?php echo e($student->id); ?></th>
                       <td scope="col" class='text-center'><a href="<?php echo e(route('studentprofile',$student->id)); ?>"><?php echo e($student->name); ?></a></td>
-				<td scope="col" class='text-center'><?php echo e($student->code); ?></td>
+                <td scope="col" class='text-center'><?php echo e($student->code); ?></td>
                 <td scope="col" class='text-center'><?php echo e($student->phone); ?></td>
-             <td scope="col" class="text-center">
-                <?php if($student->state): ?>     
-                   <?php echo e($student->state['state']); ?>
-
-				 <?php endif; ?>
-                  </td>   
-						<td scope="col" class="text-center">
-                     <?php if($student->city): ?>
-                   <?php echo e($student->city['city']); ?>
-
-						<?php endif; ?>
-                  </td>     
+                <?php if($student->year_id != null): ?>
+                <td scope="col" class="text-center">
+               <ul>
+               <?php if($student->stutypes): ?>
+                      <?php $__currentLoopData = $student->stutypes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li style="font-size:14px;"><?php echo e($type->name_ar); ?></li>
+               
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                      <?php endif; ?>
+                         </ul>
+                  </td>  
+                  <?php elseif($student->university_id != null): ?>
+                <td scope="col" class="text-center">
+               <ul>
+               <?php if($student->stutypescollege): ?>
+                      <?php $__currentLoopData = $student->stutypescollege; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $typecollege): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <li style="font-size:14px;"><?php echo e($typecollege->name_ar); ?></li>
+               
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                      <?php endif; ?>
+                         </ul>
+               
+                  </td>  
+                  <?php else: ?>
+                  <td scope="col" class="text-center">
+          
+               
+                  </td>  
+                  <?php endif; ?>
 
 
 
