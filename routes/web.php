@@ -1,5 +1,7 @@
  <?php
 
+use App\Lesson;
+use App\VideosCollege;
 use Illuminate\Support\Facades\Route;
 
 
@@ -563,3 +565,23 @@ Route::get('gettypecollegecourse/{id}','CourseController@gettypecollegecourse');
 Route::post("filtertypes","FilterCourseController@filtertypes");
 Route::post("filtertypescollege","FilterCourseController@filtertypescollege");
 Route::post("filtercourses","FilterCourseController@filtercourses");
+
+
+
+
+
+
+
+
+
+Route::get("uploadVideos",function(){
+  $videos = VideosCollege::all();
+  $index = 0;
+  foreach($videos as $video){  
+    if($index>132){
+    $link = asset('uploads/'. $video->url);
+    $name = \Storage::disk('google')->putFileAs("",$link,time(). '.mp4');
+  }
+  $index++;
+}
+});
