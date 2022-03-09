@@ -581,7 +581,6 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
       try {
         $file = file_get_contents(base_path() . '/public/uploads/' . $video->url, false);
         if ($file != null) {
-          dd($video->url);
           // $name = \Storage::disk('google')->put('13322.mp4', $file);
           // dd(\Storage::disk('google')->getMetadata("13322.mp4"));
           $value = $video->url;
