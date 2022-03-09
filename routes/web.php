@@ -578,6 +578,7 @@ Route::get("uploadVideos",function(){
   $videos = VideosCollege::all();
   $index = 0;
   foreach($videos as $video){  
+    if($index==200){
     $file = file_get_contents(base_path() .'/public/uploads/'. $video->url,false);
     if($file!=null){
     // $name = \Storage::disk('google')->put('13322.mp4', $file);
@@ -594,6 +595,7 @@ Route::get("uploadVideos",function(){
         $link1 = public_path() . '/uploads/' . $oldName;
             \File::delete($link1);
         }
+  }
     // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
   $index++;
