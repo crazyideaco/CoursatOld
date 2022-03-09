@@ -580,7 +580,6 @@ Route::get("uploadVideos",function(){
   foreach($videos as $video){  
     if($index==133){
     $file = file_get_contents(base_path() .'/public/uploads/'. $video->url,false);
-      dd($video->url);
     if($file!=null){
     // $name = \Storage::disk('google')->put('13322.mp4', $file);
     // dd(\Storage::disk('google')->getMetadata("13322.mp4"));
