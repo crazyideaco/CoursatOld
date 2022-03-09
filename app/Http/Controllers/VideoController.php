@@ -91,6 +91,9 @@ class VideoController extends Controller
   ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id);
 }
 public function storevideo($id,Request $request){
+  $url = $request->url;
+  $name = \Storage::disk('google')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+  dd(\Storage::disk('google')->url($name));
  $subtype = Subtype::where('id',$id)->first();
     $validator = Validator::make($request->all(),[
          //'description_ar' => 'required',
