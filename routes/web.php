@@ -584,7 +584,7 @@ Route::get("uploadVideos",function(){
   
     if($file!=null){
     $name = \Storage::disk('google')->put('13322.mp4', $file);
-    dd(\Storage::disk('google')->getMetadata("122.mp4"));
+    dd(\Storage::disk('google')->getMetadata("13322.mp4"));
   }
     // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
