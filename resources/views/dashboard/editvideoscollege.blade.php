@@ -95,7 +95,7 @@
                                
                             <div class="col-6 text-center set-img">
                                          <video width="200" height="200" controls >
-              <source src="{{asset('uploads/'.$video->url)}}" id="video_here">
+              <source src="{{$video->url_video}}" id="video_here">
             Your browser does not support HTML5 video.
           </video>
           <br>

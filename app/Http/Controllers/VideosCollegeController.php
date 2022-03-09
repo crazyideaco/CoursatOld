@@ -56,8 +56,10 @@ use App\Paqa;
 use App\Paqa_User;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
+use App\Traits\GeneralTrait;
 class VideosCollegeController extends Controller
 {
+  use GeneralTrait;
     public function __construct()
     {
         $this->middleware(['permission:videoscolleges-create'])->only('addvideoscollege');
@@ -170,8 +172,12 @@ $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
     $video->video_size= $request->file('url')->getSize()/1024;
-      $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
-      $video->url = time(). '.'.$url->getClientOriginalExtension();
+  
+   // $video->url = $this->upload_video($url);
+    $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+//dd($path);
+$video->storage_type = 1;
+   // dd(\Storage::disk("google")->url($this->upload_video($url)),$this->upload_video($url));
   } 
   if($request->hasFile('image'))
   {
@@ -287,9 +293,8 @@ $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
-      $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
-      $video->url = time(). '.'.$url->getClientOriginalExtension();
-
+          $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+          $video->storage_type = 1;
 
   } 
   if($request->hasFile('image'))
@@ -404,9 +409,9 @@ $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
-      $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
-      $video->url = time(). '.'.$url->getClientOriginalExtension();
-  } 
+          $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+          $video->storage_type = 1;
+        } 
   if($request->hasFile('image'))
   {
       $image = $request->image;
@@ -568,9 +573,7 @@ if( $videoall > 0){
    $video->description_en = $request->description_en;
    $video->description_ar = $request->description_ar;
  if($request->hasFile('url'))
-  {  if(public_path() . '/uploads/' . $video->url){
-   $link = public_path() . '/uploads/' . $video->url;
-    File::delete($link);}
+  {    $this->delete_video($video);
           $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
   
@@ -579,9 +582,8 @@ $duration =  $file['playtime_seconds'];
    $video->video_size= $request->file('url')->getSize()/1024;
 
       $url = $request->url;
-      $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
-      $video->url =  time(). '.'.$url->getClientOriginalExtension();
-      
+      $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+      $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
@@ -653,9 +655,7 @@ if( $videoall > 0){
    $video->description_en = $request->description_en;
    $video->description_ar = $request->description_ar;
   if($request->hasFile('url'))
-  {  if(public_path() . '/uploads/' . $video->url){
-   $link = public_path() . '/uploads/' . $video->url;
-    File::delete($link);}
+  {    $this->delete_video($video);
           $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
   
@@ -664,9 +664,8 @@ $duration =  $file['playtime_seconds'];
    $video->video_size= $request->file('url')->getSize()/1024;
 
       $url = $request->url;
-      $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
-      $video->url =  time(). '.'.$url->getClientOriginalExtension();
-      
+      $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+      $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
@@ -734,20 +733,18 @@ if( $videoall > 0){
    $video->description_en = $request->description_en;
    $video->description_ar = $request->description_ar;
 if($request->hasFile('url'))
-  {  if(public_path() . '/uploads/' . $video->url){
-   $link = public_path() . '/uploads/' . $video->url;
-    File::delete($link);}
+  {  
           $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
   
 $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
+   $this->delete_video($video);
    $video->video_size= $request->file('url')->getSize()/1024;
-
+ 
       $url = $request->url;
-      $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
-      $video->url =  time(). '.'.$url->getClientOriginalExtension();
-      
+      $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+      $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
@@ -794,15 +791,17 @@ $duration =  $file['playtime_seconds'];
 }public function deletevideoscollege($id){
   $video =  VideosCollege::where('id',$id)->first();
               
-           if( public_path() . '/uploads/' . $video->intro){
+           if( public_path() . '/uploads/' . $video->image){
           $link1 = public_path() . '/uploads/' . $video->image;
                 File::delete($link1);
          }
-          if(public_path() . '/uploads/' . $video->intro){
-          $link1 = public_path() . '/uploads/' . $video->intro;
-                 File::delete($link1);}
-     
-         
+        $this->delete_video($video);
+            if(public_path() . '/uploads/' . $video->board){
+            $link1 = public_path() . '/uploads/' . $video->board;
+                    File::delete($link1);}
+              if(public_path() . '/uploads/' . $video->pdf){
+                $link1 = public_path() . '/uploads/' . $video->pdf;
+                      File::delete($link1);}
                      
       $video->delete();
        return response()->json(['status' => true]);

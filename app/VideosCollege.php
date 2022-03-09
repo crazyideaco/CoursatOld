@@ -36,5 +36,16 @@ class VideosCollege extends Model
     	
     public function typescollege(){
         return $this->belongsTo(TypesCollege::class,'typescollege_id');
-    }
+    }public function getUrlVideoAttribute (){
+        $url = "";
+        if($this->url){
+            if($this->storage_type == 1){
+           
+           $url = \Storage::disk('google')->url($this->url);
+        }
+      }else{
+        $url = asset("uploads/".$this->url);
+       }
+        return $url;
+       }
 }
