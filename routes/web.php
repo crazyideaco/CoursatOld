@@ -588,8 +588,8 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
           // dd(\Storage::disk('google')->getMetadata("13322.mp4"));
           $value = $video->url;
           $oldName =  $video->url;
+          dd($video->url);
           \Storage::disk('google')->put($value, $file);
-
           $video->url  =   \Storage::disk("google")->getMetaData($value)['path'];
           $video->storage_type = 1;
           $video->save();
