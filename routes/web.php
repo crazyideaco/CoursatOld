@@ -596,6 +596,8 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
 
             $link1 = public_path() . '/uploads/' . $oldName;
             \File::delete($link1);
+          }else{
+            dd("file removed");
           }
         }
       }
