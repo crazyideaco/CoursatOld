@@ -604,6 +604,7 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
         dd("file removed");
       }
       } catch (Exception $e) {
+        dd("file removedd");
         continue;
       }
       // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
