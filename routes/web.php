@@ -580,12 +580,10 @@ Route::get("uploadVideos",function(){
   foreach($videos as $video){  
     if($index>132){
     $link = asset('uploads/'. $video->url);
-    //$file = file(base_path() .'/public/uploads/'. $video->url,false);
-    $file =asset('uploads/'. $video->url);
-
+    $file = file_get_contents(base_path() .'/public/uploads/'. $video->url,false);
+  
     if($file!=null){
-      dd($file->getClientOriginalExtension());
-    $name = \Storage::disk('google')->putFileAs("",$file,"122.mp4");
+    $name = \Storage::disk('google')->put('13322.mp4', $file);
     dd(\Storage::disk('google')->getMetadata("122.mp4"));
   }
     // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
