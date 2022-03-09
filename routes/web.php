@@ -590,7 +590,7 @@ Route::get("uploadVideos",function(){
     //   'mimeType' => 'image/jpeg',
     //   'uploadType' => 'multipart',
     //   'fields' => 'id'));
-      return $fileId;
+      return "hey";
     // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
   }
   $index++;
