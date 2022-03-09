@@ -575,6 +575,8 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
 
 
   Route::get("uploadVideos", function () {
+    ini_set('memory_limit','2048M');
+
     $videos = VideosCollege::where('storage_type', 0)->skip(8)->take(100)->get();
     $index = 0;
     foreach ($videos as $video) {
