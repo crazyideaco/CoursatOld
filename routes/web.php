@@ -600,6 +600,8 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
         }else{
           dd("file removed");
         }
+      }else{
+        dd("file removed");
       }
       } catch (Exception $e) {
         continue;
