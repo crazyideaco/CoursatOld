@@ -41,7 +41,8 @@ class VideosCollege extends Model
         if($this->url){
             if($this->storage_type == 1){
           
-      $url = \Storage::disk('google')->url($this->url);
+   //   $url = \Storage::disk('google')->url($this->url);
+      $url = "https://drive.google.com/file/d/".$this->url."/preview";
         
       }else{
         $url = asset("uploads/".$this->url);
