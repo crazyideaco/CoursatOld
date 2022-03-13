@@ -98,7 +98,7 @@
               <source src="{{$video->url_video}}" id="video_here">
             Your browser does not support HTML5 video.
           </video> -->
-          <iframe src="{{$video->url_video}}" width="640" height="480" ></iframe>
+          <iframe src="{{$video->url_video}}" width="200" height="200" ></iframe>
           <br>
           <br>
                                <input id="kt" type="file" class="form-control ehabtalaat"   name="url">
