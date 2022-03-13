@@ -53,8 +53,9 @@ class VideosCollege extends Model
         $url = "";
         if($this->url){
             if($this->storage_type == 1){
-           $url =  "https://www.googleapis.com/drive/v3/files/".$this->url."/?key=AIzaSyCbu68-aXmSnKCC5n3vAaQ7FnhHO6F5y9k&alt=media";
-            }
+        //    $url =  "https://www.googleapis.com/drive/v3/files/".$this->url."/?key=AIzaSyCbu68-aXmSnKCC5n3vAaQ7FnhHO6F5y9k&alt=media";
+            $url = "https://drive.google.com/file/d/'.$this->url.'/view";
+    }
         
       else{
         $url = asset("uploads/".$this->url);
