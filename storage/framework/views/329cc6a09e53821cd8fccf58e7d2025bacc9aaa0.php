@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
   <!--start page-body-->
         <div class="page-body">
@@ -102,7 +101,7 @@ unset($__errorArgs, $__bag); ?>
                                
                             <div class="col-6 text-center set-img">
                                          <video width="200" height="200" controls >
-              <source src="<?php echo e(asset('uploads/'.$video->url)); ?>" id="video_here">
+              <source src="<?php echo e($video->url_video); ?>" id="video_here">
             Your browser does not support HTML5 video.
           </video>
           <br>

@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('style'); ?>
 <style>
     #example_wrapper{
@@ -124,8 +123,8 @@
                 <tr>
 					<th>id</th>
                     <th scope="col" class="text-center">عنوان الفيديو</th>
-                     <th scope="col" class="text-center">الفيديو</th>
-                     <th scope="col" class="text-center">الصوره</th>
+                     <!-- <th scope="col" class="text-center">الفيديو</th> -->
+                     <!-- <th scope="col" class="text-center">الصوره</th> -->
                      <td scope="col"  class="text-center">الكليه</td>
                      <th scope="col" class="text-center">الماده</th>
                     <th scope="col" class="text-center">الدكتور</th>
@@ -139,12 +138,12 @@
                      <tr id="un<?php echo e($video->id); ?>">
 						    <td scope="col"  class="text-center"><?php echo e($video['id']); ?></td>
                         <td scope="col"  class="text-center"><?php echo e($video['name_ar']); ?></td>
-                <td scope="row" class="text-center">
-                    <video width="120" height="120" src="<?php echo e(url('uploads/'. $video->url)); ?>" controls></video>
-             </td>
-             <td scope="row" class='text-center'>
+                <!-- <td scope="row" class="text-center">
+                    <video width="120" height="120" src="<?php echo e($video->url_video); ?>" controls></video>
+             </td> -->
+             <!-- <td scope="row" class='text-center'>
                  <img src="<?php echo e(url('uploads/'. $video->image)); ?>" style="width:120px;height:120px">
-             </td>
+             </td> -->
              <td scope="col" class="text-center"><?php echo e($video->college->name_ar); ?></td>
              <td scope="col" class="text-center"><?php echo e($video->subjectscollege['name_ar']); ?></td>
          
