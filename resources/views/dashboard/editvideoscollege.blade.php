@@ -8,12 +8,13 @@
   position:relative; 
 }
 .magic{
-  position:absolute;
-  width:80px; 
-  height:80px;
-  top:20px; 
-  right:20px;
-  background-color:#000;
+  position: absolute;
+    width: 37px;
+    height: 41px;
+    top: 14px;
+    right: 145px;
+    z-index: 10;
+    background-color: #000;
 }
 </style>
   <!--start page-body-->
