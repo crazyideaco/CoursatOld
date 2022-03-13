@@ -1,5 +1,21 @@
 @extends('App.dash')
 @section('content')
+<style>
+  .iframe_hide_poop{
+ position:relative;
+}
+.iframe_hide_poop iframe{
+  position:relative; 
+}
+.magic{
+  position:absolute;
+  width:80px; 
+  height:80px;
+  top:20px; 
+  right:20px;
+  background-color:#000;
+}
+</style>
   <!--start page-body-->
         <div class="page-body">
             <div class="container">
@@ -98,7 +114,10 @@
               <source src="{{$video->url_video}}" id="video_here">
             Your browser does not support HTML5 video.
           </video> -->
+          <div class="iframe_hide_poop">
+<div class="magic"></div>
           <iframe src="{{$video->url_video}}" width="200" height="200" ></iframe>
+          </div>
           <br>
           <br>
                                <input id="kt" type="file" class="form-control ehabtalaat"   name="url">
