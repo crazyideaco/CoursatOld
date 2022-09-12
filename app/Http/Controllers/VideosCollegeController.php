@@ -116,7 +116,7 @@ public function storevideoscollege($id,Request $request){
            ],[
           'required' => 'هذا الحقل مطلوب' ,
           'mimetypes' => 'هذا الحقل يقبل فيديو فقط',
-          'mimes' =>  'هذا الحقل يقبل صوره فقط'
+          'mimes' =>  'هذا الحقل يقبل صوره فق'
                ]);
         if($validator->fails())
    {
@@ -138,12 +138,12 @@ public function storevideoscollege($id,Request $request){
   //  }
     $paqauser= Paqa_User::with("paqa")->where("user_id",$lesson->doctor_id)->first();
  if($paqauser==null){
-$msg =   'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+$msg =   'انت غير مشر في باقه برجاء لاتراك في باقه';
 return response()->json(['status' => false,'errors' => $msg]);
   
 }
   elseif($paqauser->expired_at == Carbon::now()->format('Y-m-d')){
-           $msg =  'انتهت صلاحيه الباقه';
+           $msg =  'انهت صلاحيه الباقه';
     return response()->json(['status' => false,'errors' => $msg]);
 
  }else{
@@ -174,7 +174,9 @@ $duration =  $file['playtime_seconds'];
     $video->video_size= $request->file('url')->getSize()/1024;
   
    // $video->url = $this->upload_video($url);
-    $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+    $time=time();
+   $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
+     $video->url = $time. '.'.$url->getClientOriginalExtension();
 //dd($path);
 $video->storage_type = 1;
    // dd(\Storage::disk("google")->url($this->upload_video($url)),$this->upload_video($url));
@@ -188,8 +190,8 @@ $video->storage_type = 1;
      if($request->hasFile('pdf'))
   {
       $pdf = $request->pdf;
-      $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-      $video->pdf = time().$request->pdf->getClientOriginalName();
+  $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
   {
@@ -207,8 +209,8 @@ $video->storage_type = 1;
       $students = $lesson->typescollege->studentscollege; 
       foreach($students as $user){
 				$not = new Notification;
-        $text = 'لديك فيديو جديد فى كورس ' . $lesson->typescollege->name_ar;
-    $not->title = 'اشعار جديد';
+        $text = 'لديك فيدو جديد فى كورس ' . $lesson->typescollege->name_ar;
+    $not->title = 'اشعار جيد';
      $not->text = $text;
     $not->user_id = $user->id;
     $not->save();
@@ -242,7 +244,7 @@ $video->storage_type = 1;
                return response()->json(['success' => 'video uploaded']);
         }else{
             
-    $msg = 'لقد استهلكت 100% ';
+    $msg = 'لقد اسهكت 100% ';
     return response()->json(['status' => false,'errors' => $msg]);
     
 
@@ -259,7 +261,7 @@ $video->storage_type = 1;
    $video->name_en = $request->name_en;
     $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
  if($paqauser==null){
-    $msg =   'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+    $msg =   'انت ر مشترك في باقه باء الاشتراك في باقه';
 return response()->json(['status' => false,'errors' => $msg]);
 }
   elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
@@ -293,7 +295,9 @@ $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
-          $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+       $time=time();
+   $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
+     $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
 
   } 
@@ -306,8 +310,8 @@ $duration =  $file['playtime_seconds'];
      if($request->hasFile('pdf'))
   {
       $pdf = $request->pdf;
-      $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-      $video->pdf = time().$request->pdf->getClientOriginalName();
+  $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
   {
@@ -377,11 +381,11 @@ $duration =  $file['playtime_seconds'];
    $video->name_en = $request->name_en;
     $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
  if($paqauser==null){
-     $msg =   'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+     $msg =   'انت غير مشترك في باقه برجاء الاشتراك في باه';
 return response()->json(['status' => false,'errors' => $msg]);
 }
   elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
-  $msg =  'انتهت صلاحيه الباقه';
+  $msg =  'اتهت لاحيه الباقه';
     return response()->json(['status' => false,'errors' => $msg]);
 
  }else{
@@ -409,7 +413,9 @@ $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
-          $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+      $time=time();
+   $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
+     $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
         } 
   if($request->hasFile('image'))
@@ -421,8 +427,8 @@ $duration =  $file['playtime_seconds'];
      if($request->hasFile('pdf'))
   {
       $pdf = $request->pdf;
-      $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-      $video->pdf = time().$request->pdf->getClientOriginalName();
+  $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
   {
@@ -440,7 +446,7 @@ $duration =  $file['playtime_seconds'];
       $students = $lesson->typescollege->studentscollege; 
       foreach($students as $user){
 				$not = new Notification;
-        $text = 'لديك فيديو جديد فى كورس ' . $lesson->typescollege->name_ar;
+        $text = 'لديك فيديو جيد فى كورس ' . $lesson->typescollege->name_ar;
     $not->title = 'اشعار جديد';
      $not->text = $text;
     $not->user_id = $user->id;
@@ -475,7 +481,7 @@ $duration =  $file['playtime_seconds'];
       return response()->json(['success' => 'video uploaded']);
         }else{
        
-    $msg = 'لقد استهلكت 100% ';
+    $msg = 'لق استهلكت 100% ';
     return response()->json(['status' => false,'errors' => $msg]);
 
         }
@@ -539,8 +545,8 @@ public function updatevideoscollege($id ,Request $request){
      //     'url' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
            ],[
           'required' => 'هذا الحقل مطلوب' ,
-          'mimetypes' => 'هذا الحقل يقبل فيديو فقط',
-          'mimes' =>  'هذا الحقل يقبل صوره فقط'
+          'mimetypes' => 'هذا الحقل يقبل يديو فقط',
+          'mimes' =>  'هذا الحقل يقبل صوره فق'
                ]);
             if($validator->fails())
    {
@@ -555,7 +561,7 @@ public function updatevideoscollege($id ,Request $request){
   
     $paqauser= Paqa_User::with("paqa")->where("user_id",$video->user_id)->first();
  if($paqauser==null){
-$msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+$msg = 'انت غي مشترك في باقه براء الاتراك في باقه';
    return response()->json(['status' =>false,'errors' => $msg]);
 }
   elseif($paqauser->expired_at == Carbon::now()->format('Y-m-d')){
@@ -582,7 +588,9 @@ $duration =  $file['playtime_seconds'];
    $video->video_size= $request->file('url')->getSize()/1024;
 
       $url = $request->url;
-      $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+      $time=time();
+   $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
+     $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
@@ -598,8 +606,8 @@ $duration =  $file['playtime_seconds'];
    $link = public_path() . '/uploads/' . $video->pdf;
     File::delete($link);};
       $pdf = $request->pdf;
-      $pdf->move('uploads' , time() . $pdf->getClientOriginalName());
-      $video->pdf = time() . $request->pdf->getClientOriginalName();
+      $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
   {if(public_path() . '/uploads/' . $video->board){
@@ -635,11 +643,11 @@ $duration =  $file['playtime_seconds'];
    $video->name_en = $request->name_en;
     $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
  if($paqauser==null){
-    $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+    $msg = 'انت غير مشترك في باقه برجء الاشتراك في اقه';
    return response()->json(['status' =>false,'errors' => $msg]);
 }
   elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
-             $msg =  'انتهت صلاحيه الباقه';
+             $msg =  'انتهت صلاحيه اباقه';
    return response()->json(['status' =>false,'errors' => $msg]);
 
  }else{
@@ -664,7 +672,9 @@ $duration =  $file['playtime_seconds'];
    $video->video_size= $request->file('url')->getSize()/1024;
 
       $url = $request->url;
-      $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+    $time=time();
+   $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
+     $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
@@ -680,8 +690,8 @@ $duration =  $file['playtime_seconds'];
    $link = public_path() . '/uploads/' . $video->pdf;
     File::delete($link);};
       $pdf = $request->pdf;
-      $pdf->move('uploads' , time() . $pdf->getClientOriginalName());
-      $video->pdf = time() . $request->pdf->getClientOriginalName();
+      $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
   {if(public_path() . '/uploads/' . $video->board){
@@ -700,7 +710,7 @@ $duration =  $file['playtime_seconds'];
           return response()->json(['success' =>'video uploaded']);
         }else{
             
-  $msg = 'لقد استهلكت 100% ';
+  $msg = 'لق اتهلكت 100% ';
    return response()->json(['status' =>false,'errors' => $msg]);
 
         }
@@ -715,11 +725,11 @@ $duration =  $file['playtime_seconds'];
    $video->name_en = $request->name_en;
     $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
  if($paqauser==null){
-   $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+   $msg = 'نت غير مشترك في بقه برجاء الاشترا ي باقه';
    return response()->json(['status' =>false,'errors' => $msg]);
 }
   elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
-            $msg =  'انتهت صلاحيه الباقه';
+            $msg =  'انتهت صلاحه لباقه';
    return response()->json(['status' =>false,'errors' => $msg]);
 
  }else{
@@ -743,7 +753,9 @@ $duration =  $file['playtime_seconds'];
    $video->video_size= $request->file('url')->getSize()/1024;
  
       $url = $request->url;
-      $video->url  =  \Storage::disk("google")->getMetaData($this->upload_video($url))["path"];
+  $time=time();
+   $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
+     $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
@@ -759,8 +771,8 @@ $duration =  $file['playtime_seconds'];
    $link = public_path() . '/uploads/' . $video->pdf;
     File::delete($link);};
       $pdf = $request->pdf;
-      $pdf->move('uploads' , time() . $pdf->getClientOriginalName());
-      $video->pdf = time() . $request->pdf->getClientOriginalName();
+      $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
   {if(public_path() . '/uploads/' . $video->board){
@@ -778,7 +790,7 @@ $duration =  $file['playtime_seconds'];
       $video->save();
  return response()->json(['success' =>'video uploaded']);
         }else{
- $msg = 'لقد استهلكت 100% ';
+ $msg = 'لقد استهلت 100% ';
    return response()->json(['status' =>false,'errors' => $msg]);
       }
  }
@@ -802,7 +814,9 @@ $duration =  $file['playtime_seconds'];
               if(public_path() . '/uploads/' . $video->pdf){
                 $link1 = public_path() . '/uploads/' . $video->pdf;
                       File::delete($link1);}
-                     
+                      if(public_path() . '/uploads/' . $video->url){
+                $link1 = public_path() . '/uploads/' . $video->url;
+                      File::delete($link1);}
       $video->delete();
        return response()->json(['status' => true]);
  } public function videoscolleges($id){

@@ -111,14 +111,14 @@
                             <div class="row">
                                
                             <div class="col-6 text-center set-img">
-                                         <!-- <video width="200" height="200" controls >
+                                      <video width="200" height="200" controls >
               <source src="{{$video->url_video}}" id="video_here">
             Your browser does not support HTML5 video.
-          </video> -->
-          <div class="iframe_hide_poop">
+          </video>
+         <!-- <div class="iframe_hide_poop">
 <div class="magic"></div>
           <iframe src="{{$video->url_video}}" width="200" height="200" ></iframe>
-          </div>
+          </div>-->
           <br>
           <br>
                                <input id="kt" type="file" class="form-control ehabtalaat"   name="url">
@@ -145,7 +145,7 @@
                                 <br>
                                         <label for="ad" class="ahmed">اضافة صوره</label>
                                         @error('image')
-                                        <div class="alert alert-danger">هذا الحقل مطلوب</div>
+                                        <div class="alert alert-danger">هذا الحل مطلوب</div>
                                         @enderror
                            </div>
                            
@@ -155,7 +155,7 @@
                                <input id="ad2" type="file" class="form-control ehabtalaat"  name="board">
                                         <label for="ad2" class="ahmed">سبوره الحصه</label>
                                         @error('board')
-                                        <div class="alert alert-danger">هذا الحقل مطلوب</div>
+                                        <div class="alert alert-danger">هذا الحقل مطلب</div>
                                         @enderror
                            </div>
                 
@@ -177,7 +177,7 @@
                                       @enderror
                                        </div>
                                        <div class="col-3 form-group">
-                                        <label>عنوان الفيديو بالانجليزي</label>
+                                        <label>عنوان الفيديو الانجليزي</label>
                                <input id="name_en" type="text" class="form-control" name="name_en" value="{{$video->name_en}}"
                                placeholder="الاسم">
                                       @error('name_en')
@@ -201,7 +201,7 @@
                     
                            <div class="row">
                                <div class="form-group col-6">
-                                   <label>الوصف باالعربى</label>
+                                   <label>اوصف باالعربى</label>
                                    <textarea class="form-control" rows="5" id="description_ar" name="description_ar" >{{$video->description_ar}}</textarea>
                                </div>
                                  <div class="form-group col-6">
@@ -222,7 +222,7 @@
                                       @enderror
                                        </div>
                                        <div class="col-3 form-group">
-                                        <label>عنوان الفيديو بالانجليزي</label>
+                                        <label>نوان الفيديو بالنجليزي</label>
                                <input id="name_en" type="text" class="form-control" name="name_en" value="{{$video->name_en}}"
                                placeholder="الاسم">
                                       @error('name_en')
@@ -238,7 +238,7 @@
                                  
                                </div>
                                <div class="form-group col-3">
-                               <label>ترتيب الفيديو </label>
+                               <label>ترتيب الفيدي </label>
                                <input style="height: 36px;"  type="number" name="order_number" value="{{$video->order_number}}">
                                </div>
                             </div>
@@ -266,7 +266,7 @@
                         <div class="info">
                             <div class="row">
                                <div class="col-3 form-group">
-                                        <label>عنوان الفيديو بالعربى</label>
+                                        <label>عنوان الفديو بالعربى</label>
                                <input id="name_ar" type="text" class="form-control" name="name_ar" value="{{$video->name_ar}}"
                                placeholder="الاسم">
                                       @error('name_ar')
@@ -289,7 +289,7 @@
                                  
                                </div>
                                <div class="form-group col-3">
-                               <label>ترتيب الفيديو </label>
+                               <label>ترتيب الفيدو </label>
                                <input style="height: 36px;"  type="number" name="order_number" value="{{$video->order_number}}">
                                </div>
                             </div>
@@ -301,7 +301,7 @@
                                    <textarea class="form-control" rows="5" id="description_ar"  name="description_ar">{{$video->description_ar}}</textarea>
                                </div>
                                  <div class="form-group col-6">
-                                   <label>الوصف بالانجليزي</label></label>
+                                   <label>الوصف بالانليزي</label></label>
                                    <textarea class="form-control" rows="5" id="description_en" name="description_en">{{$video->description_en}}</textarea>
                                </div>
                            </div>
@@ -687,11 +687,11 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
       
     $paqauser= \App\Paqa_User::with("paqa")->where("user_id",$type->doctor_id)->first();
     if($paqauser==null){
-     $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
+     $msg='انت غير مشترك في باقه برجا الاشتراك في باقه';
     //   return response()->json(['status' => false,'errors' => $msg]);
 }
    elseif($paqauser->expired_at ==\Carbon\Carbon::now()->format('Y-m-d')){
-            $msg = 'انتهت صلاحيه الباقه';
+            $msg = 'انتهت صلاحه الباقه';
 //return response()->json(['status' => false,'errors' => $msg]);
 
   }
@@ -713,7 +713,7 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
     // return response()->json(['status' => false,'errors' => $msg]);
 }
  elseif($paqauser->expired_at ==\Carbon\Carbon::now()->format('Y-m-d')){
-           $msg = 'انتهت صلاحيه الباقه';
+           $msg = 'انتهت صلاحيه البقه';
 //return response()->json(['status' => false,'errors' => $msg]);
 }}?>
          /* $('.progress-bar').text('Uploaded');

@@ -110,7 +110,7 @@ public function storevideo($id,Request $request){
          'url' => 'required'
           ],[
          'required' => 'هذا الحقل مطلوب' ,
-         'mimetypes' => 'هذا الحقل يقبل فيديو فقط',
+         'mimetypes' => 'هذا الحقل يقب فيديو فقط',
          'mimes' =>  'هذا الحقل يقبل صوره فقط'
               ]);
            if($validator->fails())
@@ -126,11 +126,11 @@ public function storevideo($id,Request $request){
    $video->name_en = $request->name_en;
   $paqauser= Paqa_User::with("paqa")->where("user_id",$subtype->user_id)->first();
   if($paqauser==null){
-   $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
+   $msg='انت غير مشترك في باقه برجاء الاشتراك في بقه';
      return response()->json(['status' => false,'errors' => $msg]);
 }
  elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
-          $msg = 'انتهت صلاحيه الباقه';
+          $msg = 'انتهت صلاحيه البقه';
 return response()->json(['status' => false,'errors' => $msg]);
 
 }else{
@@ -204,7 +204,7 @@ return response()->json(['status' => false,'errors' => $msg]);
    $video->name_en = $request->name_en;
   $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
   if($paqauser==null){
-    $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
+    $msg='انت غير مشترك في باقه برجاء الاشتراك في بقه';
      return response()->json(['status' => false,'errors' => $msg]);
 }
  elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
@@ -282,11 +282,11 @@ return response()->json(['status' => false,'errors' => $msg]);
    $video->name_en = $request->name_en;
   $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id )->first();
   if($paqauser==null){
-   $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
+   $msg='انت غر مشترك في باقه بجاء الاشتراك في باقه';
      return response()->json(['status' => false,'errors' => $msg]);
 }
  elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
-         $msg = 'انتهت صلاحيه الباقه';
+         $msg = 'انتهت صلاحيه البقه';
 return response()->json(['status' => false,'errors' => $msg]);
 }else{
         $videoall= Video::where('user_id',$request->user_id)->where('center_id',null)->
@@ -343,7 +343,7 @@ $duration =  $file['playtime_seconds'];
 
        }else{
            
-        $msg =  'لقد استهلكت 100% ';
+        $msg =  'لقد اسهلكت 100% ';
 
 return response()->json(['status' => false,'errors' => $msg]);
 
@@ -394,9 +394,9 @@ public function updatevideo($id,Request $request){
   //     'image' => 'mimes:jpeg,jpg,png,gif',
        //  'url' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
           ],[
-         'required' => 'هذا الحقل مطلوب' ,
-         'mimetypes' => 'هذا الحقل يقبل فيديو فقط',
-         'mimes' =>  'هذا الحقل يقبل صوره فقط'
+         'required' => 'هذا الحقل مطوب' ,
+         'mimetypes' => 'هذا الحقل يقبل فديو فقط',
+         'mimes' =>  'هذا الحقل يقب صوره فقط'
               ]);
       
      if($validator->passes()){
@@ -409,13 +409,13 @@ public function updatevideo($id,Request $request){
   $paqauser= Paqa_User::with("paqa")->where("user_id",$video->user_id)->first();
   if($paqauser==null){
 
-  $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+  $msg = 'انت غير مترك في باقه برجاء الاشتراك في باقه';
   return response()->json(['status' =>false,'errors' => $msg]);
 }
  elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
      
           
-             $msg =  'انتهت صلاحيه الباقه';
+             $msg =  'انتهت صلاحه الباقه';
   return response()->json(['status' =>false,'errors' => $msg]);
 
 }else{
@@ -479,7 +479,7 @@ $duration =  $file['playtime_seconds'];
 
        }else{
            
-$msg = 'لقد استهلكت 100% ';
+$msg = 'لقد اتهلكت 100% ';
   return response()->json(['status' =>'false','errors' => $msg]);
        }
 }
@@ -562,7 +562,7 @@ $duration =  $file['playtime_seconds'];
 
        }else{
            
-   $msg = 'لقد استهلكت 100% ';
+   $msg = 'لقد اسهلكت 100% ';
   return response()->json(['status' =>false,'errors' => $msg]);
        }
 }
@@ -575,7 +575,7 @@ $duration =  $file['playtime_seconds'];
    $video->name_en = $request->name_en;
   $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id )->first();
   if($paqauser==null){
-  $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+  $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باه';
   return response()->json(['status' =>false,'errors' => $msg]);
 }
  elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
@@ -645,7 +645,7 @@ $duration =  $file['playtime_seconds'];
        }else{
            
 
-    $msg = 'لقد استهلكت 100% ';
+    $msg = 'لقد استهكت 100% ';
   return response()->json(['status' =>false,'errors' => $msg]);
 
        }

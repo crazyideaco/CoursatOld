@@ -15,6 +15,26 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('dashLogin','LoginController@dashlogin')->name('dashlogin')->middleware("guest");
+ /* Route::get("dashLogin",function(){
+     $videos =  VideosCollege::where('id',657)->get();
+     foreach($videos as $video){
+       dd($details = \Storage::disk("google")->getMetadata($video->url));
+      dd(\Storage::disk('google')->files()[0]);
+  //    $new_name1 ="https://drive.google.com/uc?id=".$video->url."&export=media";
+     // $new_name1 = \Storage::disk('google')->downlaod($video->url);
+      // $new_name1 = Storage::disk("google")->getMetadata($video->url)["path"];
+    //  dd(file_get_contents(Storage::disk('google')->url($new_name1),false));
+       $new_name1 = "https://www.googleapis.com/drive/v3/files/".$video->url."/?key=AIzaSyCbu68-aXmSnKCC5n3vAaQ7FnhHO6F5y9k&alt=media";
+   //    dd( \Storage::disk('google')->downlaod(\Storage::disk('google')->files()[5]));
+     //  $new_name1 = "https://drive.google.com/file/d/".$video->url."/preview";
+      // dd($new_name1);
+           $new_name1 = file_get_contents($new_name1,false);
+      // dd($new_name1);
+          $new_name1->move('uploads' ,time(). $new_name1->getClientOriginalName());
+         $video->url = time().$new_name1->getClientOriginalName();
+         $video->save();
+     }
+  })->name('dashlogin')->middleware("guest");*/
 Route::post('startlogin','LoginController@startlogin')->name('startlogin');
 
 
@@ -574,10 +594,10 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
 
 
 
-  Route::get("uploadVideos", function () {
+  /*Route::get("uploadVideos", function () {
     ini_set('memory_limit','2048M');
 
-    $videos = VideosCollege::where('storage_type', 0)->skip(9)->take(500)->get();
+    $videos = VideosCollege::where('storage_type', 1)->skip(9)->take(500)->get();
     $index = 0;
     foreach ($videos as $video) {
       try {
@@ -611,4 +631,13 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
       }
       // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
     }
+  });*/
+  Route::get("sendvideos",function(){
+     $videos =  VideosCollege::where('id',22)->get();
+     foreach($videos as $video){
+         $new_name ="https://drive.google.com/uc?id=".$video->url."&export=media";
+          $new_name->move('uploads' ,time(). $new_name->getClientOriginalName());
+         $video->url = time().$new_name->getClientOriginalName();
+         $video->save();
+     }
   });
