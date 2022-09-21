@@ -174,13 +174,11 @@ $duration =  $file['playtime_seconds'];
       $url = $request->url;
     $video->video_size= $request->file('url')->getSize()/1024;
   
-   // $video->url = $this->upload_video($url);
     $time=time();
    $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
 //dd($path);
 $video->storage_type = 1;
-   // dd(\Storage::disk("google")->url($this->upload_video($url)),$this->upload_video($url));
   } 
   if($request->hasFile('image'))
   {
