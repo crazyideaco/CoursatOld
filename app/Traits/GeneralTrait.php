@@ -12,21 +12,21 @@ trait GeneralTrait
     //    \Storage::disk('google')->putFileAs("",$url,$value);
     //    return $value;
     // } 
-    // public function delete_video($video) {
+    public function delete_video($video) {
 
-    //     if($video->storage_type == 0){
+        //if($video->storage_type == 0){
 
-    //     if(public_path() . '/uploads/' . $video->url){
+        if(public_path() . '/uploads/' . $video->url){
 
-    //         $link1 = public_path() . '/uploads/' . $video->url;
-    //             File::delete($link1);
-    //         }
-    //     } else if($video->storage_type == 1){
+            $link1 = public_path() . '/uploads/' . $video->url;
+                File::delete($link1);
+        }
+        //     }
+        // } else if($video->storage_type == 1){
 
-    //     \Storage::disk('google')->delete($video->url);
 
-    //     }
+        // }
            
-    //    }
+       }
   
 } 

@@ -60,7 +60,6 @@ use App\Traits\GeneralTrait;
 class VideosCollegeController extends Controller
 {
   use GeneralTrait;
-  public $link = "https://azcourses.net";
     public function __construct()
     {
         $this->middleware(['permission:videoscolleges-create'])->only('addvideoscollege');
@@ -174,11 +173,13 @@ $duration =  $file['playtime_seconds'];
       $url = $request->url;
     $video->video_size= $request->file('url')->getSize()/1024;
   
+   // $video->url = $this->upload_video($url);
     $time=time();
    $url->move('uploads' , $time. '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
 //dd($path);
 $video->storage_type = 1;
+   // dd(\Storage::disk("google")->url($this->upload_video($url)),$this->upload_video($url));
   } 
   if($request->hasFile('image'))
   {
@@ -593,24 +594,24 @@ $duration =  $file['playtime_seconds'];
       $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
-  {  if($this->link . '/uploads/' . $video->image){
-   $link = $this->link . '/uploads/' . $video->image;
+  {  if(public_path() . '/uploads/' . $video->image){
+   $link = public_path() . '/uploads/' . $video->image;
     File::delete($link);}
       $image = $request->image;
       $image->move('uploads' , time() . $image->getClientOriginalName());
       $video->image = time() . $request->image->getClientOriginalName();
   }
      if($request->hasFile('pdf'))
-  {if($this->link . '/uploads/' . $video->pdf){
-   $link = $this->link . '/uploads/' . $video->pdf;
+  {if(public_path() . '/uploads/' . $video->pdf){
+   $link = public_path() . '/uploads/' . $video->pdf;
     File::delete($link);};
       $pdf = $request->pdf;
       $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
 $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
-  {if($this->link . '/uploads/' . $video->board){
-   $link = $this->link . '/uploads/' . $video->board;
+  {if(public_path() . '/uploads/' . $video->board){
+   $link = public_path() . '/uploads/' . $video->board;
     File::delete($link);}
       $board = $request->board;
       $board->move('uploads' , time() . $board->getClientOriginalName());
@@ -677,24 +678,24 @@ $duration =  $file['playtime_seconds'];
       $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
-  {  if($this->link . '/uploads/' . $video->image){
-   $link = $this->link . '/uploads/' . $video->image;
+  {  if(public_path() . '/uploads/' . $video->image){
+   $link = public_path() . '/uploads/' . $video->image;
     File::delete($link);}
       $image = $request->image;
       $image->move('uploads' , time() . $image->getClientOriginalName());
       $video->image = time() . $request->image->getClientOriginalName();
   }
      if($request->hasFile('pdf'))
-  {if($this->link . '/uploads/' . $video->pdf){
-   $link = $this->link . '/uploads/' . $video->pdf;
+  {if(public_path() . '/uploads/' . $video->pdf){
+   $link = public_path() . '/uploads/' . $video->pdf;
     File::delete($link);};
       $pdf = $request->pdf;
       $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
 $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
-  {if($this->link . '/uploads/' . $video->board){
-   $link = $this->link . '/uploads/' . $video->board;
+  {if(public_path() . '/uploads/' . $video->board){
+   $link = public_path() . '/uploads/' . $video->board;
     File::delete($link);}
       $board = $request->board;
       $board->move('uploads' , time() . $board->getClientOriginalName());
@@ -758,24 +759,24 @@ $duration =  $file['playtime_seconds'];
       $video->storage_type = 1;
   } 
   if($request->hasFile('image'))
-  {  if($this->link . '/uploads/' . $video->image){
-   $link = $this->link . '/uploads/' . $video->image;
+  {  if(public_path() . '/uploads/' . $video->image){
+   $link = public_path() . '/uploads/' . $video->image;
     File::delete($link);}
       $image = $request->image;
       $image->move('uploads' , time() . $image->getClientOriginalName());
       $video->image = time() . $request->image->getClientOriginalName();
   }
      if($request->hasFile('pdf'))
-  {if($this->link . '/uploads/' . $video->pdf){
-   $link = $this->link . '/uploads/' . $video->pdf;
+  {if(public_path() . '/uploads/' . $video->pdf){
+   $link = public_path() . '/uploads/' . $video->pdf;
     File::delete($link);};
       $pdf = $request->pdf;
       $pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
 $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   }
     if($request->hasFile('board'))
-  {if($this->link . '/uploads/' . $video->board){
-   $link = $this->link . '/uploads/' . $video->board;
+  {if(public_path() . '/uploads/' . $video->board){
+   $link = public_path() . '/uploads/' . $video->board;
     File::delete($link);}
       $board = $request->board;
       $board->move('uploads' , time() . $board->getClientOriginalName());
@@ -801,20 +802,20 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       }
 }public function deletevideoscollege($id){
   $video =  VideosCollege::where('id',$id)->first();
-            
-           if( $this->link . '/uploads/' . $video->image){
-          $link1 = $this->link . '/uploads/' . $video->image;
+              
+           if( public_path() . '/uploads/' . $video->image){
+          $link1 = public_path() . '/uploads/' . $video->image;
                 File::delete($link1);
          }
         $this->delete_video($video);
-            if($this->link . '/uploads/' . $video->board){
-            $link1 = $this->link . '/uploads/' . $video->board;
+            if(public_path() . '/uploads/' . $video->board){
+            $link1 = public_path() . '/uploads/' . $video->board;
                     File::delete($link1);}
-              if($this->link . '/uploads/' . $video->pdf){
-                $link1 = $this->link . '/uploads/' . $video->pdf;
+              if(public_path() . '/uploads/' . $video->pdf){
+                $link1 = public_path() . '/uploads/' . $video->pdf;
                       File::delete($link1);}
-                      if($this->link . '/uploads/' . $video->url){
-                $link1 = $this->link . '/uploads/' . $video->url;
+                      if(public_path() . '/uploads/' . $video->url){
+                $link1 = public_path() . '/uploads/' . $video->url;
                       File::delete($link1);}
       $video->delete();
        return response()->json(['status' => true]);
