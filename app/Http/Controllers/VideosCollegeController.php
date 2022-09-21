@@ -802,7 +802,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       }
 }public function deletevideoscollege($id){
   $video =  VideosCollege::where('id',$id)->first();
-              dd(base_path().'/public' . '/uploads/' . $video->url);
+              dd(app_path().'/public' . '/uploads/' . $video->url);
            if( public_path() . '/uploads/' . $video->image){
           $link1 = public_path() . '/uploads/' . $video->image;
                 File::delete($link1);
