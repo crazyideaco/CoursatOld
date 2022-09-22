@@ -153,7 +153,7 @@
                     <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px;
                      padding:6px 45px"  onclick="student_logout({{$student->id}})">
                     تسجيل الخروج
-                    <span>
+</span>
                                <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
                              @if($student->active == 1)
                              الغاء التفعيل
