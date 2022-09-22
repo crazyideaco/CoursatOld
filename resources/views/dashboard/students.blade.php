@@ -150,6 +150,10 @@
                   </td>  
                   @endif
 					<td class="text-center">
+                    <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px;
+                     padding:6px 45px"  onclick="student_logout({{$student->id}})">
+                    تسجيل خروج
+                    <span>
                                <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
                              @if($student->active == 1)
                              الغاء التفعيل
@@ -297,5 +301,35 @@ $(`#btn${id}`).html('الغاء التفعيل');
    
   })
 }
+
+function student_logout(id){
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"get",
+       url: `student_logout/${id}`,
+         contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+    if(result.status == 'true'){
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'تم  تسجيل الخروج ',
+  showConfirmButton: false,
+  timer: 1500
+});
+
+
+    }
+    
+       }
+
+      });
+  } 
+
 </script>
 @endsection
