@@ -160,7 +160,6 @@ Route::get('editstate/{id}','StateController@editstate')->name('editstate');
 Route::post('updatestate/{id}','StateController@updatestate')->name('updatestate');
 //students
 Route::get('students','StudentController@students')->name('students');
-Route::get('student_logout/{id}','StudentController@students')->name('student_logout');
 Route::get('basicstudents','StudentController@basicstudents')->name('basicstudents');
 Route::post('filterbasicstudents','StudentController@filterbasicstudents')->name('filterbasicstudents');
   Route::get('collegestudents','StudentController@collegestudents')->name('collegestudents');
@@ -576,6 +575,7 @@ Route::get('activelesson/{id}','LessonController@activelesson');
 Route::get('activevideoco/{id}','VideosCollegeController@activevideoco');
 Route::get('activetypecollege/{id}','TypesCollegeController@activetypecollege');
 Route::get('activeuser/{id}','userscontroller@activeuser');
+Route::get('student_logout/{id}','StudentController@students')->name('student_logout');
 Route::post('getmanysubs','SubjectController@getmanysubs');
 Route::post('activesubject','SubjectController@activesubject');
 Route::get('getdoctorscollege/{id}','TypesCollegeController@getdoctorscollege');
