@@ -461,9 +461,9 @@ class AuthController extends Controller
        }public function lecturer_info(Request $request){
            $le = User::where('id',$request->lecturer_id)->first();
            if($le->is_student == 2){
-               $courses = TypeResource::collection($le->types);
+               $courses = TypeResource::collection($le->types()->where("active",1)->get());
            }elseif($le->is_student == 3){
-              $courses = TypecollegeResource::collection($le->typescollege);  
+              $courses = TypecollegeResource::collection($le->typescollege()->where("active",1)->get());  
            }
            return response()->json(['status' => true ,'message' => ' معلومات المحاض ',
                'info' => new LecturerResource($le),
