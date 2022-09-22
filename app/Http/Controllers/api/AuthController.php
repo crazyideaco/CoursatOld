@@ -921,7 +921,7 @@ class AuthController extends Controller
                  ]            
                              ]);
    }public function app_status(){
-       return response()->json(["status" => true,"old_app_status" => 1,
-       "new_app_status" => 0]);
+       return response()->json(["status" => true,"old_app_status" => 0,
+       "new_app_status" => 1]);
    }
 }
