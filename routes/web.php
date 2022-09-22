@@ -575,7 +575,7 @@ Route::get('activelesson/{id}','LessonController@activelesson');
 Route::get('activevideoco/{id}','VideosCollegeController@activevideoco');
 Route::get('activetypecollege/{id}','TypesCollegeController@activetypecollege');
 Route::get('activeuser/{id}','userscontroller@activeuser');
-Route::get('student_logout/{id}','StudentController@students')->name('student_logout');
+Route::get('student_logout/{id}','StudentController@student_logout')->name('student_logout');
 Route::post('getmanysubs','SubjectController@getmanysubs');
 Route::post('activesubject','SubjectController@activesubject');
 Route::get('getdoctorscollege/{id}','TypesCollegeController@getdoctorscollege');

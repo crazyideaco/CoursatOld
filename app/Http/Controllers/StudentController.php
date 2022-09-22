@@ -331,7 +331,6 @@ $students = $students1->merge(auth()->user()->centerstudents);
          return response(['status' => 'active']);
      }
   }public function student_logout($id){
-    dd("ssdd");
     $user = User::where("id",$id)->first();
     $user->update([
       "device_id" => null,
