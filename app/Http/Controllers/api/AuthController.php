@@ -273,7 +273,7 @@ class AuthController extends Controller
                      }
                        else{
                 	 return response()->json(['status' => false,
-                        'message_ar' => 'هذا امستخم ليس له حق  ادخول '
+                        'message_ar' => 'هذا المستخدم ليس له حق الدخول'
                                              ], 401); 
 
                        }
