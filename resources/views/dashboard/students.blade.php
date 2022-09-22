@@ -152,7 +152,7 @@
 					<td class="text-center">
                     <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px;
                      padding:6px 45px"  onclick="student_logout({{$student->id}})">
-                    تسجيل خروج
+                    تسجيل الخروج
                     <span>
                                <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
                              @if($student->active == 1)
