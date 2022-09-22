@@ -149,7 +149,7 @@ class StudentController extends Controller
           }
     return response()->json(['status' => true,'data' => $text]);
   } public function students(){
-	  $students = User::where('is_student',1)->where('name','<>',NULL)->select("name","id","code","phone")->get();
+	  $students = User::where('is_student',1)->where('name','<>',NULL)->select("name","id","code","phone","year_id")->get();
      return view('dashboard.students')->with('students',$students);
   } public function mytypestudents(){
   if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){

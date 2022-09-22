@@ -314,7 +314,7 @@ function student_logout(id){
          contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
-    if(result.status == 'true'){
+    if(result.status == true){
         Swal.fire({
   position: 'top-end',
   icon: 'success',
