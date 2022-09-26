@@ -250,7 +250,7 @@ class AuthController extends Controller
                        return response()->json(['status' => false,'message_ar' => 'ذ المستخدم ليس مفعل'],401);
                      }else{
                          // comment 1 line for device id
-                    if($user->device_id == null || $user->device_id == $request->device_id){
+                    //if($user->device_id == null || $user->device_id == $request->device_id){
             $user->device_token = $request->device_token;
              $user->device_id = $request->device_id;
 						 $user->save();
@@ -270,13 +270,13 @@ class AuthController extends Controller
                          
             //         ];
                     // comment 6 line for device id
-                     }
-                       else{
-                	 return response()->json(['status' => false,
-                        'message_ar' => 'هذا المستخدم ليس له حق الدخول'
-                                             ], 401); 
+                  //    }
+                  //      else{
+                	//  return response()->json(['status' => false,
+                  //       'message_ar' => 'هذا المستخدم ليس له حق الدخول'
+                  //                            ], 401); 
 
-                       }
+                  //      }
           }
 			    
 			}else{
