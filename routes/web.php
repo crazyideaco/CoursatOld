@@ -257,7 +257,11 @@ Route::post('updatespecialbasic/{id}','SpecialbasicController@updatespecialbasic
     Route::get('deletespecialbasic/{id}','SpecialbasicController@deletespecialbasic')->name('deletespecialbasic');
 Route::get('givetypecourse','CourseController@givetypecourse')->name('givetypecourse');
 Route::post('addtypecourse','dashboardcontroller@addtypecourse');
+
 Route::resource("website_students","WebsiteStudentController");
+
+Route::get('get_filter_user_courses/{id}','WebsiteStudentController@get_filter_user_courses');
+
     //types
 Route::get('types','TypeController@types')->name('types');
 Route::get('addtype','TypeController@addtype')->name('addtype');

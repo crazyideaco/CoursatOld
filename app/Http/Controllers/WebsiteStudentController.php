@@ -39,4 +39,21 @@ class WebsiteStudentController extends Controller
 	$website_students = WebsiteStudent::get();
 	return view('dashboard.website_students.index')->with("website_students",$website_students);
 }
+public function get_filter_user_courses($id){
+    $user = User::where("id",$id)->first();
+    if($user->is_student == 2){
+        $types = $user->types;
+    }
+    if($user->is_student == 3){
+        $types = $user->typescollege;
+    }
+    if($user->is_student == 4){
+        $types = $user->courses;
+    }
+    $text = "";
+    foreach($types as $type){
+        $text .='<option value="'.$type->id.'">'.$type->name_ar.'</option>';    }
+
+        return response()->json(["status" => true,"data" => $text]);
+}
 }
