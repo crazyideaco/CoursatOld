@@ -1,0 +1,23 @@
+/* ======= Tablet ======= */
+@media only screen and (max-width: 991.98px) {
+    .login {
+        padding: 3rem 0;
+        .container-fluid {
+            .row {
+                height: unset !important;
+                flex-direction: column-reverse;
+            }
+        }
+    }
+    .single_cource {
+        .video_lesson {
+            .number {
+                font-size: 5rem;
+            }
+            video {
+                height: 250px;
+            }
+        }
+    }
+}
+/* ======= Tablet ======= */
