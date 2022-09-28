@@ -648,4 +648,4 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
   //    }
   // });
 
-  Route::get("login_website","website/LoginController@login")->name("login_website");
+  Route::get("login_website","website\LoginController@login")->name("login_website");
