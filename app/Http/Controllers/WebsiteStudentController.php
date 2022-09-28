@@ -36,7 +36,7 @@ class WebsiteStudentController extends Controller
 	}
 
 	public function index(){
-	$website_students = User::get();
+	$website_students = WebsiteStudent::get();
 	return view('dashboard.website_students.index')->with("website_students",$website_students);
 }
 }
