@@ -105,7 +105,7 @@
               <div class="form-group col-lg-3 col-md-6 col-12">
                 <label> المحاضر</label>
                 <select name="user_id" class="form-control" required 
-                onchange="getsub(this)">
+                onchange="get_filter_users(this)">
                   <option value="0" selected="selected" disabled>
                     اختر  مدرس
                   </option>
@@ -119,7 +119,7 @@
               </div>
               <div class="form-group col-lg-3 col-md-6 col-12">
                 <label> الكورسات</label>
-                <select name="sub_id" class="form-control" id="sub" required onchange="getlecturer(this)">
+                <select name="sub_id" class="form-control selectpicker" multiple id="sub" required onchange="getlecturer(this)">
                   <option value="0" selected="selected" disabled>
                     اختر  كورس
                   </option>
@@ -171,150 +171,28 @@
 @endsection
 @section("scripts")
 <script>
-  $('form').ajaxForm({
-    beforeSend: function() {
-      $('#success').empty();
-    },
-    uploadProgress: function(event, position, total, percentComplete) {
-      $('.progress-bar').text(percentComplete + '%');
-      $('.progress-bar').css('width', percentComplete + '%');
-    },
-    success: function(data) {
-      if (data.errors) {
-        $('.progress-bar').text('0%');
-        $('.progress-bar').css('width', '0%');
-        $('#success').html('<span class="text-danger"><b>' + data.errors + '</b></span>');
-      }
-      if (data.success) {
-        $('.progress-bar').text('Uploaded');
-        $('.progress-bar').css('width', '100%');
-        $('#success').html('<span class="text-success"><b>' + data.success + '</b></span><br /><br />');
-        location.href = 'course';
-      }
+
+function get_filter_user_courses(selected){
+let id = selected.value;
+console.log(id);
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-  });
-
-  function getyear(selected) {
-
-    var id = selected.value;
-    console.log(id);
-    $.ajax({
-      type: "GET",
-      url: `getyear/${id}`, //put y
-      contentType: "application/json; charset=utf-8",
-      dataType: "Json",
-      success: function(result) {
-        $('#subject').empty();
-        $('#subject').html(result);
-
-      }
-
-    });
-  }
-
-  function getteacher(selected) {
-
-    var id = selected.value;
-    console.log(id);
-    $.ajax({
-      type: "GET",
-      url: `getteacher/${id}`, //put y
-      contentType: "application/json; charset=utf-8",
-      dataType: "Json",
-      success: function(result) {
-        $('#teacher').empty();
-        $('#teacher').html(result);
-
-      }
-
-    });
-  }
-
-  function getcity(selected) {
-    let id = selected.value;
-    console.log(id);
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
     });
     $.ajax({
-      type: "get",
-      url: `getcity/${id}`,
-      //    contentType: "application/json; charset=utf-8",
-      dataType: "Json",
-      success: function(result) {
-        $('#city').empty();
-        $('#city').html(result);
-        console.log(result);
-      }
+       type:"get",
+       url: `../get_filter_users/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+       $('#sub').empty();
+       $('#sub').html(result);
+       console.log(result);
+       }
 
-    });
-  }
-
-  function getsub(selected) {
-    let id = selected.value;
-    console.log(id);
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-      type: "get",
-      url: `getsub/${id}`,
-      //    contentType: "application/json; charset=utf-8",
-      dataType: "Json",
-      success: function(result) {
-        $('#sub').empty();
-        $('#sub').html(result);
-        console.log(result);
-      }
-
-    });
-  }
-
-  function getlecturer(selected) {
-    let id = selected.value;
-    console.log(id);
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-      type: "get",
-      url: `getlecturer/${id}`,
-      //    contentType: "application/json; charset=utf-8",
-      dataType: "Json",
-      success: function(result) {
-        $('#lecturer').empty();
-        $('#lecturer').html(result);
-        console.log(result);
-      }
-
-    });
-  }
-  $(document).on("change", "#kt", function(evt) {
-    var $source = $('#video_here');
-    $source[0].src = URL.createObjectURL(this.files[0]);
-    $source.parent()[0].load();
-  });
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function(e) {
-        $('#realimg').attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(input.files[0]);
+      });
     }
-  }
 
-  $("#ad").change(function() {
-    readURL(this);
-  });
 </script>
 @endsection
