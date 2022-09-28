@@ -119,13 +119,13 @@
               </div>
               <div class="form-group col-lg-3 col-md-6 col-12">
                 <label> الكورسات</label>
-                <select name="sub_id" class="form-control selectpicker" multiple id="sub" required onchange="getlecturer(this)">
+                <select name="course_ids[]" class="form-control selectpicker" multiple id="sub" required onchange="getlecturer(this)">
                   <option value="0" selected="selected" disabled>
                     اختر  كورس
                   </option>
 
                 </select>
-                @error('sub_id')
+                @error('course_ids')
                 <p style="color:red;">{{$message}}</p>
                 @enderror
               </div>

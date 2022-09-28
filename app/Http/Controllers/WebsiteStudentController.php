@@ -5,6 +5,7 @@ use Validator;
 use Illuminate\Support\Facades\Auth;
 use App\WebsiteStudent;
 use App\User;
+use App\WebsiteStudentCourse;
 
 use Illuminate\Support\Facades\Hash;
 class WebsiteStudentController extends Controller
@@ -24,15 +25,35 @@ class WebsiteStudentController extends Controller
 	'required'=> 'هذا الحقل مطلوب',
 	'name.unique' => 'هذا الاسم موجود من قبل',
 	'phone.unique' => 'هذا الهاتف موجود من قبل'	]);
-		$user = new WebsiteStudent;
-		$user->name = $request->name;
-		$user->phone = $request->phone;
-		$user->email = $request->email;
-		$user->password = Hash::make($request->password);
-		$user->isAdmin = 'admin';
-		$user->save();
-       
-		return redirect()->route('admins');
+    $user = User::where("id",$request->user_id)->first();
+
+    if($user->is_student == 2){
+        $type = 1;
+    }
+    if($user->is_student == 3){
+        $type = 2;
+    }
+    if($user->is_student == 4){
+        $type = 3;
+    }
+		$website_student =  WebsiteStudent::create([
+            "name" => $request->name,
+            "phone" => $request->phone,
+            "user_id" => $request->user_id,
+            "type" => $type,
+            "password" => Hash::make($request->password)
+
+        ]);
+        foreach($request->course_ids as $course_id){
+        WebsiteStudentCourse::create([
+            "course_id" => $course_id,
+            "website_student_id" => $website_student->id,
+            "type" => $type 
+        ]);
+
+        }
+	
+		return redirect()->route('website_students');
 	}
 
 	public function index(){
