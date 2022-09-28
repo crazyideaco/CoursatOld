@@ -182,13 +182,13 @@ console.log(id);
     });
     $.ajax({
        type:"get",
-       url: `../get_filter_users/${id}`,
+       url: `../get_filter_user_courses/${id}`,
    //    contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
        $('#sub').empty();
-       $('#sub').html(result);
-       console.log(result);
+       $('#sub').html(result.data);
+       $("#sub").selectpicker("refresh");
        }
 
       });
