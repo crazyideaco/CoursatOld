@@ -105,7 +105,7 @@
               <div class="form-group col-lg-3 col-md-6 col-12">
                 <label> المحاضر</label>
                 <select name="user_id" class="form-control" required 
-                onchange="get_filter_users(this)">
+                onchange="get_filter_user_courses(this)">
                   <option value="0" selected="selected" disabled>
                     اختر  مدرس
                   </option>
