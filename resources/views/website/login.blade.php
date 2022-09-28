@@ -29,11 +29,11 @@
 
           <div class="col-lg-6 col-12 align-items-center">
             <form action="cources.html" method="" class="box">
-              <img src="media/logo.png" class="logo" alt="logo" />
+              <img src="{{asset('website/media/logo.png')}}" class="logo" alt="logo" />
               <br />
               <span class="lo">User Login</span>
               <br />
-              <input type="email" name="email" placeholder="Email" required />
+              <input type="phone" name="phone" placeholder="phone" required />
 
               <input
                 type="password"
