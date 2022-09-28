@@ -97,7 +97,7 @@
               </div>
               <div class="form-group col-lg-3 col-md-6 col-12">
                 <label> كلمه السر  </label>
-                <input class="form-control" required type="number" name="password">
+                <input class="form-control" required type="password" name="password">
                 @error('password')
                 <p style="color:red;">{{$message}}</p>
                 @enderror
