@@ -11,7 +11,7 @@ class WebsiteStudentController extends Controller
 {
     
   public function create(){
-    $users = User::whereIn("id",[2,3,4])->select("id","name")->get();
+    $users = User::whereIn("is_student",[2,3,4])->select("id","name")->get();
 	return view('dashboard.website_students.create',compact("users"));
 }
 
