@@ -33,7 +33,7 @@
               <br />
               <span class="lo">User Login</span>
               <br />
-              <input type="phone" name="phone" placeholder="phone" required />
+              <input type="number" name="phone" placeholder="phone" required />
 
               <input
                 type="password"
