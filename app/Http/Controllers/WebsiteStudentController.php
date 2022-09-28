@@ -53,7 +53,7 @@ class WebsiteStudentController extends Controller
 
         }
 	
-		return redirect()->route('website_students');
+		return redirect()->route('website_students.index');
 	}
 
 	public function index(){
