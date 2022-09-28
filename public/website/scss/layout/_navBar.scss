@@ -1,0 +1,21 @@
+
+.navbar {
+    background-color: #fff;
+    .navbar-brand {
+      img {
+        width: 80px;
+      }
+    }
+    .navbar-collapse {
+      .navbar-nav {
+        justify-content: space-between;
+        width: 100%;
+        .nav-item {
+          .nav-link {
+            margin-bottom: 0;
+            font-family: "semibold";
+          }
+        }
+      }
+    }
+  }

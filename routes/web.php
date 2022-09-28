@@ -638,12 +638,14 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
       // $name = \Storage::disk('google')->putFileAs("",$file,time(). '.mp4');
     }
   });*/
-  Route::get("sendvideos",function(){
-     $videos =  VideosCollege::where('id',22)->get();
-     foreach($videos as $video){
-         $new_name ="https://drive.google.com/uc?id=".$video->url."&export=media";
-          $new_name->move('uploads' ,time(). $new_name->getClientOriginalName());
-         $video->url = time().$new_name->getClientOriginalName();
-         $video->save();
-     }
-  });
+  // Route::get("sendvideos",function(){
+  //    $videos =  VideosCollege::where('id',22)->get();
+  //    foreach($videos as $video){
+  //        $new_name ="https://drive.google.com/uc?id=".$video->url."&export=media";
+  //         $new_name->move('uploads' ,time(). $new_name->getClientOriginalName());
+  //        $video->url = time().$new_name->getClientOriginalName();
+  //        $video->save();
+  //    }
+  // });
+
+  Route::get("login_website","website/LoginController@login")->name("login_website");
