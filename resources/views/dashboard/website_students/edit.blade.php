@@ -74,7 +74,7 @@
       <div class="container">
         <div class="row def">
           <img src="{{asset('images/setting.svg')}}">
-          <h5>اضافه طالب لموقع </h5>
+          <h5>تعديل طالب لموقع </h5>
         </div>
         <form method="post" action="{{route('website_students.update',$website_student->id)}}" enctype="multipart/form-data">
           @csrf
