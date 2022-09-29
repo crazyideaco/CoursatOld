@@ -41,6 +41,7 @@ class CourseController extends Controller
                 $course = Course::where("id",$id)->firstorFail();
                 $lessons = $course->subtypes;
             }
+            dd(count($lessons));
             return view('website.lessons',compact("lessons"));
         }
 }
