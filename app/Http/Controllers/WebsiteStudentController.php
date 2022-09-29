@@ -76,5 +76,9 @@ public function get_filter_user_courses($id){
         $text .='<option value="'.$type->id.'">'.$type->name_ar.'</option>';    }
 
         return response()->json(["status" => true,"data" => $text]);
-}
+}public function destroy($id){
+    $website_student = WebsiteStudent::where('id',$id)->first();
+    $website_student->delete();
+    return response()->json(['status' => true]);
+  }  
 }
