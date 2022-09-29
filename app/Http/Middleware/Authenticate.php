@@ -16,7 +16,6 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
          
-            if(auth()->guard("website_student")->check()){
             
         if ($request->is('website') || $request->is('website/*')) {
             return route('login_website');
@@ -25,7 +24,7 @@ class Authenticate extends Middleware
             return route('dashlogin');
         }
     
-    }
+    
 }
     }
 }
