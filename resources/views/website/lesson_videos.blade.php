@@ -54,7 +54,7 @@
                                             @foreach($lesson->videos as $video)
                                             <!-- Child video -->
                                             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                                <a href="{{route('course_videos',['video_id' => $video->id,'lesson_id',$lesson->id])}}" class="menu-link menu-toggle">
+                                                <a href="{{route('course_videos',['video_id' => $video->id,'lesson_id'=>$lesson->id])}}" class="menu-link menu-toggle">
                                                     <i class="menu-bullet menu-bullet-dot">
                                                         <span></span>
                                                     </i>
