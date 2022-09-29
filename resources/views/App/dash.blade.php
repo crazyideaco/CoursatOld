@@ -495,7 +495,7 @@
                                         صرف النقاط</a>
                                     <a href="{{route('messages')}}" class="@if(request()->is('messages'))active @endif">
                                         رسائل المستخدمين</a>
-                                        <a href="{{route('website_students')}}" class="@if(request()->is('website_students'))active @endif">
+                                        <a href="{{route('website_students.index')}}" class="@if(request()->is('website_students'))active @endif">
                                         طلاب الموقع </a>
                                 </div>
                             </div>
