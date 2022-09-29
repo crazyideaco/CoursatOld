@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
         if (Auth::guard("web")->check()) {
             return redirect()->route('states');
         }
-        if (Auth::guard("web")->check()) {
+        if (Auth::guard("website_student")->check()) {
             return redirect()->route('courses_website');
         }
 
