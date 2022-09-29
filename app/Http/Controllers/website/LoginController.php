@@ -24,7 +24,7 @@ class LoginController extends Controller
             if (auth()->guard("website_student")->attempt(['phone' => 
             $request->phone, 'password' => $request->password]
             )){
-               dd(true);
+                return redirect()->route('courses_website');
                
             }else{
                return redirect()->back()->with(['error'=> 
