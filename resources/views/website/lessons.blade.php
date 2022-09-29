@@ -29,7 +29,7 @@
                                         <span class="svg-icon menu-icon">
                                             <i class="fas fa-chalkboard-teacher"></i>
                                         </span>
-                                        <span class="menu-text">$lesson1->id</span>
+                                        <span class="menu-text">{{$lesson1->name_ar ?? ""}}</span>
                                         <i class="menu-arrow"></i>
                                     </a>
                                     <div class="menu-submenu">
