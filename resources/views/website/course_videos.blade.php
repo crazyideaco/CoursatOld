@@ -9,7 +9,7 @@
                     <!--begin::Brand-->
                     <div class="brand flex-column-auto" id="kt_brand">
                         <!--begin::Logo-->
-                        <p class="title">Cource name</p>
+                        <p class="title">{{$course->name_ar}} </p>
                         <!--end::Logo-->
                     </div>
                     <!--end::Brand-->
