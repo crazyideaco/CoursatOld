@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="{{asset('website/scss/style.min.css')}}" />
     <link rel="stylesheet" href="{{asset('website/css/bootstrap.min.css')}}" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
   <body oncontextmenu="return false">
     <section class="login">
@@ -53,5 +55,28 @@
     <script src="{{asset('website/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('website/js/jquery-3.5.1.min.js')}}"></script>
     <script src="{{asset('website/js/main.js')}}"></script>
+    @if(session('success'))
+<script>
+Swal.fire({
+position: 'center',
+icon: 'success',
+title:"{{session('success')}}",
+showConfirmButton: false,
+timer: 1500
+})
+
+</script>
+@endif
+@if(session('error'))
+<script>
+
+Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: "{{session('error')}}"
+  })
+
+</script>
+@endif
   </body>
 </html>
