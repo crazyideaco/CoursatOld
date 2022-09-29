@@ -17,15 +17,16 @@
                     <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
                         <!--begin::Menu Container-->
                         <div id="kt_aside_menu" class="aside-menu" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
-                     
+                       
                         <!--begin::Menu Nav-->
                             <ul class="menu-nav">
-
+                          
                       
                                 <!-- parent lesson -->
-                                @foreach($lessons as $lesson1)
+
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{route('course_lessons_videos_website',['lesson_id' => $lesson1->id,'course_id' => $course->id])}}" class="menu-link menu-toggle">
+                                    <a href="{{route('course_lessons_videos_website',['lesson_id' => $lesson1->id,'course_id' => $course->id])}}" 
+                                    class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
                                             <i class="fas fa-chalkboard-teacher"></i>
                                         </span>
@@ -37,7 +38,7 @@
                                         <ul class="menu-subnav">
                                             <li class="menu-item menu-item-parent" aria-haspopup="true">
                                                 <span class="menu-link">
-                                                    <span class="menu-text">lesson1 1</span>
+                                                    <span class="menu-text">{{$lesson1->name_ar ?? ""}}</span>
                                                 </span>
                                             </li>
                                         </ul>
@@ -50,23 +51,26 @@
                                                     <span class="menu-text">  عرض الدرس</span>
                                                 </a>
                                             </li>
-                                            @foreach($lesson->videos as $video)
+                                          @foreach($lesson->videos as $video)
                                             <!-- Child video -->
                                             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                                <a href="#" class="menu-link menu-toggle">
+                                                <a href="{{route('lesson_videos',['video_id' => $video->id,'lesson_id',$lesson->id])}}" class="menu-link menu-toggle">
                                                     <i class="menu-bullet menu-bullet-dot">
                                                         <span></span>
                                                     </i>
-                                                    <span class="menu-text">{{$video->title}}</span>
+                                                    <span class="menu-text">{{$video->name_ar}}</span>
                                                 </a>
                                             </li>
                                             <!-- Child video -->
-                                                @endforeach
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </li>
                                 <!-- parent lesson -->
-                                @endforeach
+
+                                
+          
+                        
                             </ul>
                             <!--end::Menu Nav-->
                         </div>
@@ -76,14 +80,14 @@
                 </div>
                 <!--end::Aside-->
             </div>
-            <!-- <div class="col-lg-9 col-md-8 col-12">
+            <div class="col-lg-9 col-md-8 col-12">
                 <div class="video_lesson">
-                    <p class="number">01111488849</p>
-                    <video controls controlsList="nodownload nofullscreen" donotallowfullscreen disablePictureInPicture src="./media/video/Dondorma.mp4"></video>
+                    <p class="number">{{auth()->guard("website_student")->user()->name}}</p>
+                    <video controls controlsList="nodownload nofullscreen" donotallowfullscreen 
+                    disablePictureInPicture src="{{asset('uploads/'.$lesson->intro)}}"></video>
                 </div>
-                <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" download class="btn download_btn">Download PDF</a>
-            </div> -->
-           
+            
+            </div>  
         </div>
     </div>
 </section>

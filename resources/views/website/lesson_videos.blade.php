@@ -51,27 +51,18 @@
                                                     <span class="menu-text">  عرض الدرس</span>
                                                 </a>
                                             </li>
+                                            @foreach($lesson->videos as $video)
                                             <!-- Child video -->
                                             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                                 <a href="#" class="menu-link menu-toggle">
                                                     <i class="menu-bullet menu-bullet-dot">
                                                         <span></span>
                                                     </i>
-                                                    <span class="menu-text">Video 1</span>
+                                                    <span class="menu-text">{{$video->title}}</span>
                                                 </a>
                                             </li>
                                             <!-- Child video -->
-
-                                            <!-- Child video -->
-                                            <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                                <a href="single_course.html" class="menu-link menu-toggle">
-                                                    <i class="menu-bullet menu-bullet-dot">
-                                                        <span></span>
-                                                    </i>
-                                                    <span class="menu-text">Video 2</span>
-                                                </a>
-                                            </li>
-                                            <!-- Child video -->
+                                                @endforeach
                                         </ul>
                                     </div>
                                 </li>
