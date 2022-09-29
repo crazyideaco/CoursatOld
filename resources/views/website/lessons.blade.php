@@ -173,4 +173,4 @@
         </div>
       </div>
     </section>
-    @endsec
+    @endsection
