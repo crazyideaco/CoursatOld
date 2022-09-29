@@ -6,7 +6,7 @@
             @foreach($courses as $course)
           <!-- For loop this card cource -->
           <div class="col-lg-4 col-md-6 col-12">
-            <a href="single_course.html" class="card_cource">
+            <a href="{{route('course_lessons_website',$course->id)}}" class="card_cource">
               <img src="{{asset('uploads/'.$course->image)}}" alt="cource" />
               <div class="description_card">
                 <h5 class="name">{{$course->name_ar ?? ""}}</h5>
