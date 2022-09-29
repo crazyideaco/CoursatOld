@@ -7,8 +7,8 @@
     <title>Az cources</title>
     <link rel="icon" type="image/x-icon" href="{{asset('website/media/logo.ico')}}" />
 
-    <link rel="stylesheet" href="{{asset('website/mscss/style.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('website/mcss/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('website/scss/style.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('website/css/bootstrap.min.css')}}" />
   </head>
   <body oncontextmenu="return false">
     <nav class="navbar navbar-expand-lg">
