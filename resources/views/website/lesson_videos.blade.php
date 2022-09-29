@@ -9,7 +9,7 @@
                     <!--begin::Brand-->
                     <div class="brand flex-column-auto" id="kt_brand">
                         <!--begin::Logo-->
-                        <p class="title">Cource name</p>
+                        <p class="title"> </p>
                         <!--end::Logo-->
                     </div>
                     <!--end::Brand-->
@@ -82,7 +82,7 @@
             </div>
             <div class="col-lg-9 col-md-8 col-12">
                 <div class="video_lesson">
-                    <p class="number">{{auth()->guard("website_student")->user()->name}}</p>
+                    <p class="number">{{auth()->guard("website_student")->user()->phone}}</p>
                     <video controls controlsList="nodownload nofullscreen" donotallowfullscreen 
                     disablePictureInPicture src="{{asset('uploads/'.$lesson->intro)}}"></video>
                 </div>

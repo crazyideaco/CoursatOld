@@ -13,7 +13,7 @@
   <body oncontextmenu="return false">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="cources.html">
+        <a class="navbar-brand" href="{{route('courses_website')}}">
             <img src="{{asset('website/media/logo_nav.png')}}" alt="logo">
         </a>
         <button
@@ -29,6 +29,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('courses_website')}}">الرئيسيه</a>
+            </li>
             <li class="nav-item">
               <p class="nav-link"> {{auth()->guard("website_student")->user()->name}}</p>
             </li>
