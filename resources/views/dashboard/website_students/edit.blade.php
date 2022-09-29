@@ -76,9 +76,9 @@
           <img src="{{asset('images/setting.svg')}}">
           <h5>اضافه طالب لموقع </h5>
         </div>
-        <form method="post" action="{{route('website_students.store')}}" enctype="multipart/form-data">
+        <form method="post" action="{{route('website_students.update',$website_student->id)}}" enctype="multipart/form-data">
           @csrf
-        
+        @method("put")
           <div class="info">
             <div class="row">
               <div class="form-group col-lg-3 col-md-6 col-12">
@@ -111,7 +111,7 @@
                     اختر  مدرس
                   </option>
                   @foreach($users as $user)
-                  <option value="{{$user->id}}" @if($website_student->user_id == $user->id) seleced @endif>{{$user->name}}</option>
+                  <option value="{{$user->id}}" @if($website_student->user_id == $user->id) selected @endif>{{$user->name}}</option>
                   @endforeach
                 </select>
                 @error('user_id')
@@ -191,7 +191,7 @@ console.log(id);
     });
     $.ajax({
        type:"get",
-       url: `../get_filter_user_courses/${id}`,
+       url: `../../get_filter_user_courses/${id}`,
    //    contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
