@@ -44,6 +44,11 @@ return [
             'driver' => 'session',
             'provider' => 'website_students',
         ],
+        'website_student_token' => [
+            'driver' => 'token',
+            'provider' => 'website_students',
+            'hash' => false,
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
