@@ -15,18 +15,17 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            dd(auth()->guard("website_student")->check());
+         
             if(auth()->guard("website_student")->check()){
-                return route('courses_website');
-            }else{
-                return route('login_website');
-            }
-        // if ($request->is('website') || $request->is('website/*')) {
-        //     return route('login_website');
-        // }
-        // else{
-        //     return route('dashlogin');
-        // }
+            
+        if ($request->is('website') || $request->is('website/*')) {
+            return route('login_website');
+        }
+        else{
+            return route('dashlogin');
+        }
+    
     }
+}
     }
 }
