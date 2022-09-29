@@ -41,4 +41,7 @@ class Type extends Model
     } public function students(){
         return $this->hasMany(Student_Type::class,'student_id');
     } 
+    public function getUserNameAttribute(){
+        return $this->user->name ?? "";
+      }
 }
