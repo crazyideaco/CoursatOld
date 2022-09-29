@@ -236,7 +236,7 @@
    //    contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
-    $(`#ل${id}`).remove();
+    $(`#g${id}`).remove();
      Swal.fire(
       'Deleted!',
       'تم مسح الطالب بنجاح',
