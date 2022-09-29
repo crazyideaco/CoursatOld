@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\File;
 use App\User;
 use App\Http\Requests\Website\Auth\LoginRequest;
 use App\Http\Controllers\Controller;
-
+use App\WebsiteStudent;
 use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
@@ -16,7 +16,7 @@ class LoginController extends Controller
                 "phone" => "required",
                 "password" => "required"
             ]);
-            $user = User::wherePhone($request->phone)->first();
+            $user = WebsiteStudent::wherePhone($request->phone)->first();
             if(!$user){
                return redirect()->back()->with(['error'=> 
                "لا يوجد مستخدم بهذ الرقم"]);
