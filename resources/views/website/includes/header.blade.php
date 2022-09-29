@@ -39,3 +39,4 @@
         </div>
       </div>
     </nav>
+    @yield("centent")
