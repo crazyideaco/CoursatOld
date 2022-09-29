@@ -20,7 +20,11 @@ class Course extends Model
       }
       public function user(){
          return $this->belongsTo(User::class,'user_id');
-      }public function center(){
+      }
+      public function getUserNameAttribute(){
+        return $this->user->name ?? "";
+      }
+      public function center(){
          return $this->belongsTo(User::class,'center_id');
      }public function rates(){
           return $this->hasMany(Course_Rate::class,'course_id');
