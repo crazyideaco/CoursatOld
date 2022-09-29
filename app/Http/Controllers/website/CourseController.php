@@ -12,7 +12,8 @@ use App\Course;
 use App\TypesCollege;
 use App\Subtype;
 use App\Lesson;
-
+use App\VideosCollege;
+use App\Video;
 class CourseController extends Controller
 {
         public function courses(){
@@ -58,5 +59,17 @@ class CourseController extends Controller
                 $lessons = $course->lessons;
             }
             return view('website.lesson_videos',compact("lesson","lessons","course"));
+        }  public function course_videos($lesson_id,$video_id){
+            $user = auth()->guard("website_student")->user();
+            if($user->type == 1){
+             $lesson = Subtype::where("id",$lesson_id)->firstorFail();
+             $course = Type::where("id",$lesson->type_id)->firstorFail();
+             $video = Video::where("id",$video_id)->firstorFail();
+            }elseif($user->type == 2){
+                $lesson = Lesson::where("id",$lesson_id)->firstorFail();
+                $course = TypesCollege::where("id",$lesson->typescollege_id)->firstorFail();
+                $video = VideosCollege::where("id",$video_id)->firstorFail();
+            }
+            return view('website.course_videos',compact("lesson","video","course_id"));
         }
 }

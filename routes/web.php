@@ -663,6 +663,7 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
    
     Route::get("course_lessons_website/{id}","website\CourseController@course_lessons")->name("course_lessons_website");
     Route::get("course_lessons_videos_website/{lesson_id}/{course_id}","website\CourseController@course_lessons_videos_website")->name("course_lessons_videos_website");
+    Route::get("lesson_videos/{video_id}/{lesson_id}","website\CourseController@lesson_videos")->name("lesson_videos");
 
   });
   });
