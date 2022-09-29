@@ -30,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <p class="nav-link"> auth()->guard("website_student")->user()->name</p>
+              <p class="nav-link"> {{auth()->guard("website_student")->user()->name}}</p>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{route('logout_website')}}">Logout</a>
