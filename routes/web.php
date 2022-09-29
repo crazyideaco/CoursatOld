@@ -660,7 +660,8 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
     Route::group(['middleware' => 'auth:website_student'], function() {
   
     Route::get("courses_website","website\CourseController@courses")->name("courses_website");
-   
+    Route::get("logout_website","website\LoginController@logout")->name("logout_website");
+
     Route::get("course_lessons_website/{id}","website\CourseController@course_lessons")->name("course_lessons_website");
     Route::get("course_lessons_videos_website/{lesson_id}/{course_id}","website\CourseController@course_lessons_videos_website")->name("course_lessons_videos_website");
     Route::get("course_videos/{video_id}/{lesson_id}","website\CourseController@course_videos")->name("course_videos");
