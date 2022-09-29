@@ -57,7 +57,7 @@
                                                     <i class="menu-bullet menu-bullet-dot">
                                                         <span></span>
                                                     </i>
-                                                    <span class="menu-text">{{$video->title}}</span>
+                                                    <span class="menu-text">{{$video->name_ar}}</span>
                                                 </a>
                                             </li>
                                             <!-- Child video -->
