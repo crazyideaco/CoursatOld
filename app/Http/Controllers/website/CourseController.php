@@ -14,6 +14,7 @@ use App\TypesCollege;
 class CourseController extends Controller
 {
         public function courses(){
+            dd("ssdsds");
             $user = auth()->guard("website_student")->user();
             $course_ids = $user->courses->pluck("id")->toArray();
             if($user->type == 1){
