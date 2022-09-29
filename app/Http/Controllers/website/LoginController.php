@@ -21,7 +21,7 @@ class LoginController extends Controller
                return redirect()->back()->with(['error'=> 
                "لا يوجد مستخدم بهذ الرقم"]);
             }
-            if (auth()->guard("website_student")->attempt(['phone' => 
+            if (auth()->guard("website_student_token")->attempt(['phone' => 
             $request->phone, 'password' => $request->password]
             )){
                dd(true);
@@ -32,7 +32,7 @@ class LoginController extends Controller
             }
            }
            public function logout(){
-               auth()->guard("website_student")->logout();
+               auth()->guard("website_student_token")->logout();
            
              return redirect()->route('login_website')->with(['success'=> "تم تسجيل الخروج بنجاح"]);
            }
