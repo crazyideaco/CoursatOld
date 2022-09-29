@@ -86,8 +86,8 @@
                     <video controls controlsList="nodownload nofullscreen" donotallowfullscreen 
                     disablePictureInPicture src="{{asset('uploads/'.$lesson->intro)}}"></video>
                 </div>
-                @if($lesson->pdf)
-                <a href="{{asset('uploads/'.$lesson->pdf)}}" 
+                @if($lesson->part_paper)
+                <a href="{{asset('uploads/'.$lesson->part_paper)}}" 
                 target="_blank" download class="btn download_btn">Download PDF</a>
               @endif
             </div>  
