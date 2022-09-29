@@ -10,6 +10,8 @@ use PDO;
 use App\Type;
 use App\Course;
 use App\TypesCollege;
+use App\Subtype;
+use App\Lesson;
 
 class CourseController extends Controller
 {
@@ -42,6 +44,19 @@ class CourseController extends Controller
                 $lessons = $course->subtypes;
             }
          
-            return view('website.lessons',compact("lessons"));
+            return view('website.lessons',compact("lessons","course"));
+        }
+        public function course_lessons_videos_website($lesson_id,$course_id){
+            $user = auth()->guard("website_student")->user();
+            if($user->type == 1){
+             $lesson = Subtype::where("id",$lesson_id)->firstorFail();
+             $course = Type::where("id",$course_id)->firstorFail();
+             $lessons = $course->subtypes;
+            }elseif($user->type == 2){
+                $lesson = Lesson::where("id",$lesson_id)->firstorFail();
+                $course = TypesCollege::where("id",$course_id)->firstorFail();
+                $lessons = $course->lessons;
+            }
+            return view('website.lesson_videos.blade',compact("lesson","lessons","course"));
         }
 }
