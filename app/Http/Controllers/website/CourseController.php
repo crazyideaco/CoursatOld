@@ -27,4 +27,20 @@ class CourseController extends Controller
             }
             return view('website.courses',compact("courses"));
         }
+        public function course_lessons($id){
+            $user = auth()->guard("website_student")->user();
+            $course_ids = $user->courses->pluck("course_id")->toArray();
+            if($user->type == 1){
+             $course = Type::where("id",$id)->firstorFail();
+             $lessons = $course->subtypes;
+            }elseif($user->type == 2){
+                $course = TypesCollege::where("id",$id)->firstorFail();
+                $lessons = $course->lessons;
+            }
+            elseif($user->type == 3){
+                $course = Course::where("id",$id)->firstorFail();
+                $lessons = $course->subtypes;
+            }
+            return view('website.lessons',compact("lessons"));
+        }
 }

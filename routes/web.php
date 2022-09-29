@@ -660,5 +660,8 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
     Route::group(['middleware' => 'auth:website_student'], function() {
   
     Route::get("courses_website","website\CourseController@courses")->name("courses_website");
-    });
+   
+    Route::get("course_lessons_website/{id}","website\CourseController@course_lessons")->name("course_lessons_website");
+
+  });
   });
