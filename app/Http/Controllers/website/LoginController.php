@@ -32,9 +32,9 @@ class LoginController extends Controller
                "كلمه السر خاطئه"]);
             }
            }
-           public function logout(){
-               auth()->guard("website_student")->logout();
+        //    public function logout(){
+        //        auth()->guard("website_student")->logout();
            
-             return redirect()->route('login_website')->with(['success'=> "تم تسجيل الخروج بنجاح"]);
-           }
+        //      return redirect()->route('login_website')->with(['success'=> "تم تسجيل الخروج بنجاح"]);
+        //    }
 }
