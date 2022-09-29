@@ -1,5 +1,5 @@
 @extends('website.website_layout')
-@section('content')
+@section('centent')
 <div class="cources">
       <div class="container">
         <div class="row">
