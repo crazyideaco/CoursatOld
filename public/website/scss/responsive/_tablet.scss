@@ -1,23 +1,68 @@
 /* ======= Tablet ======= */
 @media only screen and (max-width: 991.98px) {
-    .login {
-        padding: 3rem 0;
-        .container-fluid {
-            .row {
-                height: unset !important;
-                flex-direction: column-reverse;
+  .mobile_preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 1.5rem 0;
+    img {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        .apple_btn {
+            display: block;
+            width: 35vw;
+            margin-inline-end: 1rem;
+            img {
+                display: block;
+                margin: 0;
+                width: 100%;
+            }
+        }
+        .google_btn {
+            display: block;
+            width: 35vw;
+            img {
+                display: block;
+                margin: 0;
+                width: 100%;
             }
         }
     }
-    .single_cource {
-        .video_lesson {
-            .number {
-                font-size: 5rem;
-            }
-            video {
-                height: 250px;
-            }
-        }
+  }
+  .navbar {
+    display: none !important;
+  }
+  .login {
+    display: none;
+    padding: 3rem 0;
+    .container-fluid {
+      .row {
+        height: unset !important;
+        flex-direction: column-reverse;
+      }
     }
+  }
+  .single_cource {
+    display: none;
+    .video_lesson {
+      .number {
+        font-size: 5rem;
+      }
+      video {
+        height: 250px;
+      }
+    }
+  }
+  .cources {
+    display: none;
+  }
 }
 /* ======= Tablet ======= */

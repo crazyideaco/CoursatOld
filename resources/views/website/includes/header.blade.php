@@ -42,4 +42,17 @@
         </div>
       </div>
     </nav>
+    <!-- Mobile preview -->
+    <div class="mobile_preview">
+      <img src="{{asset('website/media/logo_nav.png')}}" alt="logo">
+      <div class="buttons">
+        <a href="https://apps.apple.com/eg/app/azcourses/id1592327429" class="apple_btn">
+          <img src="{{asset('website/media/apple.png')}}" alt="apple">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.crazyidea.azcourses" class="google_btn">
+          <img src="{{asset('website/media/google.png')}}" alt="google">
+        </a>
+      </div>
+    </div>
+    <!-- Mobile preview -->
     @yield("centent")

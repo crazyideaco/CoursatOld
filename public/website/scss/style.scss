@@ -35,6 +35,10 @@ $PrimaryColor: #03314b;
 }
 @import "./auth.scss";
 
+.mobile_preview {
+  display: none;
+}
+
 .cources {
   padding: 2rem 0;
   position: relative;
@@ -118,12 +122,6 @@ $PrimaryColor: #03314b;
       border: 1px solid $PrimaryColor;
       transition: .7s ease-in-out;
     }
-  }
-}
-
-@media only screen and (min-width: 100vw) {
-  body {
-    display: none;
   }
 }
 
