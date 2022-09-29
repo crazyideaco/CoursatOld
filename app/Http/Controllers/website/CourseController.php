@@ -16,7 +16,7 @@ class CourseController extends Controller
         public function courses(){
          
             $user = auth()->guard("website_student")->user();
-            $course_ids = $user->courses->pluck("id")->toArray();
+            $course_ids = $user->courses->pluck("course_id")->toArray();
             if($user->type == 1){
              $courses = Type::whereIn("id",$course_ids)->get();
             }elseif($user->type == 2){
