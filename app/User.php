@@ -170,5 +170,11 @@ class User extends Authenticatable
         }
         return  $number;
         
+    }public function ur_courses(){
+        if($this->is_student == 2){
+          return $this->types();
+        }elseif($this->is_student == 3){
+            return $this->typescollege(); 
+        }
     }
 }

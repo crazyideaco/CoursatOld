@@ -80,5 +80,10 @@ public function get_filter_user_courses($id){
     $website_student = WebsiteStudent::where('id',$id)->first();
     $website_student->delete();
     return response()->json(['status' => true]);
-  }  
+  }    public function edit($id){
+    $website_student = WebsiteStudent::where('id',$id)->first();
+
+    $users = User::whereIn("is_student",[2,3,4])->select("id","name")->get();
+	return view('dashboard.website_students.edit',compact("users","website_student"));
+}
 }
