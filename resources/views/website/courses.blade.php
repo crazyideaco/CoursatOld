@@ -9,7 +9,7 @@
             <a href="single_course.html" class="card_cource">
               <img src="{{asset('uploads/'.$course->image)}}" alt="cource" />
               <div class="description_card">
-                <h5 class="name">{{$course->name_ar ? ""}}</h5>
+                <h5 class="name">{{$course->name_ar ?? ""}}</h5>
                 <h6 class="instractor">{{$course->user_name ?? ""}}</h6>
                 <p class="description">
                 {{$course->description_ar ?? ""}}
