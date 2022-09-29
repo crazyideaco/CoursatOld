@@ -135,7 +135,7 @@
                                          <th scope="col" class="text-center">رقم الهاتف </th>
                                          <th scope="col" class="text-center">المحاضر </th>
                                        
-                                         <!-- <th scope="col" class="text-center">الاعدادات</th> -->
+                                         <th scope="col" class="text-center">الاعدادات</th>
                                      </tr>
                                  </thead>
                                  <tbody id="courses">
@@ -146,7 +146,15 @@
                                              {{$website_student->name}}</td>
                                          <td class="text-center">{{$website_student->phone}}</td>
                                          <td class="text-center">{{$website_student->user->name ?? ""}}</td>
-                                       
+                                         <td class="text-center">
+                  <a href="{{route('website_students.edit',$website_student->id)}}">
+                     <img src="{{asset('images/pen.svg')}}" id="pen" 
+                         style="cursor: pointer"></a>
+                       
+                        <img src="{{asset('images/trash.svg')}}" id="trash" 
+                        onclick="deletewebsite_student('{{$website_student->id}}')" style="cursor:pointer;"> 
+                       
+                                            </td>
                                      </tr>
                                      @endforeach
                                  </tbody>
@@ -200,6 +208,47 @@
          });
      });
 
+     function deletewebsite_student(sel){
+    let id = sel;
+ 
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    Swal.fire({
+  title: 'هل انت متاكد؟',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    
+    $.ajax({
+    type:"Post",
+      data:{
+        '_method': 'DELETE',
+        '_token':$('meta[name="csrf-token"]').attr('content')
+      },
+     url: `website_students/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+    $(`#ل${id}`).remove();
+     Swal.fire(
+      'Deleted!',
+      'تم مسح الطالب بنجاح',
+      'success'
+         )
+       }
+
+      });
+    }
    
+   
+  })
+}
  </script>
  @endsection
