@@ -103,7 +103,7 @@ class WebsiteStudentController extends Controller
         $website_student = WebsiteStudent::where('id', $id)->first();
         $request->validate([
             'name' => 'required',
-            'password' => 'required',
+        //    'password' => 'required',
             'phone' => "required|unique:website_students,phone,$id"
         ], [
             'required' => 'هذا الحقل مطلوب',
@@ -130,7 +130,7 @@ class WebsiteStudentController extends Controller
 
         ]);
         WebsiteStudentCourse::where("website_student_id",$id)->delete();
-        
+
         foreach ($request->course_ids as $course_id) {
             WebsiteStudentCourse::create([
                 "course_id" => $course_id,
