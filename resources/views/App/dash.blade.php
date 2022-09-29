@@ -476,7 +476,8 @@
                             <div class="col-6">
                                 <a href="#setting" data-toggle="collapse">الاعدادات</a>
                                 <div id="setting" class="collapse @if(request()->is('offers')  || request()->is('states') || request()->is('admins') ||  request()->is('cities') ||
-                             request()->is('categoryall') || request()->is('messages')) show  @endif">
+                             request()->is('categoryall') || request()->is('messages') || 
+                             request()->is('website_students')) show  @endif">
                                     <a href="{{route('categoryall')}}" class="@if(request()->is('categoryall'))active @endif">
                                         الفئات</a>
                                     <a href="{{route('offers')}}" class="@if(request()->is('offers'))active @endif">
@@ -494,6 +495,8 @@
                                         صرف النقاط</a>
                                     <a href="{{route('messages')}}" class="@if(request()->is('messages'))active @endif">
                                         رسائل المستخدمين</a>
+                                        <a href="{{route('website_students')}}" class="@if(request()->is('website_students'))active @endif">
+                                        طلاب الموقع </a>
                                 </div>
                             </div>
                             <div class="col-2">
