@@ -76,6 +76,6 @@ class CourseController extends Controller
             $course = TypesCollege::where("id", $lesson->typescollege_id)->firstorFail();
             $video = VideosCollege::where("id", $video_id)->firstorFail();
         }
-        return view('website.course_videos', compact("lesson", "video", "course_id"));
+        return view('website.course_videos', compact("lesson", "video", "course"));
     }
 }
