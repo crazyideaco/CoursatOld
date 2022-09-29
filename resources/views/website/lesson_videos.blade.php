@@ -25,7 +25,7 @@
                                 <!-- parent lesson -->
 
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                                    <a href="{{route('course_lessons_videos_website',['lesson_id' = >$lesson1->id,'course_id' => $course->id])}}" 
+                                    <a href="{{route('course_lessons_videos_website',['lesson_id' => $lesson1->id,'course_id' => $course->id])}}" 
                                     class="menu-link menu-toggle">
                                         <span class="svg-icon menu-icon">
                                             <i class="fas fa-chalkboard-teacher"></i>
