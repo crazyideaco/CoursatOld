@@ -43,6 +43,14 @@
                                             </li>
                                         </ul>
                                         <ul class="menu-subnav">
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                                <a href="{{route('course_lessons_videos_website',['lesson_id' => $lesson1->id,'course_id' => $course->id])}}" class="menu-link menu-toggle">
+                                                    <i class="menu-bullet menu-bullet-dot">
+                                                        <span></span>
+                                                    </i>
+                                                    <span class="menu-text">  عرض الدرس</span>
+                                                </a>
+                                            </li>
                                             <!-- Child video -->
                                             <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                                                 <a href="#" class="menu-link menu-toggle">
@@ -68,7 +76,7 @@
                                     </div>
                                 </li>
                                 <!-- parent lesson -->
-
+@endforeach
                                 
           
                         
@@ -92,7 +100,6 @@
                 target="_blank" download class="btn download_btn">Download PDF</a>
               @endif
             </div>  
-            @endforeach
         </div>
     </div>
 </section>
