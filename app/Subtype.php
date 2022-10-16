@@ -18,7 +18,7 @@ class Subtype extends Model
           return $this->belongsTo(Year::class,'years_id');
       }
       public function subject(){
-          return $this->belongsTo(Subject::class,'subjects_id');
+          return $this->belongsTo(Subject::class,'subjects_id'); 
       }
       public function type(){
           return $this->belongsTo(Type::class,'type_id');
