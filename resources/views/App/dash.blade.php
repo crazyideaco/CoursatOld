@@ -556,6 +556,9 @@
                                         نتائج امتحانات الكورسات </a>
                                     <a href="{{route('allsubtypeexamresults')}}" class="@if(request()->is('allsubtypeexamresults'))active @endif">
                                         نتائج امتحانات الحصص </a>
+                                        <a href="{{route('type_joins')}}" class="
+                              @if(request()->is('type_joins'))active @endif">
+                                        طلبات الانضمام</a>
                                     @endif
                                     <a href="{{route('subjectquestionsscenter')}}" class="@if(request()->is('subjectquestionsscenter'))active @endif">
                                         بنك الاسئله</a>
