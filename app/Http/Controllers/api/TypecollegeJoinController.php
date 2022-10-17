@@ -30,7 +30,12 @@ class TypecollegeJoinController extends Controller{
              $join->save();
              $msg = "تم اضافه طلب الانضمام بنجاح";
              return response()->json(['status' => true,"message" => $msg]);
-      } else if(auth()->user()->category_id == 2){
+      }   else{
+        $msg = $validator->messages()->first();
+        return response()->json(['status' => false,"message" => $msg]);
+      }
+    
+     } else if(auth()->user()->category_id == 2){
           $validator = Validator::make($request->all(),[
               "typecollege_id" => "required" 
           ],[
