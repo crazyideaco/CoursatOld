@@ -286,7 +286,8 @@ public function course(){
         $types1 = auth()->user()->centertypes->pluck('id')->toArray();
         $types = auth()->user()->centertypes;
         $students_ids = Student_Type::whereIn('type_id',$types1)->get()->pluck('student_id')->unique();
-        $students = User::whereIn('id',$students_ids)->get();
+        $students1 = User::whereIn('id',$students_ids)->get();
+        $students = $students1->merge(auth()->user()->centerstudents);
 		$types = auth()->user()->centertypes;
       }
       return view('dashboard.givetypecourse')->with('students',$students)->with('types',$types);
