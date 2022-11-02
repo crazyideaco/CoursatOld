@@ -189,7 +189,7 @@ class StudentController extends Controller
         $types = auth()->user()->courses;
 $students_ids = Student_Course::whereIn('course_id',$types1)->get()->pluck('student_id')->unique();
 $students1 = User::whereIn('id',$students_ids)->get();
-$students = $students1->merge(auth()->user()->centerstudents); 
+$students = $students1->merge(auth()->user()->centerstudents);
       }
 	 return view("dashboard.mytypestudents")->with('students',$students)->with('types',$types);
  } public function typeresults_students($id){
