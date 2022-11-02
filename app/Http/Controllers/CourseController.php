@@ -283,9 +283,13 @@ public function course(){
         $students = auth()->user()->centerstudents;
 		$types = auth()->user()->types;
       }elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){
-        $students = auth()->user()->centerstudents;
+        $types1 = auth()->user()->centertypes->pluck('id')->toArray();
+        $types = auth()->user()->centertypes;
+        $students_ids = Student_Type::whereIn('type_id',$types1)->get()->pluck('student_id')->unique();
+        $students = User::whereIn('id',$students_ids)->get();
 		$types = auth()->user()->centertypes;
-      }return view('dashboard.givetypecourse')->with('students',$students)->with('types',$types);
+      }
+      return view('dashboard.givetypecourse')->with('students',$students)->with('types',$types);
  }public function gettypecourse($id){
 	 $user = User::where('id',$id)->first();
 	 if(Auth::user() &&Auth::user()->is_student == 2){
