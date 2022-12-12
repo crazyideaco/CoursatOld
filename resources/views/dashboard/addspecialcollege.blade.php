@@ -569,9 +569,9 @@ console.log(id);
 
       });
     }
-  let id = 1;
+  var id = 1;
   $('#adds').click(function(){
-    $("#section").append(` <div class="row col-12" id="pre${id}">
+    $("#section").append(`<div class="row col-12" id="pre${id}">
     <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
                                    <select name="video_id[]" class="form-control selectpicker"  required  >
