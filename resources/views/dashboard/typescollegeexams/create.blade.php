@@ -407,7 +407,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][0]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][0]" value="1">
+                              <input type="checkbox" class="hello${id}" name="correct[${id}][0]" value="1">
                             </div>
                           </div><div class="row">
                             <div class="col-6">
@@ -417,7 +417,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][1]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][1]"  value="1">
+                              <input type="checkbox" class="hello${id}"" name="correct[${id}][1]"  value="1">
                             </div>
                           </div><div class="row">
                             <div class="col-6">
@@ -427,7 +427,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][2]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][2]" value="1">
+                              <input type="checkbox" class="hello${id}"" name="correct[${id}][2]" value="1">
                             </div>
                           </div><div class="row">
                             <div class="col-6">
@@ -437,7 +437,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][3]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][3]" value="1">
+                              <input type="checkbox" class="hello${id}"" name="correct[${id}][3]" value="1">
                             </div>
                           </div>
                           <div class="row">
