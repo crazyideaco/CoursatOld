@@ -258,6 +258,7 @@ $("body").on('click','input:checkbox', function() {
     console.log("sasa");
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
+  console.log($box.attr("class"));
   if ($box.is(":checked")) {
     
     // the name of the box is retrieved using the .attr() method
