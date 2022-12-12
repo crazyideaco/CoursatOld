@@ -189,7 +189,7 @@
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[{{$key}}][{{$key1}}]"value="0">
-                              <input type="checkbox" class="hello{{$key1}}" name="correct[{{$key}}][{{$key1}}]" value="1" @if($answer->correct ==1 ) checked @endif>
+                              <input type="checkbox" class="hello{{$key}}" name="correct[{{$key}}][{{$key1}}]" value="1" @if($answer->correct ==1 ) checked @endif>
                             </div>
                           </div>
                            @endforeach
@@ -352,7 +352,7 @@ function getboard(f){
         reader.readAsDataURL(output.files[0]);
     }
 }
-  let id = $('.rowanswers').length;
+  let id = $('.rowanswers').length == 0 ?  $('.rowanswers').length / 4 : 0;
   $("#click").click(function(){
     $("#section").append(` 
      <div id="s${id}"><div class="info">
