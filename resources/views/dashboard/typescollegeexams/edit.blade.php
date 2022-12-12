@@ -352,7 +352,7 @@ function getboard(f){
         reader.readAsDataURL(output.files[0]);
     }
 }
-  let id = $('.rowanswers').length == 0 ?  $('.rowanswers').length / 4 : 0;
+  let id = $('.rowanswers').length != 0 ?  $('.rowanswers').length / 4 : 0;
   $("#click").click(function(){
     $("#section").append(` 
      <div id="s${id}"><div class="info">
