@@ -180,7 +180,7 @@
                           </div>
                           </div>
                             @foreach($question->answers as $key1 => $answer)
-                   <div class="row">
+                   <div class="row rowanswers" >
                      
                             <div class="col-6">
                               <label>الاجابه 1</label>
@@ -189,7 +189,7 @@
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[{{$key}}][{{$key1}}]"value="0">
-                              <input type="checkbox" class="hello" name="correct[{{$key}}][{{$key1}}]" value="1" @if($answer->correct ==1 ) checked @endif>
+                              <input type="checkbox" class="hello{{$key1}}" name="correct[{{$key}}][{{$key1}}]" value="1" @if($answer->correct ==1 ) checked @endif>
                             </div>
                           </div>
                            @endforeach
@@ -352,7 +352,7 @@ function getboard(f){
         reader.readAsDataURL(output.files[0]);
     }
 }
-  let id = 1;
+  let id = $('.rowanswers').length;
   $("#click").click(function(){
     $("#section").append(` 
      <div id="s${id}"><div class="info">
@@ -396,7 +396,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][0]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][0]" value="1">
+                              <input type="checkbox" class="hello${id}" name="correct[${id}][0]" value="1">
                             </div>
                           </div><div class="row">
                             <div class="col-6">
@@ -406,7 +406,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][1]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][1]"  value="1">
+                              <input type="checkbox" class="hello${id}" name="correct[${id}][1]"  value="1">
                             </div>
                           </div><div class="row">
                             <div class="col-6">
@@ -416,7 +416,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][2]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][2]" value="1">
+                              <input type="checkbox" class="hello${id}" name="correct[${id}][2]" value="1">
                             </div>
                           </div><div class="row">
                             <div class="col-6">
@@ -426,7 +426,7 @@ function getboard(f){
                             <div class="col-1">
                                <label></label>
                                <input type="hidden" class="form-control" name="correct[${id}][3]" value="0">
-                              <input type="checkbox" class="form-control" name="correct[${id}][3]" value="1">
+                              <input type="checkbox" class="hello${id}" name="correct[${id}][3]" value="1">
                             </div>
                           </div>
                           <div class="row">
