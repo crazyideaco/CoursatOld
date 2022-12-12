@@ -264,7 +264,7 @@ $("body").on('click','input:checkbox', function() {
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
   if ($box.is(":checked")) {
-    
+    console.log($box.attr("class"));
     // the name of the box is retrieved using the .attr() method
     // as it is assumed and expected to be immutable
     var group = "input:checkbox[class='" + $box.attr("class") + "']";
