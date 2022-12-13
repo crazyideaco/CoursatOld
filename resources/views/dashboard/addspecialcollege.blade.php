@@ -569,9 +569,9 @@ console.log(id);
 
       });
     }
-  var id1 = 1;
+  var id = 1;
   $('#adds').click(function(){
-    $("#section").append(`<div class="row col-12" id="pre${id1}">
+    $("#section").append(`<div class="row col-12" id="pre${id}">
     <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
                                    <select name="video_id[]" class="form-control selectpicker"  required  >
@@ -591,10 +591,10 @@ console.log(id);
                                        </div>
   <div class="col-2">
         <div class="radio">
-  <label><input type="radio" name="paid[${id1}]" checked value="1"> مدفوع</label>
+  <label><input type="radio" name="paid[${id}]" checked value="1"> مدفوع</label>
 </div>
 <div class="radio">
-  <label><input type="radio" name="paid[${id1}]" value="0"> مجانى</label>
+  <label><input type="radio" name="paid[${id}]" value="0"> مجانى</label>
 </div>
            </div>
          <div class="col-2 mt-3">
@@ -603,12 +603,12 @@ console.log(id);
          <span id="adds" class="btn btn-danger" onclick="removes(${id})">حذف</span>
              </div>   
 </div>`);
-id1++;
+id++;
     $(".selectpicker").selectpicker();
 });
-function removes(id1){
-      $(`#pre${id1}`).remove();
-      id1--;
+function removes(id){
+      $(`#pre${id}`).remove();
+      id--;
     }
     
 </script>
