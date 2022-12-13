@@ -572,39 +572,9 @@ console.log(id);
   var id = 1;
   $('#adds').click(function(){
     console.log(id);
-    $("#section").append(`<div class="row col-12" 
-    id='pre${id}'>
-    <div class="form-group col-5">
-                                    <label>اسم الفيديو </label>
-                                   <select name="video_id[]" class="form-control selectpicker"  required  >
-                                       <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
-                                    @foreach($videos as $video)
-                                     <option value="{{$video->id}}">{{$video->name_ar}} </option>
-                                     @endforeach
-                                   </select>
-                                </div>
-                                  <div class="col-3 form-group">
-                                        <label>  الاسم</label>
-                               <input id="name" type="text" class="form-control" required name="name[]" value="{{old('name')}}"
-                               placeholder="الاسم">
-                                      @error('name')
-                                      <p style="color:red;">{{$message}}</p>
-                                      @enderror
-                                       </div>
-  <div class="col-2">
-        <div class="radio">
-  <label><input type="radio" name="paid[${id}]" checked value="1"> مدفوع</label>
-</div>
-<div class="radio">
-  <label><input type="radio" name="paid[${id}]" value="0"> مجانى</label>
-</div>
-           </div>
-         <div class="col-2 mt-3">
-           
-         
-         <span id="adds" class="btn btn-danger" onclick="removes(${id})">حذف</span>
-             </div>   
-</div>`);
+    $("#section").append(
+   
+);
 id++;
     $(".selectpicker").selectpicker();
 });
