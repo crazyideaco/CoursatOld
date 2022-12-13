@@ -278,7 +278,7 @@ span.btn{
     console.log(id);
     $("#section").append(`
     <div class="row col-12" 
-    id="pre">
+    id="pre${id}">
     <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
                                    <select name="video_id[]" class="form-control selectpicker"  required  >
