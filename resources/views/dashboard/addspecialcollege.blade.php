@@ -571,6 +571,7 @@ console.log(id);
     }
   var id = 1;
   $('#adds').click(function(){
+    console.log(id);
     $("#section").append(`<div class="row col-12" id="pre${id}">
     <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
