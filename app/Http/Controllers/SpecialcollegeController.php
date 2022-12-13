@@ -97,8 +97,8 @@ class SpecialcollegeController extends Controller
          $lessons = Lesson::where('center_id',auth()->user()->id)->get();
         $users = User::where('id',auth()->user()->id)->first()->doctors;
     }
-    $videos = VideosCollege::where("user_id",$type->doctor_id)->get();
-    dd($videos);
+    $videos = VideosCollege::where("user_id",$type->doctor_id)->get()->take(5);
+ 
      return view('dashboard.addspecialcollege')
      ->with('types',Type::all())->with('users',$users)->with('colleges',College::all())
      ->with('divisions',$divisions)->
