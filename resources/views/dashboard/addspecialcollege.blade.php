@@ -281,11 +281,11 @@ span.btn{
   $('#adds').click(function(){
     console.log(id);
     $("#section").append(`
-    <div class="row col-12" 
-    id="pre${id}">
+  
     <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
-                                   <select name="video_id[]" class="form-control selectpicker"  required 
+                                   <select name="video_id[]" 
+                                   class="form-control selectpicker"  required 
                                    style="height: 10px; overflow-y: scroll;"
         data-live-search="true"
         data-size="10" >
@@ -316,11 +316,9 @@ span.btn{
          
          <span id="adds" class="btn btn-danger" onclick="removes(${id})">حذف</span>
              </div>   
-</div>`);
+`);
 id++;
-$(".selectpicker").selectpicker({
-    "title": "Select Options"        
-}).selectpicker("render");
+    $(".selectpicker").selectpicker();
 });
 function removes(id){
       $(`#pre${id}`).remove();
