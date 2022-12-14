@@ -206,11 +206,7 @@ span.btn{
        <div class="row">
       <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
-                                   <select name="video_id[]" class="form-control selectpicker"
-                                   
-                                   style="height: 10px; overflow-y: scroll;"
-        data-live-search="true"
-        data-size="10" required  >
+                                   <select name="video_id[]" class="form-control selectpicker"  required  >
                                        <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
                                     @foreach($videos as $video)
                                      <option value="{{$video->id}}">{{$video->name_ar}} </option>
@@ -281,14 +277,11 @@ span.btn{
   $('#adds').click(function(){
     console.log(id);
     $("#section").append(`
-  
+    <div class="row col-12" 
+    id="pre${id}">
     <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
-                                   <select name="video_id[]" 
-                                   class="form-control selectpicker"  required 
-                                   style="height: 10px; overflow-y: scroll;"
-        data-live-search="true"
-        data-size="10" >
+                                   <select name="video_id[]" class="form-control"  required  >
                                        <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
                                     @foreach($videos as $video)
                                      <option value="{{$video->id}}">{{$video->name_ar}} </option>
@@ -316,7 +309,7 @@ span.btn{
          
          <span id="adds" class="btn btn-danger" onclick="removes(${id})">حذف</span>
              </div>   
-`);
+</div>`);
 id++;
     $(".selectpicker").selectpicker();
 });
