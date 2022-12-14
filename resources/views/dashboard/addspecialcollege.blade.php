@@ -318,7 +318,9 @@ span.btn{
              </div>   
 </div>`);
 id++;
-    $(".selectpicker").selectpicker();
+$(".selectpicker").selectpicker({
+    "title": "Select Options"        
+}).selectpicker("render");
 });
 function removes(id){
       $(`#pre${id}`).remove();
