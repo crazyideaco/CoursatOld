@@ -156,7 +156,7 @@ class TypeExamController extends Controller
     return view("dashboard.typeexams.edit")->with('id',$id)->with('exam',$exam)->with('questions',$questions)->with('privatequestions',$privatequestions);
   }public function updatetypeexam(Request $request,$id){
    // dd($request->all());
-   dd($request->question_image);
+  
    $exam =  TypeExam::where('id',$id)->first();
       $type = Type::where('id',$exam->type_id)->first();
      $exam->name = $request->name_ar;
