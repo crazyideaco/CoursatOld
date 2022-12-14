@@ -206,7 +206,8 @@ span.btn{
        <div class="row">
       <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
-                                   <select name="video_id[]" class="form-control selectpicker"  required  >
+                                   <select name="video_id[]" class="form-control selectpicker" 
+                                   data-live-search="true" required  >
                                        <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
                                     @foreach($videos as $video)
                                      <option value="{{$video->id}}">{{$video->name_ar}} </option>
@@ -281,7 +282,9 @@ span.btn{
     id="pre${id}">
     <div class="form-group col-5">
                                     <label>اسم الفيديو </label>
-                                   <select name="video_id[]" class="form-control"  required  >
+                                   <select name="video_id[]" class="form-control selectpicker"
+                                   data-live-search="true"
+                                   required  >
                                        <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
                                     @foreach($videos as $video)
                                      <option value="{{$video->id}}">{{$video->name_ar}} </option>
