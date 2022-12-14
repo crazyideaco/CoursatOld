@@ -102,7 +102,7 @@ class TypeExamController extends Controller
      $question->typeexam_id = $exam->id;
      $question->score = $request->score[$key1];
      $question->question_level = $request->question_level[$key1];
-         if($request->question_image[$key1])
+         if($request->question_image[$key1] &&  $request->question_image[$key1] =! null)
     {  if(file_exists($request->question_image[$key1])){
         $image = $request->question_image[$key1];
         $image->move('uploads' , time().$image->getClientOriginalName());
