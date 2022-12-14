@@ -158,7 +158,7 @@
                                <img src="{{asset('images/set-img.svg')}}" id="realimg" style="width:200px;height:200px;margin:2% 0">
                                      @endif
                     <br>
-                   <input id="ad" type="file" class="form-control ehabtalaat"  name="question_image[{{$key}}]" style="width:50px;height:50px;">
+                   <input id="ad" type="file" class="form-control ehabtalaat" value="{{$question->question_image}}" name="question_image[{{$key}}]" style="width:50px;height:50px;">
                             <label for="ad" class="ahmed">اضافة صوره</label>
                             @error('question_image')
                             <p style="color:red;">{{$message}}</p>
