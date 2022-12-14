@@ -159,6 +159,7 @@
                                      @endif
                     <br>
                    <input id="ad" type="file" class="form-control ehabtalaat" value="{{$question->question_image}}" name="question_image[{{$key}}]" style="width:50px;height:50px;">
+                   <input  type="hidden" value="{{$question->question_image}}" name="question_image[{{$key}}]" >
                             <label for="ad" class="ahmed">اضافة صوره</label>
                             @error('question_image')
                             <p style="color:red;">{{$message}}</p>
