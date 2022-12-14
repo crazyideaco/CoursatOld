@@ -155,7 +155,7 @@ class TypeExamController extends Controller
 
     return view("dashboard.typeexams.edit")->with('id',$id)->with('exam',$exam)->with('questions',$questions)->with('privatequestions',$privatequestions);
   }public function updatetypeexam(Request $request,$id){
-    dd($request->question_image);
+  
   
    $exam =  TypeExam::where('id',$id)->first();
       $type = Type::where('id',$exam->type_id)->first();
@@ -186,6 +186,8 @@ class TypeExamController extends Controller
         $image = $request->question_image[$key1];
         $image->move('uploads' , time().$image->getClientOriginalName());
         $question->question_image = time().$image->getClientOriginalName();
+             }else{
+              $question->question_image = $request->question_image[$key1];
              }
     } 
     $question->save();
