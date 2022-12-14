@@ -99,7 +99,8 @@ class SpecialcollegeController extends Controller
     }
     $videos = VideosCollege::where("user_id",$type->doctor_id)->select("name_ar","id")->get();//->take(200);
    foreach($videos as $video){
-    str_replace('`', '', $video->name_ar);
+    $video->name_ar = str_replace('`', '', $video->name_ar);
+    $video->save();
    }
      return view('dashboard.addspecialcollege')
      ->with('types',Type::all())->with('users',$users)->with('colleges',College::all())
