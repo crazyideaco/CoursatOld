@@ -80,6 +80,7 @@ class TypeExamController extends Controller
     $privatequestions = SubjectQuestion::where('public',0)->where('teacher_id',$type->user_id)->where("subjects_id",$type->subjects_id)->get();
     return view("dashboard.typeexams.create")->with('id',$id)->with('questions',$questions)->with('privatequestions',$privatequestions);
   }public function storetypeexam(Request $request,$id){
+    dd($request->question_image);
      $type = Type::where('id',$id)->first();
      $exam = new TypeExam;
      $exam->name = $request->name_ar;
