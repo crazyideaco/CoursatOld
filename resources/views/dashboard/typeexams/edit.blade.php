@@ -153,9 +153,9 @@
                             </div>
                                    <div class="col-12 text-center">
                                      @if($question->question_image)
-                                        <img src="{{asset('uploads/'.$question->question_image)}}" id="realimg" style="width:200px;height:200px;margin:2% 0">
+                                        <img src="{{asset('uploads/'.$question->question_image)}}" id="r{{$key}}"  style="width:200px;height:200px;margin:2% 0">
                                      @else
-                               <img src="{{asset('images/set-img.svg')}}" id="realimg" style="width:200px;height:200px;margin:2% 0">
+                               <img src="{{asset('images/set-img.svg')}}"  id="r{{$key}}" style="width:200px;height:200px;margin:2% 0">
                                      @endif
                     <br>
                    <input id="d{{$key}}" type="file" class="form-control ehabtalaat" 
