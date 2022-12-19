@@ -118,6 +118,7 @@ public function storevideo($id,Request $request){
    return response()->json(['errors' => $validator->errors()->all()]);
   }
      if($validator->passes()){
+      dd("4343");
   if(auth()->user() && auth()->user()->isAdmin == 'admin'){
        $video = new Video;
           $video->order_number = $request->order_number;
@@ -147,7 +148,7 @@ if($videoall > 0){
   $video->subtype_id = $subtype->id;
   $video->description_ar = $request->description_ar;
   $video->description_en = $request->description_en;
-  dd("4343");
+
 if($request->hasFile('url'))
  {
             $getID3 = new \getID3;
