@@ -176,7 +176,7 @@ $duration =  $file['playtime_seconds'];
   
    // $video->url = $this->upload_video($url);
     $time=time();
-   $url->move('disk1' , $time. '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
 //dd($path);
 $video->storage_type = 1;
@@ -297,7 +297,7 @@ $duration =  $file['playtime_seconds'];
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
        $time=time();
-   $url->move('disk1' , $time. '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
 
@@ -415,7 +415,7 @@ $duration =  $file['playtime_seconds'];
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
       $time=time();
-   $url->move('disk1' , $time. '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
         } 
@@ -590,7 +590,7 @@ $duration =  $file['playtime_seconds'];
 
       $url = $request->url;
       $time=time();
-   $url->move('disk1' , $time. '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
       $video->video_type_link = 1;
@@ -675,7 +675,7 @@ $duration =  $file['playtime_seconds'];
 
       $url = $request->url;
     $time=time();
-   $url->move('disk1' , $time. '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
       $video->video_type_link = 1;
@@ -757,7 +757,7 @@ $duration =  $file['playtime_seconds'];
  
       $url = $request->url;
   $time=time();
-   $url->move('disk1' , $time. '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
       $video->video_type_link = 1;
