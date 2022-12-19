@@ -91,9 +91,10 @@ class VideoController extends Controller
   ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id);
 }
 public function storevideo($id,Request $request){
- // $url = $request->url;
-  //$name = \Storage::disk('google')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
- //dd($name);
+  $url = $request->url;
+  $name = \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+
+ dd($name);
  
 
  //dd(\Storage::disk('google')->delete("1XBtzNFUYhgGsibOxILp1FBCiZiLNzjyl"));
