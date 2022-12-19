@@ -67,7 +67,7 @@ return [
         'disk1' => [
             'driver' => 'local',
             'root' => public_path() . '/disk1',
-            'url' =>> public_path() . '/disk1',
+            'url' => public_path() . '/disk1',
             'visibility' => 'public',
         ],
         // 'google' => [
