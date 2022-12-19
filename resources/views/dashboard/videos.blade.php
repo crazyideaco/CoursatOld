@@ -143,7 +143,7 @@
 						<td scope="col" class="text-center">{{$video->id}}</td>
                          <td scope="col" class="text-center">{{$video->name_ar}}</td>
                 <td scope="row" class="text-center">
-                    <video width="120" height="120" src="{{url('uploads/'. $video->url)}}" controls></video>
+                    <video width="120" height="120" src="{{ $video->url_link}}" controls></video>
              </td>
              <td scope="row" class='text-center'>
                @if($video->image)
