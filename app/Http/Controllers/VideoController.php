@@ -156,7 +156,8 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
   $video->size_video= $request->file('url')->getSize()/1024;
-     $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
+    //  $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
+     $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'disk1');
      $video->url = time(). '.'.$url->getClientOriginalExtension();
      $video->video_type_link = 1;
  } 
