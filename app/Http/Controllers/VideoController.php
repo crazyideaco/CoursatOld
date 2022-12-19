@@ -156,9 +156,9 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
   $video->size_video= $request->file('url')->getSize()/1024;
-     $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
+     $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-
+     $video->video_type_link = 1;
  } 
  if($request->hasFile('image'))
  {
@@ -233,9 +233,9 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
   $video->size_video= $request->file('url')->getSize()/1024;
-     $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
+     $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-
+     $video->video_type_link = 1;
 
  }  
  if($request->hasFile('image'))
@@ -311,10 +311,10 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
   $video->size_video= $request->file('url')->getSize()/1024;
-     $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
+     $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
 
-
+     $video->video_type_link = 1;
  } 
  if($request->hasFile('image'))
  {
@@ -439,9 +439,9 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
          $video->size_video= $request->file('url')->getSize()/1024;
-     $url->move('uploads' ,time(). '.'.$url->getClientOriginalExtension());
+     $url->move('disk1' ,time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-
+     $video->video_type_link = 1;
 
  } 
  if($request->hasFile('image'))
@@ -522,10 +522,10 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
          $video->size_video= $request->file('url')->getSize()/1024;
-     $url->move('uploads' ,time(). '.'.$url->getClientOriginalExtension());
+     $url->move('disk1' ,time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
 
-
+     $video->video_type_link = 1;
  }
  if($request->hasFile('image'))
  { if(public_path() . '/uploads/' . $video->image){
@@ -604,9 +604,9 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
          $video->size_video= $request->file('url')->getSize()/1024;
-     $url->move('uploads' ,time(). '.'.$url->getClientOriginalExtension());
+     $url->move('disk1' ,time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-
+     $video->video_type_link = 1;
 
  }
  if($request->hasFile('image'))

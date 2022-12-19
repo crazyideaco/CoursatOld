@@ -112,7 +112,7 @@
                                
                             <div class="col-6 text-center set-img">
                                       <video width="200" height="200" controls >
-              <source src="{{$video->url_video}}" id="video_here">
+              <source src="{{$video->url_link}}" id="video_here">
             Your browser does not support HTML5 video.
           </video>
          <!-- <div class="iframe_hide_poop">

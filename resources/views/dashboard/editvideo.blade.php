@@ -93,7 +93,7 @@
                             <div class="row">
                                          <div class="col-6 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
-              <source src="{{asset('uploads/'. $video->url)}}" id="video_here">
+              <source src="{{$video->url_link}}" id="video_here">
             Your browser does not support HTML5 video.
           </video>
           <br>

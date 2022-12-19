@@ -42,7 +42,7 @@ class VideocollegeResource extends JsonResource
 $duration_seconds = $video_file['playtime_seconds'];*/
            return [
            'id'         => $this->id,
-            'video_url' => $this->url_video_flutter,
+           'video_url' => $this->url_link ?? null,
            'image' => $this->image ? asset('uploads/'.$this->image) : null,
             'subject'=>$this->subjectscollege['name_ar'],
             'description'=>$this->description_ar,

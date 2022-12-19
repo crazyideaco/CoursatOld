@@ -25,7 +25,7 @@ class VideoResource extends JsonResource
 		
            return [
            'id'   => $this->id,
-            'video_url' => $this->url ? asset('uploads/'.$this->url) : null,
+            'video_url' => $this->url_link ?? null,//$this->url ? asset('uploads/'.$this->url) : null,
            'image' => $this->image ? asset('uploads/'.$this->image) : null,
             //'image'=> asset('uploads/'.$this->image),
             'subject'=>$this->subject->name_ar,
