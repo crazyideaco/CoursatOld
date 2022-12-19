@@ -91,10 +91,9 @@ class VideoController extends Controller
   ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id);
 }
 public function storevideo($id,Request $request){
-  $url = $request->url;
-  $name = \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
 
- dd($name);
+
+
  
 
  //dd(\Storage::disk('google')->delete("1XBtzNFUYhgGsibOxILp1FBCiZiLNzjyl"));
@@ -119,7 +118,7 @@ public function storevideo($id,Request $request){
    return response()->json(['errors' => $validator->errors()->all()]);
   }
      if($validator->passes()){
-      dd("4343");
+
   if(auth()->user() && auth()->user()->isAdmin == 'admin'){
        $video = new Video;
           $video->order_number = $request->order_number;
@@ -162,8 +161,8 @@ $duration =  $file['playtime_seconds'];
     //  $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
     //  $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'disk1');
 
-  
-     \Storage::disk('disk1')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
+   \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    //  \Storage::disk('disk1')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
      $video->video_type_link = 1;
  } 
