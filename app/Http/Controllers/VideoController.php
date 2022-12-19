@@ -147,6 +147,7 @@ if($videoall > 0){
   $video->subtype_id = $subtype->id;
   $video->description_ar = $request->description_ar;
   $video->description_en = $request->description_en;
+  dd("4343");
 if($request->hasFile('url'))
  {
             $getID3 = new \getID3;
@@ -159,7 +160,7 @@ $duration =  $file['playtime_seconds'];
     //  $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
     //  $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'disk1');
 
-    dd("4343");
+  
      \Storage::disk('disk1')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
      $video->video_type_link = 1;
