@@ -31,7 +31,7 @@ class VideogeneralResource extends JsonResource
        }
            return [
            'id'         => $this->id,
-            'video_url' => asset('uploads/'. $this->url),
+           'video_url' => $this->url_link ?? null,
             'image'=> asset('uploads/'. $this->image),
             // 'subject'=>$this->subjectscollege['name_ar'],
        /*     'description'=>$this->description_ar,

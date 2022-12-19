@@ -24,5 +24,11 @@ class VideosGeneral extends Model
       }public function center(){
          return $this->belongsTo(User::class,'center_id');
      }
+
+     public function getUrlLinkAttribute()
+     {
+       $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
+         return $this->url ? asset( $floder_name . "/" . $this->url) : '';
+     } 
       
 }
