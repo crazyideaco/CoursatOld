@@ -238,7 +238,7 @@ function activesubtype(id){
     });
     $.ajax({
        type:"get",
-       url: `activesubtype/${id}`,
+       url: `../activesubtype/${id}`,
          contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
