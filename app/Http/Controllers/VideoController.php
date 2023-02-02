@@ -667,12 +667,12 @@ else{
   }public function deletevideo($id){
     $video =  Video::where('id',$id)->first();
                 
-             if( public_path() . '/uploads/' . $video->intro){
+             if( public_path() . '/uploads/' . $video->image){
             $link1 = public_path() . '/uploads/' . $video->image;
                   File::delete($link1);
            }
-            if(public_path() . '/uploads/' . $video->intro){
-            $link1 = public_path() . '/uploads/' . $video->intro;
+            if(public_path() . '/uploads/' . $video->url){
+            $link1 = public_path() . '/uploads/' . $video->url;
                    File::delete($link1);}
        
            
@@ -720,5 +720,12 @@ else{
          $text .= '<option value="'.$video->id.'">'.$video->name_ar.'</option>';
      }
      return response()->json(['data' => $text]);
+ }public function delete_video_pdf($id){
+  $video =  Video::where('id',$id)->first();
+  if( public_path() . '/uploads/' . $video->pdf){
+    $link1 = public_path() . '/uploads/' . $video->pdf;
+          File::delete($link1);
+   }
+   return response(['status' => true]);
  }
 }
