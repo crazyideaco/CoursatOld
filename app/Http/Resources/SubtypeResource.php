@@ -39,7 +39,8 @@ if(auth()->user()->stutypes->pluck('id')->contains($this->type_id)){
               'part_paper' => $this->part_paper ? asset("uploads/".$this->part_paper) : '',
            'class_videos ' => VideoResource::collection($this->videos()->orderBy('order_number','asc')->get()),
           'notes' =>  $this->notes ? asset('uploads/'.$this->notes) : '',
-             'tags' => $this->tags->pluck('id')
+             'tags' => $this->tags->pluck('id'),
+             'allow' => $allow
          
             
         ];
