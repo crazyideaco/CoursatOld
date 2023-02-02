@@ -160,9 +160,9 @@
                              تفعيل
                              @endif
                          </span>
-                       <a class="btn btn-primary btn-sm mt-2" href="{{route('videoscollegeexams',$video->id)}}">
+                       <!-- <a class="btn btn-primary btn-sm mt-2" href="{{route('videoscollegeexams',$video->id)}}">
                           الامتحانات
-                         </a>
+                         </a> -->
 							                              @if(auth()->user()->hasPermission("videoscolleges-delete"))
 				    <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletevideoscollege('{{$video->id}}')" style="cursor:pointer;"> 
                  @endif
@@ -227,7 +227,7 @@
     });
     $.ajax({
        type:"get",
-       url: `activevideoco/${id}`,
+       url: `../activevideoco/${id}`,
          contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
