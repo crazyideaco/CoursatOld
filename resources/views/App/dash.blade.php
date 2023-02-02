@@ -561,6 +561,9 @@
                                         نتائج امتحانات الحصص </a>
                                        
                                     @endif
+                                    <a href="{{route('type_joins')}}" class="
+                              @if(request()->is('type_joins'))active @endif">
+                                        طلبات الانضمام</a>
                                     <a href="{{route('subjectquestionsscenter')}}" class="@if(request()->is('subjectquestionsscenter'))active @endif">
                                         بنك الاسئله</a>
                                 </div>
