@@ -132,6 +132,8 @@
                                         @error('board')
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
+                            <span class="btn btn-danger" style="width: 3rem;">حذف السبوره</span>
+
                            </div>
                 
                             </div>
