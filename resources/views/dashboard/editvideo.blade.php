@@ -112,7 +112,7 @@
                             @error('pdf')
                             <p style="color:red;">{{$message}}</p>
                             @enderror
-                            <button class="btn btn-danger" style="width: 3rem;">حذف pdf</button>
+                            <span class="btn btn-danger" style="width: 3rem;">حذف pdf</span>
                </div>
                            <div class="col-6 text-center set-img">
                                <img src="{{asset('uploads/'. $video->image)}}" id="realimg">
@@ -132,6 +132,8 @@
                                         @error('board')
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
+                            <span class="btn btn-danger" style="width: 3rem;">حذف السبوره</span>
+
                            </div>
                 
                             </div>
