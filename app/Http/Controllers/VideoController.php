@@ -727,5 +727,12 @@ else{
           File::delete($link1);
    }
    return response(['status' => true]);
+ }public function delete_video_board($id){
+  $video =  Video::where('id',$id)->first();
+  if( public_path() . '/uploads/' . $video->board){
+    $link1 = public_path() . '/uploads/' . $video->board;
+          File::delete($link1);
+   }
+   return response(['status' => true]);
  }
 }

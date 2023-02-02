@@ -538,7 +538,7 @@ function delete_video_board(sel){
    
      Swal.fire(
       'Deleted!',
-      'Your pdf has been deleted.',
+      'Your board has been deleted.',
       'success'
          )
        }
