@@ -170,7 +170,7 @@
                              تفعيل
                              @endif
                          </span>
-                          <a href="{{route('videoexams',$video->id)}}"  class="btn btn-success btn-sm mt-2" >الكويزات</a>
+                          <!-- <a href="{{route('videoexams',$video->id)}}"  class="btn btn-success btn-sm mt-2" >الكويزات</a> -->
                                             </td>
                                         </tr>                            
                      @endforeach
