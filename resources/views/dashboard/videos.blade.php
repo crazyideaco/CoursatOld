@@ -234,7 +234,7 @@
     });
     $.ajax({
        type:"get",
-       url: `../activevideo/${id}`,
+       url: `../../activevideo/${id}`,
          contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
