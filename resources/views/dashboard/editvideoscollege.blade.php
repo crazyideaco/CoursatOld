@@ -136,7 +136,9 @@
                                         @error('pdf')
                                         <div class="alert alert-danger">هذا الحقل مطلوب</div>
                                         @enderror
-                                       </div>
+                            <span class="btn btn-danger" onclick="delete_video_college_pdf({{$video->id}})">حذف pdf</span>
+                                      
+                                      </div>
                                        
                                        
                                        <div class="col-6 text-center set-img">
@@ -157,6 +159,8 @@
                                         @error('board')
                                         <div class="alert alert-danger">هذا الحقل مطلب</div>
                                         @enderror
+                            <span class="btn btn-danger" onclick="delete_video_college_board({{$video->id}})">حذف السبوره</span>
+
                            </div>
                 
                                         </div>
@@ -746,5 +750,89 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
       }
 <?php  }?>
     });
+</script>
+<script>
+  
+function delete_video_college_pdf(sel){
+    let id = sel;
+ 
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+     Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $.ajax({
+       type:"get",
+       url: `../delete_video_college_pdf/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+           if(result.status == true){
+   
+     Swal.fire(
+      'Deleted!',
+      'Your pdf has been deleted.',
+      'success'
+         )
+       }
+           }
+        
+    });
+    }
+   
+   
+  })
+}
+
+function delete_video_college_board(sel){
+    let id = sel;
+ 
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+     Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $.ajax({
+       type:"get",
+       url: `../delete_video_college_board/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+           if(result.status == true){
+   
+     Swal.fire(
+      'Deleted!',
+      'Your board has been deleted.',
+      'success'
+         )
+       }
+           }
+        
+    });
+    }
+   
+   
+  })
+}
 </script>
   @endsection

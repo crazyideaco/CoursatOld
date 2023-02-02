@@ -461,6 +461,10 @@ Route::get('editvideoscollege/{id}','VideosCollegeController@editvideoscollege')
 Route::post('updatevideoscollege/{id}','VideosCollegeController@updatevideoscollege')->name('updatevideoscollege');
 	Route::get('deletevideoscollege/{id}','VideosCollegeController@deletevideoscollege')->name('deletevideoscollege');
 Route::get('videoscolleges/{id}','VideosCollegeController@videoscolleges')->name('videoscolleges');
+
+Route::get('delete_video_college_pdf/{id}','VideosCollegeController@delete_video_college_pdf')->name('delete_video_college_pdf');
+Route::get('delete_video_college_board/{id}','VideosCollegeController@delete_video_college_board')->name('delete_video_college_board');
+
 //typecollege ajax
 Route::get('getdocsection/{id}','SectionController@getdocsection')->name('getdocsection');
 Route::get('getdocsubcollege/{id}','SubjectsCollegeController@getdocsubcollege')->name('getdocsubcollege');
