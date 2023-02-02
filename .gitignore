@@ -2,6 +2,8 @@
 /public/hot
 /public/storage
 /public/phpMyAdmin
+/public/uploads
+/public/disk1
 /storage/framework
 /storage/logs
 /storage/*.key
