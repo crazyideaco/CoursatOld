@@ -132,7 +132,7 @@
                                         @error('board')
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
-                            <span class="btn btn-danger" style="width:5rem;">حذف السبوره</span>
+                            <span class="btn btn-danger" onclick="delete_video_board({{$video->id}})">حذف السبوره</span>
 
                            </div>
                 
@@ -490,6 +490,47 @@ function delete_video_pdf(sel){
     $.ajax({
        type:"get",
        url: `../delete_video_pdf/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+           if(result.status == true){
+   
+     Swal.fire(
+      'Deleted!',
+      'Your pdf has been deleted.',
+      'success'
+         )
+       }
+           }
+        
+    });
+    }
+   
+   
+  })
+}
+
+function delete_video_board(sel){
+    let id = sel;
+ 
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+     Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $.ajax({
+       type:"get",
+       url: `../delete_video_board/${id}`,
    //    contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){

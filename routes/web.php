@@ -353,6 +353,7 @@ Route::get('videos/{id}','VideoController@videos')->name('videos');
   Route::post('storevideo/{id}','VideoController@storevideo')->name('storevideo');
 Route::post('updatevideo/{id}','VideoController@updatevideo')->name('updatevideo');
 Route::get('delete_video_pdf/{id}','VideoController@delete_video_pdf')->name('delete_video_pdf');
+Route::get('delete_video_board/{id}','VideoController@delete_video_board')->name('delete_video_board');
 
 Route::get('type_joins','TypeJoinController@index')->name('type_joins');
 Route::get('accept_type_join/{id}','TypeJoinController@accept_type_join')->name('accept_type_join');
