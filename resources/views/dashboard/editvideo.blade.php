@@ -112,7 +112,7 @@
                             @error('pdf')
                             <p style="color:red;">{{$message}}</p>
                             @enderror
-                            <span class="btn btn-danger" style="width: 3rem;">حذف pdf</span>
+                            <span class="btn btn-danger" onclick="delete_video_pdf({{$video->id}})" style="width: 5rem;">حذف pdf</span>
                </div>
                            <div class="col-6 text-center set-img">
                                <img src="{{asset('uploads/'. $video->image)}}" id="realimg">
@@ -132,7 +132,7 @@
                                         @error('board')
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
-                            <span class="btn btn-danger" style="width: 3rem;">حذف السبوره</span>
+                            <span class="btn btn-danger" style="width:5rem;">حذف السبوره</span>
 
                            </div>
                 
@@ -468,5 +468,46 @@ $("#ad2").change(function(){
   $source[0].src = URL.createObjectURL(this.files[0]);
   $source.parent()[0].load();
 });
+
+function delete_video_pdf(sel){
+    let id = sel;
+ 
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+     Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $.ajax({
+       type:"get",
+       url: `../delete_video_pdf/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+           if(result.status == true){
+   
+     Swal.fire(
+      'Deleted!',
+      'Your pdf has been deleted.',
+      'success'
+         )
+       }
+           }
+        
+    });
+    }
+   
+   
+  })
+}
 </script>
   @endsection
