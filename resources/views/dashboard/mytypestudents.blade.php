@@ -145,8 +145,7 @@
                
                       @endforeach
                       @endif
-                         </ul>
-                  </td>  
+                   
                
               
                @if($student->stutypescollege)
