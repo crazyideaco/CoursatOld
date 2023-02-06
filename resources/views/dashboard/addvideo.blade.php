@@ -86,7 +86,7 @@
                         <div class="row def">
                             <img src="{{asset('images/setting.svg')}}">
                             <h5>اضافه فيديو </h5>
-                        </div>
+                        </div> 
                       <form method="post" action="{{route('storevideo',$id)}}" enctype="multipart/form-data">
                         	@csrf
                             
