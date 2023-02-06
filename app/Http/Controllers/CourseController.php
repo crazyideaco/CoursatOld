@@ -384,7 +384,23 @@ class CourseController extends Controller
         ]);
         if ($validator->passes()) {
             $student = User::where('id', $request->student_id)->first();
-            $student->stutypescollege()->attach($request->type_id);
+            $student->stutypescollege()->sync($request->type_id);
+            return response()->json(['status' => true]);} else {
+            $msg = $validator->messages()->first();
+            return response()->json(['status' => false, 'message' => $msg]);
+        }
+    }
+    public function addtypecourse(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'type_id' => 'required',
+            'student_id' => 'required'], [
+            'type_id.required' => 'حقل الكورس مطلوب',
+            'student_id.required' => 'حقل الطالب مطلوب',
+        ]);
+        if ($validator->passes()) {
+            $student = User::where('id', $request->student_id)->first();
+            $student->stutypes()->sync($request->type_id);
             return response()->json(['status' => true]);} else {
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'message' => $msg]);
