@@ -418,8 +418,13 @@ class CourseController extends Controller
         if ($validator->passes()) {
             if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
                 $type = Type::where('id', $request->course_id)->first();
-
-                $type = $type->studentstype()->attach($request->student_id);
+                $students = [];
+                foreach($request->student_id as $student_id){
+                  if(!in_array($student_id,$type->studentstype->pluck("id")->toArray())){
+                    $students[]= $student_id;
+                  }
+                }
+                $type = $type->studentstype()->attach($students);
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 2) {
                 $type = Type::where('id', $request->course_id)->first();
@@ -434,19 +439,44 @@ class CourseController extends Controller
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
                 $type = TypesCollege::where('id', $request->course_id)->first();
-                $type = $type->studentscollege()->attach($request->student_id);
+
+                $students = [];
+                foreach($request->student_id as $student_id){
+                  if(!in_array($student_id,$type->studentscollege->pluck("id")->toArray())){
+                    $students[]= $student_id;
+                  }
+                }
+                $type = $type->studentscollege()->attach($students);
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 3) {
                 $type = TypesCollege::where('id', $request->course_id)->first();
-                $type = $type->studentscollege()->attach($request->student_id);
+                $students = [];
+                foreach($request->student_id as $student_id){
+                  if(!in_array($student_id,$type->studentscollege->pluck("id")->toArray())){
+                    $students[]= $student_id;
+                  }
+                }
+                $type = $type->studentscollege()->attach($students);
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3) {
                 $type = Course::where('id', $request->course_id)->first();
-                $type = $type->studentscourses()->attach($request->student_id);
+                $students = [];
+                foreach($request->student_id as $student_id){
+                  if(!in_array($student_id,$type->studentscourses->pluck("id")->toArray())){
+                    $students[]= $student_id;
+                  }
+                }
+                $type = $type->studentscourses()->attach($students);
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 4) {
                 $type = Course::where('id', $request->course_id)->first();
-                $type = $type->studentscourses()->attach($request->student_id);
+                $students = [];
+                foreach($request->student_id as $student_id){
+                  if(!in_array($student_id,$type->studentscourses->pluck("id")->toArray())){
+                    $students[]= $student_id;
+                  }
+                }
+                $type = $type->studentscourses()->attach($students);
                 return response()->json(['status' => true]);
             }
         } else {
