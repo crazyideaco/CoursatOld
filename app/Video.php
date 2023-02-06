@@ -24,6 +24,8 @@ class Video extends Model
     {
       $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
         return $this->url ? asset( $floder_name . "/" . $this->url) : '';
-    } 
+    }  public function type(){
+      return $this->belongsTo(Type::class,'type_id');
+  }
     
 }
