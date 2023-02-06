@@ -458,7 +458,9 @@ Route::get('deletelesson/{id}','LessonController@deletelesson')->name('deleteles
 
 //videoscollege
 Route::get('addvideoscollege/{id}','VideosCollegeController@addvideoscollege')->name('addvideoscollege');
+Route::get('addvideoscollegespecial/{id}','VideosCollegeController@addvideoscollegespecial')->name('addvideoscollegespecial');
 Route::post('storevideoscollege/{id}','VideosCollegeController@storevideoscollege')->name('storevideoscollege');
+Route::post('storevideoscollegespecial/{id}','VideosCollegeController@storevideoscollegespecial')->name('storevideoscollegespecial');
 Route::get('editvideoscollege/{id}','VideosCollegeController@editvideoscollege')->name('editvideoscollege');
 Route::post('updatevideoscollege/{id}','VideosCollegeController@updatevideoscollege')->name('updatevideoscollege');
 	Route::get('deletevideoscollege/{id}','VideosCollegeController@deletevideoscollege')->name('deletevideoscollege');

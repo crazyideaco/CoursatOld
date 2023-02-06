@@ -900,4 +900,290 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
    }
    return response(['status' => true]);
  }
+ public function addvideoscollegespecial($id){
+  if(auth()->user() && auth()->user()->isAdmin == 'admin'){
+    $divisions = Division::all();
+    $sections = Section::all();
+    $subcolleges = SubjectsCollege::all();
+    $typescolleges = TypesCollege::all();
+    $lessons = Lesson::all();
+     $users =   User::where('is_student',3)->get();
+}elseif(Auth::user() &&Auth::user()->is_student == 3){
+             $dd =   \App\Doctor_Division::where('doctor_id',Auth::user()->id)->pluck('division_id')->toArray();
+             $divisions = \App\Division::whereIn('id',$dd)->get();
+             $ds =   \App\Doctor_Section::where('doctor_id',Auth::user()->id)->pluck('section_id')->toArray();
+             $sections = \App\Section::whereIn('id',$ds)->get();
+             $dg =    \App\Doctor_Subcollege::where('doctor_id',Auth::user()->id)->pluck('subcollege_id')->toArray();
+             $subcolleges = \App\SubjectsCollege::whereIn('id',$dg)->get();
+    $typescolleges = TypesCollege::where('doctor_id',auth()->user()->id)->get();
+     $lessons = Lesson::where('doctor_id',auth()->user()->id)->get();
+     $users = '';
+}elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
+    $divisions = Division::all();
+    $sections = Section::all();
+    $subcolleges = SubjectsCollege::all();
+    $typescolleges = TypesCollege::where('center_id',Auth::user()->id)->get();
+     $lessons = Lesson::where('center_id',auth()->user()->id)->get();
+    $users = User::where('id',auth()->user()->id)->first()->doctors;
+    if(sizeof($users)<0){
+      $users =   User::all();
+    }
+}
+$lesson = Lesson::where('doctor_id',$id)->firstOrFail();
+
+$videos = VideosCollege::where("user_id",$lesson->doctor_id)->select("name_ar","id")->get();
+ return view('dashboard.addvideoscollegespecial')
+ ->with('types',Type::all())->with('users',$users)->with('colleges',College::all())
+ ->with('divisions',$divisions)->
+ with('sections',$sections)->with('subcolleges',$subcolleges)->with('typescolleges',$typescolleges)
+ ->with('lessons',$lessons)->with('universities',University::all())->with('id',$id);
+}
+public function storevideoscollegespecial($id,Request $request){
+
+   
+  $special_video = VideosCollege::where("id",$request->video_id)->first();
+$lesson = Lesson::where('id',$id)->first();
+     $video = new VideosCollege;
+     $video->order_number = $request->order_number;
+     $video->video_type_link = 1;
+     $video->url = $special_video->url;
+$video->seconds = $special_video->seconds;
+$video->original = 0;
+ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
+ $video->user_id = $lesson->doctor_id;
+ $video->name_ar = $request->name_ar;
+ $video->name_en = $request->name_en;
+  $video->college_id = $lesson->college_id;
+  $video->university_id = $lesson->university_id;
+
+
+ $video->division_id = $lesson->division_id;
+ $video->section_id = $lesson->section_id;
+ $video->subjectscollege_id = $lesson->subjectscollege_id;
+ $video->typescollege_id = $lesson->typescollege_id;
+ $video->lesson_id = $lesson->id;
+ $video->description_en = $request->description_en;
+ $video->description_ar = $request->description_ar;
+
+if($request->hasFile('image'))
+{
+    $image = $request->image;
+    $image->move('uploads' , time().$image->getClientOriginalName());
+    $video->image = time().$request->image->getClientOriginalName();
+}
+   if($request->hasFile('pdf'))
+{
+    $pdf = $request->pdf;
+$pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
+}
+  if($request->hasFile('board'))
+{
+    $board = $request->board;
+    $board->move('uploads' , time().$board->getClientOriginalName());
+    $video->board = time().$request->board->getClientOriginalName();
+}
+  if($request->pay){
+ $video->paid=  $request->pay; 
+}else{
+   $video->paid =  0; 
+ }
+
+    $video->save();
+    $students = $lesson->typescollege->studentscollege; 
+    foreach($students as $user){
+      $not = new Notification;
+      $text = 'لديك فيدو جديد فى كورس ' . $lesson->typescollege->name_ar;
+  $not->title = 'اشعار جيد';
+   $not->text = $text;
+  $not->user_id = $user->id;
+  $not->save();
+  $to = $user->device_token;
+       $data = [
+          "to" =>$to,
+          'notification'=>[
+              'title' => $not->title,
+              'body' => $not->text
+              ],
+          "data" =>[
+             'title' => $not->title,
+              'body' => $not->text,
+              "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+              'type' => 'general'
+              ], 
+      ];
+   $dataString = json_encode($data);
+      $headers = [
+          'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
+          'Content-Type: application/json',
+      ];
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+    $result=curl_exec($ch);
+          }
+             return response()->json(['success' => 'video uploaded']);
+    
+ }
+ elseif(Auth::user() &&Auth::user()->is_student == 3){
+  $video->user_id = auth()->user()->id;
+  $video->college_id = $lesson->college_id;
+      $video->name_ar = $request->name_ar;
+ $video->name_en = $request->name_en;
+
+
+
+ $video->division_id = $lesson->division_id;
+ $video->section_id = $lesson->section_id;
+ $video->subjectscollege_id = $lesson->subjectscollege_id;
+ $video->typescollege_id = $lesson->typescollege_id;
+ $video->lesson_id = $lesson->id;
+ $video->description_en = $request->description_en;
+ $video->description_ar = $request->description_ar;
+
+if($request->hasFile('image'))
+{
+    $image = $request->image;
+    $image->move('uploads' , time().$image->getClientOriginalName());
+    $video->image = time().$request->image->getClientOriginalName();
+}
+   if($request->hasFile('pdf'))
+{
+    $pdf = $request->pdf;
+$pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
+}
+  if($request->hasFile('board'))
+{
+    $board = $request->board;
+    $board->move('uploads' , time().$board->getClientOriginalName());
+    $video->board = time().$request->board->getClientOriginalName();
+}
+ if($request->pay){
+ $video->paid=  $request->pay; 
+}else{
+   $video->paid =  0; 
+ }
+
+    $video->save();
+    $students = $lesson->typescollege->studentscollege; 
+    foreach($students as $user){
+      $not = new Notification;
+      $text = 'لديك فيديو جديد فى كورس ' . $lesson->typescollege->name_ar;
+  $not->title = 'اشعار جديد';
+   $not->text = $text;
+  $not->user_id = $user->id;
+  $not->save();
+  $to = $user->device_token;
+       $data = [
+          "to" =>$to,
+          'notification'=>[
+              'title' => $not->title,
+              'body' => $not->text
+              ],
+          "data" =>[
+             'title' => $not->title,
+              'body' => $not->text,
+              "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+              'type' => 'general'
+              ], 
+      ];
+   $dataString = json_encode($data);
+      $headers = [
+          'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
+          'Content-Type: application/json',
+      ];
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+    $result=curl_exec($ch);
+          }
+             return response()->json(['success' => 'video uploaded']);
+
+ }
+    elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
+  $video->center_id = auth()->user()->id;
+   $video->user_id = $lesson->doctor_id;
+  $video->college_id = $lesson->college_id;
+     $video->name_ar = $request->name_ar;
+ $video->name_en = $request->name_en;
+    
+
+ $video->division_id = $lesson->division_id;
+ $video->section_id = $lesson->section_id;
+ $video->subjectscollege_id = $lesson->subjectscollege_id;
+ $video->typescollege_id = $lesson->typescollege_id;
+ $video->lesson_id = $lesson->id;
+ $video->description_en = $request->description_en;
+ $video->description_ar = $request->description_ar;
+
+if($request->hasFile('image'))
+{
+    $image = $request->image;
+    $image->move('uploads' , time().$image->getClientOriginalName());
+    $video->image = time().$request->image->getClientOriginalName();
+}
+   if($request->hasFile('pdf'))
+{
+    $pdf = $request->pdf;
+$pdf->move('uploads' , time() .'.'.$pdf->getClientOriginalExtension());
+$video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
+}
+  if($request->hasFile('board'))
+{
+    $board = $request->board;
+    $board->move('uploads' , time().$board->getClientOriginalName());
+    $video->board = time().$request->board->getClientOriginalName();
+}
+ if($request->pay){
+ $video->paid=  $request->pay; 
+}else{
+   $video->paid =  0; 
+ }
+
+    $video->save();
+    $students = $lesson->typescollege->studentscollege; 
+    foreach($students as $user){
+      $not = new Notification;
+      $text = 'لديك فيديو جيد فى كورس ' . $lesson->typescollege->name_ar;
+  $not->title = 'اشعار جديد';
+   $not->text = $text;
+  $not->user_id = $user->id;
+  $not->save();
+  $to = $user->device_token;
+       $data = [
+          "to" =>$to,
+          'notification'=>[
+              'title' => $not->title,
+              'body' => $not->text
+              ],
+          "data" =>[
+             'title' => $not->title,
+              'body' => $not->text,
+              "click_action" => "FLUTTER_NOTIFICATION_CLICK",
+              'type' => 'general'
+              ], 
+      ];
+   $dataString = json_encode($data);
+      $headers = [
+          'Authorization: key=AAAANEwk9ss:APA91bEuBLaq1kPuYH94OKvkO4EU_-VMrtmnj63KDB-yioNibhvl7bKbJBEQy6IvnuLyMT6AhoBi83vYe5Ds4-UaEzIyZrL9WO7ObUfTk8dIXFMih3upFFjLvPECl2ApuHe_LL2TKu6g',
+          'Content-Type: application/json',
+      ];
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+    $result=curl_exec($ch);
+          }
+    return response()->json(['success' => 'video uploaded']);
+      }
+    }
 }
