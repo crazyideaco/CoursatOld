@@ -284,9 +284,9 @@ class CourseController extends Controller
     {
         $user = User::where('id', $id)->first();
         if (Auth::user() && Auth::user()->is_student == 2) {
-            $types = auth()->user()->types->where('years_id', $user->year_id);
+            $types = auth()->user()->types()->where('years_id', $user->year_id)->whereNotIn("id",$user->stutypes->pluck("id")->toArray())->get();
         } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
-            $types = auth()->user()->centertypes->where('years_id', $user->year_id);
+            $types = auth()->user()->centertypes()->where('years_id', $user->year_id)->whereNotIn("id",$user->stutypes->pluck("id")->toArray())->get();
         }
         $text = '';
         $text .= '<option value="0" disabled="disabled" selected="selected">اختر كورس</option>';
@@ -366,7 +366,7 @@ class CourseController extends Controller
         if (Auth::user() && Auth::user()->is_student == 3) {
             $types = auth()->user()->typescollege()->where('section_id', $user->section_id)->whereNotIn("id",$user->stutypescollege->pluck("id")->toArray())->get();}
              elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
-            $types = auth()->user()->centertypescollege->where('section_id', $user->section_id);
+            $types = auth()->user()->centertypescollege()->where('section_id', $user->section_id)->whereNotIn("id",$user->stutypescollege->pluck("id")->toArray())->get();
         }
         $text = '';
         $text .= '<option value="0" disabled="disabled" selected="selected">اختر كورس</option>';

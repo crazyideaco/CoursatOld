@@ -545,9 +545,7 @@
                                         طلاب كورساتى </a>
                                     <a href="{{route('userstudents')}}" class="@if(request()->is('userstudents'))active @endif">
                                         الطلاب </a>
-                                        <a href="{{route('type_joins')}}" class="
-                              @if(request()->is('type_joins'))active @endif">
-                                        طلبات الانضمام</a>
+                            
                                     @endif
                                     @if(Auth::user() && Auth::user()->isAdmin == 'admin')
 
