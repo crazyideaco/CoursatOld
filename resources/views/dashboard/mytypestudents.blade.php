@@ -147,7 +147,7 @@
                       @endif
                          </ul>
                   </td>  
-                  @elseif($student->university_id != null)
+               
               
                @if($student->stutypescollege)
                       @foreach($student->stutypescollege as $typecollege)
