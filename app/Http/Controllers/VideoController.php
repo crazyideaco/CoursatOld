@@ -671,9 +671,11 @@ else{
             $link1 = public_path() . '/uploads/' . $video->image;
                   File::delete($link1);
            }
+           if($video->original == 1){
             if(public_path() . '/uploads/' . $video->url){
             $link1 = public_path() . '/uploads/' . $video->url;
                    File::delete($link1);}
+            }
        
            
                        
@@ -757,7 +759,7 @@ else{
      $years = auth()->user()->years;
      $subtypes = Subtype::where('user_id',auth()->user()->id)->get();
  }
- $videos = Video::where("user_id",$subtype->user_id)->get();
+ $videos = Video::where("user_id",$subtype->user_id)->select("name_ar","id")->get();
 return view('dashboard.addvideospecial')->with('years',$years)
 ->with('subjects',$subjects)
 ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id)->with('videos',$videos);
