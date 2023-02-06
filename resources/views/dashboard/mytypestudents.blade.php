@@ -121,8 +121,8 @@
                      <th scope="col" class="text-center">الاسم</th>
 					<th scope="col" class="text-center">الكود</th>
                     <th scope="col" class="text-center">رقم الهاتف</th>
-					<th scope="col" class="text-center">المحافظه</th>
-					<th scope="col" class="text-center">المدينه</th>
+					<th scope="col" class="text-center">الكورسات</th>
+					{{-- <th scope="col" class="text-center">المدينه</th> --}}
                 <!--  <th scope="col" class="text_center">السنه</th>-->
                 <!--     <th scope="col" class="text-center">الاعدادات</th>-->
                 </tr>
@@ -137,15 +137,27 @@
 				<td scope="col" class='text-center'>{{$student->code}}</td>
                 <td scope="col" class='text-center'>{{$student->phone}}</td>
              <td scope="col" class="text-center">
-                @if($student->state)     
-                   {{$student->state['state']}}
-				 @endif
+              
+               <ul>
+               @if($student->stutypes)
+                      @foreach($student->stutypes as $type)
+                <li style="font-size:14px;">{{$type->name_ar}}</li>
+               
+                      @endforeach
+                      @endif
+                         </ul>
+                  </td>  
+                  @elseif($student->university_id != null)
+              
+               @if($student->stutypescollege)
+                      @foreach($student->stutypescollege as $typecollege)
+                <li style="font-size:14px;">{{$typecollege->name_ar}}</li>
+               
+                      @endforeach
+                      @endif
+                     
                   </td>   
-						<td scope="col" class="text-center">
-                     @if($student->city)
-                   {{$student->city['city']}}
-						@endif
-                  </td>     
+					   
 						
 					<!--	<td class="text-center">
                                <span class="btn btn-success btn-sm" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
