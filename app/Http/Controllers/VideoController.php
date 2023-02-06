@@ -777,7 +777,9 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
 $video->user_id = $subtype->user_id;
  $video->name_ar = $request->name_ar;
  $video->name_en = $request->name_en;
-
+$video->url = $special_video->url;
+$video->seconds = $special_video->seconds;
+$video->original = 0;
   $video->subject_id = $subtype->subjects_id;
 $video->year_id = $subtype->years_id;
 $video->type_id = $subtype->type_id;
@@ -824,7 +826,9 @@ $video->type_id = $subtype->type_id;
 $video->subtype_id = $subtype->id;
 $video->description_ar = $request->description_ar;
 $video->description_en = $request->description_en;
-
+$video->url = $special_video->url;
+$video->seconds = $special_video->seconds;
+$video->original = 0;
 if($request->hasFile('image'))
 {
    $image = $request->image;
@@ -864,7 +868,9 @@ $video->type_id = $subtype->type_id;
 $video->subtype_id = $subtype->id;
 $video->description_ar = $request->description_ar;
 $video->description_en = $request->description_en;
-
+$video->url = $special_video->url;
+$video->seconds = $special_video->seconds;
+$video->original = 0;
 if($request->hasFile('image'))
 {
    $image = $request->image;
