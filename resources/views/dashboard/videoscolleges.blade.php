@@ -105,7 +105,7 @@
                                 </div>
 
                                 <div class="col-5">
-                                    <button class="btn" style="width:100%">
+                                    <button class="btn" style="width:100% !important;">
                                         <a href="{{route('addvideoscollegespecial',$id)}}">>  <span><i class="fas fa-plus-circle"></i></span>
                                         + اضافة فيديو من حصص سابقة 
                                         </a>
