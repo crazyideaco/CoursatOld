@@ -100,13 +100,13 @@
 
                                 </div>
 
-                                <div class="col-3">
+                                <div class="col-4">
 
                                 </div>
 
                                 
-                                <div class="col-6">
-                                    <button class="btn" >
+                                <div class="col-5">
+                                    <button class="btn" style="100%">
                                       <a href="{{route('addvideospecial',$id)}}">  <span><i class="fas fa-plus-circle"></i></span>
                                         + اضافة فيديو من حصص سابقة 
                                         </a>
