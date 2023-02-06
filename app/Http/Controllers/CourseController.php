@@ -337,7 +337,7 @@ class CourseController extends Controller
     {
         $user = User::where('id', $id)->first();
         if (Auth::user() && Auth::user()->is_student == 3) {
-            $types = auth()->user()->typescollege->where('section_id', $user->section_id);}
+            $types = auth()->user()->typescollege()->where('section_id', $user->section_id)->whereNotIn("id",$user->stutypescollege->pluck("id")->toArray())->get();}
              elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
             $types = auth()->user()->centertypescollege->where('section_id', $user->section_id);
         }
