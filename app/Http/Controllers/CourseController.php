@@ -329,13 +329,44 @@ $msg = $validator->messages()->first();
 return response()->json(['status' => false,'message' => $msg]);
 	 }
  }public function givetypecollegecourse(){
-	if(Auth::user() &&Auth::user()->is_student == 3){
-        $students = auth()->user()->centerstudents;
-		$types = auth()->user()->typescollege;
-      }elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
-        $students = auth()->user()->centerstudents;
-		$types = auth()->user()->centertypescollege;
-      }return view('dashboard.givetypecollegecourse')->with('students',$students)->with('types',$types);
+  if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){ 
+    $types1 = auth()->user()->centertypes->pluck('id')->toArray();
+  $types = auth()->user()->centertypes;
+  $students_ids = Student_Type::whereIn('type_id',$types1)->get()->pluck('student_id')->unique();
+  $students1 = User::whereIn('id',$students_ids)->get();
+  $students = $students1->merge(auth()->user()->centerstudents);
+    }else if (Auth::user() && Auth::user()->is_student == 2 ){
+            $types1 = auth()->user()->types->pluck('id')->toArray();
+  $types = auth()->user()->types;
+    $students_ids = Student_Type::whereIn('type_id',$types1)->get()->pluck('student_id')->unique();
+  $students1 = User::whereIn('id',$students_ids)->get();
+   $students = $students1->merge(auth()->user()->centerstudents);
+    } else if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
+    $types1 = auth()->user()->centertypescollege->pluck('id')->toArray();
+     $types = auth()->user()->centertypescollege;
+  $students_ids = Student_Typecollege::whereIn('typecollege_id',$types1)->get()->pluck('student_id')->unique();
+  $students1= User::whereIn('id',$students_ids)->get();
+   $students = $students1->merge(auth()->user()->centerstudents);
+    }else if (Auth::user() && Auth::user()->is_student == 3 ){
+             $types1 = auth()->user()->typescollege->pluck('id')->toArray();
+    $types = auth()->user()->typescollege;
+    $students_ids = Student_Typecollege::whereIn('typecollege_id',$types1)->get()->pluck('student_id')->unique();
+  $students1 = User::whereIn('id',$students_ids)->get();
+  $students = $students1->merge(auth()->user()->centerstudents);
+    }else if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3){
+    $types1 = auth()->user()->centercourses->pluck('id')->toArray();
+   $types = auth()->user()->centercourses;
+  $students_ids = Student_Course::whereIn('course_id',$types1)->get()->pluck('student_id')->unique();
+  $students1 = User::whereIn('id',$students_ids)->get();
+  $students = $students1->merge(auth()->user()->centerstudents);
+    }else if (Auth::user() && Auth::user()->is_student == 4 ){
+            $types1 = auth()->user()->courses->pluck('id')->toArray();
+            $types = auth()->user()->courses;
+    $students_ids = Student_Course::whereIn('course_id',$types1)->get()->pluck('student_id')->unique();
+  $students1 = User::whereIn('id',$students_ids)->get();
+    $students = $students1->merge(auth()->user()->centerstudents);
+    }
+    return view('dashboard.givetypecollegecourse')->with('students',$students)->with('types',$types);
  }public function gettypecollegecourse($id){
 	 $user = User::where('id',$id)->first();
 	 if(Auth::user() &&Auth::user()->is_student == 2){

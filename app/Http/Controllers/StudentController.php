@@ -225,7 +225,7 @@ $students = $students1->merge(auth()->user()->centerstudents);
     $status =2;
     return view("dashboard.courses_students.studentstype",compact("students","id","status"));;
   }public function userstudents(){
-         if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){
+         if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){ 
       $types1 = auth()->user()->centertypes->pluck('id')->toArray();
     $types = auth()->user()->centertypes;
 	  $students_ids = Student_Type::whereIn('type_id',$types1)->get()->pluck('student_id')->unique();
