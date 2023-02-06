@@ -818,9 +818,11 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
               if(public_path() . '/uploads/' . $video->pdf){
                 $link1 = public_path() . '/uploads/' . $video->pdf;
                       File::delete($link1);}
+                      if($video->original == 1){
                       if(public_path() . '/uploads/' . $video->url){
                 $link1 = public_path() . '/uploads/' . $video->url;
                       File::delete($link1);}
+                      }
       $video->delete();
        return response()->json(['status' => true]);
  } public function videoscolleges($id){
