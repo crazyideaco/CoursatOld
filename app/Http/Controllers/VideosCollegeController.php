@@ -929,7 +929,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       $users =   User::all();
     }
 }
-$lesson = Lesson::where('doctor_id',$id)->firstOrFail();
+$lesson = Lesson::where('id',$id)->firstOrFail();
 
 $videos = VideosCollege::where("user_id",$lesson->doctor_id)->select("name_ar","id")->get();
  return view('dashboard.addvideoscollegespecial')
