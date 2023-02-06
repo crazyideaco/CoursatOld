@@ -936,7 +936,7 @@ $videos = VideosCollege::where("user_id",$lesson->doctor_id)->select("name_ar","
  ->with('types',Type::all())->with('users',$users)->with('colleges',College::all())
  ->with('divisions',$divisions)->
  with('sections',$sections)->with('subcolleges',$subcolleges)->with('typescolleges',$typescolleges)
- ->with('lessons',$lessons)->with('universities',University::all())->with('id',$id);
+ ->with('lessons',$lessons)->with('universities',University::all())->with('id',$id)->with("videos",$videos);
 }
 public function storevideoscollegespecial($id,Request $request){
 
