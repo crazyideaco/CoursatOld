@@ -735,4 +735,162 @@ else{
    }
    return response(['status' => true]);
  }
+
+ public function addvideospecial($id){
+  if(Auth::user() && Auth::user()->isAdmin == 'admin'){
+  $users =  User::where('is_student',2)->get();
+  $types= Type::all();
+  $years =Year::all();
+  $subjects = Subject::all();
+  $subtypes = Subtype::all();
+}else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1 ){
+       $users =  User::where('id',Auth::user()->id)->first()->teachers;
+       $types= Type::where('center_id',Auth::user()->id)->get();
+       $years =Year::all();
+  $subjects = Subject::all();
+  $subtypes = Subtype::where('center_id',auth()->user()->id)->get();
+ }else if(Auth::user() && Auth::user()->is_student == 2){
+        $users = "";
+     $subjects = auth()->user()->subjects;
+     $types= Type::where('user_id',Auth::user()->id)->where('center_id',null)->get();
+     $years = auth()->user()->years;
+     $subtypes = Subtype::where('user_id',auth()->user()->id)->get();
+ }
+ $videos = Video::where("user_id",$type->user_id)->get();
+return view('dashboard.addvideo')->with('years',$years)
+->with('subjects',$subjects)
+->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id)->with('videos',$videos);
+}
+public function storevideospecial($id,Request $request){
+
+
+
+$subtype = Subtype::where('id',$id)->first();
+$special_video = Video::where('id',$request->video_id)->first();
+ 
+  
+
+if(auth()->user() && auth()->user()->isAdmin == 'admin'){
+     $video = new Video;
+        $video->order_number = $request->order_number;
+$video->user_id = $subtype->user_id;
+ $video->name_ar = $request->name_ar;
+ $video->name_en = $request->name_en;
+
+  $video->subject_id = $subtype->subjects_id;
+$video->year_id = $subtype->years_id;
+$video->type_id = $subtype->type_id;
+$video->subtype_id = $subtype->id;
+$video->description_ar = $request->description_ar;
+$video->description_en = $request->description_en;
+
+if($request->hasFile('image'))
+{
+   $image = $request->image;
+   $image->move('uploads' , time().$image->getClientOriginalName());
+   $video->image = time().$request->image->getClientOriginalName();
+}
+if($request->hasFile('pdf'))
+{
+   $pdf = $request->pdf;
+   $pdf->move('uploads' , time().$pdf->getClientOriginalName());
+   $video->pdf = time().$request->pdf->getClientOriginalName();
+}
+  if($request->hasFile('board'))
+{
+   $board = $request->board;
+   $board->move('uploads' ,time(). $board->getClientOriginalName());
+   $video->board = time().$request->board->getClientOriginalName();
+}
+if($request->pay){
+$video->paid=  $request->pay; 
+}
+
+   $video->save();
+  return response()->json(['success' => 'video uploaded']);
+
+   
+}elseif(Auth::user() &&Auth::user()->is_student == 2){
+     $video = new Video;
+        $video->order_number = $request->order_number;
+       $video->user_id = auth()->user()->id;
+        $video->name_ar = $request->name_ar;
+ $video->name_en = $request->name_en;
+
+         $video->subject_id = $subtype->subjects_id;
+    $video->year_id = $subtype->years_id;
+$video->type_id = $subtype->type_id;
+$video->subtype_id = $subtype->id;
+$video->description_ar = $request->description_ar;
+$video->description_en = $request->description_en;
+
+if($request->hasFile('image'))
+{
+   $image = $request->image;
+   $image->move('uploads' , time().$image->getClientOriginalName());
+   $video->image = time().$request->image->getClientOriginalName();
+}
+if($request->hasFile('pdf'))
+{
+   $pdf = $request->pdf;
+   $pdf->move('uploads' , time().$pdf->getClientOriginalName());
+   $video->pdf = time().$request->pdf->getClientOriginalName();
+}
+  if($request->hasFile('board'))
+{
+   $board = $request->board;
+   $board->move('uploads' ,time(). $board->getClientOriginalName());
+   $video->board = time().$request->board->getClientOriginalName();
+}
+if($request->pay){
+$video->paid=  $request->pay; 
+}
+
+   $video->save();
+      return response()->json(['status' => true,'success' => 'video uploaded']);
+
+}elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){
+      $video = new Video;
+         $video->order_number = $request->order_number;
+      $video->center_id = auth()->user()->id;
+$video->user_id = $subtype->user_id;
+ $video->name_ar = $request->name_ar;
+ $video->name_en = $request->name_en;
+
+         $video->subject_id = $subtype->subjects_id;
+ $video->year_id = $subtype->years_id;
+$video->type_id = $subtype->type_id;
+$video->subtype_id = $subtype->id;
+$video->description_ar = $request->description_ar;
+$video->description_en = $request->description_en;
+
+if($request->hasFile('image'))
+{
+   $image = $request->image;
+   $image->move('uploads' , time().$image->getClientOriginalName());
+   $video->image = time().$request->image->getClientOriginalName();
+}
+if($request->hasFile('pdf'))
+{
+   $pdf = $request->pdf;
+   $pdf->move('uploads' , time().$pdf->getClientOriginalName());
+   $video->pdf = time().$request->pdf->getClientOriginalName();
+}
+  if($request->hasFile('board'))
+{
+   $board = $request->board;
+   $board->move('uploads' ,time(). $board->getClientOriginalName());
+   $video->board = time().$request->board->getClientOriginalName();
+}
+if($request->pay){
+$video->paid=  $request->pay; 
+}
+
+   $video->save();
+ return response()->json(['status' => true,'success' => 'video uploaded']);
+
+
+}
+ 
+}
 }
