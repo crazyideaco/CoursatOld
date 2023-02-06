@@ -93,7 +93,7 @@
 							
                             <div class="row">
                                          <div class="col-6 text-center mb-5 set-img">
-
+                                            <div class="form-group">
                         <label>اسم الفيديو </label>
                     <select name="video_id" class="form-control selectpicker"  required  >
                         <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
