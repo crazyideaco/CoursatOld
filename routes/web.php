@@ -347,10 +347,12 @@ Route::post('updatevideoexam/{id}','VideoExamController@updatevideoexam')->name(
   Route::get('deletevideoexam/{id}','VideoExamController@deletevideoexam')->name('deletevideoexam');
 //videos
 Route::get('addvideo/{id}','VideoController@addvideo')->name('addvideo');
+Route::get('addvideospecial/{id}','VideoController@addvideospecial')->name('addvideospecial');
 Route::get('editvideo/{id}','VideoController@editvideo')->name('editvideo');
   Route::get('deletevideo/{id}','VideoController@deletevideo')->name('deletevideo');
 Route::get('videos/{id}','VideoController@videos')->name('videos');
   Route::post('storevideo/{id}','VideoController@storevideo')->name('storevideo');
+  Route::post('storevideospecial/{id}','VideoController@storevideospecial')->name('storevideospecial');
 Route::post('updatevideo/{id}','VideoController@updatevideo')->name('updatevideo');
 Route::get('delete_video_pdf/{id}','VideoController@delete_video_pdf')->name('delete_video_pdf');
 Route::get('delete_video_board/{id}','VideoController@delete_video_board')->name('delete_video_board');
