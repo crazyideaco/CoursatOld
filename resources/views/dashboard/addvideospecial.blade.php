@@ -93,18 +93,23 @@
 							
                             <div class="row">
                                          <div class="col-6 text-center mb-5 set-img">
-                    <video width="200" height="200" controls >
-              <source src="mov_bbb.mp4" id="video_here">
-            Your browser does not support HTML5 video.
-          </video>
-          <br>
-          <br>
-                   <input id="kt" type="file" class="form-control ehabtalaat" required name="url">
-                            <label for="kt" class="ahmed">اضافة فيديو</label>
-                            @error('url')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
-                           </div><div class="col-6 text-center set-img">
+
+                        <label>اسم الفيديو </label>
+                    <select name="video_id" class="form-control selectpicker"  required  >
+                        <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
+                        @foreach($videos as $video)
+                        <option value="{{$video->id}}">{{$video->name_ar}} - {{$video->type->name_ar ?? ""}}</option>
+                        @endforeach
+                    </select>
+                    </div>
+                           </div>
+                           
+                           
+                           
+                           
+                           
+                           
+                           <div class="col-6 text-center set-img">
                             <canvas id="pdfViewer" style="width:200px;height:200px"></canvas>
                    <input id="myPdf" type="file" class="form-control ehabtalaat" name="pdf">
                    <br>
