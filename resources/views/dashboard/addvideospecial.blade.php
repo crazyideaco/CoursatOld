@@ -98,7 +98,7 @@
                     <select name="video_id" class="form-control selectpicker"  required  >
                         <option value="0" disabled="disabled" selected="selected"> اختر فيديو</option>
                         @foreach($videos as $video)
-                        <option value="{{$video->id}}">{{$video->name_ar}} - {{$video->type->name_ar ?? ""}}</option>
+                        <option value="{{$video->id}}">{{$video->name_ar}} </option>
                         @endforeach
                     </select>
                     </div>
