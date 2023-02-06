@@ -186,7 +186,7 @@
                          </ul>
                
                   </td>     
-                      <?php $types= \App\TypesCollege::where("section_id",$student->section_id)->get();
+                      <?php $types= \App\TypesCollege::where("section_id",$student->section_id)->whereNotIn("id",$student->stutypescollege->pluck("id")->toArray())->get();
                               ?>
 
 						<td class="text-center">
