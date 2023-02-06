@@ -737,6 +737,7 @@ else{
  }
 
  public function addvideospecial($id){
+  $subtype = Subtype::where("id",$id)->firstOrFail();
   if(Auth::user() && Auth::user()->isAdmin == 'admin'){
   $users =  User::where('is_student',2)->get();
   $types= Type::all();
@@ -756,7 +757,7 @@ else{
      $years = auth()->user()->years;
      $subtypes = Subtype::where('user_id',auth()->user()->id)->get();
  }
- $videos = Video::where("user_id",$type->user_id)->get();
+ $videos = Video::where("user_id",$subtype->user_id)->get();
 return view('dashboard.addvideo')->with('years',$years)
 ->with('subjects',$subjects)
 ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id)->with('videos',$videos);
