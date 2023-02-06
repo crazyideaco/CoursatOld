@@ -256,7 +256,7 @@ Route::post('storespecialbasic/{id}','SpecialbasicController@storespecialbasic')
 Route::post('updatespecialbasic/{id}','SpecialbasicController@updatespecialbasic')->name('updatespecialbasic');
     Route::get('deletespecialbasic/{id}','SpecialbasicController@deletespecialbasic')->name('deletespecialbasic');
 Route::get('givetypecourse','CourseController@givetypecourse')->name('givetypecourse');
-Route::post('addtypecourse','dashboardcontroller@addtypecourse');
+Route::post('addtypecourse','CourseController@addtypecourse');
 
 Route::resource("website_students","WebsiteStudentController");
 
