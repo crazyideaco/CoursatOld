@@ -170,7 +170,7 @@
                   </td>   
 					     
 					 <?php 
-                              $types= \App\Type::where("years_id",$student->years_id)->get();
+                              $types= \App\Type::where("years_id",$student->years_id)->whereNotIn("id",$student->stutypes->pluck("id")->toArray())->->get();
                               ?>
 						<td class="text-center">
                                <span class="btn btn-success btn-sm" id="btn{{$student->id}}" onclick="activeuser({{$student->id}})">
