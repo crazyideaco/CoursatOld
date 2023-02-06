@@ -219,7 +219,7 @@
           <div class="col-8">
             
          
-          <select name="type_id" class="form-control selectpicker" id="course{{$student->id}}">
+          <select name="type_id" class="form-control selectpicker" data-live-search="true" id="course{{$student->id}}">
        @foreach($types as $type)
             <option value="{{$type->id}}">{{$type->name_ar}}</option>
         @endforeach
