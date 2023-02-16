@@ -105,7 +105,7 @@
                     </div>
                     <div class="row">
                         <div class="col-4 mx-auto"> 
-                            <div class="btn btn-primary" onclick="filterbasicstudents()">بحث</div> 
+                            <div class="btn btn-primary" onclick="filter_basic_userstudents()">بحث</div> 
                         </div>
                     </div>
                     <div class="row">
@@ -317,5 +317,34 @@
 
         });
     }
+    function filter_basic_userstudents(){
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"post",
+       url: `filter_basic_userstudents`,
+      //   contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+      data:{
+        "years_id":$("#year").val(),
+       
+       
+      },
+       success: function(result){
+    if(result.status == true){
+       
+      $('#example').DataTable().destroy();
+       $("#students").empty();
+      $("#students").append(result.data);
+      $('#example').DataTable().draw();
+    }
+    
+       }
+
+      });
+  }
 </script>
 @endsection
