@@ -126,7 +126,7 @@
                                         <!--  <th scope="col" class="text-center">الاعدادات</th>-->
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="students">
                                     @foreach($students as $student)
                                     <tr id="s{{$student->id}}">
 
