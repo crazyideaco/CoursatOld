@@ -105,9 +105,10 @@ class FilterStudentController extends Controller
         }
 
 
-        $students = User::where('is_student', 1)->whereNotNull("name")->when($year_id != null,function($q) use($year_id){
-    return $q->where('year_id', $year_id);
-        })->get();
+        $students = $students->when($year_id != null,function($q) use($year_id){
+            dd("ssd");
+            return $q->where('year_id', $year_id);
+                });
         $text = "";
         foreach ($students as $student) {
         $text .='<tr id="s'.$student->id.'">
