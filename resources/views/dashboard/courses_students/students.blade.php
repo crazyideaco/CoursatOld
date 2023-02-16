@@ -95,6 +95,8 @@
 
 
                 <div class="pt-5">
+                @if ((Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) || (Auth::user() && Auth::user()->is_student == 2)) 
+
                     <div class="row">
                         <div class="form-group col-6"> <label>المرحله</label> <select class="form-control selectpicker" name="stage_id" onchange="getstage(this)">
                                 <option value="0" selected="selected" required disabled="disabled">ادخل المرحله</option> @foreach($stages as $stage) <option value='{{$stage->id}}'>{{$stage->name_ar}}</option> @endforeach
@@ -110,6 +112,69 @@
                             <div class="btn btn-primary" onclick="filter_basic_userstudents()">بحث</div> 
                         </div>
                     </div>
+                @endif
+
+                @if((Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) || (Auth::user() && Auth::user()->is_student == 3))
+
+                <div class="row">
+     <div class="form-group col-lg-3 col-md-6 col-12">
+                                    <label>اسم الجامعه </label>
+                                   <select name="university_id" required class="form-control" id="university" onchange="getcolleges(this)">
+                                       <option value="0" >اختر جامعه</option>
+                                       @foreach($universities as $university)
+                                       <option value="{{$university->id}}">
+                                           {{$university->name_ar}}
+                                           </option>
+                                       @endforeach
+                                   </select>
+                                    @error('university_id')
+                                    <p style="color:red;">{{$message}}</p>
+                                    @enderror
+                                </div>
+                                 <div class="form-group col-lg-3 col-md-6 col-12">
+                                    <label>اسم الكليه </label>
+                                   <select name="college_id" required class="form-control" id="college" onchange="getdivision(this)">
+                                       <option value="0"  >اختر كليه</option>
+                                       @foreach($colleges as $college)
+                                       <option value="{{$college->id}}">{{$college->name_ar}}</option>
+                                       @endforeach
+                                   </select>
+                                </div>
+                                 <div class="form-group col-lg-3 col-md-6 col-12">
+                                    <label>اسم القسم </label>
+                                   <select name="division_id" required class="form-control" id="division" onchange="getsection(this)">
+                                       <option value="0"  >اختر قسم</option>
+                                       @foreach($divisions as $division)
+                                       <option value="{{$division->id}}">{{$division->name_ar}}</option>
+                                       @endforeach
+                                   </select>
+                                </div>
+          <div class="form-group col-lg-3 col-md-6 col-12">
+                                    <label>اسم الفرقه </label>
+                                   <select name="section_id" required class="form-control" id="section" onchange="getsubcollege(this)" >
+                                       <option value="0"  >اختر فرقه</option>
+                                       @foreach($sections as $section)
+                                       <option value="{{$section->id}}">{{$section->name_ar}}</option>
+                                       @endforeach
+                                   </select>
+                                </div>
+                      </div>
+                      <div class="row">
+                        
+                 <div class="col-5">
+                   
+                        </div>
+                        
+                               
+                      </div>
+
+      <div class="row">
+                            <div class="col-4 mx-auto">
+                              
+                        
+                            <span class="btn btn-primary" onclick="filter_college_userstudents()">بحث</span>    </div>
+                          </div>
+                @endif
                     <div class="row">
                         <div class="table-responsive">
 
@@ -257,7 +322,64 @@
 
         });
     }
+    function getcolleges(selected){
+let id = selected.value;
+console.log(id);
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"get",
+       url: `getcolleges/${id}`,
+   //    contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+       $('#college').empty();
+       $('#college').html(result.data);
+       console.log(result);
+       }
 
+      });
+  }  function getdivision(selected){
+      let id = selected.value;
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"get",
+       url: `getdivision/${id}`,
+         contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+     $('#division').empty();
+    $('#division').html(result);
+       }
+
+      });
+  }
+  function getsection(selected){
+      let id = selected.value;
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"get",
+       url: `getsection/${id}`,
+         contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+     $('#section').empty();
+    $('#section').html(result);
+       }
+
+      });
+  }
     function deleteuser(sel) {
         let id = sel;
 
@@ -332,6 +454,39 @@
        dataType: "Json",
       data:{
         "years_id":$("#year").val(),
+       
+       
+      },
+       success: function(result){
+    if(result.status == true){
+       
+      $('#example').DataTable().destroy();
+       $("#students").empty();
+      $("#students").append(result.data);
+      $('#example').DataTable().draw();
+    }
+    
+       }
+
+      });
+  }
+
+  function filter_college_userstudents(){
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"post",
+       url: `filter_college_userstudents`,
+      //   contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+      data:{
+        "university_id":$("#university").val(),
+          "college_id":$("#college").val(),
+          "division_id":$("#division").val(),
+          "section_id":$("#section").val(),
        
        
       },
