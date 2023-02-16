@@ -35,9 +35,7 @@ class VideoResource extends JsonResource
             'allow' => $allow,
                'mintues' => $this->seconds > 0 ? intval($this->seconds / 60) : 0,
              'blackboard'=> $this->board ?  asset('uploads/' .$this->board) : ''
-			
-   
-           
+			 
         ];
     }
 }

@@ -7,7 +7,7 @@
 </style>
 @endsection
 @section('content')
-        <!--start page-body-->
+        <!--start page-body--> 
         <div class="page-body">
             <div class="container">
    <!--start heed-->
@@ -95,6 +95,7 @@
 
 
                         <div class="pt-5">
+                        <div class="row"> <div class="form-group col-6"> <label>المرحله</label> <select class="form-control selectpicker" name="stage_id" onchange="getstage(this)"> <option value="0" selected="selected" required disabled="disabled">ادخل المرحله</option> @foreach($stages as $stage) <option value='{{$stage->id}}'>{{$stage->name_ar}}</option> @endforeach </select> @error('stage_id') <p style="color:red;">{{$message}}</p> @enderror </div> <div class="form-group col-6"> <label>سنه الماده</label> <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear(this)"> <option value="0" selected="selected" disabled="disabled">اختر السنه</option> </select> @error('years_id') <p style="color:red;">{{$message}}</p> @enderror </div> <!---  <div class="form-group col-4"> <label>الماده </label> <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getteacher(this)"> <option value="0" selected="selected" disabled="disabled">اختر الماده</option> </select> @error('subjects_id') <p style="color:red;">{{$message}}</p> @enderror </div> --> </div> <div class="row"> <div class="col-3 mx-auto"> <span class="btn btn-primary" onclick="filterbasicstudents()">بحث</span>    </div> </div>
                             <div class="row">
                                  <div class="table-responsive">
                                                       
@@ -279,5 +280,26 @@ $(`#btn${id}`).html('الغاء التفعيل');
    
   })
 }
+
+function getstage(selected){
+    let id = selected.value;
+ $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"get",
+       url: `getstage/${id}`,
+         contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+    $('#year').empty();
+    $('#year').html(result);
+        $('#year').selectpicker('refresh');
+       }
+
+      });
+    }
 </script>
 @endsection
