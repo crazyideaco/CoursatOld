@@ -263,7 +263,12 @@ $students = $students1->merge(auth()->user()->centerstudents);
       $students = $students1->merge(auth()->user()->centerstudents);
       }
       $stages = Stage::all();
-    return view("dashboard.courses_students.students",compact("students","stages"));
+      $colleges =College::all(); 
+      $divisions = Division::all();
+      $sections = Section::all();
+     $universities = University::all();
+    return view("dashboard.courses_students.students",compact("students","stages","universities",
+  "colleges","divisions","sections"));
   }public function teacherstudents($id){
           $user = User::where("id",$id)->first();
         if($user && $user->is_student == 5 && $user->category_id == 1){
