@@ -106,7 +106,7 @@ class FilterStudentController extends Controller
 
 
         $students = $students->when($year_id != null,function($q) use($year_id){
-            dd("ssd");
+           
             return $q->where('year_id', $year_id);
                 });
         $text = "";
