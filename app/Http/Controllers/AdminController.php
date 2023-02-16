@@ -61,10 +61,10 @@ class AdminController extends Controller
 {
      public function __construct()
     {
-      $this->middleware(['permission:admins-create'])->only('addadmin');
-        $this->middleware(['permission:admins-read'])->only('admins');
-       $this->middleware(['permission:admins-update'])->only('editadmin');
-       $this->middleware(['permission:admins-delete'])->only('destroy');
+    //   $this->middleware(['permission:admins-create'])->only('addadmin');
+    //     $this->middleware(['permission:admins-read'])->only('admins');
+    //    $this->middleware(['permission:admins-update'])->only('editadmin');
+    //    $this->middleware(['permission:admins-delete'])->only('destroy');
     }
   public function addadmin(){
 	return view('dashboard.admins.addadmin');}
