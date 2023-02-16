@@ -224,7 +224,7 @@ $students = $students1->merge(auth()->user()->centerstudents);
     $students = Course::where("id",$id)->first()->studentscourses;
     $status =2;
     return view("dashboard.courses_students.studentstype",compact("students","id","status"));;
-  }public function userstudents(){
+  }public function userstudents(){ 
          if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){ 
       $types1 = auth()->user()->centertypes->pluck('id')->toArray();
     $types = auth()->user()->centertypes;
@@ -262,7 +262,8 @@ $students = $students1->merge(auth()->user()->centerstudents);
 	  $students1 = User::whereIn('id',$students_ids)->get();
       $students = $students1->merge(auth()->user()->centerstudents);
       }
-    return view("dashboard.courses_students.students",compact("students"));
+      $stages = Stage::all();
+    return view("dashboard.courses_students.students",compact("students","stages"));
   }public function teacherstudents($id){
           $user = User::where("id",$id)->first();
         if($user && $user->is_student == 5 && $user->category_id == 1){
