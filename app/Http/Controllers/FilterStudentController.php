@@ -155,4 +155,112 @@ class FilterStudentController extends Controller
         }
         return response()->json(['status' => true, 'data' => $text]);
     }
+
+    public function filter_college_userstudents(Request $request)
+    {
+        $university_id = $request->university_id;
+        $college_id = $request->college_id;
+        $section_id = $request->section_id;
+        $division_id = $request->division_id;
+        if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+            $types1 = auth()->user()->centertypes->pluck('id')->toArray();
+            $types = auth()->user()->centertypes;
+            $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 2) {
+            $types1 = auth()->user()->types->pluck('id')->toArray();
+            $types = auth()->user()->types;
+            $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
+            $types1 = auth()->user()->centertypescollege->pluck('id')->toArray();
+            $types = auth()->user()->centertypescollege;
+            $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 3) {
+            $types1 = auth()->user()->typescollege->pluck('id')->toArray();
+            $types = auth()->user()->typescollege;
+            $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3) {
+            $types1 = auth()->user()->centercourses->pluck('id')->toArray();
+            $types = auth()->user()->centercourses;
+            $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 4) {
+            $types1 = auth()->user()->courses->pluck('id')->toArray();
+            $types = auth()->user()->courses;
+            $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        }
+
+
+        $students = $students->when($university_id != null,function($q) use($university_id){
+           
+            return $q->where('university_id', $university_id);
+                })
+            ->when($college_id != null,function($q) use($college_id){
+        
+                return $q->where('college_id', $college_id);
+                    })
+                ->when($section_id != null,function($q) use($section_id){
+    
+                    return $q->where('section_id', $section_id);
+                        })
+                    ->when($division_id != null,function($q) use($division_id){
+
+                        return $q->where('division_id', $division_id);
+                                        });
+        $text = "";
+        foreach ($students as $student) {
+        $text .='<tr id="s'.$student->id.'">
+
+        <th>'.$student->id.'</th>
+        <td scope="col" class="text-center"><a href="'.route('studentprofile',$student->id).'">'.$student->name.'</a></td>
+        <td scope="col" class="text-center">'.$student->code.'</td>
+        <td scope="col" class="text-center">'.$student->phone.'</td>';
+        if($student->year_id != null){
+        $text .='<td scope="col" class="text-center">
+            <ul>';
+                if($student->stutypes){
+                foreach($student->stutypes as $type){
+                    $text .='<li style="font-size:14px;">'.$type->name_ar.'</li>';
+
+                }
+            }
+            $text .='</ul>
+        </td>';
+        }
+        elseif($student->university_id != null){
+        $text .='<td scope="col" class="text-center">
+            <ul>';
+                if($student->stutypescollege){
+                foreach($student->stutypescollege as $typecollege){
+                $text .='<li style="font-size:14px;">'.$typecollege->name_ar.'</li>';
+                }
+            }
+            $text .='</ul>
+
+        </td>';
+        }
+        else{
+        $text .='<td scope="col" class="text-center">
+
+
+        </td>';
+        }
+    
+
+
+
+   $text .='</tr>';
+        }
+        return response()->json(['status' => true, 'data' => $text]);
+    }
 }

@@ -54,6 +54,7 @@ Route::get('deleteuser/{id}','userscontroller@deleteuser')->name('deleteuser');
   Route::get('studentscourse/{id}','StudentController@studentscourse')->name('studentscourse');
   Route::get('userstudents','StudentController@userstudents')->name('userstudents');
   Route::post('filter_basic_userstudents','FilterStudentController@filter_basic_userstudents')->name('filter_basic_userstudents');
+  Route::post('filter_college_userstudents','FilterStudentController@filter_college_userstudents')->name('filter_college_userstudents');
    Route::get('teacherstudents/{id}','StudentController@teacherstudents')->name('teacherstudents');
   //start notification
 Route::get('sendnotification','NotificationController@sendnotification')->name('sendnotification');
