@@ -58,6 +58,8 @@ use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
 use App\TypeexamResult;
 use App\TypescollegeexamResult;
+use App\TypeJoin;
+use App\TypecollegeJoin;
 class StudentController extends Controller
 {
   public function basicstudents(){
@@ -312,8 +314,10 @@ $students = $students1->merge(auth()->user()->centerstudents);
   }public function deletestudentcourse(Request $request){
     if($request->status == 0){
      $studenttype = Student_Type::where([['student_id','=',$request->student_id],['type_id','=',$request->course_id]])->first();
+     TypeJoin::where([['student_id','=',$request->student_id],['type_id','=',$request->course_id]])->delete();
     }elseif($request->status == 1){
       $studenttype = Student_Typecollege::where([['student_id','=',$request->student_id],['typecollege_id','=',$request->course_id]])->first();
+      TypecollegeJoin::where([['student_id','=',$request->student_id],['typecollege_id','=',$request->course_id]])->delete();
     }elseif($request->status == 2){
          $studenttype = Student_Course::where([['student_id','=',$request->student_id],['course_id','=',$request->course_id]])->first();
     }
