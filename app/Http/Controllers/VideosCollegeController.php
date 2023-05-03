@@ -126,7 +126,7 @@ public function storevideoscollege($id,Request $request){
   $lesson = Lesson::where('id',$id)->first();
        $video = new VideosCollege;
        $video->order_number = $request->order_number;
-       $video->video_type_link = 1;
+       $video->video_type_link = 2;
    if(auth()->user() && auth()->user()->isAdmin == 'admin'){
    $video->user_id = $lesson->doctor_id;
    $video->name_ar = $request->name_ar;
@@ -176,7 +176,7 @@ $duration =  $file['playtime_seconds'];
   
    // $video->url = $this->upload_video($url);
     $time=time();
-    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
 //dd($path);
 $video->storage_type = 1;
@@ -297,7 +297,7 @@ $duration =  $file['playtime_seconds'];
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
        $time=time();
-    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
 
@@ -415,7 +415,7 @@ $duration =  $file['playtime_seconds'];
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
       $time=time();
-    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
         } 
@@ -590,10 +590,10 @@ $duration =  $file['playtime_seconds'];
 
       $url = $request->url;
       $time=time();
-    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
-      $video->video_type_link = 1;
+      $video->video_type_link = 2;
   } 
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
@@ -675,10 +675,10 @@ $duration =  $file['playtime_seconds'];
 
       $url = $request->url;
     $time=time();
-    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
-      $video->video_type_link = 1;
+      $video->video_type_link = 2;
   } 
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
@@ -757,10 +757,10 @@ $duration =  $file['playtime_seconds'];
  
       $url = $request->url;
   $time=time();
-    \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
-      $video->video_type_link = 1;
+      $video->video_type_link = 2;
   } 
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
@@ -947,7 +947,7 @@ public function storevideoscollegespecial($id,Request $request){
 $lesson = Lesson::where('id',$id)->first();
      $video = new VideosCollege;
      $video->order_number = $request->order_number;
-     $video->video_type_link = 1;
+     $video->video_type_link = 2;
      $video->url = $special_video->url;
 $video->seconds = $special_video->seconds;
 $video->original = 0;
