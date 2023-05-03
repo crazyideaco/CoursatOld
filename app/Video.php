@@ -22,7 +22,14 @@ class Video extends Model
     }
     public function getUrlLinkAttribute()
     {
-      $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
+        if($this->video_type_link == 0){
+            $floder_name = "uploads";
+        }elseif($this->video_type_link == 1){
+            $floder_name = "disk1";
+        }elseif($this->video_type_link == 2){
+            $floder_name = "disk2";
+        }
+    //  $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
         return $this->url ? asset( $floder_name . "/" . $this->url) : '';
     }  public function type(){
       return $this->belongsTo(Type::class,'type_id');
