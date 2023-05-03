@@ -158,13 +158,13 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
   $video->size_video= $request->file('url')->getSize()/1024;
-    //   \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
-    //  $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'disk1');
+    //   \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    //  $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'disk2');
 
-   \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
-    //  \Storage::disk('disk1')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
+   \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    //  \Storage::disk('disk2')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-     $video->video_type_link = 1;
+     $video->video_type_link = 2;
  } 
  if($request->hasFile('image'))
  {
@@ -239,9 +239,9 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
   $video->size_video= $request->file('url')->getSize()/1024;
-  \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+  \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-     $video->video_type_link = 1;
+     $video->video_type_link = 2;
 
  }  
  if($request->hasFile('image'))
@@ -317,10 +317,10 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
   $video->size_video= $request->file('url')->getSize()/1024;
-      \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+      \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
 
-     $video->video_type_link = 1;
+     $video->video_type_link = 2;
  } 
  if($request->hasFile('image'))
  {
@@ -445,9 +445,9 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
          $video->size_video= $request->file('url')->getSize()/1024;
-         $url->move('disk1' , time(). '.'.$url->getClientOriginalExtension());
+         $url->move('disk2' , time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-     $video->video_type_link = 1;
+     $video->video_type_link = 2;
 
  } 
  if($request->hasFile('image'))
@@ -528,10 +528,10 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
          $video->size_video= $request->file('url')->getSize()/1024;
-         \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+         \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
 
-     $video->video_type_link = 1;
+     $video->video_type_link = 2;
  }
  if($request->hasFile('image'))
  { if(public_path() . '/uploads/' . $video->image){
@@ -610,9 +610,9 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
          $video->size_video= $request->file('url')->getSize()/1024;
-         \Storage::disk('disk1')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+         \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
-     $video->video_type_link = 1;
+     $video->video_type_link = 2;
 
  }
  if($request->hasFile('image'))
