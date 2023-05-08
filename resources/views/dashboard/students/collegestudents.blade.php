@@ -511,5 +511,33 @@ $(`#myModal${id}`).modal('hide');
 
       });
   } 
+
+  function phone_verify(id){
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"get",
+       url: `phone_verify/${id}`,
+         contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+    if(result.status == true){
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'تم  بنجاح ',
+  showConfirmButton: false,
+  timer: 1500
+});
+
+    }
+    
+       }
+
+      });
+  }
 </script>
 @endsection
