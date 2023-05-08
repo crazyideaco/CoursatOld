@@ -180,7 +180,7 @@
                              تفعيل
                              @endif
   </span>
-  @if($user->phone_verify != 1)
+  @if($student->phone_verify != 1)
   <span class="btn btn-success btn-sm phone_verify{{$student->id}}"  onclick="phone_verify({{$student->id}})">
                              phone verify
                          </span>
