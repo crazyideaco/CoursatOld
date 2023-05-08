@@ -197,6 +197,9 @@
                              تفعيل
                              @endif
                          </span>
+                         <span class="btn btn-success btn-sm"  onclick="phone_verify({{$student->id}})">
+                             phone verify
+                         </span>
                             <!-- Button to Open the Modal -->
 <button type="button" class="btn btn-primary btn-sm" style="font-size:13px;width:52px;" data-toggle="modal" data-target="#myModal{{$student->id}}">
   كورس 

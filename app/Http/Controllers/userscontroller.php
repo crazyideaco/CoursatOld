@@ -75,4 +75,12 @@ public function activeuser($id){
          return response(['status' => 'active']);
      }
  } 
+ public function phone_verify($id){
+     $user = User::where('id',$id)->first();
+    
+         $user->phone_verify = 1;
+         $user->save();
+         return response(['status' => true]);
+     
+ } 
 }

@@ -179,6 +179,8 @@
                              @else
                              تفعيل
                              @endif
+                             <span class="btn btn-success btn-sm"  onclick="phone_verify({{$student->id}})">
+                             phone verify
                          </span>
                           <!-- Button to Open the Modal -->
 <button type="button" class="btn btn-primary btn-sm" style="font-size:13px;width:52px;" data-toggle="modal" data-target="#myModal{{$student->id}}">
@@ -467,5 +469,34 @@ $(`#myModal${id}`).modal('hide');
 
       });
   }
+
+
+  function phone_verify(id){
+      $.ajaxSetup({
+       headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    $.ajax({
+       type:"get",
+       url: `phone_verify/${id}`,
+         contentType: "application/json; charset=utf-8",
+       dataType: "Json",
+       success: function(result){
+    if(result.status == true){
+        Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'تم  بنجاح ',
+  showConfirmButton: false,
+  timer: 1500
+});
+
+    }
+    
+       }
+
+      });
+  } 
 </script>
 @endsection
