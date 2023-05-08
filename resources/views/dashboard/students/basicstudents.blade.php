@@ -179,7 +179,8 @@
                              @else
                              تفعيل
                              @endif
-                             <span class="btn btn-success btn-sm"  onclick="phone_verify({{$student->id}})">
+  </span>
+  <span class="btn btn-success btn-sm"  onclick="phone_verify({{$student->id}})">
                              phone verify
                          </span>
                           <!-- Button to Open the Modal -->
