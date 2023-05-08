@@ -600,6 +600,7 @@ Route::get('activelesson/{id}','LessonController@activelesson');
 Route::get('activevideoco/{id}','VideosCollegeController@activevideoco');
 Route::get('activetypecollege/{id}','TypesCollegeController@activetypecollege');
 Route::get('activeuser/{id}','userscontroller@activeuser');
+Route::get('phone_verify/{id}','userscontroller@phone_verify');
 Route::get('student_logout/{id}','StudentController@student_logout')->name('student_logout');
 Route::post('getmanysubs','SubjectController@getmanysubs');
 Route::post('activesubject','SubjectController@activesubject');
