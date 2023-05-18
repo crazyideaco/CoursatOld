@@ -355,7 +355,7 @@ $students = $students1->merge(auth()->user()->centerstudents);
  }
 
  public function unverified_student(){
-  $students = User::where('phone_verify',0)->get()
+  $students = User::where('phone_verify',0)->get();
   return view('dashboard.students.unverified_student',compact('students'));
 }
 }
