@@ -67,6 +67,7 @@ Route::post('storegeneralnotification','NotificationController@storegeneralnotif
 Route::post('storenoty','NotificationController@storenoty')->name('storenoty');
   //end notification
 Route::get('mytypestudents','StudentController@mytypestudents')->name('mytypestudents');
+Route::get('unverified_student','StudentController@unverified_student')->name('unverified_student');
   Route::post('addcoursesstudents','CourseController@addcoursesstudents')->name('addcoursesstudents');
 Route::get('addadmin','AdminController@addadmin')->name('addadmin');
   Route::post('addtypesollegestudent/{id}','StudentController@addtypesollegestudent')->name('addtypesollegestudent');
