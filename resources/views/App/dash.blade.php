@@ -734,7 +734,8 @@
                                 <div id="setting1" class="collapse @if(request()->is('teachers') || request()->is('addteacher') ||
                             request()->is('students') || request()->is('doctors') || request()->is('adddoctor')
                             || request()->is('lecturers') || request()->is('addlecturer') || request()->is('addcenter')
-                            || request()->is('centers')  || request()->is('basicstudents') ||  request()->is('collegestudents'))
+                            || request()->is('centers')  || request()->is('basicstudents') ||  request()->is('collegestudents') 
+                            || request()->is('unverified_students'))
                             show  @endif">
                                     <a href="{{route('addteacher')}}" class="@if(request()->is('addteacher'))active @endif">
                                         اضافه مدرس</a>
@@ -759,6 +760,9 @@
                                         طلاب الاساسى </a>
                                     <a href="{{route('collegestudents')}}" class="@if(request()->is('collegestudents'))active @endif">
                                         طلاب الجامعى</a>
+
+                                        <a href="{{route('unverified_students')}}" class="@if(request()->is('collegestudents'))active @endif">
+                                        unverified students</a>
                                 </div>
                             </div>
                             <div class="col-2">
