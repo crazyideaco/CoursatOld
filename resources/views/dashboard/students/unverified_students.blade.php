@@ -129,7 +129,6 @@
                          </span>
                          @endif
 
-                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deleteuser('{{$student->id}}')" style="cursor:pointer;"> 
                        
                                             </td>
 
