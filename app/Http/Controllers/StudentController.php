@@ -349,13 +349,10 @@ $students = $students1->merge(auth()->user()->centerstudents);
     return response()->json(["status" => true]);
   }
 
-  public function basicstudents(){
-    $students = User::where('is_student',1)->whereNotNull("name")->whereNotNull("year_id")->get();
-    return view('dashboard.students.basicstudents',compact('students'))->with('stages',Stage::all());
- }
 
- public function unverified_student(){
+
+ public function unverified_students(){
   $students = User::where('phone_verify',0)->get();
-  return view('dashboard.students.unverified_student',compact('students'));
+  return view('dashboard.students.unverified_students',compact('students'));
 }
 }
