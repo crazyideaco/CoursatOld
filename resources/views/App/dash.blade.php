@@ -20,11 +20,11 @@
     <link href="{{asset('css/all.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/Chart.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-    <script src="sweetalert2.all.min.js"></script>
+
 
 
 
