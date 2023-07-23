@@ -419,8 +419,7 @@ class AuthController extends Controller
     public function home_categories()
     {
         // $user_ids = auth()->user()->centerstudents->pluck("id");
-        $users = auth()->user()->centerstudents;
-        dd($users);
+        $users = auth()->user()->stdcenters;
         $offers = Offer::whereIn("id", $users->pluck("id"))->get();
         if (auth()->user()->category_id == 1) {
             $result = [];
