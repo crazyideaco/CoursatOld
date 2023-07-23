@@ -437,6 +437,7 @@ class AuthController extends Controller
             foreach ($users as $user) {
                 $subject_ids[] = $user->typescollege->pluck("subjectscollege_id")->toArray();
             }
+            dd($subject_ids);
             $result = call_user_func_array("array_merge", $subject_ids);
 
             $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->whereIn('id', $result)->where("active", 1)->get();
