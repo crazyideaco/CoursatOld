@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\api;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LevelResource;
@@ -57,871 +58,996 @@ use App\Notification;
 use Carbon\Carbon;
 use App\Offer;
 use App\Http\Resources\HomeCategory;
+
 class AuthController extends Controller
-{public function mynotifications(){
+{
+    public function mynotifications()
+    {
         $user = auth()->user();
-        $nots=  Notification::where('user_id',$user->id)->orderBy('created_at','desc')->get();
-      //     dd($nots);
-             $alldata = [];
-        if(count($nots) > 0){
-            foreach($nots as $not){
-          $to = $user->device_token;
-               Carbon::setLocale('ar');
-                $time= Carbon::parse($not->created_at);
-           $data = [
-            "to" =>$to,
-            "data" =>[
-                    "title" =>  $not->title,
-                    'body' =>  $not->text,
-                    'time' => $time->diffForHumans(),
-                ], 
-        ];
-        $dataString = $data;
-                $alldata[] =['data' => $dataString];
+        $nots =  Notification::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        //     dd($nots);
+        $alldata = [];
+        if (count($nots) > 0) {
+            foreach ($nots as $not) {
+                $to = $user->device_token;
+                Carbon::setLocale('ar');
+                $time = Carbon::parse($not->created_at);
+                $data = [
+                    "to" => $to,
+                    "data" => [
+                        "title" =>  $not->title,
+                        'body' =>  $not->text,
+                        'time' => $time->diffForHumans(),
+                    ],
+                ];
+                $dataString = $data;
+                $alldata[] = ['data' => $dataString];
             }
-          }
-            return response()->json(['status' => true,'message' => 'كل اشعارتك',
+        }
+        return response()->json([
+            'status' => true, 'message' => 'كل اشعارتك',
             'notifications' => $alldata
-            ]);
-   }
-    public function register(Request $request){
-    	$validator = Validator::make($request->all(), [
-    		'name'    => 'required|string|max:255|unique:users',
-    		'phone'=>'required|min:7|unique:users',
-        //	'email'=>'unique:users',
-    		'password' => 'required|min:6',
-    	],[
-		'required' => 'مطلوب ادخال الح',
-			'phone.unique' => 'ها الرقم تم تسجيله م قبل',
-			'email.unique' => 'هذا الحقل موجود ن قبل',
-			'password.min' => 'حقل كلمه السر ل يجب ان يقل عن 6 احرف',
-			'email' => 'اكب الايميل بشكل صحيح',
-			'name.unique' => 'ااسم تم تله من بله'
-			]);
-            if($validator->passes())
-			{
-                 if(isset($request->email)){
-	    	        $validator = Validator::make($request->all(), [
-        	
-         		'email'=>'required|unique:users|email',
-
-	    	],[
-	    	    'email.unique' => 'هذا اليميل مستخدم ن قبل ',
-                 'email.email' => 'حقل اامل يجب ان يكون امي'
-	    	     ]);
-                    if($validator->fails()){
-	    	       return response()->json(['status'=>false, 'message_ar' =>$validator->messages()->first()]);
-	    	     }
-	    	    
-               }
-			$user=new User;
-			$user->password = Hash::make($request->password);
-			$user->name=$request->name;
-			$user->phone=$request->phone;
-			$user->state_id=$request->state_id;
-			$user->city_id=$request->city_id;
-			$user->is_student=1;
-			$user->email=$request->email;
-			$user->code=$request->phone;
-
-// 		if($request->hasFile('image'))
-//         {
-//             $image = $request->image;
-//             $image->move('uploads' , $image->getClientOriginalName());
-//             $user->image = $request->image->getClientOriginalName();
-//         }
-			
-			$user->api_token = Hash::make(rand(0,999999).time());
-			$user->device_token =$request->device_token;
-              $user->device_id =$request->device_id;
-			$user->save();
-				if($request->code){
-			$u = User::where('code',$request->code)->first();
-            	      $u->centerstudents()->attach($user->id);
-				}
-			return response()->json([
-			'status'     =>  'true',
-            'message' => 'تم سجل المستخدم',
-			'data'=> new  UserResource($user),
-
-
-			]);
-            }else{
-	        	$msg= $validator->messages()->first();
-	     
-
-
-	          	        return response()->json(['status'=>"false",'message_ar'=>$msg], 401); 
-
-	      
-}
-    }
-    public function phone_verify(){
-	$user = auth()->user();
-		$user->phone_verify = 1;
-		$user->save();
-		return response()->json(['status' => true,'data' => new  UserResource($user)]);
-		}
-    public function register_info(Request $request){
-    //     	$validator = Validator::make($request->all(), [
-        	
-    //     		'state_id'=>'required|',
-    //     		'city_id'=>'required|',
-        		
-
-	   // 	]);
-	    	if(auth()->guard('api')->check()){
-                $user= User::where('id',auth()->guard('api')->id())->first();
-                if($request->is_primary == 1){
-                    $user->category_id = 1;
-					
-			     
-                    $user->stage_id = $request->stage_id;
-                    $user->year_id = $request->year_id;
-                    $user->is_scientific = $request->is_scientific;
-                    $user->info_compelete  = 1;
-                }elseif($request->is_primary == 0){
-                    $user->category_id = 2;
-						
-                    $user->university_id = $request->university_id;
-                    $user->college_id = $request->college_id;
-                    $user->division_id = $request->department_id;
-                    $user->section_id =$request->college_year_id;
-                    $user->info_compelete  = 1;
-                }
-               $user->save();
-			
-			}else{
-				
-	  $user= new User;
-			$user->api_token = Hash::make(rand(0,999999).time());
-										  $user->is_visitor =1;
-                $user->save();
-                if($request->is_primary == 1){
-                    $user->category_id = 1;
-						
-                    $user->stage_id = $request->stage_id;
-                    $user->year_id = $request->year_id;
-                    $user->is_scientific = $request->is_scientific;
-                    $user->info_compelete  = 1;
-                }elseif($request->is_primary == 0){
-                    $user->category_id = 2;
-							
-                    $user->university_id = $request->university_id;
-                    $user->college_id = $request->college_id;
-                    $user->division_id = $request->department_id;
-                    $user->section_id =$request->college_year_id;
-                    $user->info_compelete  = 1;
-                }
-               $user->save();
-			}
-             	return Response()->json([
-			'status'     =>  'true',
-
-			'data'=> new  UserResource($user),
-
-
-			]);
-  
-    } public function login(Request $request)
-    {  
-    	$validator = Validator::make($request->all(), [
-	 //'name' => 'required',
-		'phone'=>'required',
-		'password' => 'min:6|required',
-	     	],[
-          'phone.required' => 'حقل الهتف مطلوب',
-          'password.required' => 'حقل كمه السر موب',
-          'password.min' => 'كلمه السر لايجب ان تقل عن 6 احرف'
         ]);
-	     	
-	     	if($validator->passes()){
-            //    $credentials = $request->only(['name', 'password']);
-              // $user=User::where('name',$request->name)->first();
-            
-             $credentials = $request->only(['phone', 'password']);
-               $user=User::where('phone',$request->phone)->first();
-              if($user == null){
-            	 return response()->json(['message_en'=>'The phone field is not right.','message_ar' => 'اللفون غير حي '], 401); 
-            	     }
-            	     if (!$token = auth()->attempt($credentials)) {
-                    return response()->json(['message_en'=>'The password field is not right.','message_ar' => 'كلمه امرور غير صحيح'], 401);
-                     }else if($user->active == 0){
-                       return response()->json(['status' => false,'message_ar' => 'ذ المستخدم ليس مفعل'],401);
-                     }else{
-                         // comment 1 line for device id
-                  if($user->device_id == null || $user->device_id == $request->device_id){
+    }
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'    => 'required|string|max:255|unique:users',
+            'phone' => 'required|min:7|unique:users',
+            //	'email'=>'unique:users',
+            'password' => 'required|min:6',
+        ], [
+            'required' => 'مطلوب ادخال الح',
+            'phone.unique' => 'ها الرقم تم تسجيله م قبل',
+            'email.unique' => 'هذا الحقل موجود ن قبل',
+            'password.min' => 'حقل كلمه السر ل يجب ان يقل عن 6 احرف',
+            'email' => 'اكب الايميل بشكل صحيح',
+            'name.unique' => 'ااسم تم تله من بله'
+        ]);
+        if ($validator->passes()) {
+            if (isset($request->email)) {
+                $validator = Validator::make($request->all(), [
+
+                    'email' => 'required|unique:users|email',
+
+                ], [
+                    'email.unique' => 'هذا اليميل مستخدم ن قبل ',
+                    'email.email' => 'حقل اامل يجب ان يكون امي'
+                ]);
+                if ($validator->fails()) {
+                    return response()->json(['status' => false, 'message_ar' => $validator->messages()->first()]);
+                }
+            }
+            $user = new User;
+            $user->password = Hash::make($request->password);
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->state_id = $request->state_id;
+            $user->city_id = $request->city_id;
+            $user->is_student = 1;
+            $user->email = $request->email;
+            $user->code = $request->phone;
+
+            // 		if($request->hasFile('image'))
+            //         {
+            //             $image = $request->image;
+            //             $image->move('uploads' , $image->getClientOriginalName());
+            //             $user->image = $request->image->getClientOriginalName();
+            //         }
+
+            $user->api_token = Hash::make(rand(0, 999999) . time());
             $user->device_token = $request->device_token;
-             $user->device_id = $request->device_id;
-						 $user->save();
-                  	 return [
-                      'status'     =>  'true',
-                       'data'=> new UserResource($user) ,        
-                         
+            $user->device_id = $request->device_id;
+            $user->save();
+            if ($request->code) {
+                $u = User::where('code', $request->code)->first();
+                $u->centerstudents()->attach($user->id);
+            }
+            return response()->json([
+                'status'     =>  'true',
+                'message' => 'تم سجل المستخدم',
+                'data' => new  UserResource($user),
+
+
+            ]);
+        } else {
+            $msg = $validator->messages()->first();
+
+
+
+            return response()->json(['status' => "false", 'message_ar' => $msg], 401);
+        }
+    }
+    public function phone_verify()
+    {
+        $user = auth()->user();
+        $user->phone_verify = 1;
+        $user->save();
+        return response()->json(['status' => true, 'data' => new  UserResource($user)]);
+    }
+    public function register_info(Request $request)
+    {
+        //     	$validator = Validator::make($request->all(), [
+
+        //     		'state_id'=>'required|',
+        //     		'city_id'=>'required|',
+
+
+        // 	]);
+        if (auth()->guard('api')->check()) {
+            $user = User::where('id', auth()->guard('api')->id())->first();
+            if ($request->is_primary == 1) {
+                $user->category_id = 1;
+
+
+                $user->stage_id = $request->stage_id;
+                $user->year_id = $request->year_id;
+                $user->is_scientific = $request->is_scientific;
+                $user->info_compelete  = 1;
+            } elseif ($request->is_primary == 0) {
+                $user->category_id = 2;
+
+                $user->university_id = $request->university_id;
+                $user->college_id = $request->college_id;
+                $user->division_id = $request->department_id;
+                $user->section_id = $request->college_year_id;
+                $user->info_compelete  = 1;
+            }
+            $user->save();
+        } else {
+
+            $user = new User;
+            $user->api_token = Hash::make(rand(0, 999999) . time());
+            $user->is_visitor = 1;
+            $user->save();
+            if ($request->is_primary == 1) {
+                $user->category_id = 1;
+
+                $user->stage_id = $request->stage_id;
+                $user->year_id = $request->year_id;
+                $user->is_scientific = $request->is_scientific;
+                $user->info_compelete  = 1;
+            } elseif ($request->is_primary == 0) {
+                $user->category_id = 2;
+
+                $user->university_id = $request->university_id;
+                $user->college_id = $request->college_id;
+                $user->division_id = $request->department_id;
+                $user->section_id = $request->college_year_id;
+                $user->info_compelete  = 1;
+            }
+            $user->save();
+        }
+        return Response()->json([
+            'status'     =>  'true',
+
+            'data' => new  UserResource($user),
+
+
+        ]);
+    }
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            //'name' => 'required',
+            'phone' => 'required',
+            'password' => 'min:6|required',
+        ], [
+            'phone.required' => 'حقل الهتف مطلوب',
+            'password.required' => 'حقل كمه السر موب',
+            'password.min' => 'كلمه السر لايجب ان تقل عن 6 احرف'
+        ]);
+
+        if ($validator->passes()) {
+            //    $credentials = $request->only(['name', 'password']);
+            // $user=User::where('name',$request->name)->first();
+
+            $credentials = $request->only(['phone', 'password']);
+            $user = User::where('phone', $request->phone)->first();
+            if ($user == null) {
+                return response()->json(['message_en' => 'The phone field is not right.', 'message_ar' => 'اللفون غير حي '], 401);
+            }
+            if (!$token = auth()->attempt($credentials)) {
+                return response()->json(['message_en' => 'The password field is not right.', 'message_ar' => 'كلمه امرور غير صحيح'], 401);
+            } else if ($user->active == 0) {
+                return response()->json(['status' => false, 'message_ar' => 'ذ المستخدم ليس مفعل'], 401);
+            } else {
+                // comment 1 line for device id
+                if ($user->device_id == null || $user->device_id == $request->device_id) {
+                    $user->device_token = $request->device_token;
+                    $user->device_id = $request->device_id;
+                    $user->save();
+                    return [
+                        'status'     =>  'true',
+                        'data' => new UserResource($user),
+
                     ];
                     // comment 1 line for device id
-            //          }elseif($user->device_id == $request->device_id ){
-            //                 $user->device_token = $request->device_token;
-            //  $user->device_id = $request->device_id;
-						//  $user->save();
-            //       	 return [
-            //           'status'     =>  'true',
-            //            'data'=> new UserResource($user) ,        
-                         
-            //         ];
+                    //          }elseif($user->device_id == $request->device_id ){
+                    //                 $user->device_token = $request->device_token;
+                    //  $user->device_id = $request->device_id;
+                    //  $user->save();
+                    //       	 return [
+                    //           'status'     =>  'true',
+                    //            'data'=> new UserResource($user) ,
+
+                    //         ];
                     // comment 6 line for device id
-                     }
-                        else{
-                	 return response()->json(['status' => false,
+                } else {
+                    return response()->json([
+                        'status' => false,
                         'message_ar' => 'هذا المستخدم ليس له حق الدخول'
-                                             ], 401); 
-
-                       }
-          }
-			    
-			}else{
-		$msg= $validator->messages()->first();
-	
-	
-		return response()->json(['status'=>"false",'message_ar'=>$msg
-         ], 401); 
-
-		
-      // return response()->json(['status'=>false,'message'=>$msg], 300); 
-            }}public function logoutnow(){
-	$user = auth()->user();
-	$user->device_token = null;
-	$user->save();
-	return response()->json(['status' => true]);}
-    public function change_password(Request $request){
-            $user_id= \auth()->user()->id;
-               $password=Hash::check($request->old_password,auth()->user()->password);
-               if($password == true){
-                 $user = User::where('id',$user_id)->first();
-               }else{
-                   return Response()->json([
-        			'status'     =>  'false',
-        			'data'=> 'الاسور خطا ',
-        			],401);  
-               }
-                if($user !==null){
-                $user = User::where('id',$user_id)->first();
-              	$user->password = Hash::make($request->new_password);
-              	$user->save();
-              	return Response()->json([
-    			'status'     =>  'true',
-    			'message'=> 'تم تغيير لم السر بناح' ,
-                    	]); 
-                }else{
-                    return Response()->json([
-        			'status'   =>  'false',
-        			'data'=> 'لاوجد مستخدم',
-        			]); 
+                    ], 401);
                 }
-       }public function education_stages(){
-           return response()->json(['status' => true,
-           'message' => 'كل الراحل',
-           'primary' =>  LevelResource::collection(Stage::all()),
+            }
+        } else {
+            $msg = $validator->messages()->first();
+
+
+            return response()->json([
+                'status' => "false", 'message_ar' => $msg
+            ], 401);
+
+
+            // return response()->json(['status'=>false,'message'=>$msg], 300);
+        }
+    }
+    public function logoutnow()
+    {
+        $user = auth()->user();
+        $user->device_token = null;
+        $user->save();
+        return response()->json(['status' => true]);
+    }
+    public function change_password(Request $request)
+    {
+        $user_id = \auth()->user()->id;
+        $password = Hash::check($request->old_password, auth()->user()->password);
+        if ($password == true) {
+            $user = User::where('id', $user_id)->first();
+        } else {
+            return Response()->json([
+                'status'     =>  'false',
+                'data' => 'الاسور خطا ',
+            ], 401);
+        }
+        if ($user !== null) {
+            $user = User::where('id', $user_id)->first();
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            return Response()->json([
+                'status'     =>  'true',
+                'message' => 'تم تغيير لم السر بناح',
+            ]);
+        } else {
+            return Response()->json([
+                'status'   =>  'false',
+                'data' => 'لاوجد مستخدم',
+            ]);
+        }
+    }
+    public function education_stages()
+    {
+        return response()->json([
+            'status' => true,
+            'message' => 'كل الراحل',
+            'primary' =>  LevelResource::collection(Stage::all()),
             'collectors' => UniversityResource::collection(University::all())
-           ]);
-       }public function check_phone(Request $request){
-		  $validator = Validator::make($request->all(),[
+        ]);
+    }
+    public function check_phone(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'phone' => 'required',
-        ],[
+        ], [
             'required' => 'هذا الحق مطلب',
         ]);
-            try{
-            if($validator->passes()){
-         $user = User::where('phone',$request->phone)->first();
-				if($user){
-							$msg =' العثور عى مستخدم بهذا السم';
-				 return response()->json(['status' => true,'message' => $msg]);
-				}else{
-					$msg = 'لا يوج مستخد ذا الرقم';
-				 return response()->json(['status' => false,'message' => $msg]);
-				}
-            
-            }else{
+        try {
+            if ($validator->passes()) {
+                $user = User::where('phone', $request->phone)->first();
+                if ($user) {
+                    $msg = ' العثور عى مستخدم بهذا السم';
+                    return response()->json(['status' => true, 'message' => $msg]);
+                } else {
+                    $msg = 'لا يوج مستخد ذا الرقم';
+                    return response()->json(['status' => false, 'message' => $msg]);
+                }
+            } else {
                 $msg = $validator->messages()->first();
-                return response()->json(['status' => false,'message' => $msg]);
+                return response()->json(['status' => false, 'message' => $msg]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $msg = 'حدث خطا ما حاول التسجيل لاا';
-            return response()->json(['status' => false,'message' => $msg]);
+            return response()->json(['status' => false, 'message' => $msg]);
         }
-	}public function forget_password(Request $request){
-		  $validator = Validator::make($request->all(),[
+    }
+    public function forget_password(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'phone' => 'required',
             'password' => 'required',
-        ],[
+        ], [
             'required' => 'هذا الحقل مطلوب',
         ]);
-            try{
-            if($validator->passes()){
-         $user = User::where('phone',$request->phone)->first();
-				if($user){
-         $user->password = Hash::make($request->password);
-         $user->save();
-            return response()->json(['status' => true,'message'=> 'تم تغيير كم السر بنجح ']);
-				}else{
-				$msg = 'ا يو مستخدم بهذ الرقم';
-				 return response()->json(['status' => false,'message' => $msg]);}
-            }else{
+        try {
+            if ($validator->passes()) {
+                $user = User::where('phone', $request->phone)->first();
+                if ($user) {
+                    $user->password = Hash::make($request->password);
+                    $user->save();
+                    return response()->json(['status' => true, 'message' => 'تم تغيير كم السر بنجح ']);
+                } else {
+                    $msg = 'ا يو مستخدم بهذ الرقم';
+                    return response()->json(['status' => false, 'message' => $msg]);
+                }
+            } else {
                 $msg = $validator->messages()->first();
-                return response()->json(['status' => false,'message' => $msg]);
+                return response()->json(['status' => false, 'message' => $msg]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             $msg = 'حدث طا ما حول التسجل لاحا';
-            return response()->json(['status' => false,'message' => $msg]);
+            return response()->json(['status' => false, 'message' => $msg]);
         }
-	}
-       public function addcenter(Request $request){
-           	$validator = Validator::make($request->all(), [
-	      'code' => 'required'
-	     	],
-	     	['required' => 'ذا لحل مطلوب']);
-	     	if($validator->passes()){
-	     	    if($user = User::where('code',$request->code)->first()){
-	     	        $user->centerstudents()->attach(auth()->id());
-	     	     //   $u = new User_Owner;
-	     	     //   $u->user_id = auth()->id();
-	     	     //   $u->owner_id = $user->id;
-	     	     //   $u->save();
-	     	        return response()->json(['status' => true,'message' => 'تم التاد م صحه الكود',
-	     	         'data'=> new CenterResource($user)]);
-	     	    }else{
-	     	        return response()->json(['status' => false,'message' => 'لا وجد مستخم هذا الكود']);
-	     	    }
-	     	    }else{
-	     	          return response()->json(['status' => false,'message' => $validator->messages()->first()]);
-	     	    
-	     	}
-       }public function home_categories(){
-         $user_ids = auth()->user()->centerstudents->pluck("id");
-    $offers = Offer::whereIn("id",$user_ids)->get();
-           if(auth()->user()->category_id == 1){
-               $subjects = Subject::where('years_id',auth()->user()->year_id)->where("active",1)->get();
-           }else if(auth()->user()->category_id == 2){
-               $subjects = SubjectsCollege::where('section_id',auth()->user()->section_id)->where("active",1)->get();
-           }
-           return response()->json(['status' => true,'message' => 'محتوي هوم' ,
-           'data' =>  HomeCategory::collection($subjects),
-           'offers' => OfferResource::collection(Offer::where('center_id',NULL)->get()),
-             'centeroffers' => OfferResource::collection($offers)
-                                    
-           ]);
-       }public function course_classes(Request $request){
-           if(auth()->user()->category_id == 1){
-               $type1 = Type::where('id',$request->course_id)->first();
-             if($type1){
-               $type = Type::where('id',$request->course_id)->first()->subtypes()->orderBy('order_number','asc')->get();
-               return response()->json(['status' => true ,'message' => 'محتيت الكورس',
-                                        'data' =>  SubtypeResource::collection($type)]);}
-             else{
-                return response()->json(['status' => false ,'message' => ' لا يوجد كورس با ال id'
-                                      ]);
-             }
-           }else if(auth()->user()->category_id == 2){
-               $type1 = TypesCollege::where('id',$request->course_id)->first();
-            if($type1){
-                 $type = TypesCollege::where('id',$request->course_id)->first()->lessons()->orderBy('order_number','asc')->get();
-               return response()->json(['status' => true ,'message' => 'محتويات الكورس',
-               'data' =>  LessonResource::collection($type)]);
-             }
-              else{
-                return response()->json(['status' => false ,'message' => ' لا يجد كور بهذا ال id'
-                                      ]);
-             }
-           }
-       }public function show_center(Request $request){
-            	$validator = Validator::make($request->all(), [
-	      'code' => 'required'
-	     	],
-	     	['required' => 'حقل الكود طوب  ']);
-	     	if($validator->passes()){
-	     	    if($user = User::where('code',$request->code)->first()){
-	     	        $user->centerstudents()->attach(auth()->id());
-	     	     //   $u = new User_Owner;
-	     	     //   $u->user_id = auth()->id();
-	     	     //   $u->owner_id = $user->id;
-	     	     //   $u->save();
-	     	        return response()->json(['status' => true,'message' => 'ت التاكد من صحه ال',
-	     	         'data'=> new CenterResource($user)]);
-	     	    }else{
-	     	        return response()->json(['status' => false,'message' => 'لا يوجد مستخدم بهذا اك']);
-	     	    }
-	     	    }else{
-	     	          return response()->json(['status' => false,'message' => $validator->messages()->first()]);
-	     	    
-	     	}
-       }public function general_courses(){
-          $generals = General::orderBy('id','desc')->get();
-             return response()->json(['status' => true ,'message' => ' كل لاقسام ',
-               'data' => GeneralResource::collection($generals)]);
-       }public function lecturer_info(Request $request){
-           $le = User::where('id',$request->lecturer_id)->first();
-           if($le->is_student == 2){
-               $courses = TypeResource::collection($le->types()->where("active",1)->get());
-           }elseif($le->is_student == 3){
-              $courses = TypecollegeResource::collection($le->typescollege()->where("active",1)->get());  
-           }
-           return response()->json(['status' => true ,'message' => ' معلومات المحاض ',
-               'info' => new LecturerResource($le),
-               'courses' => $courses]);
-       }
-
-    public function getcoursevideos(Request $request){
-	$videos = VideosGeneral::where('course_id',$request->course_id)->where('active',1)->get();
-		return response()->json([
-			'status' => true,
-			'message' => 'فيديوهات كرس',
-			'data' => VideogeneralResource::collection($videos) ]);
- 	}
-    public function update_user(Request $request){
-        
-         $user_id= \auth()->user()->id;
-         
-        	$user= User::where('id',$user_id)->first();
-        	if($request->password){
-			$user->password = Hash::make($request->password);
-        	}
-        	if($request->user_name){
-			$user->name=$request->user_name;
-        	}
-        	if($request->email){
-			$user->email=$request->email;
-        	}
-		
-			$user->save();
-		#############################################################
-		
-            $user_info= \App\Model\User_info::where('user_id',$user_id)->first();
-            if($request->phone){   
-         	$user_info->phone       =   $request->phone;
-            }
-            if($request->store_name){
-			$user_info->store       =   $request->store_name;
-            }
-            if($request->country){
-         	$user_info->location    =   $request->country;
-            }
-         	$user_info->save();
-        #############################################################             	
-			return Response()->json([
-			'status'     =>  'true',
-			'data'=> new  ResourceUser($user),
-			]);
     }
+    public function addcenter(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'code' => 'required'
+            ],
+            ['required' => 'ذا لحل مطلوب']
+        );
+        if ($validator->passes()) {
+            if ($user = User::where('code', $request->code)->first()) {
+                $user->centerstudents()->sync(auth()->id());
+                //   $u = new User_Owner;
+                //   $u->user_id = auth()->id();
+                //   $u->owner_id = $user->id;
+                //   $u->save();
+                return response()->json([
+                    'status' => true, 'message' => 'تم التاد م صحه الكود',
+                    'data' => new CenterResource($user)
+                ]);
+            } else {
+                return response()->json(['status' => false, 'message' => 'لا وجد مستخم هذا الكود']);
+            }
+        } else {
+            return response()->json(['status' => false, 'message' => $validator->messages()->first()]);
+        }
+    }
+    public function home_categories()
+    {
+        // $user_ids = auth()->user()->centerstudents->pluck("id");
+        $users = auth()->user()->stdcenters;
+        $offers = Offer::whereIn("id", $users->pluck("id"))->get();
+        if (auth()->user()->category_id == 1) {
+            $result = [];
+            $subject_ids = [];
+            foreach ($users as $user) {
+                $subject_ids[] = $user->centertypes->pluck("subjects_id")->toArray();
+            }
+            $result = call_user_func_array("array_merge", $subject_ids);
+            $subjects = Subject::where('years_id', auth()->user()->year_id)->whereIn('id', $result)->where("active", 1)->get();
+            //  $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
+
+        } else if (auth()->user()->category_id == 2) {
+            $result = [];
+            $subject_ids = [];
+            foreach ($users as $user) {
+                $subject_ids[] = $user->centertypescollege->pluck("subjectscollege_id")->toArray();
+            }
     
-   public function states(){
-       return response()->json(['status' => true,
-       'data' => StateResource::collection(\App\State::all())]);
-   }
-   public function years(){
-       $year= \App\Year::get();
-       return Response()->json([
-			'data'=> $year,
-		]);
-   }
-   public function buycourse(Request $request){
-       $user = auth()->user();
-       if(auth()->user()->category_id == 1){
-           $points = $user->points;
-           $type = Type::where('id',$request->course_id)->first();
-         
-         if($type){
-             $typepoints = $type->points;
-           if($points >= $typepoints){
-            //   $stutype = new Student_Type;
-            //   $stutype->student_id = auth()->user()->id;
-            //   $stutype->type_id = $type->id;
-            //   $stutype->save();
-            $user->stutypes()->attach($type->id);
-               $user->points =$user->points - $typepoints;
-               $user->save();
-               return response()->json(['status' => true,
-               'message' => 'تم شر الكورس'
-               ]);
-           }else{
-               return response()->json(['status' => false,
-               'message' => 'عفا لاتلك ناط كافيه'
-               ]);
-           }
-         }else{
-            return response()->json(['status' => false,
-               'message' => 'عفوا   لايجد كرس هذا الاسم'
-               ]);
-         }
-       }
-       else if(auth()->user()->category_id == 2){
-           $points = $user->points;
-           $type = TypesCollege::where('id',$request->course_id)->first();
-         if($type){
-           $typepoints = $type->points;
-           if($points >= $typepoints){
-               $user->stutypescollege()->attach($type->id);
-            //   $stutype = new Student_Typecollege;
-            //   $stutype->student_id = auth()->user()->id;
-            //   $stutype->typecollege_id = $type->id;
-            //   $stutype->save();
-               $user->points =$user->points - $typepoints;
-               $user->save();
-               return response()->json(['status' => true,
-               'message' => 'تم شرء اكورس'
-               ]);
-           }else{
-               return response()->json(['status' => false,
-               'message' => 'عفو لاتمل نقاط كافيه'
-               ]);
-           }
-         }else{
-            return response()->json(['status' => false,
-               'message' => 'عفوا   ايوج كور بهذا الاسم'
-               ]);
-         }
-       }
-         else if(auth()->user()->category_id == 3){
-           $points = $user->points;
-           $type = Course::where('id',$request->course_id)->first();
-           $typepoints = $type->points;
-           if($points >= $typepoints){
-               $user->stucourses()->attach($type->id);
+            $result = call_user_func_array("array_merge", $subject_ids);
+
+            $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->whereIn('id', $result)->where("active", 1)->get();
+            // $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->where("active", 1)->get();
+        }
+        return response()->json([
+            'status' => true, 'message' => 'محتوي هوم',
+            'data' =>  HomeCategory::collection($subjects),
+            'offers' => OfferResource::collection(Offer::where('center_id', NULL)->get()),
+            'centeroffers' => OfferResource::collection($offers)
+
+        ]);
+    }
+    public function course_classes(Request $request)
+    {
+        if (auth()->user()->category_id == 1) {
+            $type1 = Type::where('id', $request->course_id)->first();
+            if ($type1) {
+                $type = Type::where('id', $request->course_id)->first()->subtypes()->orderBy('order_number', 'asc')->get();
+                return response()->json([
+                    'status' => true, 'message' => 'محتيت الكورس',
+                    'data' =>  SubtypeResource::collection($type)
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false, 'message' => ' لا يوجد كورس با ال id'
+                ]);
+            }
+        } else if (auth()->user()->category_id == 2) {
+            $type1 = TypesCollege::where('id', $request->course_id)->first();
+            if ($type1) {
+                $type = TypesCollege::where('id', $request->course_id)->first()->lessons()->orderBy('order_number', 'asc')->get();
+                return response()->json([
+                    'status' => true, 'message' => 'محتويات الكورس',
+                    'data' =>  LessonResource::collection($type)
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false, 'message' => ' لا يجد كور بهذا ال id'
+                ]);
+            }
+        }
+    }
+    public function show_center(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'code' => 'required'
+            ],
+            ['required' => 'حقل الكود طوب  ']
+        );
+        if ($validator->passes()) {
+            if ($user = User::where('code', $request->code)->first()) {
+                $user->centerstudents()->sync(auth()->id());
+                //   $u = new User_Owner;
+                //   $u->user_id = auth()->id();
+                //   $u->owner_id = $user->id;
+                //   $u->save();
+                return response()->json([
+                    'status' => true, 'message' => 'ت التاكد من صحه ال',
+                    'data' => new CenterResource($user)
+                ]);
+            } else {
+                return response()->json(['status' => false, 'message' => 'لا يوجد مستخدم بهذا اك']);
+            }
+        } else {
+            return response()->json(['status' => false, 'message' => $validator->messages()->first()]);
+        }
+    }
+    public function general_courses()
+    {
+        $generals = General::orderBy('id', 'desc')->get();
+        return response()->json([
+            'status' => true, 'message' => ' كل لاقسام ',
+            'data' => GeneralResource::collection($generals)
+        ]);
+    }
+    public function lecturer_info(Request $request)
+    {
+        $le = User::where('id', $request->lecturer_id)->first();
+        if ($le->is_student == 2) {
+            $courses = TypeResource::collection($le->types()->where("active", 1)->get());
+        } elseif ($le->is_student == 3) {
+            $courses = TypecollegeResource::collection($le->typescollege()->where("active", 1)->get());
+        }
+        return response()->json([
+            'status' => true, 'message' => ' معلومات المحاض ',
+            'info' => new LecturerResource($le),
+            'courses' => $courses
+        ]);
+    }
+
+    public function getcoursevideos(Request $request)
+    {
+        $videos = VideosGeneral::where('course_id', $request->course_id)->where('active', 1)->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'فيديوهات كرس',
+            'data' => VideogeneralResource::collection($videos)
+        ]);
+    }
+    public function update_user(Request $request)
+    {
+
+        $user_id = \auth()->user()->id;
+
+        $user = User::where('id', $user_id)->first();
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        if ($request->user_name) {
+            $user->name = $request->user_name;
+        }
+        if ($request->email) {
+            $user->email = $request->email;
+        }
+
+        $user->save();
+        #############################################################
+
+        $user_info = \App\Model\User_info::where('user_id', $user_id)->first();
+        if ($request->phone) {
+            $user_info->phone       =   $request->phone;
+        }
+        if ($request->store_name) {
+            $user_info->store       =   $request->store_name;
+        }
+        if ($request->country) {
+            $user_info->location    =   $request->country;
+        }
+        $user_info->save();
+        #############################################################
+        return Response()->json([
+            'status'     =>  'true',
+            'data' => new  ResourceUser($user),
+        ]);
+    }
+
+    public function states()
+    {
+        return response()->json([
+            'status' => true,
+            'data' => StateResource::collection(\App\State::all())
+        ]);
+    }
+    public function years()
+    {
+        $year = \App\Year::get();
+        return Response()->json([
+            'data' => $year,
+        ]);
+    }
+    public function buycourse(Request $request)
+    {
+        $user = auth()->user();
+        if (auth()->user()->category_id == 1) {
+            $points = $user->points;
+            $type = Type::where('id', $request->course_id)->first();
+
+            if ($type) {
+                $typepoints = $type->points;
+                if ($points >= $typepoints) {
+                    //   $stutype = new Student_Type;
+                    //   $stutype->student_id = auth()->user()->id;
+                    //   $stutype->type_id = $type->id;
+                    //   $stutype->save();
+                    $user->stutypes()->attach($type->id);
+                    $user->points = $user->points - $typepoints;
+                    $user->save();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'تم شر الكورس'
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'عفا لاتلك ناط كافيه'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا   لايجد كرس هذا الاسم'
+                ]);
+            }
+        } else if (auth()->user()->category_id == 2) {
+            $points = $user->points;
+            $type = TypesCollege::where('id', $request->course_id)->first();
+            if ($type) {
+                $typepoints = $type->points;
+                if ($points >= $typepoints) {
+                    $user->stutypescollege()->attach($type->id);
+                    //   $stutype = new Student_Typecollege;
+                    //   $stutype->student_id = auth()->user()->id;
+                    //   $stutype->typecollege_id = $type->id;
+                    //   $stutype->save();
+                    $user->points = $user->points - $typepoints;
+                    $user->save();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'تم شرء اكورس'
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'عفو لاتمل نقاط كافيه'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا   ايوج كور بهذا الاسم'
+                ]);
+            }
+        } else if (auth()->user()->category_id == 3) {
+            $points = $user->points;
+            $type = Course::where('id', $request->course_id)->first();
+            $typepoints = $type->points;
+            if ($points >= $typepoints) {
+                $user->stucourses()->attach($type->id);
+                //   $stutype = new Student_Course;
+                //   $stutype->student_id = auth()->user()->id;
+                //   $stutype->course_id = $type->id;
+                //   $stutype->save();
+                $user->points = $user->points - $typepoints;
+                $user->save();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'تم شرء الكورس'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا لاتملك نقط افيه'
+                ]);
+            }
+        }
+    }
+    public function buygeneralcourse(Request $request)
+    {
+        $user = auth()->user();
+        $points = $user->points;
+        $type = Course::where('id', $request->course_id)->first();
+        $typepoints = $type->points;
+        if ($points >= $typepoints) {
+            $user->stucourses()->sync($type->id);
             //   $stutype = new Student_Course;
             //   $stutype->student_id = auth()->user()->id;
             //   $stutype->course_id = $type->id;
             //   $stutype->save();
-               $user->points =$user->points - $typepoints;
-               $user->save();
-               return response()->json(['status' => true,
-               'message' => 'تم شرء الكورس'
-               ]);
-           }else{
-               return response()->json(['status' => false,
-               'message' => 'عفوا لاتملك نقط افيه'
-               ]);
-           }
-       }
-   }public function buygeneralcourse(Request $request){
-       $user = auth()->user();
-           $points = $user->points;
-           $type = Course::where('id',$request->course_id)->first();
-           $typepoints = $type->points;
-           if($points >= $typepoints){
-               $user->stucourses()->sync($type->id);
-            //   $stutype = new Student_Course;
-            //   $stutype->student_id = auth()->user()->id;
-            //   $stutype->course_id = $type->id;
-            //   $stutype->save();
-               $user->points =$user->points - $typepoints;
-               $user->save();
-               return response()->json(['status' => true,
-               'message' => 'تم راء الكورس'
-               ]);
-           }else{
-               return response()->json(['status' => false,
-               'message' => 'عفو لاتملك ناط كافي'
-               ]);
-           }
-       }
-   public function mycourses(){
-       $user = auth()->user();
-       $types = $user->stutypes()->wherePivot('active',1)->get();
-       $typescollege = $user->stutypescollege()->wherePivot('active',1)->get();
-       $courses = $user->stucourses()->wherePivot('active',1)->get();
-       return response()->json([
-           'status' => true,
-           'message' => 'كل كورستك',
-           'data1' => TypeResource::collection($types),
-           'data2' => TypecollegeResource::collection($typescollege),
-           'data3' => CourseResource::collection($courses)
-           ]);
-   }
-   public function buyclass(Request $request){
-         $user = auth()->user();
-       if(auth()->user()->category_id == 1){
-           $points = $user->points;
-           $type = Subtype::where('id',$request->class_id)->first();
-         if($type){
-           $typepoints = $type->points;
-           if($points >= $typepoints){
-            //   $stutype = new Student_Subtype;
-            //   $stutype->student_id = auth()->user()->id;
-            //   $stutype->subtype_id = $type->id;
-            //   $stutype->save();
-                $user->stusubtypes()->attach($type->id);
-               $user->points =$user->points - $typepoints;
-               $user->save();
-               return response()->json(['status' => true,
-               'message' => 'تم شاء الدرس'
-               ]);
-           }else{
-               return response()->json(['status' => false,
-               'message' => 'عفا لاتمك قاط كافيه'
-               ]);
-           }
-         }else{
-            return response()->json(['status' => false,
-               'message' => 'عفوا   لايود در با الاسم'
-               ]);
-         }
-       }
-       if(auth()->user()->category_id == 2){
-           $points = $user->points;
-           $type = Lesson::where('id',$request->class_id)->first();
-         if($type){
-           $typepoints = $type->points;
-           if($points >= $typepoints){
-               $user->stulessons()->attach($type->id);
-            //   $stutype = new Student_Lesson;
-            //   $stutype->student_id = auth()->user()->id;
-            //   $stutype->lesson_id = $type->id;
-            //   $stutype->save();
-              $user->points =$user->points - $typepoints;
-              $user->save();
-               return response()->json(['status' => true,
-               'message' => 'تم شراء الدرس'
-               ]);
-           }else{
-               return response()->json(['status' => false,
-               'message' => 'عفوا لتمك قاط ايه'
-               ]);
-           }}else{
-            return response()->json(['status' => false,
-               'message' => 'عفوا   ايوج درس بهذا السم'
-               ]);
-         }
-       }
-   }public function rate_course(Request $request){
-       $user =auth()->user();
-       if(auth()->user()->category_id == 1){
-           $type = Type::where('id',$request->course_id)->first();
-         if($type){
-           $rate = new Type_Rate;
-           $rate->type_id = $type->id;
-           $rate->user_id = $user->id;
-           $rate->rate = $request->rate;
-           $rate->comment = $request->comment;
-           $rate->save();
-           return response()->json(['status' => true,
-               'message' => 'ت التقييم بنجا',
-				'data' => new RateResource($rate)					 
-					
-               ]);
-         }else{
-            return response()->json(['status' => false,
-               'message' => 'عفو   ليد كورس بذا الاسم'
-               ]);
-         }
-       }
-        else if(auth()->user()->category_id == 2){
-           $type = TypesCollege::where('id',$request->course_id)->first();
-            if($type){
-           $rate = new Typecollege_Rate;
-           $rate->typecollege_id = $type->id;
-           $rate->user_id = $user->id;
-           $rate->rate = $request->rate;
-           $rate->comment = $request->comment;
-           $rate->save();
-           return response()->json(['status' => true,
-               'message' => 'م التقييم نجاح',
-				'data' => new RateResource($rate)					 
-					
-               ]);
-           }else{
-            return response()->json(['status' => false,
-               'message' => 'عفوا   ليوجد كورس بذا الام'
-               ]);
-         }
-       }
-           else if(auth()->user()->category_id == 3){
-           $type = Course::where('id',$request->course_id)->first();
-               if($type){
-           $rate = new Course_Rate;
-           $rate->course_id = $type->id;
-           $rate->user_id = $user->id;
-           $rate->comment = $request->comment;
-           $rate->rate = $request->rate;
-           $rate->save();
-            return response()->json(['status' => true,
-               'message' => 'تم لتقيم بجاح',
-				'data' => new RateResource($rate)					 
-					
-               ]); }else{
-            return response()->json(['status' => false,
-               'message' => 'فوا   لاوجد كورس بهذا ااسم'
-               ]);
-         }
-       }
-   } public function course_rate(Request $request){
-       $user =auth()->user();
-       if(auth()->user()->category_id == 1){
-           $type = Type::where('id',$request->course_id)->first();
-         if($type){
-          $rates = $type->rates;
-         
-          $allrates = array_sum($type->rates()->pluck('rate')->toArray());
-            return response()->json(['status' => true,
-           'message' => 'كل تقيمات الكور ',
-         'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
-               'data' => RateResource::collection($rates)
-               ]);
-         }else{
-            return response()->json(['status' => false,
-               'message' => 'عفوا   لايوجد كور بهذا الاس'
-               ]);
-         }
-       }
-        else if(auth()->user()->category_id == 2){
-           $type = TypesCollege::where('id',$request->course_id)->first();
-          if($type){
-          $rates = $type->rates;
-                $allrates = array_sum($type->rates()->pluck('rate')->toArray());
-            return response()->json(['status' => true,
-                'message' => 'كل تقيما الكوس ',
-                'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
-              'data' => RateResource::collection($rates)
-               ]);
-                   }else{
-            return response()->json(['status' => false,
-               'message' => 'فوا   ايود كورس بهذا الاسم'
-               ]);
-         }
-       }
-           else if(auth()->user()->category_id == 3){
-           $type = Course::where('id',$request->course_id)->first();
-             if($type){
-          $rates = $type->rates;
-                $allrates = array_sum($type->rates()->pluck('rate')->toArray());
-            return response()->json(['status' => true,
-               'message' => 'ل تقييمت الكورس ',
-                  'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,                  
-               'data' => RateResource::collection($rates)
-               ]);
-                      }else{
-            return response()->json(['status' => false,
-               'message' => 'عفوا   ليوجد كورس بذ ااسم'
-               ]);
-         }
-       }
-   } public function alllecturers(Request $request){
-           if(auth()->user()->category_id == 1){
-            $lecturers  =  Subject::where('id',$request->subject_id)->first()->teachers;
-           }elseif(auth()->user()->category_id == 2){
-            $lecturers  =  SubjectsCollege::where('id',$request->subject_id)->first()->doctors;
-           }
-           return response()->json(['status' => true ,'message' => ' كل المحاضري  ',
-               'data' =>  LecturerResource::collection($lecturers),
-               ]);
-   }public function subjectcourses(Request $request){
-              $user =auth()->user();
-               $centers = auth()->user()->stdcenters;
+            $user->points = $user->points - $typepoints;
+            $user->save();
+            return response()->json([
+                'status' => true,
+                'message' => 'تم راء الكورس'
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'عفو لاتملك ناط كافي'
+            ]);
+        }
+    }
+    public function mycourses()
+    {
+        $user = auth()->user();
+        $types = $user->stutypes()->wherePivot('active', 1)->get();
+        $typescollege = $user->stutypescollege()->wherePivot('active', 1)->get();
+        $courses = $user->stucourses()->wherePivot('active', 1)->get();
+        return response()->json([
+            'status' => true,
+            'message' => 'كل كورستك',
+            'data1' => TypeResource::collection($types),
+            'data2' => TypecollegeResource::collection($typescollege),
+            'data3' => CourseResource::collection($courses)
+        ]);
+    }
+    public function buyclass(Request $request)
+    {
+        $user = auth()->user();
+        if (auth()->user()->category_id == 1) {
+            $points = $user->points;
+            $type = Subtype::where('id', $request->class_id)->first();
+            if ($type) {
+                $typepoints = $type->points;
+                if ($points >= $typepoints) {
+                    //   $stutype = new Student_Subtype;
+                    //   $stutype->student_id = auth()->user()->id;
+                    //   $stutype->subtype_id = $type->id;
+                    //   $stutype->save();
+                    $user->stusubtypes()->attach($type->id);
+                    $user->points = $user->points - $typepoints;
+                    $user->save();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'تم شاء الدرس'
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'عفا لاتمك قاط كافيه'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا   لايود در با الاسم'
+                ]);
+            }
+        }
+        if (auth()->user()->category_id == 2) {
+            $points = $user->points;
+            $type = Lesson::where('id', $request->class_id)->first();
+            if ($type) {
+                $typepoints = $type->points;
+                if ($points >= $typepoints) {
+                    $user->stulessons()->attach($type->id);
+                    //   $stutype = new Student_Lesson;
+                    //   $stutype->student_id = auth()->user()->id;
+                    //   $stutype->lesson_id = $type->id;
+                    //   $stutype->save();
+                    $user->points = $user->points - $typepoints;
+                    $user->save();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'تم شراء الدرس'
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'عفوا لتمك قاط ايه'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا   ايوج درس بهذا السم'
+                ]);
+            }
+        }
+    }
+    public function rate_course(Request $request)
+    {
+        $user = auth()->user();
+        if (auth()->user()->category_id == 1) {
+            $type = Type::where('id', $request->course_id)->first();
+            if ($type) {
+                $rate = new Type_Rate;
+                $rate->type_id = $type->id;
+                $rate->user_id = $user->id;
+                $rate->rate = $request->rate;
+                $rate->comment = $request->comment;
+                $rate->save();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'ت التقييم بنجا',
+                    'data' => new RateResource($rate)
 
-       if(auth()->user()->category_id == 1){
-         if(count($centers) > 0){
-           if($request->is_recently == 0){
-           $types = Type::orderBy('id','desc')->whereIn('center_id',$centers->pluck('id'))->orWhereIn("user_id",$centers->pluck('id'))->where('subjects_id',$request->subject_id)->where("active",1)->get();
-           }else{
-             $types = Type::orderBy('id','desc')->whereIn('center_id',$centers->pluck('id'))->orWhereIn("user_id",$centers->pluck('id'))->where('subjects_id',$request->subject_id)->where("active",1)->take(20)->get();  
-           }
-         }else{
-                 if($request->is_recently == 0){
-           $types = Type::where('subjects_id',$request->subject_id)->orderBy('id','desc')->where('center_id',null)->where("active",1)->get();
-           }else{
-             $types = Type::where('subjects_id',$request->subject_id)->orderBy('id','desc')->where('center_id',null)->where("active",1)->take(20)->get();  
-           }
-         }
-           $courses = TypeResource::collection($types);
-       }
-        else if(auth()->user()->category_id == 2){
-             if(count($centers) > 0){
-               if($request->is_recently == 0){
-           $types = TypesCollege::whereIn('center_id',$centers->pluck('id'))->orWhereIn("doctor_id",$centers->pluck('id'))->orderBy('id','desc')->where('subjectscollege_id',$request->subject_id)
-             ->where("active",1)->get();
-               }else{
-                 $types = TypesCollege::whereIn('center_id',$centers->pluck('id'))->orWhereIn("doctor_id",$centers->pluck('id'))->orderBy('id','desc')->where('subjectscollege_id',$request->subject_id)
-             ->where("active",1)
-             ->take(20)->get();  
-               }
-             }else{
-                          if($request->is_recently == 0){
-           $types = TypesCollege::where('subjectscollege_id',$request->subject_id)->where("active",1)->where('center_id',null)->orderBy('id','desc')->get();
-               }else{
-                 $types = TypesCollege::where('subjectscollege_id',$request->subject_id)->where("active",1)->where('center_id',null)->orderBy('id','desc')->take(20)->get();  
-               }
-             }
-              $courses = TypecollegeResource::collection($types);
-       }
-            return response()->json(['status' => true,
-                'message' => 'ل  الكورسات ',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفو   ليد كورس بذا الاسم'
+                ]);
+            }
+        } else if (auth()->user()->category_id == 2) {
+            $type = TypesCollege::where('id', $request->course_id)->first();
+            if ($type) {
+                $rate = new Typecollege_Rate;
+                $rate->typecollege_id = $type->id;
+                $rate->user_id = $user->id;
+                $rate->rate = $request->rate;
+                $rate->comment = $request->comment;
+                $rate->save();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'م التقييم نجاح',
+                    'data' => new RateResource($rate)
 
-              'data' => $courses
-               ]);
-   }public function center_code(Request $request){
-           $user = User::where('code',$request->code)->first();
-            return response()->json(['status' => true ,
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا   ليوجد كورس بذا الام'
+                ]);
+            }
+        } else if (auth()->user()->category_id == 3) {
+            $type = Course::where('id', $request->course_id)->first();
+            if ($type) {
+                $rate = new Course_Rate;
+                $rate->course_id = $type->id;
+                $rate->user_id = $user->id;
+                $rate->comment = $request->comment;
+                $rate->rate = $request->rate;
+                $rate->save();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'تم لتقيم بجاح',
+                    'data' => new RateResource($rate)
+
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'فوا   لاوجد كورس بهذا ااسم'
+                ]);
+            }
+        }
+    }
+    public function course_rate(Request $request)
+    {
+        $user = auth()->user();
+        if (auth()->user()->category_id == 1) {
+            $type = Type::where('id', $request->course_id)->first();
+            if ($type) {
+                $rates = $type->rates;
+
+                $allrates = array_sum($type->rates()->pluck('rate')->toArray());
+                return response()->json([
+                    'status' => true,
+                    'message' => 'كل تقيمات الكور ',
+                    'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
+                    'data' => RateResource::collection($rates)
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا   لايوجد كور بهذا الاس'
+                ]);
+            }
+        } else if (auth()->user()->category_id == 2) {
+            $type = TypesCollege::where('id', $request->course_id)->first();
+            if ($type) {
+                $rates = $type->rates;
+                $allrates = array_sum($type->rates()->pluck('rate')->toArray());
+                return response()->json([
+                    'status' => true,
+                    'message' => 'كل تقيما الكوس ',
+                    'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
+                    'data' => RateResource::collection($rates)
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'فوا   ايود كورس بهذا الاسم'
+                ]);
+            }
+        } else if (auth()->user()->category_id == 3) {
+            $type = Course::where('id', $request->course_id)->first();
+            if ($type) {
+                $rates = $type->rates;
+                $allrates = array_sum($type->rates()->pluck('rate')->toArray());
+                return response()->json([
+                    'status' => true,
+                    'message' => 'ل تقييمت الكورس ',
+                    'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
+                    'data' => RateResource::collection($rates)
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'عفوا   ليوجد كورس بذ ااسم'
+                ]);
+            }
+        }
+    }
+    public function alllecturers(Request $request)
+    {
+        if (auth()->user()->category_id == 1) {
+            $lecturers  =  Subject::where('id', $request->subject_id)->first()->teachers;
+        } elseif (auth()->user()->category_id == 2) {
+            $lecturers  =  SubjectsCollege::where('id', $request->subject_id)->first()->doctors;
+        }
+        return response()->json([
+            'status' => true, 'message' => ' كل المحاضري  ',
+            'data' =>  LecturerResource::collection($lecturers),
+        ]);
+    }
+    public function subjectcourses(Request $request)
+    {
+        $user = auth()->user();
+        $centers = auth()->user()->stdcenters;
+
+        if (auth()->user()->category_id == 1) {
+            if (count($centers) > 0) {
+                if ($request->is_recently == 0) {
+                    $types = Type::orderBy('id', 'desc')->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->where('subjects_id', $request->subject_id)->where("active", 1)->get();
+                } else {
+                    $types = Type::orderBy('id', 'desc')->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->where('subjects_id', $request->subject_id)->where("active", 1)->take(20)->get();
+                }
+            } else {
+                if ($request->is_recently == 0) {
+                    $types = Type::where('subjects_id', $request->subject_id)->orderBy('id', 'desc')->where('center_id', null)->where("active", 1)->get();
+                } else {
+                    $types = Type::where('subjects_id', $request->subject_id)->orderBy('id', 'desc')->where('center_id', null)->where("active", 1)->take(20)->get();
+                }
+            }
+            $courses = TypeResource::collection($types);
+        } else if (auth()->user()->category_id == 2) {
+            if (count($centers) > 0) {
+                if ($request->is_recently == 0) {
+                    $types = TypesCollege::whereIn('center_id', $centers->pluck('id'))->orWhereIn("doctor_id", $centers->pluck('id'))->orderBy('id', 'desc')->where('subjectscollege_id', $request->subject_id)
+                        ->where("active", 1)->get();
+                } else {
+                    $types = TypesCollege::whereIn('center_id', $centers->pluck('id'))->orWhereIn("doctor_id", $centers->pluck('id'))->orderBy('id', 'desc')->where('subjectscollege_id', $request->subject_id)
+                        ->where("active", 1)
+                        ->take(20)->get();
+                }
+            } else {
+                if ($request->is_recently == 0) {
+                    $types = TypesCollege::where('subjectscollege_id', $request->subject_id)->where("active", 1)->where('center_id', null)->orderBy('id', 'desc')->get();
+                } else {
+                    $types = TypesCollege::where('subjectscollege_id', $request->subject_id)->where("active", 1)->where('center_id', null)->orderBy('id', 'desc')->take(20)->get();
+                }
+            }
+            $courses = TypecollegeResource::collection($types);
+        }
+        return response()->json([
+            'status' => true,
+            'message' => 'ل  الكورسات ',
+
+            'data' => $courses
+        ]);
+    }
+    public function center_code(Request $request)
+    {
+        $user = User::where('code', $request->code)->first();
+        return response()->json([
+            'status' => true,
             'message' => 'مومات السنتر',
-               'data' => new CenterResource($user)
-               ]);
-       }public function mycenters(){
-          $user = auth()->user();
-          $centers= $user->stdcenters;
-           return response()->json(['status' => true ,
+            'data' => new CenterResource($user)
+        ]);
+    }
+    public function mycenters()
+    {
+        $user = auth()->user();
+        $centers = $user->stdcenters;
+        return response()->json([
+            'status' => true,
             'message' => 'معومات السنتر',
-               'data' =>  CenterResource::collection($centers)
-               ]); 
-       }public function getcoursegeneral(Request $request){
-           $subs = Sub::where('general_id','=',$request->id)->get();
-           return response()->json(['status' => true,
-           'data' => SubResource::collection($subs)
-           ]);
-       }public function searshforcourses(Request $request){
-	   $name = $request->name;
-   if(auth()->user()->category_id == 1){
-	   $types = Type::where('name_ar', 'LIKE', '%' . $name. '%')->get();
-	   $teachers = User::where('is_student',2)->where('name', 'LIKE', '%' . $name . '%')->get();
-	    $courses = new Collection;
-        $courses = $courses->merge($types);
-        foreach($teachers as $teacher){
-           $courses = $courses->merge($teacher->types);
+            'data' =>  CenterResource::collection($centers)
+        ]);
+    }
+    public function getcoursegeneral(Request $request)
+    {
+        $subs = Sub::where('general_id', '=', $request->id)->get();
+        return response()->json([
+            'status' => true,
+            'data' => SubResource::collection($subs)
+        ]);
+    }
+    public function searshforcourses(Request $request)
+    {
+        $name = $request->name;
+        if (auth()->user()->category_id == 1) {
+            $types = Type::where('name_ar', 'LIKE', '%' . $name . '%')->get();
+            $teachers = User::where('is_student', 2)->where('name', 'LIKE', '%' . $name . '%')->get();
+            $courses = new Collection;
+            $courses = $courses->merge($types);
+            foreach ($teachers as $teacher) {
+                $courses = $courses->merge($teacher->types);
+            }
+            return response()->json([
+                'status' => true,
+                'message' => 'الكور',
+                'data' => TypeResource::collection($courses),
+            ]);
+        } elseif (auth()->user()->category_id == 2) {
+            $types = TypesCollege::where('name_ar', 'LIKE', '%' . $name . '%')->get();
+            $teachers = User::where('is_student', 3)->where('name', 'LIKE', '%' . $name . '%')->get();
+            $courses = new Collection;
+            $courses = $courses->merge($types);
+            foreach ($teachers as $teacher) {
+                $courses = $courses->merge($teacher->typescollege);
+            }
+            return response()->json([
+                'status' => true,
+                'message' => 'لكورسات',
+                'data' => TypecollegeResource::collection($courses),
+
+            ]);
         }
-	     return response()->json([
-           'status' => true,
-           'message' => 'الكور',
-           'data' => TypeResource::collection($courses),
-           ]);
-	   }elseif(auth()->user()->category_id == 2){
-		   $types = TypesCollege::where('name_ar', 'LIKE', '%' . $name. '%')->get();
-	   $teachers = User::where('is_student',3)->where('name', 'LIKE', '%' . $name . '%')->get();
-	    $courses = new Collection;
-        $courses = $courses->merge($types);
-        foreach($teachers as $teacher){
-           $courses = $courses->merge($teacher->typescollege);
-        }
-	    return response()->json([
-           'status' => true,
-           'message' => 'لكورسات',
-           'data' => TypecollegeResource::collection($courses),
-     
-           ]);
-   }
-   }public function sendmessage(Request $request){
-     $user = auth()->user();
-	   $message = new Message;
-	   $message->message = $request->message;
-	   $message->phone = $user->phone;
-	   $message->user_id = $user->id;
-	   $message->save();
-	   return response()->json(['status' => true,'message' => 'تم ارسل الرساله بنجاح' ]);
-   }public function lecturer_cover(Request $request){
-     $lect = User::where('id',$request->id)->firstOrFail();
-     return response()->json(['status' => true,
-                 'data' => [
-                   'id' => $lect->id,
-                   'cover' => $lect->printsplash ? asset('uploads/'.$lect->printsplash) : ''
-                 ]            
-                             ]);
-   }public function app_status(){
-       return response()->json(["status" => true,"old_app_status" => 1,
-       "new_app_status" => 0]);
-   }
+    }
+    public function sendmessage(Request $request)
+    {
+        $user = auth()->user();
+        $message = new Message;
+        $message->message = $request->message;
+        $message->phone = $user->phone;
+        $message->user_id = $user->id;
+        $message->save();
+        return response()->json(['status' => true, 'message' => 'تم ارسل الرساله بنجاح']);
+    }
+    public function lecturer_cover(Request $request)
+    {
+        $lect = User::where('id', $request->id)->firstOrFail();
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'id' => $lect->id,
+                'cover' => $lect->printsplash ? asset('uploads/' . $lect->printsplash) : ''
+            ]
+        ]);
+    }
+    public function app_status()
+    {
+        return response()->json([
+            "status" => true, "old_app_status" => 1,
+            "new_app_status" => 0
+        ]);
+    }
 }
