@@ -425,7 +425,7 @@ class AuthController extends Controller
             $result = [];
             $subject_ids = [];
             foreach ($users as $user) {
-                $subject_ids[] = $user->subjects->pluck("id")->toArray();
+                $subject_ids[] = $user->types->pluck("subjects_id")->toArray();
             }
             $result = call_user_func_array("array_merge", $subject_ids);
             $subjects = Subject::where('years_id', auth()->user()->year_id)->whereIn('id', $result)->where("active", 1)->get();
@@ -435,7 +435,7 @@ class AuthController extends Controller
             $result = [];
             $subject_ids = [];
             foreach ($users as $user) {
-                $subject_ids[] = $user->subjectscollege->pluck("id")->toArray();
+                $subject_ids[] = $user->typescollege->pluck("subjectscollege_id")->toArray();
             }
             $result = call_user_func_array("array_merge", $subject_ids);
 
