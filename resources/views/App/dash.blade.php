@@ -20,6 +20,7 @@
     <link href="{{asset('css/all.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/Chart.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('css/sweet-alert.css')}}" rel="stylesheet"> --}}
     <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
 
@@ -45,8 +46,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/css/bootstrap-select.min.css" integrity="sha512-z13ghwce5srTmilJxE0+xd80zU6gJKJricLCq084xXduZULD41qpjRE9QpWmbRyJq6kZ2yAaWyyPAgdxwxFEAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         #loading {
             width: 100%;
@@ -802,6 +802,8 @@
     };
     $(".selectpicker").selectpicker();
 </script>
+{{-- <script src="{{asset('js/sweet-alert.min.js')}}"></script> --}}
+
 
 @yield('scripts')
 
