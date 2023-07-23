@@ -76,6 +76,14 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+
+        
+        'uploads' => [
+            'driver' => 'local',
+            'root' => public_path() . '/uploads',
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
         // 'google' => [
         //     'driver' => 'google',
         //     'clientId' => env("GOOGLE_CLIENT_ID"),
