@@ -20,16 +20,15 @@
     <link href="{{asset('css/all.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/Chart.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link href="{{asset('css/sweet-alert.css')}}" rel="stylesheet">
+    {{-- <script src="{{asset('js/sweetalert2.all.min.js')}}"></script> --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
-    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/promise-polyfill/8.3.0/polyfill.min.js" integrity="sha512-310GmPyrxvjHYxcTy7HdjCN7EYL9ou4DldEiu1oABpNFUcEbPfcESbQ+4lZBIAsYb2KuKjJpvWaDxQUINj4I8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
     <link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
@@ -45,8 +44,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/css/bootstrap-select.min.css" integrity="sha512-z13ghwce5srTmilJxE0+xd80zU6gJKJricLCq084xXduZULD41qpjRE9QpWmbRyJq6kZ2yAaWyyPAgdxwxFEAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         #loading {
             width: 100%;
@@ -802,6 +800,8 @@
     };
     $(".selectpicker").selectpicker();
 </script>
+<script src="{{asset('js/sweet-alert.min.js')}}"></script>
+
 
 @yield('scripts')
 
