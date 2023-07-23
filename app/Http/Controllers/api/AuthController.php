@@ -420,6 +420,7 @@ class AuthController extends Controller
     {
         // $user_ids = auth()->user()->centerstudents->pluck("id");
         $users = auth()->user()->stdcenters;
+        dd($users);
         $offers = Offer::whereIn("id", $users->pluck("id"))->get();
         if (auth()->user()->category_id == 1) {
             $result = [];
