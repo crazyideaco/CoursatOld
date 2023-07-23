@@ -23,6 +23,8 @@
     <link href="{{asset('css/sweet-alert.css')}}" rel="stylesheet">
     {{-- <script src="{{asset('js/sweetalert2.all.min.js')}}"></script> --}}
 
+    <!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/promise-polyfill/8.3.0/polyfill.min.js" integrity="sha512-310GmPyrxvjHYxcTy7HdjCN7EYL9ou4DldEiu1oABpNFUcEbPfcESbQ+4lZBIAsYb2KuKjJpvWaDxQUINj4I8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
