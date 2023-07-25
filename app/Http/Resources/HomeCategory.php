@@ -23,12 +23,8 @@ class HomeCategory extends JsonResource
 
         $result = [];
         //get lecturer_ids
-        $lecturer_ids = [];
-        foreach ($users as $user) {
-            $lecturer_ids[] = $user->lecturers->pluck("id")->toArray();
-        }
-        $result = call_user_func_array("array_merge", $lecturer_ids);
-        dd($result);
+
+
         if (auth()->user()->category_id == 1) {
             $centers = auth()->user()->stdcenters;
             if (count($centers) > 0) {
@@ -38,6 +34,11 @@ class HomeCategory extends JsonResource
                 $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->get());
                 $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->orderBy('created_at', 'desc')->take(4)->get());
             }
+            $lecturer_ids = [];
+            foreach ($users as $user) {
+                $lecturer_ids[] = $user->teachers->pluck("id")->toArray();
+            }
+            $result = call_user_func_array("array_merge", $lecturer_ids);
             $lectuers = \App\Subject::where('id', $this->id)->first()->teachers()->where("active", 1)->whereIn("id",$result)->get();
         } else if (auth()->user()->category_id == 2) {
             $centers = auth()->user()->stdcenters;
@@ -51,6 +52,11 @@ class HomeCategory extends JsonResource
 
                 $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->where('center_id', null)->orderBy('created_at', 'desc')->take(4)->get());
             }
+            $lecturer_ids = [];
+            foreach ($users as $user) {
+                $lecturer_ids[] = $user->dockers->pluck("id")->toArray();
+            }
+            $result = call_user_func_array("array_merge", $lecturer_ids);
             $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("active", 1)->whereIn("id",$result)->get();
         } else if (auth()->user()->category_id == 3) {
             $courses = CourseResource::collection(\App\Course::where('active', 1)->get());
