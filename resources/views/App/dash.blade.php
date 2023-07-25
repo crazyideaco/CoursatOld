@@ -475,12 +475,13 @@
                             </div>
                             <div class="col-6">
                                 <a href="#setting" data-toggle="collapse">الاعدادات</a>
-                                <div id="setting" class="collapse @if(request()->is('states') || request()->is('admins') ||  request()->is('cities') ||
+                                <div id="setting" class="collapse @if(request()->is('states') ||request()->is('states') || request()->is('admins') ||  request()->is('cities') ||
                              request()->is('categoryall') || request()->is('messages') ||
                              request()->is('website_students')) show  @endif">
                                     <a href="{{route('categoryall')}}" class="@if(request()->is('categoryall'))active @endif">
                                         الفئات</a>
-
+                                        <a href="{{route('offers')}}" class="@if(request()->is('offers'))active @endif">
+                                            السلايدر</a>
                                     <a href="{{route('admins')}}" class="@if(request()->is('admins'))active @endif">
                                         الادمنز</a>
                                     <a href="{{route('states')}}" class="@if(request()->is('states'))active @endif">
