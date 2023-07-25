@@ -65,19 +65,7 @@ class ExamController extends Controller
     ]);
   }
 
-  /**
-   * Fetch exam questions.
-   *
-   * @param \Illuminate\Http\Request $request The request object.
-   * @return \Illuminate\Http\JsonResponse The JSON response.
-   */
 
-  /**
-   * Fetch exam questions.
-   *
-   * @param \Illuminate\Http\Request $request The request object.
-   * @return \Illuminate\Http\JsonResponse The JSON response.
-   */
   public function fetch_exam_questions(Request $request)
   {
     $exam_id = $request->exam_id;
