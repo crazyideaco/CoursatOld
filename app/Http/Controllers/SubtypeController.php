@@ -177,7 +177,7 @@ class SubtypeController extends Controller
                             $subtype->save();
                             if ($request->tag_id) {
                                 $subtype->tags()->attach($request->tag_id);
-                            }
+                            
                         }
 
                         foreach ($request->url as $k => $i) {
