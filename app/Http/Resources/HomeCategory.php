@@ -54,7 +54,7 @@ class HomeCategory extends JsonResource
             }
             $lecturer_ids = [];
             foreach ($users as $user) {
-                $lecturer_ids[] = $user->dockers->pluck("id")->toArray();
+                $lecturer_ids[] = $user->doctors->pluck("id")->toArray();
             }
             $result = call_user_func_array("array_merge", $lecturer_ids);
             $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("active", 1)->whereIn("id",$result)->get();
