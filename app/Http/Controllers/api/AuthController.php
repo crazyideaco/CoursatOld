@@ -898,14 +898,14 @@ class AuthController extends Controller
             }
             $result = call_user_func_array("array_merge", $lecturer_ids);
 
-            $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("id", $result)->get();
+            $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("users.id", $result)->get();
         } elseif (auth()->user()->category_id == 2) {
             $lecturer_ids = [];
             foreach ($users as $user) {
                 $lecturer_ids[] = $user->doctors->pluck("id")->toArray();
             }
             $result = call_user_func_array("array_merge", $lecturer_ids);
-            $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("id", $result)->get();
+            $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("users.id", $result)->get();
         }
         return response()->json([
             'status' => true, 'message' => ' كل المحاضري  ',
