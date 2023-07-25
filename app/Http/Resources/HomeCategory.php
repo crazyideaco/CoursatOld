@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\TypeResource;
-use App\Http\Resources\TypecollegeResource;
 use App\Http\Resources\CourseResource;
-use App\Http\Resources\OfferResource;
 use App\Http\Resources\LecturerResource;
+use App\Http\Resources\TypecollegeResource;
+use App\Http\Resources\TypeResource;
+use Illuminate\Http\Resources\Json\JsonResource;
+
 class HomeCategory extends JsonResource
 {
     /**
@@ -18,42 +18,50 @@ class HomeCategory extends JsonResource
      */
     public function toArray($request)
     {
-   
-        
-       if(auth()->user()->category_id == 1){
-         $centers = auth()->user()->stdcenters;
-            if(count($centers) > 0){
-           $courses = TypeResource::collection(\App\Type::where('active',1)->where('subjects_id',$this->id)->whereIn('center_id',$centers->pluck('id'))->orWhereIn("user_id",$centers->pluck('id'))->get());
-           $latest_courses = TypeResource::collection(\App\Type::where('active',1)->where('subjects_id',$this->id)->whereIn('center_id',$centers->pluck('id'))->orWhereIn("user_id",$centers->pluck('id'))->orderBy('created_at','desc')->take(4)->get());
-            }else{
-            $courses = TypeResource::collection(\App\Type::where('active',1)->where('subjects_id',$this->id)->where('center_id',null)->get());
-           $latest_courses = TypeResource::collection(\App\Type::where('active',1)->where('subjects_id',$this->id)->where('center_id',null)->orderBy('created_at','desc')->take(4)->get());  
+
+        $users = auth()->user()->stdcenters;
+
+        $result = [];
+        //get lecturer_ids
+        $lecturer_ids = [];
+        foreach ($users as $user) {
+            $lecturer_ids[] = $user->lecturers->pluck("id")->toArray();
+        }
+        $result = call_user_func_array("array_merge", $lecturer_ids);
+        if (auth()->user()->category_id == 1) {
+            $centers = auth()->user()->stdcenters;
+            if (count($centers) > 0) {
+                $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->get());
+                $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
+            } else {
+                $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->get());
+                $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->orderBy('created_at', 'desc')->take(4)->get());
             }
-           $lectuers = \App\Subject::where('id',$this->id)->first()->teachers->where("active",1);
-       }else if(auth()->user()->category_id == 2){
-         $centers = auth()->user()->stdcenters;
-         if(count($centers) > 0){
-            $courses = TypecollegeResource::collection(\App\TypesCollege::where('active',1)->where('subjectscollege_id',$this->id)->whereIn('center_id',$centers->pluck('id'))
-                                                       ->orWhereIn("doctor_id",$centers->pluck('id'))->get());
-        
-         $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active',1)->where('subjectscollege_id',$this->id)->whereIn('center_id',$centers->pluck('id'))->orWhereIn("doctor_id",$centers->pluck('id'))->orderBy('created_at','desc')->take(4)->get());
-         }else{
-                $courses = TypecollegeResource::collection(\App\TypesCollege::where('active',1)->where('subjectscollege_id',$this->id)->where('center_id',null)->get());
-        
-         $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active',1)->where('subjectscollege_id',$this->id)->where('center_id',null)->orderBy('created_at','desc')->take(4)->get());
-         }
-             $lectuers = \App\SubjectsCollege::where('id',$this->id)->first()->doctors->where("active",1);
-       }else if(auth()->user()->category_id == 3){
-     $courses = CourseResource::collection(\App\Course::where('active',1)->get());
-         $latest_courses = CourseResource::collection(\App\Course::where('active',1)->orderBy('created_at','desc')->take(4)->get());
-       }
- 
-           return [
-               'id' => $this->id,
-               'title' => $this->name_ar,
-           'courses' => $courses,
-           'latest_courses' => $latest_courses,
-           'lectuers'=> LecturerResource::collection($lectuers),
+            $lectuers = \App\Subject::where('id', $this->id)->first()->teachers()->where("active", 1)->whereIn("id",$result)->get();
+        } else if (auth()->user()->category_id == 2) {
+            $centers = auth()->user()->stdcenters;
+            if (count($centers) > 0) {
+                $courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->whereIn('center_id', $centers->pluck('id'))
+                        ->orWhereIn("doctor_id", $centers->pluck('id'))->get());
+
+                $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("doctor_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
+            } else {
+                $courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->where('center_id', null)->get());
+
+                $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->where('center_id', null)->orderBy('created_at', 'desc')->take(4)->get());
+            }
+            $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("active", 1)->whereIn("id",$result)->get();
+        } else if (auth()->user()->category_id == 3) {
+            $courses = CourseResource::collection(\App\Course::where('active', 1)->get());
+            $latest_courses = CourseResource::collection(\App\Course::where('active', 1)->orderBy('created_at', 'desc')->take(4)->get());
+        }
+
+        return [
+            'id' => $this->id,
+            'title' => $this->name_ar,
+            'courses' => $courses,
+            'latest_courses' => $latest_courses,
+            'lectuers' => LecturerResource::collection($lectuers),
         ];
     }
 }
