@@ -400,7 +400,7 @@ class AuthController extends Controller
         );
         if ($validator->passes()) {
             if ($user = User::where('code', $request->code)->first()) {
-                $user->centerstudents()->sync(auth()->id());
+                $user->centerstudents()->attach(auth()->id());
                 //   $u = new User_Owner;
                 //   $u->user_id = auth()->id();
                 //   $u->owner_id = $user->id;
@@ -437,7 +437,7 @@ class AuthController extends Controller
             foreach ($users as $user) {
                 $subject_ids[] = $user->centertypescollege->pluck("subjectscollege_id")->toArray();
             }
-    
+
             $result = call_user_func_array("array_merge", $subject_ids);
 
             $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->whereIn('id', $result)->where("active", 1)->get();
@@ -492,7 +492,7 @@ class AuthController extends Controller
         );
         if ($validator->passes()) {
             if ($user = User::where('code', $request->code)->first()) {
-                $user->centerstudents()->sync(auth()->id());
+                $user->centerstudents()->attach(auth()->id());
                 //   $u = new User_Owner;
                 //   $u->user_id = auth()->id();
                 //   $u->owner_id = $user->id;
