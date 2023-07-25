@@ -322,9 +322,9 @@ class SubtypeController extends Controller
                                         $video->paid = 0;
                                     }
                                 }
-                                $image = $request->images[$k];
-                                $image->move('uploads', time() . $image->getClientOriginalName());
-                                $video->image = time() . $request->images[$k]->getClientOriginalName();
+                                // $image = $request->images[$k];
+                                // $image->move('uploads', time() . $image->getClientOriginalName());
+                                // $video->image = time() . $request->images[$k]->getClientOriginalName();
                                 if ($request->hasFile('pdf')) {
                                     $pdf = $request->pdf[$k];
                                     $pdf->move('uploads', time() . $pdf->getClientOriginalName());
@@ -362,7 +362,7 @@ class SubtypeController extends Controller
                         }
                     }
                 }
-            }elseif (Auth::user() && Auth::user()->is_student == 2) {
+            } elseif (Auth::user() && Auth::user()->is_student == 2) {
 
                 $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
                 if ($paqauser == null) {

@@ -13,7 +13,7 @@
                   <!--start heed-->
                            <div class="heed">
                     <div class="row">
-                <div class="profile">
+                <div class="profile"> 
                     <div class="row">
                         <div class="col-3">
                             <img src="{{asset('images/profile.svg')}}">
@@ -38,7 +38,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -91,7 +91,7 @@
           <input type="hidden" value="{{$id}}" id="id2">
                               <input id="kt" type="file" onchange="getvid()" class="form-control in ehabtalaat" name="intro">
                                         <label for="kt" class="ahmed">اضافة انترو</label>
-                                        
+
                                         @error('intro')
                                              <p style="color:red;">{{$message}}</p>
                                         @enderror
@@ -127,7 +127,7 @@
                             <div class="row">
                                 <div class="form-group col-4">
                                     <label>اسم الحصه بالعربى</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " required name="name_ar"
                             id="name_ar">
                             @error('name_ar')
@@ -136,8 +136,8 @@
                            </div>
                            <div class="form-group col-4">
                                     <label>اسم الحصه بالانجليزي</label>
-                    <input type="text" class="form-control" 
-                            placeholder="ادخل اسم " required name="name_en" 
+                    <input type="text" class="form-control"
+                            placeholder="ادخل اسم " required name="name_en"
                             id="name_en">
                             @error('name_en')
                            <p style="color:red;">{{$message}}</p>
@@ -150,19 +150,19 @@
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                   <div class="form-group col-3">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                               <div class="col-6">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker" data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}">{{$tag->name}}</option>
                                   @endforeach
@@ -172,9 +172,9 @@
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;" min="0" type="number" name="order_number">
                                </div>
-                                       
+
                                 </div>
-                           
+
                   @elseif(Auth::user() && Auth::user()->is_student == 2)
                   <?php
                    $iduser=Auth::user()->id;
@@ -184,12 +184,12 @@
                        $yearr= \App\Year::whereIn('id',$useryear)->get();
                        $stages= \App\Year::whereIn('id',$userstage)->get();
 
-                  
+
                   ?>
                               <div class="row">
                                 <div class="form-group col-3">
                                     <label>اسم الحصه بالعربى</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_ar" required id="name_ar">
                             @error('name_ar')
                            <p style="color:red;">{{$message}}</p>
@@ -197,7 +197,7 @@
                            </div>
                            <div class="form-group col-3">
                                     <label>اسم الحصه بالانجليزي</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_en" required id="name_en">
                             @error('name_en')
                            <p style="color:red;">{{$message}}</p>
@@ -208,19 +208,19 @@
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                   <div class="form-group col-3">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                        <div class="col-6">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}">{{$tag->name}}</option>
                                   @endforeach
@@ -230,14 +230,14 @@
                                <label>ترتيب الحصص </label>
                                <input style="height: 36px;" min="0" type="number" name="order_number">
                                </div>
-                              
+
                                 </div>
                             </div>
                             @elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1)
                             <div class="row">
                                 <div class="form-group col-3">
                                     <label>اسم الحصه بالعربى</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_ar" required id="name_ar">
                             @error('name_ar')
                            <p style="color:red;">{{$message}}</p>
@@ -245,7 +245,7 @@
                            </div>
                             <div class="form-group col-3">
                                     <label>اسم الحصه بالانجليزي</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_en" required id="name_en">
                             @error('name_en')
                            <p style="color:red;">{{$message}}</p>
@@ -256,19 +256,19 @@
 
                                <input id="points" type="number" class="form-control" name="points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                   <div class="form-group col-3">
                                     <label> نقاط المذكره</label>
 
                                <input id="part_points" type="number" class="form-control" name="part_points"
                                placeholder="النقاط">
-                                      
+
                                        </div>
                                           <div class="col-6">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker " data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}">{{$tag->name}}</option>
                                   @endforeach
@@ -279,7 +279,7 @@
                                <input style="height: 36px;" min="0" type="number" name="order_number">
                                </div>
                                 </div>
-                          
+
                             @endif
                    <div class="form-group col-6">
                                    <label>الوصف </label>
@@ -287,7 +287,7 @@
                                </div>
                       </div>
                          </div>
-                            <section id="s0" >      
+                            <section id="s0" >
                             <div class="row">
                                <div class="col-6 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
@@ -320,7 +320,7 @@
                             <p style="color:red;">{{$message}}</p>
                             @enderror
                </div>
-                                    
+
                             <div class="col-6 text-center set-img">
                                 <img src="{{asset('images/set-img.svg')}}" id="b0" class="realboard">
                                 <br>
@@ -330,8 +330,8 @@
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
                            </div>
-                
-                            </div>                        
+
+                            </div>
                             <div class="row mt-5">
                                      <div class="form-group col-4">
                                   <input id="name_ar" type="text" class="form-control name_ar" required style="width:100%" name="names_ar[]"
@@ -345,12 +345,12 @@
                                <label for="pay" class="paylabel">مدفوع</label>
                                <input class="pay" type="checkbox"  value="1" name="pay[]">
                                <br>
-                               
+
                            </div>
                                      <div class="col-6">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker "data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}">{{$tag->name}}</option>
                                   @endforeach
@@ -406,7 +406,7 @@
             <!--start foter-->
             <div class="foter">
                 <div class="row">
-                    
+
                     <div class="col-12 text-center">
                         <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
@@ -421,16 +421,16 @@
 @section("scripts")
 <script>
    $('form').ajaxForm({
-  
+
       beforeSend:function(){
-        
+
         $('#success').empty();
-        
+
                 <?php
 $msg = null;
 $type = \App\Type::where('id',$id)->first();
 if(auth()->user() && auth()->user()->isAdmin == 'admin'){
-      
+
     $paqauser= \App\Paqa_User::with("paqa")->where("user_id",$type->user_id)->first();
     if($paqauser==null){
      $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
@@ -452,7 +452,7 @@ if(auth()->user() && auth()->user()->isAdmin == 'admin'){
 //return response()->json(['status' => false,'errors' => $msg]);
 }
 }if(Auth::user() && Auth::user()->is_student == 2){
-             
+
   $paqauser= \App\Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
   if($paqauser==null){
     $msg='انت غير مشترك في باقه برجاء الاشتراك في باقه';
@@ -504,7 +504,7 @@ var id = selected.value;
        success: function(result){
         $('#subject').empty();
         $('#subject').html(result);
-        
+
        }
 
       });
@@ -519,10 +519,10 @@ var id = selected.value;
       contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
-       
+
         $('#type').empty();
         $('#type').html(result[1]);
-        
+
        }
 
       });
@@ -542,7 +542,7 @@ var id = selected.value;
         $('#teacher').html(result[0]);
         $('#type').empty();
         $('#type').html(result[1]);
-        
+
        }
 
       });
@@ -558,10 +558,10 @@ var id = selected.value;
       contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
-       
+
         $('#type').empty();
         $('#type').html(result[1]);
-        
+
        }
 
       });
@@ -577,10 +577,10 @@ var id = selected.value;
       contentType: "application/json; charset=utf-8",
        dataType: "Json",
        success: function(result){
-       
+
         $('#type').empty();
         $('#type').html(result[0]);
-        
+
        }
 
       });
@@ -642,7 +642,7 @@ function getboard(f){
 }
 let c = 1;
 $("#clicked").click(function(){
-    $('.info').append(`<section id="s${c}">      
+    $('.info').append(`<section id="s${c}">
         <div class="row">
                        <div class="col-6 text-center mb-5 set-img">
                     <video width="200" height="200" controls >
@@ -675,7 +675,7 @@ $("#clicked").click(function(){
                             <p style="color:red;">{{$message}}</p>
                             @enderror
                </div>
-                                    
+
                             <div class="col-6 text-center set-img">
                                 <img src="{{asset('images/set-img.svg')}}" id="b${c}"  class="realboard">
                                 <br>
@@ -685,8 +685,8 @@ $("#clicked").click(function(){
                                         <p style="color:red;">{{$message}}</p>
                                         @enderror
                            </div>
-                
-                            </div>  
+
+                            </div>
                             <div class="row mt-5 d-flex justify-content-center">
                                      <div class="form-group col-4">
                                   <input id="name_ar" type="text" class="form-control name_ar" name="names_ar[]"
@@ -700,8 +700,8 @@ $("#clicked").click(function(){
                                <label for="pay" class="paylabel">مدفوع</label>
                                <input class="pay" type="checkbox"  value="1" name="pay[]">
                                <br>
-                               
-                           </div>  
+
+                           </div>
   <div class="form-group col-3">
                                <label>ترتيب الفيديو </label>
                                <input style="height: 36px;" min="0" type="number" name="order[]">
@@ -718,14 +718,14 @@ $("#clicked").click(function(){
                                 </div>
                                 <div class="col-1"></div>
                                 <div class="col-3 h-25" style="transform: translateY(280%);">
-                                   <button class="form-control btn btn-danger btn-sm" onclick="removesection(${c})" 
+                                   <button class="form-control btn btn-danger btn-sm" onclick="removesection(${c})"
                                     > حذف</button>
                                 </div>
                            </div>
-                           
-                         
-                            
-                          
+
+
+
+
                           </section>`);
                             c++;
 });
