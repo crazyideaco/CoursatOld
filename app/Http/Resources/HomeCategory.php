@@ -28,6 +28,7 @@ class HomeCategory extends JsonResource
             $lecturer_ids[] = $user->lecturers->pluck("id")->toArray();
         }
         $result = call_user_func_array("array_merge", $lecturer_ids);
+        dd($result);
         if (auth()->user()->category_id == 1) {
             $centers = auth()->user()->stdcenters;
             if (count($centers) > 0) {
