@@ -2,69 +2,57 @@
 
 namespace App\Http\Controllers\api;
 
-use Illuminate\Http\Request;
+use App\Course;
+use App\Course_Rate;
+use App\General;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CenterResource;
+use App\Http\Resources\CourseResource;
+use App\Http\Resources\GeneralResource;
+use App\Http\Resources\HomeCategory;
+use App\Http\Resources\LecturerResource;
+use App\Http\Resources\LessonResource;
 use App\Http\Resources\LevelResource;
+use App\Http\Resources\OfferResource;
 use App\Http\Resources\RateResource;
 use App\Http\Resources\ResourceUser;
 use App\Http\Resources\StateResource;
-use App\Http\Resources\GeneralResource;
-use App\General;
-use Illuminate\Support\Collection;
-use App\Http\Resources\UniversityResource;
-use App\Http\Resources\ResourceSellerLocation;
-use App\Http\Resources\VideogeneralResource;
-use App\Http\Resources\ResourcePainterInfo;
-use App\Notifications\SignupActivate;
-use App\Http\Resources\UserResource;
-use App\Http\Resources\LessonResource;
+use App\Http\Resources\SubResource;
 use App\Http\Resources\SubtypeResource;
-use App\Http\Resources\CourseResource;
-use App\Http\Resources\TypeResource;
-use App\Http\Resources\LecturerResource;
-use App\Http\Resources\CenterResource;
 use App\Http\Resources\TypecollegeResource;
-use App\Http\Resources\OfferResource;
-use App\User;
-use App\Sub;
-use App\User_Owner;
-use Validator;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use App\Type;
-use App\Course;
-use App\Stage;
-use App\Http\Resources\VideocollegeResource;
-use App\Http\Resources\VideoResource;
-use App\University;
-use App\TypesCollege;
-use App\Student_Type;
-use App\Student_Typecollege;
-use App\Student_Course;
-use App\Subtype;
-use App\Student_Subtype;
-use App\Student_Lesson;
+use App\Http\Resources\TypeResource;
+use App\Http\Resources\UniversityResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\VideogeneralResource;
 use App\Lesson;
-use App\Course_Rate;
-use App\Typecollege_Rate;
-use App\Type_Rate;
+use App\Message;
+use App\Notification;
+use App\Offer;
+use App\Stage;
+use App\Sub;
 use App\Subject;
 use App\SubjectsCollege;
-use App\Message;
-use App\Http\Resources\SubResource;
+use App\Subtype;
+use App\Type;
+use App\Typecollege_Rate;
+use App\TypesCollege;
+use App\Type_Rate;
+use App\University;
+use App\User;
 use App\VideosGeneral;
-use App\Notification;
 use Carbon\Carbon;
-use App\Offer;
-use App\Http\Resources\HomeCategory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Validator;
 
 class AuthController extends Controller
 {
     public function mynotifications()
     {
         $user = auth()->user();
-        $nots =  Notification::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        $nots = Notification::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
         //     dd($nots);
         $alldata = [];
         if (count($nots) > 0) {
@@ -75,8 +63,8 @@ class AuthController extends Controller
                 $data = [
                     "to" => $to,
                     "data" => [
-                        "title" =>  $not->title,
-                        'body' =>  $not->text,
+                        "title" => $not->title,
+                        'body' => $not->text,
                         'time' => $time->diffForHumans(),
                     ],
                 ];
@@ -86,15 +74,15 @@ class AuthController extends Controller
         }
         return response()->json([
             'status' => true, 'message' => 'كل اشعارتك',
-            'notifications' => $alldata
+            'notifications' => $alldata,
         ]);
     }
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'    => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:255|unique:users',
             'phone' => 'required|min:7|unique:users',
-            //	'email'=>'unique:users',
+            //    'email'=>'unique:users',
             'password' => 'required|min:6',
         ], [
             'required' => 'مطلوب ادخال الح',
@@ -102,7 +90,7 @@ class AuthController extends Controller
             'email.unique' => 'هذا الحقل موجود ن قبل',
             'password.min' => 'حقل كلمه السر ل يجب ان يقل عن 6 احرف',
             'email' => 'اكب الايميل بشكل صحيح',
-            'name.unique' => 'ااسم تم تله من بله'
+            'name.unique' => 'ااسم تم تله من بله',
         ]);
         if ($validator->passes()) {
             if (isset($request->email)) {
@@ -112,7 +100,7 @@ class AuthController extends Controller
 
                 ], [
                     'email.unique' => 'هذا اليميل مستخدم ن قبل ',
-                    'email.email' => 'حقل اامل يجب ان يكون امي'
+                    'email.email' => 'حقل اامل يجب ان يكون امي',
                 ]);
                 if ($validator->fails()) {
                     return response()->json(['status' => false, 'message_ar' => $validator->messages()->first()]);
@@ -128,7 +116,7 @@ class AuthController extends Controller
             $user->email = $request->email;
             $user->code = $request->phone;
 
-            // 		if($request->hasFile('image'))
+            //         if($request->hasFile('image'))
             //         {
             //             $image = $request->image;
             //             $image->move('uploads' , $image->getClientOriginalName());
@@ -144,16 +132,13 @@ class AuthController extends Controller
                 $u->centerstudents()->attach($user->id);
             }
             return response()->json([
-                'status'     =>  'true',
+                'status' => 'true',
                 'message' => 'تم سجل المستخدم',
-                'data' => new  UserResource($user),
-
+                'data' => new UserResource($user),
 
             ]);
         } else {
             $msg = $validator->messages()->first();
-
-
 
             return response()->json(['status' => "false", 'message_ar' => $msg], 401);
         }
@@ -163,27 +148,25 @@ class AuthController extends Controller
         $user = auth()->user();
         $user->phone_verify = 1;
         $user->save();
-        return response()->json(['status' => true, 'data' => new  UserResource($user)]);
+        return response()->json(['status' => true, 'data' => new UserResource($user)]);
     }
     public function register_info(Request $request)
     {
-        //     	$validator = Validator::make($request->all(), [
+        //         $validator = Validator::make($request->all(), [
 
-        //     		'state_id'=>'required|',
-        //     		'city_id'=>'required|',
+        //             'state_id'=>'required|',
+        //             'city_id'=>'required|',
 
-
-        // 	]);
+        //     ]);
         if (auth()->guard('api')->check()) {
             $user = User::where('id', auth()->guard('api')->id())->first();
             if ($request->is_primary == 1) {
                 $user->category_id = 1;
 
-
                 $user->stage_id = $request->stage_id;
                 $user->year_id = $request->year_id;
                 $user->is_scientific = $request->is_scientific;
-                $user->info_compelete  = 1;
+                $user->info_compelete = 1;
             } elseif ($request->is_primary == 0) {
                 $user->category_id = 2;
 
@@ -191,7 +174,7 @@ class AuthController extends Controller
                 $user->college_id = $request->college_id;
                 $user->division_id = $request->department_id;
                 $user->section_id = $request->college_year_id;
-                $user->info_compelete  = 1;
+                $user->info_compelete = 1;
             }
             $user->save();
         } else {
@@ -206,7 +189,7 @@ class AuthController extends Controller
                 $user->stage_id = $request->stage_id;
                 $user->year_id = $request->year_id;
                 $user->is_scientific = $request->is_scientific;
-                $user->info_compelete  = 1;
+                $user->info_compelete = 1;
             } elseif ($request->is_primary == 0) {
                 $user->category_id = 2;
 
@@ -214,15 +197,14 @@ class AuthController extends Controller
                 $user->college_id = $request->college_id;
                 $user->division_id = $request->department_id;
                 $user->section_id = $request->college_year_id;
-                $user->info_compelete  = 1;
+                $user->info_compelete = 1;
             }
             $user->save();
         }
         return Response()->json([
-            'status'     =>  'true',
+            'status' => 'true',
 
-            'data' => new  UserResource($user),
-
+            'data' => new UserResource($user),
 
         ]);
     }
@@ -235,7 +217,7 @@ class AuthController extends Controller
         ], [
             'phone.required' => 'حقل الهتف مطلوب',
             'password.required' => 'حقل كمه السر موب',
-            'password.min' => 'كلمه السر لايجب ان تقل عن 6 احرف'
+            'password.min' => 'كلمه السر لايجب ان تقل عن 6 احرف',
         ]);
 
         if ($validator->passes()) {
@@ -258,7 +240,7 @@ class AuthController extends Controller
                     $user->device_id = $request->device_id;
                     $user->save();
                     return [
-                        'status'     =>  'true',
+                        'status' => 'true',
                         'data' => new UserResource($user),
 
                     ];
@@ -267,7 +249,7 @@ class AuthController extends Controller
                     //                 $user->device_token = $request->device_token;
                     //  $user->device_id = $request->device_id;
                     //  $user->save();
-                    //       	 return [
+                    //            return [
                     //           'status'     =>  'true',
                     //            'data'=> new UserResource($user) ,
 
@@ -276,18 +258,16 @@ class AuthController extends Controller
                 } else {
                     return response()->json([
                         'status' => false,
-                        'message_ar' => 'هذا المستخدم ليس له حق الدخول'
+                        'message_ar' => 'هذا المستخدم ليس له حق الدخول',
                     ], 401);
                 }
             }
         } else {
             $msg = $validator->messages()->first();
 
-
             return response()->json([
-                'status' => "false", 'message_ar' => $msg
+                'status' => "false", 'message_ar' => $msg,
             ], 401);
-
 
             // return response()->json(['status'=>false,'message'=>$msg], 300);
         }
@@ -307,7 +287,7 @@ class AuthController extends Controller
             $user = User::where('id', $user_id)->first();
         } else {
             return Response()->json([
-                'status'     =>  'false',
+                'status' => 'false',
                 'data' => 'الاسور خطا ',
             ], 401);
         }
@@ -316,12 +296,12 @@ class AuthController extends Controller
             $user->password = Hash::make($request->new_password);
             $user->save();
             return Response()->json([
-                'status'     =>  'true',
+                'status' => 'true',
                 'message' => 'تم تغيير لم السر بناح',
             ]);
         } else {
             return Response()->json([
-                'status'   =>  'false',
+                'status' => 'false',
                 'data' => 'لاوجد مستخدم',
             ]);
         }
@@ -331,8 +311,8 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'كل الراحل',
-            'primary' =>  LevelResource::collection(Stage::all()),
-            'collectors' => UniversityResource::collection(University::all())
+            'primary' => LevelResource::collection(Stage::all()),
+            'collectors' => UniversityResource::collection(University::all()),
         ]);
     }
     public function check_phone(Request $request)
@@ -394,20 +374,20 @@ class AuthController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'code' => 'required'
+                'code' => 'required',
             ],
             ['required' => 'ذا لحل مطلوب']
         );
         if ($validator->passes()) {
             if ($user = User::where('code', $request->code)->first()) {
-                $user->centerstudents()->sync(auth()->id());
+                $user->centerstudents()->attach(auth()->id());
                 //   $u = new User_Owner;
                 //   $u->user_id = auth()->id();
                 //   $u->owner_id = $user->id;
                 //   $u->save();
                 return response()->json([
                     'status' => true, 'message' => 'تم التاد م صحه الكود',
-                    'data' => new CenterResource($user)
+                    'data' => new CenterResource($user),
                 ]);
             } else {
                 return response()->json(['status' => false, 'message' => 'لا وجد مستخم هذا الكود']);
@@ -437,7 +417,7 @@ class AuthController extends Controller
             foreach ($users as $user) {
                 $subject_ids[] = $user->centertypescollege->pluck("subjectscollege_id")->toArray();
             }
-    
+
             $result = call_user_func_array("array_merge", $subject_ids);
 
             $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->whereIn('id', $result)->where("active", 1)->get();
@@ -445,9 +425,9 @@ class AuthController extends Controller
         }
         return response()->json([
             'status' => true, 'message' => 'محتوي هوم',
-            'data' =>  HomeCategory::collection($subjects),
-            'offers' => OfferResource::collection(Offer::where('center_id', NULL)->get()),
-            'centeroffers' => OfferResource::collection($offers)
+            'data' => HomeCategory::collection($subjects),
+            'offers' => OfferResource::collection(Offer::where('center_id', null)->get()),
+            'centeroffers' => OfferResource::collection($offers),
 
         ]);
     }
@@ -459,11 +439,11 @@ class AuthController extends Controller
                 $type = Type::where('id', $request->course_id)->first()->subtypes()->orderBy('order_number', 'asc')->get();
                 return response()->json([
                     'status' => true, 'message' => 'محتيت الكورس',
-                    'data' =>  SubtypeResource::collection($type)
+                    'data' => SubtypeResource::collection($type),
                 ]);
             } else {
                 return response()->json([
-                    'status' => false, 'message' => ' لا يوجد كورس با ال id'
+                    'status' => false, 'message' => ' لا يوجد كورس با ال id',
                 ]);
             }
         } else if (auth()->user()->category_id == 2) {
@@ -472,11 +452,11 @@ class AuthController extends Controller
                 $type = TypesCollege::where('id', $request->course_id)->first()->lessons()->orderBy('order_number', 'asc')->get();
                 return response()->json([
                     'status' => true, 'message' => 'محتويات الكورس',
-                    'data' =>  LessonResource::collection($type)
+                    'data' => LessonResource::collection($type),
                 ]);
             } else {
                 return response()->json([
-                    'status' => false, 'message' => ' لا يجد كور بهذا ال id'
+                    'status' => false, 'message' => ' لا يجد كور بهذا ال id',
                 ]);
             }
         }
@@ -486,20 +466,20 @@ class AuthController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'code' => 'required'
+                'code' => 'required',
             ],
             ['required' => 'حقل الكود طوب  ']
         );
         if ($validator->passes()) {
             if ($user = User::where('code', $request->code)->first()) {
-                $user->centerstudents()->sync(auth()->id());
+                $user->centerstudents()->attach(auth()->id());
                 //   $u = new User_Owner;
                 //   $u->user_id = auth()->id();
                 //   $u->owner_id = $user->id;
                 //   $u->save();
                 return response()->json([
                     'status' => true, 'message' => 'ت التاكد من صحه ال',
-                    'data' => new CenterResource($user)
+                    'data' => new CenterResource($user),
                 ]);
             } else {
                 return response()->json(['status' => false, 'message' => 'لا يوجد مستخدم بهذا اك']);
@@ -513,7 +493,7 @@ class AuthController extends Controller
         $generals = General::orderBy('id', 'desc')->get();
         return response()->json([
             'status' => true, 'message' => ' كل لاقسام ',
-            'data' => GeneralResource::collection($generals)
+            'data' => GeneralResource::collection($generals),
         ]);
     }
     public function lecturer_info(Request $request)
@@ -527,7 +507,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true, 'message' => ' معلومات المحاض ',
             'info' => new LecturerResource($le),
-            'courses' => $courses
+            'courses' => $courses,
         ]);
     }
 
@@ -537,7 +517,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'فيديوهات كرس',
-            'data' => VideogeneralResource::collection($videos)
+            'data' => VideogeneralResource::collection($videos),
         ]);
     }
     public function update_user(Request $request)
@@ -561,19 +541,19 @@ class AuthController extends Controller
 
         $user_info = \App\Model\User_info::where('user_id', $user_id)->first();
         if ($request->phone) {
-            $user_info->phone       =   $request->phone;
+            $user_info->phone = $request->phone;
         }
         if ($request->store_name) {
-            $user_info->store       =   $request->store_name;
+            $user_info->store = $request->store_name;
         }
         if ($request->country) {
-            $user_info->location    =   $request->country;
+            $user_info->location = $request->country;
         }
         $user_info->save();
         #############################################################
         return Response()->json([
-            'status'     =>  'true',
-            'data' => new  ResourceUser($user),
+            'status' => 'true',
+            'data' => new ResourceUser($user),
         ]);
     }
 
@@ -581,7 +561,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'status' => true,
-            'data' => StateResource::collection(\App\State::all())
+            'data' => StateResource::collection(\App\State::all()),
         ]);
     }
     public function years()
@@ -610,18 +590,18 @@ class AuthController extends Controller
                     $user->save();
                     return response()->json([
                         'status' => true,
-                        'message' => 'تم شر الكورس'
+                        'message' => 'تم شر الكورس',
                     ]);
                 } else {
                     return response()->json([
                         'status' => false,
-                        'message' => 'عفا لاتلك ناط كافيه'
+                        'message' => 'عفا لاتلك ناط كافيه',
                     ]);
                 }
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا   لايجد كرس هذا الاسم'
+                    'message' => 'عفوا   لايجد كرس هذا الاسم',
                 ]);
             }
         } else if (auth()->user()->category_id == 2) {
@@ -639,18 +619,18 @@ class AuthController extends Controller
                     $user->save();
                     return response()->json([
                         'status' => true,
-                        'message' => 'تم شرء اكورس'
+                        'message' => 'تم شرء اكورس',
                     ]);
                 } else {
                     return response()->json([
                         'status' => false,
-                        'message' => 'عفو لاتمل نقاط كافيه'
+                        'message' => 'عفو لاتمل نقاط كافيه',
                     ]);
                 }
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا   ايوج كور بهذا الاسم'
+                    'message' => 'عفوا   ايوج كور بهذا الاسم',
                 ]);
             }
         } else if (auth()->user()->category_id == 3) {
@@ -667,12 +647,12 @@ class AuthController extends Controller
                 $user->save();
                 return response()->json([
                     'status' => true,
-                    'message' => 'تم شرء الكورس'
+                    'message' => 'تم شرء الكورس',
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا لاتملك نقط افيه'
+                    'message' => 'عفوا لاتملك نقط افيه',
                 ]);
             }
         }
@@ -693,12 +673,12 @@ class AuthController extends Controller
             $user->save();
             return response()->json([
                 'status' => true,
-                'message' => 'تم راء الكورس'
+                'message' => 'تم راء الكورس',
             ]);
         } else {
             return response()->json([
                 'status' => false,
-                'message' => 'عفو لاتملك ناط كافي'
+                'message' => 'عفو لاتملك ناط كافي',
             ]);
         }
     }
@@ -713,7 +693,7 @@ class AuthController extends Controller
             'message' => 'كل كورستك',
             'data1' => TypeResource::collection($types),
             'data2' => TypecollegeResource::collection($typescollege),
-            'data3' => CourseResource::collection($courses)
+            'data3' => CourseResource::collection($courses),
         ]);
     }
     public function buyclass(Request $request)
@@ -734,18 +714,18 @@ class AuthController extends Controller
                     $user->save();
                     return response()->json([
                         'status' => true,
-                        'message' => 'تم شاء الدرس'
+                        'message' => 'تم شاء الدرس',
                     ]);
                 } else {
                     return response()->json([
                         'status' => false,
-                        'message' => 'عفا لاتمك قاط كافيه'
+                        'message' => 'عفا لاتمك قاط كافيه',
                     ]);
                 }
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا   لايود در با الاسم'
+                    'message' => 'عفوا   لايود در با الاسم',
                 ]);
             }
         }
@@ -764,18 +744,18 @@ class AuthController extends Controller
                     $user->save();
                     return response()->json([
                         'status' => true,
-                        'message' => 'تم شراء الدرس'
+                        'message' => 'تم شراء الدرس',
                     ]);
                 } else {
                     return response()->json([
                         'status' => false,
-                        'message' => 'عفوا لتمك قاط ايه'
+                        'message' => 'عفوا لتمك قاط ايه',
                     ]);
                 }
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا   ايوج درس بهذا السم'
+                    'message' => 'عفوا   ايوج درس بهذا السم',
                 ]);
             }
         }
@@ -795,13 +775,13 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'ت التقييم بنجا',
-                    'data' => new RateResource($rate)
+                    'data' => new RateResource($rate),
 
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفو   ليد كورس بذا الاسم'
+                    'message' => 'عفو   ليد كورس بذا الاسم',
                 ]);
             }
         } else if (auth()->user()->category_id == 2) {
@@ -816,13 +796,13 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'م التقييم نجاح',
-                    'data' => new RateResource($rate)
+                    'data' => new RateResource($rate),
 
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا   ليوجد كورس بذا الام'
+                    'message' => 'عفوا   ليوجد كورس بذا الام',
                 ]);
             }
         } else if (auth()->user()->category_id == 3) {
@@ -837,13 +817,13 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'تم لتقيم بجاح',
-                    'data' => new RateResource($rate)
+                    'data' => new RateResource($rate),
 
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'فوا   لاوجد كورس بهذا ااسم'
+                    'message' => 'فوا   لاوجد كورس بهذا ااسم',
                 ]);
             }
         }
@@ -860,13 +840,13 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'كل تقيمات الكور ',
-                    'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
-                    'data' => RateResource::collection($rates)
+                    'averagerate' => (count($rates) > 0) ? $allrates / count($rates) : 0,
+                    'data' => RateResource::collection($rates),
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا   لايوجد كور بهذا الاس'
+                    'message' => 'عفوا   لايوجد كور بهذا الاس',
                 ]);
             }
         } else if (auth()->user()->category_id == 2) {
@@ -877,13 +857,13 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'كل تقيما الكوس ',
-                    'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
-                    'data' => RateResource::collection($rates)
+                    'averagerate' => (count($rates) > 0) ? $allrates / count($rates) : 0,
+                    'data' => RateResource::collection($rates),
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'فوا   ايود كورس بهذا الاسم'
+                    'message' => 'فوا   ايود كورس بهذا الاسم',
                 ]);
             }
         } else if (auth()->user()->category_id == 3) {
@@ -894,27 +874,36 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'ل تقييمت الكورس ',
-                    'averagerate' => (count($rates) > 0) ?  $allrates / count($rates) : 0,
-                    'data' => RateResource::collection($rates)
+                    'averagerate' => (count($rates) > 0) ? $allrates / count($rates) : 0,
+                    'data' => RateResource::collection($rates),
                 ]);
             } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'عفوا   ليوجد كورس بذ ااسم'
+                    'message' => 'عفوا   ليوجد كورس بذ ااسم',
                 ]);
             }
         }
     }
     public function alllecturers(Request $request)
     {
+        $users = auth()->user()->stdcenters;
+
+        $result = [];
+        $lecturer_ids = [];
+        foreach ($users as $user) {
+            $lecturer_ids[] = $user->lecturers->pluck("id")->toArray();
+        }
+        $result = call_user_func_array("array_merge", $lecturer_ids);
         if (auth()->user()->category_id == 1) {
-            $lecturers  =  Subject::where('id', $request->subject_id)->first()->teachers;
+
+            $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("id", $result)->get();
         } elseif (auth()->user()->category_id == 2) {
-            $lecturers  =  SubjectsCollege::where('id', $request->subject_id)->first()->doctors;
+            $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("id", $result)->get();
         }
         return response()->json([
             'status' => true, 'message' => ' كل المحاضري  ',
-            'data' =>  LecturerResource::collection($lecturers),
+            'data' => LecturerResource::collection($lecturers),
         ]);
     }
     public function subjectcourses(Request $request)
@@ -960,7 +949,7 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'ل  الكورسات ',
 
-            'data' => $courses
+            'data' => $courses,
         ]);
     }
     public function center_code(Request $request)
@@ -969,7 +958,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'مومات السنتر',
-            'data' => new CenterResource($user)
+            'data' => new CenterResource($user),
         ]);
     }
     public function mycenters()
@@ -979,7 +968,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'معومات السنتر',
-            'data' =>  CenterResource::collection($centers)
+            'data' => CenterResource::collection($centers),
         ]);
     }
     public function getcoursegeneral(Request $request)
@@ -987,7 +976,7 @@ class AuthController extends Controller
         $subs = Sub::where('general_id', '=', $request->id)->get();
         return response()->json([
             'status' => true,
-            'data' => SubResource::collection($subs)
+            'data' => SubResource::collection($subs),
         ]);
     }
     public function searshforcourses(Request $request)
@@ -1039,15 +1028,15 @@ class AuthController extends Controller
             'status' => true,
             'data' => [
                 'id' => $lect->id,
-                'cover' => $lect->printsplash ? asset('uploads/' . $lect->printsplash) : ''
-            ]
+                'cover' => $lect->printsplash ? asset('uploads/' . $lect->printsplash) : '',
+            ],
         ]);
     }
     public function app_status()
     {
         return response()->json([
             "status" => true, "old_app_status" => 1,
-            "new_app_status" => 0
+            "new_app_status" => 0,
         ]);
     }
 }
