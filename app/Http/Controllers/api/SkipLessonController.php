@@ -66,7 +66,7 @@ class SkipLessonController extends Controller
       'status' => false,
     'message' => 'لا يوجد امتحانات فى الدرس',
     ]);
-  
+
   }
     else{
     return response()->json([
@@ -103,7 +103,7 @@ class SkipLessonController extends Controller
        }
       } else if(auth()->user()->category_id == 2){
        $exam = LessonExam::where('lesson_id',$request->lesson_id)->latest()->first();
-  
+
          if($exam){
          $skip = new SkiplessonExam;
          $skip->user_id = auth()->id();
@@ -117,7 +117,7 @@ class SkipLessonController extends Controller
       'status' => false,
     'message' => 'لا يوجد امتحانات فى الدرس',
     ]);
-  
+
   }
     else{
     return response()->json([
@@ -129,7 +129,7 @@ class SkipLessonController extends Controller
      if(auth()->user()->category_id == 1){
       $exam_ids = SkipsubtypeExam::where('user_id',auth()->id())->get()->pluck('exam_id');
         $exams = SubtypeExam::whereIn('id',$exam_ids)->get();
-       
+
       } else if(auth()->user()->category_id == 2){
         $exam_ids = SkiplessonExam::where('user_id',auth()->id())->get()->pluck('exam_id');
         $exams = LessonExam::whereIn('id',$exam_ids)->get();
@@ -139,7 +139,7 @@ class SkipLessonController extends Controller
     'message' => 'امتحانات الدرس ',
     'data' => ExamResource::collection($exams)]);
   }public function fetch_live_lessons(Request $request){
-  
+
     $group_id = $request->group_id;
     if($group_id){
       if(auth()->user()->category_id == 1){
@@ -163,6 +163,13 @@ class SkipLessonController extends Controller
   }public function send_attendance(Request $request){
        if(auth()->user()->category_id == 1){
          $subtype = Subtype::where('id',$request->lesson_id)->first();
+         $LessonStudentattendance = LessonStudentattendance::where("subtype_id",$request->lesson_id)->whereStudentId(auth()->id())->first();
+         if ($LessonStudentattendance) {
+            return response()->json([
+              'status' => false,
+              'message' => 'لقد حضرت هذا الدرس من قبل'
+            ]);
+          }
          if($subtype){
      $subtypestudent = new SubtypeStudentattendance;
      $subtypestudent->student_id = auth()->id();
@@ -173,9 +180,16 @@ class SkipLessonController extends Controller
          }else{
              return response()->json(['status' => false,'message' => 'لا يوجد حصه بهذا الاسم ']);
          }
-        
+
       } else if(auth()->user()->category_id == 2){
                  $subtype = Lesson::where('id',$request->lesson_id)->first();
+                 $LessonStudentattendance = LessonStudentattendance::where("lesson_id",$request->lesson_id)->whereStudentId(auth()->id())->first();
+                 if ($LessonStudentattendance) {
+                    return response()->json([
+                      'status' => false,
+                      'message' => 'لقد حضرت هذا الدرس من قبل'
+                    ]);
+                  }
          if($subtype){
      $subtypestudent = new LessonStudentattendance;
      $subtypestudent->student_id = auth()->id();
