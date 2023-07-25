@@ -39,7 +39,7 @@ class HomeCategory extends JsonResource
                 $lecturer_ids[] = $user->teachers->pluck("id")->toArray();
             }
             $result = call_user_func_array("array_merge", $lecturer_ids);
-            $lectuers = \App\Subject::where('id', $this->id)->first()->teachers()->where("active", 1)->whereIn("id",$result)->get();
+            $lectuers = \App\Subject::where('id', $this->id)->first()->teachers()->where("users.active", 1)->whereIn("users.id",$result)->get();
         } else if (auth()->user()->category_id == 2) {
             $centers = auth()->user()->stdcenters;
             if (count($centers) > 0) {
@@ -57,7 +57,7 @@ class HomeCategory extends JsonResource
                 $lecturer_ids[] = $user->doctors->pluck("id")->toArray();
             }
             $result = call_user_func_array("array_merge", $lecturer_ids);
-            $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("active", 1)->whereIn("id",$result)->get();
+            $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("users.active", 1)->whereIn("users.id",$result)->get();
         } else if (auth()->user()->category_id == 3) {
             $courses = CourseResource::collection(\App\Course::where('active', 1)->get());
             $latest_courses = CourseResource::collection(\App\Course::where('active', 1)->orderBy('created_at', 'desc')->take(4)->get());
