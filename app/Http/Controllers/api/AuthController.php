@@ -890,6 +890,7 @@ class AuthController extends Controller
         $users = auth()->user()->stdcenters;
 
         $result = [];
+        //get lecturer_ids
         $lecturer_ids = [];
         foreach ($users as $user) {
             $lecturer_ids[] = $user->lecturers->pluck("id")->toArray();
