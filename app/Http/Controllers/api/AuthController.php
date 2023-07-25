@@ -426,7 +426,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true, 'message' => 'محتوي هوم',
             'data' => HomeCategory::collection($subjects),
-            'offers' => OfferResource::collection($offers),
+            'offers' => OfferResource::collection(Offer::where('center_id', null)->get()),
             'centeroffers' => OfferResource::collection($offers),
 
         ]);
