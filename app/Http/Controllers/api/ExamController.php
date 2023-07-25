@@ -86,18 +86,28 @@ class ExamController extends Controller
     $exam = null;
     if ($user_category_id == 1) {
       $exam = TypeExam::find($exam_id);
+      $typeexam =  TypeexamResult::whereExamId($exam_id)->whereStudentId(auth()->id())->first();
+
+      if ($typeexam) {
+        return response()->json([
+          'status' => false,
+          'message' => 'لقد امتحنت هذا الامتحان من قبل'
+        ]);
+      }
+
     } else if ($user_category_id == 2) {
       $exam = TypescollegeExam::find($exam_id);
+      $typeexam =  TypescollegeExamResult::whereExamId($exam_id)->whereStudentId(auth()->id())->first();
+
+      if ($typeexam) {
+        return response()->json([
+          'status' => false,
+          'message' => 'لقد امتحنت هذا الامتحان من قبل'
+        ]);
+      }
+
     }
 
-    $typeexam =  TypeexamResult::whereExamId($exam_id)->whereStudentId(auth()->id())->first();
-
-    if ($typeexam) {
-      return response()->json([
-        'status' => false,
-        'message' => 'لقد امتحنت هذا الامتحان من قبل'
-      ]);
-    }
 
     if (is_null($exam)) {
       return response()->json([
@@ -112,7 +122,7 @@ class ExamController extends Controller
       'data' => QuestionResource::collection($exam->questions)
     ]);
   }
- 
+
   public function fetch_new_exams()
   {
     $now = Carbon::now();
