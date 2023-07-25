@@ -338,26 +338,26 @@
                                 <img src="{{asset('images/qenoicon/setting.svg')}}" id="img">
                             </div>
                             <div class="col-8">
-                               
+
                                <a href="{{route('main_page_college')}}"> <p>الرئيسية</p></a>
-                               
+
                                 <p>الرئيسية</p>
-                                
+
                             </div>
                         </div>
                         @elseif(auth()->user()->isAdmin == 'admin')
-                        
+
                         @else
                         <div class="row">
                             <div class="col-2">
                                 <img src="{{asset('images/qenoicon/setting.svg')}}" id="img">
                             </div>
                             <div class="col-8">
-                               
+
                                <p>الرئيسية</p>
-                               
-                      
-                                
+
+
+
                             </div>
                         </div>
                         @endif
@@ -368,11 +368,11 @@
                             </div>
                             <div class="col-6">
                                 <a href="#setting2" data-toggle="collapse">الرئيسية</a>
-                                <div id="setting2" class="collapse 
+                                <div id="setting2" class="collapse
                                 @if(request()->is('main_page_basic')  ||
                                  request()->is('main_page_college')) show    @endif">
 
-                                    <a href="{{route('main_page_basic')}}" 
+                                    <a href="{{route('main_page_basic')}}"
                                     style="color: #aa7700;
     font-family: med;
     font-size: 12px;
@@ -386,7 +386,7 @@
     white-space: nowrap !important;" class="@if(request()->is('main_page_college'))
     active @endif">
                                          جامعى</a>
-                         
+
                                 </div>
                             </div>
                             <div class="col-2">
@@ -475,13 +475,12 @@
                             </div>
                             <div class="col-6">
                                 <a href="#setting" data-toggle="collapse">الاعدادات</a>
-                                <div id="setting" class="collapse @if(request()->is('offers')  || request()->is('states') || request()->is('admins') ||  request()->is('cities') ||
-                             request()->is('categoryall') || request()->is('messages') || 
+                                <div id="setting" class="collapse @if(request()->is('states') || request()->is('admins') ||  request()->is('cities') ||
+                             request()->is('categoryall') || request()->is('messages') ||
                              request()->is('website_students')) show  @endif">
                                     <a href="{{route('categoryall')}}" class="@if(request()->is('categoryall'))active @endif">
                                         الفئات</a>
-                                    <a href="{{route('offers')}}" class="@if(request()->is('offers'))active @endif">
-                                        السلايدر</a>
+
                                     <a href="{{route('admins')}}" class="@if(request()->is('admins'))active @endif">
                                         الادمنز</a>
                                     <a href="{{route('states')}}" class="@if(request()->is('states'))active @endif">
@@ -528,6 +527,8 @@
                                         الدورات التعلميه الشهريه
                                     </a>
                                     @if(Auth::user()->is_student == 5 && Auth()->user()->category_id == 1)
+                                    <a href="{{route('offers')}}" class="@if(request()->is('offers'))active @endif">
+                                        السلايدر</a>
                                     <a href="{{route('addteacher')}}" class="@if(request()->is('addteacher'))active @endif">
                                         اضافه مدرس</a>
                                     <a href="{{route('teachers')}}" class="@if(request()->is('teachers'))active @endif">
@@ -545,7 +546,7 @@
                                         طلاب كورساتى </a>
                                     <a href="{{route('userstudents')}}" class="@if(request()->is('userstudents'))active @endif">
                                         الطلاب </a>
-                            
+
                                     @endif
                                     @if(Auth::user() && Auth::user()->isAdmin == 'admin')
 
@@ -557,7 +558,7 @@
                                         نتائج امتحانات الكورسات </a>
                                     <a href="{{route('allsubtypeexamresults')}}" class="@if(request()->is('allsubtypeexamresults'))active @endif">
                                         نتائج امتحانات الحصص </a>
-                                       
+
                                     @endif
                                     <a href="{{route('type_joins')}}" class="
                               @if(request()->is('type_joins'))active @endif">
@@ -600,7 +601,8 @@
                                         كورسات جامعيه</a>
 
                                     @if(Auth::user()->is_student == 5 && Auth()->user()->category_id == 2)
-
+                                    <a href="{{route('offers')}}" class="@if(request()->is('offers'))active @endif">
+                                        السلايدر</a>
                                     <a href="{{route('adddoctor')}}" class="@if(request()->is('adddoctor'))active @endif">
                                         اضافه دكتور</a>
                                     <a href="{{route('doctors')}}" class="@if(request()->is('doctors'))active @endif">
@@ -734,7 +736,7 @@
                                 <div id="setting1" class="collapse @if(request()->is('teachers') || request()->is('addteacher') ||
                             request()->is('students') || request()->is('doctors') || request()->is('adddoctor')
                             || request()->is('lecturers') || request()->is('addlecturer') || request()->is('addcenter')
-                            || request()->is('centers')  || request()->is('basicstudents') ||  request()->is('collegestudents') 
+                            || request()->is('centers')  || request()->is('basicstudents') ||  request()->is('collegestudents')
                             || request()->is('unverified_students'))
                             show  @endif">
                                     <a href="{{route('addteacher')}}" class="@if(request()->is('addteacher'))active @endif">
