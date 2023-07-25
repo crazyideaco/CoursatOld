@@ -177,9 +177,246 @@ class SubtypeController extends Controller
                             $subtype->save();
                             if ($request->tag_id) {
                                 $subtype->tags()->attach($request->tag_id);
-                            
-                        }
 
+                            }
+
+                            foreach ($request->url as $k => $i) {
+                                $video = new Video;
+                                $video->order_number = $request->order[$k];
+                                $video->user_id = $subtype->user_id;
+                                $video->name_ar = $request->names_ar[$k];
+                                $video->name_en = $request->names_en[$k];
+                                $video->description_en = $request->description_en[$k];
+                                $video->description_ar = $request->description_ar[$k];
+                                $getID3 = new \getID3;
+                                $file = $getID3->analyze($i);
+
+                                $duration = $file['playtime_seconds'];
+                                $video->seconds = $duration;
+                                $url = $i;
+                                $video->size_video = $i->getSize() / 1024;
+                                $url->move('uploads', time() . '.' . $url->getClientOriginalExtension());
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
+
+                                if ($request->pay) {
+                                    if (array_key_exists($k, $request->pay)) {
+                                        $video->paid = $request->pay[$k];
+                                    } else {
+                                        $video->paid = 0;
+                                    }
+                                }
+                                if ($request->hasFile('images')) {
+                                    $image = $request->images[$k];
+                                    $image->move('uploads', time() . $image->getClientOriginalName());
+                                    $video->image = time() . $request->images[$k]->getClientOriginalName();
+                                }
+                                if ($request->hasFile('pdf')) {
+                                    $pdf = $request->pdf[$k];
+                                    $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                    $video->pdf = time() . $request->pdf[$k]->getClientOriginalName();
+                                }
+                                if ($request->hasFile('boards')) {
+                                    $board = $request->boards[$k];
+                                    $board->move('uploads', time() . $board->getClientOriginalName());
+                                    $video->board = time() . $request->boards[$k]->getClientOriginalName();
+                                }
+                                $video->subject_id = $subtype->subjects_id;
+                                $video->year_id = $subtype->years_id;
+                                $video->type_id = $subtype->type_id;
+                                $video->subtype_id = $subtype->id;
+                                if (auth()->user() && auth()->user()->isAdmin == 'admin') {
+                                    $video->user_id = $subtype->user_id;
+                                } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+                                    $video->user_id = $subtype->user_id;
+                                    $video->center_id = auth()->user()->id;
+                                } elseif (Auth::user() && Auth::user()->is_student == 2) {
+                                    $video->user_id = auth()->user()->id;
+                                }
+                                $video->save();
+                            }
+                            return response()->json(['success' => 'video upload']);} else {
+
+                            $msg = 'لقد استهلكت 100% ';
+                            return response()->json(['status' => false, 'errors' => $msg]);
+
+                        }}}} elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+                $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
+                if ($paqauser == null) {
+                    $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+                    return response()->json(['status' => false, 'message' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
+                    $msg = 'انتهت صلاحيه الباقه';
+                    return response()->json(['status' => false, 'message' => $msg]);
+                } else {
+                    $videoall = Video::where('user_id', $request->user_id)->where('center_id', null)->
+                        where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        if ($sizepaqa > $gigasum) {
+                            $subtype = new Subtype;
+                            $subtype->order_number = $request->order_number;
+                            $subtype->name_ar = $request->name_ar;
+                            $subtype->name_en = $request->name_en;
+                            $subtype->years_id = $type->years_id;
+                            $subtype->subjects_id = $type->subjects_id;
+                            $subtype->type_id = $type->id;
+                            $subtype->user_id = $type->user_id;
+                            $subtype->center_id = auth()->user()->id;
+                            $subtype->points = $request->points;
+                            $subtype->part_points = $request->part_points;
+                            $subtype->description = $request->description;
+                            if ($request->hasFile('image')) {
+
+                                $image = $request->image;
+
+                                $file = $image->getClientOriginalName();
+                                $fileName = pathinfo($file, PATHINFO_FILENAME);
+                                $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
+                                $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
+                                $subtype->image = $fileName . '_' . time() . '.' . $fileExtension;
+
+                            }if ($request->hasFile('intro')) {
+                                $intro = $request->intro;
+                                $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
+                                $subtype->intro = time() . '.' . $intro->getClientOriginalExtension();
+                            }if ($request->hasFile('part_paper')) {
+                                $part_paper = $request->part_paper;
+                                $part_paper->move('uploads', time() . '.' . $part_paper->getClientOriginalExtension());
+                                $subtype->part_paper = time() . '.' . $part_paper->getClientOriginalExtension();
+                            }if ($request->hasFile('notes')) {
+                                $notes = $request->notes;
+                                $notes->move('uploads', time() . '.' . $notes->getClientOriginalExtension());
+                                $subtype->notes = time() . '.' . $notes->getClientOriginalExtension();
+                            }
+                            $subtype->save();
+                            if ($request->tag_id) {
+                                $subtype->tags()->attach($request->tag_id);
+                            }
+
+                            foreach ($request->url as $k => $i) {
+                                $video = new Video;
+
+                                $video->order_number = $request->order[$k];
+                                $video->user_id = $subtype->user_id;
+                                $video->name_ar = $request->names_ar[$k];
+                                $video->name_en = $request->names_en[$k];
+                                $video->description_en = $request->description_en[$k];
+                                $video->description_ar = $request->description_ar[$k];
+                                $getID3 = new \getID3;
+                                $file = $getID3->analyze($i);
+
+                                $duration = $file['playtime_seconds'];
+                                $video->seconds = $duration;
+                                $url = $i;
+                                $url = $i;
+                                $video->size_video = $i->getSize() / 1024;
+                                $url->move('uploads', time() . '.' . $url->getClientOriginalExtension());
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
+
+                                if ($request->pay) {
+                                    if (array_key_exists($k, $request->pay)) {
+                                        $video->paid = $request->pay[$k];
+                                    } else {
+                                        $video->paid = 0;
+                                    }
+                                }
+                                $image = $request->images[$k];
+                                $image->move('uploads', time() . $image->getClientOriginalName());
+                                $video->image = time() . $request->images[$k]->getClientOriginalName();
+                                if ($request->hasFile('pdf')) {
+                                    $pdf = $request->pdf[$k];
+                                    $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                    $video->pdf = time() . $request->pdf[$k]->getClientOriginalName();}
+                                if ($request->hasFile('images')) {
+                                    $image = $request->images[$k];
+                                    $image->move('uploads', time() . $image->getClientOriginalName());
+                                    $video->image = time() . $request->images[$k]->getClientOriginalName();
+                                }
+
+                                if ($request->hasFile('boards')) {
+                                    $board = $request->boards[$k];
+                                    $board->move('uploads', time() . $board->getClientOriginalName());
+                                    $video->board = time() . $request->boards[$k]->getClientOriginalName();
+                                }
+                                $video->subject_id = $subtype->subjects_id;
+                                $video->year_id = $subtype->years_id;
+                                $video->type_id = $subtype->type_id;
+                                $video->subtype_id = $subtype->id;
+                                if (auth()->user() && auth()->user()->isAdmin == 'admin') {
+                                    $video->user_id = $subtype->user_id;
+                                } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+                                    $video->user_id = $subtype->user_id;
+                                    $video->center_id = auth()->user()->id;
+                                } elseif (Auth::user() && Auth::user()->is_student == 2) {
+                                    $video->user_id = auth()->user()->id;
+                                }
+                                $video->save();
+                            }
+                            return response()->json(['success' => 'video upload']);} else {
+
+                            $msg = 'لقد استهلكت 100% ';
+                            return response()->json(['status' => false, 'errors' => $msg]);
+
+                        }
+                    }
+                }
+            }elseif (Auth::user() && Auth::user()->is_student == 2) {
+
+                $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
+                if ($paqauser == null) {
+                    $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+                    return response()->json(['status' => false, 'message' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
+                    $msg = 'انتهت صلاحيه الباقه';
+                    return response()->json(['status' => false, 'message' => $msg]);
+                } else {
+                    $videoall = Video::where('user_id', auth()->user()->id)->where('center_id', null)->
+                        where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        $subtype = new Subtype;
+                        $subtype->part_points = $request->part_points;
+                        $subtype->order_number = $request->order_number;
+                        $subtype->name_ar = $request->name_ar;
+                        $subtype->name_en = $request->name_en;
+                        $subtype->years_id = $type->years_id;
+                        $subtype->subjects_id = $type->subjects_id;
+                        $subtype->type_id = $type->id;
+                        $subtype->user_id = auth()->user()->id;
+                        $subtype->points = $request->points;
+                        $subtype->description = $request->description;
+                        if ($request->hasFile('image')) {
+
+                            $image = $request->image;
+
+                            $file = $image->getClientOriginalName();
+                            $fileName = pathinfo($file, PATHINFO_FILENAME);
+                            $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
+                            $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
+                            $subtype->image = $fileName . '_' . time() . '.' . $fileExtension;
+
+                        }if ($request->hasFile('intro')) {
+                            $intro = $request->intro;
+                            $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
+                            $subtype->intro = time() . '.' . $intro->getClientOriginalExtension();
+                        }if ($request->hasFile('part_paper')) {
+                            $part_paper = $request->part_paper;
+                            $part_paper->move('uploads', time() . '.' . $part_paper->getClientOriginalExtension());
+                            $subtype->part_paper = time() . '.' . $part_paper->getClientOriginalExtension();
+                        }if ($request->hasFile('notes')) {
+                            $notes = $request->notes;
+                            $notes->move('uploads', time() . '.' . $notes->getClientOriginalExtension());
+                            $subtype->notes = time() . '.' . $notes->getClientOriginalExtension();
+                        }
+                        $subtype->save();
+
+                        if ($request->tag_id) {
+                            $subtype->tags()->attach($request->tag_id);
+                        }
                         foreach ($request->url as $k => $i) {
                             $video = new Video;
                             $video->order_number = $request->order[$k];
@@ -193,6 +430,7 @@ class SubtypeController extends Controller
 
                             $duration = $file['playtime_seconds'];
                             $video->seconds = $duration;
+                            $url = $i;
                             $url = $i;
                             $video->size_video = $i->getSize() / 1024;
                             $url->move('uploads', time() . '.' . $url->getClientOriginalExtension());
@@ -239,248 +477,11 @@ class SubtypeController extends Controller
                         $msg = 'لقد استهلكت 100% ';
                         return response()->json(['status' => false, 'errors' => $msg]);
 
-                    }}}} elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
-            $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
-            if ($paqauser == null) {
-                $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
-                return response()->json(['status' => false, 'message' => $msg]);
-            } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
-                $msg = 'انتهت صلاحيه الباقه';
-                return response()->json(['status' => false, 'message' => $msg]);
-            } else {
-                $videoall = Video::where('user_id', $request->user_id)->where('center_id', null)->
-                    where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
-                if ($videoall > 0) {
-                    $sizepaqa = $paqauser->paqa->size;
-                    $sum = array_sum($videoall);
-                    $gigasum = $sum / 1024 / 1024;
-                    if ($sizepaqa > $gigasum) {
-                        $subtype = new Subtype;
-                        $subtype->order_number = $request->order_number;
-                        $subtype->name_ar = $request->name_ar;
-                        $subtype->name_en = $request->name_en;
-                        $subtype->years_id = $type->years_id;
-                        $subtype->subjects_id = $type->subjects_id;
-                        $subtype->type_id = $type->id;
-                        $subtype->user_id = $type->user_id;
-                        $subtype->center_id = auth()->user()->id;
-                        $subtype->points = $request->points;
-                        $subtype->part_points = $request->part_points;
-                        $subtype->description = $request->description;
-                        if ($request->hasFile('image')) {
-
-                            $image = $request->image;
-
-                            $file = $image->getClientOriginalName();
-                            $fileName = pathinfo($file, PATHINFO_FILENAME);
-                            $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
-                            $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
-                            $subtype->image = $fileName . '_' . time() . '.' . $fileExtension;
-
-                        }if ($request->hasFile('intro')) {
-                            $intro = $request->intro;
-                            $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
-                            $subtype->intro = time() . '.' . $intro->getClientOriginalExtension();
-                        }if ($request->hasFile('part_paper')) {
-                            $part_paper = $request->part_paper;
-                            $part_paper->move('uploads', time() . '.' . $part_paper->getClientOriginalExtension());
-                            $subtype->part_paper = time() . '.' . $part_paper->getClientOriginalExtension();
-                        }if ($request->hasFile('notes')) {
-                            $notes = $request->notes;
-                            $notes->move('uploads', time() . '.' . $notes->getClientOriginalExtension());
-                            $subtype->notes = time() . '.' . $notes->getClientOriginalExtension();
-                        }
-                        $subtype->save();
-                        if ($request->tag_id) {
-                            $subtype->tags()->attach($request->tag_id);
-                        }
-
-                        foreach ($request->url as $k => $i) {
-                            $video = new Video;
-
-                            $video->order_number = $request->order[$k];
-                            $video->user_id = $subtype->user_id;
-                            $video->name_ar = $request->names_ar[$k];
-                            $video->name_en = $request->names_en[$k];
-                            $video->description_en = $request->description_en[$k];
-                            $video->description_ar = $request->description_ar[$k];
-                            $getID3 = new \getID3;
-                            $file = $getID3->analyze($i);
-
-                            $duration = $file['playtime_seconds'];
-                            $video->seconds = $duration;
-                            $url = $i;
-                            $url = $i;
-                            $video->size_video = $i->getSize() / 1024;
-                            $url->move('uploads', time() . '.' . $url->getClientOriginalExtension());
-                            $video->url = time() . '.' . $url->getClientOriginalExtension();
-
-                            if ($request->pay) {
-                                if (array_key_exists($k, $request->pay)) {
-                                    $video->paid = $request->pay[$k];
-                                } else {
-                                    $video->paid = 0;
-                                }
-                            }
-                            $image = $request->images[$k];
-                            $image->move('uploads', time() . $image->getClientOriginalName());
-                            $video->image = time() . $request->images[$k]->getClientOriginalName();
-                            if ($request->hasFile('pdf')) {
-                                $pdf = $request->pdf[$k];
-                                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
-                                $video->pdf = time() . $request->pdf[$k]->getClientOriginalName();}
-                            if ($request->hasFile('images')) {
-                                $image = $request->images[$k];
-                                $image->move('uploads', time() . $image->getClientOriginalName());
-                                $video->image = time() . $request->images[$k]->getClientOriginalName();
-                            }
-
-                            if ($request->hasFile('boards')) {
-                                $board = $request->boards[$k];
-                                $board->move('uploads', time() . $board->getClientOriginalName());
-                                $video->board = time() . $request->boards[$k]->getClientOriginalName();
-                            }
-                            $video->subject_id = $subtype->subjects_id;
-                            $video->year_id = $subtype->years_id;
-                            $video->type_id = $subtype->type_id;
-                            $video->subtype_id = $subtype->id;
-                            if (auth()->user() && auth()->user()->isAdmin == 'admin') {
-                                $video->user_id = $subtype->user_id;
-                            } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
-                                $video->user_id = $subtype->user_id;
-                                $video->center_id = auth()->user()->id;
-                            } elseif (Auth::user() && Auth::user()->is_student == 2) {
-                                $video->user_id = auth()->user()->id;
-                            }
-                            $video->save();
-                        }
-                        return response()->json(['success' => 'video upload']);} else {
-
-                        $msg = 'لقد استهلكت 100% ';
-                        return response()->json(['status' => false, 'errors' => $msg]);
-
                     }
                 }
             }
-        }if (Auth::user() && Auth::user()->is_student == 2) {
 
-            $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
-            if ($paqauser == null) {
-                $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
-                return response()->json(['status' => false, 'message' => $msg]);
-            } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
-                $msg = 'انتهت صلاحيه الباقه';
-                return response()->json(['status' => false, 'message' => $msg]);
-            } else {
-                $videoall = Video::where('user_id', auth()->user()->id)->where('center_id', null)->
-                    where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
-                if ($videoall > 0) {
-                    $sizepaqa = $paqauser->paqa->size;
-                    $sum = array_sum($videoall);
-                    $gigasum = $sum / 1024 / 1024;
-                    $subtype = new Subtype;
-                    $subtype->part_points = $request->part_points;
-                    $subtype->order_number = $request->order_number;
-                    $subtype->name_ar = $request->name_ar;
-                    $subtype->name_en = $request->name_en;
-                    $subtype->years_id = $type->years_id;
-                    $subtype->subjects_id = $type->subjects_id;
-                    $subtype->type_id = $type->id;
-                    $subtype->user_id = auth()->user()->id;
-                    $subtype->points = $request->points;
-                    $subtype->description = $request->description;
-                    if ($request->hasFile('image')) {
-
-                        $image = $request->image;
-
-                        $file = $image->getClientOriginalName();
-                        $fileName = pathinfo($file, PATHINFO_FILENAME);
-                        $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
-                        $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
-                        $subtype->image = $fileName . '_' . time() . '.' . $fileExtension;
-
-                    }if ($request->hasFile('intro')) {
-                        $intro = $request->intro;
-                        $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
-                        $subtype->intro = time() . '.' . $intro->getClientOriginalExtension();
-                    }if ($request->hasFile('part_paper')) {
-                        $part_paper = $request->part_paper;
-                        $part_paper->move('uploads', time() . '.' . $part_paper->getClientOriginalExtension());
-                        $subtype->part_paper = time() . '.' . $part_paper->getClientOriginalExtension();
-                    }if ($request->hasFile('notes')) {
-                        $notes = $request->notes;
-                        $notes->move('uploads', time() . '.' . $notes->getClientOriginalExtension());
-                        $subtype->notes = time() . '.' . $notes->getClientOriginalExtension();
-                    }
-                    $subtype->save();
-
-                    if ($request->tag_id) {
-                        $subtype->tags()->attach($request->tag_id);
-                    }
-                    foreach ($request->url as $k => $i) {
-                        $video = new Video;
-                        $video->order_number = $request->order[$k];
-                        $video->user_id = $subtype->user_id;
-                        $video->name_ar = $request->names_ar[$k];
-                        $video->name_en = $request->names_en[$k];
-                        $video->description_en = $request->description_en[$k];
-                        $video->description_ar = $request->description_ar[$k];
-                        $getID3 = new \getID3;
-                        $file = $getID3->analyze($i);
-
-                        $duration = $file['playtime_seconds'];
-                        $video->seconds = $duration;
-                        $url = $i;
-                        $url = $i;
-                        $video->size_video = $i->getSize() / 1024;
-                        $url->move('uploads', time() . '.' . $url->getClientOriginalExtension());
-                        $video->url = time() . '.' . $url->getClientOriginalExtension();
-
-                        if ($request->pay) {
-                            if (array_key_exists($k, $request->pay)) {
-                                $video->paid = $request->pay[$k];
-                            } else {
-                                $video->paid = 0;
-                            }
-                        }
-                        if ($request->hasFile('images')) {
-                            $image = $request->images[$k];
-                            $image->move('uploads', time() . $image->getClientOriginalName());
-                            $video->image = time() . $request->images[$k]->getClientOriginalName();
-                        }
-                        if ($request->hasFile('pdf')) {
-                            $pdf = $request->pdf[$k];
-                            $pdf->move('uploads', time() . $pdf->getClientOriginalName());
-                            $video->pdf = time() . $request->pdf[$k]->getClientOriginalName();
-                        }
-                        if ($request->hasFile('boards')) {
-                            $board = $request->boards[$k];
-                            $board->move('uploads', time() . $board->getClientOriginalName());
-                            $video->board = time() . $request->boards[$k]->getClientOriginalName();
-                        }
-                        $video->subject_id = $subtype->subjects_id;
-                        $video->year_id = $subtype->years_id;
-                        $video->type_id = $subtype->type_id;
-                        $video->subtype_id = $subtype->id;
-                        if (auth()->user() && auth()->user()->isAdmin == 'admin') {
-                            $video->user_id = $subtype->user_id;
-                        } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
-                            $video->user_id = $subtype->user_id;
-                            $video->center_id = auth()->user()->id;
-                        } elseif (Auth::user() && Auth::user()->is_student == 2) {
-                            $video->user_id = auth()->user()->id;
-                        }
-                        $video->save();
-                    }
-                    return response()->json(['success' => 'video upload']);} else {
-
-                    $msg = 'لقد استهلكت 100% ';
-                    return response()->json(['status' => false, 'errors' => $msg]);
-
-                }
-            }
         }
-
     }
 
     public function editsubtype($id)
