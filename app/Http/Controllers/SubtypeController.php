@@ -178,7 +178,7 @@ class SubtypeController extends Controller
                             if ($request->tag_id) {
                                 $subtype->tags()->attach($request->tag_id);
                             }
-
+                        }
 
                         foreach ($request->url as $k => $i) {
                             $video = new Video;
@@ -240,7 +240,6 @@ class SubtypeController extends Controller
                         return response()->json(['status' => false, 'errors' => $msg]);
 
                     }}}} elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
-                        dd("ssdd");
             $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
             if ($paqauser == null) {
                 $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
