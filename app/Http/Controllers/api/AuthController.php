@@ -890,16 +890,21 @@ class AuthController extends Controller
         $users = auth()->user()->stdcenters;
 
         $result = [];
-        //get lecturer_ids
-        $lecturer_ids = [];
-        foreach ($users as $user) {
-            $lecturer_ids[] = $user->lecturers->pluck("id")->toArray();
-        }
-        $result = call_user_func_array("array_merge", $lecturer_ids);
+
         if (auth()->user()->category_id == 1) {
+            $lecturer_ids = [];
+            foreach ($users as $user) {
+                $lecturer_ids[] = $user->teachers->pluck("id")->toArray();
+            }
+            $result = call_user_func_array("array_merge", $lecturer_ids);
 
             $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("id", $result)->get();
         } elseif (auth()->user()->category_id == 2) {
+            $lecturer_ids = [];
+            foreach ($users as $user) {
+                $lecturer_ids[] = $user->doctors->pluck("id")->toArray();
+            }
+            $result = call_user_func_array("array_merge", $lecturer_ids);
             $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("id", $result)->get();
         }
         return response()->json([
