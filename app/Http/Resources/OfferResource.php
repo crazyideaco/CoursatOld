@@ -14,13 +14,13 @@ class OfferResource extends JsonResource
      */
     public function toArray($request)
     {
-      
+
            return [
            'id' => $this->id,
-           
             'image'  =>asset('uploads/'.$this->image),
-           
-        
+            "link" => $this->link ?? ""
+
+
         ];
     }
 }
