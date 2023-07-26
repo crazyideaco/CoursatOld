@@ -400,33 +400,46 @@ class AuthController extends Controller
     {
         // $user_ids = auth()->user()->centerstudents->pluck("id");
         $users = auth()->user()->stdcenters;
-        $offers = Offer::whereIn("center_id", $users->pluck("id"))->get();
+        if (count($users) > 0) {
+
+            $offers = Offer::whereIn("center_id", $users->pluck("id"))->get();
+        } else {
+
+            $offers = Offer::where('center_id', null)->get();
+        }
         if (auth()->user()->category_id == 1) {
-            $result = [];
-            $subject_ids = [];
-            foreach ($users as $user) {
-                $subject_ids[] = $user->centertypes->pluck("subjects_id")->toArray();
-            }
-            $result = call_user_func_array("array_merge", $subject_ids);
-            $subjects = Subject::where('years_id', auth()->user()->year_id)->whereIn('id', $result)->where("active", 1)->get();
-            //  $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
+            if (count($users) > 0) {
+                $result = [];
+                $subject_ids = [];
+                foreach ($users as $user) {
+                    $subject_ids[] = $user->centertypes->pluck("subjects_id")->toArray();
+                }
+                $result = call_user_func_array("array_merge", $subject_ids);
+                $subjects = Subject::where('years_id', auth()->user()->year_id)->whereIn('id', $result)->where("active", 1)->get();
 
+            } else {
+                $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
+
+            }
         } else if (auth()->user()->category_id == 2) {
-            $result = [];
-            $subject_ids = [];
-            foreach ($users as $user) {
-                $subject_ids[] = $user->centertypescollege->pluck("subjectscollege_id")->toArray();
+            if (count($users) > 0) {
+                $result = [];
+                $subject_ids = [];
+                foreach ($users as $user) {
+                    $subject_ids[] = $user->centertypescollege->pluck("subjectscollege_id")->toArray();
+                }
+
+                $result = call_user_func_array("array_merge", $subject_ids);
+
+                $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->whereIn('id', $result)->where("active", 1)->get();
+            } else {
+                $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->where("active", 1)->get();
             }
-
-            $result = call_user_func_array("array_merge", $subject_ids);
-
-            $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->whereIn('id', $result)->where("active", 1)->get();
-            // $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->where("active", 1)->get();
         }
         return response()->json([
             'status' => true, 'message' => 'محتوي هوم',
             'data' => HomeCategory::collection($subjects),
-            'offers' => OfferResource::collection($offers), //Offer::where('center_id', null)->get()
+            'offers' => OfferResource::collection($offers), //
             'centeroffers' => OfferResource::collection($offers),
 
         ]);
