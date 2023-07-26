@@ -234,8 +234,17 @@ class AuthController extends Controller
             } else if ($user->active == 0) {
                 return response()->json(['status' => false, 'message_ar' => 'ذ المستخدم ليس مفعل'], 401);
             } else {
+
                 // comment 1 line for device id
                 if ($user->device_id == null || $user->device_id == $request->device_id) {
+                    if ($request->code) {
+                        if ($center = User::where('code', $request->code)->first()) {
+                            $center->centerstudents()->attach($user->id);
+
+                        } else {
+                            return response()->json(['status' => false, 'message' => 'لا يوجد سنتر هذا الكود']);
+                        }
+                    }
                     $user->device_token = $request->device_token;
                     $user->device_id = $request->device_id;
                     $user->save();
@@ -405,7 +414,7 @@ class AuthController extends Controller
             $offers = Offer::whereIn("center_id", $users->pluck("id"))->get();
         } else {
 
-            $offers = Offer::where('center_id', null)->where("category_id",auth()->user()->category_id)->get();
+            $offers = Offer::where('center_id', null)->where("category_id", auth()->user()->category_id)->get();
         }
         if (auth()->user()->category_id == 1) {
             if (count($users) > 0) {
@@ -905,20 +914,32 @@ class AuthController extends Controller
         $result = [];
 
         if (auth()->user()->category_id == 1) {
-            $lecturer_ids = [];
-            foreach ($users as $user) {
-                $lecturer_ids[] = $user->teachers->pluck("id")->toArray();
-            }
-            $result = call_user_func_array("array_merge", $lecturer_ids);
+            if (count($users) > 0) {
 
-            $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("users.id", $result)->get();
-        } elseif (auth()->user()->category_id == 2) {
-            $lecturer_ids = [];
-            foreach ($users as $user) {
-                $lecturer_ids[] = $user->doctors->pluck("id")->toArray();
+                $lecturer_ids = [];
+                foreach ($users as $user) {
+                    $lecturer_ids[] = $user->teachers->pluck("id")->toArray();
+                }
+                $result = call_user_func_array("array_merge", $lecturer_ids);
+
+                $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("users.id", $result)->get();
+            } else {
+                $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->get();
+
             }
-            $result = call_user_func_array("array_merge", $lecturer_ids);
-            $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("users.id", $result)->get();
+        } elseif (auth()->user()->category_id == 2) {
+            if (count($users) > 0) {
+
+                $lecturer_ids = [];
+                foreach ($users as $user) {
+                    $lecturer_ids[] = $user->doctors->pluck("id")->toArray();
+                }
+                $result = call_user_func_array("array_merge", $lecturer_ids);
+                $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("users.id", $result)->get();
+            } else {
+                $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->get();
+
+            }
         }
         return response()->json([
             'status' => true, 'message' => ' كل المحاضري  ',
