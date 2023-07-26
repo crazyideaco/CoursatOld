@@ -19,7 +19,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -34,7 +34,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -80,7 +80,7 @@
                         	@csrf
                             <div class="row">
                             <div class="col-12 text-center set-img">
-							
+
                                         <img src="{{asset('images/set-img.svg')}}" id="realimg">
                                    <br>
                                <input id="ad" type="file" class="form-control ehabtalaat" name="image">
@@ -90,6 +90,15 @@
                                         @enderror
                            </div>
 
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-3 col-md-6 col-12">
+                                    <label>اللينك</label>
+                                    <input class="form-control" type="text" name="link" value="{{old('link')}}">
+                                     @error('link')
+                                 <p style="color:red;">{{$message}}</p>
+                                 @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="info">
