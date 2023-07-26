@@ -39,7 +39,7 @@ class FilterCourseController extends Controller
         $text = "";
         foreach ($types as $type) {
             $text .= '<tr id="type' . $type->id . '">
-					<!--	  <td class="text-center">' . $type->id . '</td>-->
+					  <td class="text-center">' . $type->id . '</td>
                     <td scope="row" class="text-center"><a href="' . route("subtypes", $type->id) . '">' . $type->name_ar . '</a></td>
                       <td class="text-center">';
             if ($type->user) {
