@@ -107,7 +107,7 @@
                                     <option value="category_id" selected="selected" disabled>اختر فئه</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
-                                            @if (old('category_id') == $category->id) selected @endif>{{ $category->title }}
+                                            @if (old('category_id') == $category->id) selected @endif>{{ $category->name_ar }}
                                         </option>
                                     @endforeach
                                 </select>
