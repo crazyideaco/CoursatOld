@@ -128,7 +128,7 @@ class TypeController extends Controller
             $type->stage_id = $year->stage_id;
             $center_id = $user->belongcenter1()->first()->id ?? null;
             if ($center_id) {
-                $type->center_id = $request->center_id;
+                $type->center_id = $center_id;
             }
             if ($request->points) {
                 $type->points = $request->points;
