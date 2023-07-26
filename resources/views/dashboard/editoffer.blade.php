@@ -105,7 +105,7 @@
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>الفئه</label>
                                 <select name="category_id" class="form-control">
-                                    <option value="category_id" selected="selected" disabled>اختر فئه</option>
+                                    <option value="null" selected="selected" disabled>اختر فئه</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
                                             @if ($offer->category_id == $category->id) selected @endif>{{ $category->name_ar }}
