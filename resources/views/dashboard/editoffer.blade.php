@@ -107,7 +107,7 @@
                                 <select name="category_id" class="form-control">
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}"
-                                            @if ($offer->category_id == $category->id) selected @endif>{{ $category->name_ar }}
+                                            @if ($offer->category_id == $category->id) selected @endif>{{ $category->name }}
                                         </option>
                                     @endforeach
                                 </select>
