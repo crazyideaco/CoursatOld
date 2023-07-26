@@ -232,7 +232,8 @@ class AuthController extends Controller
             if (!$token = auth()->attempt($credentials)) {
                 return response()->json(['message_en' => 'The password field is not right.', 'message_ar' => 'كلمه امرور غير صحيح'], 401);
             } else if ($user->active == 0) {
-                return response()->json(['status' => false, 'message_ar' => 'ذ المستخدم ليس مفعل'], 401);
+                return response()->json(['status' => false, 'message_ar' => 'هذا
+                المستخدم ليس مفعل'], 401);
             } else {
 
                 // comment 1 line for device id
