@@ -64,6 +64,10 @@ class CourseController extends Controller
             $user = User::where('id', auth()->id())->first();
             $course->general_id = auth()->user()->general_id;
             $course->user_id = auth()->user()->id;
+            $center_id = $user->belongcenter3()->first()->id ?? null;
+            if ($center_id) {
+                $course->center_id = $center_id;
+            }
         } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3) {
             $user = User::where('id', $request->user_id)->first();
             $course->general_id = $request->general_id;
@@ -242,51 +246,51 @@ class CourseController extends Controller
         }
     }public function givetypecourse()
     {
-      if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
-        $types1 = auth()->user()->centertypes->pluck('id')->toArray();
-        $types = auth()->user()->centertypes;
-        $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
-        $students1 = User::whereIn('id', $students_ids)->get();
-        $students = $students1->merge(auth()->user()->centerstudents);
-    } else if (Auth::user() && Auth::user()->is_student == 2) {
-        $types1 = auth()->user()->types->pluck('id')->toArray();
-        $types = auth()->user()->types;
-        $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
-        $students1 = User::whereIn('id', $students_ids)->get();
-        $students = $students1->merge(auth()->user()->centerstudents);
-    } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
-        $types1 = auth()->user()->centertypescollege->pluck('id')->toArray();
-        $types = auth()->user()->centertypescollege;
-        $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
-        $students1 = User::whereIn('id', $students_ids)->get();
-        $students = $students1->merge(auth()->user()->centerstudents);
-    } else if (Auth::user() && Auth::user()->is_student == 3) {
-        $types1 = auth()->user()->typescollege->pluck('id')->toArray();
-        $types = auth()->user()->typescollege;
-        $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
-        $students1 = User::whereIn('id', $students_ids)->get();
-        $students = $students1->merge(auth()->user()->centerstudents);
-    } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3) {
-        $types1 = auth()->user()->centercourses->pluck('id')->toArray();
-        $types = auth()->user()->centercourses;
-        $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
-        $students1 = User::whereIn('id', $students_ids)->get();
-        $students = $students1->merge(auth()->user()->centerstudents);
-    } else if (Auth::user() && Auth::user()->is_student == 4) {
-        $types1 = auth()->user()->courses->pluck('id')->toArray();
-        $types = auth()->user()->courses;
-        $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
-        $students1 = User::whereIn('id', $students_ids)->get();
-        $students = $students1->merge(auth()->user()->centerstudents);
-    }
-    return view('dashboard.givetypecourse')->with('students', $students)->with('types', $types);
+        if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+            $types1 = auth()->user()->centertypes->pluck('id')->toArray();
+            $types = auth()->user()->centertypes;
+            $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 2) {
+            $types1 = auth()->user()->types->pluck('id')->toArray();
+            $types = auth()->user()->types;
+            $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
+            $types1 = auth()->user()->centertypescollege->pluck('id')->toArray();
+            $types = auth()->user()->centertypescollege;
+            $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 3) {
+            $types1 = auth()->user()->typescollege->pluck('id')->toArray();
+            $types = auth()->user()->typescollege;
+            $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3) {
+            $types1 = auth()->user()->centercourses->pluck('id')->toArray();
+            $types = auth()->user()->centercourses;
+            $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        } else if (Auth::user() && Auth::user()->is_student == 4) {
+            $types1 = auth()->user()->courses->pluck('id')->toArray();
+            $types = auth()->user()->courses;
+            $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
+            $students1 = User::whereIn('id', $students_ids)->get();
+            $students = $students1->merge(auth()->user()->centerstudents);
+        }
+        return view('dashboard.givetypecourse')->with('students', $students)->with('types', $types);
     }public function gettypecourse($id)
     {
         $user = User::where('id', $id)->first();
         if (Auth::user() && Auth::user()->is_student == 2) {
-            $types = auth()->user()->types()->where('years_id', $user->year_id)->whereNotIn("id",$user->stutypes->pluck("id")->toArray())->get();
+            $types = auth()->user()->types()->where('years_id', $user->year_id)->whereNotIn("id", $user->stutypes->pluck("id")->toArray())->get();
         } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
-            $types = auth()->user()->centertypes()->where('years_id', $user->year_id)->whereNotIn("id",$user->stutypes->pluck("id")->toArray())->get();
+            $types = auth()->user()->centertypes()->where('years_id', $user->year_id)->whereNotIn("id", $user->stutypes->pluck("id")->toArray())->get();
         }
         $text = '';
         $text .= '<option value="0" disabled="disabled" selected="selected">اختر كورس</option>';
@@ -364,9 +368,8 @@ class CourseController extends Controller
     {
         $user = User::where('id', $id)->first();
         if (Auth::user() && Auth::user()->is_student == 3) {
-            $types = auth()->user()->typescollege()->where('section_id', $user->section_id)->whereNotIn("id",$user->stutypescollege->pluck("id")->toArray())->get();}
-             elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
-            $types = auth()->user()->centertypescollege()->where('section_id', $user->section_id)->whereNotIn("id",$user->stutypescollege->pluck("id")->toArray())->get();
+            $types = auth()->user()->typescollege()->where('section_id', $user->section_id)->whereNotIn("id", $user->stutypescollege->pluck("id")->toArray())->get();} elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
+            $types = auth()->user()->centertypescollege()->where('section_id', $user->section_id)->whereNotIn("id", $user->stutypescollege->pluck("id")->toArray())->get();
         }
         $text = '';
         $text .= '<option value="0" disabled="disabled" selected="selected">اختر كورس</option>';
@@ -414,15 +417,15 @@ class CourseController extends Controller
             'course_id.required' => 'حقل الكورس مطلوب',
             'student_id.required' => 'حقل الطالب مطلوب',
         ]);
-       
+
         if ($validator->passes()) {
             if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
                 $type = Type::where('id', $request->course_id)->first();
                 $students = [];
-                foreach($request->student_id as $student_id){
-                  if(!in_array($student_id,$type->studentstype->pluck("id")->toArray())){
-                    $students[]= $student_id;
-                  }
+                foreach ($request->student_id as $student_id) {
+                    if (!in_array($student_id, $type->studentstype->pluck("id")->toArray())) {
+                        $students[] = $student_id;
+                    }
                 }
                 $type = $type->studentstype()->attach($students);
                 return response()->json(['status' => true]);
@@ -430,10 +433,10 @@ class CourseController extends Controller
                 $type = Type::where('id', $request->course_id)->first();
 
                 $students = [];
-                foreach($request->student_id as $student_id){
-                  if(!in_array($student_id,$type->studentstype->pluck("id")->toArray())){
-                    $students[]= $student_id;
-                  }
+                foreach ($request->student_id as $student_id) {
+                    if (!in_array($student_id, $type->studentstype->pluck("id")->toArray())) {
+                        $students[] = $student_id;
+                    }
                 }
                 $type = $type->studentstype()->attach($students);
                 return response()->json(['status' => true]);
@@ -441,40 +444,40 @@ class CourseController extends Controller
                 $type = TypesCollege::where('id', $request->course_id)->first();
 
                 $students = [];
-                foreach($request->student_id as $student_id){
-                  if(!in_array($student_id,$type->studentscollege->pluck("id")->toArray())){
-                    $students[]= $student_id;
-                  }
+                foreach ($request->student_id as $student_id) {
+                    if (!in_array($student_id, $type->studentscollege->pluck("id")->toArray())) {
+                        $students[] = $student_id;
+                    }
                 }
                 $type = $type->studentscollege()->attach($students);
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 3) {
                 $type = TypesCollege::where('id', $request->course_id)->first();
                 $students = [];
-                foreach($request->student_id as $student_id){
-                  if(!in_array($student_id,$type->studentscollege->pluck("id")->toArray())){
-                    $students[]= $student_id;
-                  }
+                foreach ($request->student_id as $student_id) {
+                    if (!in_array($student_id, $type->studentscollege->pluck("id")->toArray())) {
+                        $students[] = $student_id;
+                    }
                 }
                 $type = $type->studentscollege()->attach($students);
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3) {
                 $type = Course::where('id', $request->course_id)->first();
                 $students = [];
-                foreach($request->student_id as $student_id){
-                  if(!in_array($student_id,$type->studentscourses->pluck("id")->toArray())){
-                    $students[]= $student_id;
-                  }
+                foreach ($request->student_id as $student_id) {
+                    if (!in_array($student_id, $type->studentscourses->pluck("id")->toArray())) {
+                        $students[] = $student_id;
+                    }
                 }
                 $type = $type->studentscourses()->attach($students);
                 return response()->json(['status' => true]);
             } else if (Auth::user() && Auth::user()->is_student == 4) {
                 $type = Course::where('id', $request->course_id)->first();
                 $students = [];
-                foreach($request->student_id as $student_id){
-                  if(!in_array($student_id,$type->studentscourses->pluck("id")->toArray())){
-                    $students[]= $student_id;
-                  }
+                foreach ($request->student_id as $student_id) {
+                    if (!in_array($student_id, $type->studentscourses->pluck("id")->toArray())) {
+                        $students[] = $student_id;
+                    }
                 }
                 $type = $type->studentscourses()->attach($students);
                 return response()->json(['status' => true]);
