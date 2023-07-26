@@ -405,7 +405,7 @@ class AuthController extends Controller
             $offers = Offer::whereIn("center_id", $users->pluck("id"))->get();
         } else {
 
-            $offers = Offer::where('center_id', null)->get();
+            $offers = Offer::where('center_id', null)->where("category_id",auth()->user()->category_id)->get();
         }
         if (auth()->user()->category_id == 1) {
             if (count($users) > 0) {
