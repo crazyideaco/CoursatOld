@@ -67,7 +67,7 @@ class TypesCollegeController extends Controller
       $this->middleware(['permission:typescolleges-delete'])->only('deletetypescollege');
     }
   public function addtypescollege(){
- 
+
     if(auth()->user() && auth()->user()->isAdmin == 'admin'){
         $divisions = Division::all();
         $sections = Section::all();
@@ -81,14 +81,14 @@ class TypesCollegeController extends Controller
                  $dg =    \App\Doctor_Subcollege::where('doctor_id',Auth::user()->id)->pluck('subcollege_id')->toArray();
                  $subcolleges = \App\SubjectsCollege::whereIn('id',$dg)->get();
                  $users= "";
-        
+
     }
     elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
                  $divisions = Division::all();
              $sections = Section::all();
                $subcolleges = SubjectsCollege::all();
                  $users = User::where('id',Auth::user()->id)->first()->doctors;
-        
+
     }
     $tags = Tag::all();
      return view('dashboard.addtypescollege')->with('colleges',College::all())->with('divisions',$divisions)->
@@ -115,15 +115,15 @@ class TypesCollegeController extends Controller
      }
      $typescollege = new TypesCollege;
      $typescollege->description=$request->description;
-     $typescollege->division_id = $request->division_id; 
-     $typescollege->section_id = $request->section_id; 
-      $typescollege->subjectscollege_id = $request->subjectscollege_id; 
+     $typescollege->division_id = $request->division_id;
+     $typescollege->section_id = $request->section_id;
+      $typescollege->subjectscollege_id = $request->subjectscollege_id;
         $typescollege->name_ar = $request->name_ar;
         $typescollege->name_en = $request->name_en;
          if($request->points){
-           $typescollege->points= $request->points; 
+           $typescollege->points= $request->points;
           }
-        
+
             if($request->hasFile('intro'))
         {
             $intro = $request->intro;
@@ -131,7 +131,7 @@ class TypesCollegeController extends Controller
             $typescollege->intro = time(). '.'.$intro->getClientOriginalExtension();
         }
           if(Auth::user() && Auth::user()->isAdmin == 'admin'){
-            
+
             $doctor = User::where('id',$request->doctor_id)->first();
               if ($request->hasFile('image')) {
                 $image = $request->image;
@@ -144,9 +144,9 @@ class TypesCollegeController extends Controller
             }else{
                   $typescollege->image = $doctor->image;
               }
-           $typescollege->doctor_id = $request->doctor_id; 
+           $typescollege->doctor_id = $request->doctor_id;
            $typescollege->college_id = $request->college_id;
-           
+
             $typescollege->university_id = $request->university_id;
           }else if(Auth::user() &&Auth::user()->is_student == 3){
               $doctor = User::where('id',auth()->user()->id)->first();
@@ -161,7 +161,11 @@ class TypesCollegeController extends Controller
             }else{
                   $typescollege->image = $doctor->image;
               }
-           $typescollege->doctor_id = auth()->user()->id; 
+              $center_id = $doctor->belongcenter2()->first()->id ?? null;
+              if ($center_id) {
+                  $typescollege->center_id = $center_id;
+              }
+           $typescollege->doctor_id = auth()->user()->id;
             $typescollege->university_id = auth()->user()->university_id;
            $typescollege->college_id = auth()->user()->college_id;
           }elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
@@ -177,7 +181,7 @@ class TypesCollegeController extends Controller
             }else{
                   $typescollege->image = $doctor->image;
               }
-              $typescollege->doctor_id = $request->doctor_id; 
+              $typescollege->doctor_id = $request->doctor_id;
            $typescollege->college_id = $request->college_id;
           $typescollege->university_id = $request->university_id;
            $typescollege->center_id = auth()->user()->id;
@@ -188,7 +192,7 @@ class TypesCollegeController extends Controller
       }
         return response()->json(['success' => 'course uploaded']);
     // return redirect()->route('typescolleges');
- 
+
 }
 public function typescolleges(){
       if(auth()->user() && auth()->user()->isAdmin == 'admin'){
@@ -231,14 +235,14 @@ public function typescolleges(){
                  $dg =    \App\Doctor_Subcollege::where('doctor_id',Auth::user()->id)->pluck('subcollege_id')->toArray();
                  $subcolleges = \App\SubjectsCollege::whereIn('id',$dg)->get();
                  $users = User::all();
-        
+
     }
     elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
                  $divisions = Division::all();
              $sections = Section::all();
                $subcolleges = SubjectsCollege::all();
                  $users = User::where('id',Auth::user()->id)->first()->doctors;
-        
+
     }
      $tags = Tag::all();
      return view('dashboard.edittypescollege')->with('typescollege',TypesCollege::where('id',$id)->first())
@@ -265,13 +269,13 @@ public function typescolleges(){
      }
      $typescollege = TypesCollege::where('id',$id)->first();
         $typescollege->description=$request->description;
-    $typescollege->division_id = $request->division_id; 
-     $typescollege->section_id = $request->section_id; 
-      $typescollege->subjectscollege_id = $request->subjectscollege_id; 
+    $typescollege->division_id = $request->division_id;
+     $typescollege->section_id = $request->section_id;
+      $typescollege->subjectscollege_id = $request->subjectscollege_id;
         $typescollege->name_ar = $request->name_ar;
         $typescollege->name_en = $request->name_en;
          if($request->points){
-           $typescollege->points= $request->points; 
+           $typescollege->points= $request->points;
           }
            if ($request->hasFile('image')) {
 			   if(public_path() . '/uploads/' . $typescollege->image){
@@ -295,15 +299,15 @@ public function typescolleges(){
             $typescollege->intro = time(). '.'.$intro->getClientOriginalExtension();
         }
           if(Auth::user() && Auth::user()->isAdmin == 'admin'){
-           $typescollege->doctor_id = $request->doctor_id; 
+           $typescollege->doctor_id = $request->doctor_id;
            $typescollege->college_id = $request->college_id;
          $typescollege->university_id = $request->university_id;
           }else if(Auth::user() &&Auth::user()->is_student == 3){
-           $typescollege->doctor_id = auth()->user()->id;      
+           $typescollege->doctor_id = auth()->user()->id;
             $typescollege->university_id = auth()->user()->university_id;
            $typescollege->college_id = auth()->user()->college_id;
           }elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
-              $typescollege->doctor_id = $request->doctor_id; 
+              $typescollege->doctor_id = $request->doctor_id;
            $typescollege->college_id = $request->college_id;
            $typescollege->center_id = auth()->user()->id;
                  $typescollege->university_id = $request->university_id;
@@ -329,7 +333,7 @@ public function typescolleges(){
             }
           }
           }
-                       //   
+                       //
       $type->delete();
        return response()->json(['status' => true]);
  }public function gettypescollege($id){
