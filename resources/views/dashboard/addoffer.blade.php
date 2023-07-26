@@ -92,7 +92,7 @@
 
                             </div>
                             <div class="row">
-                                <div class="form-group col-lg-3 col-md-6 col-12">
+                                <div class="form-group col-12">
                                     <label>اللينك</label>
                                     <input class="form-control" type="text" name="link" value="{{old('link')}}">
                                      @error('link')
