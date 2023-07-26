@@ -69,6 +69,12 @@ class OfferController extends Controller
             'mimes' => 'الحقل يجب ان يكون صوره',
         ]);
         $offer = Offer::where('id', $id)->first();
+        if (auth()->user() && auth()->user()->isAdmin == 'admin') {
+            $offer->category_id = $request->category_id;
+
+        } elseif (Auth::user() && Auth::user()->is_student == 5) {
+            $offer->center_id = auth()->id();
+        }
         if ($request->hasFile('image')) {
             if (public_path() . '/uploads/' . $offer->image) {
                 $link = public_path() . '/uploads/' . $offer->image;
@@ -78,6 +84,7 @@ class OfferController extends Controller
             $image->move('uploads', $image->getClientOriginalName());
             $offer->image = $request->image->getClientOriginalName();
         }
+        $offer->link = $request->link;
         $offer->save();
         return redirect()->route('offers');
     }
