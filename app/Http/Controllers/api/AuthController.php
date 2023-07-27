@@ -26,6 +26,8 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\VideogeneralResource;
 use App\Lesson;
 use App\Message;
+use App\Center_Teacher;
+use App\Center_Doctor;
 use App\Notification;
 use App\Offer;
 use App\Stage;
@@ -911,12 +913,13 @@ class AuthController extends Controller
     }
     public function alllecturers(Request $request)
     {
-        $user_owners = User_Owner::get()->pluck("user_id")->toArray();
         $users = auth()->user()->stdcenters;
 
         $result = [];
 
         if (auth()->user()->category_id == 1) {
+        $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
+
             if (count($users) > 0) {
 
                 $lecturer_ids = [];
@@ -931,6 +934,8 @@ class AuthController extends Controller
 
             }
         } elseif (auth()->user()->category_id == 2) {
+        $user_owners = Center_Doctor::get()->pluck("doctor_id")->toArray();
+
             if (count($users) > 0) {
 
                 $lecturer_ids = [];
