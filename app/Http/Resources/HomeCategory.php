@@ -7,7 +7,8 @@ use App\Http\Resources\LecturerResource;
 use App\Http\Resources\TypecollegeResource;
 use App\Http\Resources\TypeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use App\Center_Teacher;
+use App\Center_Doctor;
 class HomeCategory extends JsonResource
 {
     /**
@@ -27,6 +28,8 @@ class HomeCategory extends JsonResource
 
         if (auth()->user()->category_id == 1) {
             $centers = auth()->user()->stdcenters;
+            $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
+
             if (count($centers) > 0) {
                 $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->get());
                 $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
@@ -42,11 +45,13 @@ class HomeCategory extends JsonResource
             if (count($centers) > 0) {
             $lectuers = \App\Subject::where('id', $this->id)->first()->teachers()->where("users.active", 1)->whereIn("users.id",$result)->get();
             }else{
-                $lectuers = \App\Subject::where('id', $this->id)->first()->teachers()->where("users.active", 1)->get();
+                $lectuers = \App\Subject::where('id', $this->id)->first()->teachers()->where("users.active", 1)->whereNotIn("users.id",$user_owners)->get();
 
             }
         } else if (auth()->user()->category_id == 2) {
             $centers = auth()->user()->stdcenters;
+            $user_owners = Center_Doctor::get()->pluck("doctor_id")->toArray();
+
             if (count($centers) > 0) {
                 $courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->whereIn('center_id', $centers->pluck('id'))
                         ->orWhereIn("doctor_id", $centers->pluck('id'))->get());
@@ -66,7 +71,7 @@ class HomeCategory extends JsonResource
 
             $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("users.active", 1)->whereIn("users.id",$result)->get();
             }else{
-                $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("users.active", 1)->get();
+                $lectuers = \App\SubjectsCollege::where('id', $this->id)->first()->doctors()->where("users.active", 1)->whereNotIn("users.id",$user_owners)->get();
 
             }
         } else if (auth()->user()->category_id == 3) {
