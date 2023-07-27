@@ -37,6 +37,7 @@ use App\Type;
 use App\Typecollege_Rate;
 use App\TypesCollege;
 use App\Type_Rate;
+use App\User_Owner;
 use App\University;
 use App\User;
 use App\VideosGeneral;
@@ -910,6 +911,7 @@ class AuthController extends Controller
     }
     public function alllecturers(Request $request)
     {
+        $user_owners = User_Owner::get()->pluck("user_id")->toArray();
         $users = auth()->user()->stdcenters;
 
         $result = [];
@@ -925,7 +927,7 @@ class AuthController extends Controller
 
                 $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("users.id", $result)->get();
             } else {
-                $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->get();
+                $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereNotIn("users.id",$user_owners)->get();
 
             }
         } elseif (auth()->user()->category_id == 2) {
@@ -938,7 +940,7 @@ class AuthController extends Controller
                 $result = call_user_func_array("array_merge", $lecturer_ids);
                 $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("users.id", $result)->get();
             } else {
-                $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->get();
+                $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereNotIn("users.id",$user_owners)->get();
 
             }
         }
