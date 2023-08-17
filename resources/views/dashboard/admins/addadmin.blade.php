@@ -266,8 +266,8 @@
                                     <div role="tabpanel" class="tab-pane fade show {{$index == 0 ? 'active' : ''}}" id="{{$model}}">
                                         @foreach($maps2 as $key => $map)
                                             <div class="checkbox checkbox-success form-check-inline">
-                                                <input type="checkbox" name="permissions[]" id="inlineCheckbox{{$key}}" value="{{$model}}-{{$map}}">
-                                                <label for="inlineCheckbox{{$key}}" style="margin-right: 30px;"> {{__('messages.'.$map)}}</label>
+                                                <input type="checkbox" name="permissions[]" id="inlineCheckboxx{{$key}}" value="{{$model}}-{{$map}}">
+                                                <label for="inlineCheckboxx{{$key}}" style="margin-right: 30px;"> {{__('messages.'.$map)}}</label>
                                             </div>
                                          @endforeach
                                     </div>
