@@ -562,12 +562,12 @@
 
                                     @endif
                                     @if(Auth::user() && Auth::user()->isAdmin == 'admin')
-                                    @if(Auth::user()->hasPermission("typecollege_joins-read"))
+                                    @if(Auth::user()->hasPermission("type_joins-read"))
 
                                     <a href="{{route('type_joins')}}" class="
                               @if(request()->is('type_joins'))active @endif">
                                         طلبات الانضمام</a>
-                                        
+
                                         @endif
 
                                         @else
@@ -646,9 +646,17 @@
 
                                     <a href="{{route('subjectscollegequestionscenter')}}" class="@if(request()->is('subjectscollegequestionscenter'))active @endif">
                                         بنك الاسئله</a>
+                                        @if(Auth::user() && Auth::user()->isAdmin == 'admin')
+                                        @if(Auth::user()->hasPermission("typecollege_joins-read"))
                                     <a href="{{route('typecollege_joins')}}" class="
                               @if(request()->is('typecollege_joins'))active @endif">
                                         طلبات الانضمام</a>
+                                        @endif
+                                        @else
+                                        <a href="{{route('typecollege_joins')}}" class="
+                                        @if(request()->is('typecollege_joins'))active @endif">
+                                                  طلبات الانضمام</a>
+                                        @endif
 
                                 </div>
                             </div>
