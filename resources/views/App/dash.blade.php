@@ -567,6 +567,7 @@
                                     <a href="{{route('type_joins')}}" class="
                               @if(request()->is('type_joins'))active @endif">
                                         طلبات الانضمام</a>
+                                        
                                         @endif
 
                                         @else
