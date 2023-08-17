@@ -31,7 +31,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -46,7 +46,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -88,8 +88,8 @@
                             <img src="{{asset('images/all-products.svg')}}">
                      <h5>  بنك اسئله الماده </h5>
 
-                           
-                    
+
+
                         </div>
 
                         <div class="products-search typs1">
@@ -97,7 +97,7 @@
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <button class="btn w-100 mx-auto" >
                                       <a href="{{route('addsubjectscollegequestionscenter')}}">  <span><i class="fas fa-plus-circle"></i></span>
-                                        اضافة   سؤال 
+                                        اضافة   سؤال
                                         </a>
                                     </button>
 
@@ -119,7 +119,7 @@
                                        <option value="0" >اختر جامعه</option>
                                        @foreach($universities as $university)
                                        <option value="{{$university->id}}">
-                                           {{$university->name_ar}}
+                                           {{$university->name_ar ?? ""}}
                                            </option>
                                        @endforeach
                                    </select>
@@ -132,7 +132,7 @@
                                    <select name="college_id" required class="form-control" id="college" onchange="getdivision(this)">
                                        <option value="0"  >اختر كليه</option>
                                        @foreach($colleges as $college)
-                                       <option value="{{$college->id}}">{{$college->name_ar}}</option>
+                                       <option value="{{$college->id}}">{{$college->name_ar ?? ""}}</option>
                                        @endforeach
                                    </select>
                                 </div>
@@ -141,7 +141,7 @@
                                    <select name="division_id" required class="form-control" id="division" onchange="getsection(this)">
                                        <option value="0"  >اختر قسم</option>
                                        @foreach($divisions as $division)
-                                       <option value="{{$division->id}}">{{$division->name_ar}}</option>
+                                       <option value="{{$division->id}}">{{$division->name_ar ?? ""}}</option>
                                        @endforeach
                                    </select>
                                 </div>
@@ -150,19 +150,19 @@
                                    <select name="section_id" required class="form-control" id="section" onchange="getsubcollege(this)" >
                                        <option value="0"  >اختر فرقه</option>
                                        @foreach($sections as $section)
-                                       <option value="{{$section->id}}">{{$section->name_ar}}</option>
+                                       <option value="{{$section->id}}">{{$section->name_ar ?? ""}}</option>
                                        @endforeach
                                    </select>
                                 </div>
                       </div>
                       <div class="row">
-                        
+
                                 <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم الماده </label>
                                    <select name="subjectscollege_id" required class="form-control" id="subcollege" onchange="getdoctor(this)" >
                                        <option value="0" >اختر ماده</option>
                                        @foreach($subcolleges as $subcollege)
-                                       <option value="{{$subcollege->id}}">{{$subcollege->name_ar}}</option>
+                                       <option value="{{$subcollege->id}}">{{$subcollege->name_ar ?? ""}}</option>
                                        @endforeach
                                    </select>
                                 </div>
@@ -170,21 +170,21 @@
 
       <div class="row">
                             <div class="col-3 mx-auto">
-                              
-                        
+
+
                             <span class="btn btn-primary" onclick="filtersubjectscollegequestion()">بحث</span>    </div>
                           </div>
 @endif
                         <div class="pt-5">
                             <div class="row">
                                      <div class="table-responsive">
-                                             
+
          <table id="example" class="table col-12" style="width:100%">
    <thead>
                 <tr>
 					<th>id</th>
                      <th scope="col" class="text-center"> قسم الاسئله  </th>
-                                  
+
                   <td scope="col" class="text-center">اسم الماده</td>
                     <td scope="col" class="text-center">القسم</td>
                      <th scope="col" class="text-center">الفرقه</th>
@@ -199,33 +199,33 @@
 						  <td class="text-center">{{$question->id}}</td>
                     <td scope="row" class="text-center">{{$question->name}}</td>
                     <td scope="row" class="text-center">
-                   {{$question->subjectscollege->name_ar}}</td>
+                   {{$question->subjectscollege->name_ar ?? ""}}</td>
                    <td scope="row" class="text-center">
-                   {{$question->section->name_ar}}</td>
+                   {{$question->section->name_ar ?? ""}}</td>
                 <td scope="row" class="text-center">
-                   {{$question->division->name_ar}}</td>
+                   {{$question->division->name_ar ?? ""}}</td>
                     <td class="text-center">
                       @if($question->college)
-                      {{$question->college->name_ar}}
+                      {{$question->college->name_ar ?? ""}}
                       @endif
                       </td>
                           <td class="text-center">
                             @if($question->university)
-                            {{$question->university->name_ar}}
+                            {{$question->university->name_ar ?? ""}}
                       @endif</td>
                         <td class="text-center">
-                          <a href="{{route('editsubjectscollegequestionscenter',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen" 
+                          <a href="{{route('editsubjectscollegequestionscenter',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen"
                          style="cursor: pointer"></a>
                               @if(auth()->user()->hasPermission("subjectscollegequestionscenter-delete"))
-                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;"> 
+                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;">
                     @endif
                                             </td>
-                                        </tr>                            
+                                        </tr>
                                         @endforeach
                                     </tbody>
     </table>
-                             
-                              </div>         
+
+                              </div>
                             </div>
 
                     </div>
@@ -254,9 +254,9 @@
 @endsection
 @section("scripts")
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    
+
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  
+
 
 <script>
     $(document).ready(function() {
@@ -266,10 +266,10 @@
       {
           targets: 0,
         visible : false,
-        
-     
+
+
       },]
-           
+
 });
 	});
 function activetype(id){
@@ -305,13 +305,13 @@ $(`#btn${id}`).html('تفعيل');
 $(`#btn${id}`).html('الغاء التفعيل');
 
     }
-    
+
        }
 
       });
   } function deletetype(sel){
     let id = sel;
- 
+
  $.ajaxSetup({
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -342,11 +342,11 @@ $(`#btn${id}`).html('الغاء التفعيل');
          )
        }
            }
-        
+
     });
     }
-   
-   
+
+
   })
 }  function getcolleges(selected){
 let id = selected.value;
@@ -441,7 +441,7 @@ console.log(id);
           "division_id":$("#division").val(),
           "section_id":$("#section").val(),
           "subjectscollege_id":$("#subcollege").val(),
-       
+
       },
        success: function(result){
     if(result.status == true){
@@ -450,7 +450,7 @@ console.log(id);
       $("#typescolleges").append(result.data);
        $('#example').DataTable().draw();
     }
-    
+
        }
 
       });

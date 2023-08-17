@@ -31,7 +31,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -46,7 +46,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -88,8 +88,8 @@
                             <img src="{{asset('images/all-products.svg')}}">
                      <h5>  بنك اسئله الماده </h5>
 
-                           
-                    
+
+
                         </div>
 
                         <div class="products-search typs1">
@@ -97,7 +97,7 @@
                                 <div class="col-lg-3 col-md-6 col-12">
                                     <button class="btn w-100 mx-auto" >
                                       <a href="{{route('addsubjectscollegequestions',$id)}}">  <span><i class="fas fa-plus-circle"></i></span>
-                                        اضافة   سؤال 
+                                        اضافة   سؤال
                                         </a>
                                     </button>
 
@@ -116,13 +116,13 @@
                         <div class="pt-5">
                             <div class="row">
                                     <div class="table-responsive">
-                                                    
+
          <table id="example" class="table col-12" style="width:100%">
    <thead>
                 <tr>
 					<th>id</th>
                      <th scope="col" class="text-center"> قسم الاسئله  </th>
-                                  
+
                   <td scope="col" class="text-center">اسم الماده</td>
                     <td scope="col" class="text-center">القسم</td>
                      <th scope="col" class="text-center">الفرقه</th>
@@ -137,25 +137,25 @@
 						  <td class="text-center">{{$question->id}}</td>
                     <td scope="row" class="text-center">{{$question->name}}</td>
                     <td scope="row" class="text-center">
-                   {{$question->subjectscollege->name_ar}}</td>
+                   {{$question->subjectscollege->name_ar ?? ""}}</td>
                    <td scope="row" class="text-center">
-                   {{$question->section->name_ar}}</td>
+                   {{$question->section->name_ar ?? ""}}</td>
                 <td scope="row" class="text-center">
-                   {{$question->division->name_ar}}</td>
-                    <td class="text-center">{{$question->college->name_ar}}</td>
-                          <td class="text-center">{{$question->university->name_ar}}</td>
+                   {{$question->division->name_ar ?? ""}}</td>
+                    <td class="text-center">{{$question->college->name_ar ?? ""}}</td>
+                          <td class="text-center">{{$question->university->name_ar ?? ""}}</td>
                         <td class="text-center">
-                          <a href="{{route('editsubjectscollegequestions',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen" 
+                          <a href="{{route('editsubjectscollegequestions',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen"
                          style="cursor: pointer"></a>
-                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;"> 
-                    
+                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;">
+
                                             </td>
-                                        </tr>                            
+                                        </tr>
                                         @endforeach
                                     </tbody>
     </table>
-                             
-                              </div>  
+
+                              </div>
                             </div>
 
                     </div>
@@ -184,9 +184,9 @@
 @endsection
 @section("scripts")
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    
+
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  
+
 
 <script>
     $(document).ready(function() {
@@ -196,10 +196,10 @@
       {
           targets: 0,
         visible : false,
-        
-     
+
+
       },]
-           
+
 });
 	});
 function activetype(id){
@@ -235,13 +235,13 @@ $(`#btn${id}`).html('تفعيل');
 $(`#btn${id}`).html('الغاء التفعيل');
 
     }
-    
+
        }
 
       });
   } function deletetype(sel){
     let id = sel;
- 
+
  $.ajaxSetup({
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -272,11 +272,11 @@ $(`#btn${id}`).html('الغاء التفعيل');
          )
        }
            }
-        
+
     });
     }
-   
-   
+
+
   })
 }
 
