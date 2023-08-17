@@ -31,7 +31,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -74,11 +74,11 @@
                        <form method="post" action="{{route('updatesubjectquestions',$part->id)}}" enctype="multipart/form-data">
                         	@csrf
                   <div class="row mt-4">
-                
+
  <div class="col-6">
    <label>القسم</label>
    <input type="text" class="form-control w-100" name="part" value="{{$part->name}}">
-                </div>                
+                </div>
                           </div>
                          <section id="section">
                            @foreach($part->questions as $key => $question)
@@ -88,7 +88,8 @@
                           <div class="row">
                             <div class="col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[{{$key}}]" value="{{$question->name}}">
+                              <textarea  class="form-control" rows="6" name="name[{{$key}}]">{{$question->name}}</textarea>
+
                             </div>
                                    <div class="col-12 text-center">
                                      @if($question->question_image)
@@ -104,10 +105,10 @@
                             @enderror
                            </div>
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-lg-2 col-6">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[{{$key}}]" value="{{$question->score}}">
@@ -115,7 +116,7 @@
                             <div class="col-lg-3 col-6">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[{{$key}}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}" @if($question->question_level == $i) selected @endif>{{$i}}</option>
                                  @endfor
@@ -124,7 +125,7 @@
                           </div>
                            @foreach($question->answers as $key1 => $answer)
                    <div class="row">
-                     
+
                             <div class="col-lg-6 col-8">
                               <label>الاجابه 1</label>
                               <input type="text" class="form-control"  value="{{$answer->name}}"name="answer[{{$key}}][{{$key1}}]" required>
@@ -137,7 +138,7 @@
                           </div>
                            @endforeach
                           <div class="row">
-                            
+
                             <div class="col-lg-3 col-12">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[{{$key}}]">{{$question->notes}}</textarea>
@@ -145,13 +146,13 @@
                                <div class="col-lg-3 col-12 text-center mb-5 set-img">
                                    @if($question->video)
                                      <video width="200" height="200" controls >
-                    
+
               <source src="{{asset('uploads/'.$question->video)}}" id="video_here">
             Your browser does not support HTML5 video.
           </video>
                       @else
                     <video width="200" height="200" controls >
-                    
+
               <source src="mov_bbb.mp4" id="video_here">
             Your browser does not support HTML5 video.
           </video>
@@ -178,7 +179,7 @@
                             @enderror
                </div>
                               <div class="col-3">
-                             
+
                            <img src="{{asset('plus.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" id="click" onclick="addquestion()">
                             </div>
                           </div>
@@ -201,14 +202,15 @@
                            </div>
                             <div class="col-md-6 col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[{{$key}}]" value="{{$question->name}}">
+                              <textarea  class="form-control" rows="6" name="name[{{$key}}]">{{$question->name}}</textarea>
+
                             </div>
-                                   
+
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-md-6 col-12">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[{{$key}}]" value="{{$question->score}}">
@@ -216,7 +218,7 @@
                             <div class="col-md-6 col-12">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[{{$key}}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}" @if($question->question_level == $i) selected @endif>{{$i}}</option>
                                  @endfor
@@ -224,9 +226,9 @@
                           </div>
                           </div>
                            @foreach($question->answers as $key1 => $answer)
-                           
+
                    <div class="row">
-                     
+
                             <div class="col-md-5 col-10">
                               <label>الاجابه 1</label>
                               <input type="text" class="form-control" name="answer[{{$key}}][{{$key1}}]" value="{{$answer->name}}" required>
@@ -239,7 +241,7 @@
                           </div>
                            @endforeach
                           <div class="row">
-                            
+
                             <div class="col-3">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[{{$key}}]">{{$question->notes}}</textarea>
@@ -247,13 +249,13 @@
                                <div class="col-3 text-center mb-5 set-img">
                                    @if($question->video)
                                      <video width="200" height="200" controls >
-                    
+
               <source src="{{asset('uploads/'.$question->video)}}" id="video_here{{$key}}">
             Your browser does not support HTML5 video.
           </video>
                       @else
                     <video width="200" height="200" controls >
-                    
+
               <source src="mov_bbb.mp4" id="video_here{{$question->id}}">
             Your browser does not support HTML5 video.
           </video>
@@ -280,12 +282,12 @@
                             @enderror
                </div>
                               <div class="col-3">
-                             
-                                                  <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" 
+
+                                                  <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;"
                                                        onclick="removequestion({{$question->id}})">
                             </div>
                           </div>
-                           
+
                         @endif
                            @endforeach
                            </section>
@@ -301,7 +303,7 @@
 
                     </div>
                     <br />
-                                                  
+
                         <div class="save text-center mt-6">
                             <div class="row save">
                                 <div class="col-12 text-center">
@@ -318,7 +320,7 @@
             <!--start foter-->
             <div class="foter">
                 <div class="row">
-                    
+
                     <div class="col-12 text-center">
                         <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
@@ -337,7 +339,7 @@
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
   if ($box.is(":checked")) {
-    
+
     // the name of the box is retrieved using the .attr() method
     // as it is assumed and expected to be immutable
     var group = "input:checkbox[class='" + $box.attr("class") + "']";
@@ -440,13 +442,14 @@ function getboard(f){
     }
 }let id = 1;
   $("#click").click(function(){
-    $("#section").append(` 
+    $("#section").append(`
       <div class="info" id="s${id}">
 
                           <div class="row">
                             <div class="col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[${id}]">
+                              <textarea  class="form-control" rows="6" name="name[${key}]"></textarea>
+
                             </div>
                                    <div class="col-12 text-center">
                                <img src="{{asset('images/set-img.svg')}}" id="r${id}" style="width:100%;height:500px;">
@@ -458,10 +461,10 @@ function getboard(f){
                             @enderror
                            </div>
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-lg-2 col-6">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[${id}]">
@@ -469,7 +472,7 @@ function getboard(f){
                             <div class="col-lg-3 col-6">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[${id}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}">{{$i}}</option>
                                  @endfor
@@ -518,7 +521,7 @@ function getboard(f){
                             </div>
                           </div>
                           <div class="row">
-                            
+
                             <div class="col-lg-3 col-md-12">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[${id}]"></textarea>
@@ -546,11 +549,11 @@ function getboard(f){
                             @enderror
                </div>
                               <div class="col-3">
-                             
+
                         <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" id="click" onclick="removequestion(${id})">
                             </div>
                           </div>
-                           
+
                           	   `);
                             id++;
 });

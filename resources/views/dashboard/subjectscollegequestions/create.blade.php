@@ -88,6 +88,7 @@
                             <div class="col-12">
                               <label>السؤال</label>
                               {{--  <input type="text" class="form-control" name="name[0]">  --}}
+
                               <textarea  class="form-control" rows="6" name="name[0]"></textarea>
                             </div>
                                    <div class="col-12 text-center">
@@ -351,7 +352,9 @@ function getboard(f){
                           <div class="row">
                             <div class="col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[${id}]">
+
+                              <textarea  class="form-control" rows="6" name="name[${id}]"></textarea>
+                              
                             </div>
                                    <div class="col-12 text-center">
                                <img src="{{asset('images/set-img.svg')}}" id="r${id}" style="width:100%;height:500px;">
