@@ -561,9 +561,18 @@
                                         نتائج امتحانات الحصص </a>
 
                                     @endif
+                                    @if(Auth::user() && Auth::user()->isAdmin == 'admin' && Auth::user()->hasPermission("typecollege_joins-read") )
+
                                     <a href="{{route('type_joins')}}" class="
                               @if(request()->is('type_joins'))active @endif">
                                         طلبات الانضمام</a>
+
+                                        @else
+                                        <a href="{{route('type_joins')}}" class="
+                                        @if(request()->is('type_joins'))active @endif">
+                                                  طلبات الانضمام</a>
+                                                  @endif
+
                                     <a href="{{route('subjectquestionsscenter')}}" class="@if(request()->is('subjectquestionsscenter'))active @endif">
                                         بنك الاسئله</a>
                                 </div>
