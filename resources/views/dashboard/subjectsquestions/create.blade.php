@@ -31,7 +31,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -73,9 +73,9 @@
                         </div>
                        <form method="post" action="{{route('storesubjectquestions',$id)}}" enctype="multipart/form-data">
                         	@csrf
-                                       
+
                            @if(Auth::user() && Auth::user()->is_student == 2)
-                           
+
                              <?php
                           $iduser=Auth::user()->id;
                          $useryear= \App\User_Year::where('user_id',$iduser)->pluck('year_id');
@@ -84,11 +84,11 @@
                        $yearr= \App\Year::whereIn('id',$useryear)->get();
                        $stages= \App\Year::whereIn('id',$userstage)->get();
 
-                       
-                          
+
+
                           ?>
                          <div class="row">
-                     
+
                            <div class="form-group col-3">
                            <label>سنه الماده</label>
                             <select class="form-control" name="years_id" id="year" required onchange="getyear(this)">
@@ -100,7 +100,7 @@
                                  @error('years_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                 <div class="form-group col-3">
                            <label>الماده </label>
                             <select class="form-control" name="subjects_id"  required id="subject" >
@@ -112,7 +112,7 @@
                                  @error('subjects_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                          </div>
                           @elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1)
                          <div class="row">
@@ -127,7 +127,7 @@
                                  @error('years_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                 <div class="form-group col-3">
                            <label>الماده </label>
                             <select class="form-control" required name="subjects_id" id="subject" onchange="getteacher(this)">
@@ -139,8 +139,8 @@
                                  @error('subjects_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
-                             
+                             </div>
+
                              <div class="form-group col-3">
                                     <label>اسم المدرس</label>
                       <select name="user_id" required class="form-control" id="teacher">
@@ -156,11 +156,11 @@
                          </div>
                          @endif
               <div class="row mt-4">
-                
+
  <div class="col-6">
    <label>القسم</label>
    <input type="text" class="form-control w-100" name="part">
-                </div>                
+                </div>
                           </div>
                          <section id="section">
                         <div class="info">
@@ -177,14 +177,15 @@
                            </div>
                             <div class="col-md-6 col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[0]">
+                              <textarea  class="form-control" rows="6" name="name[0]"></textarea>
+
                             </div>
-                                   
+
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-md-6 col-12">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[0]">
@@ -192,7 +193,7 @@
                             <div class="col-md-6 col-12">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[0]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}">{{$i}}</option>
                                  @endfor
@@ -237,7 +238,7 @@
                             </div>
                           </div>
                           <div class="row w-100">
-                            
+
                             <div class="col-lg-5 col-md-6 col-12">
                               <label>الشرح</label>
                               <textarea rows="10" class="form-control" name="notes[0]"></textarea>
@@ -265,11 +266,11 @@
                             @enderror
                </div>
                               <div class="col-lg-1 col-md-6 col-12 text-center">
-                             
+
                            <img src="{{asset('plus.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px; margin-bottom: 20px" id="click" onclick="addquestion()">
                             </div>
                           </div>
-                           
+
                            </section>
                           	    <br><br>
                          <div class="progress px-3">
@@ -283,7 +284,7 @@
 
                     </div>
                     <br />
-                                                   
+
                         <div class="save text-center mt-6">
                             <div class="row save">
                                 <div class="col-12 text-center">
@@ -300,7 +301,7 @@
             <!--start foter-->
             <div class="foter">
                 <div class="row">
-                    
+
                     <div class="col-12 text-center">
                         <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
@@ -319,7 +320,7 @@
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
   if ($box.is(":checked")) {
-    
+
     // the name of the box is retrieved using the .attr() method
     // as it is assumed and expected to be immutable
     var group = "input:checkbox[class='" + $box.attr("class") + "']";
@@ -422,7 +423,7 @@ function getboard(f){
     }
 }let id = 1;
   $("#click").click(function(){
-    $("#section").append(` 
+    $("#section").append(`
       <div class="info" id="s${id}">
 
                           <div class="row">
@@ -437,7 +438,7 @@ function getboard(f){
                            </div>
                             <div class="col-md-6 col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[${id}]">
+                              <textarea  class="form-control" rows="6" name="name[${id}]"></textarea>
                             </div>
                             </div>
                           	<div class="row">
@@ -448,7 +449,7 @@ function getboard(f){
                             <div class="col-md-6 col-12">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[${id}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}">{{$i}}</option>
                                  @endfor
@@ -523,7 +524,7 @@ function getboard(f){
                           <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;margin-bottom:20px;" id="click" onclick="removequestion(${id})">
                               </div>
                             </div>
-                           
+
                           	   `);
                             id++;
 });

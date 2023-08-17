@@ -31,7 +31,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -75,8 +75,8 @@
                         	@csrf
                                                       @if(Auth::user() && Auth::user()->isAdmin == 'admin')
                          <div class="row">
-                           
-                      
+
+
                            <div class="form-group col-3">
                            <label>سنه الماده</label>
                             <select class="form-control" name="years_id" required id="year" onchange="getyear(this)">
@@ -88,7 +88,7 @@
                                  @error('years_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                 <div class="form-group col-3">
                            <label>الماده </label>
                             <select class="form-control" name="subjects_id" required id="subject" onchange="getteacher(this)">
@@ -100,10 +100,10 @@
                                  @error('subjects_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                          </div>
                                  @elseif(Auth::user() && Auth::user()->is_student == 2)
-                           
+
                              <?php
                           $iduser=Auth::user()->id;
                          $useryear= \App\User_Year::where('user_id',$iduser)->pluck('year_id');
@@ -112,11 +112,11 @@
                        $yearr= \App\Year::whereIn('id',$useryear)->get();
                        $stages= \App\Year::whereIn('id',$userstage)->get();
 
-                       
-                          
+
+
                           ?>
                          <div class="row">
-                           
+
                               <div class="form-group col-3">
                            <label>سنه الماده</label>
                             <select class="form-control" name="years_id" id="year" required onchange="getyear(this)">
@@ -128,7 +128,7 @@
                                  @error('years_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                 <div class="form-group col-3">
                            <label>الماده </label>
                             <select class="form-control" name="subjects_id"  required id="subject" >
@@ -140,7 +140,7 @@
                                  @error('subjects_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                          </div>
                                 @elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1)
                       <div class="row">
@@ -155,7 +155,7 @@
                                  @error('years_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                 <div class="form-group col-3">
                            <label>الماده </label>
                             <select class="form-control" required name="subjects_id" id="subject" onchange="getteacher(this)">
@@ -167,8 +167,8 @@
                                  @error('subjects_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
-                             
+                             </div>
+
                              <div class="form-group col-3">
                                     <label>اسم المدرس</label>
                       <select name="teacher_id" required class="form-control" id="teacher">
@@ -184,11 +184,11 @@
                          </div>
                          @endif
                   <div class="row mt-4">
-                
+
  <div class="col-6">
    <label>القسم</label>
    <input type="text" class="form-control" name="part" value="{{$part->name}}">
-                </div>                
+                </div>
                           </div>
                          <section id="section">
                            @foreach($part->questions as $key => $question)
@@ -198,7 +198,8 @@
                           <div class="row">
                             <div class="col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[{{$key}}]" value="{{$question->name}}">
+                              <textarea  class="form-control" rows="6" name="name[{{$key}}]">{{$question->name}}</textarea>
+
                             </div>
                                    <div class="col-12 text-center">
                                      @if($question->question_image)
@@ -214,10 +215,10 @@
                             @enderror
                            </div>
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-2">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[{{$key}}]" value="{{$question->score}}">
@@ -225,7 +226,7 @@
                             <div class="col-3">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[{{$key}}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}" @if($question->question_level == $i) selected @endif>{{$i}}</option>
                                  @endfor
@@ -234,7 +235,7 @@
                           </div>
                            @foreach($question->answers as $key1 => $answer)
                    <div class="row">
-                     
+
                             <div class="col-6">
                               <label>الاجابه 1</label>
                               <input type="text" class="form-control"  value="{{$answer->name}}"name="answer[{{$key}}][{{$key1}}]" required>
@@ -247,7 +248,7 @@
                           </div>
                            @endforeach
                           <div class="row">
-                            
+
                             <div class="col-3">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[{{$key}}]">{{$question->notes}}</textarea>
@@ -255,13 +256,13 @@
                                <div class="col-3 text-center mb-5 set-img">
                                    @if($question->video)
                                      <video width="200" height="200" controls >
-                    
+
               <source src="{{asset('uploads/'.$question->video)}}" id="video_here">
             Your browser does not support HTML5 video.
           </video>
                       @else
                     <video width="200" height="200" controls >
-                    
+
               <source src="mov_bbb.mp4" id="video_here">
             Your browser does not support HTML5 video.
           </video>
@@ -288,7 +289,7 @@
                             @enderror
                </div>
                               <div class="col-3">
-                             
+
                            <img src="{{asset('plus.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" id="click" onclick="addquestion()">
                             </div>
                           </div>
@@ -298,7 +299,8 @@
                           <div class="row">
                             <div class="col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[{{$key}}]" value="{{$question->name}}">
+                              <textarea  class="form-control" rows="6" name="name[{{$key}}]">{{$question->name}}</textarea>
+
                             </div>
                                    <div class="col-4 text-center">
                                      @if($question->question_image)
@@ -314,10 +316,10 @@
                             @enderror
                            </div>
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-2">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[{{$key}}]" value="{{$question->score}}">
@@ -325,7 +327,7 @@
                             <div class="col-3">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[{{$key}}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}" @if($question->question_level == $i) selected @endif>{{$i}}</option>
                                  @endfor
@@ -333,9 +335,9 @@
                           </div>
                           </div>
                            @foreach($question->answers as $key1 => $answer)
-                           
+
                    <div class="row">
-                     
+
                             <div class="col-6">
                               <label>الاجابه 1</label>
                               <input type="text" class="form-control" name="answer[{{$key}}][{{$key1}}]" value="{{$answer->name}}" required>
@@ -348,7 +350,7 @@
                           </div>
                            @endforeach
                           <div class="row">
-                            
+
                             <div class="col-3">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[{{$key}}]">{{$question->notes}}</textarea>
@@ -356,13 +358,13 @@
                                <div class="col-3 text-center mb-5 set-img">
                                    @if($question->video)
                                      <video width="200" height="200" controls >
-                    
+
               <source src="{{asset('uploads/'.$question->video)}}" id="video_here{{$key}}">
             Your browser does not support HTML5 video.
           </video>
                       @else
                     <video width="200" height="200" controls >
-                    
+
               <source src="mov_bbb.mp4" id="video_here{{$question->id}}">
             Your browser does not support HTML5 video.
           </video>
@@ -389,12 +391,12 @@
                             @enderror
                </div>
                               <div class="col-3">
-                             
-                                                  <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" 
+
+                                                  <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;"
                                                        onclick="removequestion({{$question->id}})">
                             </div>
                           </div>
-                           
+
                         @endif
                            @endforeach
                            </section>
@@ -410,7 +412,7 @@
 
                     </div>
                     <br />
-                                                  
+
                         <div class="save text-center mt-6">
                             <div class="row save">
                                 <div class="col-12 text-center">
@@ -427,7 +429,7 @@
             <!--start foter-->
             <div class="foter">
                 <div class="row">
-                    
+
                     <div class="col-12 text-center">
                         <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
@@ -446,7 +448,7 @@
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
   if ($box.is(":checked")) {
-    
+
     // the name of the box is retrieved using the .attr() method
     // as it is assumed and expected to be immutable
     var group = "input:checkbox[class='" + $box.attr("class") + "']";
@@ -549,13 +551,14 @@ function getboard(f){
     }
 }let id = 1;
   $("#click").click(function(){
-    $("#section").append(` 
+    $("#section").append(`
       <div class="info" id="s${id}">
 
                           <div class="row">
                             <div class="col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[${id}]">
+                              <textarea  class="form-control" rows="6" name="name[${key}]"></textarea>
+
                             </div>
                                    <div class="col-12 text-center">
                                <img src="{{asset('images/set-img.svg')}}" id="r${id}" class="my-3" style="width:100%;height:500px;">
@@ -567,10 +570,10 @@ function getboard(f){
                             @enderror
                            </div>
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-2">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[${id}]">
@@ -578,7 +581,7 @@ function getboard(f){
                             <div class="col-3">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[${id}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}">{{$i}}</option>
                                  @endfor
@@ -627,7 +630,7 @@ function getboard(f){
                             </div>
                           </div>
                           <div class="row">
-                            
+
                             <div class="col-3">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[${id}]"></textarea>
@@ -655,11 +658,11 @@ function getboard(f){
                             @enderror
                </div>
                               <div class="col-3">
-                             
+
                         <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" id="click" onclick="removequestion(${id})">
                             </div>
                           </div>
-                           
+
                           	   `);
                             id++;
 });
@@ -686,8 +689,8 @@ function getboard(f){
 
       });
     }
-    
-    
+
+
       function getteacher(selected){
 
 var id = selected.value;
@@ -700,7 +703,7 @@ var id = selected.value;
        success: function(result){
         $('#teacher').empty();
         $('#teacher').html(result[0]);
-		  
+
         $('#type').empty();
         $('#type').html(result[1]);
         $('#type').selectpicker('refresh');
