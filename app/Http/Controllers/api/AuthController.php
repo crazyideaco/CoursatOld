@@ -462,7 +462,7 @@ class AuthController extends Controller
         if (auth()->user()->category_id == 1) {
             $type1 = Type::where('id', $request->course_id)->first();
             if ($type1) {
-                $type = Type::where('id', $request->course_id)->first()->subtypes()->orderBy('order_number', 'asc')->get();
+                $type = Type::where('id', $request->course_id)->first()->subtypes()->where("active",1)->orderBy('order_number', 'asc')->get();
                 return response()->json([
                     'status' => true, 'message' => 'محتيت الكورس',
                     'data' => SubtypeResource::collection($type),
@@ -475,7 +475,7 @@ class AuthController extends Controller
         } else if (auth()->user()->category_id == 2) {
             $type1 = TypesCollege::where('id', $request->course_id)->first();
             if ($type1) {
-                $type = TypesCollege::where('id', $request->course_id)->first()->lessons()->orderBy('order_number', 'asc')->get();
+                $type = TypesCollege::where('id', $request->course_id)->first()->lessons()->where("active",1)->orderBy('order_number', 'asc')->get();
                 return response()->json([
                     'status' => true, 'message' => 'محتويات الكورس',
                     'data' => LessonResource::collection($type),

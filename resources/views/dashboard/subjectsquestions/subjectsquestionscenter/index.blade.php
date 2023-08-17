@@ -31,7 +31,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -46,7 +46,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -88,15 +88,15 @@
                             <img src="{{asset('images/all-products.svg')}}">
                      <h5>  بنك اسئله الماده </h5>
 
-                           
-                    
+
+
                         </div>
 
                         <div class="products-search typs1">
                             <div class="row">
                                     <button class="btn" >
                                       <a href="{{route('addsubjectquestionscenter')}}">  <span><i class="fas fa-plus-circle"></i></span>
-                                        اضافة   سؤال 
+                                        اضافة   سؤال
                                         </a>
                                     </button>
                                 </div>
@@ -113,50 +113,50 @@
                             <select class="form-control selectpicker" name="stage_id" onchange="getstage(this)">
                                  <option value="0" selected="selected" required disabled="disabled">ادخل المرحله</option>
                                 @foreach($stages as $stage)
-                                <option value='{{$stage->id}}'>{{$stage->name_ar}}</option>
+                                <option value='{{$stage->id}}'>{{$stage->name_ar ?? ""}}</option>
                                 @endforeach
                             </select>
                                  @error('stage_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                        <div class="form-group col-lg-4 col-12">
                            <label>سنه الماده</label>
                             <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear(this)">
                                 <option value="0" selected="selected" disabled="disabled">اختر السنه</option>
-                              
+
                             </select>
                                  @error('years_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                 <div class="form-group col-lg-4 col-12">
                            <label>الماده </label>
                             <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getteacher(this)">
                                   <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
-                                
+
                             </select>
                                  @error('subjects_id')
                          <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                           </div>
                           <div class="row">
                             <div class="col-3 mx-auto">
-                              
-                        
+
+
                             <span class="btn btn-primary" onclick="filtersubjectquestions()">بحث</span>    </div>
                           </div>
 @endif
                         <div class="pt-5">
                             <div class="row">
-                                    <div class="table-responsive ">               
+                                    <div class="table-responsive ">
          <table id="example" class="tablecol-12" style="width:100%">
    <thead>
                 <tr>
 					<th>id</th>
                      <th scope="col" class="text-center"> القسم  </th>
-                                  
+
                     <th scope="col">الماده</th>
                        <th scope="col" class="text-center">السنه</th>
                     <th scope="col" class="text-center">الاعدادات</th>
@@ -169,26 +169,26 @@
                     <td scope="row" class="text-center">{{$question->name}}</td>
                         <td class="text-center">
                           @if($question->subject)
-                          {{$question->subject->name_ar}}
+                          {{$question->subject->name_ar ?? ""}}
                       @endif</td>
                           <td class="text-center">
                             @if($question->year)
-                            {{$question->year->year_ar}} 
+                            {{$question->year->year_ar}}
                       @endif</td>
                         <td class="text-center">
-                          <a href="{{route('editsubjectquestionscenter',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen" 
+                          <a href="{{route('editsubjectquestionscenter',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen"
                          style="cursor: pointer"></a>
-                          @if(auth()->user()->hasPermission("subjectquestionsscenter-delete"))  
-                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;"> 
+                          @if(auth()->user()->hasPermission("subjectquestionsscenter-delete"))
+                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;">
                     @endif
                                             </td>
-                                        </tr>                            
+                                        </tr>
                                         @endforeach
                                     </tbody>
     </table>
-                             
-                                      
-                              </div> 
+
+
+                              </div>
                             </div>
 
                     </div>
@@ -217,9 +217,9 @@
 @endsection
 @section("scripts")
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    
+
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  
+
 
 <script>
     $(document).ready(function() {
@@ -229,10 +229,10 @@
       {
           targets: 0,
         visible : false,
-        
-     
+
+
       },]
-           
+
 });
 	});
 function activetype(id){
@@ -268,13 +268,13 @@ $(`#btn${id}`).html('تفعيل');
 $(`#btn${id}`).html('الغاء التفعيل');
 
     }
-    
+
        }
 
       });
   } function deletetype(sel){
     let id = sel;
- 
+
  $.ajaxSetup({
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -305,11 +305,11 @@ $(`#btn${id}`).html('الغاء التفعيل');
          )
        }
            }
-        
+
     });
     }
-   
-   
+
+
   })
 }
 function getstage(selected){
@@ -366,7 +366,7 @@ function getstage(selected){
       data:{
         "years_id":$("#year").val(),
         "subjects_id":$("#subject").val(),
-       
+
       },
        success: function(result){
     if(result.status == true){
@@ -375,7 +375,7 @@ $("#types").empty();
       $("#types").append(result.data);
        $('#example').DataTable().draw();
     }
-    
+
        }
 
       });

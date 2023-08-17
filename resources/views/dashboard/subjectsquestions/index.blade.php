@@ -31,7 +31,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -46,7 +46,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -88,15 +88,15 @@
                             <img src="{{asset('images/all-products.svg')}}">
                      <h5>  بنك اسئله الماده </h5>
 
-                           
-                    
+
+
                         </div>
 
                         <div class="products-search typs1">
                             <div class="row">
                                     <button class="btn" >
                                       <a href="{{route('addsubjectquestions',$id)}}">  <span><i class="fas fa-plus-circle"></i></span>
-                                        اضافة   سؤال 
+                                        اضافة   سؤال
                                         </a>
                                     </button>
 
@@ -108,13 +108,13 @@
 
                         <div class="pt-5">
                             <div class="row">
-                                                    
+
          <table id="example" class="table table-responsive col-12" style="width:100%">
    <thead>
                 <tr>
 					<th>id</th>
                      <th scope="col" class="text-center"> القسم  </th>
-                                  
+
                     <th scope="col">الماده</th>
                        <th scope="col" class="text-center">السنه</th>
                     <th scope="col" class="text-center">الاعدادات</th>
@@ -127,23 +127,23 @@
                     <td scope="row" class="text-center">{{$question->name}}</td>
                         <td class="text-center">
                           @if($question->subject)
-                          {{$question->subject->name_ar}}
+                          {{$question->subject->name_ar ?? ""}}
                       @endif</td>
                           <td class="text-center">
                             @if($question->year)
-                            {{$question->year->year_ar}} 
+                            {{$question->year->year_ar}}
                       @endif</td>
                         <td class="text-center">
-                          <a href="{{route('editsubjectquestions',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen" 
+                          <a href="{{route('editsubjectquestions',$question->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen"
                          style="cursor: pointer"></a>
-                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;"> 
-                    
+                             <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletetype('{{$question->id}}')" style="cursor:pointer;">
+
                                             </td>
-                                        </tr>                            
+                                        </tr>
                                         @endforeach
                                     </tbody>
     </table>
-                             
+
                             </div>
 
                     </div>
@@ -172,9 +172,9 @@
 @endsection
 @section("scripts")
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    
+
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  
+
 
 <script>
     $(document).ready(function() {
@@ -184,10 +184,10 @@
       {
           targets: 0,
         visible : false,
-        
-     
+
+
       },]
-           
+
 });
 	});
 function activetype(id){
@@ -223,13 +223,13 @@ $(`#btn${id}`).html('تفعيل');
 $(`#btn${id}`).html('الغاء التفعيل');
 
     }
-    
+
        }
 
       });
   } function deletetype(sel){
     let id = sel;
- 
+
  $.ajaxSetup({
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -260,11 +260,11 @@ $(`#btn${id}`).html('الغاء التفعيل');
          )
        }
            }
-        
+
     });
     }
-   
-   
+
+
   })
 }
 
