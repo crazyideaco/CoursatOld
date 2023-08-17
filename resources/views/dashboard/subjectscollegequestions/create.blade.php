@@ -31,7 +31,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -73,13 +73,13 @@
                         </div>
                        <form method="post" action="{{route('storesubjectscollegequestions',$id)}}" enctype="multipart/form-data">
                         	@csrf
-                                         
+
               <div class="row mt-4">
-                
+
  <div class="col-6">
    <label>القسم</label>
    <input type="text" class="form-control" name="part">
-                </div>                
+                </div>
                           </div>
                          <section id="section">
                         <div class="info">
@@ -87,7 +87,8 @@
                           <div class="row">
                             <div class="col-12">
                               <label>السؤال</label>
-                              <input type="text" class="form-control" name="name[0]">
+                              {{--  <input type="text" class="form-control" name="name[0]">  --}}
+                              <textarea  class="form-control" rows="6" name="name[0]"></textarea>
                             </div>
                                    <div class="col-12 text-center">
                                <img src="{{asset('images/set-img.svg')}}" id="realimg" style="width:100%;height:500px;">
@@ -99,10 +100,10 @@
                             @enderror
                            </div>
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-2">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[0]">
@@ -110,7 +111,7 @@
                             <div class="col-3">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[0]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}">{{$i}}</option>
                                  @endfor
@@ -159,7 +160,7 @@
                             </div>
                           </div>
                           <div class="row">
-                            
+
                             <div class="col-3">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[0]"></textarea>
@@ -187,11 +188,11 @@
                             @enderror
                </div>
                               <div class="col-3">
-                             
+
                            <img src="{{asset('plus.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" id="click" onclick="addquestion()">
                             </div>
                           </div>
-                           
+
                            </section>
                           	    <br><br>
                          <div class="progress px-3">
@@ -205,7 +206,7 @@
 
                     </div>
                     <br />
-                                                   
+
                         <div class="save text-center mt-6">
                             <div class="row save">
                                 <div class="col-12 text-center">
@@ -222,7 +223,7 @@
             <!--start foter-->
             <div class="foter">
                 <div class="row">
-                    
+
                     <div class="col-12 text-center">
                         <h5>Made With <img src="{{asset('images/red.svg')}}"> By Crazy Idea </h5>
                         <p>Think Out Of The Box</p>
@@ -241,7 +242,7 @@
   // in the handler, 'this' refers to the box clicked on
   var $box = $(this);
   if ($box.is(":checked")) {
-    
+
     // the name of the box is retrieved using the .attr() method
     // as it is assumed and expected to be immutable
     var group = "input:checkbox[class='" + $box.attr("class") + "']";
@@ -344,7 +345,7 @@ function getboard(f){
     }
 }let id = 1;
   $("#click").click(function(){
-    $("#section").append(` 
+    $("#section").append(`
       <div class="info" id="s${id}">
 
                           <div class="row">
@@ -362,10 +363,10 @@ function getboard(f){
                             @enderror
                            </div>
                           </div>
-                          
+
                           <div class="row">
-                            
-                          
+
+
                             <div class="col-2">
                                <label>الدرجه</label>
                               <input type="number" class="form-control" name="score[${id}]">
@@ -373,7 +374,7 @@ function getboard(f){
                             <div class="col-3">
                                 <label>المستوي</label>
                             <select class="form-control" name="question_level[${id}]">
-                            
+
                               @for($i = 1;$i < 10; $i++)
                                <option value="{{$i}}">{{$i}}</option>
                                  @endfor
@@ -422,7 +423,7 @@ function getboard(f){
                             </div>
                           </div>
                           <div class="row">
-                            
+
                             <div class="col-3">
                               <label>الشرح</label>
                               <textarea rows="13" class="form-control" name="notes[${id}]"></textarea>
@@ -450,11 +451,11 @@ function getboard(f){
                             @enderror
                </div>
                               <div class="col-3">
-                             
+
                         <img src="{{asset('remove.png')}}" style="width:40px;height:40px;cursor:pointer;margin-top:113px;" id="click" onclick="removequestion(${id})">
                             </div>
                           </div>
-                           
+
                           	   `);
                             id++;
 });
