@@ -259,6 +259,16 @@
                                     </div>
                                   @endforeach
                                 </div>
+                                <ul class="nav nav-tabs notifcation">
+                                    @foreach($models2 as $index => $model)
+                                    <li class="nav-item">
+                                        <a href="#{{$model}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$index == 0 ? 'active' : ''}}">
+                                            <span>{{__('messages.'.$model)}}</span>
+                                        </a>
+                                    </li>
+                                    @endforeach
+
+                                </ul>
 
                                 <div class="tab-content">
                                     @foreach($models2 as $index=> $model)
