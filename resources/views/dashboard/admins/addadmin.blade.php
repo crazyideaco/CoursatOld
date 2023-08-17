@@ -11,7 +11,7 @@
   .info .inputDetails input{
     width: 100%;
   }
-  
+
 	/* ====== Tablet style ====== */
 	@media only screen and (max-width: 991.98px){
       .nav-tabs .nav-item{
@@ -65,7 +65,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -80,7 +80,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -164,7 +164,7 @@
             'states',
             'cities',
             'offers' ,
-       
+
           // 'points',
           // 'pointscash' ,
           // 'messages' ,
@@ -179,15 +179,15 @@
           'universities',
           'colleges',
           'divisions',
-           'sections', 
+           'sections',
           'subcolleges',
            'typescolleges',
-           'lessons', 
+           'lessons',
           'videoscolleges',
           'subjectscollegequestionscenter',
            'general',
            'sub',
-           'course', 
+           'course',
           'videosgeneral',
           'subquestioncenterss',
          'paqas' ,
@@ -199,9 +199,13 @@
            'sendnotificationuniversity' ,
            'sendnotificationgeneral' ];
                           $maps1 =  ['create'];
-                          
+
+                          $models2 = [     'type_joins' ,
+                          'typecollege_joins'  ];
+                                       $maps2 =  ['read'];
+
                             @endphp
-                         
+
                        		<div class="col-12">
                                <div class="mb-3">
                                 	<label><input type="checkbox" class="formcotrol ml-3 mr-3" id="checkAll" >كل الصلاحيات</label>
@@ -209,7 +213,7 @@
                           	</div>
                             <div class="col-xl-12">
                                 <label class="mb-3">الصلاحيات</label>
-                              
+
                                 <ul class="nav nav-tabs">
                                     @foreach($models as $index => $model)
                                     <li class="nav-item">
@@ -255,12 +259,26 @@
                                     </div>
                                   @endforeach
                                 </div>
+
+                                <div class="tab-content">
+                                    @foreach($models2 as $index=> $model)
+
+                                    <div role="tabpanel" class="tab-pane fade show {{$index == 0 ? 'active' : ''}}" id="{{$model}}">
+                                        @foreach($maps2 as $key => $map)
+                                            <div class="checkbox checkbox-success form-check-inline">
+                                                <input type="checkbox" name="permissions[]" id="inlineCheckbox{{$key}}" value="{{$model}}-{{$map}}">
+                                                <label for="inlineCheckbox{{$key}}" style="margin-right: 30px;"> {{__('messages.'.$map)}}</label>
+                                            </div>
+                                         @endforeach
+                                    </div>
+                                  @endforeach
+                                </div>
                             </div><!-- end col -->
                             </div>
-                          
+
           </div>
-                        
-                         
+
+
 
                         <div class="save text-center mt-6">
                             <div class="row save">
