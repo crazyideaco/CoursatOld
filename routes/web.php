@@ -44,6 +44,7 @@ Route::post('startlogin','LoginController@startlogin')->name('startlogin');
 //Route::group(['middleware' => ['auth','isAdmin']],function(){
 Route::group(['middleware' => ['auth']],function(){
     Route::get('main_page_basic','MainPageController@main_page_basic')->name('main_page_basic');
+    Route::get('main','MainPageController@main')->name('main');
 
 Route::get('deleteuser/{id}','userscontroller@deleteuser')->name('deleteuser');
   //courses_students
@@ -680,7 +681,7 @@ Route::post("filtercourses","FilterCourseController@filtercourses");
     });
     Route::get("logout_website","website\LoginController@logout")->name("logout_website");
     Route::group(['middleware' => 'auth:website_student'], function() {
-  
+
     Route::get("courses_website","website\CourseController@courses")->name("courses_website");
     Route::get("logout_website","website\LoginController@logout")->name("logout_website");
 
