@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard("web")->check()) {
-            return redirect()->route('states');
+            return redirect()->route('main');
         }
         if (Auth::guard("website_student")->check()) {
             return redirect()->route('courses_website');

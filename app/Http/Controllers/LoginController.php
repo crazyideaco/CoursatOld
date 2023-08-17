@@ -61,7 +61,7 @@ class LoginController extends Controller
 {
      public function startlogin(Request $request){
     if(auth()->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
-         
+
            $user= User::where('email',$request->email)->first();
 		if($user->active == 0){
 			return redirect()->back();
@@ -73,7 +73,7 @@ class LoginController extends Controller
         }else if($user->is_student==4){
             return redirect()->route('editprofile');
         }else if($user->isAdmin == "admin"){
-           return redirect('/states'); 
+           return redirect('/main');
         }else if($user->is_student == 5 && $user->category_id == 1){
     	 return redirect()->route('editprofile');
     }else if($user->is_student == 5 && $user->category_id == 2){
@@ -89,12 +89,12 @@ class LoginController extends Controller
 	}
    }
     public function logoutall(){
-        
+
          auth()->logout();
         return redirect()->route("dashlogin");
     }
     public function logoutallbasic(){
-       
+
         auth()->logout();
         return redirect()->route("dashlogin");
     }
