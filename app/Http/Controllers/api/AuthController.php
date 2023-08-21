@@ -1019,6 +1019,17 @@ class AuthController extends Controller
             'data' => CenterResource::collection($centers),
         ]);
     }
+    public function fetch_centers()
+    {
+
+        $centers =User::where('is_student', 5)->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'fetch_centers ',
+            'data' => CenterResource::collection($centers),
+        ]);
+    }
     public function getcoursegeneral(Request $request)
     {
         $subs = Sub::where('general_id', '=', $request->id)->get();

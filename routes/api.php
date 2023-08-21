@@ -41,6 +41,8 @@ Route::post('alllecturers','AuthController@alllecturers')->middleware('auth:api'
 Route::post('subjectcourses','AuthController@subjectcourses')->middleware('auth:api');
 Route::post('center_code','AuthController@center_code')->middleware('auth:api');
 Route::get('mycenters','AuthController@mycenters')->middleware('auth:api');
+
+Route::get('fetch_centers','AuthController@fetch_centers');
 Route::post('buycourse','AuthController@buycourse')->middleware('auth:api');
 Route::post('buygeneralcourse','AuthController@buygeneralcourse')->middleware('auth:api');
 Route::get('mycourses','AuthController@mycourses')->middleware('auth:api');
@@ -69,15 +71,15 @@ Route::post('add_discussion','DiscussionController@add_discussion')->middleware(
   Route::get('fetch_discussions','DiscussionController@fetch_discussions')->middleware('auth:api');
 Route::post('fetch_groups_discussions','DiscussionController@fetch_groups_discussions')->middleware('auth:api');
   Route::get('fetch_my_groups','DiscussionController@fetch_my_groups')->middleware('auth:api');
-  Route::post('discussion_replies','DiscussionController@discussion_replies')->middleware('auth:api'); 
-   Route::post('skip_lesson_exam','ExamController@skip_lesson_exam')->middleware('auth:api'); 
+  Route::post('discussion_replies','DiscussionController@discussion_replies')->middleware('auth:api');
+   Route::post('skip_lesson_exam','ExamController@skip_lesson_exam')->middleware('auth:api');
   Route::post('delete_discussion','DiscussionController@delete_discussion')->middleware('auth:api');
   //examlessons
     Route::post('fetch_lesson_exam','SkipLessonController@fetch_lesson_exam')->middleware('auth:api');
   Route::post('fetch_exam_lesson_questions','SkipLessonController@fetch_exam_lesson_questions')->middleware('auth:api');
   Route::post('skip_lesson_exam','SkipLessonController@skip_lesson_exam')->middleware('auth:api');
 Route::get('archived_exams_pre_lessons','SkipLessonController@archived_exams_pre_lessons')->middleware('auth:api');
-Route::post('fetch_live_lessons','SkipLessonController@fetch_live_lessons')->middleware('auth:api'); 
+Route::post('fetch_live_lessons','SkipLessonController@fetch_live_lessons')->middleware('auth:api');
   Route::get('fetch_subjects','ExamController@fetch_subjects')->middleware('auth:api');
   Route::post('add_to_library','LibraryController@add_to_library')->middleware('auth:api');
   Route::post('fetch_my_library','LibraryController@fetch_my_library')->middleware('auth:api');
