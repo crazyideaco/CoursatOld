@@ -16,7 +16,8 @@ class CenterResource extends JsonResource
     {
 
            return [
-           
+            'id'=>$this->id,
+
            'name'=>$this->name,
            'email'=>$this->email,
            'code' => $this->code,
@@ -28,8 +29,8 @@ class CenterResource extends JsonResource
            'address' => $this->address,
            'visitors' => $this->centerstudents()->count(),
            'decription' => $this->description
-         
-            
+
+
         ];
     }
 }
