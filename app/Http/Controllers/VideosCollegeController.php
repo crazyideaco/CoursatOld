@@ -126,7 +126,7 @@ public function storevideoscollege($id,Request $request){
   $lesson = Lesson::where('id',$id)->first();
        $video = new VideosCollege;
        $video->order_number = $request->order_number;
-       $video->video_type_link = 0;
+       $video->video_type_link = 2;
    if(auth()->user() && auth()->user()->isAdmin == 'admin'){
    $video->user_id = $lesson->doctor_id;
    $video->name_ar = $request->name_ar;
@@ -141,14 +141,14 @@ public function storevideoscollege($id,Request $request){
  if($paqauser==null){
 $msg =   'انت غير مشر في باقه برجاء لاتراك في باقه';
 return response()->json(['status' => false,'errors' => $msg]);
-  
+
 }
   elseif($paqauser->expired_at == Carbon::now()->format('Y-m-d')){
            $msg =  'انهت صلاحيه الباقه';
     return response()->json(['status' => false,'errors' => $msg]);
 
  }else{
-         
+
   $videoall= VideosCollege::where('user_id',$lesson->doctor_id)->where('center_id',null)->where('created_at','>=',$paqauser->created_at)->
 pluck('video_size')->toArray();
 if( $videoall > 0){
@@ -156,7 +156,7 @@ if( $videoall > 0){
         $sum=array_sum($videoall);
         $gigasum=$sum/1024/1024;
         if($sizepaqa >$gigasum ){
-  
+
    $video->division_id = $lesson->division_id;
    $video->section_id = $lesson->section_id;
    $video->subjectscollege_id = $lesson->subjectscollege_id;
@@ -168,20 +168,20 @@ if( $videoall > 0){
   {
          $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
-  
+
 $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
     $video->video_size= $request->file('url')->getSize()/1024;
-  
+
    // $video->url = $this->upload_video($url);
     $time=time();
-    \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
 //dd($path);
 $video->storage_type = 1;
    // dd(\Storage::disk("google")->url($this->upload_video($url)),$this->upload_video($url));
-  } 
+  }
   if($request->hasFile('image'))
   {
       $image = $request->image;
@@ -201,13 +201,13 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       $video->board = time().$request->board->getClientOriginalName();
   }
     if($request->pay){
-   $video->paid=  $request->pay; 
+   $video->paid=  $request->pay;
   }else{
-     $video->paid =  0; 
+     $video->paid =  0;
    }
-  
+
       $video->save();
-      $students = $lesson->typescollege->studentscollege; 
+      $students = $lesson->typescollege->studentscollege;
       foreach($students as $user){
 				$not = new Notification;
         $text = 'لديك فيدو جديد فى كورس ' . $lesson->typescollege->name_ar;
@@ -227,7 +227,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
                 'body' => $not->text,
                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                 'type' => 'general'
-                ], 
+                ],
         ];
      $dataString = json_encode($data);
         $headers = [
@@ -244,16 +244,16 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
             }
                return response()->json(['success' => 'video uploaded']);
         }else{
-            
+
     $msg = 'لقد اسهكت 100% ';
     return response()->json(['status' => false,'errors' => $msg]);
-    
+
 
         }
  }
-  
+
 }
-       
+
    }
    elseif(Auth::user() &&Auth::user()->is_student == 3){
     $video->user_id = auth()->user()->id;
@@ -273,13 +273,13 @@ return response()->json(['status' => false,'errors' => $msg]);
   $videoall= VideosCollege::where('user_id',auth()->user()->id)->where('center_id',null)->where('created_at','>=',$paqauser->created_at)->
 pluck('video_size')->toArray();
 if( $videoall > 0){
- 
+
         $sizepaqa=$paqauser->paqa->size;
         $sum=array_sum($videoall);
-     
+
         $gigasum=$sum/1024/1024;
         if($sizepaqa >$gigasum ){
-  
+
    $video->division_id = $lesson->division_id;
    $video->section_id = $lesson->section_id;
    $video->subjectscollege_id = $lesson->subjectscollege_id;
@@ -291,17 +291,17 @@ if( $videoall > 0){
   {
            $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
-  
+
 $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
        $time=time();
-    \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
 
-  } 
+  }
   if($request->hasFile('image'))
   {
       $image = $request->image;
@@ -321,13 +321,13 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       $video->board = time().$request->board->getClientOriginalName();
   }
    if($request->pay){
-   $video->paid=  $request->pay; 
+   $video->paid=  $request->pay;
   }else{
-     $video->paid =  0; 
+     $video->paid =  0;
    }
-  
+
       $video->save();
-      $students = $lesson->typescollege->studentscollege; 
+      $students = $lesson->typescollege->studentscollege;
       foreach($students as $user){
 				$not = new Notification;
         $text = 'لديك فيديو جديد فى كورس ' . $lesson->typescollege->name_ar;
@@ -347,7 +347,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
                 'body' => $not->text,
                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                 'type' => 'general'
-                ], 
+                ],
         ];
      $dataString = json_encode($data);
         $headers = [
@@ -364,15 +364,15 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
             }
                return response()->json(['success' => 'video uploaded']);
         }else{
-            
-            
+
+
     $msg = 'لقد استهلكت 100% ';
     return response()->json(['status' => false,'message' => $msg]);
         }
  }
-  
+
 }
-       
+
    }
       elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
     $video->center_id = auth()->user()->id;
@@ -397,7 +397,7 @@ if( $videoall > 0){
         $sum=array_sum($videoall);
         $gigasum=$sum/1024/1024;
         if($sizepaqa >$gigasum ){
-  
+
    $video->division_id = $lesson->division_id;
    $video->section_id = $lesson->section_id;
    $video->subjectscollege_id = $lesson->subjectscollege_id;
@@ -409,16 +409,16 @@ if( $videoall > 0){
   {
            $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
-  
+
 $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
       $url = $request->url;
           $video->video_size= $request->file('url')->getSize()/1024;
       $time=time();
-    \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
           $video->storage_type = 1;
-        } 
+        }
   if($request->hasFile('image'))
   {
       $image = $request->image;
@@ -438,13 +438,13 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       $video->board = time().$request->board->getClientOriginalName();
   }
    if($request->pay){
-   $video->paid=  $request->pay; 
+   $video->paid=  $request->pay;
   }else{
-     $video->paid =  0; 
+     $video->paid =  0;
    }
-  
+
       $video->save();
-      $students = $lesson->typescollege->studentscollege; 
+      $students = $lesson->typescollege->studentscollege;
       foreach($students as $user){
 				$not = new Notification;
         $text = 'لديك فيديو جيد فى كورس ' . $lesson->typescollege->name_ar;
@@ -464,7 +464,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
                 'body' => $not->text,
                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                 'type' => 'general'
-                ], 
+                ],
         ];
      $dataString = json_encode($data);
         $headers = [
@@ -481,15 +481,15 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
             }
       return response()->json(['success' => 'video uploaded']);
         }else{
-       
+
     $msg = 'لق استهلكت 100% ';
     return response()->json(['status' => false,'errors' => $msg]);
 
         }
  }
-  
+
 }
-       
+
    }
 
       }else{
@@ -534,8 +534,8 @@ public function editvideoscollege($id){
    ->with('lessons',$lessons)->with('universities',University::all())->with('video',$video);
 }
 public function updatevideoscollege($id ,Request $request){
-   
- 
+
+
   $subtype = Subtype::where('id',$id)->first();
       $validator = Validator::make($request->all(),[
          // 'description_ar' => 'required',
@@ -559,7 +559,7 @@ public function updatevideoscollege($id ,Request $request){
    if(auth()->user() && auth()->user()->isAdmin == 'admin'){
    $video->name_ar = $request->name_ar;
    $video->name_en = $request->name_en;
-  
+
     $paqauser= Paqa_User::with("paqa")->where("user_id",$video->user_id)->first();
  if($paqauser==null){
 $msg = 'انت غي مشترك في باقه براء الاتراك في باقه';
@@ -569,7 +569,7 @@ $msg = 'انت غي مشترك في باقه براء الاتراك في باق
             $msg =  'انتهت صلاحيه الباقه';
    return response()->json(['status' =>false,'errors' => $msg]);
  }else{
-         
+
   $videoall= VideosCollege::where('user_id',$video->user_id)->where('center_id',null)->where('created_at','>=',$paqauser->created_at)->
 pluck('video_size')->toArray();
 if( $videoall > 0){
@@ -583,18 +583,18 @@ if( $videoall > 0){
   {    $this->delete_video($video);
           $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
-  
+
 $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
    $video->video_size= $request->file('url')->getSize()/1024;
 
       $url = $request->url;
       $time=time();
-    \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
-      $video->video_type_link = 0;
-  } 
+      $video->video_type_link = 2;
+  }
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
    $link = public_path() . '/uploads/' . $video->image;
@@ -620,27 +620,27 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       $video->board = time() . $request->board->getClientOriginalName();
   }
    if($request->pay){
-   $video->paid=  $request->pay; 
+   $video->paid=  $request->pay;
   }else{
-       $video->paid= 0; 
+       $video->paid= 0;
    }
-  
+
       $video->save();
-     
+
   return response()->json(['success' =>'video uploaded']);
         }else{
-            
+
    $msg = 'لقد استهلكت 100% ';
    return response()->json(['status' =>false,'errors' => $msg]);
         }
  }
-  
+
 }
-       
+
    }
    elseif(Auth::user() && Auth::user()->is_student == 3){
     $video->user_id = auth()->user()->id;
-  
+
         $video->name_ar = $request->name_ar;
    $video->name_en = $request->name_en;
     $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
@@ -656,10 +656,10 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   $videoall= VideosCollege::where('user_id',auth()->user()->id)->where('center_id',null)->where('created_at','>=',$paqauser->created_at)->
 pluck('video_size')->toArray();
 if( $videoall > 0){
- 
+
         $sizepaqa=$paqauser->paqa->size;
         $sum=array_sum($videoall);
-     
+
         $gigasum=$sum/1024/1024;
         if($sizepaqa >$gigasum ){
    $video->description_en = $request->description_en;
@@ -668,18 +668,18 @@ if( $videoall > 0){
   {    $this->delete_video($video);
           $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
-  
+
 $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
    $video->video_size= $request->file('url')->getSize()/1024;
 
       $url = $request->url;
     $time=time();
-    \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
-      $video->video_type_link = 0;
-  } 
+      $video->video_type_link = 2;
+  }
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
    $link = public_path() . '/uploads/' . $video->image;
@@ -705,22 +705,22 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       $video->board = time() . $request->board->getClientOriginalName();
   }
    if($request->pay){
-   $video->paid=  $request->pay; 
+   $video->paid=  $request->pay;
   }else{
-       $video->paid= 0; 
+       $video->paid= 0;
    }
       $video->save();
           return response()->json(['success' =>'video uploaded']);
         }else{
-            
+
   $msg = 'لق اتهلكت 100% ';
    return response()->json(['status' =>false,'errors' => $msg]);
 
         }
  }
-  
+
 }
-       
+
    }
       elseif(Auth::user() &&Auth::user()->is_student == 5 && Auth::user()->category_id == 2){
 
@@ -746,22 +746,22 @@ if( $videoall > 0){
    $video->description_en = $request->description_en;
    $video->description_ar = $request->description_ar;
 if($request->hasFile('url'))
-  {  
+  {
           $getID3 = new \getID3;
 $file = $getID3->analyze($request->file('url'));
-  
+
 $duration =  $file['playtime_seconds'];
    $video->seconds = $duration;
    $this->delete_video($video);
    $video->video_size= $request->file('url')->getSize()/1024;
- 
+
       $url = $request->url;
   $time=time();
-    \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+    \Storage::disk('disk2')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
      $video->url = $time. '.'.$url->getClientOriginalExtension();
       $video->storage_type = 1;
-      $video->video_type_link = 0;
-  } 
+      $video->video_type_link = 2;
+  }
   if($request->hasFile('image'))
   {  if(public_path() . '/uploads/' . $video->image){
    $link = public_path() . '/uploads/' . $video->image;
@@ -787,9 +787,9 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       $video->board = time() . $request->board->getClientOriginalName();
   }
   if($request->pay){
-   $video->paid=  $request->pay; 
+   $video->paid=  $request->pay;
   }else{
-       $video->paid= 0; 
+       $video->paid= 0;
    }
       $video->save();
  return response()->json(['success' =>'video uploaded']);
@@ -806,7 +806,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
       }
 }public function deletevideoscollege($id){
   $video =  VideosCollege::where('id',$id)->first();
-              
+
            if( public_path() . '/uploads/' . $video->image){
           $link1 = public_path() . '/uploads/' . $video->image;
                 File::delete($link1);
@@ -829,13 +829,13 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
      $lesson = Lesson::where('id',$id)->first();
       if(Auth::user() && Auth::user()->isAdmin == 'admin'){
        $videos =  $lesson->videos;
-      
+
      }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2 ){
             $videos =  $lesson->videos->where('center_id',Auth::user()->id);
-           
+
       }else if(Auth::user() && Auth::user()->is_student == 3){
           $videos =  $lesson->videos->where('center_id',null)->where('user_id',Auth::user()->id);
-        
+
       }
      return view('dashboard.videoscolleges')->with('videoscolleges',$videos)->with('id',$id);
  }public function getvideosc($id){
@@ -942,12 +942,12 @@ $videos = VideosCollege::where("user_id",$lesson->doctor_id)->select("name_ar","
 }
 public function storevideoscollegespecial($id,Request $request){
 
-   
+
   $special_video = VideosCollege::where("id",$request->video_id)->first();
 $lesson = Lesson::where('id',$id)->first();
      $video = new VideosCollege;
      $video->order_number = $request->order_number;
-     $video->video_type_link = 0;
+     $video->video_type_link = 2;
      $video->url = $special_video->url;
 $video->seconds = $special_video->seconds;
 $video->original = 0;
@@ -986,13 +986,13 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
     $video->board = time().$request->board->getClientOriginalName();
 }
   if($request->pay){
- $video->paid=  $request->pay; 
+ $video->paid=  $request->pay;
 }else{
-   $video->paid =  0; 
+   $video->paid =  0;
  }
 
     $video->save();
-    $students = $lesson->typescollege->studentscollege; 
+    $students = $lesson->typescollege->studentscollege;
     foreach($students as $user){
       $not = new Notification;
       $text = 'لديك فيدو جديد فى كورس ' . $lesson->typescollege->name_ar;
@@ -1012,7 +1012,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
               'body' => $not->text,
               "click_action" => "FLUTTER_NOTIFICATION_CLICK",
               'type' => 'general'
-              ], 
+              ],
       ];
    $dataString = json_encode($data);
       $headers = [
@@ -1028,7 +1028,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
     $result=curl_exec($ch);
           }
              return response()->json(['success' => 'video uploaded']);
-    
+
  }
  elseif(Auth::user() &&Auth::user()->is_student == 3){
   $video->user_id = auth()->user()->id;
@@ -1065,13 +1065,13 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
     $video->board = time().$request->board->getClientOriginalName();
 }
  if($request->pay){
- $video->paid=  $request->pay; 
+ $video->paid=  $request->pay;
 }else{
-   $video->paid =  0; 
+   $video->paid =  0;
  }
 
     $video->save();
-    $students = $lesson->typescollege->studentscollege; 
+    $students = $lesson->typescollege->studentscollege;
     foreach($students as $user){
       $not = new Notification;
       $text = 'لديك فيديو جديد فى كورس ' . $lesson->typescollege->name_ar;
@@ -1091,7 +1091,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
               'body' => $not->text,
               "click_action" => "FLUTTER_NOTIFICATION_CLICK",
               'type' => 'general'
-              ], 
+              ],
       ];
    $dataString = json_encode($data);
       $headers = [
@@ -1115,7 +1115,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
   $video->college_id = $lesson->college_id;
      $video->name_ar = $request->name_ar;
  $video->name_en = $request->name_en;
-    
+
 
  $video->division_id = $lesson->division_id;
  $video->section_id = $lesson->section_id;
@@ -1144,13 +1144,13 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
     $video->board = time().$request->board->getClientOriginalName();
 }
  if($request->pay){
- $video->paid=  $request->pay; 
+ $video->paid=  $request->pay;
 }else{
-   $video->paid =  0; 
+   $video->paid =  0;
  }
 
     $video->save();
-    $students = $lesson->typescollege->studentscollege; 
+    $students = $lesson->typescollege->studentscollege;
     foreach($students as $user){
       $not = new Notification;
       $text = 'لديك فيديو جيد فى كورس ' . $lesson->typescollege->name_ar;
@@ -1170,7 +1170,7 @@ $video->pdf = time() .'.'.$pdf->getClientOriginalExtension();
               'body' => $not->text,
               "click_action" => "FLUTTER_NOTIFICATION_CLICK",
               'type' => 'general'
-              ], 
+              ],
       ];
    $dataString = json_encode($data);
       $headers = [
