@@ -445,7 +445,7 @@ $duration =  $file['playtime_seconds'];
   $video->seconds = $duration;
      $url = $request->url;
          $video->size_video= $request->file('url')->getSize()/1024;
-         $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
+         $url->move('disk2' , time(). '.'.$url->getClientOriginalExtension());
      $video->url = time(). '.'.$url->getClientOriginalExtension();
      $video->video_type_link = 2;
 
