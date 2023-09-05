@@ -9,7 +9,7 @@ use App\Year;
 class Video extends Model
 {
   protected  $guarded = [];
-    
+
       protected $table = 'videos';
     public function user(){
         return $this->belongsTo(User::class,'user_id');
@@ -29,10 +29,13 @@ class Video extends Model
         }elseif($this->video_type_link == 2){
             $floder_name = "disk2";
         }
+        elseif($this->video_type_link == 3){
+            $floder_name = "disk3";
+        }
     //  $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
         return $this->url ? asset( $floder_name . "/" . $this->url) : '';
     }  public function type(){
       return $this->belongsTo(Type::class,'type_id');
   }
-    
+
 }

@@ -126,7 +126,7 @@ class VideosCollegeController extends Controller
             $lesson = Lesson::where('id',$id)->first();
             $video = new VideosCollege;
             $video->order_number = $request->order_number;
-            $video->video_type_link = 0;
+            $video->video_type_link = 3;
             if(auth()->user() && auth()->user()->isAdmin == 'admin'){
                 $video->user_id = $lesson->doctor_id;
                 $video->name_ar = $request->name_ar;
@@ -176,10 +176,11 @@ class VideosCollegeController extends Controller
 
                                 // $video->url = $this->upload_video($url);
                                 $time=time();
-                                \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = $time. '.'.$url->getClientOriginalExtension();
 //dd($path);
                                 $video->storage_type = 1;
+                                $video->video_type_link = 3;
                                 // dd(\Storage::disk("google")->url($this->upload_video($url)),$this->upload_video($url));
                             }
                             if($request->hasFile('image'))
@@ -297,7 +298,7 @@ class VideosCollegeController extends Controller
                                 $url = $request->url;
                                 $video->video_size= $request->file('url')->getSize()/1024;
                                 $time=time();
-                                \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = $time. '.'.$url->getClientOriginalExtension();
                                 $video->storage_type = 1;
 
@@ -415,7 +416,7 @@ class VideosCollegeController extends Controller
                                 $url = $request->url;
                                 $video->video_size= $request->file('url')->getSize()/1024;
                                 $time=time();
-                                \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = $time. '.'.$url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                             }
@@ -590,10 +591,10 @@ class VideosCollegeController extends Controller
 
                                 $url = $request->url;
                                 $time=time();
-                                \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = $time. '.'.$url->getClientOriginalExtension();
                                 $video->storage_type = 1;
-                                $video->video_type_link = 0;
+                                $video->video_type_link = 3;
                             }
                             if($request->hasFile('image'))
                             {  if(public_path() . '/uploads/' . $video->image){
@@ -675,10 +676,10 @@ class VideosCollegeController extends Controller
 
                                 $url = $request->url;
                                 $time=time();
-                                \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = $time. '.'.$url->getClientOriginalExtension();
                                 $video->storage_type = 1;
-                                $video->video_type_link = 0;
+                                $video->video_type_link = 3;
                             }
                             if($request->hasFile('image'))
                             {  if(public_path() . '/uploads/' . $video->image){
@@ -757,10 +758,10 @@ class VideosCollegeController extends Controller
 
                                 $url = $request->url;
                                 $time=time();
-                                \Storage::disk('uploads')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = $time. '.'.$url->getClientOriginalExtension();
                                 $video->storage_type = 1;
-                                $video->video_type_link = 0;
+                                $video->video_type_link = 3;
                             }
                             if($request->hasFile('image'))
                             {  if(public_path() . '/uploads/' . $video->image){
@@ -947,7 +948,7 @@ class VideosCollegeController extends Controller
         $lesson = Lesson::where('id',$id)->first();
         $video = new VideosCollege;
         $video->order_number = $request->order_number;
-        $video->video_type_link = 0;
+        $video->video_type_link = 3;
         $video->url = $special_video->url;
         $video->seconds = $special_video->seconds;
         $video->original = 0;

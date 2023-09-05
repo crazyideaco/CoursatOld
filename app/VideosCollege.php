@@ -13,7 +13,7 @@ use App\SubjectsCollege;
 class VideosCollege extends Model
 {
   protected  $guarded = [];
-    
+
       protected $table = 'videoscollege';
     public function user(){
         return $this->belongsTo(User::class,'user_id');
@@ -33,14 +33,14 @@ class VideosCollege extends Model
     	public function lesson(){
     	    return $this->belongsTo(Lesson::class,'lesson_id');
     	}
-    	
+
     public function typescollege(){
         return $this->belongsTo(TypesCollege::class,'typescollege_id');
     }public function getUrlVideoAttribute (){
         $url = "";
         if($this->url){
           //  if($this->storage_type == 1){
-          
+
    //   $url = \Storage::disk('google')->url($this->url);
       //$url = "https://drive.google.com/file/d/".$this->url."/preview";
           $url = asset("uploads/".$this->url);
@@ -58,10 +58,10 @@ class VideosCollege extends Model
           //  $url = "https://drive.google.com/file/d/".$this->url."/preview";
           $url = asset("uploads/".$this->url);
     }
-        
+
       else{
        $url = "";
-        
+
        }
   //  }
         return $url;
@@ -76,8 +76,10 @@ class VideosCollege extends Model
             $floder_name = "disk1";
         }elseif($this->video_type_link == 2){
             $floder_name = "disk2";
+        } elseif($this->video_type_link == 3){
+            $floder_name = "disk3";
         }
         // $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
            return $this->url ? asset( $floder_name . "/" . $this->url) : '';
-       } 
+       }
 }

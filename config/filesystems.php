@@ -62,7 +62,7 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
-        ], 
+        ],
 
         'disk1' => [
             'driver' => 'local',
@@ -77,7 +77,14 @@ return [
             'visibility' => 'public',
         ],
 
-        
+        'disk3' => [
+            'driver' => 'local',
+            'root' => public_path() . '/disk3',
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+
         'uploads' => [
             'driver' => 'local',
             'root' => public_path() . '/uploads',
