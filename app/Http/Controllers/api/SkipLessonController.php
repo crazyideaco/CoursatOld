@@ -163,7 +163,7 @@ class SkipLessonController extends Controller
   }public function send_attendance(Request $request){
        if(auth()->user()->category_id == 1){
          $subtype = Subtype::where('id',$request->lesson_id)->first();
-         $LessonStudentattendance = LessonStudentattendance::where("subtype_id",$request->lesson_id)->whereStudentId(auth()->id())->first();
+         $LessonStudentattendance = SubtypeStudentattendance::where("subtype_id",$request->lesson_id)->whereStudentId(auth()->id())->first();
          if ($LessonStudentattendance) {
             return response()->json([
               'status' => false,
