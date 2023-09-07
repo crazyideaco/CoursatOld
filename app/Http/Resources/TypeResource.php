@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\TypeJoin;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\SubtypeResource;
 use App\Type_Rate;
@@ -16,8 +17,8 @@ class TypeResource extends JsonResource
      */
     public function toArray($request)
     {
-       
-       
+
+
          $rates = Type_Rate::where('type_id',$this->id)->get()->pluck('rate')->toArray();
          if(count($rates) > 0){
          $rate = array_sum($rates) / count($rates);}
@@ -28,7 +29,7 @@ class TypeResource extends JsonResource
            $allow = 1;
        }else{
           $is_book = 0;
-           $allow = 0; 
+           $allow = 0;
        }
        if($this->center){
            $center_image = asset('uploads/'.$this->center['image']);
@@ -37,9 +38,20 @@ class TypeResource extends JsonResource
        }if($this->center){
            $center_name = $this->center['name'];
        }else{
-          $center_name = $this->user['name']; 
+          $center_name = $this->user['name'];
        }
-       $status = 0;
+        $status = 0;
+
+        $join = TypeJoin::where([["type_id","=",$this->id],
+            ["student_id","=",auth()->id()]])->first();
+
+        if(!$join){
+            $status = 0;
+        }elseif($join->status == 0){
+            $status = 1;
+        }elseif($join->status == 1){
+            $status = 2;
+        }
          $duration = array_sum($this->videos->pluck('seconds')->toArray());
            return [
            'id'  => $this->id,
@@ -50,7 +62,7 @@ class TypeResource extends JsonResource
            'points' => $this->points,
            'description' => $this->description ? $this->description : '',
            'posted_by' => $center_name,
-           'posted_by_image' =>$center_image, 
+           'posted_by_image' =>$center_image,
               'mintues' => $duration > 0 ? intval($duration / 60) : 0,
            'name' => $this->name_ar,
            'subject' => $this->subject['name_ar'],
@@ -62,7 +74,7 @@ class TypeResource extends JsonResource
            'category_id' => 1,
            "status" => $status,
           'tags' => TagResource::collection($this->tags)
-            
+
         ];
     }
 }
