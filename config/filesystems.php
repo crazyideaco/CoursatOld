@@ -84,6 +84,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'disk4' => [
+            'driver' => 'local',
+            'root' => public_path() . '/disk4',
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
 
         'uploads' => [
             'driver' => 'local',

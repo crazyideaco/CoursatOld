@@ -79,6 +79,9 @@ class VideosCollege extends Model
         } elseif($this->video_type_link == 3){
             $floder_name = "disk3";
         }
+        elseif($this->video_type_link == 4){
+            $floder_name = "disk4";
+        }
         // $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
            return $this->url ? asset( $floder_name . "/" . $this->url) : '';
        }
