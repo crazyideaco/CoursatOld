@@ -94,22 +94,22 @@ class VideoController extends Controller
             }
         }
 
-//            if (File::isDirectory($folderPath)) {
-//                $files = File::files($folderPath);
-//
-//                $fileNames = [];
-//
-//                foreach ($files as $file) {
-//                    $fileNames[] = $file->getFilename();
-//                }
-//            }
-//                Video::whereIn("url",$fileNames)->update([
-//            "video_type_link" => 4
-//        ]);
-//
-//        VideosCollege::whereIn("url",$fileNames)->update([
-//            "video_type_link" => 4
-//        ]);
+            if (File::isDirectory($folderPath)) {
+                $files = File::files($folderPath);
+
+                $fileNames = [];
+
+                foreach ($files as $file) {
+                    $fileNames[] = $file->getFilename();
+                }
+            }
+                Video::whereIn("url",$fileNames)->update([
+            "video_type_link" => 4
+        ]);
+
+        VideosCollege::whereIn("url",$fileNames)->update([
+            "video_type_link" => 4
+        ]);
         if(Auth::user() && Auth::user()->isAdmin == 'admin'){
             $users =  User::where('is_student',2)->get();
             $types= Type::all();
