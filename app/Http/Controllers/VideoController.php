@@ -57,6 +57,7 @@ use App\Paqa;
 use App\Paqa_User;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
