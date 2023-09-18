@@ -57,6 +57,7 @@ use App\Paqa;
 use App\Paqa_User;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
+
 class VideoController extends Controller
 {
     public function __construct()
@@ -67,6 +68,29 @@ class VideoController extends Controller
         $this->middleware(['permission:videos-delete'])->only('deletevideo');
     }
     public function addvideo($id){
+//        $arries = ["1673104715.mp4","1673197676.mp4","1688235008.m4v","1688236269.m4v","1688238631.m4v"  1688240610.m4v  1688932055.mp4  1691438303.mp4  1691498154.mp4  1691515656.mp4  1692289116.mp4
+//1673108978.mp4  1673376023.mp4  1688235089.m4v  1688236693.m4v  1688238857.m4v  1688929166.m4v  1688933891.mp4  1691495403.mp4  1691499287.mp4  1691516787.mp4
+//
+//        Video::whereIn("url")->update([
+//            "video_type_link" => 4
+//        ]);
+//
+//        VideosCollege::whereIn("url")->update([
+//            "video_type_link" => 4
+//        ]);
+        $folderPath = public_path('disk4');
+
+
+            if (File::isDirectory($folderPath)) {
+                $files = File::files($folderPath);
+
+                $fileNames = [];
+
+                foreach ($files as $file) {
+                    $fileNames[] = $file->getFilename();
+                }
+            }
+            dd($fileNames);
         if(Auth::user() && Auth::user()->isAdmin == 'admin'){
             $users =  User::where('is_student',2)->get();
             $types= Type::all();
