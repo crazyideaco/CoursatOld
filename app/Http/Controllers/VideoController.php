@@ -158,13 +158,13 @@ class VideoController extends Controller
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                //   \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                //   \Storage::disk('disk4')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 //  $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'uploads');
 
-                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk4')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 //  \Storage::disk('uploads')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
-                                $video->video_type_link = 3;
+                                $video->video_type_link = 4;
                             }
                             if($request->hasFile('image'))
                             {
@@ -239,9 +239,9 @@ class VideoController extends Controller
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk4')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
-                                $video->video_type_link = 3;
+                                $video->video_type_link = 4;
 
                             }
                             if($request->hasFile('image'))
@@ -317,10 +317,10 @@ class VideoController extends Controller
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk4')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
 
-                                $video->video_type_link = 3;
+                                $video->video_type_link = 4;
                             }
                             if($request->hasFile('image'))
                             {
@@ -447,7 +447,7 @@ class VideoController extends Controller
                                 $video->size_video= $request->file('url')->getSize()/1024;
                                 $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
-                                $video->video_type_link = 3;
+                                $video->video_type_link = 4;
 
                             }
                             if($request->hasFile('image'))
@@ -528,10 +528,10 @@ class VideoController extends Controller
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk4')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
 
-                                $video->video_type_link = 3;
+                                $video->video_type_link = 4;
                             }
                             if($request->hasFile('image'))
                             { if(public_path() . '/uploads/' . $video->image){
@@ -610,9 +610,9 @@ class VideoController extends Controller
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk3')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk4')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
-                                $video->video_type_link = 3;
+                                $video->video_type_link = 4;
 
                             }
                             if($request->hasFile('image'))
