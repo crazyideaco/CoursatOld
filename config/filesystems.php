@@ -76,7 +76,7 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-
+        //disk3
         'disk3' => [
             'driver' => 'local',
             'root' => public_path() . '/disk3',
