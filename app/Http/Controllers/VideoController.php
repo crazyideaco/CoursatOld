@@ -615,6 +615,7 @@ class VideoController extends Controller
                                 $video->video_type_link = 4;
 
                             }
+
                             if($request->hasFile('image'))
                             { if(public_path() . '/uploads/' . $video->image){
                                 $link = public_path() . '/uploads/' . $video->image;
