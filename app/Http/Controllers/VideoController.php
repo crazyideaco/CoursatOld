@@ -77,7 +77,7 @@ class VideoController extends Controller
        $video =  Video::where('video_type_link',0)->first();
 
         // Move the video to the destination disk
-        Storage::disk($destinationDisk)->put($destinationPath, Storage::disk($sourceDisk)->get($video->link);
+        Storage::disk($destinationDisk)->put($destinationPath, Storage::disk($sourceDisk)->get($video->link));
 
 // Delete the video from the source disk after moving it
         Storage::disk($sourceDisk)->delete($video->link);
