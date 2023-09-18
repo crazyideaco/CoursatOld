@@ -80,7 +80,7 @@ class VideoController extends Controller
        foreach ($videos as $video) {
            if (Storage::disk($sourceDisk)->exists($video->url)) {
                // Move the video to the destination disk
-               Storage::disk($destinationDisk)->put($destinationDisk, Storage::disk($sourceDisk)->get($video->url));
+               Storage::disk($destinationDisk)->put($video->url, Storage::disk($sourceDisk)->get($video->url));
 
                Storage::disk($sourceDisk)->delete($video->url);
            }
