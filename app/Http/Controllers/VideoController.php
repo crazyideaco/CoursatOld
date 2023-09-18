@@ -75,7 +75,7 @@ class VideoController extends Controller
 
         $destinationDisk = 'disk4';
         $sourceDisk = 'uploads';
-       $videos =  VideosCollege::where('video_type_link',0)->orderBy("id","desc")->get()->take(100);
+       $videos =  VideosCollege::where('video_type_link',0)->orderBy("id","desc")->get()->take(20);
 
         foreach ($videos as $video) {
             $sourcePath = Storage::disk($sourceDisk)->path($video->url);
