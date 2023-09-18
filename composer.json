@@ -19,7 +19,8 @@
         "pbmedia/laravel-ffmpeg": "^7.5",
         "php-ffmpeg/php-ffmpeg": "^0.18.0",
         "santigarcor/laratrust": "^6.3",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "symfony/symfony": "5.4.x"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
