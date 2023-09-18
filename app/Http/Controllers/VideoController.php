@@ -90,7 +90,7 @@ class VideoController extends Controller
                 chmod($destinationPath, 0777);
 
                 // Optionally, delete the source file
-                unlink($sourcePath);
+               File::delete("uploads/".$video->url);
             }
         }
 
