@@ -92,6 +92,7 @@ class VideoController extends Controller
                 // Optionally, delete the source file
                 unlink($sourcePath);
             }
+        }
 
 //            if (File::isDirectory($folderPath)) {
 //                $files = File::files($folderPath);
