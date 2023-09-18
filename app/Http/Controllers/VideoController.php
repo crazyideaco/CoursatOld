@@ -71,45 +71,7 @@ class VideoController extends Controller
     public function addvideo($id){
 
 
-        $folderPath = public_path('disk4');
 
-        $destinationDisk = 'disk4';
-        $sourceDisk = 'uploads';
-       $videos =  Video::where('video_type_link',0)->orderBy("id","desc")->get()->take(30);
-
-        foreach ($videos as $video) {
-            $sourcePath = Storage::disk($sourceDisk)->path($video->url);
-            $destinationPath = public_path('disk4/' . $video->url);
-
-            // Check if the source file exists
-            if (file_exists($sourcePath)) {
-                // Copy the file to the destination
-                copy($sourcePath, $destinationPath);
-
-                // Set the correct permissions (assuming you have the necessary privileges)
-                chmod($destinationPath, 0777);
-
-                // Optionally, delete the source file
-               File::delete("uploads/".$video->url);
-            }
-        }
-
-            if (File::isDirectory($folderPath)) {
-                $files = File::files($folderPath);
-
-                $fileNames = [];
-
-                foreach ($files as $file) {
-                    $fileNames[] = $file->getFilename();
-                }
-            }
-                Video::whereIn("url",$fileNames)->update([
-            "video_type_link" => 4
-        ]);
-
-        VideosCollege::whereIn("url",$fileNames)->update([
-            "video_type_link" => 4
-        ]);
         if(Auth::user() && Auth::user()->isAdmin == 'admin'){
             $users =  User::where('is_student',2)->get();
             $types= Type::all();
