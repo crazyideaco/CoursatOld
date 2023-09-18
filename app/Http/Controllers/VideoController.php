@@ -77,14 +77,21 @@ class VideoController extends Controller
         $sourceDisk = 'uploads';
        $videos =  VideosCollege::where('video_type_link',0)->orderBy("id","desc")->get()->take(10);
 
-       foreach ($videos as $video) {
-           if (Storage::disk($sourceDisk)->exists($video->url)) {
-               // Move the video to the destination disk
-               Storage::disk($destinationDisk)->put($video->url, Storage::disk($sourceDisk)->get($video->url));
+        foreach ($videos as $video) {
+            $sourcePath = Storage::disk($sourceDisk)->path($video->url);
+            $destinationPath = public_path('disk4/' . $video->url);
 
-               Storage::disk($sourceDisk)->delete($video->url);
-           }
-       }
+            // Check if the source file exists
+            if (file_exists($sourcePath)) {
+                // Copy the file to the destination
+                copy($sourcePath, $destinationPath);
+
+                // Set the correct permissions (assuming you have the necessary privileges)
+                chmod($destinationPath, 0777);
+
+                // Optionally, delete the source file
+                unlink($sourcePath);
+            }
 
 //            if (File::isDirectory($folderPath)) {
 //                $files = File::files($folderPath);
