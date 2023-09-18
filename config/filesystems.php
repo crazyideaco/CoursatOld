@@ -84,6 +84,7 @@ return [
             'visibility' => 'public',
         ],
 
+        //disk4
         'disk4' => [
             'driver' => 'local',
             'root' => public_path() . '/disk4',
