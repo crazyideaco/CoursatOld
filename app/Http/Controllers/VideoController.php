@@ -78,11 +78,11 @@ class VideoController extends Controller
        $videos =  VideosCollege::where('video_type_link',0)->orderBy("id","desc")->get()->take(10);
 
        foreach ($videos as $video) {
-           if (Storage::disk($sourceDisk)->exists($video->link)) {
+           if (Storage::disk($sourceDisk)->exists($video->url)) {
                // Move the video to the destination disk
-               Storage::disk($destinationDisk)->put($destinationDisk, Storage::disk($sourceDisk)->get($video->link));
+               Storage::disk($destinationDisk)->put($destinationDisk, Storage::disk($sourceDisk)->get($video->url));
 
-               Storage::disk($sourceDisk)->delete($video->link);
+               Storage::disk($sourceDisk)->delete($video->url);
            }
        }
 
