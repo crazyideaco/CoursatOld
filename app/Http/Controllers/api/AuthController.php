@@ -88,12 +88,12 @@ class AuthController extends Controller
             //    'email'=>'unique:users',
             'password' => 'required|min:6',
         ], [
-            'required' => 'مطلوب ادخال الح',
-            'phone.unique' => 'ها الرقم تم تسجيله م قبل',
-            'email.unique' => 'هذا الحقل موجود ن قبل',
-            'password.min' => 'حقل كلمه السر ل يجب ان يقل عن 6 احرف',
+            'required' => 'مطلوب ادخال الحقل',
+            'phone.unique' => 'ها الرقم تم تسجيله من قبل',
+            'email.unique' => 'هذا الحقل موجود من قبل',
+            'password.min' => 'حقل كلمه السر لا يجب ان يقل عن 6 احرف',
             'email' => 'اكب الايميل بشكل صحيح',
-            'name.unique' => 'ااسم تم تله من بله',
+            'name.unique' => 'هذا الاسم موجود من قبل',
         ]);
         if ($validator->passes()) {
             if (isset($request->email)) {
@@ -102,8 +102,8 @@ class AuthController extends Controller
                     'email' => 'required|unique:users|email',
 
                 ], [
-                    'email.unique' => 'هذا اليميل مستخدم ن قبل ',
-                    'email.email' => 'حقل اامل يجب ان يكون امي',
+                    'email.unique' => 'هذا الايميل مستخدم ن قبل ',
+                    'email.email' => 'هذا الايميل موجود من قبل',
                 ]);
                 if ($validator->fails()) {
                     return response()->json(['status' => false, 'message_ar' => $validator->messages()->first()]);
@@ -136,7 +136,7 @@ class AuthController extends Controller
             }
             return response()->json([
                 'status' => 'true',
-                'message' => 'تم سجل المستخدم',
+                'message' => 'تم تسجيل المستخدم',
                 'data' => new UserResource($user),
 
             ]);
@@ -218,8 +218,8 @@ class AuthController extends Controller
             'phone' => 'required',
             'password' => 'min:6|required',
         ], [
-            'phone.required' => 'حقل الهتف مطلوب',
-            'password.required' => 'حقل كمه السر موب',
+            'phone.required' => 'حقل الهاتف مطلوب',
+            'password.required' => 'حقل كمه السر مطلوب',
             'password.min' => 'كلمه السر لايجب ان تقل عن 6 احرف',
         ]);
 
@@ -230,10 +230,10 @@ class AuthController extends Controller
             $credentials = $request->only(['phone', 'password']);
             $user = User::where('phone', $request->phone)->first();
             if ($user == null) {
-                return response()->json(['message_en' => 'The phone field is not right.', 'message_ar' => 'اللفون غير حي '], 401);
+                return response()->json(['message_en' => 'The phone field is not right.', 'message_ar' => 'الهاتف غير صحيح  '], 401);
             }
             if (!$token = auth()->attempt($credentials)) {
-                return response()->json(['message_en' => 'The password field is not right.', 'message_ar' => 'كلمه امرور غير صحيح'], 401);
+                return response()->json(['message_en' => 'The password field is not right.', 'message_ar' => 'كلمه المرور غير صحيح'], 401);
             } else if ($user->active == 0) {
                 return response()->json(['status' => false, 'message_ar' => 'هذا
                 المستخدم ليس مفعل'], 401);
@@ -301,7 +301,7 @@ class AuthController extends Controller
         } else {
             return Response()->json([
                 'status' => 'false',
-                'data' => 'الاسور خطا ',
+                'data' => 'كلمه السر خطا',
             ], 401);
         }
         if ($user !== null) {
@@ -310,12 +310,12 @@ class AuthController extends Controller
             $user->save();
             return Response()->json([
                 'status' => 'true',
-                'message' => 'تم تغيير لم السر بناح',
+                'message' => 'تم تغيير كلمه السر بنجاح',
             ]);
         } else {
             return Response()->json([
                 'status' => 'false',
-                'data' => 'لاوجد مستخدم',
+                'data' => 'لا يوجد مستخدم',
             ]);
         }
     }
