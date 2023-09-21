@@ -795,6 +795,7 @@ class VideoController extends Controller
             $video->subtype_id = $subtype->id;
             $video->description_ar = $request->description_ar;
             $video->description_en = $request->description_en;
+            $video->video_type_link = $special_video->video_type_link;
 
             if($request->hasFile('image'))
             {
@@ -860,6 +861,8 @@ class VideoController extends Controller
                 $video->paid=  $request->pay;
             }
 
+            $video->video_type_link = $special_video->video_type_link;
+
             $video->save();
             return response()->json(['status' => true,'success' => 'video uploaded']);
 
@@ -901,6 +904,8 @@ class VideoController extends Controller
             if($request->pay){
                 $video->paid=  $request->pay;
             }
+
+            $video->video_type_link = $special_video->video_type_link;
 
             $video->save();
             return response()->json(['status' => true,'success' => 'video uploaded']);

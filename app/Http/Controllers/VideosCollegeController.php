@@ -992,6 +992,7 @@ class VideosCollegeController extends Controller
                 $video->paid =  0;
             }
 
+            $video->video_type_link=  $special_video->video_type_link;
             $video->save();
             $students = $lesson->typescollege->studentscollege;
             foreach($students as $user){
@@ -1070,6 +1071,7 @@ class VideosCollegeController extends Controller
             }else{
                 $video->paid =  0;
             }
+            $video->video_type_link=  $special_video->video_type_link;
 
             $video->save();
             $students = $lesson->typescollege->studentscollege;
@@ -1149,6 +1151,7 @@ class VideosCollegeController extends Controller
             }else{
                 $video->paid =  0;
             }
+            $video->video_type_link=  $special_video->video_type_link;
 
             $video->save();
             $students = $lesson->typescollege->studentscollege;
