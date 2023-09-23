@@ -693,7 +693,7 @@ class VideoController extends Controller
     if(Auth::user() && Auth::user()->isAdmin == 'admin'){
         $videos =  $subtype->videos;
     }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1 ){
-        $videos =  $subtype->videos->where('center_id',Auth::user()->id);
+        $videos =  $subtype->videos;//->where('center_id',Auth::user()->id);
     }else if(Auth::user() && Auth::user()->is_student == 2){
         $videos =  $subtype->videos->where('user_id',Auth::user()->id);
     }
