@@ -832,7 +832,7 @@ class VideosCollegeController extends Controller
         $videos =  $lesson->videos;
 
     }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2 ){
-        $videos =  $lesson->videos->where('center_id',Auth::user()->id);
+        $videos =  $lesson->videos;//->where('center_id',Auth::user()->id);
 
     }else if(Auth::user() && Auth::user()->is_student == 3){
         $videos =  $lesson->videos->where('center_id',null)->where('user_id',Auth::user()->id);

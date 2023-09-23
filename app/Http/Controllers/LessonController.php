@@ -602,7 +602,7 @@ class LessonController extends Controller
         } elseif (Auth::user() && Auth::user()->is_student == 3) {
             $lessons = $type->lessons->where('doctor_id', auth()->user()->id)->where('center_id', null);
         } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
-            $lessons = $type->lessons->where('center_id', auth()->user()->id);
+            $lessons = $type->lessons;//->where('center_id', auth()->user()->id);
         }
         return view('dashboard.lessons')->with('lessons', $lessons)->with('id', $id);
     }
