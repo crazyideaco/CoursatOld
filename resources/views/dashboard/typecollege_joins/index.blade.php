@@ -134,8 +134,8 @@
         <td class="text-center">{{$join->id}}</td>
         <td class="text-center">{{$join->student->name ?? ""}}</td>
         <td class="text-center">{{$join->student->phone ?? ""}}</td>
-        <td class="text-center">{{$join->typescollege ? ($join->typescollege->center->name ?? "") : ""}}</td>
-        <td class="text-center">{{$join->typescollege ? ($join->typescollege->doctor->name ?? "") : ""}}</td>
+        <td class="text-center">{{$join->typescollege ? ($join->typescollege->center->name ?? "المنصه العامه") : ""}}</td>
+        <td class="text-center">{{$join->typescollege ? ($join->typescollege->doctor->name ?? "المنصه العامه") : ""}}</td>
         <td class="text-center">{{$join->typescollege->name_ar ?? ""}}</td>
         <td class="text-center">{{$join->user->name ?? ""}}</td>
         <td class="tex-center">
