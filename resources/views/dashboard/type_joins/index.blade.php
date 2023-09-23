@@ -17,7 +17,7 @@
         <div class="page-body">
             <div class="container">
      <!--start heed-->
-                           <div class="heed">
+             <div class="heed">
 
                     <div class="row">
                 <div class="profile">
@@ -31,7 +31,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -46,7 +46,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -89,14 +89,14 @@
                             <img src="{{asset('images/all-products.svg')}}">
                             <h5>  طلبات الانضمام</h5>
 
-                           
-                    
+
+
                         </div>
 
                         <div class="products-search typs1">
                             <div class="row">
-                                
-                     
+
+
 
 
 
@@ -104,7 +104,7 @@
 
                                 </div>
 
-                                  
+
 
                             </div>
 
@@ -114,13 +114,15 @@
 
                         <div class="pt-5">
                             <div class="row">
-                                                    
+
          <table id="example" class="table col-12" style="width:100%">
    <thead>
                 <tr>
 					<th>id</th>
                      <th scope="col" class="text-center">اسم الطالب</th>
                      <th scope="col" class="text-center">رقم الطالب</th>
+                     <th scope="col" class="text-center">المنصه </th>
+                     <th scope="col" class="text-center"> المدرس</th>
                      <th scope="col" class="text-center"> الكورس</th>
                      <th scope="col" class="text-center"> الادمن</th>
                       <th scope="col" class="text-center"> الاعدادات</th>
@@ -132,19 +134,22 @@
         <td class="text-center">{{$join->id}}</td>
         <td class="text-center">{{$join->student->name ?? ""}}</td>
         <td class="text-center">{{$join->student->phone ?? ""}}</td>
+
+            <td class="text-center">{{$join->type ? $join->type->center->name : ""}}</td>
+            <td class="text-center">{{$join->type ? $join->type->user->name : ""}}</td>
         <td class="text-center">{{$join->type->name_ar ?? ""}}</td>
         <td class="text-center">{{$join->user->name ?? ""}}</td>
         <td class="tex-center">
         <div id="status{{$join->id}}">
             @if($join->status == 0)
-          
+
         <button type="button"  class="btn btn-success
          btn-light-success w-30" onclick="accept_type_join({{$join->id}})">
                            قبول </button>
                            <button type="button"  class="btn btn-danger
          btn-light-danger w-30 "  onclick="refuse_type_join({{$join->id}})">
                            رفض </button>
-            
+
             @elseif($join->status == 1)
             <span class="badge badge-success p-2">تم القبول</span>
             @elseif($join->status == 2)
@@ -154,11 +159,11 @@
         </td>
         </tr>
               @endforeach
-                   
+
                                     </tbody>
                                     </table>
 
-                             
+
                             </div>
 
                     </div>
@@ -187,9 +192,9 @@
 @endsection
 @section("scripts")
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    
+
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  
+
 
 <script>
 //   $(document).ready(function() {
@@ -199,14 +204,14 @@
       {
          targets: 0,
       visible : false,
-        
-     
+
+
       },]
-           
+
 });
 function accept_type_join(sel){
     let id = sel;
- 
+
  $.ajaxSetup({
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -229,11 +234,11 @@ function accept_type_join(sel){
          $(`#status${id}`).html('<span class="badge badge-success p-2">تم القبول</span>');
        }
            }
-        
+
     });
     }function refuse_type_join(sel){
     let id = sel;
- 
+
  $.ajaxSetup({
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -256,9 +261,9 @@ function accept_type_join(sel){
          $(`#status${id}`).html('<span class="badge badge-danger p-2">تم الرفض</span>');
        }
            }
-        
+
     });
     }
- 
+
 </script>
 @endsection
