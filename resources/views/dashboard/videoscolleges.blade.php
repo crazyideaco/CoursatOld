@@ -86,7 +86,7 @@
 
                             <h5 class="mr-4">{{$lesson->typescollege  ? $lesson->typescollege->name_ar : ""}}</h5>
                             <h5 class="mr-4">{{ $lesson->name_ar ?? ""}}</h5>
-                            <h5 class="mr-4" >{{$lesson->typescollege  ? ($lesson->typescollege->user->name ?? "") : ""}}</h5>
+                            <h5 class="mr-4" >{{$lesson->typescollege  ? ($lesson->typescollege->doctor->name ?? "") : ""}}</h5>
 
 
                             <h5 class="mr-4" >{{$lesson->typescollege  ? ($lesson->type->center->name ?? "المنصه العامه") : ""}}</h5>
