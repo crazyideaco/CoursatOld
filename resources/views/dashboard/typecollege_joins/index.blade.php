@@ -124,6 +124,7 @@
                     <th scope="col" class="text-center">المنصه </th>
                     <th scope="col" class="text-center"> الدكتور</th>
                      <th scope="col" class="text-center"> الكورس</th>
+                    <th scope="col" class="text-center"> تاريخ الانضمام</th>
                      <th scope="col" class="text-center"> الادمن</th>
                       <th scope="col" class="text-center"> الاعدادات</th>
                 </tr>
@@ -137,6 +138,7 @@
         <td class="text-center">{{$join->typescollege ? ($join->typescollege->center->name ?? "المنصه العامه") : ""}}</td>
         <td class="text-center">{{$join->typescollege ? ($join->typescollege->doctor->name ?? "المنصه العامه") : ""}}</td>
         <td class="text-center">{{$join->typescollege->name_ar ?? ""}}</td>
+            <td class="text-center">{{\Carbon\Carbon::parse($join->created_at)->format('Y-m-d')}}</td>
         <td class="text-center">{{$join->user->name ?? ""}}</td>
         <td class="tex-center">
         <div id="status{{$join->id}}">
