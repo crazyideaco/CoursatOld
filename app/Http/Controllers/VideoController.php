@@ -689,7 +689,7 @@ class VideoController extends Controller
     $video->delete();
     return response()->json(['status' => true]);
 } public function videos($id){
-    $subtype = Subtype::where('id',$id)->first();
+    $subtype = Subtype::where('id',$id)->firstOrFail();
     if(Auth::user() && Auth::user()->isAdmin == 'admin'){
         $videos =  $subtype->videos;
     }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1 ){
@@ -697,7 +697,7 @@ class VideoController extends Controller
     }else if(Auth::user() && Auth::user()->is_student == 2){
         $videos =  $subtype->videos->where('user_id',Auth::user()->id);
     }
-    return view('dashboard.videos')->with('videos',$videos)->with('id',$id);
+    return view('dashboard.videos')->with('videos',$videos)->with('id',$id)->with("subtype",$subtype);
 }public function getvideos($id){
     if(Auth::user() && Auth::user()->isAdmin == 'admin'){
         $videos = Video::where('user_id',$id)->where('center_id',null)->get();
