@@ -281,6 +281,7 @@
                            <p style="color:red;">{{$message}}</p>
                             @enderror
                            </div>
+
                                  <div class="form-group col-3">
                                     <label>اسم الدوره بالانجليزي</label>
                     <input type="text" class="form-control"
