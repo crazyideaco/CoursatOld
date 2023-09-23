@@ -13,7 +13,7 @@
                   <!--start heed-->
                            <div class="heed">
                     <div class="row">
-                <div class="profile"> 
+                <div class="profile">
                     <div class="row">
                         <div class="col-3">
                             <img src="{{asset('images/profile.svg')}}">
@@ -287,90 +287,90 @@
                                </div>
                       </div>
                          </div>
-                            <section id="s0" >
-                            <div class="row">
-                               <div class="col-6 text-center mb-5 set-img">
-                    <video width="200" height="200" controls >
-              <source src="mov_bbb.mp4" id="video_here0">
-            Your browser does not support HTML5 video.
-          </video>
-          <br>
-          <br>
-                   <input id="kt0"  type="file" onchange="getvideo(0)" class="form-control url ehabtalaat" required name="url[]">
-                            <label for="kt0" class="ahmed">اضافة فيديو</label>
-                            @error('url')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
-                           </div><div class="col-6 text-center set-img">
-                            <canvas class="pdfViewer" style="width:200px;height:200px"></canvas>
-                   <input id="myPdf0" type="file" class="form-control pdf ehabtalaat" name="pdf[]">
-                   <br>
-<br>
-                            <label for="myPdf0" class="ahmed">اضافة pdf</label>
-                            @error('pdf')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
-               </div>
-                           <div class="col-6 text-center set-img">
-                               <img src="{{asset('images/set-img.svg')}}" id="r0" class="realimg">
-                    <br>
-                   <input id="d0" type="file" class="form-control image ehabtalaat"  onchange="getimage(0)" name="images[]">
-                            <label for="d0" class="ahmed">اضافة صوره</label>
-                            @error('image')
-                            <p style="color:red;">{{$message}}</p>
-                            @enderror
-               </div>
+{{--                            <section id="s0" >--}}
+{{--                            <div class="row">--}}
+{{--                               <div class="col-6 text-center mb-5 set-img">--}}
+{{--                    <video width="200" height="200" controls >--}}
+{{--              <source src="mov_bbb.mp4" id="video_here0">--}}
+{{--            Your browser does not support HTML5 video.--}}
+{{--          </video>--}}
+{{--          <br>--}}
+{{--          <br>--}}
+{{--                   <input id="kt0"  type="file" onchange="getvideo(0)" class="form-control url ehabtalaat" required name="url[]">--}}
+{{--                            <label for="kt0" class="ahmed">اضافة فيديو</label>--}}
+{{--                            @error('url')--}}
+{{--                            <p style="color:red;">{{$message}}</p>--}}
+{{--                            @enderror--}}
+{{--                           </div><div class="col-6 text-center set-img">--}}
+{{--                            <canvas class="pdfViewer" style="width:200px;height:200px"></canvas>--}}
+{{--                   <input id="myPdf0" type="file" class="form-control pdf ehabtalaat" name="pdf[]">--}}
+{{--                   <br>--}}
+{{--<br>--}}
+{{--                            <label for="myPdf0" class="ahmed">اضافة pdf</label>--}}
+{{--                            @error('pdf')--}}
+{{--                            <p style="color:red;">{{$message}}</p>--}}
+{{--                            @enderror--}}
+{{--               </div>--}}
+{{--                           <div class="col-6 text-center set-img">--}}
+{{--                               <img src="{{asset('images/set-img.svg')}}" id="r0" class="realimg">--}}
+{{--                    <br>--}}
+{{--                   <input id="d0" type="file" class="form-control image ehabtalaat"  onchange="getimage(0)" name="images[]">--}}
+{{--                            <label for="d0" class="ahmed">اضافة صوره</label>--}}
+{{--                            @error('image')--}}
+{{--                            <p style="color:red;">{{$message}}</p>--}}
+{{--                            @enderror--}}
+{{--               </div>--}}
 
-                            <div class="col-6 text-center set-img">
-                                <img src="{{asset('images/set-img.svg')}}" id="b0" class="realboard">
-                                <br>
-                               <input id="real0" type="file" class="form-control board ehabtalaat"  onchange="getboard(0)" name="boards[]">
-                                        <label for="real0" class="ahmed">سبوره الحصه</label>
-                                        @error('board')
-                                        <p style="color:red;">{{$message}}</p>
-                                        @enderror
-                           </div>
+{{--                            <div class="col-6 text-center set-img">--}}
+{{--                                <img src="{{asset('images/set-img.svg')}}" id="b0" class="realboard">--}}
+{{--                                <br>--}}
+{{--                               <input id="real0" type="file" class="form-control board ehabtalaat"  onchange="getboard(0)" name="boards[]">--}}
+{{--                                        <label for="real0" class="ahmed">سبوره الحصه</label>--}}
+{{--                                        @error('board')--}}
+{{--                                        <p style="color:red;">{{$message}}</p>--}}
+{{--                                        @enderror--}}
+{{--                           </div>--}}
 
-                            </div>
-                            <div class="row mt-5">
-                                     <div class="form-group col-4">
-                                  <input id="name_ar" type="text" class="form-control name_ar" required style="width:100%" name="names_ar[]"
-                               placeholder="عنوان الفيديو بالعربى ">
-                               </div>  <div class="form-group col-4">
-                                  <input id="name_en" type="text" class="form-control name_en" required style="width:100%" name="names_en[]"
-                               placeholder="عنوان الفيديو بالانجليزي ">
-                               </div>
-                               <div class="col-1"></div>
-                           <div class="form-group col-3">
-                               <label for="pay" class="paylabel">مدفوع</label>
-                               <input class="pay" type="checkbox"  value="1" name="pay[]">
-                               <br>
+{{--                            </div>--}}
+{{--                            <div class="row mt-5">--}}
+{{--                                     <div class="form-group col-4">--}}
+{{--                                  <input id="name_ar" type="text" class="form-control name_ar" required style="width:100%" name="names_ar[]"--}}
+{{--                               placeholder="عنوان الفيديو بالعربى ">--}}
+{{--                               </div>  <div class="form-group col-4">--}}
+{{--                                  <input id="name_en" type="text" class="form-control name_en" required style="width:100%" name="names_en[]"--}}
+{{--                               placeholder="عنوان الفيديو بالانجليزي ">--}}
+{{--                               </div>--}}
+{{--                               <div class="col-1"></div>--}}
+{{--                           <div class="form-group col-3">--}}
+{{--                               <label for="pay" class="paylabel">مدفوع</label>--}}
+{{--                               <input class="pay" type="checkbox"  value="1" name="pay[]">--}}
+{{--                               <br>--}}
 
-                           </div>
-                                     <div class="col-6">
-                                 <label>التاج </label>
-                                <select class="form-control selectpicker "data-live-search="true"  multiple name="tag_id[]">
+{{--                           </div>--}}
+{{--                                     <div class="col-6">--}}
+{{--                                 <label>التاج </label>--}}
+{{--                                <select class="form-control selectpicker "data-live-search="true"  multiple name="tag_id[]">--}}
 
-                                  @foreach($tags as $tag)
-                                  <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                  @endforeach
-                                </select>
-                              </div>
-                           <div class="form-group col-3">
-                               <label>ترتيب الفيديو </label>
-                               <input style="height: 36px;" min="0" type="number" name="order[]">
-                               </div>
-                            </div>
-                             <div class="row">
-                               <div class="col-6">
-                                   <label>الوصف بالعربى</label>
-                                   <textarea class="description_ar form-control" rows="6" name="description_ar[]"></textarea>
-                               </div>
-                               <div class="col-6">
-                                   <label>الوصف بالانجليزي</label>
-                                   <textarea class="description_en form-control" rows="6" name="description_en[]"></textarea>
-                               </div>
-                           </div></section>
+{{--                                  @foreach($tags as $tag)--}}
+{{--                                  <option value="{{$tag->id}}">{{$tag->name}}</option>--}}
+{{--                                  @endforeach--}}
+{{--                                </select>--}}
+{{--                              </div>--}}
+{{--                           <div class="form-group col-3">--}}
+{{--                               <label>ترتيب الفيديو </label>--}}
+{{--                               <input style="height: 36px;" min="0" type="number" name="order[]">--}}
+{{--                               </div>--}}
+{{--                            </div>--}}
+{{--                             <div class="row">--}}
+{{--                               <div class="col-6">--}}
+{{--                                   <label>الوصف بالعربى</label>--}}
+{{--                                   <textarea class="description_ar form-control" rows="6" name="description_ar[]"></textarea>--}}
+{{--                               </div>--}}
+{{--                               <div class="col-6">--}}
+{{--                                   <label>الوصف بالانجليزي</label>--}}
+{{--                                   <textarea class="description_en form-control" rows="6" name="description_en[]"></textarea>--}}
+{{--                               </div>--}}
+{{--                           </div></section>--}}
                            <br><br>
                          <div class="progress px-3">
                       <div class="progress-bar" role="progressbar" aria-valuenow=""
