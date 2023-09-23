@@ -63,7 +63,7 @@ class SubtypeController extends Controller
             $subtypes = $type->subtypes->where('user_id', Auth::user()->id)->where('center_id', null);
         } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
             $type = Type::where('id', $id)->first();
-            $subtypes = $type->subtypes->where('center_id', Auth::user()->id);
+            $subtypes = $type->subtypes;
         }
         return view('dashboard.subtypes')->with('subtypes', $subtypes)->with('id', $id);
     }
