@@ -83,8 +83,8 @@
                             <img src="{{asset('images/all-products.svg')}}">
                             <h5>الفيديوهات</h5>
 
-                            <h5>{{$subtype->type  ? $subtype->type->name : ""}}</h5>
-                            <h5>{{$subtype->type  ? ($subtype->type->user->name ?? "") : ""}}</h5>
+                            <h5 class="mr-4">{{$subtype->type  ? $subtype->type->name_ar : ""}}</h5>
+                            <h5 class="mr-4" >{{$subtype->type  ? ($subtype->type->user->name ?? "") : ""}}</h5>
 
 
 
