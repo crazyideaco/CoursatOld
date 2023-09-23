@@ -135,8 +135,8 @@
         <td class="text-center">{{$join->student->name ?? ""}}</td>
         <td class="text-center">{{$join->student->phone ?? ""}}</td>
 
-            <td class="text-center">{{$join->type ? $join->type?->center->name : ""}}</td>
-            <td class="text-center">{{$join->type ? $join->type?->user->name : ""}}</td>
+            <td class="text-center">{{$join->type ? ($join->type->center->name ?? "") : ""}}</td>
+            <td class="text-center">{{$join->type ? ($join->type->user->name ?? "") : ""}}</td>
         <td class="text-center">{{$join->type->name_ar ?? ""}}</td>
         <td class="text-center">{{$join->user->name ?? ""}}</td>
         <td class="tex-center">
