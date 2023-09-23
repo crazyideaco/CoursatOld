@@ -25,7 +25,7 @@
 
                         </div>
 
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -40,7 +40,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -83,8 +83,16 @@
                             <img src="{{asset('images/all-products.svg')}}">
                             <h5>الفيديوهات</h5>
 
-                           
-                    
+
+                            <h5 class="mr-4">{{$lesson->typescollege  ? $lesson->typescollege->name_ar : ""}}</h5>
+                            <h5 class="mr-4">{{ $lesson->name_ar ?? ""}}</h5>
+                            <h5 class="mr-4" >{{$lesson->typescollege  ? ($lesson->typescollege->user->name ?? "") : ""}}</h5>
+
+
+                            <h5 class="mr-4" >{{$lesson->typescollege  ? ($lesson->type->center->name ?? "المنصه العامه") : ""}}</h5>
+
+
+
                         </div>
 
                         <div class="products-search typs1">
@@ -92,11 +100,11 @@
                                 <div class="col-3">
                                     <button class="btn" >
                                       <a href="{{route('addvideoscollege',$id)}}">  <span><i class="fas fa-plus-circle"></i></span>
-                                        اضافة فيديو  
+                                        اضافة فيديو
                                         </a>
                                     </button>
                                 </div>
-                     
+
 
 
 
@@ -107,13 +115,13 @@
                                 <div class="col-5">
                                     <button class="btn" style="width:100% !important;">
                                         <a href="{{route('addvideoscollegespecial',$id)}}">  <span><i class="fas fa-plus-circle"></i></span>
-                                         اضافة فيديو من حصص سابقة 
+                                         اضافة فيديو من حصص سابقة
                                         </a>
                                     </button>
 
-                     
+
                               </div>
-                             
+
 
 
                                 </div>
@@ -126,7 +134,7 @@
 
                         <div class="pt-5">
                             <div class="row">
-                                                    
+
          <table id="example" class="table col-12" style="width:100%">
    <thead>
                 <tr>
@@ -155,11 +163,11 @@
              </td> -->
              <td scope="col" class="text-center">{{$video->college->name_ar}}</td>
              <td scope="col" class="text-center">{{$video->subjectscollege['name_ar']}}</td>
-         
+
              <td scope="col" class="text-center">{{$video->user->name}}</td>
                          <td scope="col" class="text-center">{{$video->order_number}}</td>
                <td class="text-center">
-                    <a href="{{route('editvideoscollege',$video->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen" 
+                    <a href="{{route('editvideoscollege',$video->id)}}" > <img src="{{asset('images/pen.svg')}}" id="pen"
                          style="cursor: pointer"></a>
                                <span class="btn btn-success btn-sm" id="btn{{$video->id}}" onclick="activevideoco({{$video->id}})">
                              @if($video->active == 1)
@@ -172,15 +180,15 @@
                           الامتحانات
                          </a> -->
 							                              @if(auth()->user()->hasPermission("videoscolleges-delete"))
-				    <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletevideoscollege('{{$video->id}}')" style="cursor:pointer;"> 
+				    <img src="{{asset('images/trash.svg')}}" id="trash" onclick="deletevideoscollege('{{$video->id}}')" style="cursor:pointer;">
                  @endif
                             </td>
-                                        </tr>                            
+                                        </tr>
                                         @endforeach
                                     </tbody>
-                   
+
     </table>
-                             
+
                             </div>
 
                     </div>
@@ -209,9 +217,9 @@
 @endsection
 @section("scripts")
 <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    
+
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-  
+
 
 <script>
 
@@ -222,10 +230,10 @@
       {
           targets: 0,
         visible : false,
-        
-     
+
+
       },]
-           
+
 });
 	});function activevideoco(id){
       $.ajaxSetup({
@@ -260,13 +268,13 @@ $(`#btn${id}`).html('تفعيل');
 $(`#btn${id}`).html('الغاء التفعيل');
 
     }
-    
+
        }
 
       });
   }  function deletevideoscollege(sel){
     let id = sel;
- 
+
  $.ajaxSetup({
        headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -297,11 +305,11 @@ $(`#btn${id}`).html('الغاء التفعيل');
          )
        }
            }
-        
+
     });
     }
-   
-   
+
+
   })
 }
 

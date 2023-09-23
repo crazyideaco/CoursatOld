@@ -827,7 +827,7 @@ class VideosCollegeController extends Controller
     $video->delete();
     return response()->json(['status' => true]);
 } public function videoscolleges($id){
-    $lesson = Lesson::where('id',$id)->first();
+    $lesson = Lesson::where('id',$id)->firstOrFail();
     if(Auth::user() && Auth::user()->isAdmin == 'admin'){
         $videos =  $lesson->videos;
 
@@ -838,7 +838,7 @@ class VideosCollegeController extends Controller
         $videos =  $lesson->videos->where('center_id',null)->where('user_id',Auth::user()->id);
 
     }
-    return view('dashboard.videoscolleges')->with('videoscolleges',$videos)->with('id',$id);
+    return view('dashboard.videoscolleges')->with('videoscolleges',$videos)->with('id',$id)->with('lesson',$lesson);
 }public function getvideosc($id){
     if(Auth::user() && Auth::user()->isAdmin == 'admin'){
         $videos = VideosCollege::where('user_id',$id)->where('center_id',null)->get();
