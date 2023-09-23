@@ -22,7 +22,7 @@
                             <p>ادمن</p>
 
                         </div>
-            
+
                             </div>
                         </div>
                         <div class="flag">
@@ -37,7 +37,7 @@
 
                                 </div>
 
-                         
+
 
                             </div>
 
@@ -76,7 +76,7 @@
                         <div class="row def">
                             <img src="{{asset('images/setting.svg')}}">
                            <h5>دوره تعلميه شهريه</h5>
-                        
+
                         </div>
                             <form method="post" action="{{route('updatetype',$type->id)}}" enctype="multipart/form-data">
                         	@csrf
@@ -103,13 +103,13 @@
                                         @enderror
                            </div>
                                        </div>
-                        	@if(Auth::user() && Auth::user()->isAdmin == 'admin') 
-                        	
+                        	@if(Auth::user() && Auth::user()->isAdmin == 'admin')
+
                         <div class="info">
                             <div class="row">
                                 <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم الدوره بالعربى</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_ar" required value="{{$type->name_ar}}">
                             @error('name_ar')
                            <p style="color:red;">{{$message}}</p>
@@ -117,7 +117,7 @@
                            </div>
                                  <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم الدوره بالانجليزي</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_en" required value="{{$type->name_en}}">
                             @error('name_en')
                            <p style="color:red;">{{$message}}</p>
@@ -134,32 +134,32 @@
                                  @error('stage_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                        <div class="form-group col-lg-3 col-md-6 col-12">
                            <label>سنه الماده</label>
                             <select class="form-control" name="years_id" id="year" required onchange="getyear(this)">
                                 @foreach($years as $year)
-                                <option value='{{$year->id}}' @if($type->years_id == $year->id ) 
+                                <option value='{{$year->id}}' @if($type->years_id == $year->id )
                                 selected @endif>{{$year->year_ar}}</option>
                                 @endforeach
                             </select>
                                  @error('years_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
-                              
+                             </div>
+
                                 <div class="form-group col-lg-3 col-md-6 col-12">
                            <label>الماده </label>
                             <select class="form-control" name="subjects_id" required id="subject"  onchange="getteacher(this)">
                                 @foreach($subjects as $subject)
-                                <option value='{{$subject->id}}' @if($type->subjects_id == $subject->id ) 
+                                <option value='{{$subject->id}}' @if($type->subjects_id == $subject->id )
                                 selected @endif>{{$subject->name_ar}}</option>
                                 @endforeach
                             </select>
                                  @error('subjects_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                      <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم المدرس</label>
                       <select name="user_id" class="form-control" required id="teacher">
@@ -175,7 +175,7 @@
                                     <div class=" col-lg-3 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker"  data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}" @if(in_array($tag->id,$type->tags->pluck('id')->toArray())) selected @endif>{{$tag->name}}</option>
                                   @endforeach
@@ -192,7 +192,7 @@
                             <div class="row">
                                 <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم الدوره بالعربى</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_ar" required value="{{$type->name_ar}}">
                             @error('name_ar')
                            <p style="color:red;">{{$message}}</p>
@@ -200,7 +200,7 @@
                            </div>
                                  <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم الدوره بالانجليزي</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_en" required value="{{$type->name_en}}">
                             @error('name_en')
                            <p style="color:red;">{{$message}}</p>
@@ -217,32 +217,32 @@
                                  @error('stage_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                        <div class="form-group col-lg-3 col-md-6 col-12">
                            <label>سنه الماده</label>
                             <select class="form-control" name="years_id" id="year" required onchange="getyear(this)">
                                 @foreach($years as $year)
-                                <option value='{{$year->id}}' @if($type->years_id == $year->id ) 
+                                <option value='{{$year->id}}' @if($type->years_id == $year->id )
                                 selected @endif>{{$year->year_ar}}</option>
                                 @endforeach
                             </select>
                                  @error('years_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
-                              
+                             </div>
+
                                 <div class="form-group col-lg-3 col-md-6 col-12">
                            <label>الماده </label>
                             <select class="form-control" name="subjects_id" required id="subject"  onchange="getteacher(this)">
                                 @foreach($subjects as $subject)
-                                <option value='{{$subject->id}}' @if($type->subjects_id == $subject->id ) 
+                                <option value='{{$subject->id}}' @if($type->subjects_id == $subject->id )
                                 selected @endif>{{$subject->name_ar}}</option>
                                 @endforeach
                             </select>
                                  @error('subjects_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                      <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>اسم المدرس</label>
                       <select name="user_id" class="form-control" required id="teacher">
@@ -258,7 +258,7 @@
                                 <div class="col-lg-3 col-md-6 col-12">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker"  data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}" @if(in_array($tag->id,$type->tags->pluck('id')->toArray())) selected @endif>{{$tag->name}}</option>
                                   @endforeach
@@ -275,7 +275,7 @@
                             <div class="row">
                                 <div class="form-group col-3">
                                     <label>اسم الدوره بالعربى</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_ar"  required value="{{$type->name_ar}}">
                             @error('name_ar')
                            <p style="color:red;">{{$message}}</p>
@@ -283,7 +283,7 @@
                            </div>
                                  <div class="form-group col-3">
                                     <label>اسم الدوره بالانجليزي</label>
-                    <input type="text" class="form-control" 
+                    <input type="text" class="form-control"
                             placeholder="ادخل اسم " name="name_en" required value="{{$type->name_en}}">
                             @error('name_en')
                            <p style="color:red;">{{$message}}</p>
@@ -300,36 +300,36 @@
                                  @error('stage_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                        <div class="form-group col-3">
                            <label>سنه الماده</label>
                             <select class="form-control" name="years_id"required id="year" onchange="getyear(this)">
                                 @foreach($years as $year)
-                                <option value='{{$year->id}}' @if($type->years_id == $year->id ) 
+                                <option value='{{$year->id}}' @if($type->years_id == $year->id )
                                 selected @endif>{{$year->year_ar}}</option>
                                 @endforeach
                             </select>
                                  @error('years_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
-                              
+                             </div>
+
                                 <div class="form-group col-3">
                            <label>الماده </label>
                             <select class="form-control" name="subjects_id" required id="subject" >
                                 @foreach($subjects as $subject)
-                                <option value='{{$subject->id}}' @if($type->subjects_id == $subject->id ) 
+                                <option value='{{$subject->id}}' @if($type->subjects_id == $subject->id )
                                 selected @endif>{{$subject->name_ar}}</option>
                                 @endforeach
                             </select>
                                  @error('subjects_id')
                            <p style="color:red;">{{$message}}</p>
                             @enderror
-                             </div> 
+                             </div>
                                 <div class="col-6">
                                  <label>التاج </label>
                                 <select class="form-control selectpicker"  data-live-search="true"  multiple name="tag_id[]">
-                                      
+
                                   @foreach($tags as $tag)
                                   <option value="{{$tag->id}}" @if(in_array($tag->id,$type->tags->pluck('id')->toArray())) selected @endif>{{$tag->name}}</option>
                                   @endforeach
@@ -429,7 +429,7 @@
        success: function(result){
     $('#year').empty();
     $('#year').html(result);
-        
+
        }
 
       });
@@ -449,12 +449,12 @@
        success: function(result){
     $('#subject').empty();
     $('#subject').html(result);
-        
+
        }
 
       });
-    } 
-      function getteacher(selected){
+    }
+ function getteacher(selected){
 
 var id = selected.value;
  console.log(id);
@@ -468,15 +468,17 @@ var id = selected.value;
         $('#teacher').html(result[0]);
         $('#type').empty();
         $('#type').html(result[1]);
-        
+
        }
 
       });
-}(document).on("change", "#kt", function(evt) {
+}
+$(document).on("change", "#kt", function(evt) {
   var $source = $('#video_here');
   $source[0].src = URL.createObjectURL(this.files[0]);
   $source.parent()[0].load();
-});function readURL(input) {
+});
+    function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
@@ -490,6 +492,6 @@ var id = selected.value;
 
 $("#ad").change(function(){
     readURL(this);
-}) 
+})
     </script>
   @endsection
