@@ -384,12 +384,12 @@
                     </div>
                     <br />
                              <div class="save text-center mt-6">
-                            <div class="row save">
-                                <div class="col-12 text-center">
-                                  <input type="button" id="clicked" value="اضافه المزيد" class="text-center">
-                                </div>
-                            </div>
-                        </div>
+{{--                            <div class="row save">--}}
+{{--                                <div class="col-12 text-center">--}}
+{{--                                  <input type="button" id="clicked" value="اضافه المزيد" class="text-center">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="save text-center mt-6">
                             <div class="row save">
                                 <div class="col-12 text-center">
