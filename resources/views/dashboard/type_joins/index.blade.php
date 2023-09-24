@@ -140,7 +140,7 @@
 
             <td class="text-center">{{$join->type ? ($join->type->center->name ?? "المنصه العامه") : ""}}</td>
             <td class="text-center">{{$join->type ? ($join->type->user->name ?? "المنصه العامه") : ""}}</td>
-            <td class="text-center">{{$join->type ? ($join->type->year->name_ar ?? " ") : ""}}</td>
+            <td class="text-center">{{$join->type ? ($join->type->year->year_ar ?? " ") : ""}}</td>
             <td class="text-center">{{$join->type ? ($join->type->subject->name_ar ?? " ") : ""}}</td>
         <td class="text-center">{{$join->type->name_ar ?? ""}}</td>
         <td class="text-center">{{\Carbon\Carbon::parse($join->created_at)->format('Y-m-d')}}</td>
