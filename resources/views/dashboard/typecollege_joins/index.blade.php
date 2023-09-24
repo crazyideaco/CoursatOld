@@ -111,7 +111,6 @@
                         </div>
 
 
-
                         <div class="pt-5">
                             <div class="row">
 
@@ -123,6 +122,8 @@
                      <th scope="col" class="text-center">رقم الطالب</th>
                     <th scope="col" class="text-center">المنصه </th>
                     <th scope="col" class="text-center"> الدكتور</th>
+                    <th scope="col" class="text-center">الفرقه </th>
+                    <th scope="col" class="text-center"> الماده</th>
                      <th scope="col" class="text-center"> الكورس</th>
                     <th scope="col" class="text-center"> تاريخ الانضمام</th>
                      <th scope="col" class="text-center"> الادمن</th>
@@ -137,6 +138,8 @@
         <td class="text-center">{{$join->student->phone ?? ""}}</td>
         <td class="text-center">{{$join->typescollege ? ($join->typescollege->center->name ?? "المنصه العامه") : ""}}</td>
         <td class="text-center">{{$join->typescollege ? ($join->typescollege->doctor->name ?? "المنصه العامه") : ""}}</td>
+        <td class="text-center">{{$join->typescollege ? ($join->typescollege->division->name_ar ?? "") : ""}}</td>
+        <td class="text-center">{{$join->typescollege ? ($join->typescollege->subjectscollege->name_ar ?? "") : ""}}</td>
         <td class="text-center">{{$join->typescollege->name_ar ?? ""}}</td>
             <td class="text-center">{{\Carbon\Carbon::parse($join->created_at)->format('Y-m-d')}}</td>
         <td class="text-center">{{$join->user->name ?? ""}}</td>
