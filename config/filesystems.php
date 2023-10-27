@@ -94,7 +94,7 @@ return [
         //disk6
         'disk6' => [
             'driver' => 'local',
-            'root' => public_path() . '/disk6',
+            'root' => public_path() . '/disk6/disk6',
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
