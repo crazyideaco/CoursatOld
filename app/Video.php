@@ -38,6 +38,9 @@ class Video extends Model
         elseif($this->video_type_link == 6){
             $floder_name = "disk6/disk6";
         }
+        elseif($this->video_type_link == 7){
+            $floder_name = "disk7";
+        }
     //  $floder_name = $this->video_type_link == 0 ? "uploads" : "disk1";
         return $this->url ? asset( $floder_name . "/" . $this->url) : '';
     }  public function type(){
