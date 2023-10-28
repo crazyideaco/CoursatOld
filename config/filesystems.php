@@ -98,6 +98,12 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'disk7' => [
+            'driver' => 'local',
+            'root' => public_path() . '/disk7',
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
 
 
         'uploads' => [
