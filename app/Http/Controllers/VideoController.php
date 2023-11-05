@@ -689,41 +689,7 @@ class VideoController extends Controller
     $video->delete();
     return response()->json(['status' => true]);
 } public function videos($id){
-    $folderPath = public_path('disk7');
 
-    $destinationDisk = 'disk7';
-    $sourceDisk = 'uploads';
-    $videos =  VideosCollege::where('video_type_link',0)->orderBy("id","desc")->paginate(30);
-
-    foreach ($videos as $video) {
-        $sourcePath = Storage::disk($sourceDisk)->path($video->url);
-        $destinationPath = public_path('disk7/' . $video->url);
-
-        // Check if the source file exists
-        if (file_exists($sourcePath)) {
-            // Copy the file to the destination
-            copy($sourcePath, $destinationPath);
-
-            // Set the correct permissions (assuming you have the necessary privileges)
-            chmod($destinationPath, 0777);
-
-            // Optionally, delete the source file
-            File::delete("uploads/".$video->url);
-        }
-    }
-
-    if (File::isDirectory($folderPath)) {
-        $files = File::files($folderPath);
-
-        $fileNames = [];
-
-        foreach ($files as $file) {
-            $fileNames[] = $file->getFilename();
-        }
-    }
-    VideosCollege::whereIn("url",$fileNames)->update([
-        "video_type_link" => 7
-    ]);
     $subtype = Subtype::where('id',$id)->firstOrFail();
     if(Auth::user() && Auth::user()->isAdmin == 'admin'){
         $videos =  $subtype->videos;
