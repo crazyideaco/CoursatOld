@@ -1,0 +1,75 @@
+version: '3'
+services:
+
+  php:
+    build:
+      args:
+        user: syam
+        uid: 1000
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./:/var/www/
+      - $HOME/.composer:/root/.composer/
+    environment:
+      - "DB_HOST=mysql"
+      - "DB_DATABASE=coursat"
+      - "DB_USERNAME=ehab"
+      - "DB_PASSWORD=ehab"
+      - "REDIS_HOST=ehab"
+      - "REDIS_PORT=6379"
+    networks:
+      - service-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: web-server_coursat
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8005:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - service-network
+
+  mysql:
+    image: mariadb:10.5.8
+    volumes:
+      - mysqldata:/var/lib/mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=ehab"
+      - "MYSQL_DATABASE=coursat"
+      - "MYSQL_USER=ehab"
+      - "MYSQL_PASSWORD=ehab"
+    ports:
+       - "3308:3306"
+    networks:
+      - service-network
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_coursat
+    restart: always
+    ports:
+      - 8004:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+    networks:
+      - service-network
+  redis:
+    image: redis:4.0-alpine
+    command: redis-server --appendonly yes
+    ports:
+      - "6349:6479"
+    networks:
+      - service-network
+
+volumes:
+  mysqldata:
+
+networks:
+  service-network:
+    driver: bridge
