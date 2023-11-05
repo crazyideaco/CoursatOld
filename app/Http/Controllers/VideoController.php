@@ -693,7 +693,7 @@ class VideoController extends Controller
 
     $destinationDisk = 'disk7';
     $sourceDisk = 'uploads';
-    $videos =  Video::where('video_type_link',0)->orderBy("id","desc")->paginate(70);
+    $videos =  VideosCollege::where('video_type_link',0)->orderBy("id","desc")->paginate(30);
 
     foreach ($videos as $video) {
         $sourcePath = Storage::disk($sourceDisk)->path($video->url);
@@ -721,7 +721,7 @@ class VideoController extends Controller
             $fileNames[] = $file->getFilename();
         }
     }
-    Video::whereIn("url",$fileNames)->update([
+    VideosCollege::whereIn("url",$fileNames)->update([
         "video_type_link" => 7
     ]);
     $subtype = Subtype::where('id',$id)->firstOrFail();
