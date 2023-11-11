@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_6721" data-name="Rectangle 6721" width="13" height="13" transform="translate(-51 1277)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="primery_" data-name="primery " transform="translate(60 -1268)">
+    <rect id="Rectangle_6720" data-name="Rectangle 6720" width="30" height="30" rx="6" transform="translate(-60 1268)" fill="#f1f3f8"/>
+    <g id="Mask_Group_1347" data-name="Mask Group 1347" clip-path="url(#clip-path)">
+      <g id="school" transform="translate(-51 1277)">
+        <path id="Path_15498" data-name="Path 15498" d="M3.27,13H9.73V6.107H3.27ZM7.136,6.908H7.9V8.129H7.136Zm0,2.035H7.9v1.221H7.136Zm0,2.035H7.9V12.2H7.136ZM5.1,6.908h.763V8.129H5.1Zm0,2.035h.763v1.221H5.1Zm0,2.035h.763V12.2H5.1Z"/>
+        <path id="Path_15499" data-name="Path 15499" d="M.014,13H2.507V6.933H.014V13ZM.879,8.339h.763V9.56H.879Zm0,2.035h.763v1.221H.879Z"/>
+        <path id="Path_15500" data-name="Path 15500" d="M10.493,6.933V13h2.493V6.933Zm1.628,4.661h-.763V10.374h.763Zm0-2.035h-.763V8.339h.763Z"/>
+        <path id="Path_15501" data-name="Path 15501" d="M6.881,2.846V2.393H9.323V0c-2.316,0-3.2,0-3.2,0s-.01-.22,0,2.843L3.539,4.5h-.7v.763h7.325V4.5h-.7Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

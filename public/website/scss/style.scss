@@ -1,0 +1,132 @@
+$PrimaryColor: #03314b;
+
+@font-face {
+  font-family: "light";
+  src: url("../fonts/Cairo-Light.ttf");
+}
+
+@font-face {
+  font-family: "regular";
+  src: url("../fonts/Cairo-Regular.ttf");
+}
+
+@font-face {
+  font-family: "semibold";
+  src: url("../fonts/Cairo-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "bold";
+  src: url("../fonts/Cairo-Bold.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+@media print {
+ 
+  html,
+  body {
+
+      /* Hide the whole page */
+      display: none;
+  }
+}
+@import "./auth.scss";
+
+.mobile_preview {
+  display: none;
+}
+
+.cources {
+  padding: 2rem 0;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  background-color: #f4f4f4 !important;
+  .card_cource {
+    box-shadow: 3px 3px 6px rgb(197 197 197 / 70%);
+    // border: 1px solid rgb(163, 163, 163);
+    background-color: #fff;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    border-radius: 10px 10px 0 0;
+    display: block;
+    img {
+      width: 100%;
+      height: 250px;
+      border-radius: 10px 10px 0 0;
+    }
+    .description_card {
+      padding: 1rem;
+      .name {
+        font-family: "semibold";
+        color: $PrimaryColor;
+      }
+      .instractor {
+        font-family: "semibold";
+        color: $PrimaryColor;
+      }
+      .description {
+        margin-bottom: 0;
+        font-family: "regular";
+        font-size: 0.9rem;
+        color: #000;
+      }
+    }
+  }
+}
+
+.single_cource {
+  padding: 2rem 0;
+  min-height: 100vh;
+  background-color: #f4f4f4 !important;
+  .video_lesson {
+    position: relative;
+    video {
+      width: 100%;
+      height: 500px;
+      max-height: 100vh;
+    }
+    video::-webkit-media-controls-fullscreen-button {
+      display: none !important;
+    }
+    .number {
+      position: absolute;
+      bottom: 30%;
+      left: 10%;
+      transform: rotate(340deg);
+      font-family: "semibold";
+      font-size: 10rem;
+      color: #fff;
+      text-shadow: 0 0 3px $PrimaryColor, 0 0 5px $PrimaryColor;
+      z-index: 0;
+      margin-bottom: 0
+    }
+  }
+  .download_btn {
+    background-color: #03314b;
+    color: #fff;
+    font-family: "semibold";
+    font-size: 1rem;
+    padding: .75rem 2rem;
+    margin-top: 1rem;
+    transition: .7s ease-in-out;
+    &:hover {
+      background-color: transparent;
+      color: $PrimaryColor;
+      border: 1px solid $PrimaryColor;
+      transition: .7s ease-in-out;
+    }
+  }
+}
+
+@import "./layout/_navBar.scss";
+@import "./layout/_sidebar.scss";
+@import "./layout/_footer.scss";
+
+@import "./_responsive.scss";
