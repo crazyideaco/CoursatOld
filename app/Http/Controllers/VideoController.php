@@ -344,9 +344,10 @@ class VideoController extends Controller
         }
     }*/
 
-    public function storevideo($id, Request $request){
+    public function storevideo($id, Request $request)
+    {
         $store_video = new StorevideoService();
-        return $store_video->storevideo($id,$request);
+        return $store_video->storevideo($id, $request);
     }
     public function editvideo($id)
     {
@@ -639,9 +640,10 @@ class VideoController extends Controller
         }
     }*/
 
-    public function updatevideo($id, Request $request){
+    public function updatevideo($id, Request $request)
+    {
         $store_video = new UpdatevideoService();
-        return $store_video->updatevideo($id,$request);
+        return $store_video->updatevideo($id, $request);
     }
 
     public function deletevideo($id)
