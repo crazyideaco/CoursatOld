@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers\api\Exam;
+
+use App\Http\Controllers\Controller;
+use App\Traits\ApiTrait;
+use App\TypeExam;
+use App\TypescollegeExam;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class ExamController extends Controller
+{
+    use ApiTrait;
+    public function check_exam_avalibality(Request $request)
+    {
+        try {
+            $rules = [
+                "exam_id" => "required",
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $this->errorResponse($validator->errors()->first(), 400);
+            }
+
+            $availability = 0;
+
+            if (auth()->user()->category_id == 1) {
+                //  dd(auth()->user()->stutypes->pluck('id'));
+                $exam = TypeExam::find($request->exam_id);
+            } else if (auth()->user()->category_id == 2) {
+                $exam = TypescollegeExam::find($request->exam_id);
+            }
+
+            $student = $exam->students()->where('id', auth()->id())->first();
+
+            if ($student) {
+                // Student has entered the exam before
+                $availability = 0;
+                $message = "لقد دخلت هذا الامتحان من قبل";
+            } else {
+                // Student has not entered the exam before
+                if ($exam->date_day > Carbon::now() || ($exam->date_day == Carbon::now()->format('Y-m-d') && $exam->date_time > Carbon::now()->format('H:i:s'))) {
+                    // Exam is in the future
+                    $availability = 0;
+                    $message = "هذا الامتحان غير متاح حاليًا";
+                } else {
+                    // Exam is not in the future, and student has not entered before
+                    $availability = 1;
+                    $message = "هذا الامتحان متاح";
+                }
+            }
+
+            // if ($exam) {
+            //     $availability = $exam->students()->where('id', auth()->id())->first() ? 0 : 1; //student_id
+
+            //     if ($exam->date_day > Carbon::now()) { // in the future
+            //         $availability = 0;
+            //         $message = "هذا الامتحان غير متاح";
+            //     }
+
+            //     if ($exam->date_day <= Carbon::now()->day() &&  $exam->date_time > Carbon::now()->time) {
+            //         $availability = 1;
+            //         $message = "هذا الامتحان متاح";
+            //     }
+
+            //     return $this->dataResponse($message, $availability, 200);
+            // }
+
+            return $this->dataResponse($message, $availability, 200);
+
+            return $this->errorResponse("هذا الامتحان غير متاح", 200);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+}//End of controller
