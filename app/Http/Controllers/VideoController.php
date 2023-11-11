@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\State;
 use FFMpeg;
@@ -55,6 +57,7 @@ use Carbon\Carbon;
 use App\Student_Type;
 use App\Paqa;
 use App\Paqa_User;
+use App\Services\VideoBasic\StorevideoService;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -68,34 +71,36 @@ class VideoController extends Controller
         $this->middleware(['permission:videos-update'])->only('editvideo');
         $this->middleware(['permission:videos-delete'])->only('deletevideo');
     }
-    public function addvideo($id){
+    public function addvideo($id)
+    {
 
 
 
-        if(Auth::user() && Auth::user()->isAdmin == 'admin'){
-            $users =  User::where('is_student',2)->get();
-            $types= Type::all();
-            $years =Year::all();
+        if (Auth::user() && Auth::user()->isAdmin == 'admin') {
+            $users =  User::where('is_student', 2)->get();
+            $types = Type::all();
+            $years = Year::all();
             $subjects = Subject::all();
             $subtypes = Subtype::all();
-        }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1 ){
-            $users =  User::where('id',Auth::user()->id)->first()->teachers;
-            $types= Type::where('center_id',Auth::user()->id)->get();
-            $years =Year::all();
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+            $users =  User::where('id', Auth::user()->id)->first()->teachers;
+            $types = Type::where('center_id', Auth::user()->id)->get();
+            $years = Year::all();
             $subjects = Subject::all();
-            $subtypes = Subtype::where('center_id',auth()->user()->id)->get();
-        }else if(Auth::user() && Auth::user()->is_student == 2){
+            $subtypes = Subtype::where('center_id', auth()->user()->id)->get();
+        } else if (Auth::user() && Auth::user()->is_student == 2) {
             $users = "";
             $subjects = auth()->user()->subjects;
-            $types= Type::where('user_id',Auth::user()->id)->where('center_id',null)->get();
+            $types = Type::where('user_id', Auth::user()->id)->where('center_id', null)->get();
             $years = auth()->user()->years;
-            $subtypes = Subtype::where('user_id',auth()->user()->id)->get();
+            $subtypes = Subtype::where('user_id', auth()->user()->id)->get();
         }
-        return view('dashboard.addvideo')->with('years',$years)
-            ->with('subjects',$subjects)
-            ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id);
+        return view('dashboard.addvideo')->with('years', $years)
+            ->with('subjects', $subjects)
+            ->with('types', $types)->with('users', $users)->with('subtypes', $subtypes)->with('id', $id);
     }
-    public function storevideo($id,Request $request){
+    /**public function storevideo($id, Request $request)
+    {
 
 
 
@@ -103,8 +108,8 @@ class VideoController extends Controller
 
         //dd(\Storage::disk('google')->delete("1XBtzNFUYhgGsibOxILp1FBCiZiLNzjyl"));
         //dd(\Storage::disk('google')->url($name));
-        $subtype = Subtype::where('id',$id)->first();
-        $validator = Validator::make($request->all(),[
+        $subtype = Subtype::where('id', $id)->first();
+        $validator = Validator::make($request->all(), [
             //'description_ar' => 'required',
             //'description_en' => 'required',
             //    'name_ar' => 'required',
@@ -113,40 +118,36 @@ class VideoController extends Controller
             //  'image' => 'required|mimes:jpeg,jpg,png,gif',
             //  'pdf' => 'required',
             'url' => 'required'
-        ],[
-            'required' => 'هذا الحقل مطلوب' ,
+        ], [
+            'required' => 'هذا الحقل مطلوب',
             'mimetypes' => 'هذا الحقل يقب فيديو فقط',
             'mimes' =>  'هذا الحقل يقبل صوره فقط'
         ]);
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-        if($validator->passes()){
+        if ($validator->passes()) {
 
-            if(auth()->user() && auth()->user()->isAdmin == 'admin'){
+            if (auth()->user() && auth()->user()->isAdmin == 'admin') {
                 $video = new Video;
                 $video->order_number = $request->order_number;
                 $video->user_id = $subtype->user_id;
                 $video->name_ar = $request->name_ar;
                 $video->name_en = $request->name_en;
-                $paqauser= Paqa_User::with("paqa")->where("user_id",$subtype->user_id)->first();
-                if($paqauser==null){
-                    $msg='انت غير مشترك في باقه برجاء الاشتراك في بقه';
-                    return response()->json(['status' => false,'errors' => $msg]);
-                }
-                elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
+                $paqauser = Paqa_User::with("paqa")->where("user_id", $subtype->user_id)->first();
+                if ($paqauser == null) {
+                    $msg = 'انت غير مشترك في باقه برجاء الاشتراك في بقه';
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
                     $msg = 'انتهت صلاحيه البقه';
-                    return response()->json(['status' => false,'errors' => $msg]);
-
-                }else{
-                    $videoall= Video::where('user_id',$subtype->user_id)->where('center_id',null)->
-                    where('created_at','>=',$paqauser->created_at)->pluck('size_video')->toArray();
-                    if($videoall > 0){
-                        $sizepaqa=$paqauser->paqa->size;
-                        $sum=array_sum($videoall);
-                        $gigasum=$sum/1024/1024;
-                        if($sizepaqa >$gigasum ){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } else {
+                    $videoall = Video::where('user_id', $subtype->user_id)->where('center_id', null)->where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        if ($sizepaqa > $gigasum) {
                             $video->subject_id = $subtype->subjects_id;
                             $video->year_id = $subtype->years_id;
                             $video->type_id = $subtype->type_id;
@@ -154,633 +155,614 @@ class VideoController extends Controller
                             $video->description_ar = $request->description_ar;
                             $video->description_en = $request->description_en;
 
-                            if($request->hasFile('url'))
-                            {
+                            if ($request->hasFile('url')) {
                                 $getID3 = new \getID3;
                                 $file = $getID3->analyze($request->file('url'));
 
                                 $duration =  $file['playtime_seconds'];
                                 $video->seconds = $duration;
                                 $url = $request->url;
-                                $video->size_video= $request->file('url')->getSize()/1024;
+                                $video->size_video = $request->file('url')->getSize() / 1024;
                                 //   \Storage::disk('disk7')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 //  $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'uploads');
 
-                                \Storage::disk('disk7')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 //  \Storage::disk('uploads')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
-                                $video->url = time(). '.'.$url->getClientOriginalExtension();
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
                                 $video->video_type_link = 7;
                             }
-                            if($request->hasFile('image'))
-                            {
+                            if ($request->hasFile('image')) {
                                 $image = $request->image;
-                                $image->move('uploads' , time().$image->getClientOriginalName());
-                                $video->image = time().$request->image->getClientOriginalName();
+                                $image->move('uploads', time() . $image->getClientOriginalName());
+                                $video->image = time() . $request->image->getClientOriginalName();
                             }
-                            if($request->hasFile('pdf'))
-                            {
+                            if ($request->hasFile('pdf')) {
                                 $pdf = $request->pdf;
-                                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                                $video->pdf = time().$request->pdf->getClientOriginalName();
+                                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                $video->pdf = time() . $request->pdf->getClientOriginalName();
                             }
-                            if($request->hasFile('board'))
-                            {
+                            if ($request->hasFile('board')) {
                                 $board = $request->board;
-                                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                                $video->board = time().$request->board->getClientOriginalName();
+                                $board->move('uploads', time() . $board->getClientOriginalName());
+                                $video->board = time() . $request->board->getClientOriginalName();
                             }
-                            if($request->pay){
-                                $video->paid=  $request->pay;
+                            if ($request->pay) {
+                                $video->paid =  $request->pay;
                             }
 
                             $video->save();
                             return response()->json(['success' => 'video uploaded']);
-
-                        }else{
+                        } else {
 
                             $msg =  'لقد استهلكت 100% ';
 
-                            return response()->json(['status' => false,'errors' => $msg]);
-
+                            return response()->json(['status' => false, 'errors' => $msg]);
                         }
                     }
-
                 }
-
-            }elseif(Auth::user() &&Auth::user()->is_student == 2){
+            } elseif (Auth::user() && Auth::user()->is_student == 2) {
                 $video = new Video;
                 $video->order_number = $request->order_number;
                 $video->user_id = auth()->user()->id;
                 $video->name_ar = $request->name_ar;
                 $video->name_en = $request->name_en;
-                $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
-                if($paqauser==null){
-                    $msg='انت غير مشترك في باقه برجاء الاشتراك في بقه';
-                    return response()->json(['status' => false,'errors' => $msg]);
-                }
-                elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
+                $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
+                if ($paqauser == null) {
+                    $msg = 'انت غير مشترك في باقه برجاء الاشتراك في بقه';
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
                     $msg = 'انتهت صلاحيه الباقه';
-                    return response()->json(['status' => false,'errors' => $msg]);
-                }else{
-                    $videoall= Video::where('user_id',auth()->user()->id)->where('center_id',null)->
-                    where('created_at','>=',$paqauser->created_at)->pluck('size_video')->toArray();
-                    if($videoall > 0){
-                        $sizepaqa=$paqauser->paqa->size;
-                        $sum=array_sum($videoall);
-                        $gigasum=$sum/1024/1024;
-                        if($sizepaqa >$gigasum ){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } else {
+                    $videoall = Video::where('user_id', auth()->user()->id)->where('center_id', null)->where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        if ($sizepaqa > $gigasum) {
                             $video->subject_id = $subtype->subjects_id;
                             $video->year_id = $subtype->years_id;
                             $video->type_id = $subtype->type_id;
                             $video->subtype_id = $subtype->id;
                             $video->description_ar = $request->description_ar;
                             $video->description_en = $request->description_en;
-                            if($request->hasFile('url'))
-                            {
+                            if ($request->hasFile('url')) {
                                 $getID3 = new \getID3;
                                 $file = $getID3->analyze($request->file('url'));
 
                                 $duration =  $file['playtime_seconds'];
                                 $video->seconds = $duration;
                                 $url = $request->url;
-                                $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk7')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
-                                $video->url = time(). '.'.$url->getClientOriginalExtension();
+                                $video->size_video = $request->file('url')->getSize() / 1024;
+                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
                                 $video->video_type_link = 7;
-
                             }
-                            if($request->hasFile('image'))
-                            {
+                            if ($request->hasFile('image')) {
                                 $image = $request->image;
-                                $image->move('uploads' , time().$image->getClientOriginalName());
-                                $video->image = time().$request->image->getClientOriginalName();
+                                $image->move('uploads', time() . $image->getClientOriginalName());
+                                $video->image = time() . $request->image->getClientOriginalName();
                             }
-                            if($request->hasFile('pdf'))
-                            {
+                            if ($request->hasFile('pdf')) {
                                 $pdf = $request->pdf;
-                                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                                $video->pdf = time().$request->pdf->getClientOriginalName();
+                                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                $video->pdf = time() . $request->pdf->getClientOriginalName();
                             }
-                            if($request->hasFile('board'))
-                            {
+                            if ($request->hasFile('board')) {
                                 $board = $request->board;
-                                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                                $video->board = time().$request->board->getClientOriginalName();
+                                $board->move('uploads', time() . $board->getClientOriginalName());
+                                $video->board = time() . $request->board->getClientOriginalName();
                             }
-                            if($request->pay){
-                                $video->paid=  $request->pay;
+                            if ($request->pay) {
+                                $video->paid =  $request->pay;
                             }
 
                             $video->save();
-                            return response()->json(['status' => true,'success' => 'video uploaded']);
-
-                        }else{
+                            return response()->json(['status' => true, 'success' => 'video uploaded']);
+                        } else {
 
                             $msg =  'لقد استهلكت 100% ';
 
-                            return response()->json(['status' => false,'errors' => $msg]);
-
+                            return response()->json(['status' => false, 'errors' => $msg]);
                         }
                     }
-
                 }
-            }elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){
+            } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
                 $video = new Video;
                 $video->order_number = $request->order_number;
                 $video->center_id = auth()->user()->id;
                 $video->user_id = $subtype->user_id;
                 $video->name_ar = $request->name_ar;
                 $video->name_en = $request->name_en;
-                $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id )->first();
-                if($paqauser==null){
-                    $msg='انت غر مشترك في باقه بجاء الاشتراك في باقه';
-                    return response()->json(['status' => false,'errors' => $msg]);
-                }
-                elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
+                $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
+                if ($paqauser == null) {
+                    $msg = 'انت غر مشترك في باقه بجاء الاشتراك في باقه';
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
                     $msg = 'انتهت صلاحيه البقه';
-                    return response()->json(['status' => false,'errors' => $msg]);
-                }else{
-                    $videoall= Video::where('user_id',$request->user_id)->where('center_id',null)->
-                    where('created_at','>=',$paqauser->created_at)->pluck('size_video')->toArray();
-                    if($videoall > 0){
-                        $sizepaqa=$paqauser->paqa->size;
-                        $sum=array_sum($videoall);
-                        $gigasum=$sum/1024/1024;
-                        if($sizepaqa >$gigasum ){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } else {
+                    $videoall = Video::where('user_id', $request->user_id)->where('center_id', null)->where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        if ($sizepaqa > $gigasum) {
                             $video->subject_id = $subtype->subjects_id;
                             $video->year_id = $subtype->years_id;
                             $video->type_id = $subtype->type_id;
                             $video->subtype_id = $subtype->id;
                             $video->description_ar = $request->description_ar;
                             $video->description_en = $request->description_en;
-                            if($request->hasFile('url'))
-                            {
+                            if ($request->hasFile('url')) {
                                 $getID3 = new \getID3;
                                 $file = $getID3->analyze($request->file('url'));
 
                                 $duration =  $file['playtime_seconds'];
                                 $video->seconds = $duration;
                                 $url = $request->url;
-                                $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk7')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
-                                $video->url = time(). '.'.$url->getClientOriginalExtension();
+                                $video->size_video = $request->file('url')->getSize() / 1024;
+                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
 
                                 $video->video_type_link = 7;
                             }
-                            if($request->hasFile('image'))
-                            {
+                            if ($request->hasFile('image')) {
                                 $image = $request->image;
-                                $image->move('uploads' , time().$image->getClientOriginalName());
-                                $video->image = time().$request->image->getClientOriginalName();
+                                $image->move('uploads', time() . $image->getClientOriginalName());
+                                $video->image = time() . $request->image->getClientOriginalName();
                             }
-                            if($request->hasFile('pdf'))
-                            {
+                            if ($request->hasFile('pdf')) {
                                 $pdf = $request->pdf;
-                                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                                $video->pdf = time().$request->pdf->getClientOriginalName();
+                                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                $video->pdf = time() . $request->pdf->getClientOriginalName();
                             }
-                            if($request->hasFile('board'))
-                            {
+                            if ($request->hasFile('board')) {
                                 $board = $request->board;
-                                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                                $video->board = time().$request->board->getClientOriginalName();
+                                $board->move('uploads', time() . $board->getClientOriginalName());
+                                $video->board = time() . $request->board->getClientOriginalName();
                             }
-                            if($request->pay){
-                                $video->paid=  $request->pay;
+                            if ($request->pay) {
+                                $video->paid =  $request->pay;
                             }
 
                             $video->save();
-                            return response()->json(['status' => true,'success' => 'video uploaded']);
-
-                        }else{
+                            return response()->json(['status' => true, 'success' => 'video uploaded']);
+                        } else {
 
                             $msg =  'لقد اسهلكت 100% ';
 
-                            return response()->json(['status' => false,'errors' => $msg]);
-
+                            return response()->json(['status' => false, 'errors' => $msg]);
                         }
                     }
-
                 }
             }
-        }else{
+        } else {
             $msg = $validator->messages()->first();
-            return response()->json(['status' => false,'errors' => $msg]);
+            return response()->json(['status' => false, 'errors' => $msg]);
         }
-    }
-    public function editvideo($id){
-        $video = Video::where('id',$id)->first();
+    }*/
 
-        if(Auth::user() && Auth::user()->isAdmin == 'admin'){
-            $users =  User::where('is_student',2)->get();
-            $types= Type::all();
-            $years =Year::all();
+    public function storevideo($id, Request $request){
+        $store_video = new StorevideoService();
+        return $store_video->storevideo($id,$request);
+    }
+    public function editvideo($id)
+    {
+        $video = Video::where('id', $id)->first();
+
+        if (Auth::user() && Auth::user()->isAdmin == 'admin') {
+            $users =  User::where('is_student', 2)->get();
+            $types = Type::all();
+            $years = Year::all();
             $subjects = Subject::all();
             $subtypes = Subtype::all();
-        }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1 ){
-            $users =  User::where('id',Auth::user()->id)->first()->teachers;
-            $types= Type::where('center_id',Auth::user()->id)->get();
-            $years =Year::all();
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+            $users =  User::where('id', Auth::user()->id)->first()->teachers;
+            $types = Type::where('center_id', Auth::user()->id)->get();
+            $years = Year::all();
             $subjects = Subject::all();
-            $subtypes = Subtype::where('center_id',auth()->user()->id)->get();
-        }else if(Auth::user() && Auth::user()->is_student == 2){
+            $subtypes = Subtype::where('center_id', auth()->user()->id)->get();
+        } else if (Auth::user() && Auth::user()->is_student == 2) {
             $users = "";
             $subjects = auth()->user()->subjects;
-            $types= Type::where('user_id',Auth::user()->id)->where('center_id',null)->get();
+            $types = Type::where('user_id', Auth::user()->id)->where('center_id', null)->get();
             $years = auth()->user()->years;
-            $subtypes = Subtype::where('user_id',auth()->user()->id)->get();
+            $subtypes = Subtype::where('user_id', auth()->user()->id)->get();
         }
-        return view('dashboard.editvideo')->with('years',$years)
-            ->with('subjects',$subjects)->with('video',$video)
-            ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id);
+        return view('dashboard.editvideo')->with('years', $years)
+            ->with('subjects', $subjects)->with('video', $video)
+            ->with('types', $types)->with('users', $users)->with('subtypes', $subtypes)->with('id', $id);
     }
-    public function updatevideo($id,Request $request){
+    public function updatevideo($id, Request $request)
+    {
 
-        $subtype = Subtype::where('id',$id)->first();
-        $validator = Validator::make($request->all(),[
+        $subtype = Subtype::where('id', $id)->first();
+        $validator = Validator::make($request->all(), [
             // 'description_ar' => 'required',
             //    'description_en' => 'required',
             'name_ar' => 'required',
             'name_en' => 'required',
             //     'image' => 'mimes:jpeg,jpg,png,gif',
             //  'url' => 'mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
-        ],[
-            'required' => 'هذا الحقل مطوب' ,
+        ], [
+            'required' => 'هذا الحقل مطوب',
             'mimetypes' => 'هذا الحقل يقبل فديو فقط',
             'mimes' =>  'هذا الحقل يقب صوره فقط'
         ]);
 
-        if($validator->passes()){
+        if ($validator->passes()) {
 
-            $video = Video::where('id',$id)->first();
+            $video = Video::where('id', $id)->first();
             $video->order_number = $request->order_number;
-            if(auth()->user() && auth()->user()->isAdmin == 'admin'){
+            if (auth()->user() && auth()->user()->isAdmin == 'admin') {
                 $video->name_ar = $request->name_ar;
                 $video->name_en = $request->name_en;
-                $paqauser= Paqa_User::with("paqa")->where("user_id",$video->user_id)->first();
-                if($paqauser==null){
+                $paqauser = Paqa_User::with("paqa")->where("user_id", $video->user_id)->first();
+                if ($paqauser == null) {
 
                     $msg = 'انت غير مترك في باقه برجاء الاشتراك في باقه';
-                    return response()->json(['status' =>false,'errors' => $msg]);
-                }
-                elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
 
 
                     $msg =  'انتهت صلاحه الباقه';
-                    return response()->json(['status' =>false,'errors' => $msg]);
-
-                }else{
-                    $videoall= Video::where('user_id',$video->user_id)->where('center_id',null)->
-                    where('created_at','>=',$paqauser->created_at)->pluck('size_video')->toArray();
-                    if($videoall > 0){
-                        $sizepaqa=$paqauser->paqa->size;
-                        $sum=array_sum($videoall);
-                        $gigasum=$sum/1024/1024;
-                        if($sizepaqa >$gigasum ){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } else {
+                    $videoall = Video::where('user_id', $video->user_id)->where('center_id', null)->where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        if ($sizepaqa > $gigasum) {
                             $video->description_ar = $request->description_ar;
-                            if($request->hasFile('url'))
-                            {
-                                if(public_path() . '/uploads/' . $video->url){
+                            if ($request->hasFile('url')) {
+                                if (public_path() . '/uploads/' . $video->url) {
                                     $link = public_path() . '/uploads/' . $video->url;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $getID3 = new \getID3;
                                 $file = $getID3->analyze($request->file('url'));
 
                                 $duration =  $file['playtime_seconds'];
                                 $video->seconds = $duration;
                                 $url = $request->url;
-                                $video->size_video= $request->file('url')->getSize()/1024;
-                                $url->move('uploads' , time(). '.'.$url->getClientOriginalExtension());
-                                $video->url = time(). '.'.$url->getClientOriginalExtension();
+                                $video->size_video = $request->file('url')->getSize() / 1024;
+                                $url->move('uploads', time() . '.' . $url->getClientOriginalExtension());
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
                                 $video->video_type_link = 7;
-
                             }
-                            if($request->hasFile('image'))
-                            { if(public_path() . '/uploads/' . $video->image){
-                                $link = public_path() . '/uploads/' . $video->image;
-                                File::delete($link);}
+                            if ($request->hasFile('image')) {
+                                if (public_path() . '/uploads/' . $video->image) {
+                                    $link = public_path() . '/uploads/' . $video->image;
+                                    File::delete($link);
+                                }
                                 $image = $request->image;
-                                $image->move('uploads' ,time(). $image->getClientOriginalName());
-                                $video->image = time().$request->image->getClientOriginalName();
+                                $image->move('uploads', time() . $image->getClientOriginalName());
+                                $video->image = time() . $request->image->getClientOriginalName();
                             }
-                            if($request->hasFile('pdf'))
-                            {
-                                if(public_path() . '/uploads/' . $video->pdf){
+                            if ($request->hasFile('pdf')) {
+                                if (public_path() . '/uploads/' . $video->pdf) {
                                     $link = public_path() . '/uploads/' . $video->pdf;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $pdf = $request->pdf;
-                                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                                $video->pdf = time().$request->pdf->getClientOriginalName();
+                                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                $video->pdf = time() . $request->pdf->getClientOriginalName();
                             }
-                            if($request->hasFile('board'))
-                            {
-                                if(public_path() . '/uploads/' . $video->board){
+                            if ($request->hasFile('board')) {
+                                if (public_path() . '/uploads/' . $video->board) {
                                     $link = public_path() . '/uploads/' . $video->board;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $board = $request->board;
-                                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                                $video->board = time().$request->board->getClientOriginalName();
+                                $board->move('uploads', time() . $board->getClientOriginalName());
+                                $video->board = time() . $request->board->getClientOriginalName();
                             }
-                            if($request->pay){
-                                $video->paid=  $request->pay;
+                            if ($request->pay) {
+                                $video->paid =  $request->pay;
                             }
 
                             $video->save();
-                            return response()->json(['status' => true,'success' => 'video uploaded']);
-
-                        }else{
+                            return response()->json(['status' => true, 'success' => 'video uploaded']);
+                        } else {
 
                             $msg = 'لقد اتهلكت 100% ';
-                            return response()->json(['status' =>'false','errors' => $msg]);
+                            return response()->json(['status' => 'false', 'errors' => $msg]);
                         }
                     }
-
                 }
-
-            }elseif(Auth::user() &&Auth::user()->is_student == 2){
+            } elseif (Auth::user() && Auth::user()->is_student == 2) {
 
                 $video->user_id = auth()->user()->id;
                 $video->name_ar = $request->name_ar;
                 $video->name_en = $request->name_en;
-                $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id)->first();
-                if($paqauser==null){
+                $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
+                if ($paqauser == null) {
                     $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
-                    return response()->json(['status' =>false,'errors' => $msg]);
-                }
-                elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
                     $msg =  'انتهت صلاحيه الباقه';
-                    return response()->json(['status' =>false,'errors' => $msg]);
-
-                }else{
-                    $videoall= Video::where('user_id',auth()->user()->id)->where('center_id',null)->
-                    where('created_at','>=',$paqauser->created_at)->pluck('size_video')->toArray();
-                    if($videoall > 0){
-                        $sizepaqa=$paqauser->paqa->size;
-                        $sum=array_sum($videoall);
-                        $gigasum=$sum/1024/1024;
-                        if($sizepaqa >$gigasum ){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } else {
+                    $videoall = Video::where('user_id', auth()->user()->id)->where('center_id', null)->where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        if ($sizepaqa > $gigasum) {
                             $video->description_ar = $request->description_ar;
                             $video->description_en = $request->description_en;
-                            if($request->hasFile('url'))
-                            {
-                                if(public_path() . '/uploads/' . $video->url){
+                            if ($request->hasFile('url')) {
+                                if (public_path() . '/uploads/' . $video->url) {
                                     $link = public_path() . '/uploads/' . $video->url;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $getID3 = new \getID3;
                                 $file = $getID3->analyze($request->file('url'));
 
                                 $duration =  $file['playtime_seconds'];
                                 $video->seconds = $duration;
                                 $url = $request->url;
-                                $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk7')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
-                                $video->url = time(). '.'.$url->getClientOriginalExtension();
+                                $video->size_video = $request->file('url')->getSize() / 1024;
+                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
 
                                 $video->video_type_link = 7;
                             }
-                            if($request->hasFile('image'))
-                            { if(public_path() . '/uploads/' . $video->image){
-                                $link = public_path() . '/uploads/' . $video->image;
-                                File::delete($link);}
+                            if ($request->hasFile('image')) {
+                                if (public_path() . '/uploads/' . $video->image) {
+                                    $link = public_path() . '/uploads/' . $video->image;
+                                    File::delete($link);
+                                }
                                 $image = $request->image;
-                                $image->move('uploads' ,time(). $image->getClientOriginalName());
-                                $video->image = time().$request->image->getClientOriginalName();
+                                $image->move('uploads', time() . $image->getClientOriginalName());
+                                $video->image = time() . $request->image->getClientOriginalName();
                             }
-                            if($request->hasFile('pdf'))
-                            {
-                                if(public_path() . '/uploads/' . $video->pdf){
+                            if ($request->hasFile('pdf')) {
+                                if (public_path() . '/uploads/' . $video->pdf) {
                                     $link = public_path() . '/uploads/' . $video->pdf;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $pdf = $request->pdf;
-                                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                                $video->pdf = time().$request->pdf->getClientOriginalName();
+                                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                $video->pdf = time() . $request->pdf->getClientOriginalName();
                             }
-                            if($request->hasFile('board'))
-                            {
-                                if(public_path() . '/uploads/' . $video->board){
+                            if ($request->hasFile('board')) {
+                                if (public_path() . '/uploads/' . $video->board) {
                                     $link = public_path() . '/uploads/' . $video->board;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $board = $request->board;
-                                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                                $video->board = time().$request->board->getClientOriginalName();
+                                $board->move('uploads', time() . $board->getClientOriginalName());
+                                $video->board = time() . $request->board->getClientOriginalName();
                             }
-                            if($request->pay){
-                                $video->paid=  $request->pay;
+                            if ($request->pay) {
+                                $video->paid =  $request->pay;
                             }
 
                             $video->save();
-                            return response()->json(['status' => true,'success' => 'video uploaded']);
-
-                        }else{
+                            return response()->json(['status' => true, 'success' => 'video uploaded']);
+                        } else {
 
                             $msg = 'لقد اسهلكت 100% ';
-                            return response()->json(['status' =>false,'errors' => $msg]);
+                            return response()->json(['status' => false, 'errors' => $msg]);
                         }
                     }
-
                 }
-            }elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){
+            } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
 
                 $video->center_id = auth()->user()->id;
                 $video->name_ar = $request->name_ar;
                 $video->name_en = $request->name_en;
-                $paqauser= Paqa_User::with("paqa")->where("user_id",auth()->user()->id )->first();
-                if($paqauser==null){
+                $paqauser = Paqa_User::with("paqa")->where("user_id", auth()->user()->id)->first();
+                if ($paqauser == null) {
                     $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باه';
-                    return response()->json(['status' =>false,'errors' => $msg]);
-                }
-                elseif($paqauser->expired_at ==Carbon::now()->format('Y-m-d')){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } elseif ($paqauser->expired_at == Carbon::now()->format('Y-m-d')) {
                     $msg =  'انتهت صلاحيه الباقه';
-                    return response()->json(['status' =>false,'errors' => $msg]);
-                }else{
-                    $videoall= Video::where('center_id',auth()->user()->id )->
-                    where('created_at','>=',$paqauser->created_at)->pluck('size_video')->toArray();
-                    if($videoall > 0){
-                        $sizepaqa=$paqauser->paqa->size;
-                        $sum=array_sum($videoall);
-                        $gigasum=$sum/1024/1024;
-                        if($sizepaqa >$gigasum ){
+                    return response()->json(['status' => false, 'errors' => $msg]);
+                } else {
+                    $videoall = Video::where('center_id', auth()->user()->id)->where('created_at', '>=', $paqauser->created_at)->pluck('size_video')->toArray();
+                    if ($videoall > 0) {
+                        $sizepaqa = $paqauser->paqa->size;
+                        $sum = array_sum($videoall);
+                        $gigasum = $sum / 1024 / 1024;
+                        if ($sizepaqa > $gigasum) {
                             $video->description_ar = $request->description_ar;
                             $video->description_en = $request->description_en;
 
-                            if($request->hasFile('url'))
-                            {
-                                if(public_path() . '/uploads/' . $video->url){
+                            if ($request->hasFile('url')) {
+                                if (public_path() . '/uploads/' . $video->url) {
                                     $link = public_path() . '/uploads/' . $video->url;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $getID3 = new \getID3;
                                 $file = $getID3->analyze($request->file('url'));
 
                                 $duration =  $file['playtime_seconds'];
                                 $video->seconds = $duration;
                                 $url = $request->url;
-                                $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk7')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
-                                $video->url = time(). '.'.$url->getClientOriginalExtension();
+                                $video->size_video = $request->file('url')->getSize() / 1024;
+                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                $video->url = time() . '.' . $url->getClientOriginalExtension();
                                 $video->video_type_link = 7;
-
                             }
                             //image
 
-                            if($request->hasFile('image'))
-                            { if(public_path() . '/uploads/' . $video->image){
-                                $link = public_path() . '/uploads/' . $video->image;
-                                File::delete($link);}
+                            if ($request->hasFile('image')) {
+                                if (public_path() . '/uploads/' . $video->image) {
+                                    $link = public_path() . '/uploads/' . $video->image;
+                                    File::delete($link);
+                                }
                                 $image = $request->image;
-                                $image->move('uploads' ,time(). $image->getClientOriginalName());
-                                $video->image = time().$request->image->getClientOriginalName();
+                                $image->move('uploads', time() . $image->getClientOriginalName());
+                                $video->image = time() . $request->image->getClientOriginalName();
                             }
-                            if($request->hasFile('pdf'))
-                            {
-                                if(public_path() . '/uploads/' . $video->pdf){
+                            if ($request->hasFile('pdf')) {
+                                if (public_path() . '/uploads/' . $video->pdf) {
                                     $link = public_path() . '/uploads/' . $video->pdf;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $pdf = $request->pdf;
-                                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                                $video->pdf = time().$request->pdf->getClientOriginalName();
+                                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                                $video->pdf = time() . $request->pdf->getClientOriginalName();
                             }
-                            if($request->hasFile('board'))
-                            {
-                                if(public_path() . '/uploads/' . $video->board){
+                            if ($request->hasFile('board')) {
+                                if (public_path() . '/uploads/' . $video->board) {
                                     $link = public_path() . '/uploads/' . $video->board;
-                                    File::delete($link);}
+                                    File::delete($link);
+                                }
                                 $board = $request->board;
-                                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                                $video->board = time().$request->board->getClientOriginalName();
+                                $board->move('uploads', time() . $board->getClientOriginalName());
+                                $video->board = time() . $request->board->getClientOriginalName();
                             }
-                            if($request->pay){
-                                $video->paid=  $request->pay;
+                            if ($request->pay) {
+                                $video->paid =  $request->pay;
                             }
 
                             $video->save();
-                            return response()->json(['status' => true,'success' => 'video uploaded']);
-
-                        }else{
+                            return response()->json(['status' => true, 'success' => 'video uploaded']);
+                        } else {
 
 
                             $msg = 'لقد استهكت 100% ';
-                            return response()->json(['status' =>false,'errors' => $msg]);
-
+                            return response()->json(['status' => false, 'errors' => $msg]);
                         }
                     }
-
                 }
             }
-        }
-        else{
+        } else {
             $msg = $validator->messages()->first();
-            return response()->json(['status' => false,'errors' => $msg]);
+            return response()->json(['status' => false, 'errors' => $msg]);
         }
-    }public function deletevideo($id){
-    $video =  Video::where('id',$id)->first();
+    }
+    public function deletevideo($id)
+    {
+        $video =  Video::where('id', $id)->first();
 
-    if( public_path() . '/uploads/' . $video->image){
-        $link1 = public_path() . '/uploads/' . $video->image;
-        File::delete($link1);
-    }
-    if($video->original == 1){
-        if(public_path() . '/uploads/' . $video->url){
-            $link1 = public_path() . '/uploads/' . $video->url;
-            File::delete($link1);}
-    }
+        if (public_path() . '/uploads/' . $video->image) {
+            $link1 = public_path() . '/uploads/' . $video->image;
+            File::delete($link1);
+        }
+        if ($video->original == 1) {
+            if (public_path() . '/uploads/' . $video->url) {
+                $link1 = public_path() . '/uploads/' . $video->url;
+                File::delete($link1);
+            }
+        }
 
 
 
-    $video->delete();
-    return response()->json(['status' => true]);
-} public function videos($id){
-    $subtype = Subtype::where('id',$id)->firstOrFail();
-    if(Auth::user() && Auth::user()->isAdmin == 'admin'){
-        $videos =  $subtype->videos;
-    }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1 ){
-        $videos =  $subtype->videos;//->where('center_id',Auth::user()->id);
-    }else if(Auth::user() && Auth::user()->is_student == 2){
-        $videos =  $subtype->videos->where('user_id',Auth::user()->id);
+        $video->delete();
+        return response()->json(['status' => true]);
     }
-    return view('dashboard.videos')->with('videos',$videos)->with('id',$id)->with("subtype",$subtype);
-}public function getvideos($id){
-    if(Auth::user() && Auth::user()->isAdmin == 'admin'){
-        $videos = Video::where('user_id',$id)->where('center_id',null)->get();
-    }else if(Auth::user() && Auth::user()->is_student == 2){
-        $videos = Video::where('user_id',auth()-user()->id)->where('center_id',null)->get();
-    }else if(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){
-        $videos = Video::where('user_id',$id)->where('center_id',auth()->user()->id)->get();
+    public function videos($id)
+    {
+        $subtype = Subtype::where('id', $id)->firstOrFail();
+        if (Auth::user() && Auth::user()->isAdmin == 'admin') {
+            $videos =  $subtype->videos;
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+            $videos =  $subtype->videos; //->where('center_id',Auth::user()->id);
+        } else if (Auth::user() && Auth::user()->is_student == 2) {
+            $videos =  $subtype->videos->where('user_id', Auth::user()->id);
+        }
+        return view('dashboard.videos')->with('videos', $videos)->with('id', $id)->with("subtype", $subtype);
     }
-    $text = '';
-    foreach($videos as $video){
-        $text .= '<option value="'.$video->id.'">'.$video->name_ar.'</option>';
+    public function getvideos($id)
+    {
+        if (Auth::user() && Auth::user()->isAdmin == 'admin') {
+            $videos = Video::where('user_id', $id)->where('center_id', null)->get();
+        } else if (Auth::user() && Auth::user()->is_student == 2) {
+            $videos = Video::where('user_id', auth() - user()->id)->where('center_id', null)->get();
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+            $videos = Video::where('user_id', $id)->where('center_id', auth()->user()->id)->get();
+        }
+        $text = '';
+        foreach ($videos as $video) {
+            $text .= '<option value="' . $video->id . '">' . $video->name_ar . '</option>';
+        }
+        return response()->json(['data' => $text]);
     }
-    return response()->json(['data' => $text]);
-}public function activevideo($id){
-    $video = Video::where('id',$id)->first();
-    if($video->active == 1){
-        $video->active = 0;
-        $video->save();
-        return response(['status' => 'deactive']);
-    }else if($video->active == 0){
-        $video->active = 1;
-        $video->save();
-        return response(['status' => 'active']);
+    public function activevideo($id)
+    {
+        $video = Video::where('id', $id)->first();
+        if ($video->active == 1) {
+            $video->active = 0;
+            $video->save();
+            return response(['status' => 'deactive']);
+        } else if ($video->active == 0) {
+            $video->active = 1;
+            $video->save();
+            return response(['status' => 'active']);
+        }
     }
-}public function getvideossub($id){
-    $videos = Video::where('subject_id',$id)->where('user_id',auth()->user()->id)->get();
-    $text = '';
-    foreach($videos as $video){
-        $text .= '<option value="'.$video->id.'">'.$video->name_ar.'</option>';
+    public function getvideossub($id)
+    {
+        $videos = Video::where('subject_id', $id)->where('user_id', auth()->user()->id)->get();
+        $text = '';
+        foreach ($videos as $video) {
+            $text .= '<option value="' . $video->id . '">' . $video->name_ar . '</option>';
+        }
+        return response()->json(['data' => $text]);
     }
-    return response()->json(['data' => $text]);
-}public function delete_video_pdf($id){
-    $video =  Video::where('id',$id)->first();
-    if( public_path() . '/uploads/' . $video->pdf){
-        $link1 = public_path() . '/uploads/' . $video->pdf;
-        File::delete($link1);
+    public function delete_video_pdf($id)
+    {
+        $video =  Video::where('id', $id)->first();
+        if (public_path() . '/uploads/' . $video->pdf) {
+            $link1 = public_path() . '/uploads/' . $video->pdf;
+            File::delete($link1);
+        }
+        return response(['status' => true]);
     }
-    return response(['status' => true]);
-}public function delete_video_board($id){
-    $video =  Video::where('id',$id)->first();
-    if( public_path() . '/uploads/' . $video->board){
-        $link1 = public_path() . '/uploads/' . $video->board;
-        File::delete($link1);
+    public function delete_video_board($id)
+    {
+        $video =  Video::where('id', $id)->first();
+        if (public_path() . '/uploads/' . $video->board) {
+            $link1 = public_path() . '/uploads/' . $video->board;
+            File::delete($link1);
+        }
+        return response(['status' => true]);
     }
-    return response(['status' => true]);
-}
 
-    public function addvideospecial($id){
-        $subtype = Subtype::where("id",$id)->firstOrFail();
-        if(Auth::user() && Auth::user()->isAdmin == 'admin'){
-            $users =  User::where('is_student',2)->get();
-            $types= Type::all();
-            $years =Year::all();
+    public function addvideospecial($id)
+    {
+        $subtype = Subtype::where("id", $id)->firstOrFail();
+        if (Auth::user() && Auth::user()->isAdmin == 'admin') {
+            $users =  User::where('is_student', 2)->get();
+            $types = Type::all();
+            $years = Year::all();
             $subjects = Subject::all();
             $subtypes = Subtype::all();
-        }else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1 ){
-            $users =  User::where('id',Auth::user()->id)->first()->teachers;
-            $types= Type::where('center_id',Auth::user()->id)->get();
-            $years =Year::all();
+        } else if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+            $users =  User::where('id', Auth::user()->id)->first()->teachers;
+            $types = Type::where('center_id', Auth::user()->id)->get();
+            $years = Year::all();
             $subjects = Subject::all();
-            $subtypes = Subtype::where('center_id',auth()->user()->id)->get();
-        }else if(Auth::user() && Auth::user()->is_student == 2){
+            $subtypes = Subtype::where('center_id', auth()->user()->id)->get();
+        } else if (Auth::user() && Auth::user()->is_student == 2) {
             $users = "";
             $subjects = auth()->user()->subjects;
-            $types= Type::where('user_id',Auth::user()->id)->where('center_id',null)->get();
+            $types = Type::where('user_id', Auth::user()->id)->where('center_id', null)->get();
             $years = auth()->user()->years;
-            $subtypes = Subtype::where('user_id',auth()->user()->id)->get();
+            $subtypes = Subtype::where('user_id', auth()->user()->id)->get();
         }
-        $videos = Video::where("user_id",$subtype->user_id)->select("name_ar","id")->get();
-        return view('dashboard.addvideospecial')->with('years',$years)
-            ->with('subjects',$subjects)
-            ->with('types',$types)->with('users',$users)->with('subtypes',$subtypes)->with('id',$id)->with('videos',$videos);
+        $videos = Video::where("user_id", $subtype->user_id)->select("name_ar", "id")->get();
+        return view('dashboard.addvideospecial')->with('years', $years)
+            ->with('subjects', $subjects)
+            ->with('types', $types)->with('users', $users)->with('subtypes', $subtypes)->with('id', $id)->with('videos', $videos);
     }
-    public function storevideospecial($id,Request $request){
+    public function storevideospecial($id, Request $request)
+    {
 
 
 
-        $subtype = Subtype::where('id',$id)->first();
-        $special_video = Video::where('id',$request->video_id)->first();
+        $subtype = Subtype::where('id', $id)->first();
+        $special_video = Video::where('id', $request->video_id)->first();
 
 
 
-        if(auth()->user() && auth()->user()->isAdmin == 'admin'){
+        if (auth()->user() && auth()->user()->isAdmin == 'admin') {
             $video = new Video;
             $video->order_number = $request->order_number;
             $video->user_id = $subtype->user_id;
@@ -797,33 +779,28 @@ class VideoController extends Controller
             $video->description_en = $request->description_en;
             $video->video_type_link = $special_video->video_type_link;
 
-            if($request->hasFile('image'))
-            {
+            if ($request->hasFile('image')) {
                 $image = $request->image;
-                $image->move('uploads' , time().$image->getClientOriginalName());
-                $video->image = time().$request->image->getClientOriginalName();
+                $image->move('uploads', time() . $image->getClientOriginalName());
+                $video->image = time() . $request->image->getClientOriginalName();
             }
-            if($request->hasFile('pdf'))
-            {
+            if ($request->hasFile('pdf')) {
                 $pdf = $request->pdf;
-                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                $video->pdf = time().$request->pdf->getClientOriginalName();
+                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                $video->pdf = time() . $request->pdf->getClientOriginalName();
             }
-            if($request->hasFile('board'))
-            {
+            if ($request->hasFile('board')) {
                 $board = $request->board;
-                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                $video->board = time().$request->board->getClientOriginalName();
+                $board->move('uploads', time() . $board->getClientOriginalName());
+                $video->board = time() . $request->board->getClientOriginalName();
             }
-            if($request->pay){
-                $video->paid=  $request->pay;
+            if ($request->pay) {
+                $video->paid =  $request->pay;
             }
 
             $video->save();
             return response()->json(['success' => 'video uploaded']);
-
-
-        }elseif(Auth::user() &&Auth::user()->is_student == 2){
+        } elseif (Auth::user() && Auth::user()->is_student == 2) {
             $video = new Video;
             $video->order_number = $request->order_number;
             $video->user_id = auth()->user()->id;
@@ -839,34 +816,30 @@ class VideoController extends Controller
             $video->url = $special_video->url;
             $video->seconds = $special_video->seconds;
             $video->original = 0;
-            if($request->hasFile('image'))
-            {
+            if ($request->hasFile('image')) {
                 $image = $request->image;
-                $image->move('uploads' , time().$image->getClientOriginalName());
-                $video->image = time().$request->image->getClientOriginalName();
+                $image->move('uploads', time() . $image->getClientOriginalName());
+                $video->image = time() . $request->image->getClientOriginalName();
             }
-            if($request->hasFile('pdf'))
-            {
+            if ($request->hasFile('pdf')) {
                 $pdf = $request->pdf;
-                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                $video->pdf = time().$request->pdf->getClientOriginalName();
+                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                $video->pdf = time() . $request->pdf->getClientOriginalName();
             }
-            if($request->hasFile('board'))
-            {
+            if ($request->hasFile('board')) {
                 $board = $request->board;
-                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                $video->board = time().$request->board->getClientOriginalName();
+                $board->move('uploads', time() . $board->getClientOriginalName());
+                $video->board = time() . $request->board->getClientOriginalName();
             }
-            if($request->pay){
-                $video->paid=  $request->pay;
+            if ($request->pay) {
+                $video->paid =  $request->pay;
             }
 
             $video->video_type_link = $special_video->video_type_link;
 
             $video->save();
-            return response()->json(['status' => true,'success' => 'video uploaded']);
-
-        }elseif(Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1){
+            return response()->json(['status' => true, 'success' => 'video uploaded']);
+        } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
             $video = new Video;
             $video->order_number = $request->order_number;
             $video->center_id = auth()->user()->id;
@@ -883,35 +856,29 @@ class VideoController extends Controller
             $video->url = $special_video->url;
             $video->seconds = $special_video->seconds;
             $video->original = 0;
-            if($request->hasFile('image'))
-            {
+            if ($request->hasFile('image')) {
                 $image = $request->image;
-                $image->move('uploads' , time().$image->getClientOriginalName());
-                $video->image = time().$request->image->getClientOriginalName();
+                $image->move('uploads', time() . $image->getClientOriginalName());
+                $video->image = time() . $request->image->getClientOriginalName();
             }
-            if($request->hasFile('pdf'))
-            {
+            if ($request->hasFile('pdf')) {
                 $pdf = $request->pdf;
-                $pdf->move('uploads' , time().$pdf->getClientOriginalName());
-                $video->pdf = time().$request->pdf->getClientOriginalName();
+                $pdf->move('uploads', time() . $pdf->getClientOriginalName());
+                $video->pdf = time() . $request->pdf->getClientOriginalName();
             }
-            if($request->hasFile('board'))
-            {
+            if ($request->hasFile('board')) {
                 $board = $request->board;
-                $board->move('uploads' ,time(). $board->getClientOriginalName());
-                $video->board = time().$request->board->getClientOriginalName();
+                $board->move('uploads', time() . $board->getClientOriginalName());
+                $video->board = time() . $request->board->getClientOriginalName();
             }
-            if($request->pay){
-                $video->paid=  $request->pay;
+            if ($request->pay) {
+                $video->paid =  $request->pay;
             }
 
             $video->video_type_link = $special_video->video_type_link;
 
             $video->save();
-            return response()->json(['status' => true,'success' => 'video uploaded']);
-
-
+            return response()->json(['status' => true, 'success' => 'video uploaded']);
         }
-
     }
 }
