@@ -57,6 +57,7 @@ use App\Student_Type;
 use App\Paqa;
 use App\Paqa_User;
 use App\Services\VideoCollege\StorevideoscollegeService;
+use App\Services\VideoCollege\UpdateVideoscollegeService;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\GeneralTrait;
@@ -507,7 +508,7 @@ class VideosCollegeController extends Controller
             ->with('divisions', $divisions)->with('sections', $sections)->with('subcolleges', $subcolleges)->with('typescolleges', $typescolleges)
             ->with('lessons', $lessons)->with('universities', University::all())->with('video', $video);
     }
-    public function updatevideoscollege($id, Request $request)
+    /**public function updatevideoscollege($id, Request $request)
     {
 
 
@@ -771,6 +772,10 @@ class VideosCollegeController extends Controller
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'message' => $msg]);
         }
+    }*/
+    public function updatevideoscollege($id, Request $request){
+        $update_function = new UpdateVideoscollegeService();
+        return $update_function->updatevideoscollege($id, $request);
     }
     public function deletevideoscollege($id)
     {

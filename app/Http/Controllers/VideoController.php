@@ -58,6 +58,7 @@ use App\Student_Type;
 use App\Paqa;
 use App\Paqa_User;
 use App\Services\VideoBasic\StorevideoService;
+use App\Services\VideoBasic\UpdatevideoService;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -374,7 +375,7 @@ class VideoController extends Controller
             ->with('subjects', $subjects)->with('video', $video)
             ->with('types', $types)->with('users', $users)->with('subtypes', $subtypes)->with('id', $id);
     }
-    public function updatevideo($id, Request $request)
+    /**public function updatevideo($id, Request $request)
     {
 
         $subtype = Subtype::where('id', $id)->first();
@@ -636,7 +637,13 @@ class VideoController extends Controller
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'errors' => $msg]);
         }
+    }*/
+
+    public function updatevideo($id, Request $request){
+        $store_video = new UpdatevideoService();
+        return $store_video->updatevideo($id,$request);
     }
+
     public function deletevideo($id)
     {
         $video =  Video::where('id', $id)->first();
