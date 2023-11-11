@@ -56,6 +56,8 @@ use Carbon\Carbon;
 use App\Student_Type;
 use App\Paqa;
 use App\Paqa_User;
+use App\Services\VideoCollege\StorevideoscollegeService;
+use App\Services\VideoCollege\UpdateVideoscollegeService;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\GeneralTrait;
@@ -79,7 +81,7 @@ class VideosCollegeController extends Controller
             $typescolleges = TypesCollege::all();
             $lessons = Lesson::all();
             $users =   User::where('is_student', 3)->get();
-        } elseif (Auth::user() && Auth::user()->is_student == 3) {
+        } elseif (Auth::user() && Auth::user()->is_student == 3) { //doctor
             $dd =   \App\Doctor_Division::where('doctor_id', Auth::user()->id)->pluck('division_id')->toArray();
             $divisions = \App\Division::whereIn('id', $dd)->get();
             $ds =   \App\Doctor_Section::where('doctor_id', Auth::user()->id)->pluck('section_id')->toArray();
@@ -89,7 +91,7 @@ class VideosCollegeController extends Controller
             $typescolleges = TypesCollege::where('doctor_id', auth()->user()->id)->get();
             $lessons = Lesson::where('doctor_id', auth()->user()->id)->get();
             $users = '';
-        } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
+        } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) { //center
             $divisions = Division::all();
             $sections = Section::all();
             $subcolleges = SubjectsCollege::all();
@@ -105,7 +107,7 @@ class VideosCollegeController extends Controller
             ->with('divisions', $divisions)->with('sections', $sections)->with('subcolleges', $subcolleges)->with('typescolleges', $typescolleges)
             ->with('lessons', $lessons)->with('universities', University::all())->with('id', $id);
     }
-    public function storevideoscollege($id, Request $request)
+    /**public function storevideoscollege($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             //  'description_ar' => 'required',
@@ -465,6 +467,10 @@ class VideosCollegeController extends Controller
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'errors' => $msg]);
         }
+    }*/
+    public function storevideoscollege($id, Request $request){
+        $store_function = new StorevideoscollegeService();
+        return $store_function->storevideoscollege($id, $request);
     }
     public function editvideoscollege($id)
     {
@@ -502,7 +508,7 @@ class VideosCollegeController extends Controller
             ->with('divisions', $divisions)->with('sections', $sections)->with('subcolleges', $subcolleges)->with('typescolleges', $typescolleges)
             ->with('lessons', $lessons)->with('universities', University::all())->with('video', $video);
     }
-    public function updatevideoscollege($id, Request $request)
+    /**public function updatevideoscollege($id, Request $request)
     {
 
 
@@ -766,6 +772,10 @@ class VideosCollegeController extends Controller
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'message' => $msg]);
         }
+    }*/
+    public function updatevideoscollege($id, Request $request){
+        $update_function = new UpdateVideoscollegeService();
+        return $update_function->updatevideoscollege($id, $request);
     }
     public function deletevideoscollege($id)
     {

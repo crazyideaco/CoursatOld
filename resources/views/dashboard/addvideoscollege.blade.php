@@ -73,14 +73,14 @@
             @error('name')
                 <p
                     style="margin: 33px auto;
-    background: #dc354559;
-    color: #dc3545;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 5px;
-    padding: 10px 20px;
-    box-shadow: 0px 3px 6px #dc35454d;
-     }">
+                            background: #dc354559;
+                            color: #dc3545;
+                            font-weight: bold;
+                            text-align: center;
+                            border-radius: 5px;
+                            padding: 10px 20px;
+                            box-shadow: 0px 3px 6px #dc35454d;
+                            }">
                     {{ $message }}</p>
             @enderror
             <div class="setting">
@@ -137,6 +137,18 @@
                                 <input id="ad2" type="file" class="form-control ehabtalaat" name="board">
                                 <label for="ad2" class="ahmed">سبوره الحصه</label>
                                 @error('board')
+                                    <div class="alert alert-danger">هذا الحقل مطلوب</div>
+                                @enderror
+                            </div>
+
+                            {{-- youtube --}}
+
+                            <div class="col-12 form-group">
+                                <label for="youtube_link" class="ahmed">اضافة لينك youtube</label>
+                                <input id="youtube_link" type="text" class="form-control" name="youtube_link"
+                                    placeholder="قم بإضافة لينك يوتيوب اذا أردت">
+
+                                @error('youtube_link')
                                     <div class="alert alert-danger">هذا الحقل مطلوب</div>
                                 @enderror
                             </div>
