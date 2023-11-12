@@ -49,7 +49,9 @@
         Route::get('deleteuser/{id}', 'userscontroller@deleteuser')->name('deleteuser');
         //courses_students
         Route::get('studentstype/{id}', 'StudentController@studentstype')->name('studentstype');
+        Route::get('bannedStudentstype/{id}', 'StudentController@bannedStudentstype')->name('bannedStudentstype');
         Route::get('studentstypecollege/{id}', 'StudentController@studentstypecollege')->name('studentstypecollege');
+        Route::get('bannedStudentstypecollege/{id}', 'StudentController@bannedStudentstypecollege')->name('bannedStudentstypecollege');
         Route::post('deletestudentcourse', 'StudentController@deletestudentcourse')->name('deletestudentcourse');
         Route::post('activestudentcourse', 'StudentController@activestudentcourse')->name('activestudentcourse');
         Route::get('studentscourse/{id}', 'StudentController@studentscourse')->name('studentscourse');

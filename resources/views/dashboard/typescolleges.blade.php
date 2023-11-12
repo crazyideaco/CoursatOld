@@ -175,7 +175,8 @@
 
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>الشهر </label>
-                            <input type="month" class="form-control" id="month" name="month"  value="{{ \Carbon\Carbon::now()->format('Y-m') }}" />
+                            <input type="month" class="form-control" id="month" name="month"
+                                value="{{ \Carbon\Carbon::now()->format('Y-m') }}" />
                             @error('month')
                                 <p style="color:red;">{{ $message }}</p>
                             @enderror
@@ -224,7 +225,8 @@
                                         <td scope="row" class="text-center">
                                             {{ $typescollege->subjectscollege->name_ar }}</td>
                                         <td scope="row" class="text-center">
-                                            {{$typescollege->type  ? ($typescollege->type->center->name ?? "المنصه العامه") : ""}} </td>
+                                            {{ $typescollege->type ? $typescollege->type->center->name ?? 'المنصه العامه' : '' }}
+                                        </td>
 
                                         <td scope="row" class="text-center">
                                             {{ $typescollege->section->name_ar }}</td>
@@ -257,9 +259,14 @@
                                             <a class="btn btn-primary btn-sm mt-2"
                                                 href="{{ route('typescollegeexams', $typescollege->id) }}">
                                                 الامتحانات
-                                            </a> <a class="btn btn-primary btn-sm mt-2"
+                                            </a>
+                                            <a class="btn btn-primary btn-sm mt-2"
                                                 href="{{ route('studentstypecollege', $typescollege->id) }}">
                                                 الطلاب
+                                            </a>
+                                            <a class="btn btn-primary btn-sm mt-2"
+                                                href="{{ route('bannedStudentstypecollege', $typescollege->id) }}">
+                                                الطلاب المحذوفين
                                             </a>
                                         </td>
                                     </tr>

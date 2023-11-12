@@ -224,6 +224,8 @@
                                                     class="btn btn-success btn-sm">المجموعات</a>
                                                 <a href="{{ route('studentstype', $type->id) }}"
                                                     class="btn btn-success btn-sm">الطلاب</a>
+                                                <a href="{{ route('bannedStudentstype', $type->id) }}"
+                                                    class="btn btn-danger btn-sm">  الطلاب المحذوفين </a>
                                                 <a href="{{ route('typeexams', $type->id) }}"
                                                     class="btn btn-success btn-sm">الامتحانات</a>
                                             </td>

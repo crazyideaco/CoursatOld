@@ -245,9 +245,22 @@ class StudentController extends Controller
         $status = 0;
         return view("dashboard.courses_students.studentstype", compact("students", "id", "status"));
     }
+
+    public function bannedStudentstype($id)
+    {
+        $students = Type::where("id", $id)->first()->studentstype()->onlyTrashed()->get();
+        $status = 0;
+        return view("dashboard.courses_students.studentstype", compact("students", "id", "status"));
+    }
     public function studentstypecollege($id)
     {
         $students = TypesCollege::where("id", $id)->first()->studentscollege;
+        $status = 1;
+        return view("dashboard.courses_students.studentstype", compact("students", "id", "status"));
+    }
+    public function bannedStudentstypecollege($id)
+    {
+        $students = TypesCollege::where("id", $id)->first()->studentscollege()->onlyTrashed()->get();
         $status = 1;
         return view("dashboard.courses_students.studentstype", compact("students", "id", "status"));
     }
