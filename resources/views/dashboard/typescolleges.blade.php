@@ -172,16 +172,26 @@
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>الشهر </label>
+                            <input type="month" class="form-control" id="month" name="month"  value="{{ \Carbon\Carbon::now()->format('Y-m') }}" />
+                            @error('month')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
+
+
 
                     <div class="row">
 
 
                         <span class="btn btn-primary" onclick="filtertypescollege()"
                             style="width: 23%;
-    display: block;
-    margin: 0 auto;"><i class="fas fa-search"
-                                style="margin-left: 10px;"></i>بحث</span>
+                                display: block;
+                                margin: 0 auto;">
+                            <i class="fas fa-search" style="margin-left: 10px;"> </i> بحث </span>
                     </div>
                 </div>
                 <div class="pt-5">
@@ -193,10 +203,12 @@
                                     <td>id</td>
                                     <td scope="col" class="text-center"> اسم الكورس</td>
                                     <td scope="col" class="text-center">اسم الماده</td>
+                                    <td scope="col" class="text-center">نوع المنصة</td>
                                     <td scope="col" class="text-center">القسم</td>
                                     <th scope="col" class="text-center">الفرقه</th>
                                     <th scope="col" class="text-center">اسم الكليه</th>
                                     <th scope="col" class="text-center">اسم الجامعه </th>
+                                    <th scope="col" class="text-center">تاريخ إنشاء الكورس </th>
                                     <th scope="col" class="text-center">الاعدادات</th>
                                 </tr>
                             </thead>
@@ -212,11 +224,15 @@
                                         <td scope="row" class="text-center">
                                             {{ $typescollege->subjectscollege->name_ar }}</td>
                                         <td scope="row" class="text-center">
+                                            {{$typescollege->type  ? ($typescollege->type->center->name ?? "المنصه العامه") : ""}} </td>
+
+                                        <td scope="row" class="text-center">
                                             {{ $typescollege->section->name_ar }}</td>
                                         <td scope="row" class="text-center">
                                             {{ $typescollege->division->name_ar }}</td>
                                         <td class="text-center">{{ $typescollege->college->name_ar }}</td>
                                         <td class="text-center">{{ $typescollege->university->name_ar }}</td>
+                                        <td class="text-center">{{ $typescollege->created_at->format('Y-m-d') }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('edittypescollege', $typescollege->id) }}"> <img
                                                     src="{{ asset('images/pen.svg') }}" id="pen"

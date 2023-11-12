@@ -146,10 +146,18 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group col-lg-3 col-md-6 col-12">
+                                <label>الشهر </label>
+                                <input type="month" class="form-control" id="month" name="month"  value="{{ \Carbon\Carbon::now()->format('Y-m') }}" />
+                                @error('month')
+                                    <p style="color:red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+
                             <div
                                 class="form-group col-lg-3 col-md-6 col-12 d-flex justify-content-center align-items-center flex-column">
                                 <label style="opacity: 0" class="w-100 d-block">الماده </label>
-                                <span class="btn btn-primary d-block" onclick="filtertypes()">بحث</span>
+                                <span class="btn btn-primary d-block"  style="width: 75%; display: block; margin: 0 auto;" onclick="filtertypes()">بحث</span>
                             </div>
                         </div>
                         <div class="row">
@@ -164,6 +172,7 @@
 
                                         <th scope="col">الماده</th>
                                         <th scope="col" class="text-center">السنه</th>
+                                        <th scope="col" class="text-center">تاريخ إنشاء الكورس</th>
                                         <th scope="col" class="text-center">الاعدادات</th>
                                     </tr>
                                 </thead>
@@ -191,6 +200,7 @@
                                                     {{ $type->year->year_ar }}
                                                 @endif
                                             </td>
+                                            <td class="text-center">{{ $type->created_at->format('Y-m-d') }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('edittype', $type->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
@@ -404,7 +414,7 @@
                 data: {
                     "years_id": $("#year").val(),
                     "subjects_id": $("#subject").val(),
-
+                    "month": $("#month").val(),
                 },
                 success: function(result) {
                     if (result.status == true) {

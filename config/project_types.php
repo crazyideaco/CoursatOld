@@ -3,12 +3,16 @@
 return [
     "auth_user_is_student" => [
         "student" => 1,
-        // "college_lecturer" => 2,
+        // "basic_lecturer" => 2,
         "doctor" => 3,
-        // "basic_lecturer" => 4,
+        // "college_lecturer" => 4,
         "center" => 5,
     ],
 
+    "system_category_type" => [
+        "category_id_basic" => 1,
+        "category_id_college" => 2,
+    ],
     "video_type_link" => [
         "storevideoscollege_function" => 7,
     ],
