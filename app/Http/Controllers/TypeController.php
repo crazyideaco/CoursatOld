@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Stage;
@@ -13,13 +14,14 @@ use Illuminate\Support\Facades\File;
 use Validator;
 
 class TypeController extends Controller
-{public function __construct()
+{
+    public function __construct()
     {
-    $this->middleware(['permission:types-create'])->only('addtype');
-    $this->middleware(['permission:types-read'])->only('types');
-    $this->middleware(['permission:types-update'])->only('edittype');
-    $this->middleware(['permission:types-delete'])->only('deletetype');
-}
+        $this->middleware(['permission:types-create'])->only('addtype');
+        $this->middleware(['permission:types-read'])->only('types');
+        $this->middleware(['permission:types-update'])->only('edittype');
+        $this->middleware(['permission:types-delete'])->only('deletetype');
+    }
     public function types()
     {
         if (Auth::user() && Auth::user()->isAdmin == 'admin') {
@@ -31,19 +33,22 @@ class TypeController extends Controller
         }
         return view('dashboard.types', compact('types'))
             ->with('stages', Stage::all());
-    }public function deletetype($id)
+    }
+    public function deletetype($id)
     {
         $type = Type::where('id', $id)->first();
         if ($type->subtypes) {
             foreach ($type->subtypes as $subtype) {
                 if (public_path() . '/uploads/' . $subtype->intro) {
                     $link1 = public_path() . '/uploads/' . $subtype->intro;
-                    File::delete($link1);}
+                    File::delete($link1);
+                }
                 if ($subtype->videos) {
                     foreach ($subtype->videos as $video) {
                         if (public_path() . '/uploads/' . $video->url) {
                             $link = public_path() . '/uploads/' . $video->url;
-                            File::delete($link);}
+                            File::delete($link);
+                        }
                     }
                 }
             }
@@ -67,7 +72,6 @@ class TypeController extends Controller
         $tags = Tag::all();
         return view('dashboard.addtype')->with('years', Year::all())->with('subjects', $subjects)
             ->with('stages', Stage::all())->with('users', $users)->with('tags', $tags);
-
     }
     public function storetype(Request $request)
     {
@@ -132,11 +136,13 @@ class TypeController extends Controller
             }
             if ($request->points) {
                 $type->points = $request->points;
-            }if ($request->hasFile('intro')) {
+            }
+            if ($request->hasFile('intro')) {
                 $intro = $request->intro;
                 $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
                 $type->intro = time() . '.' . $intro->getClientOriginalExtension();
-            }if ($request->hasFile('image')) {
+            }
+            if ($request->hasFile('image')) {
                 $image = $request->image;
 
                 $file = $image->getClientOriginalName();
@@ -144,7 +150,6 @@ class TypeController extends Controller
                 $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
                 $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
                 $type->image = $fileName . '_' . time() . '.' . $fileExtension;
-
             } else {
                 $type->image = $user->image;
             }
@@ -165,7 +170,8 @@ class TypeController extends Controller
             $type->stage_id = $year->stage_id;
             if ($request->points) {
                 $type->points = $request->points;
-            }if ($request->hasFile('image')) {
+            }
+            if ($request->hasFile('image')) {
 
                 $image = $request->image;
 
@@ -174,10 +180,10 @@ class TypeController extends Controller
                 $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
                 $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
                 $type->image = $fileName . '_' . time() . '.' . $fileExtension;
-
             } else {
                 $type->image = $user->image;
-            }if ($request->hasFile('intro')) {
+            }
+            if ($request->hasFile('intro')) {
                 $intro = $request->intro;
                 $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
                 $type->intro = time() . '.' . $intro->getClientOriginalExtension();
@@ -204,8 +210,7 @@ class TypeController extends Controller
             $subjects = User::where('id', auth()->user()->id)->first()->subjects;
         }
         $tags = Tag::all();
-        return view('dashboard.edittype')->with('years', Year::all())->with('subjects', $subjects)->
-            with('type', Type::where('id', $id)->first())->with('stages', Stage::all())->with('users', $users)->with('tags', $tags);
+        return view('dashboard.edittype')->with('years', Year::all())->with('subjects', $subjects)->with('type', Type::where('id', $id)->first())->with('stages', Stage::all())->with('users', $users)->with('tags', $tags);
     }
     public function updatetype($id, Request $request)
     {
@@ -213,7 +218,7 @@ class TypeController extends Controller
             'name_ar' => 'required',
             'name_en' => 'required',
 
-//    'image' => '|mimes:jpeg,jpg,png,gif',
+            //    'image' => '|mimes:jpeg,jpg,png,gif',
             //     'intro' => 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
         ], [
             'required' => 'هذا الحقل مطلوب',
@@ -232,7 +237,8 @@ class TypeController extends Controller
             if ($request->hasFile('intro')) {
                 if ($link = public_path() . '/uploads/' . $type->intro) {
                     $link = public_path() . '/uploads/' . $type->intro;
-                    File::delete($link);}
+                    File::delete($link);
+                }
                 $intro = $request->intro;
                 $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
                 $type->intro = time() . '.' . $intro->getClientOriginalExtension();
@@ -240,7 +246,8 @@ class TypeController extends Controller
             if ($request->hasFile('image')) {
                 if ($link = public_path() . '/uploads/' . $type->image) {
                     $link = public_path() . '/uploads/' . $type->image;
-                    File::delete($link);}
+                    File::delete($link);
+                }
                 $image = $request->image;
 
                 $file = $image->getClientOriginalName();
@@ -248,7 +255,6 @@ class TypeController extends Controller
                 $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
                 $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
                 $type->image = $fileName . '_' . time() . '.' . $fileExtension;
-
             }
             $type->name_ar = $request->name_ar;
             $type->name_en = $request->name_en;
@@ -289,7 +295,8 @@ class TypeController extends Controller
             $type->save();
         }
         return response()->json(['success' => 'course uploaded']);
-    }public function gettype($id, $value)
+    }
+    public function gettype($id, $value)
     {
 
         $types = Type::where('subjects_id', $value)->where('user_id', $id)->get();
@@ -300,7 +307,8 @@ class TypeController extends Controller
         }
 
         return response()->json([$text1]);
-    }public function activetype($id)
+    }
+    public function activetype($id)
     {
         $type = Type::where('id', $id)->first();
         if ($type->active == 1) {

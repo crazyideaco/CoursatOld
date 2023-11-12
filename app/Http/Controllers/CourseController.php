@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Course;
@@ -51,7 +52,8 @@ class CourseController extends Controller
             'required' => 'هذا الحقل مطلوب',
             'mimetypes' => 'هذا الحقل يقبل فيديو فقط',
             'mimes' => 'هذا الحقل يقبل صوره فقط',
-        ]);if ($validator->fails()) {
+        ]);
+        if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
         $course = new Course;
@@ -89,7 +91,6 @@ class CourseController extends Controller
             $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
             $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
             $course->image = $fileName . '_' . time() . '.' . $fileExtension;
-
         } else {
             $course->image = $user->image;
         }
@@ -128,23 +129,25 @@ class CourseController extends Controller
             $subs = Sub::orderBy('created_at', 'Desc')->get();
             $users = User::all();
         }
-        return view('dashboard.editcourse')->with('course', Course::where('id', $id)->first())->
-            with('generals', General::orderBy('created_at', 'Desc')->get())->with('subs', $subs)->
-            with('users', $users);
-    }public function deletecourse($id)
+        return view('dashboard.editcourse')->with('course', Course::where('id', $id)->first())->with('generals', General::orderBy('created_at', 'Desc')->get())->with('subs', $subs)->with('users', $users);
+    }
+    public function deletecourse($id)
     {
         $type = Course::where('id', $id)->first();
         if (public_path() . '/uploads/' . $type->intro) {
             $link1 = public_path() . '/uploads/' . $type->intro;
-            File::delete($link1);}
+            File::delete($link1);
+        }
         if ($type->videos) {
             foreach ($type->videos as $video) {
                 if (public_path() . '/uploads/' . $video->image) {
                     $link1 = public_path() . '/uploads/' . $video->image;
-                    File::delete($link1);}if (public_path() . '/uploads/' . $video->url) {
+                    File::delete($link1);
+                }
+                if (public_path() . '/uploads/' . $video->url) {
                     $link1 = public_path() . '/uploads/' . $video->url;
-                    File::delete($link1);}
-
+                    File::delete($link1);
+                }
             }
         }
 
@@ -162,7 +165,8 @@ class CourseController extends Controller
             'required' => 'هذا الحقل مطلوب',
             'mimetypes' => 'هذا الحقل يقبل فيديو فقط',
             'mimes' => 'هذا الحقل يقبل صوره فقط',
-        ]);if ($validator->fails()) {
+        ]);
+        if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
         $course = Course::where('id', $id)->first();
@@ -187,7 +191,8 @@ class CourseController extends Controller
         if ($request->hasFile('image')) {
             if (public_path() . '/uploads/' . $course->image) {
                 $link = public_path() . '/uploads/' . $course->image;
-                File::delete($link);}
+                File::delete($link);
+            }
             $image = $request->image;
 
             $file = $image->getClientOriginalName();
@@ -195,18 +200,20 @@ class CourseController extends Controller
             $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
             $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
             $course->image = $fileName . '_' . time() . '.' . $fileExtension;
-
         }
-        if ($request->hasFile('intro')) {if (public_path() . '/uploads/' . $course->intro) {
-            $link = public_path() . '/uploads/' . $course->intro;
-            File::delete($link);}
+        if ($request->hasFile('intro')) {
+            if (public_path() . '/uploads/' . $course->intro) {
+                $link = public_path() . '/uploads/' . $course->intro;
+                File::delete($link);
+            }
             $intro = $request->intro;
             $intro->move('uploads', time() . '.' . $intro->getClientOriginalExtension());
             $course->intro = time() . '.' . $intro->getClientOriginalExtension();
         }
         $course->save();
         return response()->json(['success' => 'video uploaded']);
-    }public function getcourse($id)
+    }
+    public function getcourse($id)
     {
         if (auth()->user() && auth()->user()->isAdmin == 'admin') {
             $courses = Course::where('user_id', $id)->get();
@@ -223,7 +230,8 @@ class CourseController extends Controller
         }
 
         return response()->json($text);
-    }public function getsubcourses($id)
+    }
+    public function getsubcourses($id)
     {
         $courses = Course::where('sub_id', $id)->get();
         $text = "";
@@ -232,7 +240,8 @@ class CourseController extends Controller
             $text .= '<option value="' . $course->id . '">' . $course->name_ar . '</option>';
         }
         return response()->json($text);
-    }public function activecourse($id)
+    }
+    public function activecourse($id)
     {
         $course = Course::where('id', $id)->first();
         if ($course->active == 1) {
@@ -244,7 +253,8 @@ class CourseController extends Controller
             $course->save();
             return response(['status' => 'active']);
         }
-    }public function givetypecourse()
+    }
+    public function givetypecourse()
     {
         if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
             $types1 = auth()->user()->centertypes->pluck('id')->toArray();
@@ -284,7 +294,8 @@ class CourseController extends Controller
             $students = $students1->merge(auth()->user()->centerstudents);
         }
         return view('dashboard.givetypecourse')->with('students', $students)->with('types', $types);
-    }public function gettypecourse($id)
+    }
+    public function gettypecourse($id)
     {
         $user = User::where('id', $id)->first();
         if (Auth::user() && Auth::user()->is_student == 2) {
@@ -298,7 +309,8 @@ class CourseController extends Controller
             $text .= '<option value="' . $type->id . '">' . $type->name_ar . '</option>';
         }
         return response()->json(['data' => $text]);
-    }public function givecourse()
+    }
+    public function givecourse()
     {
         if (Auth::user() && Auth::user()->is_student == 4) {
             $students = auth()->user()->centerstudents;
@@ -306,13 +318,15 @@ class CourseController extends Controller
         } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 3) {
             $students = auth()->user()->centerstudents;
             $types = auth()->user()->centercourses;
-        }return view('dashboard.givecourse')->with('courses', $courses)->with('students', $students);
+        }
+        return view('dashboard.givecourse')->with('courses', $courses)->with('students', $students);
     }
     public function addcourses(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'course_id' => 'required',
-            'student_id' => 'required'], [
+            'student_id' => 'required'
+        ], [
             'course_id.required' => 'حقل الكورس مطلوب',
             'student_id.required' => 'حقل الطالب مطلوب',
         ]);
@@ -320,11 +334,13 @@ class CourseController extends Controller
             $student = User::where('id', $request->student_id)->first();
             $course = Course::where('id', $request->course_id)->first();
             $student->stucourses()->attach($request->course_id);
-            return response()->json(['status' => true]);} else {
+            return response()->json(['status' => true]);
+        } else {
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'message' => $msg]);
         }
-    }public function givetypecollegecourse()
+    }
+    public function givetypecollegecourse()
     {
         if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
             $types1 = auth()->user()->centertypes->pluck('id')->toArray();
@@ -364,11 +380,13 @@ class CourseController extends Controller
             $students = $students1->merge(auth()->user()->centerstudents);
         }
         return view('dashboard.givetypecollegecourse')->with('students', $students)->with('types', $types);
-    }public function gettypecollegecourse($id)
+    }
+    public function gettypecollegecourse($id)
     {
         $user = User::where('id', $id)->first();
         if (Auth::user() && Auth::user()->is_student == 3) {
-            $types = auth()->user()->typescollege()->where('section_id', $user->section_id)->whereNotIn("id", $user->stutypescollege->pluck("id")->toArray())->get();} elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
+            $types = auth()->user()->typescollege()->where('section_id', $user->section_id)->whereNotIn("id", $user->stutypescollege->pluck("id")->toArray())->get();
+        } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
             $types = auth()->user()->centertypescollege()->where('section_id', $user->section_id)->whereNotIn("id", $user->stutypescollege->pluck("id")->toArray())->get();
         }
         $text = '';
@@ -377,18 +395,21 @@ class CourseController extends Controller
             $text .= '<option value="' . $type->id . '">' . $type->name_ar . '</option>';
         }
         return response()->json(['data' => $text]);
-    }public function addtypecollegecourse(Request $request)
+    }
+    public function addtypecollegecourse(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'type_id' => 'required',
-            'student_id' => 'required'], [
+            'student_id' => 'required'
+        ], [
             'type_id.required' => 'حقل الكورس مطلوب',
             'student_id.required' => 'حقل الطالب مطلوب',
         ]);
         if ($validator->passes()) {
             $student = User::where('id', $request->student_id)->first();
             $student->stutypescollege()->attach($request->type_id);
-            return response()->json(['status' => true]);} else {
+            return response()->json(['status' => true]);
+        } else {
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'message' => $msg]);
         }
@@ -397,14 +418,16 @@ class CourseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'type_id' => 'required',
-            'student_id' => 'required'], [
+            'student_id' => 'required'
+        ], [
             'type_id.required' => 'حقل الكورس مطلوب',
             'student_id.required' => 'حقل الطالب مطلوب',
         ]);
         if ($validator->passes()) {
             $student = User::where('id', $request->student_id)->first();
             $student->stutypes()->attach($request->type_id);
-            return response()->json(['status' => true]);} else {
+            return response()->json(['status' => true]);
+        } else {
             $msg = $validator->messages()->first();
             return response()->json(['status' => false, 'message' => $msg]);
         }
@@ -413,7 +436,8 @@ class CourseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'course_id' => 'required',
-            'student_id' => 'required'], [
+            'student_id' => 'required'
+        ], [
             'course_id.required' => 'حقل الكورس مطلوب',
             'student_id.required' => 'حقل الطالب مطلوب',
         ]);

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\College;
@@ -14,6 +15,7 @@ use App\TypesCollege;
 use App\University;
 use App\User;
 use App\Year;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +34,10 @@ class FilterCourseController extends Controller
             $types = $types->where('subjects_id', $request->subjects_id)->get();
         } else if ($request->years_id) {
             $types = $types->where('years_id', $request->years_id)->get();
+        } else if ($request->month) {
+            // $types = $types->whereDate('created_at', '>=', $request->month)->whereDate('created_at', '<', $request->years_id)->get();
+            $next_month = Carbon::parse($request->month)->addMonth()->format('Y-m');
+            $types = $types->where('created_at', '>=', $request->month)->where('created_at', '<', $next_month)->get();
         } else {
 
             $types = $types->get();
@@ -74,7 +80,8 @@ class FilterCourseController extends Controller
                                         </tr>';
         }
         return response()->json(['status' => true, 'data' => $text]);
-    }public function filtertypescollege(Request $request)
+    }
+    public function filtertypescollege(Request $request)
     {
         // dd($request->all());
         // if($request->university_id && $request->college_id && $request->division_id &&  $request->section_id && $request->subjectscollege_id){
@@ -103,8 +110,13 @@ class FilterCourseController extends Controller
                 });
                 $query->when($request->section_id != 0, function ($q) use ($request) {
                     return $q->where("section_id", $request->section_id);
-                }); $query->when($request->subjectscollege_id != 0, function ($q) use ($request) {
+                });
+                $query->when($request->subjectscollege_id != 0, function ($q) use ($request) {
                     return $q->where("subjectscollege_id", $request->subjectscollege_id);
+                });
+                $query->when($request->month !== null, function ($q) use ($request) {
+                    $next_month = Carbon::parse($request->month)->addMonth()->format('Y-m');
+                    return $q->where('created_at', '>=', $request->month)->where('created_at', '<', $next_month);
                 });
             })->get();
         } else if (Auth::user() && Auth::user()->is_student == 3) {
@@ -120,8 +132,13 @@ class FilterCourseController extends Controller
                 });
                 $query->when($request->section_id != 0, function ($q) use ($request) {
                     return $q->where("section_id", $request->section_id);
-                }); $query->when($request->subjectscollege_id != 0, function ($q) use ($request) {
+                });
+                $query->when($request->subjectscollege_id != 0, function ($q) use ($request) {
                     return $q->where("subjectscollege_id", $request->subjectscollege_id);
+                });
+                $query->when($request->month !== null, function ($q) use ($request) {
+                    $next_month = Carbon::parse($request->month)->addMonth()->format('Y-m');
+                    return $q->where('created_at', '>=', $request->month)->where('created_at', '<', $next_month);
                 });
             })->get();
         } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
@@ -137,8 +154,13 @@ class FilterCourseController extends Controller
                 });
                 $query->when($request->section_id != 0, function ($q) use ($request) {
                     return $q->where("section_id", $request->section_id);
-                }); $query->when($request->subjectscollege_id != 0, function ($q) use ($request) {
+                });
+                $query->when($request->subjectscollege_id != 0, function ($q) use ($request) {
                     return $q->where("subjectscollege_id", $request->subjectscollege_id);
+                });
+                $query->when($request->month !== null, function ($q) use ($request) {
+                    $next_month = Carbon::parse($request->month)->addMonth()->format('Y-m');
+                    return $q->where('created_at', '>=', $request->month)->where('created_at', '<', $next_month);
                 });
             })->get();
         }
@@ -177,7 +199,8 @@ class FilterCourseController extends Controller
                                         </tr>';
         }
         return response()->json(['status' => true, 'data' => $text]);
-    }public function filtercourses(Request $request)
+    }
+    public function filtercourses(Request $request)
     {
         if ($request->sub_id) {
             $courses = Course::where("sub_id", $request->sub_id)->get();
