@@ -59,7 +59,7 @@ Route::group(['namespace' => 'api'], function () {
     Route::get('years', 'api\AuthController@years');
     Route::get('centeroffers', 'TagController@centeroffers')->middleware('auth:api');
     //exams
-    Route::post('fetch_exam_availability','api\Exam\ExamController@fetch_exam_availability')->middleware('auth:api');
+    Route::post('fetch_exam_availability','Exam\ExamController@fetch_exam_availability')->middleware('auth:api');
     Route::get('fetch_daily_exams', 'ExamController@fetch_daily_exams')->middleware('auth:api');
     Route::get('periodicexams', 'ExamController@periodicexams')->middleware('auth:api');
     Route::get('fetch_new_exams', 'ExamController@fetch_new_exams')->middleware('auth:api');
