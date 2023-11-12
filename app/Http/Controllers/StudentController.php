@@ -56,6 +56,7 @@ use Carbon\Carbon;
 use App\Student_Type;
 use App\Paqa;
 use App\Paqa_User;
+use App\Services\AuthDataService;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
 use App\TypeexamResult;
@@ -68,7 +69,9 @@ class StudentController extends Controller
     public function basicstudents()
     {
         $students = User::where('is_student', 1)->whereNotNull("name")->whereNotNull("year_id")->get();
-        return view('dashboard.students.basicstudents', compact('students'))->with('stages', Stage::all());
+        $auth_service = new AuthDataService();
+        $types = $auth_service->getAuthType();
+        return view('dashboard.students.basicstudents', compact('students', "types"))->with('stages', Stage::all());
     }
     public function filterbasicstudents(Request $request)
     {
