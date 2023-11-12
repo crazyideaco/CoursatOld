@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class ExamController extends Controller
 {
     use ApiTrait;
-    public function check_exam_avalibality(Request $request)
+    public function fetch_exam_availability(Request $request)
     {
         try {
             $rules = [
