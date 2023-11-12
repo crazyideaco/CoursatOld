@@ -176,7 +176,7 @@
 
                                                 @php
                                                     $types = \App\Type::where('years_id', $student->years_id)
-                                                    ->whereNotIn('id', $student->stutypes->pluck('id'))
+                                                    // ->whereNotIn('id', $student->stutypes->pluck('id'))
                                                         ->get();
                                                 @endphp
                                                 <td class="text-center">
