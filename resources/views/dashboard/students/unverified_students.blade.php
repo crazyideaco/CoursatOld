@@ -125,9 +125,9 @@
                                                 <td scope="col" class='text-center'>{{ $student->phone }}</td>
                                                 <td scope="col" class='text-center'>
                                                     @if ($student->is_student == 1)
-                                                        {{ $student->stage?->name_ar }}
+                                                        {{ $student->stage?->name_ar ?? '' }}
                                                     @else
-                                                        {{ $student->college?->name_ar }}
+                                                        {{ $student->college?->name_ar ?? '' }}
                                                     @endif
                                                 </td>
                                                 <td scope="col" class='text-center'>

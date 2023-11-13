@@ -135,9 +135,9 @@
                                                 </td>
                                                 <td scope="col" class="text-center">
                                                     @if ($student->stutypescollege)
-                                                        {{ $student->stutypescollege()->first()->pivot->created_at->format('Y-m-d') }}
+                                                        {{ $student->stutypescollege()->first()->created_at->format('Y-m-d') }}
                                                     @else
-                                                        {{ $student->stutypes()->first()->pivot->created_at->format('Y-m-d') }}
+                                                        {{ $student->stutypes()->first()->created_at->format('Y-m-d') }}
                                                     @endif
                                                 </td>
 
