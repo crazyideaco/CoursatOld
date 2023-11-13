@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class ExamController extends Controller
 {
     use ApiTrait;
+
     public function fetch_exam_availability(Request $request)
     {
         try {
@@ -80,5 +81,7 @@ class ExamController extends Controller
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
+        
     }
+
 }//End of controller

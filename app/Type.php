@@ -56,12 +56,15 @@ class Type extends Model
     {
         return $this->belongsToMany(Tag::class, 'types_tags', 'type_id', 'tag_id');
     }
+
     public function students()
     {
         return $this->hasMany(Student_Type::class, 'student_id');
     }
+
     public function getUserNameAttribute()
     {
         return $this->user->name ?? "";
     }
+    
 }

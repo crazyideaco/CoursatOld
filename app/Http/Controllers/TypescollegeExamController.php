@@ -168,11 +168,15 @@ class TypescollegeExamController extends Controller
         return response()->json(['success' => 'exam uploaded', 'id' => $exam->typescollege_id]);
     }*/
 
+
+    
     public function storetypescollegeexam(Request $request, $id)
     {
         $exam_service = new StoreTypesCollegeExamService();
         return $exam_service->store($request, $id);
     }
+
+
     public function edittypescollegeexam($id)
     {
         $exam = TypescollegeExam::where('id', $id)->first();
@@ -273,7 +277,7 @@ class TypescollegeExamController extends Controller
         $exam_service = new UpdateTypesCollegeExamService();
         return $exam_service->update($request, $id);
     }
-    
+
     public function deletetypescollegeexam($id)
     {
         $part =  TypescollegeExam::where('id', $id)->first();

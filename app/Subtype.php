@@ -31,16 +31,19 @@ class Subtype extends Model
     {
         return $this->hasMany(Video::class, 'subtype_id');
     }
+    
     public function exams()
     {
         return $this->hasMany(SubtypeExam::class, 'subtype_id');
     }
+
     public function attendstudents()
     {
         return $this->belongsToMany(User::class, 'subtypes_studentsattendance', 'subtype_id', 'student_id')->withPivot('created_at','updated_at');
     }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'subtypes_tags', 'subtype_id', 'tag_id');
     }
-}
+}//End of model

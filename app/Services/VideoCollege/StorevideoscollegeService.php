@@ -18,6 +18,7 @@ use Illuminate\Validation\Rule;
 class StorevideoscollegeService {
     public function storevideoscollege($id, Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             //  'description_ar' => 'required',
             //  'description_en' => 'required',
@@ -32,12 +33,14 @@ class StorevideoscollegeService {
                     return $request->youtube_link == null;
                 })
             ],
+            
             'youtube_link' => [
                 'nullable',
                 Rule::requiredIf(function () use ($request) {
                     return $request->url == null;
                 })
             ],
+
             //  |mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
         ], [
             'required' => 'هذا الحقل مطلوب',

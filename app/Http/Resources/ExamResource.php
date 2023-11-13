@@ -15,7 +15,9 @@ class ExamResource extends JsonResource
             $subject = $this->subjectscollege->name_ar;
         }
 
+
         return [
+
 
             'id' => $this->id,
             'title' => $this->name,
@@ -30,6 +32,8 @@ class ExamResource extends JsonResource
             'date_day' => $this->date_day,
             'questions' => QuestionResource::collection($this->questions)
 
+
+            
         ];
     }
 }

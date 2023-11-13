@@ -67,8 +67,12 @@ class TypesCollege extends Model
     {
         return $this->belongsToMany(Tag::class, 'typescollege_tags', 'typescollege_id', 'tag_id');
     }
+
+    
     public function getUserNameAttribute()
     {
         return $this->doctor->name ?? "";
     }
+
+
 }

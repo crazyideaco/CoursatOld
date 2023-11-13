@@ -23,6 +23,7 @@ class StorevideoService
         //dd(\Storage::disk('google')->delete("1XBtzNFUYhgGsibOxILp1FBCiZiLNzjyl"));
         //dd(\Storage::disk('google')->url($name));
         $subtype = Subtype::where('id',$id)->first();
+
         $validator = Validator::make($request->all(),[
             //'description_ar' => 'required',
             //'description_en' => 'required',
@@ -37,17 +38,20 @@ class StorevideoService
                     return $request->youtube_link == null;
                 })
             ],
+
             'youtube_link' => [
                 'nullable',
                 Rule::requiredIf(function () use ($request) {
                     return $request->url == null;
                 })
             ],
+
         ],[
             'required' => 'هذا الحقل مطلوب' ,
             'mimetypes' => 'هذا الحقل يقب فيديو فقط',
             'mimes' =>  'هذا الحقل يقبل صوره فقط'
         ]);
+        
         if($validator->fails())
         {
             return response()->json(['errors' => $validator->errors()->all()]);

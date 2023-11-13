@@ -159,11 +159,15 @@ class TypeExamController extends Controller
         return response()->json(['success' => 'exam uploaded', 'id' => $exam->type_id]);
     }*/
 
+    
+
     public function storetypeexam(Request $request, $id)
     {
         $exam_service = new StoreTypeExamService();
         return $exam_service->store($request, $id);
     }
+
+
 
     public function edittypeexam($id)
     {

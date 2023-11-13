@@ -237,6 +237,9 @@ class User extends Authenticatable
         }
         return  $number;
     }
+
+
+    
     public function getTypecollegeSellNumberAttribute()
     {
         $number = 0;
@@ -247,6 +250,8 @@ class User extends Authenticatable
         }
         return  $number;
     }
+
+
     public function ur_courses()
     {
         if ($this->is_student == 2) {
@@ -255,4 +260,6 @@ class User extends Authenticatable
             return $this->typescollege();
         }
     }
+
+
 }

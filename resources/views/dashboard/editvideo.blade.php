@@ -105,6 +105,8 @@
                                 @error('url')
                                     <p style="color:red;">{{ $message }}</p>
                                 @enderror
+                                <span class="btn btn-danger" onclick="delete_video_video({{ $video->id }})">حذف
+                                    Video</span>
                             </div>
                             <div class="col-6 text-center set-img">
                                 <canvas id="pdfViewer" style="width:200px;height:200px"></canvas>
@@ -480,6 +482,49 @@
         $("#ad2").change(function() {
             readURL2(this);
         });
+    </script>
+    <script>
+        function delete_video_video(selected) {
+            let id = sel;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "get",
+                        url: `../delete_video_video/${id}`,
+                        //    contentType: "application/json; charset=utf-8",
+                        dataType: "Json",
+                        success: function(result) {
+                            if (result.status == true) {
+
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your pdf has been deleted.',
+                                    'success'
+                                )
+                            }
+                        }
+
+                    });
+                }
+
+
+            })
+        }
+
     </script>
     <script>
         $(document).on("change", "#kt", function(evt) {
