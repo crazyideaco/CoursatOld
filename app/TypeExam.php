@@ -10,6 +10,7 @@ use App\User;
 use App\SubjectquestionAnswer;
 use App\TypeexamQuestion;
 use App\Video;
+use Carbon\Carbon;
 
 class TypeExam extends Model
 {
@@ -39,4 +40,16 @@ class TypeExam extends Model
     {
         return $this->belongsToMany(User::class, 'typeexams_results', 'exam_id', 'student_id')->withPivot('exam_score', 'student_score', 'created_at');
     }
-}
+
+    public function getStartDateTimeAttribute()
+    {
+        $from = Carbon::parse("{$this->date_day} {$this->date_time}");//->format('Y-m-d H:i:s');
+        return $from;
+    }
+    public function getEndDateTimeAttribute()
+    {
+        $to = Carbon::parse("{$this->end_date} {$this->end_time}");//->format('Y-m-d H:i:s');
+        return $to;
+    }
+
+}//End of model

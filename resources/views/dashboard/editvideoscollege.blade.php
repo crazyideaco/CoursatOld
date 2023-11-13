@@ -120,10 +120,10 @@
                                     <source src="{{ $video->url_link }}" id="video_here">
                                     Your browser does not support HTML5 video.
                                 </video>
-                                <!-- <div class="iframe_hide_poop">
-    <div class="magic"></div>
-              <iframe src="{{ $video->url_video }}" width="200" height="200" ></iframe>
-              </div>-->
+                                {{-- <div class="iframe_hide_poop">
+                                    <div class="magic"></div>
+                                    <iframe src="{{ $video->url_video }}" width="200" height="200"></iframe>
+                                </div> --}}
                                 <br>
                                 <br>
                                 <input id="kt" type="file" class="form-control ehabtalaat" name="url">
@@ -131,6 +131,8 @@
                                 @error('url')
                                     <div class="alert alert-danger">هذا الحقل مطلوب</div>
                                 @enderror
+                                <span class="btn btn-danger" onclick="delete_video_college_video({{ $video->id }})">حذف
+                                    Video</span>
                             </div>
 
                             <div class="col-6 text-center set-img">
@@ -630,7 +632,50 @@
             readURL2(this);
         });
     </script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function delete_video_college_video(selected) {
+            let id = sel;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "get",
+                        url: `../delete_video_college_video/${id}`,
+                        //    contentType: "application/json; charset=utf-8",
+                        dataType: "Json",
+                        success: function(result) {
+                            if (result.status == true) {
+
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your pdf has been deleted.',
+                                    'success'
+                                )
+                            }
+                        }
+
+                    });
+                }
+
+
+            })
+        }
+
+    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script>
         // Loaded via <script> tag, create shortcut to access PDF.js exports.
@@ -870,5 +915,5 @@
 
             })
         }
-    </script>
+    </script> --}}
 @endsection

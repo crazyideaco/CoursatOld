@@ -35,16 +35,22 @@ class ExamController extends Controller
 
             $student = $exam->students()->where('users.id', auth()->id())->first();
 
+            $from =  $exam->getStartDateTimeAttribute()->format('Y-m-d H:i:s');
+            $to = $exam->getEndDateTimeAttribute()->format('Y-m-d H:i:s');
             if ($student) {
                 // Student has entered the exam before
                 $availability = 0;
                 $message = "لقد دخلت هذا الامتحان من قبل";
             } else {
                 // Student has not entered the exam before
-                if ($exam->date_day > Carbon::now() || ($exam->date_day == Carbon::now()->format('Y-m-d') && $exam->date_time > Carbon::now()->format('H:i:s'))) {
+                if ($from > Carbon::now() ) {
                     // Exam is in the future
                     $availability = 0;
-                    $message = "هذا الامتحان غير متاح حاليًا";
+                    $message = "   لم يبدأ هذا الامتحان  غير متاح حاليًا";
+                } else if ($to < Carbon::now()) {
+                    // Exam is in the past
+                    $availability = 0;
+                    $message = "هذا الامتحان انتهي و لم يعد متاح ";
                 } else {
                     // Exam is not in the future, and student has not entered before
                     $availability = 1;
