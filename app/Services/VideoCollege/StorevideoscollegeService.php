@@ -13,8 +13,7 @@ use App\Notification;
 use App\Paqa_User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
-
+use Illuminate\Validation\Rule;
 
 class StorevideoscollegeService {
     public function storevideoscollege($id, Request $request)
@@ -27,7 +26,18 @@ class StorevideoscollegeService {
             //    'board' => 'required',
             //      'image' => 'required|mimes:jpeg,jpg,png,gif',
             //'pdf' => 'required',
-            'url' => 'required'
+            'url' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->youtube_link == null;
+                })
+            ],
+            'youtube_link' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->url == null;
+                })
+            ],
             //  |mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi'
         ], [
             'required' => 'هذا الحقل مطلوب',

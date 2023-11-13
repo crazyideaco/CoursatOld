@@ -223,9 +223,12 @@
                                         </td>
 
                                         <td scope="row" class="text-center">
-                                            {{ $typescollege->subjectscollege->name_ar }}</td>
+                                            {{ $typescollege->subjectscollege->name_ar }}
+                                        </td>
+
+
                                         <td scope="row" class="text-center">
-                                            {{ $typescollege->type ? $typescollege->type->center->name ?? 'المنصه العامه' : '' }}
+                                            {{ $typescollege->center ? $typescollege->center->name ?? 'المنصه العامه' : '' }}
                                         </td>
 
                                         <td scope="row" class="text-center">

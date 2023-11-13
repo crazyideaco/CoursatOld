@@ -12,6 +12,7 @@ use App\Subtype;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Video;
+use Illuminate\Validation\Rule;
 
 class StorevideoService
 {
@@ -28,7 +29,18 @@ class StorevideoService
             //    'board' => 'required',
             //  'image' => 'required|mimes:jpeg,jpg,png,gif',
             //  'pdf' => 'required',
-            'url' => 'required'
+            'url' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->youtube_link == null;
+                })
+            ],
+            'youtube_link' => [
+                'nullable',
+                Rule::requiredIf(function () use ($request) {
+                    return $request->url == null;
+                })
+            ],
         ],[
             'required' => 'هذا الحقل مطلوب' ,
             'mimetypes' => 'هذا الحقل يقب فيديو فقط',

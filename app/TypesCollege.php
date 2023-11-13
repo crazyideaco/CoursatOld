@@ -57,7 +57,7 @@ class TypesCollege extends Model
     }
     public function studentscollege()
     {
-        return $this->belongsToMany(User::class, 'students_typescollege', 'typecollege_id', 'student_id');
+        return $this->belongsToMany(User::class, 'students_typescollege', 'typecollege_id', 'student_id')->withPivot('created_at','updated_at');
     }
     public function videos()
     {

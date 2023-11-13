@@ -173,11 +173,11 @@ class User extends Authenticatable
     }
     public function stutypes()
     {
-        return $this->belongsToMany(Type::class, 'students_types', 'student_id', 'type_id')->withPivot('active');
+        return $this->belongsToMany(Type::class, 'students_types', 'student_id', 'type_id')->withPivot('active', "created_at", "updated_at");
     }
     public function stutypescollege()
     {
-        return $this->belongsToMany(TypesCollege::class, 'students_typescollege', 'student_id', 'typecollege_id')->withPivot('active');
+        return $this->belongsToMany(TypesCollege::class, 'students_typescollege', 'student_id', 'typecollege_id')->withPivot('active', "created_at", "updated_at");
     }
     public function stucourses()
     {
