@@ -82,7 +82,7 @@
 
                         <img src="images/all-products.svg">
                         <h5>الطلاب</h5>
-                        <form action="{{ route('unverifiedstudents') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('verify_all_students') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <button type="submit" class="btn btn-success">تفعيل كل الطلاب</button>
                         </form>
