@@ -124,6 +124,7 @@
                                                 <td scope="col" class='text-center'>{{ $student->code }}</td>
                                                 <td scope="col" class='text-center'>{{ $student->phone }}</td>
                                                 <td scope="col" class='text-center'>
+                                                    {{ $student->is_student }}
                                                     {{-- @if ($student->is_student == 1)
                                                         {{ $student->stage?->name_ar ?? '' }}
                                                     @else
