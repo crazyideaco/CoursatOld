@@ -124,7 +124,7 @@
                                                 <td scope="col" class='text-center'>{{ $student->code }}</td>
                                                 <td scope="col" class='text-center'>{{ $student->phone }}</td>
                                                 <td scope="col" class='text-center'>
-                                                    {{ $student->is_student }}
+                                                    {{ $student->stage->name_ar ?? '' }}
                                                     {{-- @if ($student->is_student == 1)
                                                         {{ $student->stage?->name_ar ?? '' }}
                                                     @else
@@ -132,6 +132,7 @@
                                                     @endif --}}
                                                 </td>
                                                 <td scope="col" class='text-center'>
+                                                    {{ $student->year->year_ar ?? '' }}
                                                     {{-- @if ($student->is_student == 1)
                                                         {{ $student->year?->year_ar }}
                                                     @else
