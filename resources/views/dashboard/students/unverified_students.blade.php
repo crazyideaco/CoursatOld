@@ -125,16 +125,16 @@
                                                 <td scope="col" class='text-center'>{{ $student->phone }}</td>
                                                 <td scope="col" class='text-center'>
                                                     @if ($student->is_student == 1)
-                                                        {{ $student->stage->name_ar }}
+                                                        {{ $student->stage?->name_ar }}
                                                     @else
-                                                        {{ $student->college->name_ar }}
+                                                        {{ $student->college?->name_ar }}
                                                     @endif
                                                 </td>
                                                 <td scope="col" class='text-center'>
                                                     @if ($student->is_student == 1)
-                                                        {{ $student->year->year_ar }}
+                                                        {{ $student->year?->year_ar }}
                                                     @else
-                                                        {{ $student->section->name_ar }}
+                                                        {{ $student->section?->name_ar }}
                                                     @endif
                                                 </td>
                                                 <td scope="col" class='text-center'>{{ $student->created_at->format('d-m-Y') }}</td>

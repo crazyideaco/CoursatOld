@@ -1,88 +1,88 @@
-<?php return array(
-    'facade/ignition' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'Facade\\Ignition\\IgnitionServiceProvider',
-        ),
-        'aliases' =>
-        array(
-            'Flare' => 'Facade\\Ignition\\Facades\\Flare',
-        ),
+<?php return array (
+  'facade/ignition' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Facade\\Ignition\\IgnitionServiceProvider',
     ),
-    'fideloper/proxy' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
-        ),
+    'aliases' => 
+    array (
+      'Flare' => 'Facade\\Ignition\\Facades\\Flare',
     ),
-    'fruitcake/laravel-cors' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'Fruitcake\\Cors\\CorsServiceProvider',
-        ),
+  ),
+  'fideloper/proxy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     ),
-    'laravel/tinker' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'Laravel\\Tinker\\TinkerServiceProvider',
-        ),
+  ),
+  'fruitcake/laravel-cors' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Fruitcake\\Cors\\CorsServiceProvider',
     ),
-    'nesbot/carbon' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'Carbon\\Laravel\\ServiceProvider',
-        ),
+  ),
+  'laravel/tinker' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
     ),
-    'nunomaduro/collision' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-        ),
+  ),
+  'nesbot/carbon' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
-    'owen-oj/laravel-getid3' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'Owenoj\\LaravelGetId3\\GetId3ServiceProvider',
-        ),
+  ),
+  'nunomaduro/collision' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
-    'pbmedia/laravel-ffmpeg' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'ProtoneMedia\\LaravelFFMpeg\\Support\\ServiceProvider',
-        ),
-        'aliases' =>
-        array(
-            'FFMpeg' => 'ProtoneMedia\\LaravelFFMpeg\\Support\\FFMpeg',
-        ),
+  ),
+  'owen-oj/laravel-getid3' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Owenoj\\LaravelGetId3\\GetId3ServiceProvider',
     ),
-    'santigarcor/laratrust' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'Laratrust\\LaratrustServiceProvider',
-        ),
-        'aliases' =>
-        array(
-            'Laratrust' => 'Laratrust\\LaratrustFacade',
-        ),
+  ),
+  'pbmedia/laravel-ffmpeg' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'ProtoneMedia\\LaravelFFMpeg\\Support\\ServiceProvider',
     ),
-    'simplesoftwareio/simple-qrcode' =>
-    array(
-        'providers' =>
-        array(
-            0 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
-        ),
-        'aliases' =>
-        array(
-            'QrCode' => 'SimpleSoftwareIO\\QrCode\\Facades\\QrCode',
-        ),
+    'aliases' => 
+    array (
+      'FFMpeg' => 'ProtoneMedia\\LaravelFFMpeg\\Support\\FFMpeg',
     ),
+  ),
+  'santigarcor/laratrust' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laratrust\\LaratrustServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Laratrust' => 'Laratrust\\LaratrustFacade',
+    ),
+  ),
+  'simplesoftwareio/simple-qrcode' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'QrCode' => 'SimpleSoftwareIO\\QrCode\\Facades\\QrCode',
+    ),
+  ),
 );
