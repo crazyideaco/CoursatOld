@@ -33,7 +33,7 @@ class ExamController extends Controller
                 $exam = TypescollegeExam::find($request->exam_id);
             }
 
-            $student = $exam->students()->where('id', auth()->id())->first();
+            $student = $exam->students()->where('users.id', auth()->id())->first();
 
             if ($student) {
                 // Student has entered the exam before
