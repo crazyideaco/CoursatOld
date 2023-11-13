@@ -419,4 +419,14 @@ class StudentController extends Controller
         $students = User::where('phone_verify', 0)->whereIn("is_student", [1, 2])->where("is_visitor", 0)->whereNotNull("name")->get();
         return view('dashboard.students.unverified_students', compact('students'));
     }
+
+    public function verify_all_students(){
+        $students = User::where('phone_verify', 0)->whereIn("is_student", [1, 2])->where("is_visitor", 0)->whereNotNull("name")->get();
+        foreach($students as $student){
+            $student->update([
+                "phone_verify" => 1
+            ]);
+        }
+        return redirect()->route('unverified_students');
+    }
 }

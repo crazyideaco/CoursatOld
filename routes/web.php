@@ -71,6 +71,7 @@
         //end notification
         Route::get('mytypestudents', 'StudentController@mytypestudents')->name('mytypestudents');
         Route::get('unverified_students', 'StudentController@unverified_students')->name('unverified_students');
+        Route::post('verify_all_students', 'StudentController@verify_all_students')->name('verify_all_students');
         Route::post('addcoursesstudents', 'CourseController@addcoursesstudents')->name('addcoursesstudents');
         Route::get('addadmin', 'AdminController@addadmin')->name('addadmin');
         Route::post('addtypesollegestudent/{id}', 'StudentController@addtypesollegestudent')->name('addtypesollegestudent');
