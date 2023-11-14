@@ -33,7 +33,7 @@
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>الكورسات </label>
-    <select class="form-control selectpicker" name="type_id" required id="types" onchange="filter_students()">
+    <select class="form-control selectpicker" name="type_id" required id="types">
         <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option>
 
     </select>

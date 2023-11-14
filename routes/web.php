@@ -162,6 +162,7 @@
         Route::get('getcity/{id}', 'CityController@getcity')->name('getcity');
         //ajax subtype
         Route::get('gettype/{id}', 'TypeController@gettype')->name('gettype');
+        Route::get('getsubject_types/{id}', 'TypeController@getsubject_types')->name('getsubject_types');
         //edit
         Route::get('editstate/{id}', 'StateController@editstate')->name('editstate');
         Route::post('updatestate/{id}', 'StateController@updatestate')->name('updatestate');

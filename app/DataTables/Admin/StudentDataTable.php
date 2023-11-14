@@ -45,7 +45,7 @@ class StudentDataTable extends DataTable
             })
             ->addColumn('centers', function ($row) {
                 $centers = "المنصة العامة";
-                if ($row->stdcenters) {
+                if (count($row->stdcenters) > 0) {
                     $centers = implode('-', $row->stdcenters->pluck('name')->toArray());
                 }
                 return $centers;
@@ -119,7 +119,7 @@ class StudentDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->where('is_student', config('project_types.auth_user_is_student.student'))->where('name', '<>', NULL);
+        return $model->newQuery()->where('is_student', config('project_types.auth_user_is_student.student'))->where('name', '<>', NULL)->orderBy('id', 'desc');
     }
 
     /**
