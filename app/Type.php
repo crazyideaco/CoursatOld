@@ -50,7 +50,7 @@ class Type extends Model
     }
     public function studentstype()
     {
-        return $this->belongsToMany(User::class, 'students_types', 'type_id', 'student_id')->withPivot('created_at','updated_at','deleted_at');
+        return $this->belongsToMany(User::class, 'students_types', 'type_id', 'student_id')->withPivot('created_at','updated_at','deleted_at')->using(Student_Type::class);
     }
     public function tags()
     {
