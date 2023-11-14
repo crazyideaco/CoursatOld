@@ -7,12 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Course\Course;
 use App\Models\Patch;
 use App\Models\QrCode as QrCodeModel;
+use App\Traits\ApiTrait;
 use App\Type;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QrCodeController extends Controller
 {
+    use ApiTrait;
     protected $view = 'dashboard.types.';
     protected $route = 'types.';
 

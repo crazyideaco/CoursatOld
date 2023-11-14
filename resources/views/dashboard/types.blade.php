@@ -241,7 +241,7 @@
 
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title">{{ __('messages.create_qrcode') }}
+                                                        <h4 class="modal-title">create_qrcode
                                                         </h4>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
@@ -250,13 +250,13 @@
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <label>{{ __('messages.count') }} </label>
+                                                                <label>count </label>
                                                                 <input class="form-control" value="1"
                                                                     id="count{{ $type->id }}">
                                                             </div>
 
                                                             <div class="col-12">
-                                                                <label>{{ __('messages.expire_date') }} </label>
+                                                                <label>expire_date </label>
                                                                 <input class="form-control" type="date"
                                                                     id="expire_date{{ $type->id }}">
                                                             </div>
