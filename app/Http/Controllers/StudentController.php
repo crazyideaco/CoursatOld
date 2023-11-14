@@ -251,7 +251,7 @@ class StudentController extends Controller
 
     public function bannedStudentstype($id)
     {
-        $students = Type::where("id", $id)->first()->studentstype()->onlyTrashed();
+        $students = Type::where("id", $id)->first()->studentstype->onlyTrashed();
         $status = 0;
         return view("dashboard.courses_students.studentstype", compact("students", "id", "status"));
     }
@@ -263,7 +263,7 @@ class StudentController extends Controller
     }
     public function bannedStudentstypecollege($id)
     {
-        $students = TypesCollege::where("id", $id)->first()->studentscollege()->onlyTrashed();
+        $students = TypesCollege::where("id", $id)->first()->studentscollege->onlyTrashed();
         $status = 1;
         return view("dashboard.courses_students.studentstype", compact("students", "id", "status"));
     }
