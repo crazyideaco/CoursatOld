@@ -83,7 +83,7 @@ class StudentDataTable extends DataTable
             ->filter(function ($query) use ($request) {
                 $query
                 ->when($request->stage_id != null, function ($q) use ($request) {
-                    $q->where('stage_id', (int)$request->client_type);
+                    return $q->where('stage_id', (int)$request->client_type);
                 })
                 ->when($request->year_id != null, function ($q) use ($request) {
                     $q->where('year_id', (int)$request->year_id);
@@ -134,7 +134,7 @@ class StudentDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             // ->dom('Bfrtip')
-            // ->orderBy(1)
+            ->orderBy(1)
             ->lengthMenu([[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]]);
     }
 
