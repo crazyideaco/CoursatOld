@@ -621,8 +621,8 @@
     Route::post("filtertypescollege", "FilterCourseController@filtertypescollege");
     Route::post("filtercourses", "FilterCourseController@filtercourses");
 
-// //store_qrcode
-// Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
+//store_qrcode
+Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
 
 
 
