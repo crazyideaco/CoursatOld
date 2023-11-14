@@ -240,8 +240,8 @@
                             </table>
 
 
-                            <div class="modal" id="myModal{{ $type->id }}">
-                                <div class="modal-dialog">
+                            <div class="modal" id="myModal{{ $type->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
                                     <div class="modal-content">
 
                                         <!-- Modal Header -->
