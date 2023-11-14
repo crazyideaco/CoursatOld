@@ -52,7 +52,7 @@ class StudentDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->where('is_student', config('project_types.auth_user_is_student.student')); //->where('name', '<>', NULL);
+        return $model->newQuery()->where('is_student', config('project_types.auth_user_is_student.student'))->where('name', '<>', NULL);
     }
 
     /**

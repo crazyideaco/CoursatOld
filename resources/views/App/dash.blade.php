@@ -923,7 +923,7 @@
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <a href="#setting1" data-toggle="collapse"><img
+                                    <a href="#studentsYajra" data-toggle="collapse"><img
                                             src="{{ asset('images/arrow.svg') }}" id="arr"></a>
                                 </div>
                             </div>
@@ -933,8 +933,8 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#setting1" data-toggle="collapse">الطلاب</a>
-                                    <div id="setting1"
+                                    <a href="#studentsYajra" data-toggle="collapse">الطلاب</a>
+                                    <div id="studentsYajra"
                                         class="collapse @if (request()->is('allstudents')) show @endif">
 
                                         <a href="{{ route('allstudents') }}"
@@ -952,7 +952,7 @@
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <a href="#setting1" data-toggle="collapse"><img
+                                    <a href="#studentsYajra" data-toggle="collapse"><img
                                             src="{{ asset('images/arrow.svg') }}" id="arr"></a>
                                 </div>
                             </div>
