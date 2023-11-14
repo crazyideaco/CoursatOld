@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\QrCode;
 use Illuminate\Database\Eloquent\Model;
 use App\Year;
 use App\Subject;
@@ -11,6 +12,7 @@ use App\User;
 use App\Type_Rate;
 use App\Video;
 use App\Tag;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Type extends Model
 {
@@ -67,4 +69,8 @@ class Type extends Model
         return $this->user->name ?? "";
     }
 
+    public function qrcodes(): MorphMany
+    {
+        return $this->morphMany(QrCode::class, 'typeable');
+    }
 }

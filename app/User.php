@@ -29,6 +29,7 @@ use App\Video;
 use App\GroupType;
 use App\GroupTypescollege;
 use App\GroupCourse;
+use App\Models\QrCode;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
@@ -282,6 +283,5 @@ class User extends Authenticatable
             return $this->typescollege();
         }
     }
-
 
 }
