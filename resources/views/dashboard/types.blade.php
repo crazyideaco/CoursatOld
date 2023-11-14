@@ -231,7 +231,7 @@
                                                     class="btn btn-danger btn-sm"> الطلاب المحذوفين </a>
                                                 <a href="{{ route('typeexams', $type->id) }}"
                                                     class="btn btn-success btn-sm">الامتحانات</a>
-                                                <span class="btn btn-primary" data-toggle="modal"
+                                                <span class="btn btn-success btn-sm" data-toggle="modal"
                                                     data-target="#myModal{{ $type->id }}">create qrcode</span>
                                             </td>
                                         </tr>
