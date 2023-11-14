@@ -282,6 +282,7 @@
 
         //ajax in add video
         Route::get('getteacher/{id}', 'TeacherController@getteacher')->name('getteacher');
+        Route::get('getSubject_teacher/{id}', 'TeacherController@getSubject_teacher')->name('getSubject_teacher');
         Route::get('gettype/{id}/{value}', 'dashboardcontroller@gettype'); //->name('gettype');
 
         Route::get('getyear/{id}', 'YearController@getyear')->name('getyear');
