@@ -51,16 +51,16 @@ class StudentDataTable extends DataTable
                 return $centers;
             })
             ->editColumn('category_id', function ($row) {
-                return $row->is_category == config('project_types.system_category_type.category_id_college') ? 'جامعي' : 'أساسي';
+                return $row->category_id == config('project_types.system_category_type.category_id_college') ? 'جامعي' : 'أساسي';
             })
             ->addColumn('year', function ($row) {
                 switch ($row->category_id) {
-                    case '1':
+                    case config('project_types.system_category_type.category_id_basic'):
                         if ($row->year_id != null) {
                             return $row->year->name_ar ?? 'لم يحدد';
                         }
                         break;
-                    case '2':
+                    case config('project_types.system_category_type.category_id_college'):
                         if ($row->section_id != null) {
                             return $row->section->name_ar ?? 'لم يحدد';
                         }
