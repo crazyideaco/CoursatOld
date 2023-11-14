@@ -318,7 +318,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `gettype/${id}`,
+                url: `getsubject_types/${id}`,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -485,14 +485,14 @@
         $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
             //basic filters
             data.stage_id = $("#stage").val();
-            data.years_id = $("#year").val();
-            data.subjects_id = $("#subject").val();
-            //college filters
-            data.university_id = $("#university").val();
-            data.college_id = $("#college").val();
-            data.division_id = $("#division").val();
-            data.section_id = $("#section").val();
-            data.subjects_college_id = $("#subject_college").val();
+            // data.years_id = $("#year").val();
+            // data.subjects_id = $("#subject").val();
+            // //college filters
+            // data.university_id = $("#university").val();
+            // data.college_id = $("#college").val();
+            // data.division_id = $("#division").val();
+            // data.section_id = $("#section").val();
+            // data.subjects_college_id = $("#subject_college").val();
         });
         $('#dataTableBuilder').DataTable().ajax.reload();
     }
