@@ -228,7 +228,7 @@
 
 
                                         <td scope="row" class="text-center">
-                                            {{ $typescollege->center ? $typescollege->center->name ?? 'المنصه العامه' : '' }}
+                                            {{ $typescollege->center ? $typescollege->center->name ?? 'المنصه العامه' :  "المنصه العامه" }}
                                         </td>
 
                                         <td scope="row" class="text-center">

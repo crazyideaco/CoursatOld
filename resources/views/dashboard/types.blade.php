@@ -188,7 +188,7 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                {{$type->center  ? ($type->center->name ?? "المنصه العامه") : ""}}
+                                                {{$type->center  ? ($type->center->name ?? "المنصه العامه") :  "المنصه العامه"}}
                                             </td>
                                             <td class="text-center">
                                                 @if ($type->subject)

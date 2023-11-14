@@ -50,7 +50,7 @@ class Type extends Model
     }
     public function studentstype()
     {
-        return $this->belongsToMany(User::class, 'students_types', 'type_id', 'student_id')->withPivot('created_at','updated_at');
+        return $this->belongsToMany(User::class, 'students_types', 'type_id', 'student_id')->withPivot('created_at','updated_at','deleted_at');
     }
     public function tags()
     {
@@ -66,5 +66,5 @@ class Type extends Model
     {
         return $this->user->name ?? "";
     }
-    
+
 }

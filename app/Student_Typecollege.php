@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student_Typecollege extends Model
 {
-     protected  $guarded = [];
-      protected $table = "students_typescollege";
+    use SoftDeletes;
+    protected  $guarded = [];
+    protected $table = "students_typescollege";
 }
