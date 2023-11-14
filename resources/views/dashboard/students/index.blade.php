@@ -419,7 +419,7 @@
             });
         }
 
-        function getCoursesColleges(selected) {
+        function getSubject_teacherCollege(selected) {
             let id = selected.value;
             $.ajaxSetup({
                 headers: {
@@ -428,7 +428,27 @@
             });
             $.ajax({
                 type: "get",
-                url: `getCoursesColleges/${id}`,
+                url: `getSubject_teacher/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#teachers').empty();
+                    $('#teachers').html(result);
+                    $('#teachers').selectpicker('refresh');
+                }
+            });
+        }
+
+        function getTeacher_typescollege(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getTeacher_typescollege/${id}`,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -485,14 +505,14 @@
         $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
             //basic filters
             data.stage_id = $("#stage").val();
-            // data.years_id = $("#year").val();
-            // data.subjects_id = $("#subject").val();
+            data.years_id = $("#year").val();
+            data.type_id = $("#types").val();
             // //college filters
-            // data.university_id = $("#university").val();
-            // data.college_id = $("#college").val();
-            // data.division_id = $("#division").val();
-            // data.section_id = $("#section").val();
-            // data.subjects_college_id = $("#subject_college").val();
+            data.university_id = $("#university").val();
+            data.college_id = $("#college").val();
+            data.division_id = $("#division").val();
+            data.section_id = $("#section").val();
+            data.types_college_id = $("#typescollege").val();
         });
         $('#dataTableBuilder').DataTable().ajax.reload();
     }

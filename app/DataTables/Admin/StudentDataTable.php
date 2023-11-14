@@ -88,8 +88,8 @@ class StudentDataTable extends DataTable
                 ->when($request->year_id != null, function ($q) use ($request) {
                     return $q->where('year_id', (int)$request->year_id);
                 })
-                // ->when($request->subjects_id != null, function ($q) use ($request) {
-                //     $q->where('subjects_id', (int)$request->subjects_id);
+                // ->when($request->type_id != null, function ($q) use ($request) {
+                //     $q->where('type_id', (int)$request->type_id);
                 // })
                 ->when($request->university_id != null, function ($q) use ($request) {
                     return $q->where('university_id', (int)$request->university_id);
@@ -103,8 +103,8 @@ class StudentDataTable extends DataTable
                 ->when($request->section_id != null, function ($q) use ($request) {
                     return $q->where('section_id', (int)$request->section_id);
                 })
-                // ->when($request->subjects_college_id != null, function ($q) use ($request) {
-                //     $q->where('subjects_college_id', (int)$request->subjects_college_id);
+                // ->when($request->type_college_id != null, function ($q) use ($request) {
+                //     $q->where('type_college_id', (int)$request->type_college_id);
                 // })
                 ;
             });

@@ -48,8 +48,19 @@
 </div>
 
 <div class="form-group col-lg-3 col-md-6 col-12">
+    <label>المدرسين </label>
+    <select class="form-control selectpicker" name="teacher_id" required id="teachers"  onchange="getTeacher_typescollege(this)">
+        <option value="0" selected="selected" disabled="disabled">اختر المدرس</option>
+
+    </select>
+    @error('teacher_id')
+        <p style="color:red;">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="form-group col-lg-3 col-md-6 col-12">
     <label>الكورسات </label>
-    <select class="form-control selectpicker" name="types_college_id" required id="typescollege" >
+    <select class="form-control selectpicker" name="types_college_id" required id="typescollege" onchange="filter_students()">
         <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option>
 
     </select>
