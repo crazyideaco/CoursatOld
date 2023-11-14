@@ -2,7 +2,7 @@
 
 return [
     "auth_user_is_student" => [
-        "basic_student" => 1,
+        "student" => 1,
         "basic_lecturer" => 2,
         "doctor" => 3,
         "private_course_lecturer" => 4,

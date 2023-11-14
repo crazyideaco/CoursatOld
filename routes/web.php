@@ -166,6 +166,7 @@
         Route::get('editstate/{id}', 'StateController@editstate')->name('editstate');
         Route::post('updatestate/{id}', 'StateController@updatestate')->name('updatestate');
         //students
+        Route::get('allstudents', 'Dashboard\StudentController@allstudents')->name('allstudents');
         Route::get('students', 'StudentController@students')->name('students');
         Route::get('basicstudents', 'StudentController@basicstudents')->name('basicstudents');
         Route::post('filterbasicstudents', 'StudentController@filterbasicstudents')->name('filterbasicstudents');

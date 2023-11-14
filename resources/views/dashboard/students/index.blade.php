@@ -95,95 +95,59 @@
 
 
                     <div class="pt-5">
+                        {{-- <div class="row">
+                                <div class="form-group col-6">
+                                    <label>المرحله</label>
+                                    <select class="form-control selectpicker" name="stage_id" onchange="getstage(this)">
+                                        <option value="0" selected="selected" required disabled="disabled">ادخل المرحله
+                                        </option>
+                                        @foreach ($stages as $stage)
+                                            <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('stage_id')
+                                        <p style="color:red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>سنه الماده</label>
+                                    <select class="form-control selectpicker" name="years_id" required id="year"
+                                        onchange="getyear(this)">
+                                        <option value="0" selected="selected" disabled="disabled">اختر السنه</option>
+
+                                    </select>
+                                    @error('years_id')
+                                        <p style="color:red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-4">
+                                    <label>الماده </label>
+                                    <select class="form-control selectpicker" name="subjects_id" required id="subject"
+                                        onchange="getteacher(this)">
+                                        <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
+
+                                    </select>
+                                    @error('subjects_id')
+                                        <p style="color:red;">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3 mx-auto">
+
+
+                                <span class="btn btn-primary" onclick="filterbasicstudents()">بحث</span>
+                            </div>
+                        </div> --}}
                         <div class="row">
                             <div class="table-responsive">
 
-                                <table id="example" class="table col-12" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>id</th>
-                                            <th scope="col" class="text-center">الاسم</th>
-                                            <th scope="col" class="text-center">الكود</th>
-                                            <th scope="col" class="text-center">رقم الهاتف</th>
-                                            <th scope="col" class="text-center">الكورسات</th>
-
-
-                                            <!--  <th scope="col" class="text_center">السنه</th>-->
-                                            <th scope="col" class="text-center">الاعدادات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($students as $student)
-                                            <tr id="s{{ $student->id }}">
-
-                                                <th>{{ $student->id }}</th>
-                                                <td scope="col" class='text-center'><a
-                                                        href="{{ route('studentprofile', $student->id) }}">{{ $student->name }}</a>
-                                                </td>
-                                                <td scope="col" class='text-center'>{{ $student->code }}</td>
-                                                <td scope="col" class='text-center'>{{ $student->phone }}</td>
-                                                @if ($student->year_id != null)
-                                                    <td scope="col" class="text-center">
-                                                        <ul>
-                                                            @if ($student->stutypes)
-                                                                @foreach ($student->stutypes as $type)
-                                                                    <li style="font-size:14px;">{{ $type->name_ar }}</li>
-                                                                @endforeach
-                                                            @endif
-                                                        </ul>
-                                                    </td>
-                                                @elseif($student->university_id != null)
-                                                    <td scope="col" class="text-center">
-                                                        <ul>
-                                                            @if ($student->stutypescollege)
-                                                                @foreach ($student->stutypescollege as $typecollege)
-                                                                    <li style="font-size:14px;">{{ $typecollege->name_ar }}
-                                                                    </li>
-                                                                @endforeach
-                                                            @endif
-                                                        </ul>
-
-                                                    </td>
-                                                @else
-                                                    <td scope="col" class="text-center">
-
-
-                                                    </td>
-                                                @endif
-                                                <td class="text-center">
-                                                    <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px" onclick="student_logout({{ $student->id }})">
-                                                        تسجيل الخروج
-                                                    </span>
-                                                    <span
-                                                        class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
-                                                        id="btn{{ $student->id }}"
-                                                        onclick="activeuser({{ $student->id }})">
-                                                        @if ($student->active == 1)
-                                                            الغاء التفعيل
-                                                        @else
-                                                            تفعيل
-                                                        @endif
-                                                    </span>
-                                                    <img src="{{ asset('images/trash.svg') }}" id="trash"
-                                                        onclick="deleteuser('{{ $student->id }}')"
-                                                        style="cursor:pointer;">
-                                                    @if ($student->category_id == 1)
-                                                        <a class="btnbtn-sm mt-2"
-                                                            style="border:1px solid #222; margin-bottom:10px; font-size:13px; display:block;    padding: 10px 10px; width: 60%; "
-                                                            href="{{ route('typeresults_students', $student->id) }}">نتائج
-                                                            الامتحانات</a>
-                                                    @elseif($student->category_id == 2)
-                                                        <a class="btn btn-sm mt-2"
-                                                            style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
-                                                            href="{{ route('typecollegeresults_students', $student->id) }}">نتائج
-                                                            الامتحانات</a>
-                                                    @endif
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                {!! $dataTable->table(
+                                    [
+                                        'class' => 'table_expenses table_topic table table-striped table-bordered',
+                                    ],
+                                    true,
+                                ) !!}
 
                             </div>
                         </div>
@@ -209,13 +173,14 @@
         </div>
     </div>
     <!--end page-body-->
-
-
 @endsection
+
 @section('scripts')
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+    {{ $dataTable->scripts() }}
 
 
     <script>
