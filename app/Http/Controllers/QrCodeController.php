@@ -37,7 +37,7 @@ class QrCodeController extends Controller
 
         try {
             $rules['count'] = 'required|numeric';
-            $rules['expire_date'] = 'required|date';
+            $rules['expire_date'] = 'required|date|after:today';
             $validator = validator($request->all(), $rules);
 
             if ($validator->fails()) {
