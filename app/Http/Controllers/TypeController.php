@@ -321,4 +321,7 @@ class TypeController extends Controller
             return response(['status' => 'active']);
         }
     }
+
+
+    
 }

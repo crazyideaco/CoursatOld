@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin;
 
 use App\User;
+use Illuminate\Http\Request as HttpRequest;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -18,7 +19,7 @@ class StudentDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query, HttpRequest $request)
     {
         return datatables()
             ->eloquent($query)
@@ -69,14 +70,43 @@ class StudentDataTable extends DataTable
 
             })
             ->editColumn('created_at', function ($row) {
-                return $row->created_at->format('Y-m-d');
+                return  $row->created_at ? $row->created_at->format('Y-m-d') : '';
             })
             ->rawColumns([
                 'action',
                 'courses',
                 'centers',
                 'category_id',
-            ]);
+            ])
+            ->filter(function ($query) use ($request) {
+                $query
+                ->when($request->stage_id != null, function ($q) use ($request) {
+                    $q->where('stage_id', (int)$request->client_type);
+                })
+                ->when($request->year_id != null, function ($q) use ($request) {
+                    $q->where('year_id', (int)$request->year_id);
+                })
+                // ->when($request->subjects_id != null, function ($q) use ($request) {
+                //     $q->where('subjects_id', (int)$request->subjects_id);
+                // })
+                ->when($request->university_id != null, function ($q) use ($request) {
+                    $q->where('university_id', (int)$request->university_id);
+                })
+                ->when($request->college_id != null, function ($q) use ($request) {
+                    $q->where('college_id', (int)$request->college_id);
+                })
+                ->when($request->division_id != null, function ($q) use ($request) {
+                    $q->where('division_id', (int)$request->division_id);
+                })
+                ->when($request->section_id != null, function ($q) use ($request) {
+                    $q->where('section_id', (int)$request->section_id);
+                })
+                // ->when($request->subjects_college_id != null, function ($q) use ($request) {
+                //     $q->where('subjects_college_id', (int)$request->subjects_college_id);
+                // })
+                ;
+            })
+            ;
     }
 
     /**
