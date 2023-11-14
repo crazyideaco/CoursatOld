@@ -235,57 +235,57 @@
                                                     data-target="#myModal{{ $type->id }}">create qrcode</span>
                                             </td>
                                         </tr>
+                                        <div class="modal" id="myModal{{ $type->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">{{ __('messages.create_qrcode') }}
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <label>{{ __('messages.count') }} </label>
+                                                                <input class="form-control" value="1"
+                                                                    id="count{{ $type->id }}">
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <label>{{ __('messages.expire_date') }} </label>
+                                                                <input class="form-control" type="date"
+                                                                    id="expire_date{{ $type->id }}">
+                                                            </div>
+                                                            <div class="col-md-6 col-12">
+                                                                <div id="qrcodes{{ $type->id }}"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-4">
+                                                            <button type="button" class="btn btn-success mx-auto"
+                                                                onclick="store_qrcodes({{ $type->id }})">save</button>
+
+                                                            <button class="btn btn-primary waves-effect waves-light mr-12"
+                                                                type="button" onclick=" printDiv('qrcodes{{ $type->id }}');">
+                                                                طباعة ال QR
+                                                            </button>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>
 
 
-                            <div class="modal" id="myModal{{ $type->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">{{ __('messages.create_qrcode') }}
-                                            </h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <label>{{ __('messages.count') }} </label>
-                                                    <input class="form-control" value="1"
-                                                        id="count{{ $type->id }}">
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label>{{ __('messages.expire_date') }} </label>
-                                                    <input class="form-control" type="date"
-                                                        id="expire_date{{ $type->id }}">
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div id="qrcodes{{ $type->id }}"></div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-4">
-                                                <button type="button" class="btn btn-success mx-auto"
-                                                    onclick="store_qrcodes({{ $type->id }})">save</button>
-
-                                                <button class="btn btn-primary waves-effect waves-light mr-12"
-                                                    type="button" onclick=" printDiv('qrcodes{{ $type->id }}');">
-                                                    طباعة ال QR
-                                                </button>
-
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
 
                         </div>
