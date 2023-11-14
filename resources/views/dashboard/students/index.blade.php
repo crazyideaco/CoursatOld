@@ -416,4 +416,16 @@
 
     }
 </script> --}}
+
+
+<script>
+    function filter_clients() {
+        $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
+            data.stage_id = $("#stage").val();
+            data.years_id = $("#year").val();
+        });
+        $('#dataTableBuilder').DataTable().ajax.reload();
+    }
+</script>
+
 @endsection

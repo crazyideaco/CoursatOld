@@ -1,6 +1,6 @@
 <div class="form-group col-6">
     <label>المرحله</label>
-    <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this)">
+    <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this)" id="stage">
         <option value="0" selected="selected" required disabled="disabled">ادخل المرحله
         </option>
         @foreach ($stages as $stage)
