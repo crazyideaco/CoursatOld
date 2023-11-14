@@ -308,6 +308,27 @@
 
             });
         }
+
+        function getsubjects_types(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `gettype/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#types').empty();
+                    $('#types').html(result);
+                    $('#types').selectpicker('refresh');
+                }
+
+            });
+        }
     </script>
 
     {{-- college filters --}}
@@ -376,6 +397,48 @@
 
             });
         }
+
+        function getsection_subjectsCollege(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getsection_subjectsCollege/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#subject_college').empty();
+                    $('#subject_college').html(result);
+                    $('#subject_college').selectpicker('refresh');
+                }
+
+            });
+        }
+
+        function getCoursesColleges(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getCoursesColleges/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#typescollege').empty();
+                    $('#typescollege').html(result);
+                    $('#typescollege').selectpicker('refresh');
+                }
+
+            });
+        }
     </script>
 
 {{-- <script>
@@ -416,4 +479,22 @@
 
     }
 </script> --}}
+
+<script>
+    function filter_students() {
+        $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
+            //basic filters
+            data.stage_id = $("#stage").val();
+            data.years_id = $("#year").val();
+            data.subjects_id = $("#subject").val();
+            //college filters
+            data.university_id = $("#university").val();
+            data.college_id = $("#college").val();
+            data.division_id = $("#division").val();
+            data.section_id = $("#section").val();
+            data.subjects_college_id = $("#subject_college").val();
+        });
+        $('#dataTableBuilder').DataTable().ajax.reload();
+    }
+</script>
 @endsection

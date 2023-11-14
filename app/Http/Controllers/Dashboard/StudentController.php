@@ -30,7 +30,6 @@ class StudentController extends Controller
         ]);
     }
 
-    
 
     /**
      * year_id
