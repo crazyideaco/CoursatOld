@@ -270,7 +270,7 @@ class StudentController extends Controller
     {
 
         $students = [];
-        $students_joins = Student_Typecollege::where("type_id", $id)->onlyTrashed()->get();
+        $students_joins = Student_Typecollege::where("typecollege_id", $id)->onlyTrashed()->get();
         foreach ($students_joins as $join) {
             $students [] = $join->student;
         }
