@@ -83,6 +83,7 @@ class StudentDataTable extends DataTable
             ->filter(function ($query) use ($request) {
                 $query
                 ->when($request->stage_id != null, function ($q) use ($request) {
+                    dd($request->stage_id);
                     return $q->where('stage_id', (int)$request->client_type);
                 })
                 ->when($request->year_id != null, function ($q) use ($request) {
@@ -107,8 +108,7 @@ class StudentDataTable extends DataTable
                 //     $q->where('subjects_college_id', (int)$request->subjects_college_id);
                 // })
                 ;
-            })
-            ;
+            });
     }
 
     /**
@@ -135,6 +135,7 @@ class StudentDataTable extends DataTable
             ->minifiedAjax()
             // ->dom('Bfrtip')
             ->orderBy(1)
+            // ->orderBy('id', 'desc')
             ->lengthMenu([[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]]);
     }
 
