@@ -44,9 +44,11 @@ class StudentDataTable extends DataTable
                 return $courses_names;
             })
             ->addColumn('centers', function ($row) {
+                $centers = "المنصة العامة";
                 if ($row->stdcenters) {
-                    implode('-', $row->stdcenters->pluck('name')->toArray());
+                    $centers = implode('-', $row->stdcenters->pluck('name')->toArray());
                 }
+                return $centers;
             })
             ->editColumn('category_id', function ($row) {
                 return $row->is_category == config('project_types.system_category_type.category_id_college') ? 'جامعي' : 'أساسي';
@@ -148,7 +150,7 @@ class StudentDataTable extends DataTable
             Column::make('name')->title('الاسم'),
             Column::make('code')->title('الكود'),
             Column::make('phone')->title('رقم الهاتف'),
-            Column::make('courses')->title('الكورسات'),
+            // Column::make('courses')->title('الكورسات'),
             Column::make('created_at')->title('تاريخ التسجيل'),
             Column::make("centers")->title("المنصة"),
             Column::make("category_id")->title("نوع التعليم"),
