@@ -329,7 +329,7 @@
             $.ajax({
                 type: 'POST',
                 data: {
-                    'typeable_id': type_id,
+                    'type_id': type_id,
                     'count': $(`#count${type_id}`).val(),
                     'expire_date': $(`#expire_date${type_id}`).val(),
                 },
