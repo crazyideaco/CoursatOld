@@ -41,6 +41,25 @@ class User extends Authenticatable
      * @var array
      */
     protected  $guarded = [];
+    // protected $fillable = [
+    //     'name', 'email', 'address', 'image', 'description', 'phone', 'latitude', 'longitude',
+    //     'active', 'intro', 'info_compelete',
+    //     'email_verified_at', 'password', 'remember_token', 'api_token',
+    //     'isAdmin', 'is_student', 'is_college', 'is_public_platform_or_private_platform', 'is_scientific',
+    //     "year_id", "university_id", "college_id", "division_id", "section_id", "subjectscollege_id", "general_id", "center_id", 'subject_id', "category_id", "stage_id",
+    //     'state_id', 'city_id',
+    //     "points",
+    //      "printsplash",
+    //      "device_token",
+    //      "device_id",
+    //      "phone_verify",
+    //      "created_at",
+    //      "updated_at",
+    //      "code",
+    //      "is_visitor",
+    //      "cover_image",
+    // ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -199,6 +218,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Year::class, 'year_id');
     }
+    /**
+     * this is the centers that the students/users belong
+     */
     public function stdcenters()
     {
         return $this->belongsToMany(User::class, 'users_owners', 'user_id', 'owner_id');

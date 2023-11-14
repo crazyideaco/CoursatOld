@@ -41,7 +41,42 @@ class StudentDataTable extends DataTable
                     }
                 }
                 return $courses_names;
-            });
+            })
+            ->addColumn('centers', function ($row) {
+                if ($row->stdcenters) {
+                    implode('-', $row->stdcenters->pluck('name')->toArray());
+                }
+            })
+            ->editColumn('category_id', function ($row) {
+                return $row->is_category == config('project_types.system_category_type.category_id_college') ? 'جامعي' : 'أساسي';
+            })
+            ->addColumn('year', function ($row) {
+                switch ($row->category_id) {
+                    case '1':
+                        if ($row->year_id != null) {
+                            return $row->year->name_ar ?? 'لم يحدد';
+                        }
+                        break;
+                    case '2':
+                        if ($row->section_id != null) {
+                            return $row->section->name_ar ?? 'لم يحدد';
+                        }
+                        break;
+                    default:
+                        return 'لم يحدد';
+                        break;
+                }
+
+            })
+            ->editColumn('created_at', function ($row) {
+                return $row->created_at->format('Y-m-d');
+            })
+            ->rawColumns([
+                'action',
+                'courses',
+                'centers',
+                'category_id',
+            ]);
     }
 
     /**
@@ -84,7 +119,10 @@ class StudentDataTable extends DataTable
             Column::make('code')->title('الكود'),
             Column::make('phone')->title('رقم الهاتف'),
             Column::make('courses')->title('الكورسات'),
-            Column::make('created_at'),
+            Column::make('created_at')->title('تاريخ التسجيل'),
+            Column::make("centers")->title("المنصة"),
+            Column::make("category_id")->title("نوع التعليم"),
+            Column::make("year")->title("السنة"),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

@@ -95,44 +95,15 @@
 
 
                     <div class="pt-5">
-                        {{-- <div class="row">
-                                <div class="form-group col-6">
-                                    <label>المرحله</label>
-                                    <select class="form-control selectpicker" name="stage_id" onchange="getstage(this)">
-                                        <option value="0" selected="selected" required disabled="disabled">ادخل المرحله
-                                        </option>
-                                        @foreach ($stages as $stage)
-                                            <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('stage_id')
-                                        <p style="color:red;">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-6">
-                                    <label>سنه الماده</label>
-                                    <select class="form-control selectpicker" name="years_id" required id="year"
-                                        onchange="getyear(this)">
-                                        <option value="0" selected="selected" disabled="disabled">اختر السنه</option>
-
-                                    </select>
-                                    @error('years_id')
-                                        <p style="color:red;">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div class="form-group col-4">
-                                    <label>الماده </label>
-                                    <select class="form-control selectpicker" name="subjects_id" required id="subject"
-                                        onchange="getteacher(this)">
-                                        <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
-
-                                    </select>
-                                    @error('subjects_id')
-                                        <p style="color:red;">{{ $message }}</p>
-                                    @enderror
-                                </div>
+                        <div class="row" id="category_id_basic">
+                            @include('dashboard.students.includes.__basic_filter_sections')
                         </div>
-                        <div class="row">
+
+
+                        <div class="row" id="category_id_college">
+                            @include('dashboard.students.includes.__college_filter_sections')
+                        </div>
+                        {{-- <div class="row">
                             <div class="col-3 mx-auto">
 
 
@@ -184,20 +155,6 @@
 
 
     <script>
-        $(document).ready(function() {
-
-            $('#example').DataTable({
-                "order": [
-                    [0, "desc"]
-                ],
-                "columnDefs": [{
-                    "targets": [0],
-                    "visible": false,
-                }, ] // Order on init. # is the column, starting at 0
-
-            });
-        });
-
         function activeuser(id) {
             $.ajaxSetup({
                 headers: {
@@ -307,4 +264,156 @@
             });
         }
     </script>
+
+    {{-- basic filters --}}
+    <script>
+        function getstage_years(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getstage/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#year').empty();
+                    $('#year').html(result);
+                    $('#year').selectpicker('refresh');
+                }
+
+            });
+        }
+
+        function getyear_subjects(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getyear/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#subject').empty();
+                    $('#subject').html(result);
+                    $('#subject').selectpicker('refresh');
+                }
+
+            });
+        }
+    </script>
+
+    {{-- college filters --}}
+    <script>
+        function getcolleges(selected) {
+            let id = selected.value;
+            console.log(id);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getcolleges/${id}`,
+                //    contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#college').empty();
+                    $('#college').html(result.data);
+                    $('.selectpicker').selectpicker('refresh');
+                    console.log(result);
+                }
+
+            });
+        }
+
+        function getdivision(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getdivision/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#division').empty();
+                    $('#division').html(result);
+                    $('.selectpicker').selectpicker('refresh');
+                }
+
+            });
+        }
+
+        function getsection(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getsection/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#section').empty();
+                    $('#section').html(result);
+                    $('.selectpicker').selectpicker('refresh');
+                }
+
+            });
+        }
+    </script>
+
+{{-- <script>
+    function filter_based_on_category_id_education() {
+
+        // // Get selected options
+        // var selected = $("#issue_type_id option:selected");
+
+        // var issue_types = selected.map(function() {
+        //     return $(this).val();
+        // }).get(); // Convert to an array
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            url: `{{ route('client.issues.index') }}`,
+            type: 'POST',
+            data: {
+                "word": $(".word").val(),
+                "session_date": session_date,
+                "issue_types": issue_types,
+                "issue_status": issue_status,
+            },
+
+
+        }).done(function(result) {
+            // $('.selectpicker').selectpicker('refresh');
+            $('.category_id_basic').html(result);
+        }).fail(function(result) {
+            $('.case_container').html(result);
+        });
+
+    }
+</script> --}}
 @endsection

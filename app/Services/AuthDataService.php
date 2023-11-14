@@ -19,4 +19,4 @@ class AuthDataService
         }
         return $types;
     }
-}
+}//End of service

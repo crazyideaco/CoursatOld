@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\State;
 use FFMpeg;
@@ -57,63 +59,74 @@ use App\Paqa;
 use App\Paqa_User;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
+
 class StageController extends Controller
 {
-      public function __construct()
+    public function __construct()
     {
-       $this->middleware(['permission:stages-create'])->only('addstage');
+        $this->middleware(['permission:stages-create'])->only('addstage');
         $this->middleware(['permission:stages-read'])->only('stages');
         $this->middleware(['permission:stages-update'])->only('editstage');
-       $this->middleware(['permission:stages-delete'])->only('deletestage');
+        $this->middleware(['permission:stages-delete'])->only('deletestage');
     }
-   public function addstage(){
-         return view('dashboard.addstage');
-     }
-       public function storestage(Request $request){
-             $request->validate([
-             'name_ar' => 'required|unique:stages',
-             'name_en' => 'required||unique:stages'
-               ],[
-                 'required' => 'هذا الحقل مطلوب' ,
-				 'unique' =>  'هذا الاسم موجود'
-                   ]);
-         $stage = new Stage;
-         $stage->name_ar = $request->name_ar;
-          $stage->name_en = $request->name_en;
-         $stage->category_id = $request->category_id;
-         $stage->save();
-         return redirect()->route('stages');
-     } public function editstage($id){
-         return view('dashboard.editstage')->with('stage',Stage::where('id',$id)->first());
-     }
-       public function updatestage($id,Request $request){
-           $request->validate([
-             'name_ar' => 'required|unique:stages,name_ar,' . $id,
-             'name_en' => 'required|unique:stages,name_en,' . $id,
-               ],[
-                 'required' => 'هذا الحقل مطلوب' ,
-					'unique' => 'هذا الاسم موجود'
-                   ]);
-         $stage = Stage::where('id',$id)->first();
-         $stage->name_ar = $request->name_ar;
-          $stage->name_en = $request->name_en;
-         $stage->category_id = $request->category_id;
-         $stage->save();
-         return redirect()->route('stages');
-     }
-     public function stages(){
-         return view('dashboard.stages')->with('stages',Stage::all());
-     }public function deletestage($id){
-   $category = Stage::where('id',$id)->first();
-   $category->delete();
-   return response()->json(['status' => true]);
- }     public function getstage($id){
-         $years = Year::where('stage_id',$id)->get();
-         $text = "";
-        $text .='<option value="0"   disabled="disabled">ادخل السنه</option>';
-                foreach($years as $year){
-                       $text .= '<option value="'.$year->id.'">'.$year->year_ar.'</option>';
-            }
-            return response()->json($text);
-     }
+    public function addstage()
+    {
+        return view('dashboard.addstage');
+    }
+    public function storestage(Request $request)
+    {
+        $request->validate([
+            'name_ar' => 'required|unique:stages',
+            'name_en' => 'required||unique:stages'
+        ], [
+            'required' => 'هذا الحقل مطلوب',
+            'unique' =>  'هذا الاسم موجود'
+        ]);
+        $stage = new Stage;
+        $stage->name_ar = $request->name_ar;
+        $stage->name_en = $request->name_en;
+        $stage->category_id = $request->category_id;
+        $stage->save();
+        return redirect()->route('stages');
+    }
+    public function editstage($id)
+    {
+        return view('dashboard.editstage')->with('stage', Stage::where('id', $id)->first());
+    }
+    public function updatestage($id, Request $request)
+    {
+        $request->validate([
+            'name_ar' => 'required|unique:stages,name_ar,' . $id,
+            'name_en' => 'required|unique:stages,name_en,' . $id,
+        ], [
+            'required' => 'هذا الحقل مطلوب',
+            'unique' => 'هذا الاسم موجود'
+        ]);
+        $stage = Stage::where('id', $id)->first();
+        $stage->name_ar = $request->name_ar;
+        $stage->name_en = $request->name_en;
+        $stage->category_id = $request->category_id;
+        $stage->save();
+        return redirect()->route('stages');
+    }
+    public function stages()
+    {
+        return view('dashboard.stages')->with('stages', Stage::all());
+    }
+    public function deletestage($id)
+    {
+        $category = Stage::where('id', $id)->first();
+        $category->delete();
+        return response()->json(['status' => true]);
+    }
+    public function getstage($id)
+    {
+        $years = Year::where('stage_id', $id)->get();
+        $text = "";
+        $text .= '<option value="0"   disabled="disabled">ادخل السنه</option>';
+        foreach ($years as $year) {
+            $text .= '<option value="' . $year->id . '">' . $year->year_ar . '</option>';
+        }
+        return response()->json($text);
+    }
 }
