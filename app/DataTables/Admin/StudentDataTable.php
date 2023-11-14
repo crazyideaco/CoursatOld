@@ -86,22 +86,22 @@ class StudentDataTable extends DataTable
                     return $q->where('stage_id', (int)$request->stage_id);
                 })
                 ->when($request->year_id != null, function ($q) use ($request) {
-                    $q->where('year_id', (int)$request->year_id);
+                    return $q->where('year_id', (int)$request->year_id);
                 })
                 // ->when($request->subjects_id != null, function ($q) use ($request) {
                 //     $q->where('subjects_id', (int)$request->subjects_id);
                 // })
                 ->when($request->university_id != null, function ($q) use ($request) {
-                    $q->where('university_id', (int)$request->university_id);
+                    return $q->where('university_id', (int)$request->university_id);
                 })
                 ->when($request->college_id != null, function ($q) use ($request) {
-                    $q->where('college_id', (int)$request->college_id);
+                    return $q->where('college_id', (int)$request->college_id);
                 })
                 ->when($request->division_id != null, function ($q) use ($request) {
-                    $q->where('division_id', (int)$request->division_id);
+                    return $q->where('division_id', (int)$request->division_id);
                 })
                 ->when($request->section_id != null, function ($q) use ($request) {
-                    $q->where('section_id', (int)$request->section_id);
+                    return $q->where('section_id', (int)$request->section_id);
                 })
                 // ->when($request->subjects_college_id != null, function ($q) use ($request) {
                 //     $q->where('subjects_college_id', (int)$request->subjects_college_id);
