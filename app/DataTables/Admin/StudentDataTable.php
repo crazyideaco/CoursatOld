@@ -153,7 +153,7 @@ class StudentDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('name')->title('الاسم'),
-            Column::make('code')->title('الكود'),
+            // Column::make('code')->title('الكود'),
             Column::make('phone')->title('رقم الهاتف'),
             // Column::make('courses')->title('الكورسات'),
             Column::make('created_at')->title('تاريخ التسجيل'),

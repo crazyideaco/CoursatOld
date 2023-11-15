@@ -103,7 +103,7 @@ class StorevideoscollegeService {
 
                                 // $video->url = $this->upload_video($url);
                                 $time = time();
-                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 //dd($path);
                                 $video->storage_type = 1;
@@ -213,7 +213,7 @@ class StorevideoscollegeService {
                                 $url = $request->url;
                                 $video->video_size = $request->file('url')->getSize() / 1024;
                                 $time = time();
-                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                             }
@@ -320,7 +320,7 @@ class StorevideoscollegeService {
                                 $url = $request->url;
                                 $video->video_size = $request->file('url')->getSize() / 1024;
                                 $time = time();
-                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                             }
