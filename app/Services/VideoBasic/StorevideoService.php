@@ -107,13 +107,13 @@ class StorevideoService
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                //   \Storage::disk('disk6/disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                //   \Storage::disk('disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 //  $url->storeAs('/', time(). '.'.$url->getClientOriginalExtension(), 'uploads');
 
-                                \Storage::disk('disk6/disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 //  \Storage::disk('uploads')->putFileAs('', $url,  time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
-                                $video->video_type_link = 7;
+                                $video->video_type_link = 6;
                             }
                             if($request->hasFile('image'))
                             {
@@ -188,9 +188,9 @@ class StorevideoService
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk6/disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
-                                $video->video_type_link = 7;
+                                $video->video_type_link = 6;
 
                             }
                             if($request->hasFile('image'))
@@ -266,10 +266,10 @@ class StorevideoService
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video= $request->file('url')->getSize()/1024;
-                                \Storage::disk('disk6/disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("",$request->file("url"),time(). '.'.$url->getClientOriginalExtension());
                                 $video->url = time(). '.'.$url->getClientOriginalExtension();
 
-                                $video->video_type_link = 7;
+                                $video->video_type_link = 6;
                             }
                             if($request->hasFile('image'))
                             {

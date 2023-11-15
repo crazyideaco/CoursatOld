@@ -15,7 +15,18 @@ return [
         // "category_id_center" => 3,
     ],
     "video_type_link" => [
-        "storevideoscollege_function" => 7,
+        "disk7" => 7,
+        "disk6" => 6,
+        "disk4" => 4,
+        "disk3" => 3,
+        "disk2" => 2,
+        "disk1" => 1,
+        "uploads" => 0,
+    ],
+
+    "storage_type" => [
+        "Videocollege" => 1,
+        
     ],
 
     "is_public_platform_or_private_platform" => [

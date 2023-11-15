@@ -83,10 +83,10 @@ class UpdateVideoscollegeService {
 
                                 $url = $request->url;
                                 $time = time();
-                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
-                                $video->video_type_link = 7;
+                                $video->video_type_link = 6;
                             }
                             if ($request->hasFile('image')) {
                                 if (public_path() . '/uploads/' . $video->image) {
@@ -165,10 +165,10 @@ class UpdateVideoscollegeService {
 
                                 $url = $request->url;
                                 $time = time();
-                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
-                                $video->video_type_link = 7;
+                                $video->video_type_link = 6;
                             }
                             if ($request->hasFile('image')) {
                                 if (public_path() . '/uploads/' . $video->image) {
@@ -242,10 +242,10 @@ class UpdateVideoscollegeService {
 
                                 $url = $request->url;
                                 $time = time();
-                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
-                                $video->video_type_link = 7;
+                                $video->video_type_link = 6;
                             }
                             if ($request->hasFile('image')) {
                                 if (public_path() . '/uploads/' . $video->image) {

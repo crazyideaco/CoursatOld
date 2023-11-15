@@ -56,7 +56,7 @@ class StorevideoscollegeService {
             $is_youtube = $request->youtube_link ? 1 : 0;
             $video = new VideosCollege;
             $video->order_number = $request->order_number;
-            $video->video_type_link = 7;
+            $video->video_type_link = 6;
             $video->youtube_link = $youtube_link;
             $video->is_youtube = $is_youtube;
             if (auth()->user() && auth()->user()->isAdmin == 'admin') {
@@ -103,11 +103,11 @@ class StorevideoscollegeService {
 
                                 // $video->url = $this->upload_video($url);
                                 $time = time();
-                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 //dd($path);
                                 $video->storage_type = 1;
-                                $video->video_type_link = 7;
+                                $video->video_type_link = 6;
                                 // dd(\Storage::disk("google")->url($this->upload_video($url)),$this->upload_video($url));
                             }
                             if ($request->hasFile('image')) {
@@ -213,7 +213,7 @@ class StorevideoscollegeService {
                                 $url = $request->url;
                                 $video->video_size = $request->file('url')->getSize() / 1024;
                                 $time = time();
-                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                             }
@@ -320,7 +320,7 @@ class StorevideoscollegeService {
                                 $url = $request->url;
                                 $video->video_size = $request->file('url')->getSize() / 1024;
                                 $time = time();
-                                \Storage::disk('disk6/disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                             }
