@@ -1,6 +1,6 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>المرحله</label>
-    <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);filter_students()" id="stage">
+    <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);filter_students();" id="stage">
         <option value="0" selected="selected" required disabled="disabled">ادخل المرحله
         </option>
         @foreach ($stages as $stage)
@@ -13,7 +13,7 @@
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>سنه الماده</label>
-    <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this);filter_students()">
+    <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this);filter_students();">
         <option value="0" selected="selected" disabled="disabled">اختر السنه</option>
 
     </select>
