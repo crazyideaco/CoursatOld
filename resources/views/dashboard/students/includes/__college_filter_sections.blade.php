@@ -1,7 +1,7 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الجامعه </label>
     <select name="university_id" required class="form-control" id="university"
-        onchange="getcolleges(this);filter_students()">
+        onchange="getcolleges(this);filter_students();">
         <option value="0">اختر جامعه</option>
         @foreach ($universities as $university)
             <option value="{{ $university->id }}">
@@ -16,7 +16,7 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الكليه </label>
     <select name="college_id" required class="form-control" id="college"
-        onchange="getdivision(this);filter_students()">
+        onchange="getdivision(this);filter_students();">
         <option value="0">اختر كليه</option>
 
     </select>
@@ -24,14 +24,14 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم القسم </label>
     <select name="division_id" required class="form-control" id="division"
-        onchange="getsection(this);filter_students()">
+        onchange="getsection(this);filter_students();">
         <option value="0">اختر قسم</option>
 
     </select>
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الفرقه </label>
-    <select name="section_id" required class="form-control" id="section" onchange="getsection_subjectsCollege(this);filter_students()">
+    <select name="section_id" required class="form-control" id="section" onchange="getsection_subjectsCollege(this);filter_students();">
         <option value="0">اختر فرقه</option>
 
     </select>
