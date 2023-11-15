@@ -3,6 +3,7 @@
 
 namespace App\Services;
 
+use App\Course;
 use App\Models\Patch;
 use App\Type;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use App\User;
 
 class QrcodeService
 {
-    public function store(Request $request,$model)
+    public function store(Request $request,$model,$model_type)
     {
 
         try {
@@ -27,7 +28,19 @@ class QrcodeService
 
             $returnedQrCode = [];
 
-            $course = $model::whereId(request()->type_id)->first();
+
+            switch ($model_type) {
+                case 'value':
+                    $course = Course::whereId(request()->type_id)->first();
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
+
+
+
             $count = request()->count;
 
             $patch = Patch::create([
