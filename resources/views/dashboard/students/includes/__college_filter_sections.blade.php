@@ -184,8 +184,8 @@
 
     function getTeacher_typescollege(teacherId) {
         let subjectId = $('#subject_college').val();
-        let teacherId = $('#teachers_college').val();
-        
+        let teacher_id = $('#teachers_college').val();
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -193,7 +193,7 @@
         });
         $.ajax({
             type: "get",
-            url: `getTeacher_typescollege/${subjectId}/${teacherId}`,
+            url: `getTeacher_typescollege/${subjectId}/${teacher_id}`,
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {

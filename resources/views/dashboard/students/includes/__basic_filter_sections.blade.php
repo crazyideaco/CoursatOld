@@ -141,7 +141,7 @@
 
     function getTeacher_types(teacherId) {
         let subjectId = $('#subject').val();
-        let teacherId = $('#teachers').val();
+        let teacher_id = $('#teachers').val();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -149,7 +149,7 @@
         });
         $.ajax({
             type: "get",
-            url: `gettype/${subjectId}/${teacherId}`,
+            url: `gettype/${subjectId}/${teacher_id}`,
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
