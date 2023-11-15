@@ -19,6 +19,7 @@ class TeacherController extends Controller
     }
 
     public function getSubject_teachercollege($id){
+        dd('dddddd');
         $users = SubjectsCollege::where('id', $id)->first()->teachers;
         $text = "";
         foreach ($users as $user) {
