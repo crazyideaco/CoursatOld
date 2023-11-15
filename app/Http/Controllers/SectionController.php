@@ -132,18 +132,7 @@ class SectionController extends Controller
         $section->save();
         return redirect()->route('sections');
     }
-    public function getsection($id)
-    {
-        $sections = Section::where('division_id', $id)->get();
-
-        $text = "";
-
-        $text .= '<option value="0" selected="selected"   disabled="disabled">ادخل الفرقه</option>';
-        foreach ($sections as $section) {
-            $text .= '<option value="' . $section->id . '">' . $section->name_ar . '</option>';
-        }
-        return response()->json($text);
-    }
+    
     public function getsection2(Request $request)
     {
 
@@ -169,19 +158,5 @@ class SectionController extends Controller
     }
 
 
-    public function getsection_subjectsCollege($id)
-    {
-        if (Auth::user() && Auth::user()->is_student == 2) {
-            $subjects = auth()->user()->subcolleges->where('section_id', $id);
-        } else {
-            $subjects = SubjectsCollege::where('section_id', $id)->get();
-        }
-        $text = "";
-        $text .= ' <option value="0"  selected="selected" disabled>اختر الماده</option>';
-        foreach ($subjects as $subject) {
-            $text .= '<option value="' . $subject->id . '">' . $subject->name_ar . '</option>';
-        }
 
-        return response()->json($text);
-    }
 }

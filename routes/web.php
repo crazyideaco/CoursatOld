@@ -162,7 +162,8 @@
         Route::get('getcity/{id}', 'CityController@getcity')->name('getcity');
         //ajax subtype
         Route::get('gettype/{id}', 'TypeController@gettype')->name('gettype');
-        Route::get('getsubject_types/{id}', 'TypeController@getsubject_types')->name('getsubject_types');
+        Route::get('gettype/{id}/{value}', 'Dashboard\Filter\TypeController@gettype')->name('gettype');
+        Route::get('getsubject_types/{id}', 'Dashboard\Filter\TypeController@getsubject_types')->name('getsubject_types');
         //edit
         Route::get('editstate/{id}', 'StateController@editstate')->name('editstate');
         Route::post('updatestate/{id}', 'StateController@updatestate')->name('updatestate');
@@ -278,15 +279,15 @@
         Route::get('edittype/{id}', 'TypeController@edittype')->name('edittype');
         Route::post('updatetype/{id}', 'TypeController@updatetype')->name('updatetype');
         Route::get('deletetype/{id}', 'TypeController@deletetype')->name('deletetype');
-        Route::get('getstage/{id}', 'StageController@getstage')->name('getstage');
+        Route::get('getstage/{id}', 'Dashboard\Filter\StageController@getstage')->name('getstage');
 
         //ajax in add video
         Route::get('getteacher/{id}', 'TeacherController@getteacher')->name('getteacher');
-        Route::get('getSubject_teacher/{id}', 'TeacherController@getSubject_teacher')->name('getSubject_teacher');
-        Route::get('getSubject_teachercollege/{id}', 'TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
+        Route::get('getSubject_teacher/{id}', 'Dashboard\Filter\TeacherController@getSubject_teacher')->name('getSubject_teacher');
+        Route::get('getSubject_teachercollege/{id}', 'Dashboard\Filter\TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
         Route::get('gettype/{id}/{value}', 'dashboardcontroller@gettype'); //->name('gettype');
 
-        Route::get('getyear/{id}', 'YearController@getyear')->name('getyear');
+        Route::get('getyear/{id}', 'Dashboard\Filter\YearController@getyear')->name('getyear');
         Route::get('getsubtype/{id}', 'SubtypeController@getsubtype')->name('getsubtype');
 
         //subtypes
@@ -482,12 +483,12 @@
         Route::get('delete_video_college_video/{id}', 'VideosCollegeController@delete_video_college_video')->name('delete_video_college_video');
 
         //typecollege ajax
-        Route::get('getsection_subjectsCollege/{id}', 'SectionController@getsection_subjectsCollege')->name('getsection_subjectsCollege');
+        Route::get('getsection_subjectsCollege/{id}', 'Dashboard\Filter\SectionController@getsection_subjectsCollege')->name('getsection_subjectsCollege');
         Route::get('getdocsection/{id}', 'SectionController@getdocsection')->name('getdocsection');
         Route::get('getdocsubcollege/{id}', 'SubjectsCollegeController@getdocsubcollege')->name('getdocsubcollege');
 
         Route::get('getdoctypescollege/{id}', 'TypesCollegeController@getdoctypescollege')->name('getdoctypescollege');
-        Route::get('getTeacher_typescollege/{id}/{value}', 'TypesCollegeController@getTeacher_typescollege')->name('getTeacher_typescollege');
+        Route::get('getTeacher_typescollege/{id}/{value}', 'Dashboard\Filter\TypesCollegeController@getTeacher_typescollege')->name('getTeacher_typescollege');
 
         //typecollege_joins
 
@@ -578,7 +579,7 @@
     Route::post('getsection2', 'SectionController@getsection2')->name('getsection2');
     Route::post('getdivision2', 'DivisionController@getdivision2')->name('getdivision2');
     Route::post('getsubcollege2', 'SubjectsCollegeController@getsubcollege2')->name('getsubcollege2');
-    Route::get('getsection/{id}', 'SectionController@getsection')->name('getsection');
+    Route::get('getsection/{id}', 'Dashboard\Filter\SectionController@getsection')->name('getsection');
     Route::get('getsubcollege/{id}', 'SubjectsCollegeController@getsubcollege')->name('getsubcollege');
     Route::get('gettypescollege/{id}', 'TypesCollegeController@gettypescollege')->name('gettypescollege');
     Route::get('gettypescollege2/{id}', 'TypesCollegeController@gettypescollege2')->name('gettypescollege2');

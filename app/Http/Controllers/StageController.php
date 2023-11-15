@@ -119,14 +119,5 @@ class StageController extends Controller
         $category->delete();
         return response()->json(['status' => true]);
     }
-    public function getstage($id)
-    {
-        $years = Year::where('stage_id', $id)->get();
-        $text = "";
-        $text .= '<option value="0"   disabled="disabled">ادخل السنه</option>';
-        foreach ($years as $year) {
-            $text .= '<option value="' . $year->id . '">' . $year->year_ar . '</option>';
-        }
-        return response()->json($text);
-    }
+    
 }

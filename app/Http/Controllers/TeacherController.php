@@ -299,21 +299,5 @@ class TeacherController extends Controller
         return response()->json([$text, $text1]);
     }
 
-    public function getSubject_teacher($id){
-        $users = Subject::where('id', $id)->first()->teachers;
-        $text = "";
-        foreach ($users as $user) {
-            $text .= '<option value="' . $user->id . '">' . $user->name . '</option>';
-        }
-        return response()->json($text);
-    }
 
-    public function getSubject_teachercollege($id){
-        $users = SubjectsCollege::where('id', $id)->first()->teachers;
-        $text = "";
-        foreach ($users as $user) {
-            $text .= '<option value="' . $user->id . '">' . $user->name . '</option>';
-        }
-        return response()->json($text);
-    }
 }
