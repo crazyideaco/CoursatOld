@@ -69,7 +69,6 @@ class StudentDataTable extends DataTable
                         return 'لم يحدد';
                         break;
                 }
-
             })
             ->editColumn('created_at', function ($row) {
                 return  $row->created_at ? $row->created_at->format('Y-m-d') : '';
@@ -82,31 +81,34 @@ class StudentDataTable extends DataTable
             ])
             ->filter(function ($query) use ($request) {
                 $query
-                ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
-                    // dd($request->all());
-                    return $q->where('stage_id', (int)$request->stage_id);
-                })
-                ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
-                    return $q->where('year_id', (int)$request->year_id);
-                })
-                // ->when($request->type_id != null, function ($q) use ($request) {
-                //     $q->where('type_id', (int)$request->type_id);
-                // })
-                ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
-                    return $q->where('university_id', (int)$request->university_id);
-                })
-                ->when($request->college_id != null && $request->college_id != 0, function ($q) use ($request) {
-                    return $q->where('college_id', (int)$request->college_id);
-                })
-                ->when($request->division_id != null && $request->division_id != 0, function ($q) use ($request) {
-                    return $q->where('division_id', (int)$request->division_id);
-                })
-                ->when($request->section_id != null && $request->section_id != 0, function ($q) use ($request) {
-                    return $q->where('section_id', (int)$request->section_id);
-                })
-                // ->when($request->type_college_id != null && $request->type_college_id != 0, function ($q) use ($request) {
-                //     $q->where('type_college_id', (int)$request->type_college_id);
-                // })
+                    ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
+                        // dd($request->all());
+                        return $q->where('stage_id', (int)$request->stage_id);
+                    })
+                    ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
+                        return $q->where('year_id', (int)$request->year_id);
+                    })
+                    ->when($request->type_id != null, function ($q) use ($request) {
+
+                        return $q->whereHas('stutypes', function ($typeq) use ($request) {
+                            $typeq->where('id', (int)$request->type_id);
+                        });
+                    })
+                    ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
+                        return $q->where('university_id', (int)$request->university_id);
+                    })
+                    ->when($request->college_id != null && $request->college_id != 0, function ($q) use ($request) {
+                        return $q->where('college_id', (int)$request->college_id);
+                    })
+                    ->when($request->division_id != null && $request->division_id != 0, function ($q) use ($request) {
+                        return $q->where('division_id', (int)$request->division_id);
+                    })
+                    ->when($request->section_id != null && $request->section_id != 0, function ($q) use ($request) {
+                        return $q->where('section_id', (int)$request->section_id);
+                    })
+                    // ->when($request->type_college_id != null && $request->type_college_id != 0, function ($q) use ($request) {
+                    //     $q->where('type_college_id', (int)$request->type_college_id);
+                    // })
                 ;
             });
     }
