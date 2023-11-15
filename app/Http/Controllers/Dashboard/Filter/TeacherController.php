@@ -9,15 +9,6 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-    public function getSubject_teacher($id){
-        $users = Subject::where('id', $id)->first()->teachers;
-        $text = "";
-        foreach ($users as $user) {
-            $text .= '<option value="' . $user->id . '">' . $user->name . '</option>';
-        }
-        return response()->json($text);
-    }
-
     public function getSubject_teachercollege($id){
         dd('dddddd');
         $users = SubjectsCollege::where('id', $id)->first()->teachers;
@@ -27,4 +18,15 @@ class TeacherController extends Controller
         }
         return response()->json($text);
     }
+    
+    public function getSubject_teacher($id){
+        $users = Subject::where('id', $id)->first()->teachers;
+        $text = "";
+        foreach ($users as $user) {
+            $text .= '<option value="' . $user->id . '">' . $user->name . '</option>';
+        }
+        return response()->json($text);
+    }
+
+
 }//End of controller
