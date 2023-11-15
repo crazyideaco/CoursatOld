@@ -12,7 +12,6 @@ class TeacherController extends Controller
     public function getSubject_teachercollege($id){
 
         $users = SubjectsCollege::where('id', $id)->first()->doctors;
-        dd($users);
         $text = "";
         foreach ($users as $user) {
             $text .= '<option value="' . $user->id . '">' . $user->name . '</option>';
