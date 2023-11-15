@@ -37,11 +37,11 @@
 
     </select>
 </div>
-<div class="form-group col-lg-3 col-md-6 col-12">
+{{-- <div class="form-group col-lg-3 col-md-6 col-12">
     <label>الماده </label>
     <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " required
         id="subject_college" onchange="getSubject_teacherCollege(this)">
-        {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
+        <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
 
     </select>
     @error('subjects_id')
@@ -53,7 +53,7 @@
     <label>المدرسين </label>
     <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed id="teachers_college"
         onchange="getTeacher_typescollege(this)">
-        {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
+        <option value="0" selected="selected" disabled="disabled">اختر المدرس</option>
 
     </select>
     @error('teacher_id')
@@ -71,7 +71,7 @@
     @error('types_college_id')
         <p style="color:red;">{{ $message }}</p>
     @enderror
-</div>
+</div> --}}
 
 
 
@@ -165,27 +165,27 @@
 
 
 
-    function getSubject_teacherCollege(selected) {
-        let id = selected.value;
-        var url = "{{ route('getSubject_teacherCollege',':id') }}";
-        url = url.replace(':id', id);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "get",
-            url: url,
-            contentType: "application/json; charset=utf-8",
-            dataType: "Json",
-            success: function(result) {
-                $('#teachers_college').empty();
-                $('#teachers_college').html(result);
-                $('#teachers_college').selectpicker('refresh');
-            }
-        });
-    }
+    // function getSubject_teacherCollege(selected) {
+    //     let id = selected.value;
+    //     var url = "{{ route('getSubject_teacherCollege',':id') }}";
+    //     url = url.replace(':id', id);
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         }
+    //     });
+    //     $.ajax({
+    //         type: "get",
+    //         url: url,
+    //         contentType: "application/json; charset=utf-8",
+    //         dataType: "Json",
+    //         success: function(result) {
+    //             $('#teachers_college').empty();
+    //             $('#teachers_college').html(result);
+    //             $('#teachers_college').selectpicker('refresh');
+    //         }
+    //     });
+    // }
 
 
     function getTeacher_typescollege(teacherId) {
