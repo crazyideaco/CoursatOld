@@ -184,7 +184,8 @@
 
     function getTeacher_typescollege(teacherId) {
         let subjectId = $('#subject_college').val();
-        let teacherId = teacherId.value;
+        let teacherId = $('#teachers_college').val();
+        
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

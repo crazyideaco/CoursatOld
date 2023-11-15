@@ -140,8 +140,8 @@
     }
 
     function getTeacher_types(teacherId) {
-        let subjectId =  $('#subject').val();
-        let teacherId = teacherId.value;
+        let subjectId = $('#subject').val();
+        let teacherId = $('#teachers').val();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
