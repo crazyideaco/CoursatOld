@@ -17,7 +17,7 @@ class YearController extends Controller
             $subjects = Subject::where('years_id', $id)->get();
         }
         $text = "";
-        $text .= ' <option value="0"  selected="selected" disabled>اختر الماده</option>';
+        // $text .= ' <option value="0"  selected="selected" disabled>اختر الماده</option>';
         foreach ($subjects as $subject) {
             $text .= '<option value="' . $subject->id . '">' . $subject->name_ar . '</option>';
         }

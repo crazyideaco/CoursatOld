@@ -17,7 +17,7 @@ class SectionController extends Controller
 
         $text = "";
 
-        $text .= '<option value="0"   disabled="disabled">ادخل الفرقه</option>';
+        // $text .= '<option value="0"   disabled="disabled">ادخل الفرقه</option>';
         foreach ($sections as $section) {
             $text .= '<option value="' . $section->id . '">' . $section->name_ar . '</option>';
         }
@@ -32,7 +32,7 @@ class SectionController extends Controller
             $subjects = SubjectsCollege::where('section_id', $id)->get();
         }
         $text = "";
-        $text .= ' <option value="0"   disabled="disabled">اختر الماده</option>';
+        // $text .= ' <option value="0"   disabled="disabled">اختر الماده</option>';
         foreach ($subjects as $subject) {
             $text .= '<option value="' . $subject->id . '">' . $subject->name_ar . '</option>';
         }

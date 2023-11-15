@@ -13,7 +13,7 @@ class TypeController extends Controller
 
         $types = Type::where('subjects_id', $value)->where('user_id', $id)->get();
         $text1 = "";
-        $text1 .= '<option value="0"  selected="selected" disabled>اختر دوره تعلميه  </option>';
+        // $text1 .= '<option value="0"  selected="selected" disabled>اختر دوره تعلميه  </option>';
         foreach ($types as $type) {
             $text1 .= '<option value="' . $type->id . '">' . $type->name_ar . '</option>';
         }
@@ -25,7 +25,7 @@ class TypeController extends Controller
 
         $types = Type::where('subjects_id', $subjectId)->get();
         $text1 = "";
-        $text1 .= '<option value="0"  disabled="disabled">اختر دوره تعلميه  </option>';
+        // $text1 .= '<option value="0"  disabled="disabled">اختر دوره تعلميه  </option>';
         foreach ($types as $type) {
             $text1 .= '<option value="' . $type->id . '">' . $type->name_ar . '</option>';
         }

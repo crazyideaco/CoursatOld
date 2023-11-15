@@ -12,7 +12,7 @@ class TypesCollegeController extends Controller
     {
         $typescolleges = TypesCollege::where('subjectscollege_id', $subjectscollege_id)->where('doctor_id', $doctor_id)->get();
         $text = "";
-        $text .= '<option value="0"  disabled="disabled" >ادخل كورس</option>';
+        // $text .= '<option value="0"  disabled="disabled" >ادخل كورس</option>';
         foreach ($typescolleges as $typescollege) {
             $text .= '<option value="' . $typescollege->id . '">' . $typescollege->name_ar . '</option>';
         }

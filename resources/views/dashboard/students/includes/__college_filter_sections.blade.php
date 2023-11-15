@@ -1,8 +1,8 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الجامعه </label>
     <select name="university_id" required class="form-control" id="university"
-        onchange="getcolleges(this);filter_students();">
-        <option value="0" selected="selected" disabled="disabled">اختر جامعه</option>
+        onchange="getcolleges(this);filter_students();" title="اختر جامعه">
+        {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
         @foreach ($universities as $university)
             <option value="{{ $university->id }}">
                 {{ $university->name_ar }}
@@ -16,30 +16,32 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الكليه </label>
     <select name="college_id" required class="form-control" id="college"
-        onchange="getdivision(this);filter_students();">
-        <option value="0" selected="selected" disabled="disabled">اختر كليه</option>
+        onchange="getdivision(this);filter_students();" title="اختر كليه">
+        {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
 
     </select>
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم القسم </label>
     <select name="division_id" required class="form-control" id="division"
-        onchange="getsection(this);filter_students();">
-        <option value="0" selected="selected" disabled="disabled">اختر قسم</option>
+        onchange="getsection(this);filter_students();" title="اختر قسم">
+        {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
 
     </select>
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الفرقه </label>
-    <select name="section_id" required class="form-control" id="section" onchange="getsection_subjectsCollege(this);filter_students();">
-        <option value="0" selected="selected" disabled="disabled">اختر فرقه</option>
+    <select name="section_id" required class="form-control" id="section"
+        onchange="getsection_subjectsCollege(this);filter_students();" title="اختر فرقه">
+        {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
     </select>
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>الماده </label>
-    <select class="form-control selectpicker" name="subjects_college_id" required id="subject_college" onchange="getSubject_teacherCollege(this)">
-        <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
+    <select class="form-control selectpicker" name="subjects_college_i title="اختر الماده"d" required
+        id="subject_college" onchange="getSubject_teacherCollege(this)">
+        {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
     </select>
     @error('subjects_id')
@@ -49,8 +51,9 @@
 
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>المدرسين </label>
-    <select class="form-control selectpicker" name="teacher_id" required id="teachers_college"  onchange="getTeacher_typescollege(this)">
-        <option value="0" selected="selected" disabled="disabled">اختر المدرس</option>
+    <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed id="teachers_college"
+        onchange="getTeacher_typescollege(this)">
+        {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
     </select>
     @error('teacher_id')
@@ -60,8 +63,9 @@
 
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>الكورسات </label>
-    <select class="form-control selectpicker" name="types_college_id" required id="typescollege" onchange="filter_students()">
-        <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option>
+    <select class="form-control selectpicker" name="types_college_id" required id="typescollege"
+        onchange="filter_students()" title="اختر الكورسات">
+        {{-- <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option> --}}
 
     </select>
     @error('types_college_id')
@@ -71,8 +75,8 @@
 
 
 
- {{-- college filters --}}
- <script>
+{{-- college filters --}}
+<script>
     function getcolleges(selected) {
         let id = selected.value;
         console.log(id);
