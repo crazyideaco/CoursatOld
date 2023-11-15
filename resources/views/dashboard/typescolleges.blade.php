@@ -275,7 +275,7 @@
                                                     data-target="#myModal{{ $typescollege->id }}">create qrcode</span>
                                         </td>
                                     </tr>
-                                    <div class="modal" id="myModal{{ $type->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal" id="myModal{{ $typescollege->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
 
