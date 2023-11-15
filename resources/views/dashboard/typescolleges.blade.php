@@ -366,7 +366,7 @@
             $.ajax({
                 type: 'POST',
                 data: {
-                    'typescollege_id': typescollege_id,
+                    'type_id': typescollege_id,
                     'count': $(`#count${typescollege_id}`).val(),
                     'expire_date': $(`#expire_date${typescollege_id}`).val(),
                 },
