@@ -91,7 +91,8 @@ class StudentDataTable extends DataTable
                     ->when($request->type_id != null, function ($q) use ($request) {
 
                         return $q->whereHas('stutypes', function ($typeq) use ($request) {
-                            return $typeq->where('id', (int)$request->type_id);
+                            dd($request->type_id);
+                            return $typeq->where('types.id', (int)$request->type_id);
                         });
                     })
                     ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
