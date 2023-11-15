@@ -1,6 +1,6 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>المرحله</label>
-    <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);filter_students();" id="stage" id="stage" title="ادخل المرحله ">
+    <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);filter_students();" id="stage" title="ادخل المرحله ">
         {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
         @foreach ($stages as $stage)
             <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
