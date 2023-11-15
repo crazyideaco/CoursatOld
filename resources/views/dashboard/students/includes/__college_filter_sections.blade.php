@@ -1,6 +1,6 @@
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الجامعه </label>
-    <select name="university_id" required class="form-control" id="university"
+    <select name="university_id" required class="form-control selectpicker" id="university"
         onchange="getcolleges(this);filter_students();" title="اختر جامعه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
         @foreach ($universities as $university)
@@ -15,7 +15,7 @@
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الكليه </label>
-    <select name="college_id" required class="form-control" id="college"
+    <select name="college_id" required class="form-control selectpicker" id="college"
         onchange="getdivision(this);filter_students();" title="اختر كليه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
 
@@ -23,7 +23,7 @@
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم القسم </label>
-    <select name="division_id" required class="form-control" id="division"
+    <select name="division_id" required class="form-control selectpicker" id="division"
         onchange="getsection(this);filter_students();" title="اختر قسم">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
 
@@ -31,7 +31,7 @@
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>اسم الفرقه </label>
-    <select name="section_id" required class="form-control" id="section"
+    <select name="section_id" required class="form-control selectpicker" id="section"
         onchange="getsection_subjectsCollege(this);filter_students();" title="اختر فرقه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
@@ -39,7 +39,7 @@
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>الماده </label>
-    <select class="form-control selectpicker" name="subjects_college_i title="اختر الماده"d" required
+    <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " required
         id="subject_college" onchange="getSubject_teacherCollege(this)">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
