@@ -165,27 +165,7 @@
 
 
 
-    // function getSubject_teacherCollege(selected) {
-    //     let id = selected.value;
-    //     var url = "{{ route('getSubject_teacherCollege',':id') }}";
-    //     url = url.replace(':id', id);
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-    //     $.ajax({
-    //         type: "get",
-    //         url: url,
-    //         contentType: "application/json; charset=utf-8",
-    //         dataType: "Json",
-    //         success: function(result) {
-    //             $('#teachers_college').empty();
-    //             $('#teachers_college').html(result);
-    //             $('#teachers_college').selectpicker('refresh');
-    //         }
-    //     });
-    // }
+
 
 
     function getTeacher_typescollege(teacherId) {
@@ -211,3 +191,24 @@
         });
     }
 </script>
+{{-- // function getSubject_teacherCollege(selected) {
+    //     let id = selected.value;
+    //     var url = "{{ route('getSubject_teacherCollege',':id') }}";
+    //     url = url.replace(':id', id);
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         }
+    //     });
+    //     $.ajax({
+    //         type: "get",
+    //         url: url,
+    //         contentType: "application/json; charset=utf-8",
+    //         dataType: "Json",
+    //         success: function(result) {
+    //             $('#teachers_college').empty();
+    //             $('#teachers_college').html(result);
+    //             $('#teachers_college').selectpicker('refresh');
+    //         }
+    //     });
+    // } --}}
