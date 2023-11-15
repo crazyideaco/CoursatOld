@@ -98,26 +98,7 @@
         });
     }
 
-    function getsubjects_types(selected) {
-        let id = selected.value;
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            type: "get",
-            url: `getsubject_types/${id}`,
-            contentType: "application/json; charset=utf-8",
-            dataType: "Json",
-            success: function(result) {
-                $('#types').empty();
-                $('#types').html(result);
-                $('#types').selectpicker('refresh');
-            }
 
-        });
-    }
 
     function getSubject_teacher(selected) {
         let id = selected.value;
@@ -161,3 +142,24 @@
         });
     }
 </script>
+
+{{-- function getsubjects_types(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getsubject_types/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#types').empty();
+                $('#types').html(result);
+                $('#types').selectpicker('refresh');
+            }
+
+        });
+    } --}}

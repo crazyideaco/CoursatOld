@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class TypeController extends Controller
 {
-    public function gettype($id, $value)
+    public function getteacher_type( $subjectId,$userId)
     {
 
-        $types = Type::where('subjects_id', $value)->where('user_id', $id)->get();
+        $types = Type::where('subjects_id', $subjectId)->where('user_id', $userId)->get();
         $text1 = "";
         // $text1 .= '<option value="0"  selected="selected" disabled>اختر دوره تعلميه  </option>';
         foreach ($types as $type) {

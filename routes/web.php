@@ -251,7 +251,7 @@
 
         Route::get('getSubject_teacher/{id}', 'Dashboard\Filter\TeacherController@getSubject_teacher')->name('getSubject_teacher');
         Route::get('getSubjectTeachercollege/{id}', 'Dashboard\Filter\TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
-        Route::get('getteacher_type/{id}/{value}', 'Dashboard\Filter\TypeController@gettype')->name('getteacher_type');
+        Route::get('getteacher_type/{subjectId}/{userId}', 'Dashboard\Filter\TypeController@getteacher_type')->name('getteacher_type');
 
     });
 
