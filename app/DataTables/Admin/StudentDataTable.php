@@ -90,7 +90,6 @@ class StudentDataTable extends DataTable
                     })
                     ->when($request->type_id != null, function ($q) use ($request) {
 
-                        // dd($request->type_id);
                         return $q->whereHas('stutypes', function ($typeq) use ($request) {
                             return $typeq->where('types.id', (int)$request->type_id);
                         });
@@ -107,9 +106,11 @@ class StudentDataTable extends DataTable
                     ->when($request->section_id != null && $request->section_id != 0, function ($q) use ($request) {
                         return $q->where('section_id', (int)$request->section_id);
                     })
-                    // ->when($request->type_college_id != null && $request->type_college_id != 0, function ($q) use ($request) {
-                    //     $q->where('type_college_id', (int)$request->type_college_id);
-                    // })
+                    ->when($request->type_college_id != null && $request->type_college_id != 0, function ($q) use ($request) {
+                        return $q->whereHas('stutypescollege', function ($typeq) use ($request) {
+                            return $typeq->where('typescollege.id', (int)$request->type_college_id);
+                        });
+                    })
                 ;
             });
     }

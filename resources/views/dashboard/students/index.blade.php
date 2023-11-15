@@ -267,7 +267,7 @@
 
 
 
-   
+
 
 {{-- <script>
     function filter_based_on_category_id_education() {
@@ -320,7 +320,7 @@
             data.college_id = $("#college").val();
             data.division_id = $("#division").val();
             data.section_id = $("#section").val();
-            data.types_college_id = $("#typescollege").val();
+            data.type_college_id = $("#typescollege").val();
         });
         $('#dataTableBuilder').DataTable().ajax.reload();
     }
