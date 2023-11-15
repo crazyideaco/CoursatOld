@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\State;
 use App\Point;
@@ -56,6 +58,7 @@ use App\Paqa;
 use App\Paqa_User;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
+
 class SectionController extends Controller
 {
     public function __construct()
@@ -63,92 +66,122 @@ class SectionController extends Controller
         $this->middleware(['permission:sections-create'])->only('addsection');
         $this->middleware(['permission:sections-read'])->only('sections');
         $this->middleware(['permission:sections-update'])->only('editsection');
-      $this->middleware(['permission:sections-delete'])->only('deletesection');
+        $this->middleware(['permission:sections-delete'])->only('deletesection');
     }
-  public function addsection(){
-     return view('dashboard.addsection')->with('colleges',College::all())->
-     with('divisions',Division::all())->with('universities',University::all());
- }
- public function storesection(Request $request){
-	 //|unique:section,name_ar,division_id
-      $request->validate([
-         'name_ar' => 'required',
-         'college_id' => 'required',
-         'name_en' => 'required',
-         'university_id' => 'required',
-         'division_id' => 'required'
-         ],[
+    public function addsection()
+    {
+        return view('dashboard.addsection')->with('colleges', College::all())->with('divisions', Division::all())->with('universities', University::all());
+    }
+    public function storesection(Request $request)
+    {
+        //|unique:section,name_ar,division_id
+        $request->validate([
+            'name_ar' => 'required',
+            'college_id' => 'required',
+            'name_en' => 'required',
+            'university_id' => 'required',
+            'division_id' => 'required'
+        ], [
             'required' => 'هذا الحقل مطلوب',
-             'unique' => 'هذه السنه موجوده فى هذا القسم '
-	  ]);
-	  foreach($request->division_id as $value){
-     $section = new Section;
-     $section->college_id = $request->college_id;
-     $section->division_id = $value; 
-        $section->name_ar = $request->name_ar;
-        $section->name_en = $request->name_en;
-         $section->university_id = $request->university_id;
-        $section->save();}
-     return redirect()->route('sections');
-}public function deletesection($id){
+            'unique' => 'هذه السنه موجوده فى هذا القسم '
+        ]);
+        foreach ($request->division_id as $value) {
+            $section = new Section;
+            $section->college_id = $request->college_id;
+            $section->division_id = $value;
+            $section->name_ar = $request->name_ar;
+            $section->name_en = $request->name_en;
+            $section->university_id = $request->university_id;
+            $section->save();
+        }
+        return redirect()->route('sections');
+    }
+    public function deletesection($id)
+    {
 
-     $section =  Section::where('id',$id)->first();
-	 $section->delete();
-   return response()->json(['status' => true]);
-}
-public function sections(){
-    return view('dashboard.sections')->with('sections',Section::orderBy('created_at','Desc')->get());
-}
-   public function editsection($id){
-     return view('dashboard.editsection')->with('colleges',College::all())->with('divisions',Division::all())
-     ->with('section',Section::where('id',$id)->first())->with('universities',University::all());
- }
- public function updatesection($id,Request $request){
-      $request->validate([
-         'name_ar' => 'required',
-         'college_id' => 'required',
-         'name_en' => 'required',
-         'university_id' => 'required',
-         'division_id' => 'required'
-         ],[
+        $section =  Section::where('id', $id)->first();
+        $section->delete();
+        return response()->json(['status' => true]);
+    }
+    public function sections()
+    {
+        return view('dashboard.sections')->with('sections', Section::orderBy('created_at', 'Desc')->get());
+    }
+    public function editsection($id)
+    {
+        return view('dashboard.editsection')->with('colleges', College::all())->with('divisions', Division::all())
+            ->with('section', Section::where('id', $id)->first())->with('universities', University::all());
+    }
+    public function updatesection($id, Request $request)
+    {
+        $request->validate([
+            'name_ar' => 'required',
+            'college_id' => 'required',
+            'name_en' => 'required',
+            'university_id' => 'required',
+            'division_id' => 'required'
+        ], [
             'required' => 'هذا الحقل مطلوب'
         ]);
-     $section = Section::where('id',$id)->first();
+        $section = Section::where('id', $id)->first();
         $section->college_id = $request->college_id;
-     $section->division_id = $request->division_id; 
-         $section->name_ar = $request->name_ar;
+        $section->division_id = $request->division_id;
+        $section->name_ar = $request->name_ar;
         $section->name_en = $request->name_en;
-         $section->university_id = $request->university_id;
+        $section->university_id = $request->university_id;
         $section->save();
-     return redirect()->route('sections');
-}
-public function getsection($id){
-        $sections = Section::where('division_id',$id)->get();
+        return redirect()->route('sections');
+    }
+    public function getsection($id)
+    {
+        $sections = Section::where('division_id', $id)->get();
 
-     $text = "";
-        $text .='<option value="0" selected="selected"   disabled="disabled">ادخل الفرقه</option>';
-                foreach($sections as $section){
-                       $text .= '<option value="'.$section->id.'">'.$section->name_ar.'</option>';
-            }
-            return response()->json($text);
-}public function getsection2(Request $request ){
- 
-    $sections = Section::whereIn('division_id',$request->division)->get();
-     
-     $text = "";
-        $text .='<option value="0"   disabled="disabled" selected="selected">ادخل الفرقه</option>';
-                foreach($sections as $section){
-                       $text .= '<option value="'.$section->id.'">'.$section->name_ar.'</option>';
-            }
-            return response()->json($text);
-}public function getdocsection($id){
-    $secids = Doctor_Section::where('doctor_id',auth()->user()->id)->pluck('section_id')->toArray();
-        $sections = Section::whereIn('id',$secids)->where('division_id',$id)->get();
-     $text = "";
-        $text .='<option value="0"   disabled="disabled" selected="selected">ادخل الفرقه</option>';
-                foreach($sections as $section){
-                       $text .= '<option value="'.$section->id.'">'.$section->name_ar.'</option>';
-            }
-            return response()->json($text);
-}
+        $text = "";
+
+        $text .= '<option value="0" selected="selected"   disabled="disabled">ادخل الفرقه</option>';
+        foreach ($sections as $section) {
+            $text .= '<option value="' . $section->id . '">' . $section->name_ar . '</option>';
+        }
+        return response()->json($text);
+    }
+    public function getsection2(Request $request)
+    {
+
+        $sections = Section::whereIn('division_id', $request->division)->get();
+
+        $text = "";
+        $text .= '<option value="0"   disabled="disabled" selected="selected">ادخل الفرقه</option>';
+        foreach ($sections as $section) {
+            $text .= '<option value="' . $section->id . '">' . $section->name_ar . '</option>';
+        }
+        return response()->json($text);
+    }
+    public function getdocsection($id)
+    {
+        $secids = Doctor_Section::where('doctor_id', auth()->user()->id)->pluck('section_id')->toArray();
+        $sections = Section::whereIn('id', $secids)->where('division_id', $id)->get();
+        $text = "";
+        $text .= '<option value="0"   disabled="disabled" selected="selected">ادخل الفرقه</option>';
+        foreach ($sections as $section) {
+            $text .= '<option value="' . $section->id . '">' . $section->name_ar . '</option>';
+        }
+        return response()->json($text);
+    }
+
+
+    public function getsection_subjectsCollege($id)
+    {
+        if (Auth::user() && Auth::user()->is_student == 2) {
+            $subjects = auth()->user()->subcolleges->where('section_id', $id);
+        } else {
+            $subjects = SubjectsCollege::where('section_id', $id)->get();
+        }
+        $text = "";
+        $text .= ' <option value="0"  selected="selected" disabled>اختر الماده</option>';
+        foreach ($subjects as $subject) {
+            $text .= '<option value="' . $subject->id . '">' . $subject->name_ar . '</option>';
+        }
+
+        return response()->json($text);
+    }
 }

@@ -162,6 +162,7 @@
         Route::get('getcity/{id}', 'CityController@getcity')->name('getcity');
         //ajax subtype
         Route::get('gettype/{id}', 'TypeController@gettype')->name('gettype');
+        Route::get('getsubject_types/{id}', 'TypeController@getsubject_types')->name('getsubject_types');
         //edit
         Route::get('editstate/{id}', 'StateController@editstate')->name('editstate');
         Route::post('updatestate/{id}', 'StateController@updatestate')->name('updatestate');
@@ -281,6 +282,8 @@
 
         //ajax in add video
         Route::get('getteacher/{id}', 'TeacherController@getteacher')->name('getteacher');
+        Route::get('getSubject_teacher/{id}', 'TeacherController@getSubject_teacher')->name('getSubject_teacher');
+        Route::get('getSubject_teachercollege/{id}', 'TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
         Route::get('gettype/{id}/{value}', 'dashboardcontroller@gettype'); //->name('gettype');
 
         Route::get('getyear/{id}', 'YearController@getyear')->name('getyear');
@@ -479,10 +482,12 @@
         Route::get('delete_video_college_video/{id}', 'VideosCollegeController@delete_video_college_video')->name('delete_video_college_video');
 
         //typecollege ajax
+        Route::get('getsection_subjectsCollege/{id}', 'SectionController@getsection_subjectsCollege')->name('getsection_subjectsCollege');
         Route::get('getdocsection/{id}', 'SectionController@getdocsection')->name('getdocsection');
         Route::get('getdocsubcollege/{id}', 'SubjectsCollegeController@getdocsubcollege')->name('getdocsubcollege');
 
         Route::get('getdoctypescollege/{id}', 'TypesCollegeController@getdoctypescollege')->name('getdoctypescollege');
+        Route::get('getTeacher_typescollege/{id}/{value}', 'TypesCollegeController@getTeacher_typescollege')->name('getTeacher_typescollege');
 
         //typecollege_joins
 
@@ -619,7 +624,8 @@
     Route::post("filtertypescollege", "FilterCourseController@filtertypescollege");
     Route::post("filtercourses", "FilterCourseController@filtercourses");
 
-
+//store_qrcode
+Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
 
 
 

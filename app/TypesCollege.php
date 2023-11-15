@@ -8,11 +8,13 @@ use App\Division;
 use App\College;
 use App\SubjectsCollege;
 use App\Lesson;
+use App\Models\QrCode;
 use App\University;
 use App\User;
 use App\Typecollege_Rate;
 use App\VideosCollege;
 use App\Tag;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class TypesCollege extends Model
 {
@@ -74,5 +76,8 @@ class TypesCollege extends Model
         return $this->doctor->name ?? "";
     }
 
-
+    public function qrcodes(): MorphMany
+    {
+        return $this->morphMany(QrCode::class, 'typeable');
+    }
 }

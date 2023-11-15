@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin;
 
 use App\User;
+use Illuminate\Http\Request as HttpRequest;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -18,7 +19,7 @@ class StudentDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query, HttpRequest $request)
     {
         return datatables()
             ->eloquent($query)
@@ -43,21 +44,23 @@ class StudentDataTable extends DataTable
                 return $courses_names;
             })
             ->addColumn('centers', function ($row) {
-                if ($row->stdcenters) {
-                    implode('-', $row->stdcenters->pluck('name')->toArray());
+                $centers = "المنصة العامة";
+                if (count($row->stdcenters) > 0) {
+                    $centers = implode('-', $row->stdcenters->pluck('name')->toArray());
                 }
+                return $centers;
             })
             ->editColumn('category_id', function ($row) {
-                return $row->is_category == config('project_types.system_category_type.category_id_college') ? 'جامعي' : 'أساسي';
+                return $row->category_id == config('project_types.system_category_type.category_id_college') ? 'جامعي' : 'أساسي';
             })
             ->addColumn('year', function ($row) {
                 switch ($row->category_id) {
-                    case '1':
+                    case config('project_types.system_category_type.category_id_basic'):
                         if ($row->year_id != null) {
                             return $row->year->name_ar ?? 'لم يحدد';
                         }
                         break;
-                    case '2':
+                    case config('project_types.system_category_type.category_id_college'):
                         if ($row->section_id != null) {
                             return $row->section->name_ar ?? 'لم يحدد';
                         }
@@ -69,14 +72,43 @@ class StudentDataTable extends DataTable
 
             })
             ->editColumn('created_at', function ($row) {
-                return $row->created_at->format('Y-m-d');
+                return  $row->created_at ? $row->created_at->format('Y-m-d') : '';
             })
             ->rawColumns([
                 'action',
                 'courses',
                 'centers',
                 'category_id',
-            ]);
+            ])
+            ->filter(function ($query) use ($request) {
+                dd($request->all());
+                $query
+                ->when($request->stage_id != null, function ($q) use ($request) {
+                    return $q->where('stage_id', (int)$request->stage_id);
+                })
+                ->when($request->year_id != null, function ($q) use ($request) {
+                    return $q->where('year_id', (int)$request->year_id);
+                })
+                // ->when($request->type_id != null, function ($q) use ($request) {
+                //     $q->where('type_id', (int)$request->type_id);
+                // })
+                ->when($request->university_id != null, function ($q) use ($request) {
+                    return $q->where('university_id', (int)$request->university_id);
+                })
+                ->when($request->college_id != null, function ($q) use ($request) {
+                    return $q->where('college_id', (int)$request->college_id);
+                })
+                ->when($request->division_id != null, function ($q) use ($request) {
+                    return $q->where('division_id', (int)$request->division_id);
+                })
+                ->when($request->section_id != null, function ($q) use ($request) {
+                    return $q->where('section_id', (int)$request->section_id);
+                })
+                // ->when($request->type_college_id != null, function ($q) use ($request) {
+                //     $q->where('type_college_id', (int)$request->type_college_id);
+                // })
+                ;
+            });
     }
 
     /**
@@ -87,7 +119,7 @@ class StudentDataTable extends DataTable
      */
     public function query(User $model)
     {
-        return $model->newQuery()->where('is_student', config('project_types.auth_user_is_student.student'))->where('name', '<>', NULL);
+        return $model->newQuery()->where('is_student', config('project_types.auth_user_is_student.student'))->where('name', '<>', NULL)->orderBy('id', 'desc');
     }
 
     /**
@@ -102,7 +134,8 @@ class StudentDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             // ->dom('Bfrtip')
-            // ->orderBy(1)
+            ->orderBy(1)
+            // ->orderBy('id', 'desc')
             ->lengthMenu([[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]]);
     }
 
@@ -118,7 +151,7 @@ class StudentDataTable extends DataTable
             Column::make('name')->title('الاسم'),
             Column::make('code')->title('الكود'),
             Column::make('phone')->title('رقم الهاتف'),
-            Column::make('courses')->title('الكورسات'),
+            // Column::make('courses')->title('الكورسات'),
             Column::make('created_at')->title('تاريخ التسجيل'),
             Column::make("centers")->title("المنصة"),
             Column::make("category_id")->title("نوع التعليم"),

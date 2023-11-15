@@ -148,7 +148,8 @@
 
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>الشهر </label>
-                                <input type="month" class="form-control" id="month" name="month"  value="{{ \Carbon\Carbon::now()->format('Y-m') }}" />
+                                <input type="month" class="form-control" id="month" name="month"
+                                    value="{{ \Carbon\Carbon::now()->format('Y-m') }}" />
                                 @error('month')
                                     <p style="color:red;">{{ $message }}</p>
                                 @enderror
@@ -157,7 +158,8 @@
                             <div
                                 class="form-group col-lg-3 col-md-6 col-12 d-flex justify-content-center align-items-center flex-column">
                                 <label style="opacity: 0" class="w-100 d-block">الماده </label>
-                                <span class="btn btn-primary d-block"  style="width: 75%; display: block; margin: 0 auto;" onclick="filtertypes()">بحث</span>
+                                <span class="btn btn-primary d-block" style="width: 75%; display: block; margin: 0 auto;"
+                                    onclick="filtertypes()">بحث</span>
                             </div>
                         </div>
                         <div class="row">
@@ -181,14 +183,15 @@
                                         <tr id="type{{ $type->id }}">
                                             <td class="text-center">{{ $type->id }}</td>
                                             <td scope="row" class="text-center"><a
-                                                    href="{{ route('subtypes', $type->id) }}">{{ $type->name_ar }}</a></td>
+                                                    href="{{ route('subtypes', $type->id) }}">{{ $type->name_ar }}</a>
+                                            </td>
                                             <td class="text-center">
                                                 @if ($type->user)
                                                     {{ $type->user->name }}
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                {{$type->center  ? ($type->center->name ?? "المنصه العامه") :  "المنصه العامه"}}
+                                                {{ $type->center ? $type->center->name ?? 'المنصه العامه' : 'المنصه العامه' }}
                                             </td>
                                             <td class="text-center">
                                                 @if ($type->subject)
@@ -225,14 +228,65 @@
                                                 <a href="{{ route('studentstype', $type->id) }}"
                                                     class="btn btn-success btn-sm">الطلاب</a>
                                                 <a href="{{ route('bannedStudentstype', $type->id) }}"
-                                                    class="btn btn-danger btn-sm">  الطلاب المحذوفين </a>
+                                                    class="btn btn-danger btn-sm"> الطلاب المحذوفين </a>
                                                 <a href="{{ route('typeexams', $type->id) }}"
                                                     class="btn btn-success btn-sm">الامتحانات</a>
+                                                <span class="btn btn-success btn-sm" data-toggle="modal"
+                                                    data-target="#myModal{{ $type->id }}">create qrcode</span>
                                             </td>
                                         </tr>
+                                        <div class="modal" id="myModal{{ $type->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">create_qrcode
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <label>count </label>
+                                                                <input class="form-control" value="1"
+                                                                    id="count{{ $type->id }}">
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <label>expire_date </label>
+                                                                <input class="form-control" type="date"
+                                                                    id="expire_date{{ $type->id }}">
+                                                            </div>
+                                                            <div class="col-md-6 col-12">
+                                                                <div id="qrcodes{{ $type->id }}"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-4">
+                                                            <button type="button" class="btn btn-success mx-auto"
+                                                                onclick="store_qrcodes({{ $type->id }})">save</button>
+
+                                                            <button class="btn btn-primary waves-effect waves-light mr-12"
+                                                                type="button" onclick=" printDiv('qrcodes{{ $type->id }}');">
+                                                                طباعة ال QR
+                                                            </button>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>
+
+
+
 
                         </div>
 
@@ -263,6 +317,48 @@
 
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
+    <script>
+        function store_qrcodes(type_id) {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                data: {
+                    'type_id': type_id,
+                    'count': $(`#count${type_id}`).val(),
+                    'expire_date': $(`#expire_date${type_id}`).val(),
+                },
+                url: `{{ route('store_qrcode') }}`,
+                dataType: "Json",
+                success: function(result) {
+                    if (result.status == true) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        $(`#qrcodes${type_id}`).html(result.html);
+
+                        // $(`#myModal${type_id}`).modal('hide');
+                        // table.ajax.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: result.message
+                        })
+                    }
+                }
+            });
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
