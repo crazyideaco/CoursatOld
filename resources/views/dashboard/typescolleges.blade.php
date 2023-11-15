@@ -271,8 +271,56 @@
                                                 href="{{ route('bannedStudentstypecollege', $typescollege->id) }}">
                                                 الطلاب المحذوفين
                                             </a>
+                                            <span class="btn btn-success btn-sm" data-toggle="modal"
+                                                    data-target="#myModal{{ $typescollege->id }}">create qrcode</span>
                                         </td>
                                     </tr>
+                                    <div class="modal" id="myModal{{ $type->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">create qrcode
+                                                    </h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <label>count </label>
+                                                            <input class="form-control" value="1"
+                                                                id="count{{ $typescollege->id }}">
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label>expire_date </label>
+                                                            <input class="form-control" type="date"
+                                                                id="expire_date{{ $typescollege->id }}">
+                                                        </div>
+                                                        <div class="col-md-6 col-12">
+                                                            <div id="qrcodes{{ $typescollege->id }}"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mt-4">
+                                                        <button type="button" class="btn btn-success mx-auto"
+                                                            onclick="store_qrcodes({{ $typescollege->id }})">save</button>
+
+                                                        <button class="btn btn-primary waves-effect waves-light mr-12"
+                                                            type="button" onclick=" printDiv('qrcodes{{ $typescollege->id }}');">
+                                                            طباعة ال QR
+                                                        </button>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -306,7 +354,66 @@
 
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
+    <script>
+        function store_qrcodes(typescollege_id) {
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                data: {
+                    'typescollege_id': typescollege_id,
+                    'count': $(`#count${typescollege_id}`).val(),
+                    'expire_date': $(`#expire_date${typescollege_id}`).val(),
+                },
+                url: `{{ route('store_course_college_qrcode') }}`,
+                dataType: "Json",
+                success: function(result) {
+                    if (result.status == true) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: result.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        $(`#qrcodes${typescollege_id}`).html(result.html);
+
+                        // $(`#myModal${typescollege_id}`).modal('hide');
+                        // table.ajax.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: result.message
+                        })
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        function printDiv(divName) {
+            var PrintContent = document.getElementById(divName).innerHTML;
+            const y = window.top.outerHeight / 2 + window.top.screenY - (530 / 2);
+            const x = window.top.outerWidth / 2 + window.top.screenX - (400 / 2);
+            var PrintWindow = window.open('', '',
+                `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=400, height=530, top=${y}, left=${x}`
+            );
+            PrintWindow.document.write('<html><head></head><body>');
+            PrintWindow.document.write(PrintContent);
+            PrintWindow.document.write('</body></html>');
+            setTimeout(function() {
+                PrintWindow.focus();
+                PrintWindow.print();
+                PrintWindow.close();
+            }, 500);
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
@@ -322,6 +429,7 @@
 
             });
         });
+
 
         function activetypecollege(id) {
             $.ajaxSetup({
@@ -361,6 +469,7 @@
 
             });
         }
+
 
         function deletetypescollege(sel) {
             let id = sel;

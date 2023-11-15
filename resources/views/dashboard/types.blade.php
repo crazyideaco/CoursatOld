@@ -235,15 +235,17 @@
                                                     data-target="#myModal{{ $type->id }}">create qrcode</span>
                                             </td>
                                         </tr>
-                                        <div class="modal" id="myModal{{ $type->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal" id="myModal{{ $type->id }}" tabindex="-1"
+                                            role="dialog" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
 
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title">create_qrcode
+                                                        <h4 class="modal-title">create qrcode
                                                         </h4>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">&times;</button>
                                                     </div>
 
                                                     <!-- Modal body -->
@@ -269,7 +271,8 @@
                                                                 onclick="store_qrcodes({{ $type->id }})">save</button>
 
                                                             <button class="btn btn-primary waves-effect waves-light mr-12"
-                                                                type="button" onclick=" printDiv('qrcodes{{ $type->id }}');">
+                                                                type="button"
+                                                                onclick=" printDiv('qrcodes{{ $type->id }}');">
                                                                 طباعة ال QR
                                                             </button>
 
@@ -359,7 +362,24 @@
             });
         }
     </script>
-
+    <script>
+        function printDiv(divName) {
+            var PrintContent = document.getElementById(divName).innerHTML;
+            const y = window.top.outerHeight / 2 + window.top.screenY - (530 / 2);
+            const x = window.top.outerWidth / 2 + window.top.screenX - (400 / 2);
+            var PrintWindow = window.open('', '',
+                `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=400, height=530, top=${y}, left=${x}`
+            );
+            PrintWindow.document.write('<html><head></head><body>');
+            PrintWindow.document.write(PrintContent);
+            PrintWindow.document.write('</body></html>');
+            setTimeout(function() {
+                PrintWindow.focus();
+                PrintWindow.print();
+                PrintWindow.close();
+            }, 500);
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
