@@ -249,6 +249,9 @@
         Route::get('editcenter/{id}', 'CenterController@editcenter')->name('editcenter');
         Route::post('updatecenter/{id}', 'CenterController@updatecenter')->name('updatecenter');
         Route::get('centers', 'CenterController@centers')->name('centers');
+
+        Route::get('getSubject_teacher/{id}', 'Dashboard\Filter\TeacherController@getSubject_teacher')->name('getSubject_teacher');
+        Route::get('getSubject_teachercollege/{id}', 'Dashboard\Filter\TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
     });
 
 
@@ -283,8 +286,7 @@
 
         //ajax in add video
         Route::get('getteacher/{id}', 'TeacherController@getteacher')->name('getteacher');
-        Route::get('getSubject_teacher/{id}', 'Dashboard\Filter\TeacherController@getSubject_teacher')->name('getSubject_teacher');
-        Route::get('getSubject_teachercollege/{id}', 'Dashboard\Filter\TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
+
         // Route::get('gettype/{id}/{value}', 'dashboardcontroller@gettype'); //->name('gettype');
 
         Route::get('getyear/{id}', 'Dashboard\Filter\YearController@getyear')->name('getyear');
