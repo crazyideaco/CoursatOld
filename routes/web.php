@@ -631,6 +631,9 @@
 //store_qrcode
 Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
 
+//store_course_college_qrcode
+Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
+
 
 
 

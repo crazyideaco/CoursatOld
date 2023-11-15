@@ -432,7 +432,6 @@ class AuthController extends Controller
 
             } else {
                 $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
-
             }
 
 
