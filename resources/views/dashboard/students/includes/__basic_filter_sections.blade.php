@@ -23,7 +23,7 @@
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>الماده </label>
-    <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getTeachers(this)">
+    <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getSubject_teacher(this)">
         <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
 
     </select>
@@ -43,7 +43,7 @@
     @enderror
 </div>
 
-{{-- <div class="form-group col-lg-3 col-md-6 col-12">
+<div class="form-group col-lg-3 col-md-6 col-12">
     <label>الكورسات </label>
     <select class="form-control selectpicker" name="type_id" required id="types">
         <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option>
@@ -52,4 +52,4 @@
     @error('type_id')
         <p style="color:red;">{{ $message }}</p>
     @enderror
-</div> --}}
+</div>

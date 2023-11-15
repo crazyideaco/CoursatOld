@@ -308,10 +308,10 @@ class TypeController extends Controller
 
         return response()->json([$text1]);
     }
-    public function getsubject_types($id)
+    public function getsubject_types($subjectId)
     {
 
-        $types = Type::where('subjects_id', $id)->get();
+        $types = Type::where('subjects_id', $subjectId)->get();
         $text1 = "";
         $text1 .= '<option value="0"  selected="selected" disabled>اختر دوره تعلميه  </option>';
         foreach ($types as $type) {
@@ -320,6 +320,7 @@ class TypeController extends Controller
 
         return response()->json([$text1]);
     }
+
     public function activetype($id)
     {
         $type = Type::where('id', $id)->first();

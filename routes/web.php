@@ -283,6 +283,7 @@
         //ajax in add video
         Route::get('getteacher/{id}', 'TeacherController@getteacher')->name('getteacher');
         Route::get('getSubject_teacher/{id}', 'TeacherController@getSubject_teacher')->name('getSubject_teacher');
+        Route::get('getSubject_teachercollege/{id}', 'TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
         Route::get('gettype/{id}/{value}', 'dashboardcontroller@gettype'); //->name('gettype');
 
         Route::get('getyear/{id}', 'YearController@getyear')->name('getyear');
@@ -486,7 +487,7 @@
         Route::get('getdocsubcollege/{id}', 'SubjectsCollegeController@getdocsubcollege')->name('getdocsubcollege');
 
         Route::get('getdoctypescollege/{id}', 'TypesCollegeController@getdoctypescollege')->name('getdoctypescollege');
-        Route::get('getCoursesColleges/{id}', 'TypesCollegeController@getCoursesColleges')->name('getCoursesColleges');
+        Route::get('getTeacher_typescollege/{id}/{value}', 'TypesCollegeController@getTeacher_typescollege')->name('getTeacher_typescollege');
 
         //typecollege_joins
 

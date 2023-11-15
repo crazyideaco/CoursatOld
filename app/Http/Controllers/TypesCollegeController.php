@@ -420,9 +420,9 @@ class TypesCollegeController extends Controller
     }
 
 
-    public function getCoursesColleges($id)
+    public function getTeacher_typescollege($subjectscollege_id, $doctor_id)
     {
-        $typescolleges = TypesCollege::where('subjectscollege_id', $id)->get();
+        $typescolleges = TypesCollege::where('subjectscollege_id', $subjectscollege_id)->where('doctor_id', $doctor_id)->get();
         $text = "";
         $text .= '<option value="0"  selected="selected" disabled="disabled">ادخل كورس</option>';
         foreach ($typescolleges as $typescollege) {

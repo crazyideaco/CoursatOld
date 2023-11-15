@@ -419,7 +419,7 @@
             });
         }
 
-        function getSubject_teacherCollege(selected) {
+        function getSubject_teacher(selected) {
             let id = selected.value;
             $.ajaxSetup({
                 headers: {
@@ -439,26 +439,68 @@
             });
         }
 
-        // function getTeacher_typescollege(selected) {
-        //     let id = selected.value;
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         }
-        //     });
-        //     $.ajax({
-        //         type: "get",
-        //         url: `getTeacher_typescollege/${id}`,
-        //         contentType: "application/json; charset=utf-8",
-        //         dataType: "Json",
-        //         success: function(result) {
-        //             $('#typescollege').empty();
-        //             $('#typescollege').html(result);
-        //             $('#typescollege').selectpicker('refresh');
-        //         }
+        function getSubject_teacherCollege(selected) {
+            let id = selected.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getSubject_teacherCollege/${id}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#teachers_college').empty();
+                    $('#teachers_college').html(result);
+                    $('#teachers_college').selectpicker('refresh');
+                }
+            });
+        }
 
-        //     });
-        // }
+        function getTeacher_types(subjectId,teacherId) {
+            let subjectId = subjectId.value;
+            let teacherId = teacherId.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `gettype/${subjectId}/${teacherId}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#types').empty();
+                    $('#types').html(result);
+                    $('#types').selectpicker('refresh');
+                }
+
+            });
+        }
+        function getTeacher_typescollege(subjectId,teacherId) {
+            let subjectId = subjectId.value;
+            let teacherId = teacherId.value;
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "get",
+                url: `getTeacher_typescollege/${subjectId}/${teacherId}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#typescollege').empty();
+                    $('#typescollege').html(result);
+                    $('#typescollege').selectpicker('refresh');
+                }
+
+            });
+        }
     </script>
 
 {{-- <script>
