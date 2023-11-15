@@ -10,72 +10,73 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\QrCode as QrCodeModel;
+use App\Traits\ApiTrait;
 use App\User;
 
 class QrcodeService
 {
-    public function store(Request $request,$model,$model_type)
+    use ApiTrait;
+
+    public function store(Request $request, $model, $model_type)
     {
 
-        try {
-            $rules['count'] = 'required|numeric';
-            $rules['expire_date'] = 'required|date|after:today';
-            $validator = validator($request->all(), $rules);
 
-            if ($validator->fails()) {
-                return response()->json(['status' => false, 'message' => $validator->errors()->first()]);
-            }
+        $rules['count'] = 'required|numeric';
+        $rules['expire_date'] = 'required|date|after:today';
+        $validator = validator($request->all(), $rules);
 
-            $returnedQrCode = [];
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'message' => $validator->errors()->first()]);
+        }
 
-
-            switch ($model_type) {
-                case 'value':
-                    $course = Course::whereId(request()->type_id)->first();
-                    break;
-
-                default:
-                    # code...
-                    break;
-            }
+        $returnedQrCode = [];
 
 
+        switch ($model_type) {
+            case 'Type':
+                $course = Type::whereId(request()->type_id)->first();
+                break;
 
-            $count = request()->count;
+            default:
+                # code...
+                break;
+        }
 
-            $patch = Patch::create([
-                // 'course_id' => $course->id,
-                'count' => $count,
-                'createable_id' => auth()->id(),
-                'createable_type' => User::class,
-            ]);
 
-            for ($i = 0; $i < $count; $i++) {
-                $generatedQrCode = QrCodeModel::create([
+
+        $count = request()->count;
+
+        $patch = Patch::create([
+            // 'course_id' => $course->id,
+            'count' => $count,
+            'createable_id' => auth()->id(),
+            'createable_type' => User::class,
+        ]);
+
+        for ($i = 0; $i < $count; $i++) {
+            $generatedQrCode = QrCodeModel::create([
                 'typeable_id' => request()->type_id,
                 'typeable_type' => $model,
 
-                    'user_id' => $course->user_id,
-                    "expire_date" => $request->expire_date,
-                    "patch_id" => $patch->id,
-                    'qrcode' => rand(99999, 999999),
-                ]);
+                'user_id' => $course->user_id,
+                "expire_date" => $request->expire_date,
+                "patch_id" => $patch->id,
+                'qrcode' => rand(99999, 999999),
+            ]);
 
-                $returnedQrCode[] = $generatedQrCode;
-
-
-            }
-            $barcodes = [];
+            $returnedQrCode[] = $generatedQrCode;
+        }
+        $barcodes = [];
 
 
 
-            // Loop through each QR code and generate the barcode.
-            foreach ($returnedQrCode as $key => $qr) {
-                $barcode = QrCode::encoding('UTF-8')->size(60)->generate($qr->qrcode);
+        // Loop through each QR code and generate the barcode.
+        foreach ($returnedQrCode as $key => $qr) {
+            $barcode = QrCode::encoding('UTF-8')->size(60)->generate($qr->qrcode);
 
-                $name = $course->title . "<br/>" . $qr->qrcode;
+            $name = $course->title . "<br/>" . $qr->qrcode;
 
-                $bar = "<div class='row' style='width: 100%;
+            $bar = "<div class='row' style='width: 100%;
                     height: 100%;
                     display: flex;
                     align-items: center;
@@ -90,18 +91,16 @@ class QrcodeService
 
 
 
-                // Add the generated barcode to the $barcodes array.
-                $barcodes[] = $bar;
-            }
-
-
-            $barcodeContent = implode("\n", $barcodes);
-
-
-            return response()->json(['status' => true, 'message' => __('messages.successmessage') , "qrcodes" => $returnedQrCode, "html" => $barcodeContent
-        ]);
-        } catch (\Exception $ex) {
-            return $this->returnException($ex->getMessage(), 500);
+            // Add the generated barcode to the $barcodes array.
+            $barcodes[] = $bar;
         }
+
+
+        $barcodeContent = implode("\n", $barcodes);
+
+
+        return response()->json([
+            'status' => true, 'message' => __('messages.successmessage'), "qrcodes" => $returnedQrCode, "html" => $barcodeContent
+        ]);
     }
 }//End of service
