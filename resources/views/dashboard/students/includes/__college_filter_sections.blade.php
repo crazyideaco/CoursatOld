@@ -71,3 +71,136 @@
 
 
 
+ {{-- college filters --}}
+ <script>
+    function getcolleges(selected) {
+        let id = selected.value;
+        console.log(id);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getcolleges/${id}`,
+            //    contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#college').empty();
+                $('#college').html(result.data);
+                $('.selectpicker').selectpicker('refresh');
+                console.log(result);
+            }
+
+        });
+    }
+
+    function getdivision(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getdivision/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#division').empty();
+                $('#division').html(result);
+                $('.selectpicker').selectpicker('refresh');
+            }
+
+        });
+    }
+
+    function getsection(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getsection/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#section').empty();
+                $('#section').html(result);
+                $('.selectpicker').selectpicker('refresh');
+            }
+
+        });
+    }
+
+    function getsection_subjectsCollege(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getsection_subjectsCollege/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#subject_college').empty();
+                $('#subject_college').html(result);
+                $('#subject_college').selectpicker('refresh');
+            }
+
+        });
+    }
+
+
+
+    function getSubject_teacherCollege(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getSubject_teacherCollege/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#teachers_college').empty();
+                $('#teachers_college').html(result);
+                $('#teachers_college').selectpicker('refresh');
+            }
+        });
+    }
+
+
+    function getTeacher_typescollege(teacherId) {
+        let subjectId = $('#subject_college').val();
+        let teacherId = teacherId.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getTeacher_typescollege/${subjectId}/${teacherId}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#typescollege').empty();
+                $('#typescollege').html(result);
+                $('#typescollege').selectpicker('refresh');
+            }
+
+        });
+    }
+</script>

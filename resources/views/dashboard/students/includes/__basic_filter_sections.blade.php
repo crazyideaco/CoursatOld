@@ -54,4 +54,110 @@
 </div>
 
 
+{{-- basic filters --}}
+<script>
+    function getstage_years(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getstage/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#year').empty();
+                $('#year').html(result);
+                $('#year').selectpicker('refresh');
+            }
 
+        });
+    }
+
+    function getyear_subjects(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getyear/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#subject').empty();
+                $('#subject').html(result);
+                $('#subject').selectpicker('refresh');
+            }
+
+        });
+    }
+
+    function getsubjects_types(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getsubject_types/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#types').empty();
+                $('#types').html(result);
+                $('#types').selectpicker('refresh');
+            }
+
+        });
+    }
+
+    function getSubject_teacher(selected) {
+        let id = selected.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `getSubject_teacher/${id}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#teachers').empty();
+                $('#teachers').html(result);
+                $('#teachers').selectpicker('refresh');
+            }
+        });
+    }
+
+    function getTeacher_types(teacherId) {
+        let subjectId =  $('#subject').val();
+        let teacherId = teacherId.value;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "get",
+            url: `gettype/${subjectId}/${teacherId}`,
+            contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            success: function(result) {
+                $('#types').empty();
+                $('#types').html(result);
+                $('#types').selectpicker('refresh');
+            }
+
+        });
+    }
+</script>
