@@ -162,7 +162,6 @@
         Route::get('getcity/{id}', 'CityController@getcity')->name('getcity');
         //ajax subtype
         Route::get('gettype/{id}', 'TypeController@gettype')->name('gettype');
-        Route::get('gettype/{id}/{value}', 'Dashboard\Filter\TypeController@gettype')->name('gettype');
         Route::get('getsubject_types/{id}', 'Dashboard\Filter\TypeController@getsubject_types')->name('getsubject_types');
         //edit
         Route::get('editstate/{id}', 'StateController@editstate')->name('editstate');
@@ -252,6 +251,8 @@
 
         Route::get('getSubject_teacher/{id}', 'Dashboard\Filter\TeacherController@getSubject_teacher')->name('getSubject_teacher');
         Route::get('getSubject_teachercollege/{id}', 'Dashboard\Filter\TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
+        Route::get('getteacher_type/{id}/{value}', 'Dashboard\Filter\TypeController@gettype')->name('gettype');
+
     });
 
 

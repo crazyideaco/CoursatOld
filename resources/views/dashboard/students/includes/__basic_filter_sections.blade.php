@@ -149,7 +149,7 @@
         });
         $.ajax({
             type: "get",
-            url: `gettype/${subjectId}/${teacher_id}`,
+            url: `getteacher_type/${subjectId}/${teacher_id}`,
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
