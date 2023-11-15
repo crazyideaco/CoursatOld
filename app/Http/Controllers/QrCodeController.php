@@ -44,13 +44,8 @@ class QrCodeController extends Controller
 
     public function store(Request $request)
     {
-        $data = $this->qrcodeService->store($request,Type::class);
-        if (!$data) {
-            return redirect()->back()
-                ->with(['error' => __("messages.some_thing_went_wrong")]);
-        }
-        return redirect()->route($this->route . "index")
-            ->with(['success' => __("messages.createmessage")]);
+        $data = $this->qrcodeService->store($request,Type::class,'Type');
+        return  $data;
     }
 
     // public function store(Request $request)
