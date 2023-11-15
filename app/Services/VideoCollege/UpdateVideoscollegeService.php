@@ -50,7 +50,7 @@ class UpdateVideoscollegeService {
             $video->order_number = $request->order_number;
             $video->youtube_link = $youtube_link;
             $video->is_youtube = $is_youtube;
-            
+
             if (auth()->user() && auth()->user()->isAdmin == 'admin') {
                 $video->name_ar = $request->name_ar;
                 $video->name_en = $request->name_en;
@@ -83,7 +83,7 @@ class UpdateVideoscollegeService {
 
                                 $url = $request->url;
                                 $time = time();
-                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                                 $video->video_type_link = 7;
@@ -165,7 +165,7 @@ class UpdateVideoscollegeService {
 
                                 $url = $request->url;
                                 $time = time();
-                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                                 $video->video_type_link = 7;
@@ -242,7 +242,7 @@ class UpdateVideoscollegeService {
 
                                 $url = $request->url;
                                 $time = time();
-                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = $time . '.' . $url->getClientOriginalExtension();
                                 $video->storage_type = 1;
                                 $video->video_type_link = 7;

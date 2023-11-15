@@ -39,7 +39,7 @@ class UpdatevideoService
         if ($validator->passes()) {
 
             $video = Video::where('id', $id)->first();
-            
+
             $youtube_link = $request->youtube_link ?? $video->youtube_link;
             $is_youtube = $request->youtube_link ? 1 : $video->is_youtube;
 
@@ -158,7 +158,7 @@ class UpdatevideoService
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video = $request->file('url')->getSize() / 1024;
-                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = time() . '.' . $url->getClientOriginalExtension();
 
                                 $video->video_type_link = 7;
@@ -237,7 +237,7 @@ class UpdatevideoService
                                 $video->seconds = $duration;
                                 $url = $request->url;
                                 $video->size_video = $request->file('url')->getSize() / 1024;
-                                \Storage::disk('disk7')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
+                                \Storage::disk('disk6')->putFileAs("", $request->file("url"), time() . '.' . $url->getClientOriginalExtension());
                                 $video->url = time() . '.' . $url->getClientOriginalExtension();
                                 $video->video_type_link = 7;
                             }
