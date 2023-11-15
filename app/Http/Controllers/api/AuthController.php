@@ -434,6 +434,18 @@ class AuthController extends Controller
                 $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
 
             }
+
+
+            //start add all subjects tab
+            $allSubjectTab['id'] = 0;
+            $allSubjectTab['title'] = 'الكل';
+            $allSubjectTab['courses'] = [];
+            $allSubjectTab['latest_courses'] = [];
+            $allSubjectTab['lectuers'] = [];
+            array_unshift($subjects, $allSubjectTab);
+            //end add all subjects tab
+
+
         } else if (auth()->user()->category_id == 2) {
             if (count($users) > 0) {
                 $result = [];
