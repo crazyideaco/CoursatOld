@@ -38,7 +38,7 @@ class QrcodeService
                 $course = Type::whereId(request()->type_id)->first();
                 break;
             case 'TypesCollege':
-                $course = TypesCollege::whereId(request()->typescollege_id)->first();
+                $course = TypesCollege::whereId(request()->type_id)->first();
                 break;
             default:
                 # code...
