@@ -2,7 +2,8 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\QrCode;
+use App\Models\Patch;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class QrCodeDataTable extends DataTable
+class PatchDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,8 +25,19 @@ class QrCodeDataTable extends DataTable
         return datatables()
         ->eloquent($query)
 
-        // ->addColumn('action', 'admin_dashboard.orders.action')
+        ->addColumn('action', 'admin_dashboard.teachers.patch_action')
+        ->editColumn("created_by",function($query){
+            return $query->createable->name;
+        })
+        ->editColumn('created_at', function ($row) {
+            if ($row->created_at != null) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('Y-m-d');
+            } else {
+                return 'no date';
+            }
+        })
         ->rawColumns([
+
             'action',
         ]);
     }
@@ -33,16 +45,15 @@ class QrCodeDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(QrCode $model): QueryBuilder
+    public function query(Patch $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy("id", "desc")->where('patch_id',$this->id)
-        ;
+        return $model->newQuery()->orderBy("id", "desc")->where([['course_id','=',$this->id],[]]);
     }
 
     /**
      * Optional method if you want to use the html builder.
      */
-    public function html()
+    public function html(): HtmlBuilder
     {
         return $this->builder()
         ->columns($this->getColumns())
@@ -63,14 +74,13 @@ class QrCodeDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ["data" => "id" ,"title" => __('messages.code_number'),'orderable'=>false,'searchable'=>false],
-            ["data" => "qrcode" ,"title" => __('messages.qrcode'),'orderable'=>false,'searchable'=>false],
-            ["data" => "date_format" ,"title" => __('messages.print_date'),'orderable'=>false,'searchable'=>false],
-            ["data" => "expire_date_format" ,"title" => __('messages.expire_date'),'orderable'=>false,'searchable'=>false],
-            ["data" => "status_format" ,"title" => __('messages.status'),'orderable'=>false,'searchable'=>false],
+            ["data" => "id" ,"title" => __('messages.id')],
+             ["data" => "created_by" ,"title" => __('messages.created_by')],
+             ["data" => "count" ,"title" => __('messages.count')],
+             ["data" => "created_at" ,"title" => __('messages.created_at')],
 
-            // ['data'=>'action','title'=>__("messages.actions"),'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
-        ];
+             ['data'=>'action','title'=>__("messages.actions"),'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+           ];
     }
 
     /**
@@ -78,6 +88,6 @@ class QrCodeDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ProductQrCode_' . date('YmdHis');
+        return 'QrcodePatch_' . date('YmdHis');
     }
 }
