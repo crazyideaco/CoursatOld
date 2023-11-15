@@ -174,7 +174,7 @@
         });
         $.ajax({
             type: "get",
-            url: `getSubject_teacherCollege/${id}`,
+            url: `getSubjectTeachercollege/${id}`,
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
