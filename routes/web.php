@@ -642,9 +642,14 @@ Route::get('typecollege_patches/{id}','CollegeCourseQrCodeController@patch_index
 
 //store_sub_type_qrcode
 Route::post('store_sub_type_qrcode','SubTypeQrCodeController@store')->name('store_sub_type_qrcode');
+//patches
+Route::get('subtype_patches/{id}','SubTypeQrCodeController@patch_index')->name('subtype.subtype_patches');
+
 
 //store_lesson_qrcode
 Route::post('store_lesson_qrcode','LessonQrCodeController@store')->name('store_lesson_qrcode');
+//patches
+Route::get('lesson_patches/{id}','LessonQrCodeController@patch_index')->name('lesson.lesson_patches');
 
 
 
