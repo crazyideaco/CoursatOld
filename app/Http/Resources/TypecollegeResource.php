@@ -16,6 +16,14 @@ class TypecollegeResource extends JsonResource
      */
     public function toArray($request)
     {
+        $is_rated = false;
+        $rated = Typecollege_Rate::where([['typecollege_id','=',$this->id],['user_id','=',auth()->id()]])->first();
+        if($rated){
+            return $is_rated = true;
+        }else{
+            return $is_rated = false;
+        }
+
          $rates = Typecollege_Rate::where('typecollege_id',$this->id)->get()->pluck('rate')->toArray();
          if(count($rates) > 0){
          $rate = array_sum($rates) / count($rates);}
@@ -27,7 +35,7 @@ class TypecollegeResource extends JsonResource
            $allow = 1;
        }else{
           $is_book = 0;
-           $allow = 0; 
+           $allow = 0;
        }
         if($this->center){
            $center_image = asset('uploads/'.$this->center['image']);
@@ -36,12 +44,12 @@ class TypecollegeResource extends JsonResource
        }if($this->center){
            $center_name = $this->center['name'];
        }else{
-          $center_name = $this->doctor['name']; 
+          $center_name = $this->doctor['name'];
        }
        $status = 0;
        $join = TypecollegeJoin::where([["typecollege_id","=",$this->id],
        ["student_id","=",auth()->id()]])->first();
-      
+
        if(!$join){
            $status = 0;
        }elseif($join->status == 0){
@@ -58,7 +66,7 @@ class TypecollegeResource extends JsonResource
            'lecturer_id' => $this->doctor_id,
             'lecturer_image' => $this->doctor ? asset('uploads/'.$this->doctor['image']) : null,
            'posted_by' => $center_name,
-           'posted_by_image' =>$center_image, 
+           'posted_by_image' =>$center_image,
            'points' => $this->points,
            'description' => $this->description ? $this->description : '',
            'name' => $this->name_ar,
@@ -68,10 +76,12 @@ class TypecollegeResource extends JsonResource
            'is_book' => $is_book,
            'allow' => $allow,
            'rate'=> $rate,
+           'is_rated'=> $is_rated ?? false,
+
            'category_id' => 2,
            "status" => $status
-         
-            
+
+
         ];
     }
 }

@@ -15,6 +15,13 @@ class CourseResource extends JsonResource
      */
     public function toArray($request)
     {
+        $is_rated = false;
+        $rated = Course_Rate::where([['course_id','=',$this->id],['user_id','=',auth()->id()]])->first();
+        if($rated){
+            return $is_rated = true;
+        }else{
+            return $is_rated = false;
+        }
         $rates = Course_Rate::where('course_id',$this->id)->get()->pluck('rate')->toArray();
          if(count($rates) > 0){
          $rate = array_sum($rates) / count($rates);}
@@ -26,7 +33,7 @@ class CourseResource extends JsonResource
            $allow = 1;
        }else{
           $is_book = 0;
-           $allow = 0; 
+           $allow = 0;
        }    if($this->center){
            $center_image = asset('uploads/'.$this->center['image']);
        }else{
@@ -34,7 +41,7 @@ class CourseResource extends JsonResource
        }if($this->center){
            $center_name = $this->center['name'];
        }else{
-          $center_name = $this->user['name']; 
+          $center_name = $this->user['name'];
        }
        $duration = array_sum($this->videos->pluck('seconds')->toArray());
         $videos_number = count($this->videos);
@@ -45,7 +52,7 @@ class CourseResource extends JsonResource
            'lecturer' => $this->user['name'],
            'lecturer_id' => $this->user_id,
            'posted_by' => $center_name,
-           'posted_by_image' =>$center_image, 
+           'posted_by_image' =>$center_image,
            'points' => $this->points,
            'description' => $this->description,
             'mintues' => 0,
@@ -57,7 +64,8 @@ class CourseResource extends JsonResource
            'is_book' => $is_book,
            'allow' => $allow,
            'rate'=> $rate,
-            
+           'is_rated'=> $is_rated ?? false,
+
           'videos ' => VideogeneralResource::collection($this->videos),
         ];
     }

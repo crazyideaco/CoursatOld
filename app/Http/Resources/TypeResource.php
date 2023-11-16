@@ -17,7 +17,13 @@ class TypeResource extends JsonResource
      */
     public function toArray($request)
     {
-
+        $is_rated = false;
+        $rated = Type_Rate::where([['type_id','=',$this->id],['user_id','=',auth()->id()]])->first();
+        if($rated){
+            return $is_rated = true;
+        }else{
+            return $is_rated = false;
+        }
 
          $rates = Type_Rate::where('type_id',$this->id)->get()->pluck('rate')->toArray();
          if(count($rates) > 0){
@@ -71,6 +77,7 @@ class TypeResource extends JsonResource
             'is_book' => $is_book,
            'allow' => $allow,
            'rate'=> $rate,
+           'is_rated'=> $is_rated ?? false,
            'category_id' => 1,
            "status" => $status,
           'tags' => TagResource::collection($this->tags)
