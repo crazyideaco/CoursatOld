@@ -638,7 +638,7 @@ Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')
 Route::post('store_sub_type_qrcode','SubTypeQrCodeController@store')->name('store_sub_type_qrcode');
 
 //store_lesson_qrcode
-Route::post('store_lesson_qrcode','LessonController@store')->name('store_lesson_qrcode');
+Route::post('store_lesson_qrcode','LessonQrCodeController@store')->name('store_lesson_qrcode');
 
 
 
