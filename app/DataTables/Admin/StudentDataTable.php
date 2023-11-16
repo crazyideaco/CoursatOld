@@ -80,6 +80,18 @@ class StudentDataTable extends DataTable
                 'category_id',
             ])
             ->filter(function ($query) use ($request) {
+                if (
+                    $request->has('search') && isset($request->input('search')['value'])
+                    && !empty($request->input('search')['value'])
+                ) {
+                    $searchValue = $request->input('search')['value'];
+                    $query->where(function ($query) use ($searchValue) {
+                        $query->where('name', 'LIKE', "%$searchValue%")
+                            ->orWhere('mobile', 'LIKE', "%$searchValue%");
+                    })->orwhereHas('stdcenters', function ($q) use ($searchValue) {
+                        $q->where('name', 'LIKE', "%$searchValue%");
+                    });
+                }
                 $query
                     ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
                         // dd($request->all());
@@ -110,8 +122,7 @@ class StudentDataTable extends DataTable
                         return $q->whereHas('stutypescollege', function ($typeq) use ($request) {
                             return $typeq->where('typescollege.id', (int)$request->type_college_id);
                         });
-                    })
-                ;
+                    });
             });
     }
 
@@ -138,7 +149,7 @@ class StudentDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             // ->dom('Bfrtip')
-            ->orderBy(1)
+            // ->orderBy(1)
             // ->orderBy('id', 'desc')
             ->lengthMenu([[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]]);
     }
