@@ -58,7 +58,8 @@ class QrcodeService
         $count = request()->count;
 
         $patch = Patch::create([
-            // 'course_id' => $course->id,
+            'course_id' => request()->type_id,
+            'course_type' => $model_type,
             'count' => $count,
             'createable_id' => auth()->id(),
             'createable_type' => User::class,

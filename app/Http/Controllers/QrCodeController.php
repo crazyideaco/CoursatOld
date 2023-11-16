@@ -18,8 +18,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class QrCodeController extends Controller
 {
     use ApiTrait;
-    protected $view = 'dashboard.types.';
-    protected $route = 'types.';
+    protected $view = 'dashboard.patches.';
+    protected $route = 'patches.';
 
     protected  QrcodeService $qrcodeService;
 
@@ -27,12 +27,12 @@ class QrCodeController extends Controller
     {
         $this->qrcodeService = $qrcodeService;
     }
-    // public function patch_index(PatchDataTable $dataTable, $id)
-    // {
-    //     $course = Type::whereId($id)->firstorFail();
-    //     $dataTable->id = $id;
-    //     return $dataTable->render($this->view . 'patches', compact('id', 'course'));
-    // }
+    public function patch_index(PatchDataTable $dataTable, $id)
+    {
+        $course = Type::whereId($id)->firstorFail();
+        $dataTable->id = $id;
+        return $dataTable->render($this->view . 'patches', compact('id', 'course'));
+    }
 
     // public function index(QrCodeDataTable $dataTable, $id)
     // {
