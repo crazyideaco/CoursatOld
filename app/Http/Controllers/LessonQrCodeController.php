@@ -21,8 +21,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class LessonQrCodeController extends Controller
 {
     use ApiTrait;
-    protected $view = 'dashboard.types.';
-    protected $route = 'types.';
+    protected $view = 'dashboard.patches.';
+    protected $route = 'patches.';
 
     protected  QrcodeService $qrcodeService;
 
