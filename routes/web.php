@@ -632,7 +632,7 @@
 Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
 
 //patches
-Route::get('patches/{id}','QrCodeController@patch_index');
+Route::get('patches/{id}','QrCodeController@patch_index')->name('types.patches');
 
 
 //store_course_college_qrcode
