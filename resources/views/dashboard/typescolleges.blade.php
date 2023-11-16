@@ -296,7 +296,7 @@
                                                         </div>
 
                                                         <div class="col-12">
-                                                            <label>expire_date </label>
+                                                            <label>expire date </label>
                                                             <input class="form-control" type="date"
                                                                 id="expire_date{{ $typescollege->id }}">
                                                         </div>
