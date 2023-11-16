@@ -32,5 +32,9 @@ trait ApiTrait
             'data' => $data,
         ], $code);
     }
-    
+
+    public function returnException($message, $code)
+    {
+        return $this->errorResponse($message, $code);
+    }
 }//End of trait
