@@ -18,9 +18,9 @@ class CourseResource extends JsonResource
         $is_rated = false;
         $rated = Course_Rate::where([['course_id','=',$this->id],['user_id','=',auth()->id()]])->first();
         if($rated){
-            return $is_rated = true;
+            $is_rated = true;
         }else{
-            return $is_rated = false;
+            $is_rated = false;
         }
         $rates = Course_Rate::where('course_id',$this->id)->get()->pluck('rate')->toArray();
          if(count($rates) > 0){

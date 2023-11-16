@@ -19,9 +19,9 @@ class TypecollegeResource extends JsonResource
         $is_rated = false;
         $rated = Typecollege_Rate::where([['typecollege_id','=',$this->id],['user_id','=',auth()->id()]])->first();
         if($rated){
-            return $is_rated = true;
+            $is_rated = true;
         }else{
-            return $is_rated = false;
+            $is_rated = false;
         }
 
          $rates = Typecollege_Rate::where('typecollege_id',$this->id)->get()->pluck('rate')->toArray();
