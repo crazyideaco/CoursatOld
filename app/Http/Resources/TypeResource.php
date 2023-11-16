@@ -20,9 +20,9 @@ class TypeResource extends JsonResource
         $is_rated = false;
         $rated = Type_Rate::where([['type_id','=',$this->id],['user_id','=',auth()->id()]])->first();
         if($rated){
-            return $is_rated = true;
+            $is_rated = true;
         }else{
-            return $is_rated = false;
+            $is_rated = false;
         }
 
          $rates = Type_Rate::where('type_id',$this->id)->get()->pluck('rate')->toArray();
