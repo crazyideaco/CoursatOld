@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\QrCode as QrCodeModel;
+use App\Subtype;
 use App\Traits\ApiTrait;
 use App\TypesCollege;
 use App\User;
@@ -39,6 +40,9 @@ class QrcodeService
                 break;
             case 'TypesCollege':
                 $course = TypesCollege::whereId(request()->type_id)->first();
+                break;
+            case 'SubType':
+                $course = Subtype::whereId(request()->type_id)->first();
                 break;
             default:
                 # code...
