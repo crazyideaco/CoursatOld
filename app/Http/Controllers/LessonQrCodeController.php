@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\Admin\LessonPatchDataTable;
 use App\DataTables\Admin\PatchDataTable;
 use App\DataTables\Admin\QrCodeDataTable;
 use App\Http\Controllers\Controller;
@@ -29,12 +30,12 @@ class LessonQrCodeController extends Controller
     {
         $this->qrcodeService = $qrcodeService;
     }
-    // public function patch_index(PatchDataTable $dataTable, $id)
-    // {
-    //     $course = Type::whereId($id)->firstorFail();
-    //     $dataTable->id = $id;
-    //     return $dataTable->render($this->view . 'patches', compact('id', 'course'));
-    // }
+    public function lesson_patch_index(LessonPatchDataTable $dataTable, $id)
+    {
+        $course = Lesson::whereId($id)->firstorFail();
+        $dataTable->id = $id;
+        return $dataTable->render($this->view . 'lesson_patches', compact('id', 'course'));
+    }
 
     // public function index(QrCodeDataTable $dataTable, $id)
     // {

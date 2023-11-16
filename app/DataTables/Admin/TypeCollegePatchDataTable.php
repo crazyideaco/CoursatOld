@@ -13,7 +13,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PatchDataTable extends DataTable
+class TypeCollegePatchDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -25,7 +25,7 @@ class PatchDataTable extends DataTable
         return datatables()
         ->eloquent($query)
 
-        ->addColumn('action', 'dashboard.patches.action')
+        ->addColumn('action', 'admin_dashboard.teachers.patch_action')
         ->editColumn("created_by",function($query){
             return $query->createable->name;
         })
@@ -47,7 +47,7 @@ class PatchDataTable extends DataTable
      */
     public function query(Patch $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy("id", "desc")->where([['course_id','=',$this->id],['course_type','=','Type']]);
+        return $model->newQuery()->orderBy("id", "desc")->where([['course_id','=',$this->id],['course_type','=','TypesCollege']]);
     }
 
     /**

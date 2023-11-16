@@ -631,6 +631,10 @@
 //store_qrcode
 Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
 
+//patches
+Route::post('patches/{id}','QrCodeController@patch_index')->name('types.patches');
+
+
 //store_course_college_qrcode
 Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
 
@@ -638,8 +642,7 @@ Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')
 Route::post('store_sub_type_qrcode','SubTypeQrCodeController@store')->name('store_sub_type_qrcode');
 
 //store_lesson_qrcode
-Route::post('store_lesson_qrcode','LessonController@store')->name('store_lesson_qrcode');
-
+Route::post('store_lesson_qrcode','LessonQrCodeController@store')->name('store_lesson_qrcode');
 
 
 

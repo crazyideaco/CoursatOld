@@ -233,6 +233,9 @@
                                                     class="btn btn-success btn-sm">الامتحانات</a>
                                                 <span class="btn btn-success btn-sm" data-toggle="modal"
                                                     data-target="#myModal{{ $type->id }}">create qrcode</span>
+                                                <a href="{{ route('types.patches', $course->id) }}"
+                                                    title="QrCode History"
+                                                    class="text-dark ml-2"><i class="fas fa-cog"></i></a>
                                             </td>
                                         </tr>
                                         <div class="modal" id="myModal{{ $type->id }}" tabindex="-1"
