@@ -192,6 +192,8 @@
                           <a href="{{route('lessonattendstudents',$lesson->id)}}"  class="btn btn-success btn-sm mt-2" >الحاضرين</a>
                           <span class="btn btn-success btn-sm" data-toggle="modal"
                                                     data-target="#myModal{{ $lesson->id }}">create qrcode</span>
+                                                    <a href="{{ route('lesson.lesson_patches', $lesson->id) }}" title="QrCode History"
+                                                        class="text-dark ml-2"><i class="fas fa-cog"></i></a>
                                             </td>
                                         </tr>
                                         <div class="modal" id="myModal{{ $lesson->id }}" tabindex="-1" role="dialog" aria-hidden="true">
