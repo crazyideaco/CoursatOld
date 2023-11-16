@@ -87,7 +87,7 @@ class StudentDataTable extends DataTable
                     $searchValue = $request->input('search')['value'];
                     $query->where(function ($query) use ($searchValue) {
                         $query->where('name', 'LIKE', "%$searchValue%")
-                            ->orWhere('mobile', 'LIKE', "%$searchValue%");
+                            ->orWhere('phone', 'LIKE', "%$searchValue%");
                     })->orwhereHas('stdcenters', function ($q) use ($searchValue) {
                         $q->where('name', 'LIKE', "%$searchValue%");
                     });
