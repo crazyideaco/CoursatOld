@@ -30,7 +30,7 @@ class SubTypeQrCodeController extends Controller
     {
         $this->qrcodeService = $qrcodeService;
     }
-    public function subtype_patch_index(SubTypePatchDataTable $dataTable, $id)
+    public function patch_index(SubTypePatchDataTable $dataTable, $id)
     {
         $course = Subtype::whereId($id)->firstorFail();
         $dataTable->id = $id;

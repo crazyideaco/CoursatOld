@@ -25,7 +25,7 @@ class TypeCollegePatchDataTable extends DataTable
         return datatables()
         ->eloquent($query)
 
-        ->addColumn('action', 'admin_dashboard.teachers.patch_action')
+        ->addColumn('action', 'dashboard.patches.typecollege_action')
         ->editColumn("created_by",function($query){
             return $query->createable->name;
         })
@@ -74,12 +74,12 @@ class TypeCollegePatchDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ["data" => "id" ,"title" => __('messages.id')],
-             ["data" => "created_by" ,"title" => __('messages.created_by')],
-             ["data" => "count" ,"title" => __('messages.count')],
-             ["data" => "created_at" ,"title" => __('messages.created_at')],
+            ["data" => "id" ,"title" => 'ID'],
+             ["data" => "created_by" ,"title" => 'created by'],
+             ["data" => "count" ,"title" => 'العدد'],
+             ["data" => "created_at" ,"title" => 'الوقت'],
 
-             ['data'=>'action','title'=>__("messages.actions"),'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+             ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
            ];
     }
 

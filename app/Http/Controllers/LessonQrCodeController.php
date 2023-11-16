@@ -30,7 +30,7 @@ class LessonQrCodeController extends Controller
     {
         $this->qrcodeService = $qrcodeService;
     }
-    public function lesson_patch_index(LessonPatchDataTable $dataTable, $id)
+    public function patch_index(LessonPatchDataTable $dataTable, $id)
     {
         $course = Lesson::whereId($id)->firstorFail();
         $dataTable->id = $id;
