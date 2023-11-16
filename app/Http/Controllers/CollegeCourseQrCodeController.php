@@ -21,8 +21,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class CollegeCourseQrCodeController extends Controller
 {
     use ApiTrait;
-    protected $view = 'dashboard.types.';
-    protected $route = 'types.';
+    protected $view = 'dashboard.patches.';
+    protected $route = 'patches.';
 
     protected  QrcodeService $qrcodeService;
 
@@ -34,7 +34,7 @@ class CollegeCourseQrCodeController extends Controller
     {
         $course = TypesCollege::whereId($id)->firstorFail();
         $dataTable->id = $id;
-        return $dataTable->render($this->view . 'patches', compact('id', 'course'));
+        return $dataTable->render($this->view . 'typecollege_patches', compact('id', 'course'));
     }
 
     // public function index(QrCodeDataTable $dataTable, $id)

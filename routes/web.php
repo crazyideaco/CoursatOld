@@ -630,13 +630,15 @@
 
 //store_qrcode
 Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
-
 //patches
 Route::get('patches/{id}','QrCodeController@patch_index')->name('types.patches');
 
 
 //store_course_college_qrcode
 Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
+//patches
+Route::get('typecollege_patches/{id}','CollegeCourseQrCodeController@patch_index')->name('typecolleges.typecollege_patches');
+
 
 //store_sub_type_qrcode
 Route::post('store_sub_type_qrcode','SubTypeQrCodeController@store')->name('store_sub_type_qrcode');
