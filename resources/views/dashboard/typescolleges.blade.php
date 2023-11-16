@@ -273,6 +273,9 @@
                                             </a>
                                             <span class="btn btn-success btn-sm" data-toggle="modal"
                                                     data-target="#myModal{{ $typescollege->id }}">create qrcode</span>
+                                            <a href="{{ route('typecolleges.typecollege_patches', $typescollege->id) }}"
+                                                title="QrCode History"
+                                                class="text-dark ml-2"><i class="fas fa-cog"></i></a>
                                         </td>
                                     </tr>
                                     <div class="modal" id="myModal{{ $typescollege->id }}" tabindex="-1" role="dialog" aria-hidden="true">
