@@ -802,7 +802,14 @@ class AuthController extends Controller
         $user = auth()->user();
         if (auth()->user()->category_id == 1) {
             $type = Type::where('id', $request->course_id)->first();
-            if ($type) {
+            $type_rate = Type_Rate::where('type_id', $type->id)->where('user_id', $user->id)->first();
+            if($type_rate){
+                return response()->json([
+                    'status' => false,
+                    'message' =>'لقد قيمت هذا الكورس من قبل',
+                ]);
+            }else{
+                if ($type) {
                 $rate = new Type_Rate;
                 $rate->type_id = $type->id;
                 $rate->user_id = $user->id;
@@ -821,8 +828,19 @@ class AuthController extends Controller
                     'message' => 'عفو   ليد كورس بذا الاسم',
                 ]);
             }
+            }
+
         } else if (auth()->user()->category_id == 2) {
             $type = TypesCollege::where('id', $request->course_id)->first();
+
+            $typecollegetype_rate = Typecollege_Rate::where('typecollege_id', $type->id)->where('user_id', $user->id)->first();
+
+            if($typecollegetype_rate){
+                return response()->json([
+                    'status' => false,
+                    'message' =>'لقد قيمت هذا الكورس من قبل',
+                ]);
+            }else{
             if ($type) {
                 $rate = new Typecollege_Rate;
                 $rate->typecollege_id = $type->id;
@@ -842,8 +860,17 @@ class AuthController extends Controller
                     'message' => 'عفوا   ليوجد كورس بذا الام',
                 ]);
             }
+        }
         } else if (auth()->user()->category_id == 3) {
             $type = Course::where('id', $request->course_id)->first();
+            $course_rate = Course_Rate::where('course_id', $type->id)->where('user_id', $user->id)->first();
+
+            if($course_rate){
+                return response()->json([
+                    'status' => false,
+                    'message' =>'لقد قيمت هذا الكورس من قبل',
+                ]);
+            }else{
             if ($type) {
                 $rate = new Course_Rate;
                 $rate->course_id = $type->id;
@@ -863,6 +890,7 @@ class AuthController extends Controller
                     'message' => 'فوا   لاوجد كورس بهذا ااسم',
                 ]);
             }
+        }
         }
     }
     public function course_rate(Request $request)
