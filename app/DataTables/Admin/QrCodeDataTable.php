@@ -63,11 +63,11 @@ class QrCodeDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ["data" => "id" ,"title" => __('messages.code_number'),'orderable'=>false,'searchable'=>false],
-            ["data" => "qrcode" ,"title" => __('messages.qrcode'),'orderable'=>false,'searchable'=>false],
-            ["data" => "date_format" ,"title" => __('messages.print_date'),'orderable'=>false,'searchable'=>false],
-            ["data" => "expire_date_format" ,"title" => __('messages.expire_date'),'orderable'=>false,'searchable'=>false],
-            ["data" => "status_format" ,"title" => __('messages.status'),'orderable'=>false,'searchable'=>false],
+            ["data" => "id" ,"title" => 'code number','orderable'=>false,'searchable'=>false],
+            ["data" => "qrcode" ,"title" => 'qrcode','orderable'=>false,'searchable'=>false],
+            ["data" => "date_format" ,"title" => 'print_date','orderable'=>false,'searchable'=>false],
+            ["data" => "expire_date_format" ,"title" => 'expire_date','orderable'=>false,'searchable'=>false],
+            ["data" => "status_format" ,"title" => 'status','orderable'=>false,'searchable'=>false],
 
             // ['data'=>'action','title'=>__("messages.actions"),'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
         ];

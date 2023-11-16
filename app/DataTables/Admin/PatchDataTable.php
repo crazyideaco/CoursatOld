@@ -25,7 +25,7 @@ class PatchDataTable extends DataTable
         return datatables()
         ->eloquent($query)
 
-        ->addColumn('action', 'dashboard.patches.action')
+        ->addColumn('action', 'dashboard.patches.patch_action')
         ->editColumn("created_by",function($query){
             return $query->createable->name;
         })
