@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Course;
+use App\Lesson;
 use App\Models\Patch;
 use App\Type;
 use Illuminate\Http\Request;
@@ -43,6 +44,9 @@ class QrcodeService
                 break;
             case 'SubType':
                 $course = Subtype::whereId(request()->type_id)->first();
+                break;
+            case 'Lesson':
+                $course = Lesson::whereId(request()->type_id)->first();
                 break;
             default:
                 # code...
