@@ -23,9 +23,9 @@
             href="{{ route('typecollegeresults_students', $id) }}">نتائج
             الامتحانات</a>
     @endif
-    <button type="button" class="btn btn-primary btn-sm" style="font-size:13px;width:52px;" data-toggle="modal"
+    <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px" data-toggle="modal"
         data-target="#passwordModal{{ $id }}">
-        كورس
+        ريسيت باسورد الطالب
     </button>
 </td>
 <!-- The Modal -->
@@ -86,8 +86,8 @@
             //  contentType: "application/json; charset=utf-8",
             dataType: "Json",
             data: {
-                'password': $(`#password${id}`).val()
-                'password_confirmation': $(`#password_confirmation${id}`).val()
+                'password': $(`#password${id}`).val();
+                'password_confirmation': $(`#password_confirmation${id}`).val();
             },
             success: function(result) {
                 if (result.status == true) {
@@ -99,7 +99,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    $(`#myModal${id}`).modal('hide');
+                    table.ajax().reload()
 
                     //location.reload();
                 } else if (result.status == false) {
@@ -110,7 +110,9 @@
                     })
 
                 }
-                table.ajax().reload()
+                $(`#myModal${id}`).modal('hide');
+
+
 
             }
 
