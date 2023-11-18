@@ -86,8 +86,8 @@
             //  contentType: "application/json; charset=utf-8",
             dataType: "Json",
             data: {
-                'password': $(`#password${id}`).val();
-                'password_confirmation': $(`#password_confirmation${id}`).val();
+                'password': $(`#password${id}`).val(),
+                'password_confirmation': $(`#password_confirmation${id}`).val(),
             },
             success: function(result) {
                 if (result.status == true) {
