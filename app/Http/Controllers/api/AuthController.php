@@ -450,9 +450,25 @@ class AuthController extends Controller
 
                 // If you need to convert it back to a collection, you can use collect()
                 $subjects = collect($subjectsArray);
-            */
 
+                 // Create a resource object for the special subject
+                $allSubjectResource = new HomeCategory([
+                    'id' => 0,
+                    'title' => 'الكل',
+                    'courses' => [],
+                    'latest_courses' => [],
+                    'lecturers' => [],
+                ]);
 
+                // Transform the collection using the resource
+                $subjectsResource = HomeCategory::collection($subjects);
+
+                // Prepend the special subject to the transformed collection
+                $subjectsResource->prepend($allSubjectResource);
+
+                // Return the modified collection
+                return $subjectsResource;
+             */
         } else if (auth()->user()->category_id == 2) {
             if (count($users) > 0) {
                 $result = [];
@@ -468,11 +484,11 @@ class AuthController extends Controller
                 $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->where("active", 1)->get();
             }
         }
-        $subjectsResource = HomeCategory::collection($subjects);
+
         return response()->json([
             'status' => true,
             'message' => 'محتوي هوم',
-            'data' => $subjectsResource,
+            'data' => HomeCategory::collection($subjects),
             'offers' => OfferResource::collection($offers), //
             'centeroffers' => OfferResource::collection($offers),
 
