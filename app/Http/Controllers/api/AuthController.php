@@ -244,7 +244,6 @@ class AuthController extends Controller
                     if ($request->code) {
                         if ($center = User::where('code', $request->code)->first()) {
                             $center->centerstudents()->attach($user->id);
-
                         } else {
                             return response()->json(['status' => false, 'message' => 'لا يوجد سنتر هذا الكود']);
                         }
@@ -429,20 +428,29 @@ class AuthController extends Controller
                 }
                 $result = call_user_func_array("array_merge", $subject_ids);
                 $subjects = Subject::where('years_id', auth()->user()->year_id)->whereIn('id', $result)->where("active", 1)->get();
-
             } else {
                 $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
             }
 
+            /**
+                // Convert the collection to an array
+                $subjectsArray = $subjects->toArray();
 
-            //start add all subjects tab
-            $allSubjectTab['id'] = 0;
-            $allSubjectTab['title'] = 'الكل';
-            $allSubjectTab['courses'] = [];
-            $allSubjectTab['latest_courses'] = [];
-            $allSubjectTab['lectuers'] = [];
-            array_unshift($subjects, $allSubjectTab);
-            //end add all subjects tab
+                // Initialize the special subject
+                $allSubjectTab = [
+                    'id' => 0,
+                    'title' => 'الكل',
+                    'courses' => [],
+                    'latest_courses' => [],
+                    'lecturers' => [],
+                ];
+
+                // Add the special subject to the beginning of the array
+                array_unshift($subjectsArray, $allSubjectTab);
+
+                // If you need to convert it back to a collection, you can use collect()
+                $subjects = collect($subjectsArray);
+            */
 
 
         } else if (auth()->user()->category_id == 2) {
@@ -460,9 +468,11 @@ class AuthController extends Controller
                 $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->where("active", 1)->get();
             }
         }
+        $subjectsResource = HomeCategory::collection($subjects);
         return response()->json([
-            'status' => true, 'message' => 'محتوي هوم',
-            'data' => HomeCategory::collection($subjects),
+            'status' => true,
+            'message' => 'محتوي هوم',
+            'data' => $subjectsResource,
             'offers' => OfferResource::collection($offers), //
             'centeroffers' => OfferResource::collection($offers),
 
@@ -473,7 +483,7 @@ class AuthController extends Controller
         if (auth()->user()->category_id == 1) {
             $type1 = Type::where('id', $request->course_id)->first();
             if ($type1) {
-                $type = Type::where('id', $request->course_id)->first()->subtypes()->where("active",1)->orderBy('order_number', 'asc')->get();
+                $type = Type::where('id', $request->course_id)->first()->subtypes()->where("active", 1)->orderBy('order_number', 'asc')->get();
                 return response()->json([
                     'status' => true, 'message' => 'محتيت الكورس',
                     'data' => SubtypeResource::collection($type),
@@ -486,7 +496,7 @@ class AuthController extends Controller
         } else if (auth()->user()->category_id == 2) {
             $type1 = TypesCollege::where('id', $request->course_id)->first();
             if ($type1) {
-                $type = TypesCollege::where('id', $request->course_id)->first()->lessons()->where("active",1)->orderBy('order_number', 'asc')->get();
+                $type = TypesCollege::where('id', $request->course_id)->first()->lessons()->where("active", 1)->orderBy('order_number', 'asc')->get();
                 return response()->json([
                     'status' => true, 'message' => 'محتويات الكورس',
                     'data' => LessonResource::collection($type),
@@ -803,94 +813,93 @@ class AuthController extends Controller
         if (auth()->user()->category_id == 1) {
             $type = Type::where('id', $request->course_id)->first();
             $type_rate = Type_Rate::where('type_id', $type->id)->where('user_id', $user->id)->first();
-            if($type_rate){
+            if ($type_rate) {
                 return response()->json([
                     'status' => false,
-                    'message' =>'لقد قيمت هذا الكورس من قبل',
-                ]);
-            }else{
-                if ($type) {
-                $rate = new Type_Rate;
-                $rate->type_id = $type->id;
-                $rate->user_id = $user->id;
-                $rate->rate = $request->rate;
-                $rate->comment = $request->comment;
-                $rate->save();
-                return response()->json([
-                    'status' => true,
-                    'message' => 'ت التقييم بنجا',
-                    'data' => new RateResource($rate),
-
+                    'message' => 'لقد قيمت هذا الكورس من قبل',
                 ]);
             } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'عفو   ليد كورس بذا الاسم',
-                ]);
-            }
-            }
+                if ($type) {
+                    $rate = new Type_Rate;
+                    $rate->type_id = $type->id;
+                    $rate->user_id = $user->id;
+                    $rate->rate = $request->rate;
+                    $rate->comment = $request->comment;
+                    $rate->save();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'ت التقييم بنجا',
+                        'data' => new RateResource($rate),
 
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'عفو   ليد كورس بذا الاسم',
+                    ]);
+                }
+            }
         } else if (auth()->user()->category_id == 2) {
             $type = TypesCollege::where('id', $request->course_id)->first();
 
             $typecollegetype_rate = Typecollege_Rate::where('typecollege_id', $type->id)->where('user_id', $user->id)->first();
 
-            if($typecollegetype_rate){
+            if ($typecollegetype_rate) {
                 return response()->json([
                     'status' => false,
-                    'message' =>'لقد قيمت هذا الكورس من قبل',
-                ]);
-            }else{
-            if ($type) {
-                $rate = new Typecollege_Rate;
-                $rate->typecollege_id = $type->id;
-                $rate->user_id = $user->id;
-                $rate->rate = $request->rate;
-                $rate->comment = $request->comment;
-                $rate->save();
-                return response()->json([
-                    'status' => true,
-                    'message' => 'م التقييم نجاح',
-                    'data' => new RateResource($rate),
-
+                    'message' => 'لقد قيمت هذا الكورس من قبل',
                 ]);
             } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'عفوا   ليوجد كورس بذا الام',
-                ]);
+                if ($type) {
+                    $rate = new Typecollege_Rate;
+                    $rate->typecollege_id = $type->id;
+                    $rate->user_id = $user->id;
+                    $rate->rate = $request->rate;
+                    $rate->comment = $request->comment;
+                    $rate->save();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'م التقييم نجاح',
+                        'data' => new RateResource($rate),
+
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'عفوا   ليوجد كورس بذا الام',
+                    ]);
+                }
             }
-        }
         } else if (auth()->user()->category_id == 3) {
             $type = Course::where('id', $request->course_id)->first();
             $course_rate = Course_Rate::where('course_id', $type->id)->where('user_id', $user->id)->first();
 
-            if($course_rate){
+            if ($course_rate) {
                 return response()->json([
                     'status' => false,
-                    'message' =>'لقد قيمت هذا الكورس من قبل',
-                ]);
-            }else{
-            if ($type) {
-                $rate = new Course_Rate;
-                $rate->course_id = $type->id;
-                $rate->user_id = $user->id;
-                $rate->comment = $request->comment;
-                $rate->rate = $request->rate;
-                $rate->save();
-                return response()->json([
-                    'status' => true,
-                    'message' => 'تم لتقيم بجاح',
-                    'data' => new RateResource($rate),
-
+                    'message' => 'لقد قيمت هذا الكورس من قبل',
                 ]);
             } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'فوا   لاوجد كورس بهذا ااسم',
-                ]);
+                if ($type) {
+                    $rate = new Course_Rate;
+                    $rate->course_id = $type->id;
+                    $rate->user_id = $user->id;
+                    $rate->comment = $request->comment;
+                    $rate->rate = $request->rate;
+                    $rate->save();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'تم لتقيم بجاح',
+                        'data' => new RateResource($rate),
+
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'فوا   لاوجد كورس بهذا ااسم',
+                    ]);
+                }
             }
-        }
         }
     }
     public function course_rate(Request $request)
@@ -957,7 +966,7 @@ class AuthController extends Controller
         $result = [];
 
         if (auth()->user()->category_id == 1) {
-        $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
+            $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
 
             if (count($users) > 0) {
 
@@ -969,11 +978,10 @@ class AuthController extends Controller
 
                 $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereIn("users.id", $result)->get();
             } else {
-                $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereNotIn("users.id",$user_owners)->get();
-
+                $lecturers = Subject::where('id', $request->subject_id)->first()->teachers()->whereNotIn("users.id", $user_owners)->get();
             }
         } elseif (auth()->user()->category_id == 2) {
-        $user_owners = Center_Doctor::get()->pluck("doctor_id")->toArray();
+            $user_owners = Center_Doctor::get()->pluck("doctor_id")->toArray();
 
             if (count($users) > 0) {
 
@@ -984,8 +992,7 @@ class AuthController extends Controller
                 $result = call_user_func_array("array_merge", $lecturer_ids);
                 $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereIn("users.id", $result)->get();
             } else {
-                $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereNotIn("users.id",$user_owners)->get();
-
+                $lecturers = SubjectsCollege::where('id', $request->subject_id)->first()->doctors()->whereNotIn("users.id", $user_owners)->get();
             }
         }
         return response()->json([
@@ -1061,7 +1068,7 @@ class AuthController extends Controller
     public function fetch_centers()
     {
 
-        $centers =User::where('is_student', 5)->get();
+        $centers = User::where('is_student', 5)->get();
 
         return response()->json([
             'status' => true,
