@@ -1,3 +1,6 @@
+@php
+    $student = \App\User::find($id);
+@endphp
 <td class="text-center">
     <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
         onclick="student_logout({{ $id }})">
