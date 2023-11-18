@@ -172,7 +172,7 @@
 
         //students
         Route::get('allstudents', 'Dashboard\StudentController@allstudents')->name('allstudents');
-        Route::post('resetStudentPassword/{id}', 'Dashboard\StudentController@resetStudentPassword')->name('resetStudentPassword');
+        Route::post('resetStudentPassword/{student}', 'Dashboard\StudentController@resetStudentPassword')->name('resetStudentPassword');
         Route::get('students', 'StudentController@students')->name('students');
         Route::get('basicstudents', 'StudentController@basicstudents')->name('basicstudents');
         Route::post('filterbasicstudents', 'StudentController@filterbasicstudents')->name('filterbasicstudents');
