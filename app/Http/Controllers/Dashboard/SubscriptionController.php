@@ -11,17 +11,17 @@ use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-    protected $view = "dashboard.students.subscriptions.";
+    protected $view = "dashboard.students.";
     public function typescollegeStudentSubscription(TypeCollegeSubscriptionDataTable $dataTable)
     {
-        return $dataTable->render($this->view . 'typeCollege', [
+        return $dataTable->render($this->view . 'college_subscriptions.index', [
             "universities" => University::all(),
         ]);
     }
 
     public function typesStudentSubscription(TypeSubscriptionDataTable $dataTable)
     {
-        return $dataTable->render($this->view . 'type', [
+        return $dataTable->render($this->view . 'basic_subscriptions.index', [
             "stage" => Stage::all(),
         ]);
     }

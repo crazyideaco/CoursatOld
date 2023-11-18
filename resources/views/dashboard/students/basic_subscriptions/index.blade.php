@@ -100,16 +100,6 @@
                         </div>
 
 
-                        <div class="row" id="category_id_college">
-                            @include('dashboard.students.includes.__college_filter_sections')
-                        </div>
-                        {{-- <div class="row">
-                            <div class="col-3 mx-auto">
-
-
-                                <span class="btn btn-primary" onclick="filterbasicstudents()">بحث</span>
-                            </div>
-                        </div> --}}
                         <div class="row">
                             <div class="table-responsive">
 
@@ -316,11 +306,11 @@
             data.years_id = $("#year").val();
             data.type_id = $("#types").val();
             // //college filters
-            data.university_id = $("#university").val();
-            data.college_id = $("#college").val();
-            data.division_id = $("#division").val();
-            data.section_id = $("#section").val();
-            data.type_college_id = $("#typescollege").val();
+            // data.university_id = $("#university").val();
+            // data.college_id = $("#college").val();
+            // data.division_id = $("#division").val();
+            // data.section_id = $("#section").val();
+            // data.type_college_id = $("#typescollege").val();
         });
         $('#dataTableBuilder').DataTable().ajax.reload();
     }

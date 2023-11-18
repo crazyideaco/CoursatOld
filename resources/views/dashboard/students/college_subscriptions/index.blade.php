@@ -95,9 +95,9 @@
 
 
                     <div class="pt-5">
-                        <div class="row" id="category_id_basic">
+                        {{-- <div class="row" id="category_id_basic">
                             @include('dashboard.students.includes.__basic_filter_sections')
-                        </div>
+                        </div> --}}
 
 
                         <div class="row" id="category_id_college">
@@ -154,7 +154,7 @@
     {{ $dataTable->scripts() }}
 
 
-    <script>
+    {{-- <script>
         function activeuser(id) {
             $.ajaxSetup({
                 headers: {
@@ -263,7 +263,7 @@
 
             });
         }
-    </script>
+    </script> --}}
 
 
 
@@ -312,9 +312,9 @@
     function filter_students() {
         $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
             //basic filters
-            data.stage_id = $("#stage").val();
-            data.years_id = $("#year").val();
-            data.type_id = $("#types").val();
+            // data.stage_id = $("#stage").val();
+            // data.years_id = $("#year").val();
+            // data.type_id = $("#types").val();
             // //college filters
             data.university_id = $("#university").val();
             data.college_id = $("#college").val();

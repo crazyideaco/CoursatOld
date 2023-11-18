@@ -166,6 +166,10 @@
         //edit
         Route::get('editstate/{id}', 'StateController@editstate')->name('editstate');
         Route::post('updatestate/{id}', 'StateController@updatestate')->name('updatestate');
+        //studnet subscriptions
+        Route::get('typescollegeStudentSubscription', 'Dashboard\SubscriptionController@typescollegeStudentSubscription')->name('typescollegeStudentSubscription');
+        Route::get('typesStudentSubscription', 'Dashboard\SubscriptionController@typesStudentSubscription')->name('typesStudentSubscription');
+
         //students
         Route::get('allstudents', 'Dashboard\StudentController@allstudents')->name('allstudents');
         Route::post('resetStudentPassword/{id}', 'Dashboard\StudentController@resetStudentPassword')->name('resetStudentPassword');

@@ -2,7 +2,7 @@
 
 namespace App\DataTables\Admin;
 
-use App\Models\Admin/TypeCollegeSubscriptionDataTable;
+use App\Student_Typecollege;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -11,6 +11,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class TypeCollegeSubscriptionDataTable extends DataTable
 {
+    protected $view = "dashboard.students.subscriptions.college_subscriptions.";
     /**
      * Build DataTable class.
      *
@@ -21,7 +22,7 @@ class TypeCollegeSubscriptionDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin/typecollegesubscriptiondatatable.action');
+            ->addColumn('action', $this->view . 'action');
     }
 
     /**
@@ -30,7 +31,7 @@ class TypeCollegeSubscriptionDataTable extends DataTable
      * @param \App\Models\Admin/TypeCollegeSubscriptionDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Admin/TypeCollegeSubscriptionDataTable $model)
+    public function query(Student_Typecollege $model)
     {
         return $model->newQuery();
     }
@@ -65,15 +66,14 @@ class TypeCollegeSubscriptionDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('id'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
         ];
     }
 
