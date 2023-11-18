@@ -23,9 +23,14 @@
             href="{{ route('typecollegeresults_students', $id) }}">نتائج
             الامتحانات</a>
     @endif
-    <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px" data-toggle="modal"
-        data-target="#passwordModal{{ $id }}">
+    <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
+        data-toggle="modal" data-target="#passwordModal{{ $id }}">
         ريسيت باسورد الطالب
+    </button>
+
+    <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
+        data-toggle="modal" data-target="#cousesModal{{ $id }}">
+        كورسات الطالب
     </button>
 </td>
 <!-- The Modal -->
@@ -44,12 +49,14 @@
                 <div class="row">
                     <div class="col-8">
                         <label for="password{{ $id }}"> كلمة المرور</label>
-                        <input id="password{{ $id }}" type="password" name="password" class="form-control" placeholder="كلمة المرور" >
+                        <input id="password{{ $id }}" type="password" name="password" class="form-control"
+                            placeholder="كلمة المرور">
 
                     </div>
                     <div class="col-8">
                         <label for="password_confirmation{{ $id }}">تأكيد كلمة المرور</label>
-                        <input  id="password_confirmation{{ $id }}"type="password" name="password_confirmation" class="form-control" placeholder="تاكيد كلمة المرور">
+                        <input id="password_confirmation{{ $id }}"type="password"
+                            name="password_confirmation" class="form-control" placeholder="تاكيد كلمة المرور">
                     </div>
                 </div>
                 <div class="row  mt-4">
@@ -57,6 +64,48 @@
                         class="btn btn-success">
                         حفظ
                     </button>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="cousesModal{{ $id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">كورسات الطالب </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="row">
+                    @if ($student->stutypescollege)
+                        <ul>
+                            @foreach ($student->stutypescollege as $typecollege)
+                                <li style="font-size:14px;">{{ $typecollege->name_ar }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+
+                    @if ($student->stutypes)
+                        <ul>
+                            @foreach ($student->stutypes as $type)
+                                <li style="font-size:14px;">{{ $type->name_ar }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
             </div>
 
