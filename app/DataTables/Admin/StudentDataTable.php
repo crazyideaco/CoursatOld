@@ -57,7 +57,7 @@ class StudentDataTable extends DataTable
                 switch ($row->category_id) {
                     case config('project_types.system_category_type.category_id_basic'):
                         if ($row->year_id != null) {
-                            return $row->year->name_ar ?? 'لم يحدد';
+                            return $row->year->year_ar ?? 'لم يحدد';
                         }
                         break;
                     case config('project_types.system_category_type.category_id_college'):
