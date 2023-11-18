@@ -22,7 +22,7 @@ class SubscriptionController extends Controller
     public function typesStudentSubscription(TypeSubscriptionDataTable $dataTable)
     {
         return $dataTable->render($this->view . 'basic_subscriptions.index', [
-            "stage" => Stage::all(),
+            "stages" => Stage::all(),
         ]);
     }
 

@@ -11,7 +11,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class TypeSubscriptionDataTable extends DataTable
 {
-    protected $view = "dashboard.students.subscriptions.basic_subscriptions.";
+    protected $view = "dashboard.students.basic_subscriptions.";
     /**
      * Build DataTable class.
      *
