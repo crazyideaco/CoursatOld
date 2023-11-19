@@ -17,6 +17,7 @@ div#category_id_college {
 }
 h4.hederre {
     font-family: "reg";
+    font-size: 1.2rem;
 }
 </style>
 

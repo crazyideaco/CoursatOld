@@ -14,6 +14,7 @@ div#category_id_basic {
 }
 h4.hederre {
     font-family: "reg";
+    font-size: 1.2rem;
 }
 </style>
 

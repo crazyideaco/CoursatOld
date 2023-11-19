@@ -6,18 +6,21 @@
         onclick="student_logout({{ $id }})">
         <img src="{{ asset('images/trash.svg') }}" alt="" title="تسجيل الخروج">
     </span>
-    <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
-        id="btn{{ $id }}" onclick="activeuser({{ $id }})">
-        @if ($active == 1)
-        <img src="{{ asset('images/trash.svg') }}" alt="" title="الغاء التفعيل">
-        @else
-        <img src="{{ asset('images/trash.svg') }}" alt="" title="تفعيل">
 
+    {{-- تفعيل المستخدم --}}
+    @if ($active == 1)
+    <img src="{{ asset('images/trash.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="الغاء التفعيل">
+    @else
+    <img src="{{ asset('images/trash.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="تفعيل">
 
-        @endif
-    </span>
+    @endif
+    {{-- تفعيل المستخدم --}}
+
+    {{-- حذف المستخدم --}}
     <img src="{{ asset('images/trash.svg') }}" id="trash" onclick="deleteuser('{{ $id }}')"
         style="cursor:pointer;">
+    {{-- حذف المستخدم --}}
+
     @if ($category_id == 1)
         <a class="btnbtn-sm mt-2"
             style="border:1px solid #222; margin-bottom:10px; font-size:13px; display:block;    padding: 10px 10px; width: 60%; "
@@ -33,16 +36,16 @@
 
             الامتحانات"></a>
     @endif
-    <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
-        data-toggle="modal" data-target="#passwordModal{{ $id }}">
-        ريسيت باسورد الطالب
-    </button>
 
-    <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
-        data-toggle="modal" data-target="#cousesModal{{ $id }}">
-        <img src="{{ asset('images/trash.svg') }}" alt="" title="كورسات الطالب">
 
-    </button>
+        <img src="{{ asset('images/trash.svg') }}" alt="" title=" ريسيت باسورد الطالب " data-toggle="modal" data-target="#passwordModal{{ $id }}">
+
+
+
+
+        <img src="{{ asset('images/trash.svg') }}" alt="" title="كورسات الطالب"  data-toggle="modal" data-target="#cousesModal{{ $id }}">
+
+
 </td>
 <!-- The Modal -->
 <div class="modal" id="passwordModal{{ $id }}">
