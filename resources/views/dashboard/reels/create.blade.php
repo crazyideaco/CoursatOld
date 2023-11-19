@@ -485,7 +485,7 @@
 
         function getSubject_teacherCollege(selected) {
             let id = selected.value;
-            var url = `{{ route('getSubjectTeachercollege',':id') }}`;
+            var url = `{{ route('getSubject_teachercollege',':id') }}`;
             url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
