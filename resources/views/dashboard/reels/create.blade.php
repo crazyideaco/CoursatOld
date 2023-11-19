@@ -318,6 +318,8 @@
 
         function getyear_subjects(selected) {
             let id = selected.value;
+            var url = `{{ route('getyear',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -325,7 +327,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getyear/${id}`,
+                url: url,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -341,6 +343,8 @@
 
         function getSubject_teacher(selected) {
             let id = selected.value;
+            var url = `{{ route('getSubject_teacher',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -348,7 +352,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getSubject_teacher/${id}`,
+                url: url,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -362,6 +366,7 @@
         function getTeacher_types(teacherId) {
             let subjectId = $('#subject').val();
             let teacher_id = $('#teachers').val();
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -384,6 +389,8 @@
     <script>
         function getcolleges(selected) {
             let id = selected.value;
+            var url = `{{ route('getcolleges',':id') }}`;
+            url = url.replace(':id',id);
             console.log(id);
             $.ajaxSetup({
                 headers: {
@@ -392,7 +399,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getcolleges/${id}`,
+                url: url,
                 //    contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -407,6 +414,8 @@
 
         function getdivision(selected) {
             let id = selected.value;
+            var url = `{{ route('getdivision',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -414,7 +423,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getdivision/${id}`,
+                url: url ,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -428,6 +437,8 @@
 
         function getsection(selected) {
             let id = selected.value;
+            var url = `{{ route('getsection',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -435,7 +446,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getsection/${id}`,
+                url: url,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -449,6 +460,8 @@
 
         function getsection_subjectsCollege(selected) {
             let id = selected.value;
+            var url = `{{ route('getsection_subjectsCollege',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -456,7 +469,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getsection_subjectsCollege/${id}`,
+                url: url,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
@@ -472,6 +485,8 @@
 
         function getSubject_teacherCollege(selected) {
             let id = selected.value;
+            var url = `{{ route('getSubjectTeachercollege',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -479,7 +494,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getSubjectTeachercollege/${id}`,
+                url: url ,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
