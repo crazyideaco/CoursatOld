@@ -6,13 +6,12 @@
     {{-- <a class="btn show" href="{{route('students.show',$student->id)}}"> <i
             class="bi bi-eye"></i></a> --}}
 
-    <a class="btn edit" href="{{route('reels.edit',$id)}}"> <i
-            class="bi bi-pencil"></i></a>
-
+            <a href="{{route('reels.edit',$id)}}"> <img src="{{asset('images/pen.svg')}}" id="pen"
+                style="cursor: pointer"></a>
     {{-- <button class="btn block" href="#"> <i class="bi bi-slash-circle"></i></button> --}}
 
-    <button type="button" onclick="deletereels({{$id}})" class="btn delete" >
-        <i class="bi bi-trash3"></i></button>
+    <button type="button" onclick="deletereels({{$id}})"  >
+        مسح</button>
 
 </td>
 
@@ -27,13 +26,13 @@
         });
 
         Swal.fire({
-            title: "{{__('messages.areyousure')}}",
+            title: "هل انت متأكد",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            cancelButtonText: "{{__('messages.cancel')}}",
-            confirmButtonText: "{{__('messages.yessure')}}",
+            cancelButtonText: "الغاء",
+            confirmButtonText: "نعم",
         }).then((result) => {
             if (result.isConfirmed) {
 
@@ -49,8 +48,8 @@
                     success: function(result){
                         if(result.status == true){
                             Swal.fire(
-                                "{{__('messages.deleted')}}",
-                                "{{__('messages.donedelete')}}",
+                                "تم المسح",
+                                "تما المسح بنجاح",
                                 'success'
                             )
                             table.ajax.reload();

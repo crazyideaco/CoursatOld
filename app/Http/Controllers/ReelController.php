@@ -220,7 +220,10 @@ class ReelController extends Controller
     public function destroy($id)
     {
         $reel = Reel::whereId($id)->first();
-        delete_image($reel->video ?? '');
+        if (public_path() . '/uploads/' . $reel->image) {
+            $link = public_path() . '/uploads/' . $reel->image;
+            File::delete($link);
+        }
         $reel->delete();
         return response()->json(['status' => true]);
     }
