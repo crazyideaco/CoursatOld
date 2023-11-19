@@ -417,6 +417,7 @@ class StudentController extends Controller
     }
     public function student_logout($id)
     {
+        dd('logout ');
         $user = User::where("id", $id)->first();
         $user->update([
             "device_id" => null,
