@@ -299,7 +299,10 @@
             });
             $.ajax({
                 type: "get",
-                url: `../getstage/${id}`,
+                url: `{{ route('getstage') }}`,
+                data: {
+                    "id": id
+                },
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
