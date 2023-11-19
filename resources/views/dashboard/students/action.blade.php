@@ -4,13 +4,13 @@
 @endphp
 <td class="text-center">
 
-        <img src="{{ asset('images/6-p.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
+        <img src="{{ asset('images/sex.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
 
     {{-- تفعيل المستخدم --}}
     @if ($active == 1)
-    <img src="{{ asset('images/5-p.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="الغاء التفعيل">
+    <img src="{{ asset('images/five.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="الغاء التفعيل">
     @else
-    <img src="{{ asset('images/7-p.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="تفعيل">
+    <img src="{{ asset('images/seven.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="تفعيل">
 
     @endif
     {{-- تفعيل المستخدم --}}
@@ -36,12 +36,12 @@
     @endif
 
 
-        <img src="{{ asset('images/3-p.svg') }}" alt="" title=" ريسيت باسورد الطالب " data-toggle="modal" data-target="#passwordModal{{ $id }}">
+        <img src="{{ asset('images/three.svg') }}" alt="" title=" ريسيت باسورد الطالب " data-toggle="modal" data-target="#passwordModal{{ $id }}">
 
 
 
 
-        <img src="{{ asset('images/2-p.svg') }}" alt="" title="كورسات الطالب"  data-toggle="modal" data-target="#cousesModal{{ $id }}">
+        <img src="{{ asset('images/two.svg') }}" alt="" title="كورسات الطالب"  data-toggle="modal" data-target="#cousesModal{{ $id }}">
 
 
 </td>
