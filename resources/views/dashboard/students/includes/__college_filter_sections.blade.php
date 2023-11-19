@@ -14,6 +14,7 @@ div#category_id_college {
     margin-top: 13px;
     border-radius: 10px;
     margin-top: 10px;
+    padding: 0.5rem;
 }
 h4.hederre {
     font-family: "reg";

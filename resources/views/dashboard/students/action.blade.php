@@ -1,8 +1,14 @@
-
+<style>
+    .icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 @php
     $student = \App\User::find($id);
 @endphp
-<td class="text-center">
+<td class="icons">
 
         <img src="{{ asset('images/sex.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
 
@@ -23,14 +29,14 @@
     @if ($category_id == 1)
         <a class="resl"
             href="{{ route('typeresults_students', $id) }}">
-            <img src="{{ asset('images/trash.svg') }}" alt="" title="نتائج
+            <img src="{{ asset('images/eat.svg') }}" alt="" title="نتائج
 
             الامتحانات">
 
             </a>
     @elseif($category_id == 2)
         <a class="resl"
-            href="{{ route('typecollegeresults_students', $id) }}"><img src="{{ asset('images/trash.svg') }}" alt="" title="نتائج
+            href="{{ route('typecollegeresults_students', $id) }}"><img src="{{ asset('images/eat.svg') }}" alt="" title="نتائج
 
             الامتحانات"></a>
     @endif
@@ -42,6 +48,8 @@
 
 
         <img src="{{ asset('images/two.svg') }}" alt="" title="كورسات الطالب"  data-toggle="modal" data-target="#cousesModal{{ $id }}">
+        <img src="{{ asset('images/one.svg') }}" alt="" title="بروفيل الطالب">
+
 
 
 </td>

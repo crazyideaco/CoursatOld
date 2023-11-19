@@ -11,6 +11,7 @@
 div#category_id_basic {
     background-color: #eaeaea87;
     border-radius: 10px
+    padding: 0.5rem;
 }
 h4.hederre {
     font-family: "reg";
