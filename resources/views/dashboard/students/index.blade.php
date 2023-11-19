@@ -78,14 +78,14 @@
             <!--start setting-->
             <div class="setting all-products typs">
                 <div class="container">
-                    <div class="row def">
+                    {{-- <div class="row def">
 
                         <img src="images/all-products.svg">
                         <h5>الطلاب</h5>
 
 
 
-                    </div>
+                    </div> --}}
 
                     <div class="products-search typs1">
 
@@ -94,13 +94,19 @@
 
 
 
-                    <div class="pt-5">
+                    <div class="all-infor">
                         <div class="row" id="category_id_basic">
+                            <h4 class="hederre">
+                                المرحله الأساسيه
+                            </h4>
                             @include('dashboard.students.includes.__basic_filter_sections')
                         </div>
 
 
                         <div class="row" id="category_id_college">
+                            <h4 class="hederre">
+                                المرحله الجامعيه
+                            </h4>
                             @include('dashboard.students.includes.__college_filter_sections')
                         </div>
                         {{-- <div class="row">
