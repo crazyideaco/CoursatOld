@@ -7,28 +7,34 @@
 </style>
 @endsection
 @section('content')
+	<!--begin::Card-->
+    <div class="container">
 
-<div class="content_page">
-    <div class="faq">
-        <div class="container">
-            <!-- header section -->
-            <div class="main_topic">
-                <h4>reels</h4>
-                <a class="btn first" href="{{route('reels.create')}}"> <i class="bi bi-plus"></i>add reel</a>
-            </div>
-            <!-- search and filter section -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="search_topic">
-                        <div class="table-responsive">
-                            {!! $dataTable->table([], true) !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <div class="card card-custom gutter-b">
+
+        <div class="card-header flex-wrap py-3">
+										<div class="card-title">
+											<h3 class="card-label">QrCode History
+</h3>
+										</div>
+										<div class="card-toolbar">
+
+                                            <a class="btn first" href="{{route('reels.create')}}"> <i class="bi bi-plus"></i>add reel</a>
+
+											<!--end::Button-->
+										</div>
+									</div>
+
+
+            <!--begin: Datatable-->
+
+    {!! $dataTable->table([
+
+                     ],true) !!}
+            <!--end: Datatable-->
+
+
+    <!--end::Card-->
 @endsection
 @section('scripts')
 

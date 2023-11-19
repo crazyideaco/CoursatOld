@@ -53,7 +53,7 @@
                     <div class="col-12">
                         <div class="input-group">
                             <label class="form-label">{{__('messages.educational stages')}}</label>
-                            @if(in_array(1 , auth('teacher')->user()->teacher->categories->pluck('id')->toArray()))
+
 
                             <div class="form-check form-check-inline">
                                 <input
@@ -64,8 +64,6 @@
                                     onchange="toggleRow()" value="1">
                                 <label class="form-check-label" for="radio1">{{__('messages.basic')}}</label>
                             </div>
-                            @endif
-                            @if(in_array(2 , auth('teacher')->user()->teacher->categories->pluck('id')->toArray()))
 
                             <div class="form-check form-check-inline">
                                 <input
@@ -76,7 +74,7 @@
                                     onchange="toggleRow()" value="2">
                                 <label class="form-check-label" for="radio2">{{__('messages.university education')}}</label>
                             </div>
-                            @endif
+
 
                             {{-- <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="educationType" id="radio3"
@@ -336,5 +334,5 @@
 
         </script>
         <!-- show main education -->
-        
+
 @endsection
