@@ -7,7 +7,7 @@
 </style>
 @endsection
 @section('content')
-    <div class="content_page">
+    <div class="page-body">
         <div class="container">
             <!-- header section -->
             <div class="main_topic">
