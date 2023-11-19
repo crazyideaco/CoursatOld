@@ -1,4 +1,22 @@
-<div class="form-group col-lg-3 col-md-6 col-12">
+<style>
+    .filter-option-inner-inner {
+    color: black !important;
+}
+.all-products button {
+    width: 100% !important;
+}
+:not(.input-group)>.bootstrap-select.form-control:not([class*=col-]) {
+    width: 95% !important;
+}
+div#category_id_basic {
+    background-color: #eaeaea87;
+    border-radius: 10px
+}
+</style>
+
+
+
+<div class="form-group col-lg-2 col-md-6 col-12">
     <label>المرحله</label>
     <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);filter_students();" id="stage" title="ادخل المرحله ">
         {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
@@ -10,7 +28,7 @@
         <p style="color:red;">{{ $message }}</p>
     @enderror
 </div>
-<div class="form-group col-lg-3 col-md-6 col-12">
+<div class="form-group col-lg-2 col-md-6 col-12">
     <label>سنه الماده</label>
     <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this);filter_students();" title="اختر السنه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
@@ -20,7 +38,7 @@
         <p style="color:red;">{{ $message }}</p>
     @enderror
 </div>
-<div class="form-group col-lg-3 col-md-6 col-12">
+<div class="form-group col-lg-2 col-md-6 col-12">
     <label>الماده </label>
     <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getSubject_teacher(this)" title="اختر الماده">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
@@ -31,7 +49,7 @@
     @enderror
 </div>
 
-<div class="form-group col-lg-3 col-md-6 col-12">
+<div class="form-group col-lg-2 col-md-6 col-12">
     <label>المدرسين </label>
     <select class="form-control selectpicker" name="teacher_id" required id="teachers"  onchange="getTeacher_types(this)" title="اختر المدرس">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
@@ -42,7 +60,7 @@
     @enderror
 </div>
 
-<div class="form-group col-lg-3 col-md-6 col-12">
+<div class="form-group col-lg-2 col-md-6 col-12">
     <label>الكورسات </label>
     <select class="form-control selectpicker" name="type_id" required id="types" onchange="filter_students();" title="اختر الكورسات">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option> --}}
