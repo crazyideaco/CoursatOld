@@ -45,7 +45,7 @@ class QrCode extends Model
         if($this->status == 0){
             return 'available';
         }
-        elseif($this->status == 1 || $this->expire_date < Carbon::now()){
+        elseif($this->expire_date <= Carbon::now() || $this->status == 1  ){
             return 'expired';
 
         }elseif($this->status == 2){
