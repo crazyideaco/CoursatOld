@@ -42,7 +42,7 @@ class User extends Authenticatable
      * @var array
      */
     protected  $guarded = [];
-    protected $fillable = [
+    // protected $fillable = [
     //     'name', 'email', 'address', 'image', 'description', 'phone', 'latitude', 'longitude',
     //     'active', 'intro', 'info_compelete',
     //     'email_verified_at', 'password', 'remember_token', 'api_token',
@@ -59,8 +59,8 @@ class User extends Authenticatable
     //      "code",
     //      "is_visitor",
     //      "cover_image",
-    'image'
-    ];
+    // 'image'
+    // ];
 
 
     /**
