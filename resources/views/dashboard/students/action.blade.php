@@ -3,7 +3,7 @@
         display: flex !important;
         justify-content: center;
         align-items: center;
-        flex-wrap: wrap
+        flex-wrap: wrap;
         min-width: 200px;
     }
     td.text-center {
@@ -34,8 +34,8 @@
         <img src="{{ asset('images/five.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="الغاء التفعيل">
         @else
         <img src="{{ asset('images/seven.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="تفعيل">
-        </div>
-    @endif
+        @endif
+    </div>
     {{-- تفعيل المستخدم --}}
 
     {{-- حذف المستخدم --}}
