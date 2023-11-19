@@ -42,13 +42,14 @@ class QrCode extends Model
     }
 
     public function getStatusFormatAttribute(){
-        if($this->status == 0){
-            return 'available';
-        }
-        elseif($this->expire_date <= Carbon::now() || $this->status == 1  ){
+
+        if($this->expire_date <= Carbon::now() || $this->status == 1  ){
             return 'expired';
 
-        }elseif($this->status == 2){
+        }elseif($this->status == 0){
+            return 'available';
+        }
+        elseif($this->status == 2){
             return 'used';
         }
     }
