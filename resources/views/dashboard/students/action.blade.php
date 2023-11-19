@@ -3,7 +3,13 @@
         display: flex !important;
         justify-content: center;
         align-items: center;
+        width: 30%;
     }
+.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    border-bottom-width: 0;
+    font-size: 0.8rem;
+    padding: 0.5rem !important;
+}
 </style>
 @php
     $student = \App\User::find($id);
