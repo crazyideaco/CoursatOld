@@ -43,12 +43,13 @@ class QrCode extends Model
 
     public function getStatusFormatAttribute(){
         if($this->status == 0){
-            return __("messages.available");
+            return 'available';
         }
-        elseif($this->status == 1){
-            return __("messages.expired");
+        elseif($this->status == 1 || $this->expire_date < Carbon::now()){
+            return 'expired';
+
         }elseif($this->status == 2){
-            return __("messages.used");
+            return 'used';
         }
     }
 }
