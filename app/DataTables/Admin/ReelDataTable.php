@@ -62,10 +62,10 @@ class ReelDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ["data" => "name" ,"title" => __('messages.name')],
-            ["data" => "date_format" ,"title" => __('messages.date'),'orderable'=>false],
+            ["data" => "name" ,"title" => 'name'],
+            ["data" => "date_format" ,"title" => 'date','orderable'=>false],
 
-            ['data'=>'action','title'=>__("messages.actions"),'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+            ['data'=>'action','title'=>"actions",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
           ];
     }
 
