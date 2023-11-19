@@ -1,23 +1,16 @@
-<style>
-    .flex {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
 
 @php
     $student = \App\User::find($id);
 @endphp
-<td class="flex">
+<td class="text-center">
 
-        <img src="{{ asset('images/trash.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
+        <img src="{{ asset('images/6-p.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
 
     {{-- تفعيل المستخدم --}}
     @if ($active == 1)
-    <img src="{{ asset('images/trash.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="الغاء التفعيل">
+    <img src="{{ asset('images/5-p.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="الغاء التفعيل">
     @else
-    <img src="{{ asset('images/trash.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="تفعيل">
+    <img src="{{ asset('images/7-p.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="تفعيل">
 
     @endif
     {{-- تفعيل المستخدم --}}
@@ -43,12 +36,12 @@
     @endif
 
 
-        <img src="{{ asset('images/trash.svg') }}" alt="" title=" ريسيت باسورد الطالب " data-toggle="modal" data-target="#passwordModal{{ $id }}">
+        <img src="{{ asset('images/3-p.svg') }}" alt="" title=" ريسيت باسورد الطالب " data-toggle="modal" data-target="#passwordModal{{ $id }}">
 
 
 
 
-        <img src="{{ asset('images/trash.svg') }}" alt="" title="كورسات الطالب"  data-toggle="modal" data-target="#cousesModal{{ $id }}">
+        <img src="{{ asset('images/2-p.svg') }}" alt="" title="كورسات الطالب"  data-toggle="modal" data-target="#cousesModal{{ $id }}">
 
 
 </td>
