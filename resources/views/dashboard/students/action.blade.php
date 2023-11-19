@@ -4,14 +4,16 @@
 <td class="text-center">
     <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
         onclick="student_logout({{ $id }})">
-        تسجيل الخروج
+        <img src="{{ asset('images/trash.svg') }}" alt="" title="تسجيل الخروج">
     </span>
     <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
         id="btn{{ $id }}" onclick="activeuser({{ $id }})">
         @if ($active == 1)
-            الغاء التفعيل
+        <img src="{{ asset('images/trash.svg') }}" alt="" title="الغاء التفعيل">
         @else
-            تفعيل
+        <img src="{{ asset('images/trash.svg') }}" alt="" title="تفعيل">
+
+
         @endif
     </span>
     <img src="{{ asset('images/trash.svg') }}" id="trash" onclick="deleteuser('{{ $id }}')"
@@ -19,12 +21,17 @@
     @if ($category_id == 1)
         <a class="btnbtn-sm mt-2"
             style="border:1px solid #222; margin-bottom:10px; font-size:13px; display:block;    padding: 10px 10px; width: 60%; "
-            href="{{ route('typeresults_students', $id) }}">نتائج
-            الامتحانات</a>
+            href="{{ route('typeresults_students', $id) }}">
+            <img src="{{ asset('images/trash.svg') }}" alt="" title="نتائج
+
+            الامتحانات">
+
+            </a>
     @elseif($category_id == 2)
         <a class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
-            href="{{ route('typecollegeresults_students', $id) }}">نتائج
-            الامتحانات</a>
+            href="{{ route('typecollegeresults_students', $id) }}"><img src="{{ asset('images/trash.svg') }}" alt="" title="نتائج
+
+            الامتحانات"></a>
     @endif
     <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
         data-toggle="modal" data-target="#passwordModal{{ $id }}">
@@ -33,7 +40,8 @@
 
     <button type="button" class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
         data-toggle="modal" data-target="#cousesModal{{ $id }}">
-        كورسات الطالب
+        <img src="{{ asset('images/trash.svg') }}" alt="" title="كورسات الطالب">
+
     </button>
 </td>
 <!-- The Modal -->
