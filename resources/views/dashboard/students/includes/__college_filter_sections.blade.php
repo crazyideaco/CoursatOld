@@ -44,7 +44,7 @@ h4.hederre {
     </select>
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
-    <label>اسم القسم </label>
+    {{-- <label>اسم القسم </label> --}}
     <select name="division_id" required class="form-control selectpicker" id="division"
         onchange="getsection(this);filter_students();" title="اختر قسم">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
