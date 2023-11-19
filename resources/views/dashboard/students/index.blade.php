@@ -95,9 +95,9 @@
 
 
                     <div class="pt-5">
-                        {{-- <div class="row" id="category_id_basic">
+                        <div class="row" id="category_id_basic">
                             @include('dashboard.students.includes.__basic_filter_sections')
-                        </div> --}}
+                        </div>
 
 
                         <div class="row" id="category_id_college">
