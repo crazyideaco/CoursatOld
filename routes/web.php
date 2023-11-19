@@ -638,6 +638,8 @@ Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
 //patches
 Route::get('patches/{id}','QrCodeController@patch_index')->name('types.patches');
 
+Route::get('qrcodes/{id}', 'QrCodeController@index')->name('types.qrcodes');
+
 
 //store_course_college_qrcode
 Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');

@@ -1,7 +1,7 @@
-{{-- <?php
-// $teacher = \App\Models\Qrcode\QrcodePatch::whereId($id)->first();
+<?php
+$teacher = \App\Models\Patch::whereId($id)->first();
 ?>
 
-<a href="{{route("courses.course_qrcodes", $teacher->id)}}" title="{{__('messages.qr_codes')}}"
+<a href="{{ route('types.qrcodes', $teacher->id) }}" title="qr codes"
         class="text-dark ml-2"><i class="fas fa-cog"></i></a>
- --}}
+
