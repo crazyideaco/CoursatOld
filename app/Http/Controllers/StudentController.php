@@ -420,7 +420,6 @@ class StudentController extends Controller
     {
         DB::beginTransaction();
         $user = User::where("id", $id)->first();
-        dd($user);
         $user->update([
             "device_id" => null,
             "device_token" => null
