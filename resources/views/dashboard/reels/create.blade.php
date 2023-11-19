@@ -291,6 +291,8 @@
     <script>
         function getstage_years(selected) {
             let id = selected.value;
+            var url = `{{ route('getstage',':id') }}`;
+            url = url.replace(':id',id);
             console.log('getstage_years');
             $.ajaxSetup({
                 headers: {
@@ -299,7 +301,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `{{ route('getstage') }}`,
+                url: url,
                 data: {
                     "id": id
                 },
