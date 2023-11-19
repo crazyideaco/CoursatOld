@@ -645,18 +645,20 @@ Route::get('qrcodes/{id}', 'QrCodeController@index')->name('types.qrcodes');
 Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
 //patches
 Route::get('typecollege_patches/{id}','CollegeCourseQrCodeController@patch_index')->name('typecolleges.typecollege_patches');
-
+Route::get('typecollege_qrcodes/{id}', 'CollegeCourseQrCodeController@index')->name('typecolleges.typecollege_qrcodes');
 
 //store_sub_type_qrcode
 Route::post('store_sub_type_qrcode','SubTypeQrCodeController@store')->name('store_sub_type_qrcode');
 //patches
 Route::get('subtype_patches/{id}','SubTypeQrCodeController@patch_index')->name('subtype.subtype_patches');
+Route::get('subtype_qrcodes/{id}', 'SubTypeQrCodeController@index')->name('subtype.subtype_qrcodes');
 
 
 //store_lesson_qrcode
 Route::post('store_lesson_qrcode','LessonQrCodeController@store')->name('store_lesson_qrcode');
 //patches
 Route::get('lesson_patches/{id}','LessonQrCodeController@patch_index')->name('lesson.lesson_patches');
+Route::get('lesson_qrcodes/{id}', 'LessonQrCodeController@index')->name('lesson.lesson_qrcodes');
 
 
 

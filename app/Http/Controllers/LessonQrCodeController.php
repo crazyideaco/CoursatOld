@@ -37,12 +37,12 @@ class LessonQrCodeController extends Controller
         return $dataTable->render($this->view . 'lesson_patches', compact('id', 'course'));
     }
 
-    // public function index(QrCodeDataTable $dataTable, $id)
-    // {
-    //     $patch = Patch::whereId($id)->firstorFail();
-    //     $dataTable->id = $id;
-    //     return $dataTable->render($this->view . 'qrcodes', compact('id', 'patch'));
-    // }
+    public function index(QrCodeDataTable $dataTable, $id)
+    {
+        $patch = Patch::whereId($id)->firstorFail();
+        $dataTable->id = $id;
+        return $dataTable->render($this->view . 'lesson_qrcodes', compact('id', 'patch'));
+    }
 
 
     public function store(Request $request)
