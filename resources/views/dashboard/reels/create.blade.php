@@ -18,33 +18,46 @@
                 @csrf
                 <!-- start input -->
                 <div class="row">
+                    <div class="col-8 mx-auto">
+                        <div class="uploadOuter">
+                            <span class="dragBox">
+
+                                Darg and Drop image here
+                                <input type="file" name="image" onChange="dragNdrop(event)" ondragover="drag()"
+                                    ondrop="drop()" id="uploadFile" />
+                            </span>
+                        </div>
+
+                        <div id="preview">
+                            @error('image')
+                                <span class="invalid-feedback">
+                                    {{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
                     <div class="col-12">
                         <div class="input-group">
-                            <label class="form-label"> {{ __('messages.name') }}</label>
-                            <input required type="text" name="name" placeholder="{{ __('messages.name') }}" class="form-control">
+                            <label class="form-label"> name</label>
+                            <input required type="text" name="name" placeholder="name" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <label class="form-label"> video</label>
+                            <input required type="text" name="video" placeholder="video" class="form-control">
                         </div>
                     </div>
                 </div>
                 <!-- finish input -->
 
                 <!-- start input -->
-                <div class="row">
-                    <div class="input-group pt-4">
-                        <div class="file-upload-wrapper"
-                            data-text="{{ __('messages.Drag the video you want to add or open it from here') }}">
-                            <input name="video" type="file" class="file-upload-field" value="" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-12 mx-auto text-center mb-5 set-img">
-                    <video width="200" height="200" controls>
-                        <source src="{{ $reel->video_link ?? '' }}" id="video_here">
-                        Your browser does not support HTML5 video.
-                    </video>
-                    @error('video')
-                        <p style="color:red;">{{ $message }}</p>
-                    @enderror
-                </div>
+
 
                 <div class="row">
                     <div class="col-12">
@@ -63,7 +76,7 @@
                                     <label class="form-check-label"
                                         for="radio2">{{ __('messages.university education') }}</label>
                                 </div>
-                           
+
                             {{-- <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="educationType" id="radio3"
                                 onchange="toggleRow()" value="option3">

@@ -52,232 +52,163 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="input-group">
-                            <label class="form-label">{{__('messages.educational stages')}}</label>
+                            <label class="form-label">{{ __('messages.education_stage') }}</label>
 
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="category_id" id="radio1"
+                                        onchange="toggleRow()" value="1">
+                                    <label class="form-check-label" for="radio1">{{ __('messages.basic') }}</label>
+                                </div>
 
-                            <div class="form-check form-check-inline">
-                                <input
-                                @if($reel->category_id == 1)
-                                checked
-                                @endif
-                                 class="form-check-input" type="radio" name="category_id" id="radio1"
-                                    onchange="toggleRow()" value="1">
-                                <label class="form-check-label" for="radio1">{{__('messages.basic')}}</label>
-                            </div>
-
-                            <div class="form-check form-check-inline">
-                                <input
-                                @if($reel->category_id == 2)
-                                checked
-                                @endif
-                                 class="form-check-input" type="radio" name="category_id" id="radio2"
-                                    onchange="toggleRow()" value="2">
-                                <label class="form-check-label" for="radio2">{{__('messages.university education')}}</label>
-                            </div>
-
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="category_id" id="radio2"
+                                        onchange="toggleRow()" value="2">
+                                    <label class="form-check-label"
+                                        for="radio2">{{ __('messages.university education') }}</label>
+                                </div>
 
                             {{-- <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="educationType" id="radio3"
-                                    onchange="toggleRow()" value="option3">
-                                <label class="form-check-label" for="radio3">تعليم حر</label>
-                            </div> --}}
+                            <input class="form-check-input" type="radio" name="educationType" id="radio3"
+                                onchange="toggleRow()" value="option3">
+                            <label class="form-check-label" for="radio3">تعليم حر</label>
+                        </div> --}}
                         </div>
                     </div>
                 </div>
-
                 <!-- finish input -->
+
                 <!-- main education -->
-                <div  id="mainEducation" @if($reel->category_id == 2) class="main_education" @endif >
-                    <h4>{{__('messages.basic')}}</h4>
+                <div class="main_education" id="mainEducation">
+                    <h4>{{ __('messages.basic') }}</h4>
                     <div class="row">
                         {{-- <div class="col-12">
-                            <div class="input-group">
-                                <label class="form-label"> الصلاحيات</label>
-                                <select required class="selectpicker"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div> --}}
-                        <div class="col-lg-6 col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.basic_education_type')}}</label>
-                                <select class="selectpicker"  name="basic_education_type_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" title="&nbsp;" id="basic_education_type_id"
-                                    onchange="filter_teacher_stages()">
-                                    @foreach($basic_education_types as $basic_education_type)
-                                <option value="{{$basic_education_type->id}}"
-                                    @if($basic_education_type->id == $reel->information?->basic_education_type_id)
-                                    selected
-                                    @endif
-                                    >{{$basic_education_type->title}}</option>
-                             @endforeach
-                                </select>
-
-                            </div>
-
-
-
+                        <div class="input-group">
+                            <label class="form-label"> الصلاحيات</label>
+                            <select required class="selectpicker"
+                                data-selected-text-format="count > 1" data-icon="bi bi-trash"
+                                data-live-search="true">
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.stage')}}</label>
-                                <select class="selectpicker"  name="stage_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" title="&nbsp;" id="stage_id"
-                                    onchange="filter_teacher_years_by_stage_ids()">
-                                    @foreach ($stages as $stage)
-                                    <option value="{{$stage->id}}"
-                                        @if($stage->id == $reel->information?->stage_id)
-                                    selected
-                                    @endif
-                                        >{{$stage->title}}</option>
+                    </div> --}}
+                    <div class="form-group col-lg-3 col-md-6 col-12">
+                        <label>المرحله</label>
+                        <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);" id="stage" title="ادخل المرحله ">
+                            {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
+                            @foreach ($stages as $stage)
+                                <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
+                            @endforeach
+                        </select>
+                        @error('stage_id')
+                            <p style="color:red;">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-12">
+                        <label>سنه الماده</label>
+                        <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this);" title="اختر السنه">
+                            {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
 
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.year')}}</label>
-                                <select class="selectpicker"  name="year_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" id="year_id" title="&nbsp;">
-                                    @foreach ($years as $year)
-                                    <option value="{{$year->id}}"
-                                        @if($year->id == $reel->information?->year_id)
-                                        selected
-                                        @endif
-                                        >{{$year->title}}</option>
+                        </select>
+                        @error('years_id')
+                            <p style="color:red;">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="form-group col-lg-3 col-md-6 col-12">
+                        <label>الماده </label>
+                        <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getSubject_teacher(this)" title="اختر الماده">
+                            {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                        </select>
+                        @error('subjects_id')
+                            <p style="color:red;">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-lg-3 col-md-6 col-12">
+                        <label>المدرسين </label>
+                        <select class="form-control selectpicker" name="teacher_id" required id="teachers"  onchange="getTeacher_types(this)" title="اختر المدرس">
+                            {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
+
+                        </select>
+                        @error('teacher_id')
+                            <p style="color:red;">{{ $message }}</p>
+                        @enderror
+                    </div>
                     </div>
                 </div>
                 <!-- main education -->
 
+
+
                 <!-- university education -->
-                <div  @if($reel->category_id == 1) class="university_education" @endif id="universityEducation">
-                    <h4>{{__('messages.university education')}}</h4>
-                    <div  class="row">
-                        <div class="col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.university_education_type')}}</label>
-                                <select class="selectpicker"  name="university_education_type_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" title="&nbsp;" id="university_education_type_id"
-                                    onchange="filter_teacher_universities()">
-                                    @foreach ($university_education_types as $university_education_type)
-                                    <option value="{{$university_education_type->id}}"
-                                        @if($university_education_type->id == $reel->information?->university_education_type_id)
-                                        selected
-                                        @endif
-                                        >{{$university_education_type->title}}</option>
+                <div class="university_education" id="universityEducation">
+                    <h4>{{ __('messages.university education') }}</h4>
+                    <div class="row">
 
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>اسم الجامعه </label>
+                            <select name="university_id" required class="form-control selectpicker" id="university"
+                                onchange="getcolleges(this);" title="اختر جامعه">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
+                                @foreach ($universities as $university)
+                                    <option value="{{ $university->id }}">
+                                        {{ $university->name_ar }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('university_id')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.university')}}</label>
-                                <select class="selectpicker"  name="university_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" title="&nbsp;" onchange="filter_teacher_colleges_by_university_ids()"
-                                    id="university_id">
-                                    @foreach ($universities as $university)
-                                    <option value="{{$university->id}}"
-                                        @if($university->id == $reel->information?->university_id)
-                                        selected
-                                        @endif
-                                        >{{$university->title}}</option>
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>اسم الكليه </label>
+                            <select name="college_id" required class="form-control selectpicker" id="college"
+                                onchange="getdivision(this);" title="اختر كليه">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
 
-                                    @endforeach
-                                </select>
-                            </div>
+                            </select>
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.college')}}</label>
-                                <select class="selectpicker"  name="college_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" title="&nbsp;" id="college_id" onchange="filter_teacher_departments_by_college_ids()">
-                                    @foreach ($colleges as $college)
-                                    <option value="{{$college->id}}"
-                                        @if($college->id == $reel->information?->college_id)
-                                        selected
-                                        @endif
-                                        >{{$college->title}}</option>
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>اسم القسم </label>
+                            <select name="division_id" required class="form-control selectpicker" id="division"
+                                onchange="getsection(this);" title="اختر قسم">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
 
-                                    @endforeach
-                                </select>
-                            </div>
+                            </select>
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.department')}}</label>
-                                <select class="selectpicker"  name="department_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" title="&nbsp;" id="department_id"
-                                   onchange="filter_teacher_divisions_by_department_ids()">
-                                    @foreach ($departments as $department)
-                                    <option value="{{$department->id}}"
-                                        @if($department->id == $reel->information?->department_id)
-                                        selected
-                                        @endif
-                                        >{{$department->title}}</option>
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>اسم الفرقه </label>
+                            <select name="section_id" required class="form-control selectpicker" id="section"
+                                onchange="getsection_subjectsCollege(this);" title="اختر فرقه">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
-                                    @endforeach
-                                </select>
-                            </div>
+                            </select>
                         </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="input-group">
-                                <label class="form-label">{{__('messages.division')}}</label>
-                                <select class="selectpicker"  name="division_id"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true" id="division_id" title="&nbsp;">
-                                    @foreach ($divisions as $division)
-                                    <option value="{{$division->id}}"
-                                        @if($division->id == $reel->information?->division_id)
-                                        selected
-                                        @endif
-                                        >{{$division->title}}</option>
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>الماده </label>
+                            <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " required
+                                id="subject_college" onchange="getSubject_teacherCollege(this)">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
-                                    @endforeach
-                                </select>
-                            </div>
+                            </select>
+                            @error('subjects_id')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
                         </div>
-                        {{-- <div class="col-12">
-                            <div class="input-group">
-                                <label class="form-label"> المواد</label>
-                                <select required class="selectpicker"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
+
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>المدرسين </label>
+                            <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed id="teachers_college"
+                                onchange="getTeacher_typescollege(this)">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
+
+                            </select>
+                            @error('teacher_id')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div class="col-12">
-                            <div class="input-group">
-                                <label class="form-label"> الترم</label>
-                                <select required class="selectpicker"
-                                    data-selected-text-format="count > 1" data-icon="bi bi-trash"
-                                    data-live-search="true">
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
                 <!-- finish input -->
