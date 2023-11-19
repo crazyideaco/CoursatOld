@@ -65,8 +65,8 @@ class QrCodeDataTable extends DataTable
         return [
             ["data" => "id" ,"title" => 'code number','orderable'=>false,'searchable'=>false],
             ["data" => "qrcode" ,"title" => 'qrcode','orderable'=>false,'searchable'=>false],
-            ["data" => "date_format" ,"title" => 'print_date','orderable'=>false,'searchable'=>false],
-            ["data" => "expire_date_format" ,"title" => 'expire_date','orderable'=>false,'searchable'=>false],
+            ["data" => "date_format" ,"title" => 'print date','orderable'=>false,'searchable'=>false],
+            ["data" => "expire_date_format" ,"title" => 'expire date','orderable'=>false,'searchable'=>false],
             ["data" => "status_format" ,"title" => 'status','orderable'=>false,'searchable'=>false],
 
             // ['data'=>'action','title'=>__("messages.actions"),'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
