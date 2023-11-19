@@ -1,10 +1,10 @@
 @extends('App.dash')
 @section('style')
-<style>
-    #example_wrapper {
-        width: 100% !important;
-    }
-</style>
+    <style>
+        #example_wrapper {
+            width: 100% !important;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="page-body">
@@ -14,7 +14,7 @@
                 <h4>add reel</h4>
             </div>
 
-            <form class="form_topic" action="{{route('reels.store')}}" method="post" enctype="multipart/form-data">
+            <form class="form_topic" action="{{ route('reels.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <!-- start input -->
                 <div class="row">
@@ -64,18 +64,17 @@
                         <div class="input-group">
                             <label class="form-label">نوع التعليم</label>
 
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="category_id" id="radio1"
-                                        onchange="toggleRow()" value="1">
-                                    <label class="form-check-label" for="radio1">اساسي</label>
-                                </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="category_id" id="radio1"
+                                    onchange="toggleRow()" value="1">
+                                <label class="form-check-label" for="radio1">اساسي</label>
+                            </div>
 
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="category_id" id="radio2"
-                                        onchange="toggleRow()" value="2">
-                                    <label class="form-check-label"
-                                        for="radio2">جامعي</label>
-                                </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="category_id" id="radio2"
+                                    onchange="toggleRow()" value="2">
+                                <label class="form-check-label" for="radio2">جامعي</label>
+                            </div>
 
                             {{-- <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="educationType" id="radio3"
@@ -103,49 +102,53 @@
                             </select>
                         </div>
                     </div> --}}
-                    <div class="form-group col-lg-3 col-md-6 col-12">
-                        <label>المرحله</label>
-                        <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this)" id="stage" title="ادخل المرحله ">
-                            {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
-                            @foreach ($stages as $stage)
-                                <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
-                            @endforeach
-                        </select>
-                        @error('stage_id')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-lg-3 col-md-6 col-12">
-                        <label>سنه الماده</label>
-                        <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this)" title="اختر السنه">
-                            {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>المرحله</label>
+                            <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this)"
+                                id="stage" title="ادخل المرحله ">
+                                {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
+                                @foreach ($stages as $stage)
+                                    <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
+                                @endforeach
+                            </select>
+                            @error('stage_id')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>سنه الماده</label>
+                            <select class="form-control selectpicker" name="years_id" required id="year"
+                                onchange="getyear_subjects(this)" title="اختر السنه">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
 
-                        </select>
-                        @error('years_id')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group col-lg-3 col-md-6 col-12">
-                        <label>الماده </label>
-                        <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getSubject_teacher(this)" title="اختر الماده">
-                            {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
+                            </select>
+                            @error('years_id')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>الماده </label>
+                            <select class="form-control selectpicker" name="subjects_id" required id="subject"
+                                onchange="getSubject_teacher(this)" title="اختر الماده">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
-                        </select>
-                        @error('subjects_id')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
-                    </div>
+                            </select>
+                            @error('subjects_id')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
+                        </div>
 
-                    <div class="form-group col-lg-3 col-md-6 col-12">
-                        <label>المدرسين </label>
-                        <select class="form-control selectpicker" name="teacher_id" required id="teachers"  onchange="getTeacher_types(this)" title="اختر المدرس">
-                            {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
+                        <div class="form-group col-lg-3 col-md-6 col-12">
+                            <label>المدرسين </label>
+                            <select class="form-control selectpicker" name="teacher_id" required id="teachers"
+                                onchange="getTeacher_types(this)" title="اختر المدرس">
+                                {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
-                        </select>
-                        @error('teacher_id')
-                            <p style="color:red;">{{ $message }}</p>
-                        @enderror
-                    </div>
+                            </select>
+                            @error('teacher_id')
+                                <p style="color:red;">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
                 <!-- main education -->
@@ -198,8 +201,8 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>الماده </label>
-                            <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " required
-                                id="subject_college" onchange="getSubject_teacherCollege(this)">
+                            <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده "
+                                required id="subject_college" onchange="getSubject_teacherCollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
                             </select>
@@ -210,8 +213,8 @@
 
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>المدرسين </label>
-                            <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed id="teachers_college"
-                                onchange="getTeacher_typescollege(this)">
+                            <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed
+                                id="teachers_college" onchange="getTeacher_typescollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
                             </select>
@@ -225,7 +228,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                class="btn first">{{ __('messages.save') }}</button>
+                            class="btn first">{{ __('messages.save') }}</button>
                     </div>
                 </div>
 
@@ -282,9 +285,13 @@
     <!-- show main education -->
 
 
+@endsection
+
+@section('scripts')
     <script>
         function getstage_years(selected) {
             let id = selected.value;
+            console.log('getstage_years');
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -502,9 +509,4 @@
             });
         }
     </script>
-@endsection
-
-@section('JavaScript')
-
-
 @endsection
