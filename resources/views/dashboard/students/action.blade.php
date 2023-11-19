@@ -1,7 +1,15 @@
+<style>
+    .flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 @php
     $student = \App\User::find($id);
 @endphp
-<td class="d-flex">
+<td class="flex">
 
         <img src="{{ asset('images/trash.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
 
@@ -20,7 +28,7 @@
     {{-- حذف المستخدم --}}
 
     @if ($category_id == 1)
-        <a class="btnbtn-sm mt-2"
+        <a class="resl"
             href="{{ route('typeresults_students', $id) }}">
             <img src="{{ asset('images/trash.svg') }}" alt="" title="نتائج
 
@@ -28,7 +36,7 @@
 
             </a>
     @elseif($category_id == 2)
-        <a class="btn btn-sm mt-2" style="border:1px solid #222; margin-bottom:10px; padding:6px 20px"
+        <a class="resl"
             href="{{ route('typecollegeresults_students', $id) }}"><img src="{{ asset('images/trash.svg') }}" alt="" title="نتائج
 
             الامتحانات"></a>
