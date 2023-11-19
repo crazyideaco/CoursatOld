@@ -11,7 +11,7 @@
         <div class="container">
             <!-- header section -->
             <div class="main_topic">
-                <h4>{{__('messages.edit reel')}}</h4>
+                <h4>edit reel</h4>
             </div>
 
             <form class="form_topic" action="{{route('reels.update',$reel->id)}}" method="post" enctype="multipart/form-data">
