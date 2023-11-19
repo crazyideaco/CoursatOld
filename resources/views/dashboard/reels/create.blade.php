@@ -117,7 +117,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>سنه الماده</label>
-                            <select class="form-control selectpicker" name="years_id" required id="year"
+                            <select class="form-control selectpicker" name="year_id" required id="year"
                                 onchange="getyear_subjects(this)" title="اختر السنه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
 
@@ -128,7 +128,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>الماده </label>
-                            <select class="form-control selectpicker" name="subjects_id" required id="subject"
+                            <select class="form-control selectpicker" name="subject_id" required id="subject"
                                 onchange="getSubject_teacher(this)" title="اختر الماده">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
@@ -201,7 +201,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>الماده </label>
-                            <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده "
+                            <select class="form-control selectpicker" name="subjectscollege_id" title="اختر الماده "
                                 required id="subject_college" onchange="getSubject_teacherCollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
@@ -213,7 +213,7 @@
 
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>المدرسين </label>
-                            <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed
+                            <select class="form-control selectpicker" name="doctor_id" requir title="اختر المدرس"ed
                                 id="teachers_college" onchange="getTeacher_typescollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
@@ -228,7 +228,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            class="btn first">{{ __('messages.save') }}</button>
+                            class="btn first">حفظ</button>
                     </div>
                 </div>
 

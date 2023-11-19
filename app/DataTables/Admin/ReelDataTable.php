@@ -24,7 +24,7 @@ class ReelDataTable extends DataTable
         return datatables()
             ->eloquent($query)
 
-            ->addColumn('action', 'teacher_dashboard.reels.action')
+            ->addColumn('action', 'dashboard.reels.action')
             ->rawColumns([
 
                 'action',
