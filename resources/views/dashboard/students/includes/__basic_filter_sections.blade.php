@@ -12,12 +12,15 @@ div#category_id_basic {
     background-color: #eaeaea87;
     border-radius: 10px
 }
+h4.hederre {
+    font-family: "reg";
+}
 </style>
 
 
 
 <div class="form-group col-lg-2 col-md-6 col-12">
-    <label>المرحله</label>
+    {{-- <label>المرحله</label> --}}
     <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);filter_students();" id="stage" title="ادخل المرحله ">
         {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
         @foreach ($stages as $stage)
@@ -29,7 +32,7 @@ div#category_id_basic {
     @enderror
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
-    <label>سنه الماده</label>
+    {{-- <label>سنه الماده</label> --}}
     <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this);filter_students();" title="اختر السنه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
 
@@ -39,7 +42,7 @@ div#category_id_basic {
     @enderror
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
-    <label>الماده </label>
+    {{-- <label>الماده </label> --}}
     <select class="form-control selectpicker" name="subjects_id" required id="subject" onchange="getSubject_teacher(this)" title="اختر الماده">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
@@ -50,7 +53,7 @@ div#category_id_basic {
 </div>
 
 <div class="form-group col-lg-2 col-md-6 col-12">
-    <label>المدرسين </label>
+    {{-- <label>المدرسين </label> --}}
     <select class="form-control selectpicker" name="teacher_id" required id="teachers"  onchange="getTeacher_types(this)" title="اختر المدرس">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
@@ -61,7 +64,7 @@ div#category_id_basic {
 </div>
 
 <div class="form-group col-lg-2 col-md-6 col-12">
-    <label>الكورسات </label>
+    {{-- <label>الكورسات </label> --}}
     <select class="form-control selectpicker" name="type_id" required id="types" onchange="filter_students();" title="اختر الكورسات">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option> --}}
 
