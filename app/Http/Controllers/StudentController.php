@@ -63,6 +63,7 @@ use App\TypeexamResult;
 use App\TypescollegeexamResult;
 use App\TypeJoin;
 use App\TypecollegeJoin;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -417,12 +418,13 @@ class StudentController extends Controller
     }
     public function student_logout($id)
     {
-        dd('logout ');
+        DB::beginTransaction();
         $user = User::where("id", $id)->first();
         $user->update([
             "device_id" => null,
             "device_token" => null
         ]);
+        DB::commit();
         return response()->json(["status" => true]);
     }
 
