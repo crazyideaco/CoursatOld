@@ -25,7 +25,7 @@ class SubTypePatchDataTable extends DataTable
         return datatables()
         ->eloquent($query)
 
-        ->addColumn('action', 'dashboard.patches.subtype_action')
+        ->addColumn('action', 'dashboard.patches.action')
         ->editColumn("created_by",function($query){
             return $query->createable->name;
         })
