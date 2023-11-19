@@ -1,6 +1,6 @@
 <style>
-    .icons {
-        display: flex;
+    td.text-center {
+        display: flex !important;
         justify-content: center;
         align-items: center;
     }
@@ -8,7 +8,7 @@
 @php
     $student = \App\User::find($id);
 @endphp
-<td class="icons">
+<td class="text-center">
 
         <img src="{{ asset('images/sex.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
 
