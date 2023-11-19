@@ -661,6 +661,7 @@ Route::get('lesson_patches/{id}','LessonQrCodeController@patch_index')->name('le
 Route::get('lesson_qrcodes/{id}', 'LessonQrCodeController@index')->name('lesson.lesson_qrcodes');
 
 
+Route::resource("reels", 'ReelController');
 
 
 
