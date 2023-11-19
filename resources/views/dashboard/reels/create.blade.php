@@ -7,11 +7,11 @@
 </style>
 @endsection
 @section('content')
-    <div class="content_page">
+    <div class="page-body">
         <div class="container">
             <!-- header section -->
             <div class="main_topic">
-                <h4>{{__('messages.add reel')}}</h4>
+                <h4>add reel</h4>
             </div>
 
             <form class="form_topic" action="{{route('reels.store')}}" method="post" enctype="multipart/form-data">
@@ -62,19 +62,19 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="input-group">
-                            <label class="form-label">{{ __('messages.education_stage') }}</label>
+                            <label class="form-label">نوع التعليم</label>
 
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="category_id" id="radio1"
                                         onchange="toggleRow()" value="1">
-                                    <label class="form-check-label" for="radio1">{{ __('messages.basic') }}</label>
+                                    <label class="form-check-label" for="radio1">اساسي</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="category_id" id="radio2"
                                         onchange="toggleRow()" value="2">
                                     <label class="form-check-label"
-                                        for="radio2">{{ __('messages.university education') }}</label>
+                                        for="radio2">جامعي</label>
                                 </div>
 
                             {{-- <div class="form-check form-check-inline">
@@ -105,7 +105,7 @@
                     </div> --}}
                     <div class="form-group col-lg-3 col-md-6 col-12">
                         <label>المرحله</label>
-                        <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this);" id="stage" title="ادخل المرحله ">
+                        <select class="form-control selectpicker" name="stage_id" onchange="getstage_years(this)" id="stage" title="ادخل المرحله ">
                             {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
                             @foreach ($stages as $stage)
                                 <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
@@ -117,7 +117,7 @@
                     </div>
                     <div class="form-group col-lg-3 col-md-6 col-12">
                         <label>سنه الماده</label>
-                        <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this);" title="اختر السنه">
+                        <select class="form-control selectpicker" name="years_id" required id="year" onchange="getyear_subjects(this)" title="اختر السنه">
                             {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
 
                         </select>
@@ -160,7 +160,7 @@
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم الجامعه </label>
                             <select name="university_id" required class="form-control selectpicker" id="university"
-                                onchange="getcolleges(this);" title="اختر جامعه">
+                                onchange="getcolleges(this)" title="اختر جامعه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
                                 @foreach ($universities as $university)
                                     <option value="{{ $university->id }}">
@@ -175,7 +175,7 @@
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم الكليه </label>
                             <select name="college_id" required class="form-control selectpicker" id="college"
-                                onchange="getdivision(this);" title="اختر كليه">
+                                onchange="getdivision(this)" title="اختر كليه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
 
                             </select>
@@ -183,7 +183,7 @@
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم القسم </label>
                             <select name="division_id" required class="form-control selectpicker" id="division"
-                                onchange="getsection(this);" title="اختر قسم">
+                                onchange="getsection(this)" title="اختر قسم">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
 
                             </select>
@@ -191,7 +191,7 @@
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم الفرقه </label>
                             <select name="section_id" required class="form-control selectpicker" id="section"
-                                onchange="getsection_subjectsCollege(this);" title="اختر فرقه">
+                                onchange="getsection_subjectsCollege(this)" title="اختر فرقه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
                             </select>
@@ -233,7 +233,7 @@
         </div>
     </div>
 
-    <script>
+    {{-- <script>
         // This function for main education
         function toggleRow() {
             var checkbox = document.getElementById('radio1') == null ? null : document.getElementById('radio1');
@@ -278,7 +278,7 @@
 
 
         }
-    </script>
+    </script> --}}
     <!-- show main education -->
 
 
