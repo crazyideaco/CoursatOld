@@ -299,7 +299,7 @@
             });
             $.ajax({
                 type: "get",
-                url: `getstage/${id}`,
+                url: `../getstage/${id}`,
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
