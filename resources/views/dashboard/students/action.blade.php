@@ -15,6 +15,8 @@
     padding: 0.5rem !important;
 }
 .width_30 {
+    text-align: center;
+    margin-bottom: 0.5rem;
     width: 30%;
 }
 .width_30 img {width: 25px;}
