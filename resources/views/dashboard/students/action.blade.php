@@ -1,11 +1,9 @@
 @php
     $student = \App\User::find($id);
 @endphp
-<td class="text-center">
-    <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
-        onclick="student_logout({{ $id }})">
-        <img src="{{ asset('images/trash.svg') }}" alt="" title="تسجيل الخروج">
-    </span>
+<td class="d-flex">
+
+        <img src="{{ asset('images/trash.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
 
     {{-- تفعيل المستخدم --}}
     @if ($active == 1)
@@ -23,7 +21,6 @@
 
     @if ($category_id == 1)
         <a class="btnbtn-sm mt-2"
-            style="border:1px solid #222; margin-bottom:10px; font-size:13px; display:block;    padding: 10px 10px; width: 60%; "
             href="{{ route('typeresults_students', $id) }}">
             <img src="{{ asset('images/trash.svg') }}" alt="" title="نتائج
 
