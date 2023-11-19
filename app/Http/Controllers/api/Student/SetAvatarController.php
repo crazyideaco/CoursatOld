@@ -10,6 +10,9 @@ use App\Traits\ApiTrait;
 class SetAvatarController extends Controller
 {
     use ApiTrait;
+
+    // upload an avatar image
+    
     public function setAvatar(Request $request) {
         $image = $request->image;
         $imageName = time().$image->getClientOriginalName();

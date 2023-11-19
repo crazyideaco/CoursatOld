@@ -23,6 +23,8 @@ Route::group(['namespace' => 'api'], function () {
     // route for set avatar
 
     Route::post("setAvatar","Student\SetAvatarController@setAvatar")->middleware('auth:api');
+
+
     Route::post('login', 'AuthController@login')->name('login');
     Route::post('register', 'AuthController@register');
     Route::post('register_info', 'AuthController@register_info');
