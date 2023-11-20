@@ -126,7 +126,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($paymentways as $paymentway)
+                                    @foreach ($paymentWays as $paymentway)
                                         <tr id="c{{ $paymentway->id }}">
                                             <td scope="row">{{ $paymentway->title ?? ''}}</td>
                                             <td scope="row">{{ $paymentway->number ?? ''}}</td>
