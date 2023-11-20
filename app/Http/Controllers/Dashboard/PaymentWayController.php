@@ -19,9 +19,7 @@ class PaymentWayController extends Controller
     public function index()
     {
         $paymentWays =  PaymentWay::get();
-        return view("dashboard.payment_wayes.index",compact("paymentWays"));
-
-
+        return view("dashboard.payment_wayes.index", compact("paymentWays"));
     }
 
     /**
@@ -31,8 +29,8 @@ class PaymentWayController extends Controller
      */
     public function create()
     {
-        $centers = User::where("is_student",5)->get();
-        return view("dashboard.payment_wayes.create",compact("centers"));
+        $centers = User::where("is_student", 5)->get();
+        return view("dashboard.payment_wayes.create", compact("centers"));
     }
 
     /**
@@ -44,18 +42,18 @@ class PaymentWayController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "title"=>"string",
-            "number"=>"string"
+            "title" => "string",
+            "number" => "string"
         ]);
 
-    $paymentway = new paymentWay;
-    $paymentway->title = $request->title;
-    $paymentway->number = $request->number;
-    $paymentway->creator_id = auth()->id();
-    $paymentway->center_id = $request->center_id;
-    $paymentway->save();
-    return view("dashboard.payment_wayes.index");
+        $paymentway = new paymentWay;
+        $paymentway->title = $request->title;
+        $paymentway->number = $request->number;
+        $paymentway->creator_id = auth()->id();
+        $paymentway->center_id = $request->center_id;
+        $paymentway->save();
 
+        return redirect()->route("paymentways.index");
     }
 
     /**
@@ -66,8 +64,8 @@ class PaymentWayController extends Controller
      */
     public function show($id)
     {
-        $paymentway = PaymentWay::get()->where("id",$id);
-        return view("dashboard.payment_wayes.show",$paymentway);
+        $paymentway = PaymentWay::get()->where("id", $id);
+        return view("dashboard.payment_wayes.show", $paymentway);
     }
 
     /**
@@ -78,9 +76,9 @@ class PaymentWayController extends Controller
      */
     public function edit($id)
     {
-        $paymentway = PaymentWay::where("id",$id)->first();
-        $centers = User::where("is_student",5)->get();
-        return view("dashboard.payment_wayes.edit",compact("paymentway","centers"));
+        $paymentway = PaymentWay::where("id", $id)->first();
+        $centers = User::where("is_student", 5)->get();
+        return view("dashboard.payment_wayes.edit", compact("paymentway", "centers"));
     }
 
     /**
@@ -93,17 +91,18 @@ class PaymentWayController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "title"=>"string",
-            "number"=>"string"
+            "title" => "string",
+            "number" => "string"
         ]);
 
-    $paymentway =  paymentWay::where("id",$id)->first();
-    $paymentway->title = $request->title;
-    $paymentway->number = $request->number;
-    $paymentway->creator_id = $request->creator_id;
-    $paymentway->center_id = $request->center_id;
-    $paymentway->save();
-    return view("dashboard.payment_wayes.index");
+        $paymentway =  paymentWay::where("id", $id)->first();
+        $paymentway->title = $request->title;
+        $paymentway->number = $request->number;
+        $paymentway->creator_id = $request->creator_id;
+        $paymentway->center_id = $request->center_id;
+        $paymentway->save();
+        
+        return redirect()->route("paymentways.index");
     }
 
     /**
@@ -114,7 +113,7 @@ class PaymentWayController extends Controller
      */
     public function destroy($id)
     {
-        PaymentWay::where("id",$id)->delete();
+        PaymentWay::where("id", $id)->delete();
         return view("dashboard.payment_wayes.index");
     }
 }
