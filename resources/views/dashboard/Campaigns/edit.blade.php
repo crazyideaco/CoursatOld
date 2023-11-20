@@ -73,7 +73,7 @@
                         <img src="{{ asset('images/setting.svg') }}">
                         <h5>تعديل تفاصيل الحملة </h5>
                     </div>
-                    <form method="post" action="{{ route('campaign.update', $campaign->id) }}"
+                    <form method="post" action="{{ route('campaigns.update', $campaign->id) }}"
 
                         enctype="multipart/form-data">
                         @csrf
