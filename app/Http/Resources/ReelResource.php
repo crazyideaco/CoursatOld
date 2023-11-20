@@ -21,7 +21,7 @@ class ReelResource extends JsonResource
         "id" => $this->id,
         "title" => $this->name ?? '',
         "teacher_name" => $this->information->user->name ?? "",
-        'teacher_image' => $this->information->user->image ? asset('uploads/' . $this->information->user->image) : null,
+        'teacher_image' => $this->information->user->image ? asset('uploads/'.$this->information->user->image) : "",
         'image' => $this->image ? asset('uploads/'.$this->image) : '' ,
         "date" => $this->date_format ?? "",
         "video" => $this->video ?? "",
