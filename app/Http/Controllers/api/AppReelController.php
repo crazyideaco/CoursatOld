@@ -14,7 +14,6 @@ class AppReelController extends Controller
     use ApiTrait;
     public function fetch_reels(Request $request)
     {
-        try {
 
             $user = auth()->user();
             $reels = Reel::whereHas("information", function ($query) use ($user) {
@@ -37,8 +36,6 @@ class AppReelController extends Controller
             $response =  ReelResource::collection($reels);
 
             return $this->dataResponse($msg, $response, 200);
-        } catch (\Exception $ex) {
-            return $this->returnException($ex->getMessage(), 500);
-        }
+       
     }
 }
