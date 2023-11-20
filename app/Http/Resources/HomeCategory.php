@@ -9,6 +9,8 @@ use App\Http\Resources\TypeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Center_Teacher;
 use App\Center_Doctor;
+use App\Models\Reel;
+
 class HomeCategory extends JsonResource
 {
     /**
@@ -78,13 +80,21 @@ class HomeCategory extends JsonResource
                 $courses = CourseResource::collection(\App\Course::where('active', 1)->get());
                 $latest_courses = CourseResource::collection(\App\Course::where('active', 1)->orderBy('created_at', 'desc')->take(4)->get());
             }
-
+            $user = auth()->user();
+            $reels = Reel::whereHas("informations", function ($query) use ($user) {
+                $query->when($user->category_id && $user->category_id == 1, function ($q) use ($user) {
+                    $q->whereYearId($user->year_id);
+                })->when($user->category_id && $user->category_id == 2, function ($q) use ($user) {
+                    $q->whereDivisionId($user->division_id);
+                });
+            });
             return [
                 'id' => $this->id,
                 'title' => $this->name_ar,
                 'courses' => $courses,
                 'latest_courses' => $latest_courses,
                 'lectuers' => LecturerResource::collection($lectuers),
+                'reels' => ReelResource::collection($reels),
             ];
         }
         return [

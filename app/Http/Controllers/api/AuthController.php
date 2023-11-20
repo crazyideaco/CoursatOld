@@ -408,6 +408,7 @@ class AuthController extends Controller
             return response()->json(['status' => false, 'message' => $validator->messages()->first()]);
         }
     }
+    
     public function home_categories()
     {
         // $user_ids = auth()->user()->centerstudents->pluck("id");
