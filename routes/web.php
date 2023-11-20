@@ -1,7 +1,8 @@
  <?php
 
-use Dashboard\CampaignController;
-use App\Lesson;
+    use Dashboard\CampaignController;
+    use App\Lesson;
+
     use App\VideosCollege;
     use Illuminate\Support\Facades\Route;
     use Dashboard\PaymentWayController;
@@ -39,15 +40,18 @@ use App\Lesson;
   })->name('dashlogin')->middleware("guest");*/
     Route::post('startlogin', 'LoginController@startlogin')->name('startlogin');
 
-// campaign resource route
 
     //tags
     Route::resource("tags", 'TagController');
     //Route::group(['middleware' => ['auth','isAdmin']],function(){
-        Route::group(['middleware' => ['auth']], function () {
-            // route for paymentways----------------------
-            Route::resource('paymentways', PaymentWayController::class);
-           //-------------------------------------------
+    Route::group(['middleware' => ['auth']], function () {
+        // route for paymentways----------------------
+        Route::resource('paymentways', PaymentWayController::class);
+        //-------------------------------------------
+        // route for campaigns----------------------
+        Route::resource("campaigns", CampaignController::class);
+        // ------------------------------------------
+
         Route::get('main_page_basic', 'MainPageController@main_page_basic')->name('main_page_basic');
         Route::get('main', 'MainPageController@main')->name('main');
 
@@ -262,7 +266,6 @@ use App\Lesson;
         Route::get('getSubject_teacher/{id}', 'Dashboard\Filter\TeacherController@getSubject_teacher')->name('getSubject_teacher');
         Route::get('getSubjectTeachercollege/{id}', 'Dashboard\Filter\TeacherController@getSubject_teachercollege')->name('getSubject_teachercollege');
         Route::get('getteacher_type/{subjectId}/{userId}', 'Dashboard\Filter\TypeController@getteacher_type')->name('getteacher_type');
-
     });
 
 
@@ -638,35 +641,35 @@ use App\Lesson;
     Route::post("filtertypescollege", "FilterCourseController@filtertypescollege");
     Route::post("filtercourses", "FilterCourseController@filtercourses");
 
-//store_qrcode
-Route::post('store_qrcode','QrCodeController@store')->name('store_qrcode');
-//patches
-Route::get('patches/{id}','QrCodeController@patch_index')->name('types.patches');
+    //store_qrcode
+    Route::post('store_qrcode', 'QrCodeController@store')->name('store_qrcode');
+    //patches
+    Route::get('patches/{id}', 'QrCodeController@patch_index')->name('types.patches');
 
-Route::get('qrcodes/{id}', 'QrCodeController@index')->name('types.qrcodes');
-
-
-//store_course_college_qrcode
-Route::post('store_course_college_qrcode','CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
-//patches
-Route::get('typecollege_patches/{id}','CollegeCourseQrCodeController@patch_index')->name('typecolleges.typecollege_patches');
-Route::get('typecollege_qrcodes/{id}', 'CollegeCourseQrCodeController@index')->name('typecolleges.typecollege_qrcodes');
-
-//store_sub_type_qrcode
-Route::post('store_sub_type_qrcode','SubTypeQrCodeController@store')->name('store_sub_type_qrcode');
-//patches
-Route::get('subtype_patches/{id}','SubTypeQrCodeController@patch_index')->name('subtype.subtype_patches');
-Route::get('subtype_qrcodes/{id}', 'SubTypeQrCodeController@index')->name('subtype.subtype_qrcodes');
+    Route::get('qrcodes/{id}', 'QrCodeController@index')->name('types.qrcodes');
 
 
-//store_lesson_qrcode
-Route::post('store_lesson_qrcode','LessonQrCodeController@store')->name('store_lesson_qrcode');
-//patches
-Route::get('lesson_patches/{id}','LessonQrCodeController@patch_index')->name('lesson.lesson_patches');
-Route::get('lesson_qrcodes/{id}', 'LessonQrCodeController@index')->name('lesson.lesson_qrcodes');
+    //store_course_college_qrcode
+    Route::post('store_course_college_qrcode', 'CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
+    //patches
+    Route::get('typecollege_patches/{id}', 'CollegeCourseQrCodeController@patch_index')->name('typecolleges.typecollege_patches');
+    Route::get('typecollege_qrcodes/{id}', 'CollegeCourseQrCodeController@index')->name('typecolleges.typecollege_qrcodes');
+
+    //store_sub_type_qrcode
+    Route::post('store_sub_type_qrcode', 'SubTypeQrCodeController@store')->name('store_sub_type_qrcode');
+    //patches
+    Route::get('subtype_patches/{id}', 'SubTypeQrCodeController@patch_index')->name('subtype.subtype_patches');
+    Route::get('subtype_qrcodes/{id}', 'SubTypeQrCodeController@index')->name('subtype.subtype_qrcodes');
 
 
-Route::resource("reels", 'ReelController');
+    //store_lesson_qrcode
+    Route::post('store_lesson_qrcode', 'LessonQrCodeController@store')->name('store_lesson_qrcode');
+    //patches
+    Route::get('lesson_patches/{id}', 'LessonQrCodeController@patch_index')->name('lesson.lesson_patches');
+    Route::get('lesson_qrcodes/{id}', 'LessonQrCodeController@index')->name('lesson.lesson_qrcodes');
+
+
+    Route::resource("reels", 'ReelController');
 
 
 

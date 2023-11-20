@@ -76,7 +76,8 @@
                     <div class="row def">
 
                         <img src="images/all-products.svg">
-                        <h5>وسائل الدفع</h5>
+                        <h5> الحملات</h5>
+
 
 
 
@@ -88,7 +89,8 @@
                                 <button class="btn">
                                     <a href="{{ route('paymentways.create') }}"> <span><i
                                                 class="fas fa-plus-circle"></i></span>
-                                        اضافة وسيلة دفع
+                                        اضافة حملة
+
                                     </a>
                                 </button>
 
@@ -118,24 +120,34 @@
                             <table id="example" class="table col-12" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">وسيلة الدفع</th>
-                                        <th scope="col">رقم وسيلة الدفع</th>
-                                        <th scope="col">صاحب وسيلة الدفع</th>
-                                        <th scope="col">المركز المسئول عن الدفع</th>
+                                        <th scope="col">اسم الحملة</th>
+                                        <th scope="col"> تاريخ بداية الحملة</th>
+                                        <th scope="col"> تاريخ انتهاء الحملة </th>
+                                        <th scope="col"> تاريخ انشاء الحملة</th>
+
                                         <th scope="col" class="text-center">الاعدادات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($paymentways as $paymentway)
                                         <tr id="c{{ $paymentway->id }}">
-                                            <td scope="row">{{ $paymentway->title ?? ''}}</td>
-                                            <td scope="row">{{ $paymentway->number ?? ''}}</td>
-                                            <td scope="row">{{ $paymentway->creator->name ?? ''}}</td>
-                                            <td scope="row">{{ $paymentway->center->name ?? '' }}</td>
+                                            <td scope="row">{{ $campaign->title ?? '' }}</td>
+                                            <td scope="row">{{ $campaign->start_date ?? '' }}</td>
+                                            <td scope="row">{{ $paymentway->end_date ?? '' }}</td>
+                                            <td scope="row">{{ $paymentway->created_at ?? '' }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('payment_ways.edit', $paymentway->id) }}"> <img
+                                                {{-- link for editing --}}
+                                                <a href="{{ route('campaigns.edit', $paymentway->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
+                                                {{-- link for showing  --}}
+                                                <a href="{{ route('campaigns.show', $paymentway->id) }}"> <img
+                                                        src="{{ asset('images/pen.svg') }}" id="pen"
+                                                        style="cursor: pointer"></a>
+                                                {{-- link for result file --}}
+                                                <a href=""> <img src="{{ asset('images/pen.svg') }}" id="pen"
+                                                        style="cursor: pointer"></a>
+                                                {{-- link for deleting  --}}
 
                                                 <img src="{{ asset('images/trash.svg') }}" id="trash"
                                                     onclick="deletetag('{{ $paymentway->id }}')" style="cursor:pointer;">

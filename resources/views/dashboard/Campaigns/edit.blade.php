@@ -71,9 +71,10 @@
                 <div class="container">
                     <div class="row def">
                         <img src="{{asset('images/setting.svg')}}">
-                        <h5>تعديل وسيلة الدفع </h5>
+                        <h5>تعديل تفاصيل الحملة </h5>
                     </div>
-                    <form method="post" action="{{route('paymentways.update', $paymentway->id)}}"
+                    <form method="post" action="{{route('campaign.update', $paymentway->id)}}"
+
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

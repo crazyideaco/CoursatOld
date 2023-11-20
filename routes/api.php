@@ -18,6 +18,7 @@ use Dashboard\CampaignController;
 
 Route::resource("campaigns",CampaignController::class);
 
+
 Route::group(['namespace' => 'api'], function () {
 
 

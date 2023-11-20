@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\College;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCampaignrequest;
 use App\Models\Campaign;
+use App\Stage;
+use App\Subject;
+use App\University;
+use App\Year;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
@@ -18,7 +23,8 @@ class CampaignController extends Controller
     {
         $campains = new Campaign;
         $campains->get();
-        return view("",compact("campaigns"));
+        return view("dashboard.Campaigns.index",compact("campaigns"));
+
     }
 
     /**
@@ -28,7 +34,16 @@ class CampaignController extends Controller
      */
     public function create()
     {
-        return view("");
+
+        $stages = Stage::get();
+        // $years = Year::get();
+        // $subjects = Subject::get();
+
+        // $colleges = College::get();
+        $universities = University::get();
+        // dd($stages);
+        return view("dashboard.Campaigns.create",compact("stages","universities"));
+
     }
 
     /**
@@ -46,7 +61,9 @@ class CampaignController extends Controller
         $campain->description = $request->description;
         $campain->platform = $request->platform;
         $campain->save();
-        return view("");
+
+        return redirect(route("campaigns.index"));
+
     }
 
     /**
@@ -70,7 +87,15 @@ class CampaignController extends Controller
     public function edit($id)
     {
         $campain =  Campaign::where("id",$id)->get();
-        return view("",$campain);
+        $stages = Stage::get();
+        $years = Year::get();
+        $subjects = Subject::get();
+        $colleges = College::get();
+        $universities = University::get();
+        dd($stages);
+        return view("dashboard.Campaigns.edit",compact("stages","years","subjects","colleges","universities","campaign"));
+
+
     }
 
     /**
@@ -89,7 +114,8 @@ class CampaignController extends Controller
         $campain->description = $request->description;
         $campain->platform = $request->platform;
         $campain->save();
-        return view("");
+          return redirect(route("campaigns.index"));;
+
     }
 
     /**
@@ -100,7 +126,8 @@ class CampaignController extends Controller
      */
     public function destroy($id)
     {
-        $campain =  Campaign::where("id",$id)->delete();
-        return view("");
+         Campaign::where("id",$id)->delete();
+        return view("dashboard.Campaigns.index");
+
     }
 }
