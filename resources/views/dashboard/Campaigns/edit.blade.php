@@ -74,6 +74,7 @@
                         <h5>تعديل تفاصيل الحملة </h5>
                     </div>
                     <form method="post" action="{{ route('campaign.update', $paymentway->id) }}"
+
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

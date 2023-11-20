@@ -22,6 +22,7 @@ class CreateCampaignsTable extends Migration
             $table->date("end_date")->default(date("Y-m-d"));
             // 1 for academic & 0 for basic
             $table->enum("target",[1,0]);
+
             $table->timestamps();
         });
     }

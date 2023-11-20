@@ -24,6 +24,7 @@ class CampaignController extends Controller
         $campains = new Campaign;
         $campains->get();
         return view("dashboard.Campaigns.index", compact("campaigns"));
+
     }
 
     /**
@@ -33,6 +34,7 @@ class CampaignController extends Controller
      */
     public function create()
     {
+
         $stages = Stage::get();
         // $years = Year::get();
         // $subjects = Subject::get();
@@ -41,6 +43,7 @@ class CampaignController extends Controller
         $universities = University::get();
         // dd($stages);
         return view("dashboard.Campaigns.create", compact("stages", "universities"));
+
     }
 
     /**
@@ -58,7 +61,9 @@ class CampaignController extends Controller
         $campain->description = $request->description;
         $campain->platform = $request->platform;
         $campain->save();
+
         return redirect(route("campaigns.index"));
+
     }
 
     /**
@@ -88,6 +93,7 @@ class CampaignController extends Controller
         // $colleges = College::get();
         $universities = University::get();
         return view("dashboard.Campaigns.edit", compact("stages", "universities", "campaign"));
+
     }
 
     /**
@@ -106,7 +112,7 @@ class CampaignController extends Controller
         $campain->description = $request->description;
         $campain->platform = $request->platform;
         $campain->save();
-        return redirect(route("campaigns.index"));;
+        return redirect(route("campaigns.index"));
     }
 
     /**
@@ -119,5 +125,6 @@ class CampaignController extends Controller
     {
         Campaign::where("id", $id)->delete();
         return view("dashboard.Campaigns.index");
+
     }
 }

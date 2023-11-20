@@ -14,6 +14,7 @@
                             </div>
                             <div class="col-6">
                                 <h5>{{ auth()->user()->name }}</h5>
+
                                 <p>ادمن</p>
 
                             </div>
@@ -72,6 +73,7 @@
                     <div class="row def">
                         <img src="{{ asset('images/setting.svg') }}">
                         <h5>اضافة حملة </h5>
+
                     </div>
                     <form method="post" action="{{ route('campaigns.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -80,6 +82,7 @@
                                 {{-- input for campaign name --}}
                                 <div class="form-group col-3">
                                     <label>اسم الحملة </label>
+
                                     <input type="text" class="form-control" placeholder="ادخل اسم " name="title"
                                         value="{{ old('title') }}"required>
                                     @error('title')
@@ -89,6 +92,7 @@
                                 {{-- input for campaign description --}}
                                 <div class="form-group col-3">
                                     <label>تفاصيل الحملة </label>
+
                                     <input type="text" class="form-control" placeholder="ادخل الرقم " name="description"
                                         value="{{ old('description') }}"required>
                                     @error('description')
@@ -100,6 +104,7 @@
                                     <label>بداية الحملة</label>
                                     <input type="date" class="form-control" placeholder="ادخل تاريخ البدء"
                                         name="start_date" value="{{ old('start_date') }}"required>
+
                                     @error('start_date')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
@@ -109,6 +114,7 @@
                                     <label> نهاية الحملة </label>
                                     <input type="date" class="form-control" placeholder=" ادخل تاريخ الانتهاء "
                                         name="end_date" value="{{ old('end_date') }}"required>
+
                                     @error('end_date')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
@@ -129,6 +135,7 @@
                                     <input type="checkbox" name="platform[]" id="whatsapp" value="whatsapp">
                                     <label for="whatsapp">WhatsApp</label>
                                     <input type="checkbox" name="platform[]" id="x" value="x">
+
                                     <label for="x">X</label>
                                     @error('center_id')
                                         <div style="color:red;">{{ $message }} </div>
@@ -240,6 +247,7 @@
                                     </div>
                                 </div>
                                 {{-- end of filter  --}}
+
 
                             </div>
                         </div>
@@ -511,4 +519,5 @@
             });
         }
     </script>
+
 @endsection
