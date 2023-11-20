@@ -110,9 +110,9 @@
                                 {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
                                 @foreach ($stages as $stage)
                                     <option value='{{ $stage->id }}'
-                                        @if($stage->id == $reel->information?->stage_id)
+                                        {{-- @if($stage->id == $reel->information?->stage_id)
                                         selected
-                                        @endif
+                                        @endif --}}
                                         >{{ $stage->name_ar }}</option>
                                 @endforeach
                             </select>
