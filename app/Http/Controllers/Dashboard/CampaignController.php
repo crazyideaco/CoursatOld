@@ -57,7 +57,7 @@ class CampaignController extends Controller
         $campain->description = $request->description;
         $campain->category_id = $request->category_id;
         $campain->save();
-        $campain->attach($request->platform);
+        $campain->Platforms()->attach($request->platform);
 
         return redirect(route("campaigns.index"));
 
@@ -106,7 +106,7 @@ class CampaignController extends Controller
         $campain->description = $request->description;
         $campain->category_id = $request->category_id;
         $campain->save();
-        $campain->sync($request->platform);
+        $campain->Platforms()->sync($request->platform);
 
         return redirect(route("campaigns.index"));
     }
