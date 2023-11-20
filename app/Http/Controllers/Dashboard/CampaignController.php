@@ -35,10 +35,10 @@ class CampaignController extends Controller
     public function create()
     {
         $stages = Stage::get();
-        $platform = Platform::get();
+        $platforms = Platform::get();
         $universities = University::get();
 
-        return view("dashboard.Campaigns.create", compact("stages", "universities","platform"));
+        return view("dashboard.Campaigns.create", compact("stages", "universities","platforms"));
 
     }
 
