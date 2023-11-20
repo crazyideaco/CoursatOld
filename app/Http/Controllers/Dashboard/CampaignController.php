@@ -23,7 +23,7 @@ class CampaignController extends Controller
     {
         $campains = new Campaign;
         $campains->get();
-        return view("dashboard.Campaigns.index",compact("campaigns"));
+        return view("dashboard.Campaigns.index", compact("campaigns"));
     }
 
     /**
@@ -40,7 +40,7 @@ class CampaignController extends Controller
         // $colleges = College::get();
         $universities = University::get();
         // dd($stages);
-        return view("dashboard.Campaigns.create",compact("stages","universities"));
+        return view("dashboard.Campaigns.create", compact("stages", "universities"));
     }
 
     /**
@@ -54,7 +54,7 @@ class CampaignController extends Controller
         $campain = new Campaign();
         $campain->title = $request->title;
         $campain->start_date = $request->start_date;
-        $campain->end_date = $request -> end_date;
+        $campain->end_date = $request->end_date;
         $campain->description = $request->description;
         $campain->platform = $request->platform;
         $campain->save();
@@ -69,8 +69,8 @@ class CampaignController extends Controller
      */
     public function show($id)
     {
-        $campain =  Campaign::where("id",$id)->get();
-        return view("",$campain);
+        $campain =  Campaign::where("id", $id)->get();
+        return view("", $campain);
     }
 
     /**
@@ -81,15 +81,13 @@ class CampaignController extends Controller
      */
     public function edit($id)
     {
-        $campain =  Campaign::where("id",$id)->get();
+        $campain =  Campaign::where("id", $id)->get();
         $stages = Stage::get();
-        $years = Year::get();
-        $subjects = Subject::get();
-        $colleges = College::get();
+        // $years = Year::get();
+        // $subjects = Subject::get();
+        // $colleges = College::get();
         $universities = University::get();
-        dd($stages);
-        return view("dashboard.Campaigns.edit",compact("stages","years","subjects","colleges","universities","campaign"));
-
+        return view("dashboard.Campaigns.edit", compact("stages", "universities", "campaign"));
     }
 
     /**
@@ -101,14 +99,14 @@ class CampaignController extends Controller
      */
     public function update(StoreCampaignrequest $request, $id)
     {
-        $campain =  Campaign::where("id",$id)->get();
+        $campain =  Campaign::where("id", $id)->get();
         $campain->title = $request->title;
         $campain->start_date = $request->start_date;
-        $campain->end_date = $request -> end_date;
+        $campain->end_date = $request->end_date;
         $campain->description = $request->description;
         $campain->platform = $request->platform;
         $campain->save();
-          return redirect(route("campaigns.index"));;
+        return redirect(route("campaigns.index"));;
     }
 
     /**
@@ -119,7 +117,7 @@ class CampaignController extends Controller
      */
     public function destroy($id)
     {
-         Campaign::where("id",$id)->delete();
+        Campaign::where("id", $id)->delete();
         return view("dashboard.Campaigns.index");
     }
 }

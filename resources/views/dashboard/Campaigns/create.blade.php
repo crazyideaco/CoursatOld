@@ -86,16 +86,16 @@
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
                                 </div>
-                                 {{-- input for campaign description --}}
+                                {{-- input for campaign description --}}
                                 <div class="form-group col-3">
-                                    <label>تفاصيل الحملة  </label>
+                                    <label>تفاصيل الحملة </label>
                                     <input type="text" class="form-control" placeholder="ادخل الرقم " name="description"
                                         value="{{ old('description') }}"required>
                                     @error('description')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
                                 </div>
-                                 {{-- input for campaign start date --}}
+                                {{-- input for campaign start date --}}
                                 <div class="form-group col-3">
                                     <label>بداية الحملة</label>
                                     <input type="date" class="form-control" placeholder="ادخل تاريخ البدء"
@@ -104,7 +104,7 @@
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
                                 </div>
-                                 {{-- input for campaign end date --}}
+                                {{-- input for campaign end date --}}
                                 <div class="form-group col-3">
                                     <label> نهاية الحملة </label>
                                     <input type="date" class="form-control" placeholder=" ادخل تاريخ الانتهاء "
@@ -115,7 +115,7 @@
                                 </div>
 
 
-                                 {{-- input for campaign platform type --}}
+                                {{-- input for campaign platform type --}}
                                 <div class="form-group col-3">
                                     <h5> نوع المنصه </h5>
                                     <input type="checkbox" name="platform[]" id="facebook" value="facebook">
@@ -136,7 +136,7 @@
                                 </div>
                                 {{-- begin of filter --}}
 
-                                 {{-- input for campaign type --}}
+                                {{-- input for campaign type --}}
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-group">
@@ -270,9 +270,6 @@
     <!--end page-body-->
 @endsection
 @section('scripts')
-
-
-
     <script>
         function getstage_years(selected) {
             let id = selected.value;
