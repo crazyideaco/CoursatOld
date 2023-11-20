@@ -22,8 +22,8 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $campains = new Campaign;
-        $campains->get();
+        $campaigns = new Campaign;
+        $campaigns->get();
         return view("dashboard.Campaigns.index", compact("campaigns"));
 
     }

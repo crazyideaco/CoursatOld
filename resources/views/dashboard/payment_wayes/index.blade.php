@@ -133,7 +133,7 @@
                                             <td scope="row">{{ $paymentway->creator->name ?? ''}}</td>
                                             <td scope="row">{{ $paymentway->center->name ?? '' }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('payment_ways.edit', $paymentway->id) }}"> <img
+                                                <a href="{{ route('paymentways.edit', $paymentway->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
 

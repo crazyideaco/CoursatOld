@@ -183,10 +183,6 @@
     <!--end page-body-->
 @endsection
 @section('scripts')
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
-
 
     <script>
         $(document).ready(function() {
@@ -217,7 +213,7 @@
                             '_method': 'DELETE',
                             '_token': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: `paymentways/${id}`,
+                        url: `campaigns/${id}`,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
