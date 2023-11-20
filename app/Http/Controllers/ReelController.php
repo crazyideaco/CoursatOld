@@ -224,7 +224,8 @@ class ReelController extends Controller
             $link = public_path() . '/uploads/' . $reel->image;
             File::delete($link);
         }
-        $reel->informations->delete();
+
+        $reel->information->delete();
 
         $reel->delete();
         return response()->json(['status' => true]);
