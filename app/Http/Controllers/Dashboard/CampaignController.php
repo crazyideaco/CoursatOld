@@ -83,7 +83,7 @@ class CampaignController extends Controller
      */
     public function edit($id)
     {
-        $campaign =  Campaign::where("id", $id)->get();
+        $campaign =  Campaign::where("id", $id)->first();
         $stages = Stage::get();
         $universities = University::get();
         return view("dashboard.Campaigns.edit", compact("stages", "universities", "campaign"));
