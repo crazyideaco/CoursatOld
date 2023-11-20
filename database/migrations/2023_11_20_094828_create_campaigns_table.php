@@ -18,9 +18,10 @@ class CreateCampaignsTable extends Migration
             $table->string("title");
             $table->text("description");
             $table->string("platform");
-            $table->date("start_date");
-            $table->date("end_date");
-            
+            $table->date("start_date",)->default(date("Y-m-d"));
+            $table->date("end_date")->default(date("Y-m-d"));
+            // 1 for academic & 0 for basic
+            $table->enum("target",[1,0]);
             $table->timestamps();
         });
     }
