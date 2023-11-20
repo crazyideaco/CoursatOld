@@ -606,7 +606,7 @@ use App\Lesson;
     Route::get('getmoney/{points}', 'PointController@getmoney')->name('getmoney');
     Route::get('getpoints/{money}', 'PointController@getpoints')->name('getpoints');
     Route::post('storestupoints', 'PointController@storestupoints')->name('storestupoints');
-    Route::get('getcolleges/{id}', 'CollegeController@getcolleges');
+    Route::get('getcolleges/{id}', 'CollegeController@getcolleges')->name('getcolleges');
     Route::get('getvideos/{id}', 'VideoController@getvideos');
     Route::get('addspecialcollege/{id}', 'SpecialcollegeController@addspecialcollege')->name('addspecialcollege');
     Route::get('specialbasic', 'SpecialbasicController@specialbasic')->name('specialbasic');
@@ -666,6 +666,7 @@ Route::get('lesson_patches/{id}','LessonQrCodeController@patch_index')->name('le
 Route::get('lesson_qrcodes/{id}', 'LessonQrCodeController@index')->name('lesson.lesson_qrcodes');
 
 
+Route::resource("reels", 'ReelController');
 
 
 

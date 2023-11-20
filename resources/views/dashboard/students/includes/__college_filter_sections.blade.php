@@ -1,5 +1,29 @@
-<div class="form-group col-lg-3 col-md-6 col-12">
-    <label>اسم الجامعه </label>
+
+<style>
+    .filter-option-inner-inner {
+    color: black !important;
+}
+.all-products button {
+    width: 100% !important;
+}
+:not(.input-group)>.bootstrap-select.form-control:not([class*=col-]) {
+    width: 95% !important;
+}
+div#category_id_college {
+    background-color: #f4f4f4;
+    margin-top: 13px;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 0.5rem;
+}
+h4.hederre {
+    font-family: "reg";
+    font-size: 1.2rem;
+}
+</style>
+
+<div class="form-group col-lg-2 col-md-6 col-12">
+    {{-- <label>اسم الجامعه </label> --}}
     <select name="university_id" required class="form-control selectpicker" id="university"
         onchange="getcolleges(this);filter_students();" title="اختر جامعه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
@@ -13,32 +37,32 @@
         <p style="color:red;">{{ $message }}</p>
     @enderror
 </div>
-<div class="form-group col-lg-3 col-md-6 col-12">
-    <label>اسم الكليه </label>
+<div class="form-group col-lg-2 col-md-6 col-12">
+    {{-- <label>اسم الكليه </label> --}}
     <select name="college_id" required class="form-control selectpicker" id="college"
         onchange="getdivision(this);filter_students();" title="اختر كليه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
 
     </select>
 </div>
-<div class="form-group col-lg-3 col-md-6 col-12">
-    <label>اسم القسم </label>
+<div class="form-group col-lg-2 col-md-6 col-12">
+    {{-- <label>اسم القسم </label> --}}
     <select name="division_id" required class="form-control selectpicker" id="division"
         onchange="getsection(this);filter_students();" title="اختر قسم">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
 
     </select>
 </div>
-<div class="form-group col-lg-3 col-md-6 col-12">
-    <label>اسم الفرقه </label>
+<div class="form-group col-lg-2 col-md-6 col-12">
+    {{-- <label>اسم الفرقه </label> --}}
     <select name="section_id" required class="form-control selectpicker" id="section"
         onchange="getsection_subjectsCollege(this);filter_students();" title="اختر فرقه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
     </select>
 </div>
-<div class="form-group col-lg-3 col-md-6 col-12">
-    <label>الماده </label>
+<div class="form-group col-lg-2 col-md-6 col-12">
+    {{-- <label>الماده </label> --}}
     <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " required
         id="subject_college" onchange="getSubject_teacherCollege(this)">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
@@ -50,7 +74,7 @@
 </div>
 
 <div class="form-group col-lg-3 col-md-6 col-12">
-    <label>المدرسين </label>
+    {{-- <label>المدرسين </label> --}}
     <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed id="teachers_college"
         onchange="getTeacher_typescollege(this)">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
@@ -62,7 +86,7 @@
 </div>
 
 <div class="form-group col-lg-3 col-md-6 col-12">
-    <label>الكورسات </label>
+    {{-- <label>الكورسات </label> --}}
     <select class="form-control selectpicker" name="type_college_id" required id="typescollege"
         onchange="filter_students();" title="اختر الكورسات">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option> --}}
