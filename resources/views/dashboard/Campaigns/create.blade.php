@@ -124,19 +124,10 @@
                                 {{-- input for campaign platform type --}}
                                 <div class="form-group col-3">
                                     <h5> نوع المنصه </h5>
-                                    <input type="checkbox" name="platform[]" id="facebook" value="facebook">
-                                    <label for="facebook">Facebook</label>
-                                    <input type="checkbox" name="platform[]" id="instagram" value="instagram">
-                                    <label for="instagram">Instagram</label>
-                                    <input type="checkbox" name="platform[]" id="tiktok" value="tiktok">
-                                    <label for="tiktok">Tiktok</label>
-                                    <input type="checkbox" name="platform[]" id="youtube" value='youtube'>
-                                    <label for="youtube">Youtube</label>
-                                    <input type="checkbox" name="platform[]" id="whatsapp" value="whatsapp">
-                                    <label for="whatsapp">WhatsApp</label>
-                                    <input type="checkbox" name="platform[]" id="x" value="x">
-
-                                    <label for="x">X</label>
+                                    @foreach ($platforms as $platform)
+                                        <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
+                                        <label>{{ $platform->title }}</label>
+                                    @endforeach
                                     @error('center_id')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
@@ -519,5 +510,4 @@
             });
         }
     </script>
-
 @endsection

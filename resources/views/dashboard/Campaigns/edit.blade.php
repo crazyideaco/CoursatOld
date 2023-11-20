@@ -73,7 +73,7 @@
                         <img src="{{ asset('images/setting.svg') }}">
                         <h5>تعديل تفاصيل الحملة </h5>
                     </div>
-                    <form method="post" action="{{ route('campaign.update', $paymentway->id) }}"
+                    <form method="post" action="{{ route('campaign.update', $campaign->id) }}"
 
                         enctype="multipart/form-data">
                         @csrf
@@ -84,7 +84,7 @@
                                 <div class="form-group col-3">
                                     <label>اسم الحملة </label>
                                     <input type="text" class="form-control" placeholder=" ادخل اسم الحملة" name="title"
-                                        value="{{ $campaign->title }}"required>
+                                        value="{{ $campaign->title ?? '' }}"required>
                                     @error('title')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
@@ -93,7 +93,7 @@
                                 <div class="form-group col-3">
                                     <label>تفاصيل الحملة </label>
                                     <input type="text" class="form-control" placeholder="ادخل تفاصيل الحملة "
-                                        name="description" value="{{ $campaign->description }}"required>
+                                        name="description" value="{{ $campaign->description ?? '' }}"required>
                                     @error('description')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
@@ -121,18 +121,10 @@
                                 {{-- input for campaign platform type --}}
                                 <div class="form-group col-3">
                                     <h5> نوع المنصه </h5>
-                                    <input type="checkbox" name="platform[]" id="facebook" value="facebook">
-                                    <label for="facebook">Facebook</label>
-                                    <input type="checkbox" name="platform[]" id="instagram" value="instagram">
-                                    <label for="instagram">Instagram</label>
-                                    <input type="checkbox" name="platform[]" id="tiktok" value="tiktok">
-                                    <label for="tiktok">Tiktok</label>
-                                    <input type="checkbox" name="platform[]" id="youtube" value='youtube'>
-                                    <label for="youtube">Youtube</label>
-                                    <input type="checkbox" name="platform[]" id="whatsapp" value="whatsapp">
-                                    <label for="whatsapp">WhatsApp</label>
-                                    <input type="checkbox" name="platform[]" id="x" value="x">
-                                    <label for="x">X</label>
+                                    @foreach ($platforms as $platform)
+                                        <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
+                                        <label>{{ $platform->title }}</label>
+                                    @endforeach
                                     @error('center_id')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror

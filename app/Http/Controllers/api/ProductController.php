@@ -70,7 +70,7 @@ class ProductController extends Controller
 
 
 
-        $validator = Validator::make($request->all(), [
+        $validator = Validato::make($request->all(), [
 
             'category_id' => 'required',
             "status" => 'required',

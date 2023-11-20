@@ -636,7 +636,7 @@ class AuthController extends Controller
         ]);
     }
     public function buycourse(Request $request)
-    {
+    {   
         $user = auth()->user();
         if (auth()->user()->category_id == 1) {
             $points = $user->points;
