@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PaymentWay;
 use App\User;
+
 use Illuminate\Support\Facades\Validator;
 
 class PaymentWayController extends Controller

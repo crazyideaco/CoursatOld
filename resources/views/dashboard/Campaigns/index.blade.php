@@ -80,6 +80,7 @@
 
 
 
+
                     </div>
 
                     <div class="products-search typs1">
@@ -89,6 +90,7 @@
                                     <a href="{{ route('paymentways.create') }}"> <span><i
                                                 class="fas fa-plus-circle"></i></span>
                                         اضافة حملة
+
                                     </a>
                                 </button>
 
@@ -122,6 +124,7 @@
                                         <th scope="col"> تاريخ بداية الحملة</th>
                                         <th scope="col"> تاريخ انتهاء الحملة </th>
                                         <th scope="col"> تاريخ انشاء الحملة</th>
+
                                         <th scope="col" class="text-center">الاعدادات</th>
                                     </tr>
                                 </thead>
@@ -145,6 +148,7 @@
                                                 <a href=""> <img src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
                                                 {{-- link for deleting  --}}
+
                                                 <img src="{{ asset('images/trash.svg') }}" id="trash"
                                                     onclick="deletetag('{{ $paymentway->id }}')" style="cursor:pointer;">
 

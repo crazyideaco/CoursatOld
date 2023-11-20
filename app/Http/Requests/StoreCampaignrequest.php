@@ -30,6 +30,7 @@ class StoreCampaignrequest extends FormRequest
             "description" =>"required|string",
             "platform"=>"required",
             "target"=>"required|numeric"
+
         ];
     }
 }
