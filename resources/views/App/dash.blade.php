@@ -934,15 +934,16 @@
                                 </div>
                                 <div class="col-6">
                                     <a href="#studentsYajra" data-toggle="collapse">الطلاب</a>
-                                    <div id="studentsYajra" class="collapse @if (request()->is('allstudents')) show @endif">
+                                    <div id="studentsYajra"
+                                        class="collapse @if (request()->is('allstudents')) show @endif">
 
                                         <a href="{{ route('allstudents') }}"
                                             class="@if (request()->is('allstudents')) active @endif">
                                             الطلاب</a>
 
                                         <a href="{{ route('allstudents') }}"
-                                        class="@if (request()->is('allstudents')) active @endif">
-                                        الاشتراكات</a>
+                                            class="@if (request()->is('allstudents')) active @endif">
+                                            الاشتراكات</a>
 
                                         {{-- <a href="{{ route('allbasicstudents') }}"
                                             class="@if (request()->is('allbasicstudents')) active @endif">
@@ -951,7 +952,6 @@
                                             class="@if (request()->is('allcollegestudents')) active @endif">
                                             طلاب الجامعى</a> --}}
 
-
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -959,6 +959,35 @@
                                             src="{{ asset('images/arrow.svg') }}" id="arr"></a>
                                 </div>
                             </div>
+
+
+                            <div class="row sub-side">
+                                <div class="col-2">
+                                    <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
+                                </div>
+                                <div class="col-6">
+                                    <a href="#systemSettings" data-toggle="collapse">إعدادات النظام</a>
+                                    <div id="systemSettings"
+                                        class="collapse
+                                    @if (
+                                    request()->is('paymentways.index') ||
+                                    request()->is('campaigns.index')) show @endif
+                                     ">
+
+                                        <a href="{{ route('paymentways.index') }}"
+                                            class="@if (request()->is('paymentways.index')) active @endif"> وسائل الدفع</a>
+                                        <a href="{{ route('campaigns.index') }}"
+                                            class="@if (request()->is('campaigns.index')) active @endif">الحملات الإعلانية</a>
+
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <a href="#systemSettings" data-toggle="collapse"><img
+                                            src="{{ asset('images/arrow.svg') }}" id="arr"></a>
+                                </div>
+                            </div>
+
+
                             <div class="row sub-side">
                                 <div class="col-2">
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
@@ -966,12 +995,7 @@
                                 <div class="col-6">
                                     <a href="#studentsYajra" data-toggle="collapse">الفيديوهات القصيره</a>
                                     <div id="studentsYajra" class="collapse ">
-
-                                        <a href="{{ route('reels.index') }}"
-                                           >
-                                            الفيديوهات القصيره</a>
-
-
+                                        <a href="{{ route('reels.index') }}"> الفيديوهات القصيره</a>
                                     </div>
                                 </div>
                                 <div class="col-2">
