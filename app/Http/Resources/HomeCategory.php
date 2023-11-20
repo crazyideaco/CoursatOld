@@ -29,6 +29,7 @@ class HomeCategory extends JsonResource
 
         if($this->id !== 0){
             if (auth()->user()->category_id == 1) {
+                
                 $centers = auth()->user()->stdcenters;
                 $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
 
