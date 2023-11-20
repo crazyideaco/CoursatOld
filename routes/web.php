@@ -1,8 +1,10 @@
  <?php
 
-    use App\Lesson;
+use Dashboard\CampaignController;
+use App\Lesson;
     use App\VideosCollege;
     use Illuminate\Support\Facades\Route;
+    use Dashboard\PaymentWayController;
 
 
     // Route::get('/cache', function() {
@@ -37,12 +39,15 @@
   })->name('dashlogin')->middleware("guest");*/
     Route::post('startlogin', 'LoginController@startlogin')->name('startlogin');
 
+// campaign resource route
 
     //tags
-
     Route::resource("tags", 'TagController');
     //Route::group(['middleware' => ['auth','isAdmin']],function(){
-    Route::group(['middleware' => ['auth']], function () {
+        Route::group(['middleware' => ['auth']], function () {
+            // route for paymentways----------------------
+            Route::resource('paymentways', PaymentWayController::class);
+           //-------------------------------------------
         Route::get('main_page_basic', 'MainPageController@main_page_basic')->name('main_page_basic');
         Route::get('main', 'MainPageController@main')->name('main');
 

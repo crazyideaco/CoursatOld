@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\Student\studentController;
+use Dashboard\CampaignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,15 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource("campaigns",CampaignController::class);
 
 Route::group(['namespace' => 'api'], function () {
 
 
     Route::get('app_status', 'AuthController@app_status');
 
-    // route for set avatar
+    // route for setting avatar
 
     Route::post("setAvatar","Student\SetAvatarController@setAvatar")->middleware('auth:api');
+    // Route for switching centers
+    Route::post('switch', "Student\studentController@switchCenter")->middleware('auth:api');
+
     Route::post('login', 'AuthController@login')->name('login');
     Route::post('register', 'AuthController@register');
     Route::post('register_info', 'AuthController@register_info');

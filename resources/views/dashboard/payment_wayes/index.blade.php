@@ -76,7 +76,7 @@
                     <div class="row def">
 
                         <img src="images/all-products.svg">
-                        <h5>التاجات</h5>
+                        <h5>وسائل الدفع</h5>
 
 
 
@@ -86,8 +86,9 @@
                         <div class="row">
                             <div class="col-3">
                                 <button class="btn">
-                                    <a href="{{ route('tags.create') }}"> <span><i class="fas fa-plus-circle"></i></span>
-                                        اضافة تاج
+                                    <a href="{{ route('paymentways.create') }}"> <span><i
+                                                class="fas fa-plus-circle"></i></span>
+                                        اضافة وسيلة دفع
                                     </a>
                                 </button>
 
@@ -117,22 +118,27 @@
                             <table id="example" class="table col-12" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th scope="col">التاج</th>
-
+                                        <th scope="col">وسيلة الدفع</th>
+                                        <th scope="col">رقم وسيلة الدفع</th>
+                                        <th scope="col">صاحب وسيلة الدفع</th>
+                                        <th scope="col">المركز المسئول عن الدفع</th>
                                         <th scope="col" class="text-center">الاعدادات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tags as $tag)
-                                        <tr id="c{{ $tag->id }}">
-                                            <td scope="row">{{ $tag->name }}</td>
+                                    @foreach ($paymentways as $paymentway)
+                                        <tr id="c{{ $paymentway->id }}">
+                                            <td scope="row">{{ $paymentway->title ?? ''}}</td>
+                                            <td scope="row">{{ $paymentway->number ?? ''}}</td>
+                                            <td scope="row">{{ $paymentway->creator->name ?? ''}}</td>
+                                            <td scope="row">{{ $paymentway->center->name ?? '' }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('tags.edit', $tag->id) }}"> <img
+                                                <a href="{{ route('payment_ways.edit', $paymentway->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
 
                                                 <img src="{{ asset('images/trash.svg') }}" id="trash"
-                                                    onclick="deletetag('{{ $tag->id }}')" style="cursor:pointer;">
+                                                    onclick="deletetag('{{ $paymentway->id }}')" style="cursor:pointer;">
 
                                             </td>
                                         </tr>
@@ -199,14 +205,14 @@
                             '_method': 'DELETE',
                             '_token': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: `tags/${id}`,
+                        url: `paymentways/${id}`,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
                             $(`#c${id}`).remove();
                             Swal.fire(
                                 'Deleted!',
-                                'تم مسح التاج بنجاح',
+                                'تم مسح وسيلة الدفع بنجاح',
                                 'success'
                             )
                         }
