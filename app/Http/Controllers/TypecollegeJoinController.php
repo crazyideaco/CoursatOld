@@ -10,7 +10,7 @@ public function index(){
     if(auth()->user() && auth()->user()->isAdmin == 'admin'){
     $joins = TypecollegeJoin::get();
 }elseif(Auth::user() &&Auth::user()->is_student == 3){
-   
+
    $typescolleges =  TypesCollege::where('doctor_id',Auth::user()->id)
    ->orderBy('created_at','Desc')->get();
    $joins = TypecollegeJoin::whereIn("typecollege_id",$typescolleges->pluck("id")->toArray())

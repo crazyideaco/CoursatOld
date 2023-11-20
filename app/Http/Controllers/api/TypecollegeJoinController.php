@@ -14,7 +14,7 @@ class TypecollegeJoinController extends Controller{
     public function index(Request $request){
         if(auth()->user()->category_id == 1){
             $validator = Validator::make($request->all(),[
-                "typecollege_id" => "required" 
+                "typecollege_id" => "required"
             ],[
                 "typecollege_id.required" => "حقل الكورس مطلوب"
             ]);
@@ -34,10 +34,10 @@ class TypecollegeJoinController extends Controller{
         $msg = $validator->messages()->first();
         return response()->json(['status' => false,"message" => $msg]);
       }
-    
+
      } else if(auth()->user()->category_id == 2){
           $validator = Validator::make($request->all(),[
-              "typecollege_id" => "required" 
+              "typecollege_id" => "required"
           ],[
               "typecollege_id.required" => "حقل الكورس مطلوب"
           ]);
@@ -45,7 +45,7 @@ class TypecollegeJoinController extends Controller{
               $type = TypesCollege::where("id",$request->typecollege_id)->first();
               if(!$type){
                 $msg = "لا يوجد كورس بهذا الاسم";
-                return response()->json(['status' => false,"message" => $msg]); 
+                return response()->json(['status' => false,"message" => $msg]);
               }
            $join = new TypecollegeJoin;
            $join->student_id = auth()->id();
@@ -59,5 +59,5 @@ class TypecollegeJoinController extends Controller{
           }
          }
     }
-    
+
 }
