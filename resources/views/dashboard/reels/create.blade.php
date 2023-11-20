@@ -41,16 +41,16 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="input-group">
-                            <label class="form-label"> name</label>
-                            <input required type="text" name="name" placeholder="name" class="form-control">
+                            <label class="form-label"> الاسم</label>
+                            <input required type="text" name="name" placeholder="الاسم" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="input-group">
-                            <label class="form-label"> video</label>
-                            <input required type="text" name="video" placeholder="video" class="form-control">
+                            <label class="form-label"> لينك الفيديو</label>
+                            <input required type="text" name="video" placeholder="لينك الفيديو" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
 
                 <!-- main education -->
                 <div class="main_education" id="mainEducation">
-                    <h4>{{ __('messages.basic') }}</h4>
+                    <h4>اساسي</h4>
                     <div class="row">
                         {{-- <div class="col-12">
                         <div class="input-group">
@@ -157,7 +157,7 @@
 
                 <!-- university education -->
                 <div class="university_education" id="universityEducation">
-                    <h4>{{ __('messages.university education') }}</h4>
+                    <h4>جامعي</h4>
                     <div class="row">
 
                         <div class="form-group col-lg-3 col-md-6 col-12">

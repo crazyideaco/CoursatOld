@@ -14,12 +14,12 @@
 
         <div class="card-header flex-wrap py-3">
 										<div class="card-title">
-											<h3 class="card-label">QrCode History
+											<h3 class="card-label">الفيديوهات القصيره
 </h3>
 										</div>
 										<div class="card-toolbar">
 
-                                            <a class="btn first" href="{{route('reels.create')}}"> <i class="bi bi-plus"></i>add reel</a>
+                                            <a class="btn first" href="{{route('reels.create')}}"> <i class="bi bi-plus"></i>اضافه فيديو قصير</a>
 
 											<!--end::Button-->
 										</div>
