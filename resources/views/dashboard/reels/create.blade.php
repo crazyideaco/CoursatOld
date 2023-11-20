@@ -11,7 +11,7 @@
         <div class="container">
             <!-- header section -->
             <div class="main_topic">
-                <h4>add reel</h4>
+                <h4>اضافه فيديو قصير</h4>
             </div>
 
             <form class="form_topic" action="{{ route('reels.store') }}" method="post" enctype="multipart/form-data">
