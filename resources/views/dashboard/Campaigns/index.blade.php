@@ -87,7 +87,7 @@
                         <div class="row">
                             <div class="col-3">
                                 <button class="btn">
-                                    <a href="{{ route('paymentways.create') }}"> <span><i
+                                    <a href="{{ route('campaigns.create') }}"> <span><i
                                                 class="fas fa-plus-circle"></i></span>
                                         اضافة حملة
 
@@ -129,19 +129,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($paymentways as $paymentway)
-                                        <tr id="c{{ $paymentway->id }}">
+                                    @foreach ($campaigns as $campaign)
+                                        <tr id="c{{ $campaign->id }}">
                                             <td scope="row">{{ $campaign->title ?? '' }}</td>
                                             <td scope="row">{{ $campaign->start_date ?? '' }}</td>
-                                            <td scope="row">{{ $paymentway->end_date ?? '' }}</td>
-                                            <td scope="row">{{ $paymentway->created_at ?? '' }}</td>
+                                            <td scope="row">{{ $campaign->end_date ?? '' }}</td>
+                                            <td scope="row">{{ $campaign->created_at ?? '' }}</td>
                                             <td class="text-center">
                                                 {{-- link for editing --}}
-                                                <a href="{{ route('campaigns.edit', $paymentway->id) }}"> <img
+                                                <a href="{{ route('campaigns.edit', $campaign->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
                                                 {{-- link for showing  --}}
-                                                <a href="{{ route('campaigns.show', $paymentway->id) }}"> <img
+                                                <a href="{{ route('campaigns.show', $campaign->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
                                                 {{-- link for result file --}}
@@ -150,7 +150,7 @@
                                                 {{-- link for deleting  --}}
 
                                                 <img src="{{ asset('images/trash.svg') }}" id="trash"
-                                                    onclick="deletetag('{{ $paymentway->id }}')" style="cursor:pointer;">
+                                                    onclick="deletetag('{{ $campaign->id }}')" style="cursor:pointer;">
 
                                             </td>
                                         </tr>
