@@ -17,11 +17,16 @@ class AppReelController extends Controller
         try {
 
             $user = auth()->user();
-            $reels = Reel::whereHas("informations", function ($query) use ($user) {
+            $reels = Reel::whereHas("information", function ($query) use ($user) {
                 $query->when($user->category_id == 1, function ($q) use ($user) {
-                    $q->whereYearId($user->year_id);
+                    $q->where('stage_id',$user->stage_id)
+                    ->orWhere('year_id',$user->year_id)
+                    ->orWhere('subject_id',$user->subject_id);
                 })->when($user->category_id == 2, function ($q) use ($user) {
-                    $q->whereDivisionId($user->division_id);
+                    $q->where('university_id',$user->university_id)
+                    ->orWhere('college_id',$user->college_id)
+                    ->orWhere('division_id',$user->division_id)
+                    ->orWhere('section_id',$user->section_id);
                 });
             })->get();
 
