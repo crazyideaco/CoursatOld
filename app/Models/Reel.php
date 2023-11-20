@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Reel extends Model
@@ -24,6 +25,11 @@ class Reel extends Model
     public function informations()
     {
         return $this->hasMany(ReelInformation::class);
+    }
+
+    public function information(): HasOne
+    {
+        return $this->hasOne(ReelInformation::class, 'reel_id');
     }
 
     protected $appends = ['date_format'];
