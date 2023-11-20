@@ -16,7 +16,7 @@ class paymentwayResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-
+            "id"=>$this->id,
             'title'=>$this->name,
             'number'=>$this->number,
             'creator_name' => $this->creator->name,

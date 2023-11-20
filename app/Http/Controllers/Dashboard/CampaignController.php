@@ -56,6 +56,7 @@ class CampaignController extends Controller
         $campain->start_date = $request->start_date;
         $campain->end_date = $request->end_date;
         $campain->description = $request->description;
+        $campain->category_id = $request->category_id;
         $campain->save();
         $campain->attach($request->platform);
 
@@ -104,6 +105,7 @@ class CampaignController extends Controller
         $campain->start_date = $request->start_date;
         $campain->end_date = $request->end_date;
         $campain->description = $request->description;
+        $campain->category_id = $request->category_id;
         $campain->save();
         $campain->sync($request->platform);
 

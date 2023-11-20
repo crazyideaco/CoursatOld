@@ -28,7 +28,11 @@ class StoreCampaignrequest extends FormRequest
             "start_date"=>"required|date",
             "end_date"=>"required|date",
             "platform"=>"required",
-            "target"=>"required|numeric"
+            "category_id"=>"required|numeric",
+            "college_id"=>"nullable|integer",
+            "university_id"=>"nullable|integer",
+            "year_id"=>"nullable|integer",
+            "stage_id"=>"nullable|integer",
         ];
     }
 }
