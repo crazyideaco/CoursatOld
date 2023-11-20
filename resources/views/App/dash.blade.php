@@ -959,6 +959,26 @@
                                             src="{{ asset('images/arrow.svg') }}" id="arr"></a>
                                 </div>
                             </div>
+                            <div class="row sub-side">
+                                <div class="col-2">
+                                    <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
+                                </div>
+                                <div class="col-6">
+                                    <a href="#studentsYajra" data-toggle="collapse">الفيديوهات القصيره</a>
+                                    <div id="studentsYajra" class="collapse ">
+
+                                        <a href="{{ route('reels.index') }}"
+                                           >
+                                            الفيديوهات القصيره</a>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <a href="#studentsYajra" data-toggle="collapse"><img
+                                            src="{{ asset('images/arrow.svg') }}" id="arr"></a>
+                                </div>
+                            </div>
                         @endif
 
                         <div class="row log text-center">
