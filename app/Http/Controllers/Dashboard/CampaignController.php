@@ -6,6 +6,7 @@ use App\College;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCampaignrequest;
 use App\Models\Campaign;
+use App\Models\Platform;
 use App\Stage;
 use App\Subject;
 use App\University;
@@ -34,15 +35,11 @@ class CampaignController extends Controller
      */
     public function create()
     {
-
         $stages = Stage::get();
-        // $years = Year::get();
-        // $subjects = Subject::get();
-
-        // $colleges = College::get();
+        $platform = Platform::get();
         $universities = University::get();
-        // dd($stages);
-        return view("dashboard.Campaigns.create", compact("stages", "universities"));
+
+        return view("dashboard.Campaigns.create", compact("stages", "universities","platform"));
 
     }
 
@@ -59,8 +56,8 @@ class CampaignController extends Controller
         $campain->start_date = $request->start_date;
         $campain->end_date = $request->end_date;
         $campain->description = $request->description;
-        $campain->platform = $request->platform;
         $campain->save();
+        $campain->attach($request->platform);
 
         return redirect(route("campaigns.index"));
 
@@ -75,7 +72,7 @@ class CampaignController extends Controller
     public function show($id)
     {
         $campain =  Campaign::where("id", $id)->get();
-        return view("", $campain);
+        return view("dashboard.Campaigns.show", $campain);
     }
 
     /**
@@ -88,9 +85,6 @@ class CampaignController extends Controller
     {
         $campain =  Campaign::where("id", $id)->get();
         $stages = Stage::get();
-        // $years = Year::get();
-        // $subjects = Subject::get();
-        // $colleges = College::get();
         $universities = University::get();
         return view("dashboard.Campaigns.edit", compact("stages", "universities", "campaign"));
 
@@ -110,8 +104,9 @@ class CampaignController extends Controller
         $campain->start_date = $request->start_date;
         $campain->end_date = $request->end_date;
         $campain->description = $request->description;
-        $campain->platform = $request->platform;
         $campain->save();
+        $campain->sync($request->platform);
+
         return redirect(route("campaigns.index"));
     }
 
