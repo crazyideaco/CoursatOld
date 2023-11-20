@@ -122,7 +122,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>سنه الماده</label>
-                            <select class="form-control selectpicker" name="year_id" required id="year"
+                            <select class="form-control selectpicker" name="year_id"  id="year"
                                 onchange="getyear_subjects(this)" title="اختر السنه">
 
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
@@ -134,7 +134,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>الماده </label>
-                            <select class="form-control selectpicker" name="subject_id" required id="subject"
+                            <select class="form-control selectpicker" name="subject_id"  id="subject"
                                 onchange="getSubject_teacher(this)" title="اختر الماده">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
@@ -146,7 +146,7 @@
 
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>المدرسين </label>
-                            <select class="form-control selectpicker" name="teacher_id" required id="teachers"
+                            <select class="form-control selectpicker" name="teacher_id"  id="teachers"
                                 onchange="getTeacher_types(this)" title="اختر المدرس">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
@@ -168,7 +168,7 @@
 
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم الجامعه </label>
-                            <select name="university_id" required class="form-control selectpicker" id="university"
+                            <select name="university_id"  class="form-control selectpicker" id="university"
                                 onchange="getcolleges(this)" title="اختر جامعه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
                                 @foreach ($universities as $university)
@@ -183,7 +183,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم الكليه </label>
-                            <select name="college_id" required class="form-control selectpicker" id="college"
+                            <select name="college_id"  class="form-control selectpicker" id="college"
                                 onchange="getdivision(this)" title="اختر كليه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
 
@@ -191,7 +191,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم القسم </label>
-                            <select name="division_id" required class="form-control selectpicker" id="division"
+                            <select name="division_id"  class="form-control selectpicker" id="division"
                                 onchange="getsection(this)" title="اختر قسم">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
 
@@ -199,7 +199,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>اسم الفرقه </label>
-                            <select name="section_id" required class="form-control selectpicker" id="section"
+                            <select name="section_id"  class="form-control selectpicker" id="section"
                                 onchange="getsection_subjectsCollege(this)" title="اختر فرقه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
@@ -208,7 +208,7 @@
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>الماده </label>
                             <select class="form-control selectpicker" name="subjectscollege_id" title="اختر الماده "
-                                required id="subject_college" onchange="getSubject_teacherCollege(this)">
+                                 id="subject_college" onchange="getSubject_teacherCollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
                             </select>
@@ -219,7 +219,7 @@
 
                         <div class="form-group col-lg-3 col-md-6 col-12">
                             <label>المدرسين </label>
-                            <select class="form-control selectpicker" name="doctor_id" requir title="اختر المدرس"ed
+                            <select class="form-control selectpicker" name="doctor_id"  title="اختر المدرس"ed
                                 id="teachers_college" onchange="getTeacher_typescollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
