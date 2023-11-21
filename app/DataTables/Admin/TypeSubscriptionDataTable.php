@@ -104,15 +104,15 @@ class TypeSubscriptionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ["data" => "student_name" ,"title" => 'اسم الطالب'],
-             ["data" => "student_phone" ,"title" => 'رقم الطالب'],
-             ["data" => "center_name" ,"title" => 'المنصه'],
-             ["data" => "teacher_name" ,"title" => 'المدرس'],
-             ["data" => "year_name" ,"title" => 'السنه'],
-             ["data" => "subject_name" ,"title" => 'الماده'],
-             ["data" => "course_name" ,"title" => 'الكورس'],
-             ["data" => "created_at" ,"title" => 'تاريخ الانضمام'],
-             ["data" => "admin_name" ,"title" => 'الادمن'],
+            ["data" => "student_name" ,"title" => 'اسم الطالب','exportable'=>false,'orderable'=>false],
+             ["data" => "student_phone" ,"title" => 'رقم الطالب','exportable'=>false,'orderable'=>false],
+             ["data" => "center_name" ,"title" => 'المنصه','exportable'=>false,'orderable'=>false],
+             ["data" => "teacher_name" ,"title" => 'المدرس','exportable'=>false,'orderable'=>false],
+             ["data" => "year_name" ,"title" => 'السنه','exportable'=>false,'orderable'=>false],
+             ["data" => "subject_name" ,"title" => 'الماده','exportable'=>false,'orderable'=>false],
+             ["data" => "course_name" ,"title" => 'الكورس','exportable'=>false,'orderable'=>false],
+             ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
+             ["data" => "admin_name" ,"title" => 'الادمن','exportable'=>false,'orderable'=>false],
 
              ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
            ];
