@@ -29,6 +29,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'phone' => $this->phone,
+            'image' =>  $this->image ? asset('uploads/'.$this->image) : '' ,
             'api_token' => $this->api_token,
             'info_compelete' => $this->info_compelete,
             'city' => ($this->city) ? $this->city['city'] : null,
