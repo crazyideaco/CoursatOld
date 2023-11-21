@@ -44,10 +44,16 @@ class TypeCollegeSubscriptionDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    // ->dom('Bfrtip')
-                    ->lengthMenu([[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]]);
+        ->columns($this->getColumns())
+        ->minifiedAjax()
+        ->parameters([
+            // 'dom' => 'Blfrtip',
+            'order' => [0, 'desc'],
+            'lengthMenu' => [
+                [10,25,50,-1],[10,25,50,'all record']
+            ],
+       'buttons'      => ['export'],
+   ]);
     }
 
     /**

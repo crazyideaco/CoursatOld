@@ -3,6 +3,8 @@
 namespace App\DataTables\Admin;
 
 use App\Student_Type;
+use App\TypeJoin;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -21,19 +23,57 @@ class TypeSubscriptionDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', $this->view . 'action');
-    }
+        ->eloquent($query)
 
+        ->addColumn('action', 'dashboard.type_subscribtions.action')
+
+        ->editColumn("student_name",function($query){
+            return $query->student->name ?? "";
+        })
+        ->editColumn("student_phone",function($query){
+            return $query->student->phone ?? "" ?? "";
+        })
+        ->editColumn("center_name",function($query){
+            return $query->type ? ($query->type->center->name ?? "المنصه العامه") : "";
+        })
+        ->editColumn("teacher_name",function($query){
+            return $query->type ? ($query->type->user->name ?? "المنصه العامه") : "";
+        })
+        ->editColumn("year_name",function($query){
+            return $query->type ? ($query->type->year->year_ar ?? " ") : "";
+        })
+        ->editColumn("subject_name",function($query){
+            return $query->type ? ($query->type->subject->name_ar ?? " ") : "";
+        })
+        ->editColumn("course_name",function($query){
+            return $query->type->name_ar ?? "";
+        })
+        ->editColumn('created_at', function ($row) {
+            if ($row->created_at != null) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('Y-m-d');
+            } else {
+                return 'no date';
+            }
+        })
+        ->editColumn("admin_name",function($query){
+            return $query->user->name ?? "";
+        })
+
+
+        ->rawColumns([
+
+            'action',
+        ]);
+    }
     /**
      * Get query source of dataTable.
      *
      * @param \App\Models\Admin/TypeSubscriptionDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Student_Type $model)
+    public function query(TypeJoin $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy("id", "desc");
     }
 
     /**
@@ -44,12 +84,16 @@ class TypeSubscriptionDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->lengthMenu([[10, 25, 50, 100, 200], [10, 25, 50, 100, 200]]);
+        ->columns($this->getColumns())
+        ->minifiedAjax()
+        ->parameters([
+            // 'dom' => 'Blfrtip',
+            'order' => [0, 'desc'],
+            'lengthMenu' => [
+                [10,25,50,-1],[10,25,50,'all record']
+            ],
+       'buttons'      => ['export'],
+   ]);
     }
 
     /**
@@ -60,15 +104,18 @@ class TypeSubscriptionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-        ];
+            ["data" => "student_name" ,"title" => 'اسم الطالب'],
+             ["data" => "student_phone" ,"title" => 'رقم الطالب'],
+             ["data" => "center_name" ,"title" => 'المنصه'],
+             ["data" => "teacher_name" ,"title" => 'المدرس'],
+             ["data" => "year_name" ,"title" => 'السنه'],
+             ["data" => "subject_name" ,"title" => 'الماده'],
+             ["data" => "course_name" ,"title" => 'الكورس'],
+             ["data" => "created_at" ,"title" => 'تاريخ الانضمام'],
+             ["data" => "admin_name" ,"title" => 'الادمن'],
+
+             ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+           ];
     }
 
     /**
