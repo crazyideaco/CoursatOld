@@ -57,4 +57,6 @@ return [
   'delete' => 'حذف',
   "typecollege_joins" => "طلبات الانضمام الجامعى",
   "type_joins" => "طلبات الانضمام الاساسى",
+  "university education" => "جامعي",
+  "basic" => "اساسي",
 ];
