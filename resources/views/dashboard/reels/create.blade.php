@@ -152,17 +152,9 @@
                 <!-- main education -->
 <script>
     let radioOne = document.getElementById("radio1");
-    let radioTwo = document.getElementById("radio2");
     let divOne = document.getElementById("mainEducation");
-    let divTwo = document.getElementById("universityEducation");
-    radioOne.onclick = function(){
-        divOne.style.dispaly = "block";
-        divTwo.style.dispaly = "none";
-
-    }
-    radioTwo.onclick = function(){
-        divTwo.style.dispaly = "block";
-        divOne.style.dispaly = "none";
+    radioOne.onchange = function (){
+        divOne.style.display = "block";
     }
 
 
