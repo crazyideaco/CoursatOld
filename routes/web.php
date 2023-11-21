@@ -671,6 +671,7 @@
 
     Route::resource("reels", 'ReelController');
     Route::resource("type_subscribtions", 'TypeSubscriptionController');
+    Route::resource("typecollege_subscribtions", 'TypeCollegeSubscriptionController');
 
 
 

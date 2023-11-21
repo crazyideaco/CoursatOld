@@ -3,6 +3,8 @@
 namespace App\DataTables\Admin;
 
 use App\Student_Typecollege;
+use App\TypecollegeJoin;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -21,8 +23,47 @@ class TypeCollegeSubscriptionDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', $this->view . 'action');
+        ->eloquent($query)
+
+        ->addColumn('action', 'dashboard.type_subscribtions.action')
+
+        ->editColumn("student_name",function($query){
+            return $query->student->name ?? "";
+        })
+        ->editColumn("student_phone",function($query){
+            return $query->student->phone ?? "" ?? "";
+        })
+        ->editColumn("center_name",function($query){
+            return $query->typescollege ? ($query->typescollege->center->name ?? "المنصه العامه") : "";
+        })
+        ->editColumn("teacher_name",function($query){
+            return $query->typescollege ? ($query->typescollege->doctor->name ?? "المنصه العامه") : "";
+        })
+        ->editColumn("year_name",function($query){
+            return $query->typescollege ? ($query->typescollege->division->year_ar ?? " ") : "";
+        })
+        ->editColumn("subject_name",function($query){
+            return $query->typescollege ? ($query->typescollege->subjectscollege->name_ar ?? " ") : "";
+        })
+        ->editColumn("course_name",function($query){
+            return $query->typescollege->name_ar ?? "";
+        })
+        ->editColumn('created_at', function ($row) {
+            if ($row->created_at != null) {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('Y-m-d');
+            } else {
+                return 'no date';
+            }
+        })
+        ->editColumn("admin_name",function($query){
+            return $query->user->name ?? "";
+        })
+
+
+        ->rawColumns([
+
+            'action',
+        ]);
     }
 
     /**
@@ -31,9 +72,9 @@ class TypeCollegeSubscriptionDataTable extends DataTable
      * @param \App\Models\Admin/TypeCollegeSubscriptionDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Student_Typecollege $model)
+    public function query(TypecollegeJoin $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy("id", "desc");
     }
 
     /**
@@ -64,15 +105,18 @@ class TypeCollegeSubscriptionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-        ];
+            ["data" => "student_name" ,"title" => 'اسم الطالب','exportable'=>false,'orderable'=>false],
+             ["data" => "student_phone" ,"title" => 'رقم الطالب','exportable'=>false,'orderable'=>false],
+             ["data" => "center_name" ,"title" => 'المنصه','exportable'=>false,'orderable'=>false],
+             ["data" => "teacher_name" ,"title" => 'المدرس','exportable'=>false,'orderable'=>false],
+             ["data" => "year_name" ,"title" => 'السنه','exportable'=>false,'orderable'=>false],
+             ["data" => "subject_name" ,"title" => 'الماده','exportable'=>false,'orderable'=>false],
+             ["data" => "course_name" ,"title" => 'الكورس','exportable'=>false,'orderable'=>false],
+             ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
+             ["data" => "admin_name" ,"title" => 'الادمن','exportable'=>false,'orderable'=>false],
+
+             ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+           ];
     }
 
     /**
