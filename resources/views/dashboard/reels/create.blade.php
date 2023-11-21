@@ -29,6 +29,12 @@
     padding: 0.5rem;
     border-radius: 15px;
 }
+.sec-tow {
+    margin-top: 10px;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
 </style>
 
 @extends('App.dash')
@@ -79,6 +85,7 @@
                 </div>
               </div>
 
+                <div class="sec-tow"></div>
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group">
