@@ -55,6 +55,10 @@
         integrity="sha512-z13ghwce5srTmilJxE0+xd80zU6gJKJricLCq084xXduZULD41qpjRE9QpWmbRyJq6kZ2yAaWyyPAgdxwxFEAg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        a.nas {
+    color: #aa6e38 !important;
+    font-size: 0.9rem !important;
+}
         #loading {
             width: 100%;
             height: 100%;
@@ -933,8 +937,8 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#studentsYajra" data-toggle="collapse"> كل الطلاب </a>
-                                    <div id="studentsYajra"
+                                    <a href="#studentsYajra-1" data-toggle="collapse"> كل الطلاب </a>
+                                    <div id="studentsYajra-1"
                                         class="collapse @if (request()->is('allstudents')) show @endif">
 
                                         <a href="{{ route('allstudents') }}"
@@ -942,7 +946,7 @@
                                             عرض الطلاب</a>
 
                                         <a href="{{ route('allstudents') }}"
-                                            class="@if (request()->is('allstudents')) active @endif">
+                                            class="@if (request()->is('allstudents')) active @endif nas">
                                             عرض الاشتراكات</a>
 
                                         {{-- <a href="{{ route('allbasicstudents') }}"
@@ -975,9 +979,9 @@
                                      ">
 
                                         <a href="{{ route('paymentways.index') }}"
-                                            class="@if (request()->is('paymentways.index')) active @endif"> وسائل الدفع</a>
+                                            class="@if (request()->is('paymentways.index')) active @endif nas"> وسائل الدفع</a>
                                         <a href="{{ route('campaigns.index') }}"
-                                            class="@if (request()->is('campaigns.index')) active @endif">الحملات الإعلانية</a>
+                                            class="@if (request()->is('campaigns.index')) active @endif nas">الحملات الإعلانية</a>
 
                                     </div>
                                 </div>
@@ -993,9 +997,9 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#studentsYajra" data-toggle="collapse">الفيديوهات القصيره</a>
+                                    <a href="#studentsYajra" data-toggle="collapse">الفيديوهات </a>
                                     <div id="studentsYajra" class="collapse ">
-                                        <a href="{{ route('reels.index') }}"> الفيديوهات القصيره</a>
+                                        <a href="{{ route('reels.index') }} nas"> الفيديوهات القصيره</a>
                                     </div>
                                 </div>
                                 <div class="col-2">
