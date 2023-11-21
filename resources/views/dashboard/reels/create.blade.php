@@ -21,12 +21,13 @@
     text-align: center;
     padding: 1.5rem;
     border-radius: 8px;
-    margin-bottom: 0;
+    margin-bottom: -14px;
     cursor: pointer;
 }
 .one-sec {
     background-color: #ffffff;
     padding: 0.5rem;
+    border-radius: 15px;
 }
 </style>
 
