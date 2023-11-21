@@ -34,19 +34,19 @@ class TypeSubscriptionDataTable extends DataTable
             return $query->student->phone ?? "" ?? "";
         })
         ->editColumn("center_name",function($query){
-            return $query->type ? ($query->type->center->name ?? "المنصه العامه") : "";
+            return $query->type_course ? ($query->type_course->center->name ?? "المنصه العامه") : "";
         })
         ->editColumn("teacher_name",function($query){
-            return $query->type ? ($query->type->user->name ?? "المنصه العامه") : "";
+            return $query->type_course ? ($query->type_course->user->name ?? "المنصه العامه") : "";
         })
         ->editColumn("year_name",function($query){
-            return $query->type ? ($query->type->year->year_ar ?? " ") : "";
+            return $query->type_course ? ($query->type_course->year->year_ar ?? " ") : "";
         })
         ->editColumn("subject_name",function($query){
-            return $query->type ? ($query->type->subject->name_ar ?? " ") : "";
+            return $query->type_course ? ($query->type_course->subject->name_ar ?? " ") : "";
         })
         ->editColumn("course_name",function($query){
-            return $query->type->name_ar ?? "";
+            return $query->type_course->name_ar ?? "";
         })
         ->editColumn('created_at', function ($row) {
             if ($row->created_at != null) {

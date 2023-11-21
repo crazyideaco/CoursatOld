@@ -14,7 +14,7 @@ class Student_Type extends Model
     public function student(){
         return $this->belongsTo(User::class, 'student_id');
     }
-    public function type()
+    public function type_course()
     {
         return $this->belongsTo(Type::class, 'type_id');
     }
