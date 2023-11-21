@@ -59,15 +59,6 @@ class TypeCollegeSubscriptionDataTable extends DataTable
             return $query->user->name ?? "";
         })
 
-        ->editColumn("type",function($query){
-            $type = Student_Typecollege::where('student_id',$query->student_id)->where('typecollege_id',$query->typecollege_id)->first();
-            if($query->status == 0){
-                return 'طلب انضمام';
-            }
-            elseif($type){
-                return 'شراء كورس';
-            }
-        })
 
         ->rawColumns([
 

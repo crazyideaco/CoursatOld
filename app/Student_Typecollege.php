@@ -14,6 +14,11 @@ class Student_Typecollege extends Model
         return $this->belongsTo(User::class, 'student_id');
     }
 
+    public function typescollege()
+    {
+        return $this->belongsTo(TypesCollege::class, 'typecollege_id');
+    }
+    
     protected $appends = ['type_format'];
 
     public function getTypeFormatAttribute()
