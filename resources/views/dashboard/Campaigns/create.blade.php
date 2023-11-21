@@ -235,7 +235,7 @@
 
 
                                 <!-- university education -->
-                                <div class="university_education" id="universityEducation">
+                                <div class="university_education" id="universityEducation" style="display: none">
                                     <h4>{{ __('messages.university education') }}</h4>
                                     <div class="row">
 
