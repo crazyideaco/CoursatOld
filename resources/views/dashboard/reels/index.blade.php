@@ -15,7 +15,7 @@
     background: unset !important;
 }
 div#dataTableBuilder_wrapper {
-    border: 1px solid #0000000f;
+    border: 1px solid #0000000f !important;
     font-family: 'med';
 }
 button {
@@ -26,6 +26,7 @@ button {
     border-radius: 10px !important;
     padding: 0.5rem 1rem !important;
     margin-right: 27px !important;
+    cursor:  !important;
 }
 div#dataTableBuilder_length {
     margin-top: 19px;
