@@ -35,6 +35,12 @@
     padding: 0.5rem;
     border-radius: 15px;
 }
+.sec-there {
+    margin-top: 10px;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
 </style>
 
 @extends('App.dash')
@@ -111,6 +117,7 @@
                 <!-- start input -->
 
 
+               <div class="sec-there">
                 <div class="row">
                     <div class="col-12">
                         <div class="input-group">
@@ -134,6 +141,7 @@
                         </div>
                     </div>
                 </div>
+               </div>
                 <!-- finish input -->
 
                 <!-- main education -->
