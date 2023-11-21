@@ -119,19 +119,24 @@
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
                                 </div>
+                            </div>
 
 
                                 {{-- input for campaign platform type --}}
-                                <h5> نوع المنصه </h5>
+                                <div class="row">
+                                    <div class="hed">
+                                        <h5> نوع المنصه </h5>
 
-                                <div class="form-group nasra">
-                                    @foreach ($platforms as $platform)
-                                        <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
-                                        <label>{{ $platform->title }}</label>
-                                    @endforeach
-                                    @error('center_id')
-                                        <div style="color:red;">{{ $message }} </div>
-                                    @enderror
+                                       </div>
+                                    <div class="form-group nasra">
+                                        @foreach ($platforms as $platform)
+                                            <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
+                                            <label>{{ $platform->title }}</label>
+                                        @endforeach
+                                        @error('center_id')
+                                            <div style="color:red;">{{ $message }} </div>
+                                        @enderror
+                                    </div>
                                 </div>
                                 {{-- begin of filter --}}
 
