@@ -933,17 +933,17 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#studentsYajra" data-toggle="collapse">الطلاب</a>
+                                    <a href="#studentsYajra" data-toggle="collapse"> كل الطلاب </a>
                                     <div id="studentsYajra"
                                         class="collapse @if (request()->is('allstudents')) show @endif">
 
                                         <a href="{{ route('allstudents') }}"
-                                            class="@if (request()->is('allstudents')) active @endif">
-                                            الطلاب</a>
+                                            class="@if (request()->is('allstudents')) active @endif nas">
+                                            عرض الطلاب</a>
 
                                         <a href="{{ route('allstudents') }}"
                                             class="@if (request()->is('allstudents')) active @endif">
-                                            الاشتراكات</a>
+                                            عرض الاشتراكات</a>
 
                                         {{-- <a href="{{ route('allbasicstudents') }}"
                                             class="@if (request()->is('allbasicstudents')) active @endif">
