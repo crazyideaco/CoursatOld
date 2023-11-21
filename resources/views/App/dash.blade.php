@@ -937,8 +937,8 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#studentsYajra-1" data-toggle="collapse"> كل الطلاب </a>
-                                    <div id="studentsYajra-1"
+                                    <a href="#studentsYajra" data-toggle="collapse"> كل الطلاب </a>
+                                    <div id="studentsYajra"
                                         class="collapse @if (request()->is('allstudents')) show @endif">
 
                                         <a href="{{ route('allstudents') }}"
