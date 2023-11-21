@@ -167,7 +167,7 @@
 
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="category_id"
-                                                    id="radio2" value="2">
+                                                    id="radioUniversityEducation" value="2">
                                                 <label class="form-check-label" for="radio2">جامعي</label>
                                             </div>
 
@@ -264,6 +264,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <script>
+                                    let radioUniversityEducation = document.getElementById("radioUniversityEducation");
+                                    let divuniversityEducation = document.getElementById("universityEducation");
+                                    radioUniversityEducation.onclick = function(){
+                                        divuniversityEducation.style.display = "block";
+                                        divMainEducation.style.display = "none";
+                                    }
+                                </script>
                                 {{-- end of filter  --}}
 
 
