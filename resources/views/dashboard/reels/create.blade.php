@@ -158,9 +158,7 @@
     radio.onclick = function (){
         div.style.display = "block";
     }
-    radioOne.onclick = function (){
-                        divTwo.style.display = "none";
-                    }
+
 </script>
 
 
@@ -240,9 +238,7 @@
                     radioOne.onclick = function (){
                         divTwo.style.display = "block";
                     }
-                    radio.onclick = function (){
-        div.style.display = "none";
-    }
+                   
                 </script>
                 <!-- finish input -->
                 <div class="row">
