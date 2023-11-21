@@ -40,6 +40,20 @@
     background-color: #ffffff;
     padding: 0.5rem;
     border-radius: 15px;
+    margin-bottom: 10px;
+}
+div#mainEducation {
+    margin-top: 10px;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 15px;
+
+}
+div#universityEducation {
+    margin-top: 10px;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 15px;
 }
 </style>
 
