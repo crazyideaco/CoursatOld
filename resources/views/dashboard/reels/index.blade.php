@@ -15,7 +15,6 @@
     background: unset !important;
 }
 div#dataTableBuilder_wrapper {
-    border: 1px solid #0000000f !important;
     font-family: 'med';
 }
 button {
