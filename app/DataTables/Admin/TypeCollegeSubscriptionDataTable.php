@@ -37,10 +37,10 @@ class TypeCollegeSubscriptionDataTable extends DataTable
             return $query->typescollege ? ($query->typescollege->center->name ?? "المنصه العامه") : "";
         })
         ->editColumn("teacher_name",function($query){
-            return $query->typescollege ? ($query->typescollege->doctor->name ?? "المنصه العامه") : "";
+            return $query->typescollege ? ($query->typescollege->doctor->name ?? "") : "";
         })
         ->editColumn("year_name",function($query){
-            return $query->typescollege ? ($query->typescollege->division->year_ar ?? " ") : "";
+            return $query->typescollege ? ($query->typescollege->division->name_ar ?? " ") : "";
         })
         ->editColumn("subject_name",function($query){
             return $query->typescollege ? ($query->typescollege->subjectscollege->name_ar ?? " ") : "";
@@ -108,8 +108,8 @@ class TypeCollegeSubscriptionDataTable extends DataTable
             ["data" => "student_name" ,"title" => 'اسم الطالب','exportable'=>false,'orderable'=>false],
              ["data" => "student_phone" ,"title" => 'رقم الطالب','exportable'=>false,'orderable'=>false],
              ["data" => "center_name" ,"title" => 'المنصه','exportable'=>false,'orderable'=>false],
-             ["data" => "teacher_name" ,"title" => 'المدرس','exportable'=>false,'orderable'=>false],
-             ["data" => "year_name" ,"title" => 'السنه','exportable'=>false,'orderable'=>false],
+             ["data" => "teacher_name" ,"title" => 'الدكتور','exportable'=>false,'orderable'=>false],
+             ["data" => "year_name" ,"title" => 'الفرقه','exportable'=>false,'orderable'=>false],
              ["data" => "subject_name" ,"title" => 'الماده','exportable'=>false,'orderable'=>false],
              ["data" => "course_name" ,"title" => 'الكورس','exportable'=>false,'orderable'=>false],
              ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
