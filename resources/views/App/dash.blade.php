@@ -999,7 +999,7 @@
                                 <div class="col-6">
                                     <a href="#studentsYajra-1" data-toggle="collapse">الفيديوهات </a>
                                     <div id="studentsYajra-1" class="collapse ">
-                                        <a href="{{ route('reels.index') }} nas"> الفيديوهات القصيره</a>
+                                        <a href="{{ route('reels.index') }} " class="nas"> الفيديوهات القصيره</a>
                                     </div>
                                 </div>
                                 <div class="col-2">
