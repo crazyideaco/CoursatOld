@@ -1,3 +1,12 @@
+<style>
+    label {
+        font-family: "reg"
+    }
+    button.btn.first {
+        font-family: "reg"
+    }
+</style>
+
 @extends('App.dash')
 @section('style')
     <style>
