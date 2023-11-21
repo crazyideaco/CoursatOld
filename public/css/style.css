@@ -1897,7 +1897,9 @@ div#example_filter {
 .loc-add label input[type="checkbox"] {
     margin: 0 5px;
 }
-
+.main_topic h4 {
+    font-family: "reg";
+}
 /* QENO Edite */
 
 
