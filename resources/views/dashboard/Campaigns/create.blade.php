@@ -161,13 +161,13 @@
 
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="category_id"
-                                                    id="radio1" onchange="toggleRow()" value="1">
+                                                    id="radioMainEducation" value="1">
                                                 <label class="form-check-label" for="radio1">اساسي</label>
                                             </div>
 
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="category_id"
-                                                    id="radio2" onchange="toggleRow()" value="2">
+                                                    id="radio2" value="2">
                                                 <label class="form-check-label" for="radio2">جامعي</label>
                                             </div>
 
@@ -182,7 +182,7 @@
                                 <!-- finish input -->
 
                                 <!-- main education -->
-                                <div class="main_education" id="mainEducation">
+                                <div class="main_education" id="mainEducation" style="display: none">
                                     <h4>{{ __('messages.basic') }}</h4>
                                     <div class="row">
                                         <div class="form-group col-lg-3 col-md-6 col-12">
@@ -223,6 +223,14 @@
                                     </div>
                                 </div>
                                 <!-- main education -->
+                                <script>
+                                    let radioMainEducation = document.getElementById("radioMainEducation");
+                                    let divMainEducation= document.getElementById("mainEducation");
+                                    radioMainEducation.onclick = function(){
+                                        divMainEducation.style.display = "block";
+                                        divuniversityEducation.style.display = "none";
+                                    }
+                                </script>
 
 
 
