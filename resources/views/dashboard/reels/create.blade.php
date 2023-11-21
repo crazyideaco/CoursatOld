@@ -157,14 +157,6 @@
         divOne.style.display = "block";
     }
 </script>
-<script>
-    let radioTwo = document.getElementById("radio2");
-    let divTwo = document.getElementById("universityEducation");
-    radioTwo.onclick = function(){
-        divTwo.style.display = "block";
-    }
-</script>
-
 
 
 
@@ -239,6 +231,14 @@
                         </div>
                     </div>
                 </div>
+                <script>
+                    let radioTwo = document.getElementById("radio2");
+                    let divTwo = document.getElementById("universityEducation");
+                    radioTwo.onclick = function(){
+                        divTwo.style.display = "block";
+                    }
+                </script>
+
 
                 <!-- finish input -->
                 <div class="row">
