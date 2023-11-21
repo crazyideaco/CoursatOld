@@ -61,6 +61,8 @@ class QrController extends Controller
 
                 if ($type) {
                         $user->stutypes()->attach($type->id);
+                    $user->stutypes()->updateExistingPivot($type->id, ['type' => 1]);
+
                         $Qrcode->update(['status' => 2]);
                         return response()->json([
                             'status' => true,
@@ -83,6 +85,8 @@ class QrController extends Controller
                 if ($type) {
 
                         $user->stutypescollege()->attach($type->id);
+                    $user->stutypescollege()->updateExistingPivot($type->id, ['type' => 1]);
+
                         $Qrcode->update(['status' => 2]);
                         return response()->json([
                             'status' => true,

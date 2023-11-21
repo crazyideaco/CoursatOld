@@ -34,6 +34,8 @@ class TypeJoinController extends Controller
         $type = new Student_Type;
         $type->student_id = $join->student_id;
         $type->type_id  = $join->type_id;
+        $type->type  = 2 ;
+
         $type->save();
         $join->user_id  = auth()->id();
         $join->status = 1;
