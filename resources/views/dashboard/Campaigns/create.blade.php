@@ -294,16 +294,17 @@
         </div>
         <!--end setting-->
         <!--start foter-->
-        <div class="foter">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h5>Made With <img src="{{ asset('images/red.svg') }}"> By Crazy Idea </h5>
-                    <p>Think Out Of The Box</p>
-                </div>
-            </div>
-        </div>
+
         <!--end foter-->
     </div>
+    </div>
+    <div class="foter">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h5>Made With <img src="{{ asset('images/red.svg') }}"> By Crazy Idea </h5>
+                <p>Think Out Of The Box</p>
+            </div>
+        </div>
     </div>
     <!--end page-body-->
 @endsection
