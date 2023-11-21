@@ -155,6 +155,7 @@
     let divOne = document.getElementById("mainEducation");
     radioOne.onclick = function(){
         divOne.style.display = "block";
+        divTwo.style.display = "none";
     }
 </script>
 
@@ -236,6 +237,7 @@
                     let divTwo = document.getElementById("universityEducation");
                     radioTwo.onclick = function(){
                         divTwo.style.display = "block";
+                        divOne.style.display = "none";
                     }
                 </script>
 
