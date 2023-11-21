@@ -37,15 +37,21 @@
                 <!-- start input -->
                 <div class="row">
                     <div class="col-8 mx-auto">
-                        <div class="uploadOuter">
-                            <span class="dragBox">
-
-                                Darg and Drop image here
-                                <input type="file" name="image" onChange="dragNdrop(event)" ondragover="drag()"
-                                    ondrop="drop()" id="uploadFile" />
-                            </span>
-                        </div>
-
+                        <div class="form-group upload_file">
+                            <label for="imageCover" class="upload_file_label">
+                              <i class="fa-regular fa-image"></i>
+                              <p>اسحب صورة معبرة واسقطها هنا</p>
+                              <span id="fileNameImage">او اضغط هنا</span>
+                            </label>
+                            <input
+                              type="file"
+                              name=""
+                              id="imageCover"
+                              class="form-control"
+                              accept="image/*"
+                              hidden
+                            />
+                          </div>
                         <div id="preview">
                             @error('image')
                                 <span class="invalid-feedback">
