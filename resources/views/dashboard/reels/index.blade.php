@@ -26,7 +26,7 @@ button {
     border-radius: 10px !important;
     padding: 0.5rem 1rem !important;
     margin-right: 27px !important;
-    cursor:  !important;
+    cursor: pointer !important;
 }
 div#dataTableBuilder_length {
     margin-top: 19px;
