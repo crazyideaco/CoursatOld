@@ -24,6 +24,9 @@
     margin-bottom: 0;
     cursor: pointer;
 }
+.one-sec {
+    background-color: #f5f8fa
+}
 </style>
 
 @extends('App.dash')
@@ -45,12 +48,13 @@
             <form class="form_topic" action="{{ route('reels.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <!-- start input -->
+              <div class="one-sec">
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group upload_file">
                             <label for="imageCover" class="upload_file_label">
 
-                              <p>اسحب صورة معبرة واسقطها هنا</p>
+                              <p>اسحب فديو معبر واسقطها هنا</p>
                               <span id="fileNameImage">او اضغط هنا</span>
                             </label>
                             <input
@@ -71,6 +75,7 @@
                     </div>
 
                 </div>
+              </div>
 
                 <div class="row">
                     <div class="col-6">
