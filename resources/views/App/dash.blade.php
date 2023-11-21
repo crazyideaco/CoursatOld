@@ -1003,7 +1003,7 @@
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <a href="#studentsYajra" data-toggle="collapse"><img
+                                    <a href="#studentsYajra-1" data-toggle="collapse"><img
                                             src="{{ asset('images/arrow.svg') }}" id="arr"></a>
                                 </div>
                             </div>
