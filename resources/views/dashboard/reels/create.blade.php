@@ -235,7 +235,7 @@
                     let radioOne = document.getElementById("radio2");
                     let divTwo = document.getElementById("mainEducation-1");
                     radioOne.onclick = function (){
-                        div.style.display = "block";
+                        divTwo.style.display = "block";
                     }
                 </script>
                 <!-- finish input -->
