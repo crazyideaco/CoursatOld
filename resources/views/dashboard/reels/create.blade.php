@@ -155,12 +155,12 @@
     let div = document.getElementById("mainEducation");
     let radioEducation = document.getElementById("radio2");
     let divTwo = document.getElementById("universityEducation");
-    radio.onchange = function (){
+    radioMainEducation.onchange = function (){
         div.style.display = "block";
         divTwo.style.display = "none";
     }
 
-    radioOne.onchange = function (){
+    radioEducation.onchange = function (){
         divTwo.style.display = "block";
         div.style.display = "none";
     }
