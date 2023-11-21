@@ -408,7 +408,7 @@ class AuthController extends Controller
             return response()->json(['status' => false, 'message' => $validator->messages()->first()]);
         }
     }
-    
+
     public function home_categories()
     {
         // $user_ids = auth()->user()->centerstudents->pluck("id");
@@ -636,7 +636,7 @@ class AuthController extends Controller
         ]);
     }
     public function buycourse(Request $request)
-    {   
+    {
         $user = auth()->user();
         if (auth()->user()->category_id == 1) {
             $points = $user->points;
@@ -650,6 +650,8 @@ class AuthController extends Controller
                     //   $stutype->type_id = $type->id;
                     //   $stutype->save();
                     $user->stutypes()->attach($type->id);
+                    $user->stutypes()->updateExistingPivot($type->id, ['type' => 1]);
+
                     $user->points = $user->points - $typepoints;
                     $user->save();
                     return response()->json([
@@ -675,6 +677,8 @@ class AuthController extends Controller
                 $typepoints = $type->points;
                 if ($points >= $typepoints) {
                     $user->stutypescollege()->attach($type->id);
+                    $user->stutypescollege()->updateExistingPivot($type->id, ['type' => 1]);
+
                     //   $stutype = new Student_Typecollege;
                     //   $stutype->student_id = auth()->user()->id;
                     //   $stutype->typecollege_id = $type->id;

@@ -27,6 +27,7 @@ public function index(){
     $type = new Student_Typecollege;
     $type->student_id = $join->student_id;
     $type->typecollege_id  = $join->typecollege_id ;
+    $type->type  = 2 ;
     $type->save();
     $join->user_id  = auth()->id();
     $join->status =1;
