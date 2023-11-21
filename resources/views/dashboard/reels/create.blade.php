@@ -55,6 +55,12 @@ div#universityEducation {
     padding: 0.5rem;
     border-radius: 15px;
 }
+button.btn.first.save {
+    margin-top: 10px;
+    background-color: #243e56;
+    color: white;
+    width: 40%;
+}
 </style>
 
 @extends('App.dash')
