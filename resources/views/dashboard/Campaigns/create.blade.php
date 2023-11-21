@@ -1,11 +1,11 @@
 
 <style>
-    /* .form-group.nasra {
+    .form-group.nasra {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 35px;
-} */
+}
 </style>
 
 @extends('App.dash')
