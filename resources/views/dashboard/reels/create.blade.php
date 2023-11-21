@@ -151,19 +151,21 @@
                 </div>
                 <!-- main education -->
 <script>
-    let radioMainEducation = document.getElementById("radio1");
-    let div = document.getElementById("mainEducation");
-    let radioEducation = document.getElementById("radio2");
+    let radioOne = document.getElementById("radio1");
+    let radioTwo = document.getElementById("radio2");
+    let divOne = document.getElementById("mainEducation");
     let divTwo = document.getElementById("universityEducation");
-    radioMainEducation.onchange = function (){
-        div.style.display = "block";
-        divTwo.style.display = "none";
+    radioOne.onchange = function(){
+        divOne.style.dispaly = "block";
+        divTwo.style.dispaly = "none";
+
+    }
+    radioTwo.onchange = function(){
+        divTwo.style.dispaly = "block";
+        divOne.style.dispaly = "none";
     }
 
-    radioEducation.onchange = function (){
-        divTwo.style.display = "block";
-        div.style.display = "none";
-    }
+
 </script>
 
 
