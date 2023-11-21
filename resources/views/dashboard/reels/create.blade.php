@@ -11,6 +11,9 @@
     .main_education h4 {
         font-family: "reg"
     }
+    .university_education h4 {
+        font-family: "reg"
+    }
 </style>
 
 @extends('App.dash')
