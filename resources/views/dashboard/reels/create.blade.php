@@ -65,14 +65,12 @@
                             <label class="form-label">نوع التعليم</label>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="category_id" id="radio1"
-                                    onchange="toggleRow()" value="1">
+                                <input class="form-check-input" type="radio" name="category_id" id="radio1" value="1">
                                 <label class="form-check-label" for="radio1">اساسي</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="category_id" id="radio2"
-                                    onchange="toggleRow()" value="2">
+                                <input class="form-check-input" type="radio" name="category_id" id="radio2" value="2">
                                 <label class="form-check-label" for="radio2">جامعي</label>
                             </div>
 
@@ -153,16 +151,16 @@
                 </div>
                 <!-- main education -->
 <script>
-    let radio = document.getElementById("radio1");
+    let radioMainEducation = document.getElementById("radio1");
     let div = document.getElementById("mainEducation");
-    let radioOne = document.getElementById("radio2");
+    let radioEducation = document.getElementById("radio2");
     let divTwo = document.getElementById("universityEducation");
-    radio.onclick = function (){
+    radio.onchange = function (){
         div.style.display = "block";
         divTwo.style.display = "none";
     }
 
-    radioOne.onclick = function (){
+    radioOne.onchange = function (){
         divTwo.style.display = "block";
         div.style.display = "none";
     }
