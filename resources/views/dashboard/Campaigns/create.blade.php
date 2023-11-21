@@ -6,6 +6,9 @@
     justify-content: space-between;
     gap: 35px;
 }
+.hed h5 {
+    font-family: "reg"
+}
 </style>
 
 @extends('App.dash')
