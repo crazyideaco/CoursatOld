@@ -5,6 +5,9 @@
     button.btn.first {
         font-family: "reg"
     }
+    .main_topic h4 {
+        font-family: "reg"
+    }
 </style>
 
 @extends('App.dash')
