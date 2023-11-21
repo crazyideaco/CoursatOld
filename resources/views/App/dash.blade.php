@@ -997,8 +997,8 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#studentsYajra" data-toggle="collapse">الفيديوهات </a>
-                                    <div id="studentsYajra" class="collapse ">
+                                    <a href="#studentsYajra-1" data-toggle="collapse">الفيديوهات </a>
+                                    <div id="studentsYajra-1" class="collapse ">
                                         <a href="{{ route('reels.index') }} nas"> الفيديوهات القصيره</a>
                                     </div>
                                 </div>
