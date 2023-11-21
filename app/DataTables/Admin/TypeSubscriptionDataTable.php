@@ -61,7 +61,6 @@ class TypeSubscriptionDataTable extends DataTable
 
 
         ->editColumn("type",function($query){
-            $return = 'شراء كورس';
             $type = Student_Type::where('student_id',$query->student_id)->where('type_id',$query->type_id)->first();
             if($query->status = 0){
                  $return = 'طلب انضمام';
