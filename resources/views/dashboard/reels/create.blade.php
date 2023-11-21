@@ -87,7 +87,7 @@
                 <!-- finish input -->
 
                 <!-- main education -->
-                <div class="main_education" id="mainEducation">
+                <div class="main_education" id="mainEducation" style="display: none">
                     <h4>اساسي</h4>
                     <div class="row">
                         {{-- <div class="col-12">
@@ -152,7 +152,13 @@
                     </div>
                 </div>
                 <!-- main education -->
-
+<script>
+    let radio = document.getElementById("radio1");
+    let div = document.getElementById("mainEducation");
+    radio.onclick = function (){
+        div.style.display = "block";
+    }
+</script>
 
 
                 <!-- university education -->
