@@ -65,7 +65,7 @@ class TypeSubscriptionDataTable extends DataTable
             $type = Student_Type::where('student_id',$query->student_id)->where('type_id',$query->type_id)->first();
             if($type){
                 return $return = 'شراء كورس';
-            }elseIf($query->status = 0){
+            }elseif($query->status = 0){
                 return $return = 'طلب انضمام';
             }
         })
