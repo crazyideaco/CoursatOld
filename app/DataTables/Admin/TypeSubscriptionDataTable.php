@@ -13,7 +13,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class TypeSubscriptionDataTable extends DataTable
 {
-    protected $view = "dashboard.students.basic_subscriptions.";
+    // protected $view = "dashboard.students.basic_subscriptions.";
     /**
      * Build DataTable class.
      *
@@ -59,6 +59,10 @@ class TypeSubscriptionDataTable extends DataTable
             return $query->user->name ?? "";
         })
 
+
+        // ->editColumn("type",function($query){
+        //     if()
+        // })
 
         ->rawColumns([
 
