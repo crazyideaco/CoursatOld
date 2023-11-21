@@ -25,7 +25,8 @@
     cursor: pointer;
 }
 .one-sec {
-    background-color: #f5f8fa
+    background-color: #ffffff;
+    padding: 0.5rem;
 }
 </style>
 
