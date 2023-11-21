@@ -945,10 +945,13 @@
                                             class="@if (request()->is('allstudents')) active @endif nas">
                                             عرض الطلاب</a>
 
-                                        <a href="{{ route('allstudents') }}"
+                                        <a href="{{ route('type_subscribtions.index') }}"
                                             class="@if (request()->is('allstudents')) active @endif nas">
-                                            عرض الاشتراكات</a>
+                                            عرض الاشتراكات الاساسي</a>
 
+                                            <a href="{{ route('typecollege_subscribtions.index') }}"
+                                            class="@if (request()->is('allstudents')) active @endif nas">
+                                            عرض الاشتراكات الجامعي</a>
                                         {{-- <a href="{{ route('allbasicstudents') }}"
                                             class="@if (request()->is('allbasicstudents')) active @endif">
                                             طلاب الاساسى </a>
