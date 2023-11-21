@@ -25,7 +25,7 @@ class TypeCollegeSubscriptionDataTable extends DataTable
         return datatables()
         ->eloquent($query)
 
-        ->addColumn('action', 'dashboard.typecollege_subscribtions.action')
+        // ->addColumn('action', 'dashboard.typecollege_subscribtions.action')
 
         ->editColumn("student_name",function($query){
             return $query->student->name ?? "";
