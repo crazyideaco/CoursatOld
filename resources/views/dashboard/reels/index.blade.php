@@ -26,6 +26,11 @@ button {
     padding: 0.5rem 1rem !important;
     margin-right: 27px !important;
     cursor: pointer !important;
+    transition: 0.7s
+}
+button :hover {
+    background-color: white;
+    color: #243e56;
 }
 div#dataTableBuilder_length {
     margin-top: 19px;
