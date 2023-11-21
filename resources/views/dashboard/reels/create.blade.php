@@ -62,11 +62,12 @@
                             <label class="form-label"> الاسم</label>
                             <input required type="text" name="name" placeholder="الاسم" class="form-control">
                         </div>
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="form-label"> لينك الفيديو</label>
-                                <input required type="text" name="video" placeholder="لينك الفيديو" class="form-control">
-                            </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <label class="form-label"> لينك الفيديو</label>
+                            <input required type="text" name="video" placeholder="لينك الفيديو" class="form-control">
                         </div>
                     </div>
                 </div>
