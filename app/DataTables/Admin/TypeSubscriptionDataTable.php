@@ -60,9 +60,15 @@ class TypeSubscriptionDataTable extends DataTable
         })
 
 
-        // ->editColumn("type",function($query){
-        //     if()
-        // })
+        ->editColumn("type",function($query){
+            $return = 'شراء كورس';
+            $type = Student_Type::where('student_id',$query->student_id)->where('type_id',$query->type_id)->first();
+            if($type){
+                return $return = 'شراء كورس';
+            }elseIf($query->status = 0){
+                return $return = 'طلب انضمام';
+            }
+        })
 
         ->rawColumns([
 
@@ -117,6 +123,7 @@ class TypeSubscriptionDataTable extends DataTable
              ["data" => "course_name" ,"title" => 'الكورس','exportable'=>false,'orderable'=>false],
              ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
              ["data" => "admin_name" ,"title" => 'الادمن','exportable'=>false,'orderable'=>false],
+             ["data" => "type" ,"title" => 'طريقه الاشتراك','exportable'=>false,'orderable'=>false],
 
              ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
            ];
