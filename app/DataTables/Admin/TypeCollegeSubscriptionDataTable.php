@@ -10,6 +10,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Http\Request as HttpRequest;
 
 class TypeCollegeSubscriptionDataTable extends DataTable
 {
@@ -20,7 +21,7 @@ class TypeCollegeSubscriptionDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query, HttpRequest $request)
     {
         return datatables()
         ->eloquent($query)
@@ -59,7 +60,55 @@ class TypeCollegeSubscriptionDataTable extends DataTable
             return $query->user->name ?? "";
         })
 
+        ->filter(function ($query) use ($request) {
+            if (
+                $request->has('search') && isset($request->input('search')['value'])
+                && !empty($request->input('search')['value'])
+            ) {
+                $searchValue = $request->input('search')['value'];
+                $query->where(function ($query) use ($searchValue) {
+                    $query->whereHas('student',function($q) use ($searchValue){
+                        $q->where('name', 'LIKE', "%$searchValue%")
+                        ->orWhere('phone', 'LIKE', "%$searchValue%");
+                    });
+                })->orwhereHas('stdcenters', function ($q) use ($searchValue) {
+                    $q->where('name', 'LIKE', "%$searchValue%");
+                });
+            }
+            $query->whereHas('student',function($q) use ($request) {
 
+            $q->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
+                    // dd($request->all());
+                    return $q->where('stage_id', (int)$request->stage_id);
+                })
+                ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
+                    return $q->where('year_id', (int)$request->year_id);
+                })
+                ->when($request->type_id != null, function ($q) use ($request) {
+
+                    return $q->whereHas('stutypes', function ($typeq) use ($request) {
+                        return $typeq->where('types.id', (int)$request->type_id);
+                    });
+                })
+                ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
+                    return $q->where('university_id', (int)$request->university_id);
+                })
+                ->when($request->college_id != null && $request->college_id != 0, function ($q) use ($request) {
+                    return $q->where('college_id', (int)$request->college_id);
+                })
+                ->when($request->division_id != null && $request->division_id != 0, function ($q) use ($request) {
+                    return $q->where('division_id', (int)$request->division_id);
+                })
+                ->when($request->section_id != null && $request->section_id != 0, function ($q) use ($request) {
+                    return $q->where('section_id', (int)$request->section_id);
+                })
+                ->when($request->type_college_id != null && $request->type_college_id != 0, function ($q) use ($request) {
+                    return $q->whereHas('stutypescollege', function ($typeq) use ($request) {
+                        return $typeq->where('typescollege.id', (int)$request->type_college_id);
+                    });
+                });
+            });
+        })
         ->rawColumns([
 
             'action',
