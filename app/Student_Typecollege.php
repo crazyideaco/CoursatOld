@@ -18,7 +18,10 @@ class Student_Typecollege extends Model
 
     public function getTypeFormatAttribute()
     {
-        if ($this->type == 1) {
+        if ($this->type == 0) {
+            return 'اشتراك';
+        }
+        elseif ($this->type == 1) {
             return 'شراء';
         } elseif ($this->type == 2) {
             return 'طلب انضمام';
