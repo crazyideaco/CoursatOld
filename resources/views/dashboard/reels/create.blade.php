@@ -8,6 +8,9 @@
     .main_topic h4 {
         font-family: "reg"
     }
+    .main_education h4 {
+        font-family: "reg"
+    }
 </style>
 
 @extends('App.dash')
