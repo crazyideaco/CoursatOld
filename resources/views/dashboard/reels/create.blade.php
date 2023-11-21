@@ -158,12 +158,14 @@
     }
 </script>
 <script>
-   let radioTwo = document.getElementById("radio2");
-   let divTwo = document.getElementById("universityEducation");
-   radioTwo.onchange = function(){
-    divTwo.style.display = "block";
-   }
+    let radioTwo = document.getElementById("radio2");
+    let divTwo = document.getElementById("universityEducation");
+    radioTwo.onchange = function(){
+        divTwo.style.display = "block";
+    }
 </script>
+
+
 
 
 
