@@ -81,7 +81,7 @@ class TypeSubscriptionDataTable extends DataTable
      * @param \App\Models\Admin/TypeSubscriptionDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(TypeJoin $model)
+    public function query(Student_Type $model)
     {
         return $model->newQuery()->orderBy("id", "desc");
     }
@@ -121,11 +121,11 @@ class TypeSubscriptionDataTable extends DataTable
              ["data" => "year_name" ,"title" => 'السنه','exportable'=>false,'orderable'=>false],
              ["data" => "subject_name" ,"title" => 'الماده','exportable'=>false,'orderable'=>false],
              ["data" => "course_name" ,"title" => 'الكورس','exportable'=>false,'orderable'=>false],
-             ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
+            //  ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
              ["data" => "admin_name" ,"title" => 'الادمن','exportable'=>false,'orderable'=>false],
-             ["data" => "type" ,"title" => 'طريقه الاشتراك','exportable'=>false,'orderable'=>false],
+             ["data" => "type_format" ,"title" => 'طريقه الاشتراك','exportable'=>false,'orderable'=>false],
 
-             ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+            //  ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
            ];
     }
 

@@ -81,7 +81,7 @@ class TypeCollegeSubscriptionDataTable extends DataTable
      * @param \App\Models\Admin/TypeCollegeSubscriptionDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(TypecollegeJoin $model)
+    public function query(Student_Typecollege $model)
     {
         return $model->newQuery()->orderBy("id", "desc");
     }
@@ -123,9 +123,9 @@ class TypeCollegeSubscriptionDataTable extends DataTable
              ["data" => "course_name" ,"title" => 'الكورس','exportable'=>false,'orderable'=>false],
              ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
              ["data" => "admin_name" ,"title" => 'الادمن','exportable'=>false,'orderable'=>false],
-             ["data" => "type" ,"title" => 'طريقه الاشتراك','exportable'=>false,'orderable'=>false],
+             ["data" => "type_format" ,"title" => 'طريقه الاشتراك','exportable'=>false,'orderable'=>false],
 
-             ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+            //  ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
            ];
     }
 
