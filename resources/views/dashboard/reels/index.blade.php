@@ -28,7 +28,7 @@ button {
     cursor: pointer !important;
     transition: 0.7s
 }
-button :hover {
+button:hover {
     background-color: white;
     color: #243e56;
 }
