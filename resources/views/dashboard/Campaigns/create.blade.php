@@ -128,15 +128,16 @@
                                         <h5> نوع المنصه </h5>
 
                                        </div>
-                                    <div class="form-group nasra">
-                                        @foreach ($platforms as $platform)
-                                            <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
-                                            <label>{{ $platform->title }}</label>
-                                        @endforeach
-                                        @error('center_id')
-                                            <div style="color:red;">{{ $message }} </div>
-                                        @enderror
-                                    </div>
+                                  <div class="col-2"></div>
+                                  <div class="form-group nasra">
+                                    @foreach ($platforms as $platform)
+                                        <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
+                                        <label>{{ $platform->title }}</label>
+                                    @endforeach
+                                    @error('center_id')
+                                        <div style="color:red;">{{ $message }} </div>
+                                    @enderror
+                                </div>
                                 </div>
                                 {{-- begin of filter --}}
 
