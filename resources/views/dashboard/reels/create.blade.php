@@ -46,7 +46,7 @@
                 @csrf
                 <!-- start input -->
                 <div class="row">
-                    <div class="col-8 mx-auto">
+                    <div class="col-12">
                         <div class="form-group upload_file">
                             <label for="imageCover" class="upload_file_label">
 
