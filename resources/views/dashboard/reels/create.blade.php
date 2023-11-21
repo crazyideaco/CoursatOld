@@ -153,14 +153,14 @@
 <script>
     let radioOne = document.getElementById("radio1");
     let divOne = document.getElementById("mainEducation");
-    radioOne.onchange = function(){
+    radioOne.onclick = function(){
         divOne.style.display = "block";
     }
 </script>
 <script>
     let radioTwo = document.getElementById("radio2");
     let divTwo = document.getElementById("universityEducation");
-    radioTwo.onchange = function(){
+    radioTwo.onclick = function(){
         divTwo.style.display = "block";
     }
 </script>
