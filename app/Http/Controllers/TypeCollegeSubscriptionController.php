@@ -16,6 +16,8 @@ use App\Type;
 use App\User;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Stage;
+use App\University;
 
 class TypeCollegeSubscriptionController extends Controller
 {
@@ -26,7 +28,10 @@ class TypeCollegeSubscriptionController extends Controller
 
     public function index(TypeCollegeSubscriptionDataTable $dataTable)
     {
-        return $dataTable->render($this->view . 'index');
+        return $dataTable->render($this->view . 'index',[
+            "stages" => Stage::all(),
+            "universities" => University::all(),
+        ]);
     }
 
 
