@@ -155,11 +155,19 @@
 <script>
     let radio = document.getElementById("radio1");
     let div = document.getElementById("mainEducation");
+    let radioOne = document.getElementById("radio2");
+    let divTwo = document.getElementById("universityEducation");
     radio.onclick = function (){
         div.style.display = "block";
+        divTwo.style.display = "none";
     }
 
+    radioOne.onclick = function (){
+        divTwo.style.display = "block";
+        div.style.display = "none";
+    }
 </script>
+
 
 
 
@@ -232,14 +240,7 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    let radioOne = document.getElementById("radio2");
-                    let divTwo = document.getElementById("universityEducation");
-                    radioOne.onclick = function (){
-                        divTwo.style.display = "block";
-                    }
-                   
-                </script>
+
                 <!-- finish input -->
                 <div class="row">
                     <div class="col-lg-6">
