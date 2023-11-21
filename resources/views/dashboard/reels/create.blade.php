@@ -14,6 +14,16 @@
     .university_education h4 {
         font-family: "reg"
     }
+    .form-group.upload_file .upload_file_label {
+    background-color: #f5f8fa;
+    border: 1px dashed #d1d3d6;
+    width: 100%;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 0;
+    cursor: pointer;
+}
 </style>
 
 @extends('App.dash')
@@ -39,7 +49,7 @@
                     <div class="col-8 mx-auto">
                         <div class="form-group upload_file">
                             <label for="imageCover" class="upload_file_label">
-                              <i class="fa-regular fa-image"></i>
+
                               <p>اسحب صورة معبرة واسقطها هنا</p>
                               <span id="fileNameImage">او اضغط هنا</span>
                             </label>
