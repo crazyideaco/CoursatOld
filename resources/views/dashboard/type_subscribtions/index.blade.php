@@ -178,4 +178,21 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
     {{ $dataTable->scripts() }}
+    <script>
+        function filter_students() {
+            $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
+                //basic filters
+                data.stage_id = $("#stage").val();
+                data.years_id = $("#year").val();
+                data.type_id = $("#types").val();
+                // //college filters
+                data.university_id = $("#university").val();
+                data.college_id = $("#college").val();
+                data.division_id = $("#division").val();
+                data.section_id = $("#section").val();
+                data.type_college_id = $("#typescollege").val();
+            });
+            $('#dataTableBuilder').DataTable().ajax.reload();
+        }
+    </script>
  @endsection
