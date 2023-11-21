@@ -320,7 +320,7 @@ div#universityEducation {
                 <div class="row">
                     <div class="col-lg-6">
                         <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            class="btn first">حفظ</button>
+                            class="btn first save">حفظ</button>
                     </div>
                 </div>
 
