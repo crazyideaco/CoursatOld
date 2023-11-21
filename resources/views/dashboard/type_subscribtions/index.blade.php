@@ -177,7 +177,7 @@
             $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
                 //basic filters
                 data.stage_id = $("#stage").val();
-                data.years_id = $("#year").val();
+                data.year_id = $("#year").val();
                 data.type_id = $("#types").val();
                 // //college filters
 

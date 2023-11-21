@@ -5,14 +5,21 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Carbon\Carbon;
 use App\Http\Resources\QuestionResource;
+use App\TypeExam;
+use App\TypeexamResult;
+use App\TypescollegeexamResult;
+
 class ExamResource extends JsonResource
 {
     public function toArray($request)
     {
         if (auth()->user()->category_id == 1) {
             $subject = $this->subject->name_ar;
+            // $exam_result = TypeexamResult::where('student_id', auth()->id())->where('exam_id',$this->id)->firstOrNew();
         } else if (auth()->user()->category_id == 2) {
             $subject = $this->subjectscollege->name_ar;
+            // $exam_result = TypescollegeexamResult::where('student_id', auth()->id())->where('exam_id',$this->id)->firstOrNew();
+
         }
 
 
@@ -30,10 +37,10 @@ class ExamResource extends JsonResource
             'subject' => $subject,
             'lecturer_name' => $this->user ? $this->user->name : '',
             'date_day' => $this->date_day,
-            'questions' => QuestionResource::collection($this->questions)
+            'questions' => QuestionResource::collection($this->questions),
+            // 'result' => $exam_result ? $examresult : ''
 
 
-            
         ];
     }
 }
