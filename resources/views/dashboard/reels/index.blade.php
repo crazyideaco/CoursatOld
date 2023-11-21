@@ -1,3 +1,39 @@
+<style>
+    h3.card-label {
+    font-family: 'med';
+}
+.card-toolbar a.btn.first {
+    background-color: #243e56;
+    color: white;
+    font-family: 'reg';
+
+}
+.table tbody tr td {
+    background: unset !important;
+}
+.table thead tr th {
+    background: unset !important;
+}
+div#dataTableBuilder_wrapper {
+    border: 1px solid #0000000f;
+    font-family: 'med';
+}
+button {
+    background-color: #243e56 !important;
+    color: white !important;
+    border: unset !important;
+    font-family: 'reg';
+    border-radius: 10px !important;
+    padding: 0.5rem 1rem !important;
+    margin-right: 27px !important;
+}
+div#dataTableBuilder_length {
+    margin-top: 19px;
+}
+</style>
+
+
+
 @extends('App.dash')
 @section('style')
 <style>
@@ -19,7 +55,7 @@
 										</div>
 										<div class="card-toolbar">
 
-                                            <a class="btn first" href="{{route('reels.create')}}"> <i class="bi bi-plus"></i>اضافه فيديو قصير</a>
+                                            <a class="btn first" href="{{route('reels.create')}}"> <i class="bi bi-plus"></i>اضافه فيديو قصير +</a>
 
 											<!--end::Button-->
 										</div>
