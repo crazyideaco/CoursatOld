@@ -95,60 +95,7 @@
         <!--end heed-->
 
 
-        <!--start setting-->
-        <div class="setting all-products typs">
-            <div class="container">
-                {{-- <div class="row def">
 
-                    <img src="images/all-products.svg">
-                    <h5>الطلاب</h5>
-
-
-
-                </div> --}}
-
-                <div class="products-search typs1">
-
-
-                </div>
-
-
-
-                <div class="all-infor">
-                    <div class="row" id="category_id_basic">
-                        <h4 class="hederre">
-                            المرحله الأساسيه
-                        </h4>
-                        @include('dashboard.students.includes.__basic_filter_sections')
-                    </div>
-
-
-                    {{-- <div class="row">
-                        <div class="col-3 mx-auto">
-
-
-                            <span class="btn btn-primary" onclick="filterbasicstudents()">بحث</span>
-                        </div>
-                    </div> --}}
-                    <div class="row">
-                        <div class="table-responsive">
-
-                            {!! $dataTable->table(
-                                [
-                                    'class' => 'table_expenses table_topic table table-striped table-bordered',
-                                ],
-                                true,
-                            ) !!}
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-        <!--end setting-->
 
 
         <!--start foter-->
@@ -172,18 +119,5 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
     {{ $dataTable->scripts() }}
-    <script>
-        function filter_students() {
-            $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
-                //basic filters
-                data.stage_id = $("#stage").val();
-                data.year_id = $("#year").val();
-                data.subject_id = $("#subject").val();
-                // data.user_id = $("#teachers").val();
-                // //college filters
-
-            });
-            $('#dataTableBuilder').DataTable().ajax.reload();
-        }
-    </script>
+    
  @endsection

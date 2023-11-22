@@ -110,9 +110,9 @@
                                 {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
                                 @foreach ($stages as $stage)
                                     <option value='{{ $stage->id }}'
-                                        {{-- @if($stage->id == $reel->information?->stage_id)
+                                        @if($stage->id == $reel->information->stage_id)
                                         selected
-                                        @endif --}}
+                                        @endif
                                         >{{ $stage->name_ar }}</option>
                                 @endforeach
                             </select>
@@ -126,7 +126,15 @@
                                 onchange="getyear_subjects(this)" title="اختر السنه">
 
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
-
+                                @foreach ($years as $year)
+                                <option value="{{ $year->id }}"
+                                    @if($year->id == $reel->information->year_id)
+                                        selected
+                                        @endif
+                                    >
+                                    {{ $year->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                             @error('years_id')
                                 <p style="color:red;">{{ $message }}</p>
@@ -137,7 +145,15 @@
                             <select class="form-control selectpicker" name="subject_id"  id="subject"
                                 onchange="getSubject_teacher(this)" title="اختر الماده">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
-
+                                @foreach ($subjects as $subject)
+                                <option value="{{ $subject->id }}"
+                                    @if($subject->id == $reel->information->subject_id)
+                                    selected
+                                    @endif
+                                >
+                                    {{ $subject->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                             @error('subjects_id')
                                 <p style="color:red;">{{ $message }}</p>
@@ -149,7 +165,15 @@
                             <select class="form-control selectpicker" name="teacher_id"  id="teachers"
                                 onchange="getTeacher_types(this)" title="اختر المدرس">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
-
+                                @foreach ($teachers as $teacher)
+                                <option value="{{ $teacher->id }}"
+                                    @if($teacher->id == $reel->information->user_id)
+                                    selected
+                                    @endif
+                                >
+                                    {{ $teacher->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                             @error('teacher_id')
                                 <p style="color:red;">{{ $message }}</p>
@@ -172,7 +196,11 @@
                                 onchange="getcolleges(this)" title="اختر جامعه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
                                 @foreach ($universities as $university)
-                                    <option value="{{ $university->id }}">
+                                    <option value="{{ $university->id }}"
+                                        @if($university->id == $reel->information->university_id)
+                                    selected
+                                    @endif
+                                >
                                         {{ $university->name_ar }}
                                     </option>
                                 @endforeach
@@ -186,7 +214,15 @@
                             <select name="college_id"  class="form-control selectpicker" id="college"
                                 onchange="getdivision(this)" title="اختر كليه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
-
+                                @foreach ($colleges as $college)
+                                <option value="{{ $college->id }}"
+                                    @if($college->id == $reel->information->college_id)
+                                    selected
+                                    @endif
+                                    >
+                                    {{ $college->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
@@ -194,7 +230,15 @@
                             <select name="division_id"  class="form-control selectpicker" id="division"
                                 onchange="getsection(this)" title="اختر قسم">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
-
+                                @foreach ($divisions as $division)
+                                <option value="{{ $division->id }}"
+                                    @if($division->id == $reel->information->division_id)
+                                    selected
+                                    @endif
+                                    >
+                                    {{ $division->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
@@ -202,7 +246,15 @@
                             <select name="section_id"  class="form-control selectpicker" id="section"
                                 onchange="getsection_subjectsCollege(this)" title="اختر فرقه">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
-
+                                @foreach ($sections as $section)
+                                <option value="{{ $section->id }}"
+                                    @if($section->id == $reel->information->section_id)
+                                    selected
+                                    @endif
+                                    >
+                                    {{ $section->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-12">
@@ -210,7 +262,15 @@
                             <select class="form-control selectpicker" name="subjectscollege_id" title="اختر الماده "
                                  id="subject_college" onchange="getSubject_teacherCollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
-
+                                @foreach ($subject_colleges as $subject_college)
+                                <option value="{{ $subject_college->id }}"
+                                    @if($subject_college->id == $reel->information->subject_college_id)
+                                    selected
+                                    @endif
+                                    >
+                                    {{ $subject_college->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                             @error('subjects_id')
                                 <p style="color:red;">{{ $message }}</p>
@@ -222,7 +282,15 @@
                             <select class="form-control selectpicker" name="doctor_id"  title="اختر المدرس"ed
                                 id="teachers_college" onchange="getTeacher_typescollege(this)">
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
-
+                                @foreach ($doctors as $doctor)
+                                <option value="{{ $doctor->id }}"
+                                    @if($doctor->id == $reel->information->user_id)
+                                    selected
+                                    @endif
+                                    >
+                                    {{ $doctor->name_ar }}
+                                </option>
+                            @endforeach
                             </select>
                             @error('teacher_id')
                                 <p style="color:red;">{{ $message }}</p>

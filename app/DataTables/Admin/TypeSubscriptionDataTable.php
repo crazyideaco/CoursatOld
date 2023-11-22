@@ -83,6 +83,9 @@ class TypeSubscriptionDataTable extends DataTable
                 ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
                     return $q->where('year_id', (int)$request->year_id);
                 })
+                ->when($request->subject_id != null && $request->subject_id != 0, function ($q) use ($request) {
+                    return $q->where('subject_id', (int)$request->subject_id);
+                })
                 ->when($request->type_id != null, function ($q) use ($request) {
 
                     return $q->whereHas('stutypes', function ($typeq) use ($request) {
