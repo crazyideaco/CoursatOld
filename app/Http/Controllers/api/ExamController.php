@@ -81,6 +81,13 @@ class ExamController extends Controller
                     'status' => false,
                     'message' => 'لقد امتحنت هذا الامتحان من قبل'
                 ]);
+            } else {
+                $typeexam = new TypeexamResult;
+                $typeexam->student_id = auth()->id();
+                $typeexam->exam_id = $exam->id;
+                $typeexam->exam_score = $exam->score;
+                // $typeexam->student_score = $degree;
+                $typeexam->save();
             }
         } else if ($user_category_id == 2) {
             $exam = TypescollegeExam::find($exam_id);
@@ -91,6 +98,13 @@ class ExamController extends Controller
                     'status' => false,
                     'message' => 'لقد امتحنت هذا الامتحان من قبل'
                 ]);
+            } else {
+                $typeexam = new TypescollegeexamResult;
+                $typeexam->student_id = auth()->id();
+                $typeexam->exam_id = $exam->id;
+                $typeexam->exam_score = $exam->score;
+                // $typeexam->student_score = $degree;
+                $typeexam->save();
             }
         }
 
