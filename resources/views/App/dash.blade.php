@@ -1013,7 +1013,7 @@
                         @endif
 
                         <div class="row log text-center">
-                            <div class="col-1 offset-1">
+                            <div class="col-1">
                                 <img src="{{ asset('images/qenoicon/logout.svg') }}" id="img">
                             </div>
                             <div class="col-9">
