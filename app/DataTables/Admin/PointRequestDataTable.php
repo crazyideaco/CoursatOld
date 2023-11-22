@@ -24,6 +24,15 @@ class PointRequestDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->editColumn("image",function($query){
+                if($query->image ? asset($query->image) : ''){
+                $image = $query->image ? asset($query->image) : '';
+                $status = '<img src="'.$image.'">';
+                }else{
+                    $status ='';
+                }
+                return $status;
+            })
             ->editColumn("student_name",function($query){
                 return $query->user->name ?? "";
             })
@@ -68,6 +77,7 @@ class PointRequestDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            ["data" => "image" ,"title" => 'الصوره','printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
             ["data" => "student_name" ,"title" => 'اسم الطالب','orderable'=>false],
             ["data" => "payment_way" ,"title" => 'طريقه الدفع','orderable'=>false],
             ["data" => "points" ,"title" => 'النقاط','orderable'=>false],
