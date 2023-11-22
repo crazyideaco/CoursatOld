@@ -109,6 +109,13 @@
                             </h4>
                             @include('dashboard.students.includes.__college_filter_sections')
                         </div>
+
+                        <div class="row" id="online_status">
+                            <h4 class="hederre">
+                                حالة الاونلاين
+                            </h4>
+                            @include('dashboard.students.includes.__online_filter_sections')
+                        </div>
                         {{-- <div class="row">
                             <div class="col-3 mx-auto">
 
@@ -318,6 +325,8 @@
 <script>
     function filter_students() {
         $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
+            //online , offline filter
+            data.is_online = $("#is_online").val();
             //basic filters
             data.stage_id = $("#stage").val();
             data.years_id = $("#year").val();
