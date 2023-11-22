@@ -43,7 +43,7 @@ class PointRequestDataTable extends DataTable
             })
             ->addColumn('action', 'dashboard.point_requests.action')
             ->rawColumns([
-
+                'image',
                 'action',
             ]);
     }
