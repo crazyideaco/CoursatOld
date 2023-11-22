@@ -86,7 +86,7 @@ class ExamController extends Controller
                 $typeexam->student_id = auth()->id();
                 $typeexam->exam_id = $exam->id;
                 $typeexam->exam_score = $exam->score;
-                // $typeexam->student_score = $degree;
+                $typeexam->student_score = 0;
                 $typeexam->save();
             }
         } else if ($user_category_id == 2) {
@@ -103,7 +103,7 @@ class ExamController extends Controller
                 $typeexam->student_id = auth()->id();
                 $typeexam->exam_id = $exam->id;
                 $typeexam->exam_score = $exam->score;
-                // $typeexam->student_score = $degree;
+                $typeexam->student_score = 0;
                 $typeexam->save();
             }
         }
