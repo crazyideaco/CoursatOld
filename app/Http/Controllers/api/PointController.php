@@ -25,7 +25,7 @@ class PointController extends Controller
     {
 
         $rules = [
-            "payment_way_id" => "required|exists:payment_ways,id",
+            "payment_method_id" => "required|exists:payment_ways,id",
             "points" => "required",
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -42,7 +42,7 @@ class PointController extends Controller
             $image = $request->image;
             $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
             $point_image = time() . '.' . $image->getClientOriginalExtension();
-            base64_encode($point_image);
+            $data['image'] = base64_encode($point_image);
         }
 
         PointRequest::create($data);
