@@ -33,6 +33,11 @@ trait ApiTrait
         ], $code);
     }
 
+    public function getvalidationErrors($validator, $code = 422)
+    {
+        return $this->errorResponse($validator->errors()->first(), $code);
+    }
+    
     public function returnException($message, $code)
     {
         return $this->errorResponse($message, $code);
