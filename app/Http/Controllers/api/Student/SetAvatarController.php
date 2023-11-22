@@ -18,7 +18,9 @@ class SetAvatarController extends Controller
         $imageName = time().$image->getClientOriginalName();
         $img = $image->move("uploads",$imageName);
         $user = auth()->user();
-        $user->image = base64_decode($img);
+        $user->image = $img;
+        // $user->image = base64_decode($img);
+
         $user->save();
 
         return $this->successResponse("image uploaded");
