@@ -73,17 +73,18 @@ class PointRequestController extends Controller
         $history->type  = 1 ;
 
         $history->save();
-        
-        $point->user_id  = auth()->id();
+
         $point->status = 1;
         $point->save();
+        $point->user->update([
+            'points' => $point->user->points + $point->points
+        ]);
         $msg = "تم القبول بنجاح";
         return response()->json(['status' => true, "message" => $msg]);
     }
     public function refuse_point_request($id)
     {
         $point = PointRequest::where("id", $id)->first();
-        $point->user_id  = auth()->id();
         $point->status = 2;
         $point->save();
         $msg = "تم الرفض بنجاح";

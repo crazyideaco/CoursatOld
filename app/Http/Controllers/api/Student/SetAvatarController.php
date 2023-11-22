@@ -12,13 +12,13 @@ class SetAvatarController extends Controller
     use ApiTrait;
 
     // upload an avatar image
-    
+
     public function setAvatar(Request $request) {
         $image = $request->image;
         $imageName = time().$image->getClientOriginalName();
         $img = $image->move("uploads",$imageName);
         $user = auth()->user();
-        $user->image = $img;
+        $user->image = base64_encode($img);
         $user->save();
 
         return $this->successResponse("image uploaded");
