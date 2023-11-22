@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PointRequest;
 use App\Traits\ApiTrait;
+use Validator;
 
 class PointController extends Controller
 {
