@@ -139,6 +139,12 @@ class StudentDataTable extends DataTable
                     ->when($request->is_online != null , function ($q) use ($request) {
                         return $q->where('is_online', (int)$request->is_online);
                     })
+                    ->when($request->from_date != null && $request->from_date != 0, function ($q) use ($request) {
+                        return $q->whereDate('created_at', '>=', $request->from_date);
+                    })
+                    ->when($request->to_date != null && $request->to_date != 0, function ($q) use ($request) {
+                        return $q->whereDate('created_at', '<=', $request->to_date);
+                    })
                     ;
             });
     }

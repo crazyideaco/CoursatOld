@@ -327,6 +327,8 @@
         $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
             //online , offline filter
             data.is_online = $("#is_online").val();
+            data.from_date = $("#from_date").val();
+            data.to_date = $("#to_date").val();
             //basic filters
             data.stage_id = $("#stage").val();
             data.years_id = $("#year").val();

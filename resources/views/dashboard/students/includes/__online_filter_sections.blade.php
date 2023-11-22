@@ -29,11 +29,21 @@
     {{-- <label>الكورسات </label> --}}
     <select class="form-control selectpicker" name="is_online" id="is_online" onchange="filter_students();"
         title="اختر حالة الاونلاين او الاوفلاين">
-        <option value="1" >Online</option>
-        <option value="0" >Offline</option>
+        <option value="1">Online</option>
+        <option value="0">Offline</option>
 
     </select>
     @error('is_online')
         <p style="color:red;">{{ $message }}</p>
     @enderror
+</div>
+
+
+<div class="form-group col-lg-3 col-md-6 col-12">
+    <label>من</label>
+    <input type="date" name="from_date" id="from_date" class="form-control">
+</div>
+<div class="form-group col-lg-3 col-md-6 col-12">
+    <label>الي</label>
+    <input type="date" name="to_date" id="to_date" class="form-control">
 </div>
