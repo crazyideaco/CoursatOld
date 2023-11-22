@@ -38,15 +38,15 @@ class PointController extends Controller
         $data['user_id'] = auth()->id();
         $data['payment_way_id'] = $request->payment_method_id;
         $data['points'] = $request->points;
-        if ($request->hasFile('image')) {
+        if($request->image)
+        {
             $image = $request->image;
-            $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
-            $point_image = time() . '.' . $image->getClientOriginalExtension();
-           $data['points'] = $point_image;
+            $image->move('uploads' , time(). '.'.$image->getClientOriginalExtension());
+            $data['image'] =time(). '.'.$image->getClientOriginalExtension();
         }
 
         PointRequest::create($data);
-        $msg = "نقاط " . $request->points . " تم طلب";
+        $msg =  " تم طلب". $request->points .  "نقاط ";
         return response()->json([
             "status" => true,
             "message" => $msg,
