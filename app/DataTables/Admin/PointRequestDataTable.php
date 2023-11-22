@@ -31,7 +31,7 @@ class PointRequestDataTable extends DataTable
                 }else{
                     $status ='';
                 }
-                return $status;
+                return $image;
             })
             ->editColumn("student_name",function($query){
                 return $query->user->name ?? "";
