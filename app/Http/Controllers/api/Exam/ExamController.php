@@ -70,7 +70,10 @@ class ExamController extends Controller
                     $availability = 0;
                     $message = "هذا الامتحان انتهي و لم يعد متاح ";
                 } elseif ($typeexam) {
-                    return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
+                    $availability = 0;
+                    $message = "لقد دخلت هذا الامتحان من قبل";
+
+                    // return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
                 }
                 else {
                     // Exam is not in the future, and student has not entered before
