@@ -967,6 +967,30 @@
                                 </div>
                             </div>
 
+                            <div class="row sub-side">
+                                <div class="col-2">
+                                    <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
+                                </div>
+                                <div class="col-6">
+                                    <a href="#studentsYajra" data-toggle="collapse"> النقاط</a>
+                                    <div id="studentsYajra"
+                                        >
+
+                                        <a href="{{ route('point_requests.index') }}"
+                                            >
+                                            طلبات النقاط</a>
+
+                                        <a href="{{ route('point_requests.point_histories') }}"
+                                            >
+                                            تاريخ طلبات النقاط</a>
+
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <a href="#studentsYajra" data-toggle="collapse"><img
+                                            src="{{ asset('images/arrow.svg') }}" id="arr"></a>
+                                </div>
+                            </div>
 
                             <div class="row sub-side">
                                 <div class="col-2">
