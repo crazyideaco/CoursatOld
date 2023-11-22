@@ -418,8 +418,8 @@
                                 <img src="{{ asset('images/qenoicon/setting.svg') }}" id="img">
                             </div>
                             <div class="col-6">
-                                <a href="#setting2" data-toggle="collapse">البروفايل</a>
-                                <div id="setting2" class="collapse @if (request()->is('editprofile') || request()->is('editpassword') || request()->is('edityourinformation')) show @endif">
+                                <a href="#setting" data-toggle="collapse">البروفايل</a>
+                                <div id="setting" class="collapse @if (request()->is('editprofile') || request()->is('editpassword') || request()->is('edityourinformation')) show @endif">
                                     <a href="{{ route('editprofile') }}"
                                         style="color: #aa7700;
     font-family: med;
