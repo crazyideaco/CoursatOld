@@ -59,7 +59,9 @@ class User extends Authenticatable
     //      "code",
     //      "is_visitor",
     //      "cover_image",
-    // 'image'
+    // 'image',
+    // 'is_online','online_date', 'offline_date',
+
     // ];
 
 

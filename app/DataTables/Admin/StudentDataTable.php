@@ -73,6 +73,12 @@ class StudentDataTable extends DataTable
             ->editColumn('is_online', function ($row) {
                 return $row->getOnlineStatusAttribute();
             })
+            ->editColumn('online_date', function ($row) {
+                return $row->is_online == 1 && $row->online_date ? $row->online_date->format('Y-m-d g:i A') : '-';
+            })
+            ->editColumn('offline_date', function ($row) {
+                return $row->is_online == 0 && $row->offline_date ? $row->offline_date->format('Y-m-d g:i A') : '-';
+            })
             ->editColumn('created_at', function ($row) {
                 return  $row->created_at ? $row->created_at->format('Y-m-d') : '';
             })
@@ -176,6 +182,8 @@ class StudentDataTable extends DataTable
             Column::make("category_id")->title("نوع التعليم"),
             Column::make("year")->title("السنة"),
             Column::make("is_online")->title("حالة الظهور"),
+            Column::make("online_date")->title("تاريخ الظهور"),
+            Column::make("ofline_date")->title("تاريخ أخر ظهور"),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
