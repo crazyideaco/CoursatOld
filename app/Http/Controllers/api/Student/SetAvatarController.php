@@ -13,15 +13,20 @@ class SetAvatarController extends Controller
 
     // upload an avatar image
 
-    public function setAvatar(Request $request) {
+    public function setAvatar(Request $request)
+    {
         $image = $request->image;
-        $imageName = time().$image->getClientOriginalName();
-        $img = $image->move("uploads",$imageName);
+        $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
+        $data['image'] = time() . '.' . $image->getClientOriginalExtension();
+
+        // $image = $request->image;
+        // $imageName = time() . $image->getClientOriginalName();
+        // $img = $image->move("uploads", $imageName);
         $user = auth()->user();
-        $user->image = $img;
+        $user->update($data);
         // $user->image = base64_decode($img);
 
-        $user->save();
+
 
         return $this->successResponse("image uploaded");
     }
