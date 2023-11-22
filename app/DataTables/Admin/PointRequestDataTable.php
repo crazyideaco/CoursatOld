@@ -88,7 +88,8 @@ class PointRequestDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ["data" => "image" ,"title" => 'الصوره','printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
+         ["data" => "image" ,"title" => 'الصوره','searchable'=>false],
+
             ["data" => "student_name" ,"title" => 'اسم الطالب','orderable'=>false],
             ["data" => "payment_way" ,"title" => 'طريقه الدفع','orderable'=>false],
             ["data" => "points" ,"title" => 'النقاط','orderable'=>false],
