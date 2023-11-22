@@ -6,36 +6,46 @@
         flex-wrap: wrap;
         min-width: 200px;
     }
+
     td.text-center {
         width: 30%;
     }
-.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
-    border-bottom-width: 0;
-    font-size: 0.8rem;
-    padding: 0.5rem !important;
-}
-.width_30 {
-    text-align: center;
-    margin-bottom: 0.5rem;
-    width: 30%;
-}
-.width_30 img {width: 25px;}
+
+    .table-bordered.dataTable tbody th,
+    table.table-bordered.dataTable tbody td {
+        border-bottom-width: 0;
+        font-size: 0.8rem;
+        padding: 0.5rem !important;
+    }
+
+    .width_30 {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        width: 30%;
+    }
+
+    .width_30 img {
+        width: 25px;
+    }
 </style>
 @php
     $student = \App\User::find($id);
 @endphp
 <td class="text-center">
     <div class="width_30">
-        <img src="{{ asset('images/sex.svg') }}" alt="" title="تسجيل الخروج" onclick="student_logout({{ $id }})">
+        <img src="{{ asset('images/sex.svg') }}" alt="" title="تسجيل الخروج"
+            onclick="student_logout({{ $id }})">
     </div>
 
 
     {{-- تفعيل المستخدم --}}
     <div class="width_30">
         @if ($active == 1)
-        <img src="{{ asset('images/five.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="الغاء التفعيل">
+            <img src="{{ asset('images/five.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})"
+                alt="" title="الغاء التفعيل">
         @else
-        <img src="{{ asset('images/seven.svg') }}" id="btn{{ $id }}" onclick="activeuser({{ $id }})" alt="" title="تفعيل">
+            <img src="{{ asset('images/seven.svg') }}" id="btn{{ $id }}"
+                onclick="activeuser({{ $id }})" alt="" title="تفعيل">
         @endif
     </div>
     {{-- تفعيل المستخدم --}}
@@ -48,32 +58,33 @@
     {{-- حذف المستخدم --}}
 
     <div class="width_30">
-    @if ($category_id == 1)
-        <a class="resl"
-            href="{{ route('typeresults_students', $id) }}">
-            <img src="{{ asset('images/eat.svg') }}" alt="" title="نتائج
+        @if ($category_id == 1)
+            <a class="resl" href="{{ route('typeresults_students', $id) }}">
+                <img src="{{ asset('images/eat.svg') }}" alt="" title="نتائج
 
             الامتحانات">
 
             </a>
-    @elseif($category_id == 2)
-        <a class="resl"
-            href="{{ route('typecollegeresults_students', $id) }}"><img src="{{ asset('images/eat.svg') }}" alt="" title="نتائج
-
-            الامتحانات"></a>
-    @endif
+        @elseif($category_id == 2)
+            <a class="resl" href="{{ route('typecollegeresults_students', $id) }}"><img
+                    src="{{ asset('images/eat.svg') }}" alt="" title="نتائج الامتحانات "></a>
+        @endif
     </div>
 
     <div class="width_30">
-        <img src="{{ asset('images/three.svg') }}" alt="" title=" ريسيت باسورد الطالب " data-toggle="modal" data-target="#passwordModal{{ $id }}">
+        <img src="{{ asset('images/three.svg') }}" alt="" title=" ريسيت باسورد الطالب " data-toggle="modal"
+            data-target="#passwordModal{{ $id }}">
     </div>
 
 
     <div class="width_30">
-        <img src="{{ asset('images/two.svg') }}" alt="" title="كورسات الطالب"  data-toggle="modal" data-target="#cousesModal{{ $id }}">
+        <img src="{{ asset('images/two.svg') }}" alt="" title="كورسات الطالب" data-toggle="modal"
+            data-target="#cousesModal{{ $id }}">
     </div>
     <div class="width_30">
-        <img src="{{ asset('images/one.svg') }}" alt="" title="بروفيل الطالب">
+        <a href="{{ route('studentprofile', $id) }}" alt="" title="بروفيل الطالب" class="resl" >
+            <img src="{{ asset('images/one.svg') }}" alt="" title="بروفيل الطالب">
+        </a>
     </div>
 
 
