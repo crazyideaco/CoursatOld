@@ -25,7 +25,7 @@ class PointRequestDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->editColumn("image",function($query){
-                if($query->image ? asset($query->image) : ''){
+                if($query->image){
                 $image = $query->image ? asset('uploads/' . $query->image) : '';
                 $status = '<img src="'.$image.'">';
                 }else{
