@@ -89,6 +89,8 @@ class StudentDataTable extends DataTable
                 'centers',
                 'category_id',
                 'is_online',
+                'online_date',
+                'offline_date',
             ])
             ->filter(function ($query) use ($request) {
                 if (
@@ -184,7 +186,7 @@ class StudentDataTable extends DataTable
             Column::make("year")->title("السنة"),
             Column::make("is_online")->title("حالة الظهور"),
             Column::make("online_date")->title("تاريخ الظهور"),
-            Column::make("ofline_date")->title("تاريخ أخر ظهور"),
+            Column::make("offline_date")->title("تاريخ أخر ظهور"),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
