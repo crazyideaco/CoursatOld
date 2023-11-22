@@ -976,7 +976,7 @@
                                     <div id="studentsYajra"
                                         >
 
-                                        <a href="{{ route('point_requests.index') }}"
+                                        <a href="{{ route('point_requests') }}"
                                             >
                                             طلبات النقاط</a>
 
