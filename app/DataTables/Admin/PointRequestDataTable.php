@@ -24,22 +24,13 @@ class PointRequestDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->editColumn("image",function($query){
-            //     if($query->image_link){
-            //     $image = $query->image_link;
-            //     $status = '<img src="'.$image.'">';
-            //     }else{
-            //         $status ='';
-            //     }
-            //     return $status;
-            // })
 
-            ->editColumn('image', function ($query) {
-                if ($query->image) {
-                    $image = $query->image;
-                    $status = '<img src="' . url('uploads/' .  $image) . '" >';
-                } else {
-                    $status = '';
+            ->editColumn("image",function($query){
+                if($query->image_link){
+                $image = $query->image_link;
+                $status = '<img src="'.$image.'">';
+                }else{
+                    $status ='';
                 }
                 return $status;
             })
