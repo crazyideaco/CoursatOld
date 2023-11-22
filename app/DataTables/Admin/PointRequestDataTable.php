@@ -37,18 +37,18 @@ class PointRequestDataTable extends DataTable
             ->editColumn('image', function ($query) {
                 if ($query->image_link) {
                     $image = $query->image_link;
-                    $status = '<img src="' . $image . '" alt="Image">';
+                    $status = '<img src="' . $query->image . '" alt="Image">';
                 } else {
                     $status = '';
                 }
                 return $status;
             })
 
-            ->editColumn("student_name",function($query){
+            ->editColumn("student_name", function ($query) {
                 return $query->user->name ?? "";
             })
-            ->editColumn("payment_way",function($query){
-                return $query->payment_way->title ?? "" ;
+            ->editColumn("payment_way", function ($query) {
+                return $query->payment_way->title ?? "";
             })
             ->addColumn('action', 'dashboard.point_requests.action')
             ->rawColumns([
@@ -61,7 +61,7 @@ class PointRequestDataTable extends DataTable
      */
     public function query(PointRequest $model): QueryBuilder
     {
-        return $model->newQuery()->orderBy("id","desc");
+        return $model->newQuery()->orderBy("id", "desc");
     }
 
     /**
@@ -70,16 +70,16 @@ class PointRequestDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-        ->columns($this->getColumns())
-        ->minifiedAjax()
-        ->parameters([
-            'dom' => 'Blfrtip',
-            'order' => [0, 'desc'],
-            'lengthMenu' => [
-                [10,25,50,-1],[10,25,50,'all record']
-            ],
-       'buttons'      => ['export'],
-   ]);
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->parameters([
+                'dom' => 'Blfrtip',
+                'order' => [0, 'desc'],
+                'lengthMenu' => [
+                    [10, 25, 50, -1], [10, 25, 50, 'all record']
+                ],
+                'buttons'      => ['export'],
+            ]);
     }
 
     /**
@@ -88,14 +88,13 @@ class PointRequestDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-         ["data" => "image" ,"title" => 'الصوره','searchable'=>false],
+            ["data" => "image", "title" => 'الصوره', 'searchable' => false],
+            ["data" => "student_name", "title" => 'اسم الطالب', 'orderable' => false],
+            ["data" => "payment_way", "title" => 'طريقه الدفع', 'orderable' => false],
+            ["data" => "points", "title" => 'النقاط', 'orderable' => false],
 
-            ["data" => "student_name" ,"title" => 'اسم الطالب','orderable'=>false],
-            ["data" => "payment_way" ,"title" => 'طريقه الدفع','orderable'=>false],
-            ["data" => "points" ,"title" => 'النقاط','orderable'=>false],
-
-            ['data'=>'action','title'=>"actions",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
-          ];
+            ['data' => 'action', 'title' => "actions", 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false],
+        ];
     }
 
     /**
