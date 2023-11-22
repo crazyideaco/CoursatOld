@@ -41,9 +41,9 @@
 
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>من</label>
-    <input type="date" name="from_date" id="from_date" class="form-control">
+    <input type="date" name="from_date" id="from_date" class="form-control" onkeyup="filter_students();">
 </div>
 <div class="form-group col-lg-3 col-md-6 col-12">
     <label>الي</label>
-    <input type="date" name="to_date" id="to_date" class="form-control">
+    <input type="date" name="to_date" id="to_date" class="form-control" onkeyup="filter_students();">
 </div>
