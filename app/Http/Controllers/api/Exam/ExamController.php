@@ -50,7 +50,7 @@ class ExamController extends Controller
 
 
             }
-
+            
             $student = $exam->students()->where('users.id', auth()->id())->first();
 
             $from =  $exam->getStartDateTimeAttribute()->format('Y-m-d H:i:s');
