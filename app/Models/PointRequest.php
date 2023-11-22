@@ -17,6 +17,13 @@ class PointRequest extends Model
     protected  $guarded = [];
     protected $table = "point_requests";
 
+    protected $appends  = ["image_link"];
+
+    public function getImageLinkAttribute()
+    {
+        return $this->image ? asset($this->image) : '';
+    }
+    
     public function user()
     {
         return $this->belongsto(User::class, 'user_id');
