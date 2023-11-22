@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request as HttpRequest;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -74,10 +75,10 @@ class StudentDataTable extends DataTable
                 return $row->getOnlineStatusAttribute();
             })
             ->editColumn('online_date', function ($row) {
-                return $row->is_online == 1 && $row->online_date ? $row->online_date->format('Y-m-d g:i A') : '-';
+                return $row->is_online == 1 && $row->online_date ? Carbon::parse($row->online_date)->format('Y-m-d g:i A') : '-';
             })
             ->editColumn('offline_date', function ($row) {
-                return $row->is_online == 0 && $row->offline_date ? $row->offline_date->format('Y-m-d g:i A') : '-';
+                return $row->is_online == 0 && $row->offline_date ? Carbon::parse($row->offline_date)->format('Y-m-d g:i A') : '-';
             })
             ->editColumn('created_at', function ($row) {
                 return  $row->created_at ? $row->created_at->format('Y-m-d') : '';
