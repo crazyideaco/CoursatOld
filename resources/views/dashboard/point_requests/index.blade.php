@@ -1,3 +1,4 @@
+
 @extends('App.dash')
 @section('style')
 <style>
@@ -9,6 +10,7 @@
 @section('content')
 	<!--begin::Card-->
     <div class="container">
+
     <div class="card card-custom gutter-b">
 
         <div class="card-header flex-wrap py-3">
@@ -16,12 +18,7 @@
 											<h3 class="card-label">طلبات النقاط
 </h3>
 										</div>
-										<div class="card-toolbar">
-
-
-
-											<!--end::Button-->
-										</div>
+										
 									</div>
 
 
