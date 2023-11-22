@@ -81,13 +81,6 @@ class ExamController extends Controller
                     'status' => false,
                     'message' => 'لقد امتحنت هذا الامتحان من قبل'
                 ]);
-            } else {
-                $typeexam = new TypeexamResult;
-                $typeexam->student_id = auth()->id();
-                $typeexam->exam_id = $exam->id;
-                $typeexam->exam_score = $exam->score;
-                $typeexam->student_score = 0;
-                $typeexam->save();
             }
         } else if ($user_category_id == 2) {
             $exam = TypescollegeExam::find($exam_id);
@@ -98,13 +91,6 @@ class ExamController extends Controller
                     'status' => false,
                     'message' => 'لقد امتحنت هذا الامتحان من قبل'
                 ]);
-            } else {
-                $typeexam = new TypescollegeexamResult;
-                $typeexam->student_id = auth()->id();
-                $typeexam->exam_id = $exam->id;
-                $typeexam->exam_score = $exam->score;
-                $typeexam->student_score = 0;
-                $typeexam->save();
             }
         }
 
@@ -187,6 +173,11 @@ class ExamController extends Controller
         $degree = $request->degree;
         if (auth()->user()->category_id == 1) {
             $exam = TypeExam::where('id', $exam_id)->first();
+            $typeexam =  TypeexamResult::whereExamId($exam_id)->whereStudentId(auth()->id())->first();
+
+            if ($typeexam) {
+                $typeexam->delete();
+            }
             if (is_null($exam)) {
                 return response()->json([
                     'status' => false,
@@ -204,6 +195,11 @@ class ExamController extends Controller
             }
         } else if (auth()->user()->category_id == 2) {
             $exam = TypescollegeExam::where('id', $exam_id)->first();
+            $typeexam =  TypescollegeExamResult::whereExamId($exam_id)->whereStudentId(auth()->id())->first();
+
+            if ($typeexam) {
+                $typeexam->delete();
+            }
             if (is_null($exam)) {
                 return response()->json([
                     'status' => false,
@@ -221,6 +217,47 @@ class ExamController extends Controller
             }
         }
     }
+
+    public function start_exam(Request $request)
+    {
+        $exam_id = $request->exam_id;
+        if (auth()->user()->category_id == 1) {
+            $exam = TypeExam::where('id', $exam_id)->first();
+            if (is_null($exam)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'لا يوجد امتحان بهذا الاسم'
+                ]);
+            } else {
+                $typeexam = new TypeexamResult;
+                $typeexam->student_id = auth()->id();
+                $typeexam->exam_id = $exam_id;
+                $typeexam->exam_score = $exam->score;
+                $typeexam->student_id = auth()->id();
+                $typeexam->student_score = 0;
+                $typeexam->save();
+                return response()->json(['status' => true, 'message' => 'تم بدأ الامتحان بنجاح']);
+            }
+        } else if (auth()->user()->category_id == 2) {
+            $exam = TypescollegeExam::where('id', $exam_id)->first();
+            if (is_null($exam)) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'لا يوجد امتحان بهذا الاسم'
+                ]);
+            } else {
+                $typeexam = new TypescollegeexamResult;
+                $typeexam->student_id = auth()->id();
+                $typeexam->exam_id = $exam_id;
+                $typeexam->exam_score = $exam->score;
+                $typeexam->student_id = auth()->id();
+                $typeexam->student_score = 0;
+                $typeexam->save();
+                return response()->json(['status' => true, 'message' => 'تم بدأ الامتحان بنجاح']);
+            }
+        }
+    }
+
     public function sendlesson_exam_result(Request $request)
     {
         $exam_id = $request->exam_id;
