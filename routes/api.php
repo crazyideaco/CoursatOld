@@ -100,6 +100,7 @@ Route::group(['namespace' => 'api'], function () {
     Route::post('send_attendance', 'SkipLessonController@send_attendance')->middleware('auth:api');
     Route::post('build_custom_exam', 'ExamController@build_custom_exam')->middleware('auth:api');
     Route::post('sendcourse_exam_result', 'ExamController@sendcourse_exam_result')->middleware('auth:api');
+    Route::post('start_exam', 'ExamController@start_exam')->middleware('auth:api');
     Route::post('sendlesson_exam_result', 'ExamController@sendlesson_exam_result')->middleware('auth:api');
 
     //
