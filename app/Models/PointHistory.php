@@ -10,6 +10,7 @@ use App\City;
 use App\Users;
 use App\Category;
 use App\Models\PaymentWay;
+use App\User;
 
 class PointHistory extends Model
 {

@@ -10,11 +10,13 @@ use App\City;
 use App\Users;
 use App\Category;
 use App\Models\PaymentWay;
+use App\User;
 
 class PointRequest extends Model
 {
     protected  $guarded = [];
     protected $table = "point_requests";
+
     public function user()
     {
         return $this->belongsto(User::class, 'user_id');
