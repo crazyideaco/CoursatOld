@@ -34,7 +34,7 @@ class StudentController extends Controller
         try {
             $user = auth()->user();
             $rules = [
-                "is_online" => "required|integer|between:1,0",
+                "is_online" => "required|integer",//|between:1,0
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
