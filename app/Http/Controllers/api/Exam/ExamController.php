@@ -33,37 +33,37 @@ class ExamController extends Controller
                 //  dd(auth()->user()->stutypes->pluck('id'));
                 $exam = TypeExam::find($request->exam_id);
 
-                // $examresult = TypeexamResult::where('student_id', auth()->id())->where('exam_id',$exam->id)->first();
-                // if ($examresult) {
-                //     return response()->json([
-                //         'status' => false,
-                //         'message' => "لقد دخلت هذا الامتحان من قبل"
-                //     ]);
-                // }
-                //     $typeexam = new TypeexamResult;
-                //     $typeexam->student_id = auth()->id();
-                //     $typeexam->exam_id = $exam->id;
-                //     $typeexam->exam_score = $exam->score;
-                //     // $typeexam->student_score = $degree;
-                //     $typeexam->save();
+                $examresult = TypeexamResult::where('student_id', auth()->id())->where('exam_id',$exam->id)->first();
+                if ($examresult) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => "لقد دخلت هذا الامتحان من قبل"
+                    ]);
+                }
+                    $typeexam = new TypeexamResult;
+                    $typeexam->student_id = auth()->id();
+                    $typeexam->exam_id = $exam->id;
+                    $typeexam->exam_score = $exam->score;
+                    // $typeexam->student_score = $degree;
+                    $typeexam->save();
 
 
             } else if (auth()->user()->category_id == 2) {
                 $exam = TypescollegeExam::find($request->exam_id);
 
-                // $examresult = TypescollegeexamResult::where('student_id', auth()->id())->where('exam_id',$exam->id)->first();
-                // if ($examresult) {
-                //     return response()->json([
-                //         'status' => false,
-                //         'message' => "لقد دخلت هذا الامتحان من قبل"
-                //     ]);
-                // }
-                //     $typeexam = new TypescollegeexamResult;
-                //     $typeexam->student_id = auth()->id();
-                //     $typeexam->exam_id = $exam->id;
-                //     $typeexam->exam_score = $exam->score;
-                //     // $typeexam->student_score = $degree;
-                //     $typeexam->save();
+                $examresult = TypescollegeexamResult::where('student_id', auth()->id())->where('exam_id',$exam->id)->first();
+                if ($examresult) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => "لقد دخلت هذا الامتحان من قبل"
+                    ]);
+                }
+                    $typeexam = new TypescollegeexamResult;
+                    $typeexam->student_id = auth()->id();
+                    $typeexam->exam_id = $exam->id;
+                    $typeexam->exam_score = $exam->score;
+                    // $typeexam->student_score = $degree;
+                    $typeexam->save();
 
             }
 
