@@ -8,13 +8,13 @@
 @endsection
 @section('content')
 	<!--begin::Card-->
-    {{-- <div class="container">
+    <div class="container">
 
     <div class="card card-custom gutter-b">
 
         <div class="card-header flex-wrap py-3">
 										<div class="card-title">
-											<h3 class="card-label">الاشتراكات
+											<h3 class="card-label">تاريخ النقاط
 </h3>
 										</div>
 
@@ -27,7 +27,7 @@
 
                      ],true) !!}
             <!--end: Datatable-->
- --}}
+
  <div class="page-body">
     <div class="container">
         <!--start heed-->
@@ -119,5 +119,5 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
     {{ $dataTable->scripts() }}
-    
+
  @endsection
