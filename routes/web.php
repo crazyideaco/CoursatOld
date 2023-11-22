@@ -389,6 +389,11 @@
         Route::get('type_joins', 'TypeJoinController@index')->name('type_joins');
         Route::get('accept_type_join/{id}', 'TypeJoinController@accept_type_join')->name('accept_type_join');
         Route::get('refuse_type_join/{id}', 'TypeJoinController@refuse_type_join')->name('refuse_type_join');
+
+        Route::get('point_requests', 'PointRequestController@index')->name('point_requests');
+        Route::get('point_requests', 'PointRequestController@pointhistory_index')->name('point_requests.pointhistory_index');
+        Route::get('accept_point_request/{id}', 'PointRequestController@accept_point_request')->name('accept_point_request');
+        Route::get('refuse_point_request/{id}', 'PointRequestController@refuse_point_request')->name('refuse_point_request');
     });
 
     Route::group(['middleware' => ['auth', 'college']], function () {
