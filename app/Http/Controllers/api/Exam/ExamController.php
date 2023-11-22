@@ -34,30 +34,20 @@ class ExamController extends Controller
                 $exam = TypeExam::find($request->exam_id);
 
                 $typeexam =  TypeexamResult::whereExamId($request->exam_id)->whereStudentId(auth()->id())->first();
-                if ($typeexam) {
-                    return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
-                }
-                // $typeexam = new TypeexamResult;
-                // $typeexam->student_id = auth()->id();
-                // $typeexam->exam_id = $exam->id;
-                // $typeexam->exam_score = $exam->score;
-                // // $typeexam->student_score = $degree;
-                // $typeexam->save();
+                // if ($typeexam) {
+                //     return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
+                // }
+
 
 
             } else if (auth()->user()->category_id == 2) {
                 $exam = TypescollegeExam::find($request->exam_id);
 
                 $typeexam =  TypescollegeExamResult::whereExamId($request->exam_id)->whereStudentId(auth()->id())->first();
-                if ($typeexam) {
-                    return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
-                }
-                // $typeexam = new TypescollegeexamResult;
-                // $typeexam->student_id = auth()->id();
-                // $typeexam->exam_id = $exam->id;
-                // $typeexam->exam_score = $exam->score;
-                // // $typeexam->student_score = $degree;
-                // $typeexam->save();
+                // if ($typeexam) {
+                //     return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
+                // }
+
 
             }
 
@@ -79,7 +69,10 @@ class ExamController extends Controller
                     // Exam is in the past
                     $availability = 0;
                     $message = "هذا الامتحان انتهي و لم يعد متاح ";
-                } else {
+                } elseif ($typeexam) {
+                    return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
+                }
+                else {
                     // Exam is not in the future, and student has not entered before
                     $availability = 1;
                     $message = "هذا الامتحان متاح";
