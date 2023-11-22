@@ -285,4 +285,12 @@ class User extends Authenticatable
         }
     }
 
+    public function getOnlineStatusAttribute(){
+        if($this->is_online == 1){
+            return "Online";
+        }else{
+            return "Offline";
+        }
+    }
+
 }

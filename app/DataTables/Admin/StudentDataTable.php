@@ -70,6 +70,9 @@ class StudentDataTable extends DataTable
                         break;
                 }
             })
+            ->editColumn('is_online', function ($row) {
+                return $row->getOnlineStatusAttribute();
+            })
             ->editColumn('created_at', function ($row) {
                 return  $row->created_at ? $row->created_at->format('Y-m-d') : '';
             })
@@ -78,6 +81,7 @@ class StudentDataTable extends DataTable
                 'courses',
                 'centers',
                 'category_id',
+                'is_online',
             ])
             ->filter(function ($query) use ($request) {
                 if (
@@ -171,6 +175,7 @@ class StudentDataTable extends DataTable
             Column::make("centers")->title("المنصة"),
             Column::make("category_id")->title("نوع التعليم"),
             Column::make("year")->title("السنة"),
+            Column::make("is_online")->title("حالة الظهور"),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
