@@ -46,7 +46,7 @@ class PointController extends Controller
         }
 
         PointRequest::create($data);
-        $msg =  " تم طلب". $request->points .  "نقاط ";
+        $msg = "تم طلب " . $request->points . " نقاط";
         return response()->json([
             "status" => true,
             "message" => $msg,
