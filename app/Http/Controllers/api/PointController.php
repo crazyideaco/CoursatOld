@@ -42,7 +42,7 @@ class PointController extends Controller
             $image = $request->image;
             $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
             $point_image = time() . '.' . $image->getClientOriginalExtension();
-            $data['image'] = base64_decode($point_image);
+           $data['points'] = $point_image;
         }
 
         PointRequest::create($data);

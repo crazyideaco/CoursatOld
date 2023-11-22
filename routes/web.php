@@ -391,7 +391,7 @@
         Route::get('refuse_type_join/{id}', 'TypeJoinController@refuse_type_join')->name('refuse_type_join');
 
         Route::get('point_requests', 'PointRequestController@index')->name('point_requests');
-        Route::get('point_requests', 'PointRequestController@pointhistory_index')->name('point_requests.pointhistory_index');
+        Route::get('point_histories', 'PointRequestController@pointhistory_index')->name('point_requests.point_histories');
         Route::get('accept_point_request/{id}', 'PointRequestController@accept_point_request')->name('accept_point_request');
         Route::get('refuse_point_request/{id}', 'PointRequestController@refuse_point_request')->name('refuse_point_request');
     });
