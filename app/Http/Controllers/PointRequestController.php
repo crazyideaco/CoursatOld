@@ -61,7 +61,7 @@ class PointRequestController extends Controller
     }
     public function pointhistory_index(PointHistoryDataTable $dataTable)
     {
-        return $dataTable->render($this->view . 'pointhistory_index');
+        return $dataTable->render($this->view . 'point_histories');
     }
 
     public function accept_point_request($id)
