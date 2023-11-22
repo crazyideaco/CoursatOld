@@ -37,9 +37,7 @@ class ExamController extends Controller
                 // if ($typeexam) {
                 //     return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
                 // }
-
-
-
+                
             } else if (auth()->user()->category_id == 2) {
                 $exam = TypescollegeExam::find($request->exam_id);
 
@@ -50,7 +48,7 @@ class ExamController extends Controller
 
 
             }
-            
+
             $student = $exam->students()->where('users.id', auth()->id())->first();
 
             $from =  $exam->getStartDateTimeAttribute()->format('Y-m-d H:i:s');
@@ -97,6 +95,7 @@ class ExamController extends Controller
 
             //     return $this->dataResponse($message, $availability, 200);
             // }
+
 
             return $this->dataResponse($message, $availability, 200);
 
