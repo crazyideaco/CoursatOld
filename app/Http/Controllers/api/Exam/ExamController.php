@@ -33,37 +33,31 @@ class ExamController extends Controller
                 //  dd(auth()->user()->stutypes->pluck('id'));
                 $exam = TypeExam::find($request->exam_id);
 
-                $examresult = TypeexamResult::where('student_id', auth()->id())->where('exam_id',$exam->id)->first();
-                if ($examresult) {
-                    return response()->json([
-                        'status' => false,
-                        'message' => "لقد دخلت هذا الامتحان من قبل"
-                    ]);
+                $typeexam =  TypeexamResult::whereExamId($request->exam_id)->whereStudentId(auth()->id())->first();
+                if ($typeexam) {
+                    return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
                 }
-                    // $typeexam = new TypeexamResult;
-                    // $typeexam->student_id = auth()->id();
-                    // $typeexam->exam_id = $exam->id;
-                    // $typeexam->exam_score = $exam->score;
-                    // // $typeexam->student_score = $degree;
-                    // $typeexam->save();
+                // $typeexam = new TypeexamResult;
+                // $typeexam->student_id = auth()->id();
+                // $typeexam->exam_id = $exam->id;
+                // $typeexam->exam_score = $exam->score;
+                // // $typeexam->student_score = $degree;
+                // $typeexam->save();
 
 
             } else if (auth()->user()->category_id == 2) {
                 $exam = TypescollegeExam::find($request->exam_id);
 
-                $examresult = TypescollegeexamResult::where('student_id', auth()->id())->where('exam_id',$exam->id)->first();
-                if ($examresult) {
-                    return response()->json([
-                        'status' => false,
-                        'message' => "لقد دخلت هذا الامتحان من قبل"
-                    ]);
+                $typeexam =  TypescollegeExamResult::whereExamId($request->exam_id)->whereStudentId(auth()->id())->first();
+                if ($typeexam) {
+                    return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
                 }
-                    // $typeexam = new TypescollegeexamResult;
-                    // $typeexam->student_id = auth()->id();
-                    // $typeexam->exam_id = $exam->id;
-                    // $typeexam->exam_score = $exam->score;
-                    // // $typeexam->student_score = $degree;
-                    // $typeexam->save();
+                // $typeexam = new TypescollegeexamResult;
+                // $typeexam->student_id = auth()->id();
+                // $typeexam->exam_id = $exam->id;
+                // $typeexam->exam_score = $exam->score;
+                // // $typeexam->student_score = $degree;
+                // $typeexam->save();
 
             }
 
@@ -77,7 +71,7 @@ class ExamController extends Controller
                 $message = "لقد دخلت هذا الامتحان من قبل";
             } else {
                 // Student has not entered the exam before
-                if ($from > Carbon::now() ) {
+                if ($from > Carbon::now()) {
                     // Exam is in the future
                     $availability = 0;
                     $message = "   لم يبدأ هذا الامتحان  غير متاح حاليًا";
@@ -114,7 +108,5 @@ class ExamController extends Controller
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
-
     }
-
 }//End of controller
