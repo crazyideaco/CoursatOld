@@ -136,7 +136,7 @@ class StudentDataTable extends DataTable
                             return $typeq->where('typescollege.id', (int)$request->type_college_id);
                         });
                     })
-                    ->when($request->is_online != null && $request->is_online != 0, function ($q) use ($request) {
+                    ->when($request->is_online != null , function ($q) use ($request) {
                         return $q->where('is_online', (int)$request->is_online);
                     })
                     ;
