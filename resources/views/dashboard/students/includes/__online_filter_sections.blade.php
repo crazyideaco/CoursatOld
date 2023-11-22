@@ -29,8 +29,8 @@
     {{-- <label>الكورسات </label> --}}
     <select class="form-control selectpicker" name="is_online" id="is_online" onchange="filter_students();"
         title="اختر حالة الاونلاين او الاوفلاين">
-        <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option>
-        <option value="1" selected="selected" disabled="disabled">اختر الكورسات</option>
+        <option value="0" >Online</option>
+        <option value="1" >Offline</option>
 
     </select>
     @error('is_online')
