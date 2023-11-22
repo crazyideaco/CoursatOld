@@ -37,9 +37,7 @@ class ExamController extends Controller
                 // if ($typeexam) {
                 //     return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
                 // }
-
-
-
+                
             } else if (auth()->user()->category_id == 2) {
                 $exam = TypescollegeExam::find($request->exam_id);
 
@@ -70,7 +68,10 @@ class ExamController extends Controller
                     $availability = 0;
                     $message = "هذا الامتحان انتهي و لم يعد متاح ";
                 } elseif ($typeexam) {
-                    return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
+                    $availability = 0;
+                    $message = "لقد دخلت هذا الامتحان من قبل";
+
+                    // return $this->errorResponse("لقد دخلت هذا الامتحان من قبل", 200);
                 }
                 else {
                     // Exam is not in the future, and student has not entered before
@@ -94,6 +95,7 @@ class ExamController extends Controller
 
             //     return $this->dataResponse($message, $availability, 200);
             // }
+
 
             return $this->dataResponse($message, $availability, 200);
 
