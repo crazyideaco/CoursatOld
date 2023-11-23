@@ -433,8 +433,7 @@ class AuthController extends Controller
                 $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
             }
 
-            /**
-                // Convert the collection to an array
+            /**Convert the collection to an array
                 $subjectsArray = $subjects->toArray();
 
                 // Initialize the special subject
