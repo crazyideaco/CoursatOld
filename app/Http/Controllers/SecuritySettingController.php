@@ -42,7 +42,7 @@ class SecuritySettingController extends Controller
         $security_setting->update($data);
 
 
-        view('types.index', compact('id'));
+        view('types', compact('id'));
 
     }
 }
