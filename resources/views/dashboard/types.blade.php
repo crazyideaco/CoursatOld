@@ -235,7 +235,7 @@
                                                     data-target="#myModal{{ $type->id }}">create qrcode</span>
                                                 <a href="{{ route('types.patches', $type->id) }}" title="QrCode History"
                                                     class="text-dark ml-2"><i class="fas fa-cog"></i></a>
-                                                <a href="{{ route('security', $type->id) }}"
+                                                <a href="{{ route('security', $type->id) }}" title="اعدادات الامان"
                                                     class="text-dark ml-2"><i class="fas fa-cog"></i></a>
                                             </td>
                                         </tr>

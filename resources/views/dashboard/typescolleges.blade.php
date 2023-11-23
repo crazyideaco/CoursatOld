@@ -276,7 +276,8 @@
                                             <a href="{{ route('typecolleges.typecollege_patches', $typescollege->id) }}"
                                                 title="QrCode History" class="text-dark ml-2"><i
                                                     class="fas fa-cog"></i></a>
-                                            <a href="{{ route('college_security', $typescollege->id) }}" class="text-dark ml-2"><i
+                                            <a href="{{ route('college_security', $typescollege->id) }}"
+                                                title="اعدادات الامان" class="text-dark ml-2"><i
                                                     class="fas fa-cog"></i></a>
                                         </td>
                                     </tr>

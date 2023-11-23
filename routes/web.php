@@ -659,6 +659,8 @@
 
     Route::get('qrcodes/{id}', 'QrCodeController@index')->name('types.qrcodes');
 
+    //course_code_status
+    Route::post('course_code_status', 'CourseCodeController@course_code_status')->name('course_code_status');
 
     //store_course_college_qrcode
     Route::post('store_course_college_qrcode', 'CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
