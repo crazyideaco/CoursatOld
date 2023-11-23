@@ -44,7 +44,7 @@ class CourseCodeController extends Controller
                     return response()->json([
                         'status' => true,
                         'message' => 'course_code_status',
-                        'data' => CourseCodeResource::collection($security),
+                        'data' => new CourseCodeResource($security),
                     ]);
                 } else {
                     return response()->json([
@@ -58,7 +58,7 @@ class CourseCodeController extends Controller
                     return response()->json([
                         'status' => true,
                         'message' => 'course_code_status',
-                        'data' => CourseCodeResource::collection($security),
+                        'data' => new CourseCodeResource($security),
                     ]);
                 } else {
                     return response()->json([
