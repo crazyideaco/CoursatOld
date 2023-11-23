@@ -38,11 +38,7 @@ class SecuritySettingController extends Controller
         }
 
         $data['simulator'] = $request->simulator;
-        if ($request->simulator == 0) {
-            $data['simulator'] = null;
-        } else {
-            $data['simulator'] = $request->simulator;
-        }
+        
 
         $data['typeable_id'] = $id;
         $data['typeable_type'] = Type::class;
