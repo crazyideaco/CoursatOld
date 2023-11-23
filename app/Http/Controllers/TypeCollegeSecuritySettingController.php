@@ -5,24 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\SecuritySetting;
 use App\Type;
+use App\TypesCollege;
 use Illuminate\Http\Request;
 
-class SecuritySettingController extends Controller
+class TypeCollegeSecuritySettingController extends Controller
 {
-    protected $view = 'dashboard.security.';
-    protected $route = 'security.';
+    protected $view = 'dashboard.college_security.';
+    protected $route = 'college_security.';
 
 
     public function index($id)
     {
-        $security_setting = SecuritySetting::whereTypeableId($id)->whereTypeableType(Type::class)->firstOrNew();
+        $security_setting = SecuritySetting::whereTypeableId($id)->whereTypeableType(TypesCollege::class)->firstOrNew();
         return view($this->view . 'index', compact('security_setting', 'id'));
     }
 
 
     public function update(Request $request, $id)
     {
-        $security_setting = SecuritySetting::whereTypeableId($id)->whereTypeableType(Type::class)->firstOrCreate();
+        $security_setting = SecuritySetting::whereTypeableId($id)->whereTypeableType(TypesCollege::class)->firstOrCreate();
 
 
         $data['show_video_code'] = $request->show_video_code;
@@ -41,7 +42,7 @@ class SecuritySettingController extends Controller
 
 
         $data['typeable_id'] = $id;
-        $data['typeable_type'] = Type::class;
+        $data['typeable_type'] = TypesCollege::class;
 
         $security_setting->update($data);
 
