@@ -42,8 +42,7 @@ class SecuritySettingController extends Controller
         $security_setting->update($data);
 
 
-        return redirect()->back()
-        ->with(['success'=> 'تم التعديل']);
+        view('types.index', compact('id'));
 
     }
 }
