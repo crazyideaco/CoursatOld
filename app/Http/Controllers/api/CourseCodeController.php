@@ -49,7 +49,7 @@ class CourseCodeController extends Controller
                     ]);
                 }else {
                     return response()->json([
-                        'status' => false, 'message' => 'لا يجد اعدادات بهذا ال الاسم',
+                        'status' => false, 'message' => 'لا يجد اعدادات لهذا الكورس',
                     ]);
                 }
                 } else {
@@ -69,7 +69,7 @@ class CourseCodeController extends Controller
                     ]);
                     }else {
                         return response()->json([
-                            'status' => false, 'message' => 'لا يجد اعدادات بهذا ال الاسم',
+                            'status' => false, 'message' => 'لا يجد اعدادات لهذا الكورس',
                         ]);
                     }
 
