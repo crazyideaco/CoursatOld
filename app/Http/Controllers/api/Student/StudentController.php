@@ -16,7 +16,7 @@ class StudentController extends Controller
     {
         $user = auth()->user();
         $rules = [
-            "key" => "required|integer|between:1,2",
+            "key" => "required|integer",//|between:1,2
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
