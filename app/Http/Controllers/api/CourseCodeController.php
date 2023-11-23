@@ -41,11 +41,17 @@ class CourseCodeController extends Controller
                 $type1 = Type::where('id', $request->course_id)->first();
                 if ($type1) {
                     $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(Type::class)->firstOrCreate();
+                    if($security){
                     return response()->json([
                         'status' => true,
                         'message' => 'course_code_status',
                         'data' => new CourseCodeResource($security),
                     ]);
+                }else {
+                    return response()->json([
+                        'status' => false, 'message' => 'لا يجد اعدادات بهذا ال الاسم',
+                    ]);
+                }
                 } else {
                     return response()->json([
                         'status' => false, 'message' => 'لا يوجد كورس با ال الاسم',
@@ -55,11 +61,18 @@ class CourseCodeController extends Controller
                 $type1 = TypesCollege::where('id', $request->course_id)->first();
                 if ($type1) {
                     $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(TypesCollege::class)->firstOrCreate();
-                    return response()->json([
+                    if($security){
+                        return response()->json([
                         'status' => true,
                         'message' => 'course_code_status',
                         'data' => new CourseCodeResource($security),
                     ]);
+                    }else {
+                        return response()->json([
+                            'status' => false, 'message' => 'لا يجد اعدادات بهذا ال الاسم',
+                        ]);
+                    }
+
                 } else {
                     return response()->json([
                         'status' => false, 'message' => 'لا يجد كور بهذا ال الاسم',
