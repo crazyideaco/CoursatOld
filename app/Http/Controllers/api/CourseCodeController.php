@@ -40,7 +40,7 @@ class CourseCodeController extends Controller
             if (auth()->user()->category_id == 1) {
                 $type1 = Type::where('id', $request->course_id)->first();
                 if ($type1) {
-                    $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(Type::class)->firstOrCreate();
+                    $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(Type::class)->first();
                     if($security){
                     return response()->json([
                         'status' => true,
@@ -60,7 +60,7 @@ class CourseCodeController extends Controller
             } else if (auth()->user()->category_id == 2) {
                 $type1 = TypesCollege::where('id', $request->course_id)->first();
                 if ($type1) {
-                    $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(TypesCollege::class)->firstOrCreate();
+                    $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(TypesCollege::class)->first();
                     if($security){
                         return response()->json([
                         'status' => true,
