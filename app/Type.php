@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\QrCode;
+use App\Models\SecuritySetting;
 use Illuminate\Database\Eloquent\Model;
 use App\Year;
 use App\Subject;
@@ -72,5 +73,10 @@ class Type extends Model
     public function qrcodes(): MorphMany
     {
         return $this->morphMany(QrCode::class, 'typeable');
+    }
+
+    public function security_settings(): MorphMany
+    {
+        return $this->morphMany(SecuritySetting::class, 'typeable');
     }
 }
