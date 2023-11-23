@@ -28,7 +28,7 @@ Route::group(['namespace' => 'api'], function () {
 
     Route::post("setAvatar", "Student\SetAvatarController@setAvatar")->middleware('auth:api');
     // Route for switching centers
-    Route::post('switchCenter', "Student\StudentController@switchCenter")->middleware('auth:api');
+    Route::post('switch', "Student\StudentController@switchCenter")->middleware('auth:api');
     Route::post('change_online_status', "Student\StudentController@change_online_status")->middleware('auth:api');
     Route::get("fetchPaymentway", "FetchPaymentwayController@fetchPaymentway");
     Route::post('login', 'AuthController@login')->name('login');
