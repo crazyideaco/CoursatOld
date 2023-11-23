@@ -264,7 +264,7 @@
                                 {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
                                 @foreach ($subject_colleges as $subject_college)
                                 <option value="{{ $subject_college->id }}"
-                                    @if($subject_college->id == $reel->information->subject_college_id)
+                                    @if($subject_college->id == $reel->information->subjectscollege_id)
                                     selected
                                     @endif
                                     >
