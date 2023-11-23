@@ -43,7 +43,7 @@
                     <div class="col-12">
                         <div class="input-group">
                             <label class="form-label"> الاسم</label>
-                            <input required type="text" name="name" placeholder="الاسم" class="form-control">
+                            <input required type="text" value="{{$reel->name ?? ''}}" name="name" placeholder="الاسم" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="col-12">
                         <div class="input-group">
                             <label class="form-label"> لينك الفيديو</label>
-                            <input required type="text" name="video" placeholder="لينك الفيديو" class="form-control">
+                            <input required type="text" value="{{$reel->video ?? ''}}" name="video" placeholder="لينك الفيديو" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -67,13 +67,13 @@
 
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="category_id" id="radio1"
-                                    onchange="toggleRow()" value="1">
+                                    onchange="toggleRow()" value="1" @if($reel->category_id == 1) checked @endif>
                                 <label class="form-check-label" for="radio1">اساسي</label>
                             </div>
 
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="category_id" id="radio2"
-                                    onchange="toggleRow()" value="2">
+                                    onchange="toggleRow()" value="2" @if($reel->category_id == 2) checked @endif>
                                 <label class="form-check-label" for="radio2">جامعي</label>
                             </div>
 
