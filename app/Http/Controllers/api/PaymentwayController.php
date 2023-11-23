@@ -8,11 +8,11 @@ use App\Models\PaymentWay;
 use App\Traits\ApiTrait;
 use Illuminate\Http\Request;
 
-class FetchPaymentwayController extends Controller
+class PaymentwayController extends Controller
 {
 
 use ApiTrait;
-    public function fetchPaymentway () {
+    public function fetchPaymentWays () {
         $payments= PaymentWay::get();
         return  $this->dataResponse("payments collection",paymentwayResource::collection($payments));
     }

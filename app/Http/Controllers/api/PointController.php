@@ -27,6 +27,7 @@ class PointController extends Controller
         $rules = [
             "payment_method_id" => "required|exists:payment_ways,id",
             "points" => "required",
+            "image" => "required",
         ];
         $validator = Validator::make($request->all(), $rules);
 
@@ -47,9 +48,10 @@ class PointController extends Controller
 
         PointRequest::create($data);
         $msg = "تم طلب " . $request->points . " نقاط";
-        return response()->json([
-            "status" => true,
-            "message" => $msg,
-        ]);
+        return $this->successResponse($msg);
+        // return response()->json([
+        //     "status" => true,
+        //     "message" => $msg,
+        // ]);
     }
 }

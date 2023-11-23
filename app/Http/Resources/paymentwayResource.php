@@ -19,7 +19,8 @@ class paymentwayResource extends JsonResource
             "id"=>$this->id,
             'title'=>$this->name,
             'number'=>$this->number,
-            'creator_name' => $this->creator->name,
+            "image" => $this->image ?? "",
+            // 'creator_name' => $this->creator->name,
         ];
     }
 }

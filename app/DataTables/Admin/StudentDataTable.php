@@ -194,6 +194,7 @@ class StudentDataTable extends DataTable
             Column::make("centers")->title("المنصة"),
             Column::make("category_id")->title("نوع التعليم"),
             Column::make("year")->title("السنة"),
+            Column::make("device_id")->title("رقم الجهاز")->visible(false),
             Column::make("is_online")->title("حالة الظهور"),
             Column::make("online_date")->title("تاريخ الظهور"),
             Column::make("offline_date")->title("تاريخ أخر ظهور"),
