@@ -55,7 +55,7 @@ div#dataTableBuilder_length {
             <div class="main_topic">
                 <h4> اعدادات الامان</h4>
             </div>
-            <form method="post" class="form_topic" action="{{ route('security.update', $id) }}" enctype="multipart/form-data">
+            <form method="post" class="form_topic" action="{{ route('college_security.update', $id) }}" enctype="multipart/form-data">
                 @csrf
 
                 <!-- start input -->
