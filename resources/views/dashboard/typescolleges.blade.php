@@ -228,7 +228,7 @@
 
 
                                         <td scope="row" class="text-center">
-                                            {{ $typescollege->center ? $typescollege->center->name ?? 'المنصه العامه' :  "المنصه العامه" }}
+                                            {{ $typescollege->center ? $typescollege->center->name ?? 'المنصه العامه' : 'المنصه العامه' }}
                                         </td>
 
                                         <td scope="row" class="text-center">
@@ -272,13 +272,16 @@
                                                 الطلاب المحذوفين
                                             </a>
                                             <span class="btn btn-success btn-sm" data-toggle="modal"
-                                                    data-target="#myModal{{ $typescollege->id }}">create qrcode</span>
+                                                data-target="#myModal{{ $typescollege->id }}">create qrcode</span>
                                             <a href="{{ route('typecolleges.typecollege_patches', $typescollege->id) }}"
-                                                title="QrCode History"
-                                                class="text-dark ml-2"><i class="fas fa-cog"></i></a>
+                                                title="QrCode History" class="text-dark ml-2"><i
+                                                    class="fas fa-cog"></i></a>
+                                            <a href="{{ route('college_security', $typescollege->id) }}" class="text-dark ml-2"><i
+                                                    class="fas fa-cog"></i></a>
                                         </td>
                                     </tr>
-                                    <div class="modal" id="myModal{{ $typescollege->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal" id="myModal{{ $typescollege->id }}" tabindex="-1"
+                                        role="dialog" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
 
@@ -286,7 +289,8 @@
                                                 <div class="modal-header">
                                                     <h4 class="modal-title">create qrcode
                                                     </h4>
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
                                                 </div>
 
                                                 <!-- Modal body -->
@@ -312,7 +316,8 @@
                                                             onclick="store_qrcodes({{ $typescollege->id }})">save</button>
 
                                                         <button class="btn btn-primary waves-effect waves-light mr-12"
-                                                            type="button" onclick=" printDiv('qrcodes{{ $typescollege->id }}');">
+                                                            type="button"
+                                                            onclick=" printDiv('qrcodes{{ $typescollege->id }}');">
                                                             طباعة ال QR
                                                         </button>
 

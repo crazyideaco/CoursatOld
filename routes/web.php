@@ -519,6 +519,9 @@
 
         Route::get('security/{id}', 'SecuritySettingController@index')->name('security');
         Route::post('security/update/{id}', 'SecuritySettingController@update')->name('security.update');
+
+        Route::get('college_security/{id}', 'TypeCollegeSecuritySettingController@index')->name('college_security');
+        Route::post('college_security/update/{id}', 'TypeCollegeSecuritySettingController@update')->name('college_security.update');
     });
 
 
