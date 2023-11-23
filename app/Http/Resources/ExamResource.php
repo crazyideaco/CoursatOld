@@ -38,7 +38,7 @@ class ExamResource extends JsonResource
             'lecturer_name' => $this->user ? $this->user->name : '',
             'date_day' => $this->date_day,
             'questions' => QuestionResource::collection($this->questions),
-            'result' => $exam_result ? $exam_result : ''
+            'result_id' => $exam_result ? $exam_result->id : ''
 
 
         ];
