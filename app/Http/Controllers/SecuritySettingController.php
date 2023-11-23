@@ -16,34 +16,41 @@ class SecuritySettingController extends Controller
     public function index($id)
     {
         $security_setting = SecuritySetting::whereTypeableId($id)->firstOrNew();
-        return view($this->view . 'index', compact('security_setting','id'));
+        return view($this->view . 'index', compact('security_setting', 'id'));
     }
 
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $security_setting = SecuritySetting::whereTypeableId($id)->firstOrCreate();
 
 
-        $data['show_video_code']=$request->show_video_code;
-        if($request->show_video_code == 0){
-            $data['video_code_type']=null;
-            }else{
-        $data['video_code_type']=$request->video_code_type;
-            }
-        if($request->video_code_type == 2){
-            $data['code_duration']=$request->code_duration;
-            }else{
-        $data['code_duration'] = null ;
-            }
-        $data['typeable_id']=$id;
-        $data['typeable_type']=Type::class;
+        $data['show_video_code'] = $request->show_video_code;
+        if ($request->show_video_code == 0) {
+            $data['video_code_type'] = null;
+        } else {
+            $data['video_code_type'] = $request->video_code_type;
+        }
+        if ($request->video_code_type == 2) {
+            $data['code_duration'] = $request->code_duration;
+        } else {
+            $data['code_duration'] = null;
+        }
+
+        $data['simulator'] = $request->simulator;
+        if ($request->simulator == 0) {
+            $data['simulator'] = null;
+        } else {
+            $data['simulator'] = $request->simulator;
+        }
+
+        $data['typeable_id'] = $id;
+        $data['typeable_type'] = Type::class;
 
         $security_setting->update($data);
 
 
         return redirect()->back()
-        ->with(['success'=> 'تم التعديل']);
-
+            ->with(['success' => 'تم التعديل']);
     }
 }
