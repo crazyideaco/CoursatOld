@@ -141,6 +141,28 @@ div#dataTableBuilder_length {
                     </div>
                 </div>
 
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <label class="form-label">محاكي</label>
+                            <div class="form-check form-check-inline">
+                                <input @if ($security_setting && $security_setting->simulator == 1) checked @endif onchange="toggleCode()"
+                                    class="form-check-input" type="radio" id="inlineCheckbox6" value="1"
+                                    name="simulator">
+                                <label class="form-check-label" for="inlineCheckbox6">نعم</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input @if ($security_setting && $security_setting->simulator == 0) checked @endif onchange="toggleCode()"
+                                    name="simulator" class="form-check-input" type="radio" id="inlineCheckbox7"
+                                    value="0">
+                                <label class="form-check-label" for="inlineCheckbox7">لا</label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-lg-6">
                         <button type="submit" class="btn first">حفظ</button>
