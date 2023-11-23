@@ -112,6 +112,7 @@ Route::group(['namespace' => 'api'], function () {
 
 
     Route::post('join_by_qr', 'QrController@join_by_qr')->middleware('auth:api');
+    Route::post('course_code_status', 'CourseCodeController@course_code_status')->middleware('auth:api');
     Route::get('fetch_reels', 'AppReelController@fetch_reels')->middleware('auth:api');
 
     //Route::get('products/all','api\ProductController@products_all');
