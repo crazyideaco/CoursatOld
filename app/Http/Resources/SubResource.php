@@ -16,11 +16,11 @@ class SubResource extends JsonResource
     {
          $centers = auth()->user()->stdcenters;
        if(auth()->user()->category_id == 1){
-        
-            if(count($centers) > 0){
+
+            if(count($centers) > 0 ){
        $courses =  CourseResource::collection($this->courses()->whereIn('center_id',$centers->pluck('id'))->orWhereIn("user_id",$centers->pluck('id'))->where('active',1)->get());
             }else{
-              $courses =  CourseResource::collection($this->courses()->where('center_id',null)->where('active',1)->get()); 
+              $courses =  CourseResource::collection($this->courses()->where('center_id',null)->where('active',1)->get());
             }
        }else if(auth()->user()->category_id == 2){
          if(count($centers) > 0){
@@ -31,10 +31,10 @@ class SubResource extends JsonResource
            return [
            'id'   => $this->id,
            'title'=>$this->name_ar,
-            
+
            'courses' =>CourseResource::collection($this->courses)
-           
-            
+
+
         ];
     }
 }
