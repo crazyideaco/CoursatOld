@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\SecuritySetting;
+use App\Stage;
 use App\Type;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,7 @@ class SecuritySettingController extends Controller
         $security_setting->update($data);
 
 
-        return view('dashboard.types', compact('id'));
+        return view('dashboard.types', compact('id')) ->with('stages', Stage::all());
 
     }
 }
