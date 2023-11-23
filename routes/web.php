@@ -516,6 +516,9 @@
         Route::get('typecollege_joins', 'TypecollegeJoinController@index')->name('typecollege_joins');
         Route::get('accept_typecollege_join/{id}', 'TypecollegeJoinController@accept_typecollege_join')->name('accept_typecollege_join');
         Route::get('refuse_typecollege_join/{id}', 'TypecollegeJoinController@refuse_typecollege_join')->name('refuse_typecollege_join');
+
+        Route::get('security/{id}', 'SecuritySettingController@index')->name('security');
+        Route::post('security/update/{id}', 'SecuritySettingController@update')->name('security.update');
     });
 
 

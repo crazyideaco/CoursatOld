@@ -9,6 +9,7 @@ use App\College;
 use App\SubjectsCollege;
 use App\Lesson;
 use App\Models\QrCode;
+use App\Models\SecuritySetting;
 use App\University;
 use App\User;
 use App\Typecollege_Rate;
@@ -79,5 +80,10 @@ class TypesCollege extends Model
     public function qrcodes(): MorphMany
     {
         return $this->morphMany(QrCode::class, 'typeable');
+    }
+
+    public function security_settings(): MorphMany
+    {
+        return $this->morphMany(SecuritySetting::class, 'typeable');
     }
 }
