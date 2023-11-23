@@ -146,13 +146,13 @@ class ReelController extends Controller
         $sections = Section::get();
         $universities = University::get();
 
-        $subjectscolleges = SubjectsCollege::get();
+        $subject_colleges = SubjectsCollege::get();
 
         return view($this->view . 'edit', compact(
             'reel',
             'categories',
             'stages','years','subjects',
-            'subjectscolleges',
+            'subject_colleges',
             'universities','colleges',
             'sections','divisions'
             ,'teachers','doctors'
