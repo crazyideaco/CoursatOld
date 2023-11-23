@@ -66,13 +66,13 @@ div#dataTableBuilder_length {
                         <div class="input-group">
                             <label class="form-label"> كود الفيديوهات</label>
                             <div class="form-check form-check-inline">
-                                <input @if ($security_setting && $security_setting->show_video_code == 1) checked @endif onchange="toggleCode()"
+                                <input {{ $security_setting->show_video_code == '1' ? 'checked' : '' }} onchange="toggleCode()"
                                     class="form-check-input" type="radio" id="inlineCheckbox6" value="1"
                                     name="show_video_code">
                                 <label class="form-check-label" for="inlineCheckbox6">عرض</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input @if ($security_setting && $security_setting->show_video_code == 0) checked @endif onchange="toggleCode()"
+                                <input {{ $security_setting->show_video_code == '0' ? 'checked' : '' }} onchange="toggleCode()"
                                     name="show_video_code" class="form-check-input" type="radio" id="inlineCheckbox7"
                                     value="0">
                                 <label class="form-check-label" for="inlineCheckbox7"> اخفاء</label>
@@ -147,13 +147,13 @@ div#dataTableBuilder_length {
                         <div class="input-group">
                             <label class="form-label">محاكي</label>
                             <div class="form-check form-check-inline">
-                                <input @if ($security_setting && $security_setting->simulator == 1) checked @endif onchange="toggleCode()"
+                                <input {{ $security_setting->simulator == '1' ? 'checked' : '' }} onchange="toggleCode()"
                                     class="form-check-input" type="radio" id="inlineCheckbox6" value="1"
                                     name="simulator">
                                 <label class="form-check-label" for="inlineCheckbox6">نعم</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input @if ($security_setting && $security_setting->simulator == 0) checked @endif onchange="toggleCode()"
+                                <input {{ $security_setting->simulator == '0' ? 'checked' : '' }} onchange="toggleCode()"
                                     name="simulator" class="form-check-input" type="radio" id="inlineCheckbox7"
                                     value="0">
                                 <label class="form-check-label" for="inlineCheckbox7">لا</label>
