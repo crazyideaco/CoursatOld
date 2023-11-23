@@ -10,9 +10,17 @@ class PaymentWay extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "title","number","creator_id","center_id"
+        "title","number","creator_id","center_id",'image',
     ];
     protected $table = "payment_ways";
+
+    protected $appends  = ["image_link"];
+
+    public function getImageLinkAttribute()
+    {
+        return $this->image ? asset($this->image) : '';
+    }
+
     public function creator () {
         return $this->belongsTo(User::class,"creator_id");
     }

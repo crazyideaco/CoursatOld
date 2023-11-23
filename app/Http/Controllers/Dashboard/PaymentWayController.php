@@ -43,7 +43,8 @@ class PaymentWayController extends Controller
     {
         $request->validate([
             "title" => "string",
-            "number" => "string"
+            "number" => "string",
+            'image' => "nullable|image|mimes:png,jpg,jpeg",
         ]);
 
         $paymentway = new paymentWay;
@@ -51,6 +52,11 @@ class PaymentWayController extends Controller
         $paymentway->number = $request->number;
         $paymentway->creator_id = auth()->id();
         $paymentway->center_id = $request->center_id;
+        if ($request->image) {
+            $image = $request->image;
+            $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
+            $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
+        }
         $paymentway->save();
 
         return redirect()->route("paymentways.index");
@@ -92,7 +98,8 @@ class PaymentWayController extends Controller
     {
         $request->validate([
             "title" => "string",
-            "number" => "string"
+            "number" => "string",
+            'image' => "nullable|image|mimes:png,jpg,jpeg",
         ]);
 
         $paymentway =  paymentWay::where("id", $id)->first();
@@ -100,8 +107,13 @@ class PaymentWayController extends Controller
         $paymentway->number = $request->number;
         $paymentway->creator_id = $request->creator_id;
         $paymentway->center_id = $request->center_id;
+        if ($request->image) {
+            $image = $request->image;
+            $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
+            $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
+        }
         $paymentway->save();
-        
+
         return redirect()->route("paymentways.index");
     }
 

@@ -70,10 +70,10 @@
             <div class="setting">
                 <div class="container">
                     <div class="row def">
-                        <img src="{{asset('images/setting.svg')}}">
+                        <img src="{{ asset('images/setting.svg') }}">
                         <h5>تعديل وسيلة الدفع </h5>
                     </div>
-                    <form method="post" action="{{route('paymentways.update', $paymentway->id)}}"
+                    <form method="post" action="{{ route('paymentways.update', $paymentway->id) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -92,27 +92,33 @@
                                 <div class="form-group col-3">
                                     <label>رقم الوسيلة </label>
                                     <input type="text" class="form-control" placeholder="ادخل الرقم " name="number"
-                                        value="{{$paymentway->number}}"required>
+                                        value="{{ $paymentway->number }}"required>
                                     @error('number')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
                                 </div>
 
-                                @if (auth()->user()->isAdmin === "admin")
+                                @if (auth()->user()->isAdmin === 'admin')
+                                    <div class="form-group col-3">
+                                        <label> رقم المركز</label>
+                                        <select class="form-control" name="center_id" required>
+                                            @foreach ($centers as $center)
+                                                <option value="{{ $center->id }}">{{ $center->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('center_id')
+                                            <div style="color:red;">{{ $message }} </div>
+                                        @enderror
+                                    </div>
+                                @endif
 
                                 <div class="form-group col-3">
-                                    <label> رقم المركز</label>
-                                    <select class="form-control" name="center_id" required>
-                                        @foreach ( $centers as $center)
-                                        <option value="{{$center->id}}">{{$center->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('center_id')
+                                    <label>صورة الوسيلة </label>
+                                    <input type="file" class="form-control" placeholder="ادخل الصورة " name="image" >
+                                    @error('image')
                                         <div style="color:red;">{{ $message }} </div>
                                     @enderror
                                 </div>
-
-                                @endif
                             </div>
                         </div>
                         <div class="save text-center mt-6">
