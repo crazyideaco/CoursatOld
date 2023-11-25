@@ -71,7 +71,7 @@ class CampaignController extends Controller
     {
         $campain =  Campaign::where("id", $id)->get();
         // dd($campain);
-        return $dataTable->with("campain", $campain)->render("dashboard.Campaigns.show", compact("campain"));
+        return $dataTable->with(["campain" => $campain])->render("dashboard.Campaigns.show", compact("campain"));
         // return view("dashboard.Campaigns.show", $campain);
     }
 
