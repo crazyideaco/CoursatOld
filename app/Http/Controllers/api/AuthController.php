@@ -411,6 +411,7 @@ class AuthController extends Controller
 
     public function home_categories()
     {
+        dd(auth()->user());
         // $user_ids = auth()->user()->centerstudents->pluck("id");
         $users = auth()->user()->stdcenters;
         if (count($users) > 0) {
@@ -433,42 +434,7 @@ class AuthController extends Controller
                 $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
             }
 
-            /**Convert the collection to an array
-                $subjectsArray = $subjects->toArray();
 
-                // Initialize the special subject
-                $allSubjectTab = [
-                    'id' => 0,
-                    'title' => 'الكل',
-                    'courses' => [],
-                    'latest_courses' => [],
-                    'lecturers' => [],
-                ];
-
-                // Add the special subject to the beginning of the array
-                array_unshift($subjectsArray, $allSubjectTab);
-
-                // If you need to convert it back to a collection, you can use collect()
-                $subjects = collect($subjectsArray);
-
-                 // Create a resource object for the special subject
-                $allSubjectResource = new HomeCategory([
-                    'id' => 0,
-                    'title' => 'الكل',
-                    'courses' => [],
-                    'latest_courses' => [],
-                    'lecturers' => [],
-                ]);
-
-                // Transform the collection using the resource
-                $subjectsResource = HomeCategory::collection($subjects);
-
-                // Prepend the special subject to the transformed collection
-                $subjectsResource->prepend($allSubjectResource);
-
-                // Return the modified collection
-                return $subjectsResource;
-             */
         } else if (auth()->user()->category_id == 2) {
             if (count($users) > 0) {
                 $result = [];
