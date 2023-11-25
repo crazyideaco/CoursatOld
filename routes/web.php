@@ -51,7 +51,8 @@
         // route for campaigns----------------------
         Route::resource("campaigns", CampaignController::class);
         // ------------------------------------------
-
+        // route for Campaign subscribtions----------
+Route::get('campaigns/{id}/subscribtions', 'SubscriptionController@subscribtions')->name('campaigns.subscribtions');
         Route::get('main_page_basic', 'MainPageController@main_page_basic')->name('main_page_basic');
         Route::get('main', 'MainPageController@main')->name('main');
 
@@ -659,7 +660,7 @@
 
     Route::get('qrcodes/{id}', 'QrCodeController@index')->name('types.qrcodes');
 
-    
+
     //store_course_college_qrcode
     Route::post('store_course_college_qrcode', 'CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
     //patches

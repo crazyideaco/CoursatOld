@@ -4,6 +4,7 @@ namespace App\DataTables\SystemSettings;
 
 // use App\Models\SystemSettings/CampainStudentDataTable;
 
+use App\Student_Type;
 use App\User;
 use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
@@ -98,13 +99,18 @@ class CampainStudentDataTable extends DataTable
      */
     public function query(User $model)
     {
-        // dd($this->campain->category_id);
+        // $model->newQuery()->whereHas('student', function ($studentq) {
+            // Student_Type $model
+        //     $studentq->where('category_id', 1);
+        // });
+
+
         $studentData = $model->newQuery()->where([["is_student", 1], ["is_student", "!=", null]])
             ->where([["category_id", $this->campain->category_id], ["category_id", "!=", null]])
             // ->where([["created_at", ">=", $this->campain->start_date], ["created_at", "<=", $this->campain->end_date]])
         ;
-        // dd($studentData);
-        if ($this->campaincategory_id == 1) {
+
+        if ($this->campain->category_id == 1) {
             $studentData = $studentData->where('year_id', $this->campain->year_id)->where('Stage_id', $this->campain->Stage_id);
         }
         if ($this->campain->category_id == 2) {
@@ -126,13 +132,7 @@ class CampainStudentDataTable extends DataTable
             ->minifiedAjax()
             ->dom('Bfrtip')
             ->orderBy(1)
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            );
+            ;
     }
 
     /**
@@ -160,26 +160,6 @@ class CampainStudentDataTable extends DataTable
                 ->printable(false)
                 ->width(60)
                 ->addClass('text-center'),
-
-
-            // Column::make('id'),
-            // Column::make('name')->title('الاسم'),
-            // // Column::make('code')->title('الكود'),
-            // Column::make('phone')->title('رقم الهاتف'),
-            // // Column::make('courses')->title('الكورسات'),
-            // Column::make('created_at')->title('تاريخ التسجيل'),
-            // Column::make("centers")->title("المنصة"),
-            // Column::make("category_id")->title("نوع التعليم"),
-            // Column::make("year")->title("السنة"),
-            // Column::make("device_id")->defaultContent('-')->title("رقم الجهاز")->visible(false),
-            // Column::make("is_online")->title("حالة الظهور"),
-            // Column::make("online_date")->title("تاريخ الظهور"),
-            // Column::make("offline_date")->title("تاريخ أخر ظهور"),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
         ];
     }
 
