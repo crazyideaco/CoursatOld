@@ -2,8 +2,8 @@
 
 
     use App\Http\Controllers\Dashboard\Student\StudentExportController;
-use App\Http\Controllers\Dashboard\Student\StudentSubscriptionController;
-use App\Http\Controllers\Dashboard\SubscriptionController;
+    use App\Http\Controllers\Dashboard\Student\StudentSubscriptionController;
+    use App\Http\Controllers\Dashboard\SubscriptionController;
 
     use Dashboard\CampaignController;
     use App\Lesson;
