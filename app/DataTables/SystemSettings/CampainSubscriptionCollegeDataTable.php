@@ -4,6 +4,7 @@ namespace App\DataTables\SystemSettings;
 
 // use App\Models\SystemSettings/CampainSubscriptionCollegeDataTable;
 use App\Student_Type;
+use App\Student_Typecollege;
 use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -24,6 +25,7 @@ class CampainSubscriptionCollegeDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('action', 'systemsettings/campainsubscriptioncollegedatatable.action')
+
             ->editColumn("student_name", function ($query) {
                 return $query->student->name ?? "";
             })
@@ -63,13 +65,10 @@ class CampainSubscriptionCollegeDataTable extends DataTable
      * @param \App\Models\SystemSettings/CampainSubscriptionCollegeDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Student_Type $model)
+    public function query(Student_Typecollege $model)
     {
         return $model->newQuery()->whereHas('student', function ($studentq) {
-            $studentq->where(['college_id', $this->campain->college_id])
-                ->where('university_id', $this->campain->university_id);
-            // ->where([['category_id', $this->campain->category_id], ["category_id", "!=", null]]);
-            // ->where([["created_at", ">=", $this->campain->start_date], ["created_at", "<=", $this->campain->end_date]])
+            $studentq->where('year_id', $this->campain->year_id)->where('Stage_id', $this->campain->Stage_id);
         });
     }
 
@@ -104,8 +103,8 @@ class CampainSubscriptionCollegeDataTable extends DataTable
             ["data" => "student_name", "title" => 'اسم الطالب', 'exportable' => false, 'orderable' => false],
             ["data" => "student_phone", "title" => 'رقم الطالب', 'exportable' => false, 'orderable' => false],
             ["data" => "center_name", "title" => 'المنصه', 'exportable' => false, 'orderable' => false],
-            ["data" => "teacher_name", "title" => 'المدرس', 'exportable' => false, 'orderable' => false],
-            ["data" => "year_name", "title" => 'السنه', 'exportable' => false, 'orderable' => false],
+            ["data" => "teacher_name", "title" => 'الدكتور', 'exportable' => false, 'orderable' => false],
+            ["data" => "year_name", "title" => 'الفرقه', 'exportable' => false, 'orderable' => false],
             ["data" => "subject_name", "title" => 'الماده', 'exportable' => false, 'orderable' => false],
             ["data" => "course_name", "title" => 'الكورس', 'exportable' => false, 'orderable' => false],
             ["data" => "created_at", "title" => 'تاريخ الانضمام', 'exportable' => false, 'orderable' => false],
