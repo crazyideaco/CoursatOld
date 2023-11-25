@@ -60,9 +60,9 @@ class StudentExport implements FromQuery, WithMapping, Responsable, WithHeadings
     /**
      * Optional headers
      */
-    private $headers = [
-        'Content-Type' => 'text/xlsx',
-    ];
+    // private $headers = [
+    //     'Content-Type' => 'text/xlsx',
+    // ];
 
 
     public function query()
