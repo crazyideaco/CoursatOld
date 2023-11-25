@@ -24,7 +24,7 @@ h4.hederre {
 
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>اسم الجامعه </label> --}}
-    <select name="university_id" required class="form-control selectpicker" id="university"
+    <select name="university_id"  class="form-control selectpicker" id="university_id"
         onchange="getcolleges(this);filter_students();" title="اختر جامعه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
         @foreach ($universities as $university)
@@ -39,7 +39,7 @@ h4.hederre {
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>اسم الكليه </label> --}}
-    <select name="college_id" required class="form-control selectpicker" id="college"
+    <select name="college_id"  class="form-control selectpicker" id="college_id"
         onchange="getdivision(this);filter_students();" title="اختر كليه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
 
@@ -47,7 +47,7 @@ h4.hederre {
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>اسم القسم </label> --}}
-    <select name="division_id" required class="form-control selectpicker" id="division"
+    <select name="division_id"  class="form-control selectpicker" id="division_id"
         onchange="getsection(this);filter_students();" title="اختر قسم">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر قسم</option> --}}
 
@@ -55,7 +55,7 @@ h4.hederre {
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>اسم الفرقه </label> --}}
-    <select name="section_id" required class="form-control selectpicker" id="section"
+    <select name="section_id"  class="form-control selectpicker" id="section"
         onchange="getsection_subjectsCollege(this);filter_students();" title="اختر فرقه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
@@ -63,7 +63,7 @@ h4.hederre {
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>الماده </label> --}}
-    <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " required
+    <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده "
         id="subject_college" onchange="getSubject_teacherCollege(this)">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
@@ -87,7 +87,7 @@ h4.hederre {
 
 <div class="form-group col-lg-3 col-md-6 col-12">
     {{-- <label>الكورسات </label> --}}
-    <select class="form-control selectpicker" name="type_college_id" required id="typescollege"
+    <select class="form-control selectpicker" name="type_college_id"  id="typescollege"
         onchange="filter_students();" title="اختر الكورسات">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option> --}}
 
@@ -115,8 +115,8 @@ h4.hederre {
             //    contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#college').empty();
-                $('#college').html(result.data);
+                $('#college_id').empty();
+                $('#college_id').html(result.data);
                 $('.selectpicker').selectpicker('refresh');
                 console.log(result);
             }
@@ -137,8 +137,8 @@ h4.hederre {
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#division').empty();
-                $('#division').html(result);
+                $('#division_id').empty();
+                $('#division_id').html(result);
                 $('.selectpicker').selectpicker('refresh');
             }
 
@@ -158,8 +158,8 @@ h4.hederre {
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#section').empty();
-                $('#section').html(result);
+                $('#section_id').empty();
+                $('#section_id').html(result);
                 $('.selectpicker').selectpicker('refresh');
             }
 

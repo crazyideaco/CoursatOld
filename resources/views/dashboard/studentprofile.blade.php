@@ -128,6 +128,10 @@
                             <h6>التليفون:</h6>
                             <p>{{ $student->phone }}</p>
                         </div>
+                        <div class="row">
+                            <h6>نوع الهاتف:</h6>
+                            <p>{{ $student->device_id }}</p>
+                        </div>
                         @if ($student->category_id == 1)
                             <div class="row">
                                 <h6 for="year">السنة:</h6>
