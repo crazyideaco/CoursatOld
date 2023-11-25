@@ -100,7 +100,7 @@ class CampainStudentDataTable extends DataTable
     public function query(User $model)
     {
         // $model->newQuery()->whereHas('student', function ($studentq) {
-            // Student_Type $model
+        // Student_Type $model
         //     $studentq->where('category_id', 1);
         // });
 
@@ -111,7 +111,7 @@ class CampainStudentDataTable extends DataTable
         ;
 
         if ($this->campain->category_id == 1) {
-            $studentData = $studentData->where('year_id', $this->campain->year_id)->where('Stage_id', $this->campain->Stage_id);
+            $studentData = $studentData->where('year_id', $this->campain->year_id)->where('stage_id', $this->campain->stage_id);
         }
         if ($this->campain->category_id == 2) {
             $studentData = $studentData->where('college_id', $this->campain->college_id)->where('university_id', $this->campain->university_id);
@@ -131,8 +131,7 @@ class CampainStudentDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
-            ->orderBy(1)
-            ;
+            ->orderBy(1);
     }
 
     /**
