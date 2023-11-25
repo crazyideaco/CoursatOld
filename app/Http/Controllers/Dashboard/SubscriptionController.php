@@ -31,20 +31,22 @@ class SubscriptionController extends Controller
     }
 
 
-    public function subscribtions(CampainSubscriptionBasicDataTable $dataTableBasic, CampainSubscriptionCollegeDataTable $dataTableCollege, $id)
+    public function subscribtionsBasic(CampainSubscriptionBasicDataTable $dataTable, $id)
     {
 
         $campain =  Campaign::where("id", $id)->first();
+        return $dataTable->with(["campain" => $campain])->render($this->studentSubView . 'index', [
+            "campain" => $campain,
+        ]);
+    }
 
-        if ($campain->category_id == 1) {
-            return $dataTableBasic->with(["campain" => $campain])->render($this->studentSubView . 'index', [
-                "campain" => $campain,
-            ]);
-        }else {
-            return $dataTableCollege->with(["campain" => $campain])->render($this->studentSubView . 'index', [
-                "campain" => $campain,
-            ]);
-        }
+    public function subscribtionsCollege(CampainSubscriptionCollegeDataTable $dataTable, $id)
+    {
+
+        $campain =  Campaign::where("id", $id)->first();
+        return $dataTable->with(["campain" => $campain])->render($this->studentSubView . 'index', [
+            "campain" => $campain,
+        ]);
     }
 
     // }
