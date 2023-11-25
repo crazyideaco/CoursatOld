@@ -150,7 +150,7 @@
                         <ul>
                             @foreach ($student->stutypescollege as $typecollege)
                                 <img src="{{ asset('images/trash.svg') }}" id="trash{{ $typecollege->id }}"
-                                    onclick="deleteuser_from_stutypescollege({{ $id }},{{ $typecollege->id }})"
+                                    onclick="deleteuser_from_stutypescollege({{ $student->id }},{{ $typecollege->id }})"
                                     style="cursor:pointer;">
                                 <li style="font-size:14px;">{{ $typecollege->name_ar }} </li>
                             @endforeach
@@ -161,7 +161,7 @@
                         <ul>
                             @foreach ($student->stutypes as $type)
                                 <img src="{{ asset('images/trash.svg') }}" id="trash{{ $type->id }}"
-                                    onclick="deleteuser_from_stutypes({{ $id }},{{ $type->id }})"
+                                    onclick="deleteuser_from_stutypes({{ $student->id }},{{ $type->id }})"
                                     style="cursor:pointer;">
                                 <li style="font-size:14px;">{{ $type->name_ar }}</li>
                             @endforeach
@@ -234,7 +234,7 @@
 <script>
     function deleteuser_from_stutypes(student_id, type_id) {
 
-
+        console.log("type ",student_id);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -288,6 +288,7 @@
 
 <script>
     function deleteuser_from_stutypescollege(student_id, typecollege_id) {
+        console.log("typecolege ",student_id);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
