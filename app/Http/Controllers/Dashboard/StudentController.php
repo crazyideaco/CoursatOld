@@ -56,31 +56,5 @@ class StudentController extends Controller
             return response()->json(['status' => false, 'message' => $th->getMessage()]);
         }
     }
-    /**
-     * year_id
-     * subjects_id
-     */
 
-    // public function basicstudents()
-    // {
-    //     $students = User::where('is_student', 1)->whereNotNull("name")
-    //     ->whereNotNull("year_id")->get();
-    //     $auth_service = new AuthDataService();
-    //     $types = $auth_service->getAuthType();
-    //     return view('dashboard.students.basicstudents', compact('students', "types"))
-    //     ->with('stages', Stage::all());
-    // }
-
-    // public function collegestudents()
-    // {
-    //     $students = User::where('is_student', 1)->whereNotNull("name")
-    //     ->whereNotNull("section_id")->get();
-    //     $divisions = Division::all();
-    //     $sections = Section::all();
-    //     return view('dashboard.students.collegestudents', compact('students'))
-    //     ->with('colleges', College::all())
-    //     ->with('divisions', $divisions)
-    //     ->with('sections', $sections)
-    //     ->with('universities', University::all());
-    // }
 }//End of controller
