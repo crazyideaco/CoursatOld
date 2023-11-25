@@ -14,6 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class CampainStudentDataTable extends DataTable
 {
+    protected $campaign_action = "dashboard.Campaigns.student.";
     /**
      * Build DataTable class.
      *
@@ -22,9 +23,10 @@ class CampainStudentDataTable extends DataTable
      */
     public function dataTable($query)
     {
+
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'systemsettings/campainstudentdatatable.action')
+            ->addColumn('action', $this->campaign_action . 'action')
             ->addColumn('courses', function ($row) {
                 $courses_names = "";
                 if ($row->year_id != null) {
