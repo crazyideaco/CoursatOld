@@ -34,6 +34,7 @@ class HomeCategory extends JsonResource
                 $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
 
                 if (count($centers) > 0 ) {
+                    dd('category_id == 1');
                     $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->get());
                     $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
                 } else {
