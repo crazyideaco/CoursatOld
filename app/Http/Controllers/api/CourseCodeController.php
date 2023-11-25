@@ -41,12 +41,26 @@ class CourseCodeController extends Controller
                 $type1 = Type::where('id', $request->course_id)->first();
                 if ($type1) {
                     $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(Type::class)->first();
-
-                    return response()->json([
+                    if($security){
+                        return response()->json([
                         'status' => true,
                         'message' => 'course_code_status',
                         'data' => new CourseCodeResource($security),
                     ]);
+                    }else{
+                        return response()->json([
+                            'status' => true,
+                            'message' => 'course_code_status',
+                            'data' =>[
+                                "id" => 0,
+                                "secure"=> 1,
+                                "show_video_code"=> 0,
+                                "video_code_type"=> 0,
+                                "code_duration"=> 0
+                            ],
+                        ]);
+                    }
+
 
                 } else {
                     return response()->json([
@@ -58,12 +72,26 @@ class CourseCodeController extends Controller
                 if ($type1) {
                     $security = SecuritySetting::whereTypeableId($request->course_id)->whereTypeableType(TypesCollege::class)->first();
 
+                    if($security){
                         return response()->json([
                         'status' => true,
                         'message' => 'course_code_status',
                         'data' => new CourseCodeResource($security),
                     ]);
-                   
+                    }else{
+                        return response()->json([
+                            'status' => true,
+                            'message' => 'course_code_status',
+                            'data' =>[
+                                "id" => 0,
+                                "secure"=> 1,
+                                "show_video_code"=> 0,
+                                "video_code_type"=> 0,
+                                "code_duration"=> 0
+                            ],
+                        ]);
+                    }
+
 
                 } else {
                     return response()->json([
