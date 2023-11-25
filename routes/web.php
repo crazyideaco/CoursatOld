@@ -62,8 +62,8 @@ use App\Http\Controllers\Dashboard\SubscriptionController;
 
         Route::post('export', [StudentExportController::class, 'export'])->name('students.exportAll');
         Route::controller(StudentSubscriptionController::class)->group(function () {
-            Route::get('students/deleteuser_from_stutypes', 'deleteuser_from_stutypes')->name('stutypes.deleteuser_from_stutypes');
-            Route::get('students/deleteuser_from_stutypescollege', 'deleteuser_from_stutypescollege')->name('stutypescollege.deleteuser_from_stutypescollege');
+            Route::post('students/deleteuser_from_stutypes', 'deleteuser_from_stutypes')->name('stutypes.deleteuser_from_stutypes');
+            Route::post('students/deleteuser_from_stutypescollege', 'deleteuser_from_stutypescollege')->name('stutypescollege.deleteuser_from_stutypescollege');
         });
         // route for Campaign subscribtions----------
         Route::get('campaigns/{id}/subscribtionsBasic', [SubscriptionController::class, 'subscribtionsBasic'])->name('campaigns.subscribtionsBasic.index');
