@@ -103,7 +103,7 @@ class CampainStudentDataTable extends DataTable
             $studentData = $studentData->where('year_id', $this->campain->year_id)->where('Stage_id', $this->campain->Stage_id);
         }
         if ($this->campain->category_id == 2) {
-            $studentData = $studentData->where('college_id', $this->campain->college_id)->where(['university_id', $this->campain->university_id]);
+            $studentData = $studentData->where('college_id', $this->campain->college_id)->where('university_id', $this->campain->university_id);
         }
 
         return $studentData;
