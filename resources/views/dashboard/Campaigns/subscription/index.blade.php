@@ -82,6 +82,6 @@
     @if ($campain->category_id == 1)
         {!! $dataTableBasic->scripts() !!}
     @else
+        {!! $dataTableCollege->scripts() !!}
     @endif
-    {!! $dataTableCollege->scripts() !!}
 @endsection
