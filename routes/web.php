@@ -61,10 +61,12 @@
 
 
         Route::post('export', [StudentExportController::class, 'export'])->name('students.exportAll');
-        Route::controller(StudentSubscriptionController::class)->group(function () {
-            Route::post('students/deleteuser_from_stutypes', 'deleteuser_from_stutypes')->name('stutypes.deleteuser_from_stutypes');
-            Route::post('students/deleteuser_from_stutypescollege', 'deleteuser_from_stutypescollege')->name('stutypescollege.deleteuser_from_stutypescollege');
-        });
+        Route::post('students/deleteuser_from_stutypes', [StudentSubscriptionController::class, 'deleteuser_from_stutypes'])->name('stutypes.deleteuser_from_stutypes');
+        Route::post('students/deleteuser_from_stutypescollege', [StudentSubscriptionController::class, 'deleteuser_from_stutypescollege'])->name('stutypescollege.deleteuser_from_stutypescollege');
+        // Route::controller(StudentSubscriptionController::class)->group(function () {
+        //     Route::post('students/deleteuser_from_stutypes', 'deleteuser_from_stutypes')->name('stutypes.deleteuser_from_stutypes');
+        //     Route::post('students/deleteuser_from_stutypescollege', 'deleteuser_from_stutypescollege')->name('stutypescollege.deleteuser_from_stutypescollege');
+        // });
         // route for Campaign subscribtions----------
         Route::get('campaigns/{id}/subscribtionsBasic', [SubscriptionController::class, 'subscribtionsBasic'])->name('campaigns.subscribtionsBasic.index');
         Route::get('campaigns/{id}/subscribtionsCollege', [SubscriptionController::class, 'subscribtionsCollege'])->name('campaigns.subscribtionsCollege.index');
