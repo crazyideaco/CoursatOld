@@ -48,7 +48,7 @@ class StudentExport implements FromQuery, WithMapping, Responsable, WithHeadings
      * It's required to define the fileName within
      * the export class when making use of Responsable.
      */
-    private $fileName = "users";
+    private $fileName = "users.xlsx";
 
 
     /**
