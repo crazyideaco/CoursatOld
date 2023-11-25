@@ -163,6 +163,6 @@ class PaymentWayController extends Controller
     public function destroy($id)
     {
         PaymentWay::where("id", $id)->delete();
-        return view("dashboard.payment_wayes.index");
+        return response()->json(['status' => true, 'message' => 'تم المسح بنجاح']);
     }
 }
