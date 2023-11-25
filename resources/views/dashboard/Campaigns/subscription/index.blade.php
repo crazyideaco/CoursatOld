@@ -48,21 +48,12 @@
             <!--end heed-->
 
             <!--start table-->
-            @if ($campain->category_id == 1)
-                {!! $dataTableBasic->table(
-                    [
-                        'class' => 'table_expenses table_topic table table-striped table-bordered',
-                    ],
-                    true,
-                ) !!}
-            @else
-                {!! $dataTableCollege->table(
-                    [
-                        'class' => 'table_expenses table_topic table table-striped table-bordered',
-                    ],
-                    true,
-                ) !!}
-            @endif
+            {!! $dataTable->table(
+                [
+                    'class' => 'table_expenses table_topic table table-striped table-bordered',
+                ],
+                true,
+            ) !!}
             <!--end table-->
             <!--start foter-->
             <div class="foter">
@@ -79,9 +70,5 @@
     <!--end page-body-->
 @endsection
 @section('scripts')
-    @if ($campain->category_id == 1)
-        {!! $dataTableBasic->scripts() !!}
-    @else
-        {!! $dataTableCollege->scripts() !!}
-    @endif
+    {!! $dataTable->scripts() !!}
 @endsection
