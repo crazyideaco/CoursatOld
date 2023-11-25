@@ -32,11 +32,11 @@ class HomeCategory extends JsonResource
 
                 $centers = auth()->user()->stdcenters;
                 $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
-                if (count($centers) > 0 ) {
+
+                if (count($centers) > 0 && auth()->user()->is_public_platform_or_private_platform == 2) {
                     $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->get());
                     $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
                 } else {
-
                     $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->get());
                     $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->orderBy('created_at', 'desc')->take(4)->get());
                 }
@@ -55,13 +55,12 @@ class HomeCategory extends JsonResource
                 $centers = auth()->user()->stdcenters;
                 $user_owners = Center_Doctor::get()->pluck("doctor_id")->toArray();
 
-                if (count($centers) > 0) {
+                if (count($centers) > 0 && auth()->user()->is_public_platform_or_private_platform == 2) {
                     $courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->whereIn('center_id', $centers->pluck('id'))
                             ->orWhereIn("doctor_id", $centers->pluck('id'))->get());
 
                     $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("doctor_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
                 } else {
-
                     $courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->where('center_id', null)->get());
 
                     $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->where('center_id', null)->orderBy('created_at', 'desc')->take(4)->get());
