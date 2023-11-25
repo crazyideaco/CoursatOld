@@ -1,6 +1,7 @@
  <?php
 
-    use Dashboard\CampaignController;
+use App\Http\Controllers\Dashboard\Student\StudentExportController;
+use Dashboard\CampaignController;
     use App\Lesson;
 
     use App\VideosCollege;
@@ -52,6 +53,10 @@
         Route::resource("campaigns", CampaignController::class);
         // ------------------------------------------
 
+
+
+
+        Route::post('export', [StudentExportController::class, 'export'])->name('students.exportAll');
         Route::get('main_page_basic', 'MainPageController@main_page_basic')->name('main_page_basic');
         Route::get('main', 'MainPageController@main')->name('main');
 
@@ -659,7 +664,7 @@
 
     Route::get('qrcodes/{id}', 'QrCodeController@index')->name('types.qrcodes');
 
-    
+
     //store_course_college_qrcode
     Route::post('store_course_college_qrcode', 'CollegeCourseQrCodeController@store')->name('store_course_college_qrcode');
     //patches

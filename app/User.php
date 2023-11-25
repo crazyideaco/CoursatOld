@@ -295,4 +295,29 @@ class User extends Authenticatable
         }
     }
 
+    public function getCenterNameAttribute(){
+        $centers = "المنصة العامة";
+        if (count($this->stdcenters) > 0) {
+            $centers = implode('-', $this->stdcenters->pluck('name')->toArray());
+        }
+        return $centers;
+    }
+
+    public function getYearNameAttribute(){
+        switch ($this->category_id) {
+            case config('project_types.system_category_type.category_id_basic'):
+                if ($this->year_id != null) {
+                    return $this->year->year_ar ?? 'لم يحدد';
+                }
+                break;
+            case config('project_types.system_category_type.category_id_college'):
+                if ($this->section_id != null) {
+                    return $this->section->name_ar ?? 'لم يحدد';
+                }
+                break;
+            default:
+                return 'لم يحدد';
+                break;
+        }
+    }
 }
