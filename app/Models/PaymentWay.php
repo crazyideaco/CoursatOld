@@ -10,7 +10,7 @@ class PaymentWay extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "title","number","creator_id","center_id",'image',
+        "title", "number", "creator_id", "center_id", 'image',
     ];
     protected $table = "payment_ways";
 
@@ -21,12 +21,18 @@ class PaymentWay extends Model
         return $this->image ? asset($this->image) : '';
     }
 
-    public function creator () {
-        return $this->belongsTo(User::class,"creator_id");
+    public function creator()
+    {
+        return $this->belongsTo(User::class, "creator_id");
     }
 
-    public function center () {
-        return $this->belongsTo(User::class,"center_id");
+    public function center()
+    {
+        return $this->belongsTo(User::class, "center_id");
     }
 
+    public function centers()
+    {
+        return $this->belongsToMany(User::class, "centers_paymentway", "paymentway_id", "center_id");
+    }
 }

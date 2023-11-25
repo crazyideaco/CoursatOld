@@ -48,10 +48,40 @@ class PaymentWayController extends Controller
         ]);
 
         $paymentway = new paymentWay;
+        // if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
+        //     $paymentway->center_id = auth()->id();
+        //     $paymentway->title = $request->title;
+        //     $paymentway->number = $request->number;
+        //     $paymentway->creator_id = auth()->id();
+        //     if ($request->image) {
+        //         $image = $request->image;
+        //         $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
+        //         $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
+        //     }
+        //     $paymentway->save();
+        // } else {
+        //     $paymentway->center_id = $request->center_id;
+        //     $paymentway->title = $request->title;
+        //     $paymentway->number = $request->number;
+        //     $paymentway->creator_id = auth()->id();
+        //     if ($request->image) {
+        //         $image = $request->image;
+        //         $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
+        //         $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
+        //     }
+        //     $paymentway->save();
+        // }
+        if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
+            $paymentway->center_id = auth()->id();
+            $paymentway->centers()->attach(auth()->id());
+        } else {
+            $paymentway->centers()->attach($request->center_id);
+        }
+
+
         $paymentway->title = $request->title;
         $paymentway->number = $request->number;
         $paymentway->creator_id = auth()->id();
-        $paymentway->center_id = $request->center_id;
         if ($request->image) {
             $image = $request->image;
             $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
@@ -103,10 +133,17 @@ class PaymentWayController extends Controller
         ]);
 
         $paymentway =  paymentWay::where("id", $id)->first();
+        if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
+            $paymentway->center_id = auth()->id();
+            $paymentway->centers()->sync(auth()->id());
+        } else {
+            $paymentway->centers()->sync($request->center_id);
+        }
+
+
         $paymentway->title = $request->title;
         $paymentway->number = $request->number;
-        $paymentway->creator_id = $request->creator_id;
-        $paymentway->center_id = $request->center_id;
+        $paymentway->creator_id = auth()->id();
         if ($request->image) {
             $image = $request->image;
             $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
