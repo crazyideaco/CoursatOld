@@ -28,6 +28,7 @@ class HomeCategory extends JsonResource
         //get lecturer_ids
 
         if($this->id !== 0){
+            dd(auth()->user()->category_id);
             if (auth()->user()->category_id == 1) {
 
                 $centers = auth()->user()->stdcenters;
