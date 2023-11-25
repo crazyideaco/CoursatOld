@@ -411,7 +411,6 @@ class AuthController extends Controller
 
     public function home_categories()
     {
-        dd(auth()->user());
         // $user_ids = auth()->user()->centerstudents->pluck("id");
         $users = auth()->user()->stdcenters;
         if (count($users) > 0) {
