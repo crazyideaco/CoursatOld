@@ -443,13 +443,10 @@ class AuthController extends Controller
                 }
 
                 $result = call_user_func_array("array_merge", $subject_ids);
-// dd('categor 2 coutnt > 0' , $result);
                 $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->whereIn('id', $result)->where("active", 1)->get();
-                dd( auth()->user());
-                dd("categor 2 coutnt > 0" , $subjects );
+
             } else {
                 $subjects = SubjectsCollege::where('section_id', auth()->user()->section_id)->where("active", 1)->get();
-                dd("categor 2 coutnt false " , $subjects );
 
             }
         }

@@ -28,18 +28,14 @@ class HomeCategory extends JsonResource
         //get lecturer_ids
 
         if($this->id !== 0){
-            dd(auth()->user()->category_id);
             if (auth()->user()->category_id == 1) {
 
                 $centers = auth()->user()->stdcenters;
                 $user_owners = Center_Teacher::get()->pluck("teacher_id")->toArray();
-                dd('category_id == 1 before center count true condition ');
                 if (count($centers) > 0 ) {
-                    dd('category_id == 1');
                     $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->get());
                     $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
                 } else {
-                dd('category_id == 1 before center count false condition ');
 
                     $courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->get());
                     $latest_courses = TypeResource::collection(\App\Type::where('active', 1)->where('subjects_id', $this->id)->where('center_id', null)->orderBy('created_at', 'desc')->take(4)->get());
@@ -58,7 +54,6 @@ class HomeCategory extends JsonResource
             } else if (auth()->user()->category_id == 2) {
                 $centers = auth()->user()->stdcenters;
                 $user_owners = Center_Doctor::get()->pluck("doctor_id")->toArray();
-                dd('category_id == 2 before center count true condition ');
 
                 if (count($centers) > 0) {
                     $courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->whereIn('center_id', $centers->pluck('id'))
@@ -66,7 +61,6 @@ class HomeCategory extends JsonResource
 
                     $latest_courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->whereIn('center_id', $centers->pluck('id'))->orWhereIn("doctor_id", $centers->pluck('id'))->orderBy('created_at', 'desc')->take(4)->get());
                 } else {
-                dd('category_id == 2 before center count false condition ');
 
                     $courses = TypecollegeResource::collection(\App\TypesCollege::where('active', 1)->where('subjectscollege_id', $this->id)->where('center_id', null)->get());
 
