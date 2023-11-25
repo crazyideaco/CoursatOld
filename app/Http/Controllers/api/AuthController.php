@@ -433,7 +433,8 @@ class AuthController extends Controller
                 $subjects = Subject::where('years_id', auth()->user()->year_id)->where("active", 1)->get();
             }
 
-            /**Convert the collection to an array
+            /**
+                // Convert the collection to an array
                 $subjectsArray = $subjects->toArray();
 
                 // Initialize the special subject
@@ -1026,7 +1027,7 @@ class AuthController extends Controller
         $centers = auth()->user()->stdcenters;
 
         if (auth()->user()->category_id == 1) {
-            if (count($centers) > 0 && auth()->user()->is_public_platform_or_private_platform == 2) {
+            if (count($centers) > 0) {
                 if ($request->is_recently == 0) {
                     $types = Type::orderBy('id', 'desc')->whereIn('center_id', $centers->pluck('id'))->orWhereIn("user_id", $centers->pluck('id'))->where('subjects_id', $request->subject_id)->where("active", 1)->get();
                 } else {
@@ -1041,7 +1042,7 @@ class AuthController extends Controller
             }
             $courses = TypeResource::collection($types);
         } else if (auth()->user()->category_id == 2) {
-            if (count($centers) > 0 && auth()->user()->is_public_platform_or_private_platform == 2) {
+            if (count($centers) > 0) {
                 if ($request->is_recently == 0) {
                     $types = TypesCollege::whereIn('center_id', $centers->pluck('id'))->orWhereIn("doctor_id", $centers->pluck('id'))->orderBy('id', 'desc')->where('subjectscollege_id', $request->subject_id)
                         ->where("active", 1)->get();
