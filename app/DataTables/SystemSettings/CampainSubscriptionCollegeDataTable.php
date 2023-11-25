@@ -31,19 +31,19 @@ class CampainSubscriptionCollegeDataTable extends DataTable
                 return $query->student->phone ?? "" ?? "";
             })
             ->editColumn("center_name", function ($query) {
-                return $query->type_course ? ($query->type_course->center->name ?? "المنصه العامه") : "";
+                return $query->typescollege ? ($query->typescollege->center->name ?? "المنصه العامه") : "";
             })
             ->editColumn("teacher_name", function ($query) {
-                return $query->type_course ? ($query->type_course->user->name ?? "") : "";
+                return $query->typescollege ? ($query->typescollege->doctor->name ?? "") : "";
             })
             ->editColumn("year_name", function ($query) {
-                return $query->type_course ? ($query->type_course->year->year_ar ?? " ") : "";
+                return $query->typescollege ? ($query->typescollege->division->name_ar ?? " ") : "";
             })
             ->editColumn("subject_name", function ($query) {
-                return $query->type_course ? ($query->type_course->subject->name_ar ?? " ") : "";
+                return $query->typescollege ? ($query->typescollege->subjectscollege->name_ar ?? " ") : "";
             })
             ->editColumn("course_name", function ($query) {
-                return $query->type_course->name_ar ?? "";
+                return $query->typescollege->name_ar ?? "";
             })
             ->editColumn('created_at', function ($row) {
                 if ($row->created_at != null) {
@@ -66,7 +66,10 @@ class CampainSubscriptionCollegeDataTable extends DataTable
     public function query(Student_Type $model)
     {
         return $model->newQuery()->whereHas('student', function ($studentq) {
-            $studentq->where('college_id', $this->campain->college_id)->where('university_id', $this->campain->university_id);
+            $studentq->where(['college_id', $this->campain->college_id])
+                ->where('university_id', $this->campain->university_id)
+                ->where([['category_id', $this->campain->category_id], ["category_id", "!=", null]]);
+            // ->where([["created_at", ">=", $this->campain->start_date], ["created_at", "<=", $this->campain->end_date]])
         });
     }
 
