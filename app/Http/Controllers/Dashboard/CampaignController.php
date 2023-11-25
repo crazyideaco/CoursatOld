@@ -70,7 +70,7 @@ class CampaignController extends Controller
     public function show(CampainStudentDataTable $dataTable, $id)
     {
         $campain =  Campaign::where("id", $id)->get();
-        dd($campain);
+        // dd($campain);
         return $dataTable->with("campain", $campain)->render("dashboard.Campaigns.show", compact("campain"));
         // return view("dashboard.Campaigns.show", $campain);
     }
