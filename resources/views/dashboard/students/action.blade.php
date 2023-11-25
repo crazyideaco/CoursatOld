@@ -278,7 +278,6 @@
                             )
                         }
                     }
-                    $(`#cousesModal${id}`).modal('hide');
 
                 });
             }
@@ -338,7 +337,6 @@
                             )
                         }
                     }
-                    $(`#cousesModal${id}`).modal('hide');
 
                 });
             }
