@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\College;
+use App\DataTables\SystemSettings\CampainStudentDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCampaignrequest;
 use App\Models\Campaign;
@@ -24,7 +25,6 @@ class CampaignController extends Controller
     {
         $campaigns =  Campaign::get();
         return view("dashboard.Campaigns.index", compact("campaigns"));
-
     }
 
     /**
@@ -38,8 +38,7 @@ class CampaignController extends Controller
         $platforms = Platform::get();
         $universities = University::get();
 
-        return view("dashboard.Campaigns.create", compact("stages", "universities","platforms"));
-
+        return view("dashboard.Campaigns.create", compact("stages", "universities", "platforms"));
     }
 
     /**
@@ -60,7 +59,6 @@ class CampaignController extends Controller
         $campain->Platforms()->attach($request->platform);
 
         return redirect(route("campaigns.index"));
-
     }
 
     /**
@@ -69,10 +67,11 @@ class CampaignController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CampainStudentDataTable $dataTable, $id)
     {
         $campain =  Campaign::where("id", $id)->get();
-        return view("dashboard.Campaigns.show", $campain);
+        return $dataTable->with("campain", $campain)->render("dashboard.Campaigns.show", compact("campain"));
+        // return view("dashboard.Campaigns.show", $campain);
     }
 
     /**
@@ -88,7 +87,6 @@ class CampaignController extends Controller
         $universities = University::get();
         $platforms = Platform::get();
         return view("dashboard.Campaigns.edit", compact("stages", "universities", "campaign", 'platforms'));
-
     }
 
     /**
@@ -122,6 +120,5 @@ class CampaignController extends Controller
     {
         Campaign::where("id", $id)->delete();
         return view("dashboard.Campaigns.index");
-
     }
 }

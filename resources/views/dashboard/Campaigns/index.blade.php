@@ -22,38 +22,25 @@
                             <div class="col-6">
                                 <h5>{{ auth()->user()->name }}</h5>
                                 <p>ادمن</p>
-
                             </div>
-
-
                         </div>
                     </div>
-                    <div class="flag">
 
+
+                    <div class="flag">
                         <div class="row">
                             <div class="col-4">
                                 <img src="{{ asset('images/flag.svg') }}">
                             </div>
                             <div class="col-4">
                                 <h5>العربية</h5>
-
-
                             </div>
-
-
-
                         </div>
-
                     </div>
-
 
                     <div class="noti text-center">
                         <span><i class="far fa-bell"></i></span>
                     </div>
-
-
-
-
 
                     <div class="datee">
                         <div class="row">
@@ -61,11 +48,7 @@
                             <p>{{ Carbon\Carbon::now()->format('d-m-Y') }}</p>
                         </div>
                     </div>
-
-
                 </div>
-
-
             </div>
             <!--end heed-->
 
@@ -140,13 +123,13 @@
                                                 <a href="{{ route('campaigns.edit', $campaign->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
-                                                {{-- link for showing  --}}
+                                                {{-- link for result  --}}
                                                 <a href="{{ route('campaigns.show', $campaign->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
                                                 {{-- link for result file --}}
-                                                <a href=""> <img src="{{ asset('images/pen.svg') }}" id="pen"
-                                                        style="cursor: pointer"></a>
+                                                {{-- <a href=""> <img src="{{ asset('images/pen.svg') }}" id="pen"
+                                                        style="cursor: pointer"></a> --}}
                                                 {{-- link for deleting  --}}
 
                                                 <img src="{{ asset('images/trash.svg') }}" id="trash"
@@ -183,7 +166,6 @@
     <!--end page-body-->
 @endsection
 @section('scripts')
-
     <script>
         $(document).ready(function() {
             $('#example').DataTable();
