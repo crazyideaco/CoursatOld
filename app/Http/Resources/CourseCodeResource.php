@@ -17,7 +17,7 @@ class CourseCodeResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'secure'  => intval($this->simulator) ?? 0,
+            'secure'  => intval($this->simulator) ?? 1,
             "show_video_code" => intval($this->show_video_code) ?? 0,
             "video_code_type" => intval($this->video_code_type) ?? 0,
             "code_duration" => intval($this->code_duration) ?? 0,
