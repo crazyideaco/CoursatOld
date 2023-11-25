@@ -116,6 +116,14 @@
                             </h4>
                             @include('dashboard.students.includes.__online_filter_sections')
                         </div>
+                        <div class="row" id="general_settings">
+                            <h4 class="hederre">
+                                إعدادات عامة
+                            </h4>
+                            @include('dashboard.students.includes.__general_settings_sections')
+                        </div>
+
+
                         {{-- <div class="row">
                             <div class="col-3 mx-auto">
 
@@ -283,7 +291,7 @@
 
 
 
-{{-- <script>
+    {{-- <script>
     function filter_based_on_category_id_education() {
 
         // // Get selected options
@@ -322,29 +330,28 @@
     }
 </script> --}}
 
-<script>
-    function filter_students() {
-        $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
-            //online , offline filter
-            data.is_online = $("#is_online").val();
-            data.from_date = $("#from_date").val();
-            data.to_date = $("#to_date").val();
-            //basic filters
-            data.stage_id = $("#stage").val();
-            data.years_id = $("#year").val();
-            data.type_id = $("#types").val();
-            // //college filters
-            data.university_id = $("#university").val();
-            data.college_id = $("#college").val();
-            data.division_id = $("#division").val();
-            data.section_id = $("#section").val();
-            data.type_college_id = $("#typescollege").val();
-        });
-        $('#dataTableBuilder').DataTable().ajax.reload();
-    }
-</script>
+    <script>
+        function filter_students() {
+            $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
+                //online , offline filter
+                data.is_online = $("#is_online").val();
+                data.from_date = $("#from_date").val();
+                data.to_date = $("#to_date").val();
+                //basic filters
+                data.stage_id = $("#stage").val();
+                data.years_id = $("#year").val();
+                data.type_id = $("#types").val();
+                // //college filters
+                data.university_id = $("#university").val();
+                data.college_id = $("#college").val();
+                data.division_id = $("#division").val();
+                data.section_id = $("#section").val();
+                data.type_college_id = $("#typescollege").val();
+            });
+            $('#dataTableBuilder').DataTable().ajax.reload();
+        }
+    </script>
 
 
-{{--  --}}
-
+    {{--  --}}
 @endsection
