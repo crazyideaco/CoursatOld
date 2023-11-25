@@ -128,6 +128,6 @@ class CampaignController extends Controller
     public function destroy($id)
     {
         Campaign::where("id", $id)->delete();
-        return view("dashboard.Campaigns.index");
+        return redirect()->route("Campaigns.index");
     }
 }
