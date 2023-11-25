@@ -98,11 +98,11 @@ class CampainStudentDataTable extends DataTable
     {
         // dd($this->campain->category_id);
         $studentData = $model->newQuery()->where([["is_student", 1], ["is_student", "!=", null]])->where([["category_id", $this->campain->category_id], ["category_id", "!=", null]])->where([["created_at", ">=", $this->campain->start_date], ["created_at", "<=", $this->campain->end_date]]);
-        dd($studentData);
-        if ($studentData->category_id == 1) {
+        // dd($studentData);
+        if ($this->campaincategory_id == 1) {
             $studentData = $studentData->where('year_id', $this->campain->year_id)->where('Stage_id', $this->campain->Stage_id);
         }
-        if ($studentData->category_id == 2) {
+        if ($this->campain->category_id == 2) {
             $studentData = $studentData->where('college_id', $this->campain->college_id)->where(['university_id', $this->campain->university_id]);
         }
 
