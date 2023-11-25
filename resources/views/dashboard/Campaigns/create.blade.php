@@ -1,20 +1,22 @@
-
 <style>
     .form-group.nasra {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 35px;
-}
-.hed h5 {
-    font-family: "reg"
-}
-.university_education h4 {
-    font-family: "reg"
-}
-.main_education h4 {
-    font-family: "reg"
-}
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 35px;
+    }
+
+    .hed h5 {
+        font-family: "reg"
+    }
+
+    .university_education h4 {
+        font-family: "reg"
+    }
+
+    .main_education h4 {
+        font-family: "reg"
+    }
 </style>
 
 @extends('App.dash')
@@ -141,13 +143,13 @@
                             </div>
 
 
-                                {{-- input for campaign platform type --}}
-                                <div class="row">
-                                    <div class="hed">
-                                        <h5> نوع المنصه </h5>
+                            {{-- input for campaign platform type --}}
+                            <div class="row">
+                                <div class="hed">
+                                    <h5> نوع المنصه </h5>
 
-                                       </div>
-                                  <div class="col-2">
+                                </div>
+                                <div class="col-2">
                                     <div class="form-group nasra">
                                         @foreach ($platforms as $platform)
                                             <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
@@ -157,151 +159,151 @@
                                             <div style="color:red;">{{ $message }} </div>
                                         @enderror
                                     </div>
-                                  </div>
-
                                 </div>
-                                {{-- begin of filter --}}
 
-                                {{-- input for campaign type --}}
-                                <label class="form-label">نوع التعليم</label>
+                            </div>
+                            {{-- begin of filter --}}
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="input-group">
+                            {{-- input for campaign type --}}
+                            <label class="form-label">نوع التعليم</label>
 
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="category_id"
-                                                    id="radioMainEducation" value="1">
-                                                <label class="form-check-label" for="radio1">اساسي</label>
-                                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="input-group">
 
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="category_id"
-                                                    id="radioUniversityEducation" value="2">
-                                                <label class="form-check-label" for="radio2">جامعي</label>
-                                            </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="category_id"
+                                                id="radioMainEducation" value="1">
+                                            <label class="form-check-label" for="radio1">اساسي</label>
+                                        </div>
 
-                                            {{-- <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="category_id"
+                                                id="radioUniversityEducation" value="2">
+                                            <label class="form-check-label" for="radio2">جامعي</label>
+                                        </div>
+
+                                        {{-- <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="educationType" id="radio3"
                                                     onchange="toggleRow()" value="option3">
                                                 <label class="form-check-label" for="radio3">تعليم حر</label>
                                             </div> --}}
-                                        </div>
                                     </div>
-                                </div>
-                                <!-- finish input -->
-
-                                <!-- main education -->
-                                <div class="main_education" id="mainEducation" style="display: none">
-                                    <h4>{{ __('messages.basic') }}</h4>
-                                    <div class="row">
-                                        <div class="form-group col-lg-3 col-md-6 col-12">
-                                            <label>المرحله</label>
-                                            <select class="form-control selectpicker" name="stage_id"
-                                                onchange="getstage_years(this)" id="stage" title="ادخل المرحله ">
-                                                {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
-                                                @foreach ($stages as $stage)
-                                                    <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('stage_id')
-                                                <p style="color:red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-lg-3 col-md-6 col-12">
-                                            <label>سنه الماده</label>
-                                            <select class="form-control selectpicker" name="year_id" required
-                                                id="year" onchange="getyear_subjects(this)" title="اختر السنه">
-                                                {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
-
-                                            </select>
-                                            @error('years_id')
-                                                <p style="color:red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-lg-3 col-md-6 col-12">
-                                            <label>الماده </label>
-                                            <select class="form-control selectpicker" name="subject_id" required
-                                                id="subject" onchange="getSubject_teacher(this)" title="اختر الماده">
-                                                {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
-
-                                            </select>
-                                            @error('subjects_id')
-                                                <p style="color:red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- main education -->
-                                <script>
-                                    let radioMainEducation = document.getElementById("radioMainEducation");
-                                    let divMainEducation= document.getElementById("mainEducation");
-                                    radioMainEducation.onclick = function(){
-                                        divMainEducation.style.display = "block";
-                                        divuniversityEducation.style.display = "none";
-                                    }
-                                </script>
-
-
-
-                                <!-- university education -->
-                                <div class="university_education" id="universityEducation" style="display: none">
-                                    <h4>{{ __('messages.university education') }}</h4>
-                                    <div class="row">
-
-                                        <div class="form-group col-lg-3 col-md-6 col-12">
-                                            <label>اسم الجامعه </label>
-                                            <select name="university_id" required class="form-control selectpicker"
-                                                id="university" onchange="getcolleges(this)" title="اختر جامعه">
-                                                {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
-                                                @foreach ($universities as $university)
-                                                    <option value="{{ $university->id }}">
-                                                        {{ $university->name_ar }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('university_id')
-                                                <p style="color:red;">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group col-lg-3 col-md-6 col-12">
-                                            <label>اسم الكليه </label>
-                                            <select name="college_id" required class="form-control selectpicker"
-                                                id="college" onchange="getdivision(this)" title="اختر كليه">
-                                                {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <script>
-                                    let radioUniversityEducation = document.getElementById("radioUniversityEducation");
-                                    let divuniversityEducation = document.getElementById("universityEducation");
-                                    radioUniversityEducation.onclick = function(){
-                                        divuniversityEducation.style.display = "block";
-                                        divMainEducation.style.display = "none";
-                                    }
-                                </script>
-                                {{-- end of filter  --}}
-
-
-                            </div>
-                        </div>
-                        <div class="save text-center mt-6">
-                            <div class="row save">
-                                <div class="col-12 text-center">
-                                    <input type="submit" value="حفظ" class="text-center">
                                 </div>
                             </div>
+                            <!-- finish input -->
+
+                            <!-- main education -->
+                            <div class="main_education" id="mainEducation" style="display: none">
+                                <h4>{{ __('messages.basic') }}</h4>
+                                <div class="row">
+                                    <div class="form-group col-lg-3 col-md-6 col-12">
+                                        <label>المرحله</label>
+                                        <select class="form-control selectpicker" name="stage_id"
+                                            onchange="getstage_years(this)" id="stage" title="ادخل المرحله ">
+                                            {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله </option> --}}
+                                            @foreach ($stages as $stage)
+                                                <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('stage_id')
+                                            <p style="color:red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-6 col-12">
+                                        <label>سنه الماده</label>
+                                        <select class="form-control selectpicker" name="year_id" id="year"
+                                            onchange="getyear_subjects(this)" title="اختر السنه">
+                                            {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
+
+                                        </select>
+                                        @error('years_id')
+                                            <p style="color:red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-6 col-12">
+                                        <label>الماده </label>
+                                        <select class="form-control selectpicker" name="subject_id" id="subject"
+                                            onchange="getSubject_teacher(this)" title="اختر الماده">
+                                            {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
+
+                                        </select>
+                                        @error('subjects_id')
+                                            <p style="color:red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- main education -->
+                            <script>
+                                let radioMainEducation = document.getElementById("radioMainEducation");
+                                let divMainEducation = document.getElementById("mainEducation");
+                                radioMainEducation.onclick = function() {
+                                    divMainEducation.style.display = "block";
+                                    divuniversityEducation.style.display = "none";
+                                }
+                            </script>
+
+
+
+                            <!-- university education -->
+                            <div class="university_education" id="universityEducation" style="display: none">
+                                <h4>{{ __('messages.university education') }}</h4>
+                                <div class="row">
+
+                                    <div class="form-group col-lg-3 col-md-6 col-12">
+                                        <label>اسم الجامعه </label>
+                                        <select name="university_id" class="form-control selectpicker" id="university"
+                                            onchange="getcolleges(this)" title="اختر جامعه">
+                                            {{-- <option value="0" selected="selected" disabled="disabled">اختر جامعه</option> --}}
+                                            @foreach ($universities as $university)
+                                                <option value="{{ $university->id }}">
+                                                    {{ $university->name_ar }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('university_id')
+                                            <p style="color:red;">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-lg-3 col-md-6 col-12">
+                                        <label>اسم الكليه </label>
+                                        <select name="college_id" class="form-control selectpicker" id="college"
+                                            onchange="getdivision(this)" title="اختر كليه">
+                                            {{-- <option value="0" selected="selected" disabled="disabled">اختر كليه</option> --}}
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                let radioUniversityEducation = document.getElementById("radioUniversityEducation");
+                                let divuniversityEducation = document.getElementById("universityEducation");
+                                radioUniversityEducation.onclick = function() {
+                                    divuniversityEducation.style.display = "block";
+                                    divMainEducation.style.display = "none";
+                                }
+                            </script>
+                            {{-- end of filter  --}}
+
+
                         </div>
-                    </form>
                 </div>
+                <div class="save text-center mt-6">
+                    <div class="row save">
+                        <div class="col-12 text-center">
+                            <input type="submit" value="حفظ" class="text-center">
+                        </div>
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
-        <!--end setting-->
-        <!--start foter-->
+    </div>
+    <!--end setting-->
+    <!--start foter-->
 
-        <!--end foter-->
+    <!--end foter-->
     </div>
     </div>
     <div class="foter">
