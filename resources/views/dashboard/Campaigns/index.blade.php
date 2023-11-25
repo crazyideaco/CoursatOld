@@ -131,12 +131,12 @@
                                                 @if ($campaign->category_id == config('project_types.system_category_type.category_id_college'))
                                                     <a
                                                         href="{{ route('campaigns.subscribtionsCollege.index', $campaign->id) }}">
-                                                        <img src="{{ asset('images/pen.svg') }}" id="pen"
+                                                        <img src="{{ asset('images/show.svg') }}" id="pen"
                                                             style="cursor: pointer"></a>
                                                 @else
                                                     <a
                                                         href="{{ route('campaigns.subscribtionsBasic.index', $campaign->id) }}">
-                                                        <img src="{{ asset('images/pen.svg') }}" id="pen"
+                                                        <img src="{{ asset('images/show.svg') }}" id="pen"
                                                             style="cursor: pointer"></a>
                                                 @endif
                                                 {{-- link for result file --}}
