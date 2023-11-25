@@ -234,7 +234,9 @@
 <script>
     function deleteuser_from_stutypes(student_id, type_id) {
 
-        console.log("type ",student_id);
+        console.log("type student ",student_id);
+        console.log("type id",type_id);
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -251,8 +253,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
 
-                let student_id = student_id;
-                let type_id = type_id;
+               
                 var url = "{{ route('stutypes.deleteuser_from_stutypes') }}";
 
                 var table = $('.table').DataTable();
@@ -288,7 +289,8 @@
 
 <script>
     function deleteuser_from_stutypescollege(student_id, typecollege_id) {
-        console.log("typecolege ",student_id);
+        console.log("typecolege student ",student_id);
+        console.log("typecolege id",typecollege_id);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -305,8 +307,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
 
-                let student_id = student_id;
-                let typecollege_id = typecollege_id;
+
                 var url = "{{ route('stutypescollege.deleteuser_from_stutypescollege') }}";
 
                 var table = $('.table').DataTable();
