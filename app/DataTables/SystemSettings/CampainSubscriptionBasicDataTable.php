@@ -67,8 +67,9 @@ class CampainSubscriptionBasicDataTable extends DataTable
     public function query(Student_Type $model)
     {
         return $model->newQuery()->whereHas('student', function ($studentq) {
+            dd($this->campain->category_id);
             $studentq->where('Stage_id', $this->campain->Stage_id);
-                // ->where('year_id', $this->campain->year_id)
+            // ->where('year_id', $this->campain->year_id)
             // ->where([['category_id', $this->campain->category_id ], ["category_id", "!=", null]]);
             // ->where([["created_at", ">=", $this->campain->start_date], ["created_at", "<=", $this->campain->end_date]])
         });
