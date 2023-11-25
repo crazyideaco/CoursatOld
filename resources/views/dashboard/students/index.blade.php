@@ -379,6 +379,7 @@
             $.ajax({
                 type: 'post',
                 url: `{{ route('students.exportAll') }}`,
+                mimeType: "multipart/form-data",
                 dataType: "Json",
                 data: {
                     "is_online": is_online,
