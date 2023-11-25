@@ -128,7 +128,7 @@
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
                                                 {{-- link for subscription  --}}
-                                                <a href="{{ route('campaigns.subscription.index', $campaign->id) }}"> <img
+                                                <a href="{{ route('campaigns.subscribtions.index', $campaign->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
                                                 {{-- link for result file --}}
