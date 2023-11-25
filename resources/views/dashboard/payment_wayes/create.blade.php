@@ -99,7 +99,7 @@
                                 @if (auth()->user()->isAdmin === 'admin')
                                     <div class="form-group col-3">
                                         <label> رقم المركز</label>
-                                        <select class="form-control" multiple name="center_id" required name="center_id[]">
+                                        <select class="form-control" multiple name="center_id[]">
                                             @foreach ($centers as $center)
                                                 <option value="{{ $center->id }}">{{ $center->name }}</option>
                                             @endforeach
