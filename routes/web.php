@@ -1,6 +1,10 @@
  <?php
 
+
 use App\Http\Controllers\Dashboard\Student\StudentExportController;
+
+use App\Http\Controllers\Dashboard\SubscriptionController;
+
 use Dashboard\CampaignController;
     use App\Lesson;
 
@@ -52,11 +56,16 @@ use Dashboard\CampaignController;
         // route for campaigns----------------------
         Route::resource("campaigns", CampaignController::class);
         // ------------------------------------------
+        Route::get('campaigns/{id}/subscribtions', [SubscriptionController::class, 'subscribtions'])->name('campaigns.subscribtions.index');
 
 
 
 
         Route::post('export', [StudentExportController::class, 'export'])->name('students.exportAll');
+
+        // route for Campaign subscribtions----------
+        
+
         Route::get('main_page_basic', 'MainPageController@main_page_basic')->name('main_page_basic');
         Route::get('main', 'MainPageController@main')->name('main');
 

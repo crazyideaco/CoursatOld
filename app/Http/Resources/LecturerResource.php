@@ -22,7 +22,7 @@ class LecturerResource extends JsonResource
           $subjects = $this->subjects()->pluck('name_ar');
           $years = $this->years->pluck('name_ar');
           if($this->belongcenter1()){
-                $center_name = $this->belongcenter1()->pluck('name'); 
+                $center_name = $this->belongcenter1()->pluck('name');
                 $images = [];
                 foreach($this->belongcenter1()->pluck('image') as $image){
                     $images [] = asset('uploads/'. $image);
@@ -35,14 +35,14 @@ class LecturerResource extends JsonResource
           $subjects = $this->subcolleges()->pluck('name_ar');
           $years = $this->sections()->pluck('name_ar');
           if($this->belongcenter2()){
-                $center_name = $this->belongcenter2()->pluck('name'); 
+                $center_name = $this->belongcenter2()->pluck('name');
                 $images = [];
                 foreach($this->belongcenter2()->pluck('image') as $image){
                     $images [] = asset('uploads/'. $image);
                 }
           }
       }
-      
+
            return [
            'id'         => $this->id,
            'name'=>$this->name,
