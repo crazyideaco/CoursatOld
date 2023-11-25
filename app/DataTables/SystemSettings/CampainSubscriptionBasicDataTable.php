@@ -66,7 +66,12 @@ class CampainSubscriptionBasicDataTable extends DataTable
      */
     public function query(Student_Type $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->whereHas('student', function ($studentq) {
+            $studentq->where('year_id', $this->campain->year_id)->where('Stage_id', $this->campain->Stage_id);
+        });
+        // $model->newQuery()->whereHas('student', function ($studentq) {
+        //     $studentq->where('category_id', 1);
+        // });
     }
 
     /**
