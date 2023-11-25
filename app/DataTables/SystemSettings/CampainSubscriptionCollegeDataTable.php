@@ -67,8 +67,8 @@ class CampainSubscriptionCollegeDataTable extends DataTable
     {
         return $model->newQuery()->whereHas('student', function ($studentq) {
             $studentq->where(['college_id', $this->campain->college_id])
-                ->where('university_id', $this->campain->university_id)
-                ->where([['category_id', $this->campain->category_id], ["category_id", "!=", null]]);
+                ->where('university_id', $this->campain->university_id);
+            // ->where([['category_id', $this->campain->category_id], ["category_id", "!=", null]]);
             // ->where([["created_at", ">=", $this->campain->start_date], ["created_at", "<=", $this->campain->end_date]])
         });
     }
