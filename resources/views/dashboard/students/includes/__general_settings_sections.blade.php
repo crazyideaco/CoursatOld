@@ -37,7 +37,7 @@
 
 <div class="form-group col-lg-3 col-md-6 col-12">
     {{-- <label>تاريخ التسجيل الي :</label> --}}
-    <a href="{{ route('students.exportAll') }}" class="btn btn-primary" style="width: 100%;">تصدير ملف excel</a>
+    <button onclick ="export_students()" class="btn btn-primary" style="width: 100%;">تصدير ملف excel</button>
 </div>
 
 

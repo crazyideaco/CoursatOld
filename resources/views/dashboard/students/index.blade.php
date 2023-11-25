@@ -352,6 +352,66 @@
         }
     </script>
 
+    <script>
+        function export_students() {
+            //online , offline filter
+            var is_online = $("#is_online").val();
+            // created at filter
+            var from_date = $("#from_date").val();
+            var to_date = $("#to_date").val();
+            //basic filters
+            var stage_id = $("#stage").val();
+            var years_id = $("#year").val();
+            var type_id = $("#types").val();
+            // //college filters
+            var university_id = $("#university").val();
+            var college_id = $("#college").val();
+            var division_id = $("#division").val();
+            var section_id = $("#section").val();
+            var type_college_id = $("#typescollege").val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'post',
+                url: `{{ route('export_driver_ticket_report') }}`,
+                dataType: "Json",
+                data: {
+                    "is_online": is_online,
+                    "from_date": from_date,
+                    "to_date": to_date,
+                    "stage_id": stage_id,
+                    "years_id": years_id,
+                    "type_id": type_id,
+                    "university_id": university_id,
+                    "college_id": college_id,
+                    "division_id": division_id,
+                    "section_id": section_id,
+                    "type_college_id": type_college_id,
+                    // "days": days,
+                },
+                success: function(result) {
+                    if (result.status == true) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Showed Successfully ',
+                            showConfirmButton: false,
+                            timer: 2000
+                        })
+
+                    }
+
+
+                }
+            });
+
+        }
+    </script>
 
     {{--  --}}
 @endsection
