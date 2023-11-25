@@ -423,7 +423,7 @@ class StudentController extends Controller
         $user->update([
             "device_id" => null,
             "device_token" => null,
-            "api_token" =>  Hash::make(rand(0, 999999) . time()),
+            "api_token" => Hash::make(rand(0, 999999) . time()),
         ]);
         DB::commit();
         return response()->json(["status" => true]);
