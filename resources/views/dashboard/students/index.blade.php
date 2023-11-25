@@ -378,7 +378,7 @@
 
             $.ajax({
                 type: 'post',
-                url: `{{ route('export_driver_ticket_report') }}`,
+                url: `{{ route('students.exportAll') }}`,
                 dataType: "Json",
                 data: {
                     "is_online": is_online,
