@@ -87,7 +87,7 @@ class PaymentWayController extends Controller
             $paymentway->center_id = auth()->id();
             $paymentway->centers()->attach(auth()->id());
         } else {
-            $paymentway->centers()->attach($request->center_id);
+            $paymentway->centers()->attach([$request->center_id]);
         }
         $paymentway->save();
         return redirect()->route("paymentways.index");
