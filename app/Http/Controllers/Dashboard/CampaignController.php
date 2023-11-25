@@ -70,6 +70,7 @@ class CampaignController extends Controller
     public function show(CampainStudentDataTable $dataTable, $id)
     {
         $campain =  Campaign::where("id", $id)->get();
+        dd($campain);
         return $dataTable->with("campain", $campain)->render("dashboard.Campaigns.show", compact("campain"));
         // return view("dashboard.Campaigns.show", $campain);
     }
@@ -104,6 +105,10 @@ class CampaignController extends Controller
         $campain->end_date = $request->end_date;
         $campain->description = $request->description;
         $campain->category_id = $request->category_id;
+        $campain->college_id = $request->college_id;
+        $campain->university_id = $request->university_id;
+        $campain->stage_id = $request->stage_id;
+        $campain->year_id = $request->year_id;
         $campain->save();
         $campain->Platforms()->sync($request->platform);
 
