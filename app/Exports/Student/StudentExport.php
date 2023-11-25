@@ -99,32 +99,25 @@ class StudentExport implements  FromQuery, WithMapping, Responsable, WithHeading
     public function headings(): array
     {
         return [
-            'ticket number',
-            'terminal id',
-            'bank',
-            'name',
+            'الكود',
+            'الإسم',
+            'رقم الهاتف',
+            'تاريخ التسجيل',
+            'نوع التعليم',
+            'المنصة',
+            
 
-            'device type',
-            'area',
-            'remote city',
-            'sub area',
-            'phone',
-
-            'ticket type',
-            'client type',
-            'Status',
-            'ticket time',
 
         ];
     }
 
-    public function map($row): array
+    public function map($student): array
     {
         return [
             $row->ticket_number,
             $row->terminal_id,
             $row->bank,
             $row->name,
-            
+
     }
 }
