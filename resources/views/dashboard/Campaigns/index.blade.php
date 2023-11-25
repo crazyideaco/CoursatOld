@@ -128,9 +128,15 @@
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
                                                 {{-- link for subscription  --}}
-                                                <a href="{{ route('campaigns.subscribtions.index', $campaign->id) }}"> <img
+                                                @if ($campain->category_id == 1)
+                                                    <a href="{{ route('campaigns.subscribtionsBasic.index', $campaign->id) }}">
+                                                        <img src="{{ asset('images/pen.svg') }}" id="pen"
+                                                            style="cursor: pointer"></a>
+                                                @else
+                                                <a href="{{ route('campaigns.subscribtionsCollege.index', $campaign->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a>
+                                                @endif
                                                 {{-- link for result file --}}
                                                 {{-- <a href=""> <img src="{{ asset('images/pen.svg') }}" id="pen"
                                                         style="cursor: pointer"></a> --}}
