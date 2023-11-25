@@ -128,6 +128,6 @@ class CampaignController extends Controller
     public function destroy($id)
     {
         Campaign::where("id", $id)->delete();
-        return redirect()->route("Campaigns.index");
+        return response()->json(['status' => true, 'message' => 'تم المسح بنجاح']);
     }
 }
