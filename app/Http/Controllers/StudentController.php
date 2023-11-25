@@ -422,7 +422,8 @@ class StudentController extends Controller
         $user = User::where("id", $id)->first();
         $user->update([
             "device_id" => null,
-            "device_token" => null
+            "device_token" => null,
+            "api_token" => null,
         ]);
         DB::commit();
         return response()->json(["status" => true]);

@@ -95,42 +95,41 @@
 
 
                     <div class="all-infor">
-                        <div class="row" id="category_id_basic">
-                            <h4 class="hederre">
-                                المرحله الأساسيه
-                            </h4>
-                            @include('dashboard.students.includes.__basic_filter_sections')
-                        </div>
 
+                        <form action="{{ route('students.exportAll') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
 
-                        <div class="row" id="category_id_college">
-                            <h4 class="hederre">
-                                المرحله الجامعيه
-                            </h4>
-                            @include('dashboard.students.includes.__college_filter_sections')
-                        </div>
-
-                        <div class="row" id="online_status">
-                            <h4 class="hederre">
-                                حالة الاونلاين
-                            </h4>
-                            @include('dashboard.students.includes.__online_filter_sections')
-                        </div>
-                        <div class="row" id="general_settings">
-                            <h4 class="hederre">
-                                إعدادات عامة
-                            </h4>
-                            @include('dashboard.students.includes.__general_settings_sections')
-                        </div>
-
-
-                        {{-- <div class="row">
-                            <div class="col-3 mx-auto">
-
-
-                                <span class="btn btn-primary" onclick="filterbasicstudents()">بحث</span>
+                            <div class="row" id="category_id_basic">
+                                <h4 class="hederre">
+                                    المرحله الأساسيه
+                                </h4>
+                                @include('dashboard.students.includes.__basic_filter_sections')
                             </div>
-                        </div> --}}
+
+
+                            <div class="row" id="category_id_college">
+                                <h4 class="hederre">
+                                    المرحله الجامعيه
+                                </h4>
+                                @include('dashboard.students.includes.__college_filter_sections')
+                            </div>
+
+                            <div class="row" id="online_status">
+                                <h4 class="hederre">
+                                    حالة الاونلاين
+                                </h4>
+                                @include('dashboard.students.includes.__online_filter_sections')
+                            </div>
+                            <div class="row" id="general_settings">
+                                <h4 class="hederre">
+                                    إعدادات عامة
+                                </h4>
+                                @include('dashboard.students.includes.__general_settings_sections')
+                            </div>
+
+
+                        </form>
+                        
                         <div class="row">
                             <div class="table-responsive">
 
@@ -338,13 +337,13 @@
                 data.from_date = $("#from_date").val();
                 data.to_date = $("#to_date").val();
                 //basic filters
-                data.stage_id = $("#stage").val();
-                data.years_id = $("#year").val();
+                data.stage_id = $("#stage_id").val();
+                data.years_id = $("#years_id").val();
                 data.type_id = $("#types").val();
                 // //college filters
-                data.university_id = $("#university").val();
-                data.college_id = $("#college").val();
-                data.division_id = $("#division").val();
+                data.university_id = $("#university_id").val();
+                data.college_id = $("#college_id").val();
+                data.division_id = $("#division_id").val();
                 data.section_id = $("#section").val();
                 data.type_college_id = $("#typescollege").val();
             });
@@ -360,14 +359,14 @@
             var from_date = $("#from_date").val();
             var to_date = $("#to_date").val();
             //basic filters
-            var stage_id = $("#stage").val();
-            var years_id = $("#year").val();
+            var stage_id = $("#stage_id").val();
+            var years_id = $("#years_id").val();
             var type_id = $("#types").val();
             // //college filters
-            var university_id = $("#university").val();
-            var college_id = $("#college").val();
-            var division_id = $("#division").val();
-            var section_id = $("#section").val();
+            var university_id = $("#university_id").val();
+            var college_id = $("#college_id").val();
+            var division_id = $("#division_id").val();
+            var section_id = $("#section_id").val();
             var type_college_id = $("#typescollege").val();
 
             $.ajaxSetup({
@@ -379,7 +378,6 @@
             $.ajax({
                 type: 'post',
                 url: `{{ route('students.exportAll') }}`,
-                mimeType: "multipart/form-data",
                 dataType: "Json",
                 data: {
                     "is_online": is_online,
