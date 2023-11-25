@@ -131,7 +131,7 @@
                                             <td scope="row">{{ $paymentway->title ?? ''}}</td>
                                             <td scope="row">{{ $paymentway->number ?? ''}}</td>
                                             <td scope="row">{{ $paymentway->creator->name ?? ''}}</td>
-                                            <td scope="row">{{ implode(',', $paymentway->centers->pluck('name')) ?? '' }}</td>
+                                            <td scope="row">{{ implode(',', $paymentway->centers->pluck('name')->toArray()) ?? '' }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('paymentways.edit', $paymentway->id) }}"> <img
                                                         src="{{ asset('images/pen.svg') }}" id="pen"
