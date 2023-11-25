@@ -68,7 +68,10 @@ class CampainSubscriptionCollegeDataTable extends DataTable
     public function query(Student_Typecollege $model)
     {
         return $model->newQuery()->whereHas('student', function ($studentq) {
-            $studentq->where('year_id', $this->campain->year_id)->where('Stage_id', $this->campain->Stage_id);
+            $studentq->where('university_id', $this->campain->university_id)
+                ->where('college_id', $this->campain->college_id)
+                ->where([['category_id', $this->campain->category_id], ["category_id", "!=", null]]);
+            // ->where([["created_at", ">=", $this->campain->start_date], ["created_at", "<=", $this->campain->end_date]])
         });
     }
 
