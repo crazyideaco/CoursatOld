@@ -107,7 +107,6 @@ class CampainStudentDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('systemsettings/campainstudentdatatable-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
