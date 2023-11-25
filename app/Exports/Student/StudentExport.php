@@ -3,6 +3,7 @@
 namespace App\Exports\Student;
 
 use App\User;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
@@ -94,7 +95,7 @@ class StudentExport implements  FromQuery, WithMapping, Responsable, WithHeading
             return $query->where('section_id', $this->section_id);
         })
         ->when($this->type_college_id != null && $this->type_college_id != 0, function ($query) {
-            
+
             return $query->whereHas('stutypescollege', function ($typeq)  {
                 return $typeq->where('typescollege.id', (int)$this->type_college_id);
             });
@@ -147,7 +148,7 @@ class StudentExport implements  FromQuery, WithMapping, Responsable, WithHeading
             $student->id,
             $student->name,
             $student->phone,
-            $student->created_at->format('Y-m-d'),
+            Carbon::parse($student->created_at)->format('Y-m-d'),
             $student->category_id == config('project_types.system_category_type.category_id_college') ? 'جامعي' : 'أساسي',
             $student->getCenterNameAttribute(),
             $student->getYearNameAttribute(),
