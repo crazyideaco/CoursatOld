@@ -41,224 +41,262 @@
 
         .details_student {
             background-color: #fafafa;
-  border-radius: 10px;
-  padding: 2rem;
-}
-.details_student img {
-  display: block;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin: 0 auto;
-}
-.details_student .title {
-  text-align: center;
-  font-family: "reg";
-  color: #011c1e;
-  margin-top: 1rem;
-}
-.details_student .text {
-    font-family: "reg";
-  color: #06797e;
-  text-align: center;
-}
-.details_student .text-1 {
-    font-family: "reg";
-  color: #06797e;
-  text-align: center;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #828c8d;
-}
-.details_student .details {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 0 auto;
-}
- .details_student .details .info.date {
-  margin-inline-end: 0;
-  width: fit-content;
-}
-.details_student .details .info {
-  background-color: rgba(6,121,126,.1);
-  font-family: "reg";
-  color: #64666a;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+            border-radius: 10px;
+            padding: 2rem;
+        }
 
-  width: 80%;
-  font-size: .7rem;
-  text-align: center;
-  width: fit-content;
-}
-h5.title_section {
-  font-family: 'bold';
-}
-svg.svg-inline--fa.fa-circle.online {
-  color: green;
-  margin: 0 auto;
-  margin-inline-start: 8px;
-  margin-top: 4px;
-}
-svg.svg-inline--fa.fa-circle.ofline {
-  color: rgb(175, 180, 175);
-  margin: 0 auto;
-  margin-inline-start: 8px;
-  margin-top: 4px;
-}
-p.text-online {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-  margin-top: 7px;
-  color: black;
-  font-family: 'reg';
-  width: fit-content;
-  padding: 0.3rem;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid;
-  color: green;
-}
-.text-ofline {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-  margin-top: 7px;
-  color: black;
-  font-family: 'reg';
-  width: fit-content;
-  padding: 0.3rem;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid;
-  color: rgb(103, 107, 103);
+        .details_student img {
+            display: block;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
 
-}
- .basic_information .title {
-  font-family: "reg";
-  color: #011c1e;
-  width: 100%;
-}
- .basic_information {
-  padding: 2.5rem;
-  background-color: #fff;
-  border: 1px solid #ebeaed;
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 15px;
-}
- .basic_information .info {
-  width: 25%;
-  text-align: start;
-  font-size: .8rem;
-  margin-top: 2rem;
-}
-.basic_information .info .text {
-  font-family: "reg";
-  color: #909295;
-  margin-bottom: 0
-}
-.details_student .details .info svg {
-  margin-inline-end: 5px;
-}
-span.number {
-  color: red;
-  font-family: "reg";
-}
-.basic_information {
-  background-color: white;
-  padding: 0.5rem 0.5rem;
-}
-.table_details {
-  background-color: white;
-  margin-top: 13px;
-  padding: 0.5rem 0.5rem;
-  border-radius: 10px;
-}
- .table_details .nav-tabs .nav-link.active, .table_data .nav-tabs .nav-link.active {
-  border-color: rgba(0,0,0,0);
-  border-bottom: 2px solid #06797e;
+        .details_student .title {
+            text-align: center;
+            font-family: "reg";
+            color: #011c1e;
+            margin-top: 1rem;
+        }
 
-}
-a#pills-exams-tab{
-  color: black;
-  font-family: 'reg';
-}
-a#pills-coruses-tab {
-  color: black;
-  font-family: 'reg';
-}
-a#pills-History-tab{
-  color: black;
-  font-family: 'reg';
-}
-a#pills-viwe-tab{
-    color: black;
-  font-family: 'reg';
-}
-.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
- border: unset;
-  border-color:unset;
-}
-.header-table {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15PX;
-  /* align-items: center; */
-  font-family: "reg";
-}
-table.table {
-  font-family: "reg";
-  font-size: 0.8rem;
-}
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #fafafa !important;
-    color: black !important;
-}
-.table tbody tr td {
-    color: black !important;
-    color: black;
-    padding: 0.5rem !important;
-    font-family: "reg" !important;
-    font-size: 0.9rem !important;
-}
-.basc {
-    background-color: #fafafa;
-    padding: 1rem;
-    border-radius: 10px;
-}
-svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
-    color: red;
-    cursor: pointer;
-}
-.name-cor {
-    width: 100%;
-}
-.form-group.names {
-    font-family: "reg";
-}
-button.btn.btn-success.names {
-    margin: 0 auto;
-    display: block;
-    font-family: "reg";
-    width: 100%;
-}
-.name-cor {
-    width: 100%;
-    background-color: #fafafa;
-    margin-top: 15px;
-    padding: 1rem;
-    border-radius: 12px;
-}
+        .details_student .text {
+            font-family: "reg";
+            color: #06797e;
+            text-align: center;
+        }
 
+        .details_student .text-1 {
+            font-family: "reg";
+            color: #06797e;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #828c8d;
+        }
+
+        .details_student .details {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .details_student .details .info.date {
+            margin-inline-end: 0;
+            width: fit-content;
+        }
+
+        .details_student .details .info {
+            background-color: rgba(6, 121, 126, .1);
+            font-family: "reg";
+            color: #64666a;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+
+            width: 80%;
+            font-size: .7rem;
+            text-align: center;
+            width: fit-content;
+        }
+
+        h5.title_section {
+            font-family: 'bold';
+        }
+
+        svg.svg-inline--fa.fa-circle.online {
+            color: green;
+            margin: 0 auto;
+            margin-inline-start: 8px;
+            margin-top: 4px;
+        }
+
+        svg.svg-inline--fa.fa-circle.ofline {
+            color: rgb(175, 180, 175);
+            margin: 0 auto;
+            margin-inline-start: 8px;
+            margin-top: 4px;
+        }
+
+        p.text-online {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 7px;
+            color: black;
+            font-family: 'reg';
+            width: fit-content;
+            padding: 0.3rem;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid;
+            color: green;
+        }
+
+        .text-ofline {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            margin-top: 7px;
+            color: black;
+            font-family: 'reg';
+            width: fit-content;
+            padding: 0.3rem;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid;
+            color: rgb(103, 107, 103);
+
+        }
+
+        .basic_information .title {
+            font-family: "reg";
+            color: #011c1e;
+            width: 100%;
+        }
+
+        .basic_information {
+            padding: 2.5rem;
+            background-color: #fff;
+            border: 1px solid #ebeaed;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 15px;
+        }
+
+        .basic_information .info {
+            width: 25%;
+            text-align: start;
+            font-size: .8rem;
+            margin-top: 2rem;
+        }
+
+        .basic_information .info .text {
+            font-family: "reg";
+            color: #909295;
+            margin-bottom: 0
+        }
+
+        .details_student .details .info svg {
+            margin-inline-end: 5px;
+        }
+
+        span.number {
+            color: red;
+            font-family: "reg";
+        }
+
+        .basic_information {
+            background-color: white;
+            padding: 0.5rem 0.5rem;
+        }
+
+        .table_details {
+            background-color: white;
+            margin-top: 13px;
+            padding: 0.5rem 0.5rem;
+            border-radius: 10px;
+        }
+
+        .table_details .nav-tabs .nav-link.active,
+        .table_data .nav-tabs .nav-link.active {
+            border-color: rgba(0, 0, 0, 0);
+            border-bottom: 2px solid #06797e;
+
+        }
+
+        a#pills-exams-tab {
+            color: black;
+            font-family: 'reg';
+        }
+
+        a#pills-coruses-tab {
+            color: black;
+            font-family: 'reg';
+        }
+
+        a#pills-History-tab {
+            color: black;
+            font-family: 'reg';
+        }
+
+        a#pills-viwe-tab {
+            color: black;
+            font-family: 'reg';
+        }
+
+        .nav-tabs .nav-link:focus,
+        .nav-tabs .nav-link:hover {
+            border: unset;
+            border-color: unset;
+        }
+
+        .header-table {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15PX;
+            /* align-items: center; */
+            font-family: "reg";
+        }
+
+        table.table {
+            font-family: "reg";
+            font-size: 0.8rem;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            background-color: #fafafa !important;
+            color: black !important;
+        }
+
+        .table tbody tr td {
+            color: black !important;
+            color: black;
+            padding: 0.5rem !important;
+            font-family: "reg" !important;
+            font-size: 0.9rem !important;
+        }
+
+        .basc {
+            background-color: #fafafa;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
+            color: red;
+            cursor: pointer;
+        }
+
+        .name-cor {
+            width: 100%;
+        }
+
+        .form-group.names {
+            font-family: "reg";
+        }
+
+        button.btn.btn-success.names {
+            margin: 0 auto;
+            display: block;
+            font-family: "reg";
+            width: 100%;
+        }
+
+        .name-cor {
+            width: 100%;
+            background-color: #fafafa;
+            margin-top: 15px;
+            padding: 1rem;
+            border-radius: 12px;
+        }
     </style>
     <!--start page-body-->
     <div class="page-body">
@@ -339,54 +377,54 @@ button.btn.btn-success.names {
                             @if ($student->image)
                                 <img src="{{ url('uploads/' . $student->image) }}">
                             @endif
-                           <div class="online">
+                            <div class="online">
 
-                            <p class="text-online">online<i class="fas fa-circle online"></i></p>
-                           </div>
-                           <!-- ofline -->
-                           <!-- <div class="ofline">
-                            <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
-                           </div> -->
+                                <p class="text-online">online<i class="fas fa-circle online"></i></p>
+                            </div>
                             <!-- ofline -->
-                                        <h5 class="title"> {{ $student->name }}</h5>
+                            <!-- <div class="ofline">
+                                <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
+                               </div> -->
+                            <!-- ofline -->
+                            <h5 class="title"> {{ $student->name }}</h5>
                             <p class="text">أساسي</p>
                             <p class="text-1">عدد النقاط:<span class="number">{{ $student->points }}</span></p>
                             <div class="details">
-                              <p class="info date">
-                                <i class="far fa-calendar"></i>
-                                تاريخ الانضمام : 22 مايو, 2023
-                              </p>
-                              <p class="info">
-                                <i class="far fa-calendar"></i>
-                                تاريخ اخر ظهور علي التطبيق : 24 مايو, 2024
-                              </p>
-                              <p class="info">
-                                <i class="fas fa-star"></i>
-                                التقيم العام
-                              </p>
+                                <p class="info date">
+                                    <i class="far fa-calendar"></i>
+                                    تاريخ الانضمام : 22 مايو, 2023
+                                </p>
+                                <p class="info">
+                                    <i class="far fa-calendar"></i>
+                                    تاريخ اخر ظهور علي التطبيق : 24 مايو, 2024
+                                </p>
+                                <p class="info">
+                                    <i class="fas fa-star"></i>
+                                    التقيم العام
+                                </p>
 
                             </div>
-                          </div>
-                         <div class="row">
+                        </div>
+                        <div class="row">
                             <div class="name-cor">
                                 <div class="form-group names">
                                     <label for="exampleFormControlSelect1">اسم الكورس</label>
                                     <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>1</option>
-                                      <option>2</option>
-                                      <option>3</option>
-                                      <option>4</option>
-                                      <option>5</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
                                     </select>
-                                  </div>
-                                  <button type="button" class="btn btn-success names">اضافه</button>
+                                </div>
+                                <button type="button" class="btn btn-success names">اضافه</button>
                             </div>
-                         </div>
+                        </div>
 
 
 
 
-                          {{-- <div class="img">
+                        {{-- <div class="img">
                             @if ($student->image)
                                 <img src="{{ url('uploads/' . $student->image) }}">
                             @endif
@@ -396,169 +434,181 @@ button.btn.btn-success.names {
                     </div>
                     <div class="col-lg-8 col-md-12 col-12">
 
-                       <div class="basc">
-                        <div class="basic_information">
-                            <h3 class="title">البيانات الاساسية</h3>
-                            <div class="info">
-                              <p class="title">رقم الهاتف</p>
-                              <p class="text">{{ $student->phone }}</p>
-                            </div>
-                            <div class="info">
-                              <p class="title">المرحله</p>
-                              <p class="text"> @if ($student->stage)
-                                {{ $student->stage['stage_ar'] }}
-                            @endif</p>
-
-                            </div>
-                            <div class="info">
-                              <p class="title">السنه</p>
-                              <p class="text">  @if ($student->year)
-                                {{ $student->year->year_ar }}
-                            @endif</p>
-                            </div>
-                            <div class="info">
-                                <p class="title">نوع الهاتف</p>
-                                <p class="text"> ios</p>
-                              </div>
-
-                          </div>
-                          <div class="basic_information">
-                            <h3 class="title">المنصات</h3>
-                            <div class="info">
-                              <p class="title">المنصه </p>
-                              <p class="text">العامه</p>
-                            </div>
-                            <div class="info">
-                              <p class="title">منصة مستر </p>
-                              <p class="text">محمد حسين</p>
-
-                            </div>
-                            <div class="info">
-                              <p class="title">منصة  </p>
-                              <p class="text">د/ محمود العفيفي</p>
-                            </div>
-
-                          </div>
-                          <div class="table_details">
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                  <a class="nav-link active" id="pills-coruses-tab" data-toggle="pill" href="#pills-coruses" role="tab" aria-controls="pills-coruses" aria-selected="true">كورسات</a>
-                                </li>
-                                <li class="nav-item">
-                                  <a class="nav-link" id="pills-exams-tab" data-toggle="pill" href="#pills-exams" role="tab" aria-controls="pills-exams" aria-selected="false">الامتحانات</a>
-                                </li>
-                                <li class="nav-item">
-                                  <a class="nav-link" id="pills-History-tab" data-toggle="pill" href="#pills-History" role="tab" aria-controls="pills-History" aria-selected="false">History</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-viwe-tab" data-toggle="pill" href="#pills-viwe" role="tab" aria-controls="pills-viwe" aria-selected="false">مشاهدات</a>
-                                  </li>
-                              </ul>
-                              <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel" aria-labelledby="pills-coruses-tab">
-                                    <div class="header-table">
-                                        <h3>كورسات</h3>
-                                        <div class="form-group">
-                                          <input type="date" class="form-control">
-                                        </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                        <div class="table_details">
-                                          <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">اسم الكورس</th>
-                                                <th scope="col">تاريخ اشتراك الكورس</th>
-                                                <th scope="col">نوع الاشتراك</th>
-                                                <th scope="col">نوع المنصه</th>
-                                                <th scope="col"></th>
-
-
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr>
-                                                <th scope="row">1564115</th>
-                                                <td>المحاسبه</td>
-                                                <td>15/10/2023</td>
-                                                <td>--</td>
-                                                <td>--</td>
-                                                <td><i class="fas fa-trash-alt delet"></i></td>
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">1564115</th>
-                                                <td>المحاسبه</td>
-                                                <td>15/10/2023</td>
-                                                <td>--</td>
-                                                <td>--</td>
-                                                <td><i class="fas fa-trash-alt delet"></i></td>
-
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">1564115</th>
-                                                <td>المحاسبه</td>
-                                                <td>15/10/2023</td>
-                                                <td>--</td>
-                                                <td>--</td>
-                                                <td><i class="fas fa-trash-alt delet"></i></td>
-
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                      </div>
+                        <div class="basc">
+                            <div class="basic_information">
+                                <h3 class="title">البيانات الاساسية</h3>
+                                <div class="info">
+                                    <p class="title">رقم الهاتف</p>
+                                    <p class="text">{{ $student->phone }}</p>
                                 </div>
-                                <div class="tab-pane fade" id="pills-exams" role="tabpanel" aria-labelledby="pills-exams-tab">
-                                    <div class="header-table">
-                                        <h3>امتحانات</h3>
-                                        <div class="form-group">
-                                          <input type="date" class="form-control">
-                                        </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                        <div class="table_details">
-                                          <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">اسم الامتحان</th>
-                                                <th scope="col">تارخ الامتحان</th>
-                                                <th scope="col">الدرجه</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1564115</th>
-                                                    <td>المحاسبه</td>
-                                                    <td>15/10/2023</td>
-                                                    <td>30</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <th scope="row">1564115</th>
-                                                    <td>المحاسبه</td>
-                                                    <td>15/10/2023</td>
-                                                    <td>30</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <th scope="row">1564115</th>
-                                                    <td>المحاسبه</td>
-                                                    <td>15/10/2023</td>
-                                                    <td>30</td>
-                                                  </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                      </div>
+                                <div class="info">
+                                    <p class="title">المرحله</p>
+                                    <p class="text">
+                                        @if ($student->stage)
+                                            {{ $student->stage['stage_ar'] }}
+                                        @endif
+                                    </p>
                                 </div>
-                                <div class="tab-pane fade" id="pills-History" role="tabpanel" aria-labelledby="pills-History-tab">
-                                    <div class="header-table">
-                                        <h3>History</h3>
-                                        <div class="form-group">
-                                          <input type="date" class="form-control">
+                                <div class="info">
+                                    <p class="title">السنه</p>
+                                    <p class="text">
+                                        @if ($student->year)
+                                            {{ $student->year->year_ar }}
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="info">
+                                    <p class="title">نوع الهاتف</p>
+                                    <p class="text"> ios</p>
+                                </div>
+
+                            </div>
+                            <div class="basic_information">
+                                <h3 class="title">المنصات</h3>
+                                <div class="info">
+                                    <p class="title">المنصه </p>
+                                    <p class="text">العامه</p>
+                                </div>
+                                <div class="info">
+                                    <p class="title">منصة مستر </p>
+                                    <p class="text">محمد حسين</p>
+
+                                </div>
+                                <div class="info">
+                                    <p class="title">منصة </p>
+                                    <p class="text">د/ محمود العفيفي</p>
+                                </div>
+
+                            </div>
+                            <div class="table_details">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-coruses-tab" data-toggle="pill"
+                                            href="#pills-coruses" role="tab" aria-controls="pills-coruses"
+                                            aria-selected="true">كورسات</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-exams-tab" data-toggle="pill" href="#pills-exams"
+                                            role="tab" aria-controls="pills-exams" aria-selected="false">الامتحانات</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-History-tab" data-toggle="pill"
+                                            href="#pills-History" role="tab" aria-controls="pills-History"
+                                            aria-selected="false">History</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-viwe-tab" data-toggle="pill" href="#pills-viwe"
+                                            role="tab" aria-controls="pills-viwe" aria-selected="false">مشاهدات</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
+                                        aria-labelledby="pills-coruses-tab">
+                                        <div class="header-table">
+                                            <h3>كورسات</h3>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control">
+                                            </div>
                                         </div>
-                                      </div>
-                                      {{-- <div class="table-responsive">
+                                        <div class="table-responsive">
+                                            <div class="table_details">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ID</th>
+                                                            <th scope="col">اسم الكورس</th>
+                                                            <th scope="col">تاريخ اشتراك الكورس</th>
+                                                            <th scope="col">نوع الاشتراك</th>
+                                                            <th scope="col">نوع المنصه</th>
+                                                            <th scope="col"></th>
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">1564115</th>
+                                                            <td>المحاسبه</td>
+                                                            <td>15/10/2023</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                            <td><i class="fas fa-trash-alt delet"></i></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">1564115</th>
+                                                            <td>المحاسبه</td>
+                                                            <td>15/10/2023</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                            <td><i class="fas fa-trash-alt delet"></i></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">1564115</th>
+                                                            <td>المحاسبه</td>
+                                                            <td>15/10/2023</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                            <td><i class="fas fa-trash-alt delet"></i></td>
+
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-exams" role="tabpanel"
+                                        aria-labelledby="pills-exams-tab">
+                                        <div class="header-table">
+                                            <h3>امتحانات</h3>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <div class="table_details">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ID</th>
+                                                            <th scope="col">اسم الامتحان</th>
+                                                            <th scope="col">تارخ الامتحان</th>
+                                                            <th scope="col">الدرجه</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">1564115</th>
+                                                            <td>المحاسبه</td>
+                                                            <td>15/10/2023</td>
+                                                            <td>30</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">1564115</th>
+                                                            <td>المحاسبه</td>
+                                                            <td>15/10/2023</td>
+                                                            <td>30</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">1564115</th>
+                                                            <td>المحاسبه</td>
+                                                            <td>15/10/2023</td>
+                                                            <td>30</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-History" role="tabpanel"
+                                        aria-labelledby="pills-History-tab">
+                                        <div class="header-table">
+                                            <h3>History</h3>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control">
+                                            </div>
+                                        </div>
+                                        {{-- <div class="table-responsive">
                                         <div class="table_details">
                                           <table class="table">
                                             <thead>
@@ -591,57 +641,58 @@ button.btn.btn-success.names {
                                           </table>
                                         </div>
                                       </div> --}}
-                                </div>
-                                <div class="tab-pane fade" id="pills-viwe" role="tabpanel" aria-labelledby="pills-viwe-tab">
-                                    <div class="header-table">
-                                        <h3>المشاهدات</h3>
-                                        <div class="form-group">
-                                          <input type="date" class="form-control">
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-viwe" role="tabpanel"
+                                        aria-labelledby="pills-viwe-tab">
+                                        <div class="header-table">
+                                            <h3>المشاهدات</h3>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control">
+                                            </div>
                                         </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                        <div class="table_details">
-                                          <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <th scope="col">اسم الكورس</th>
-                                                <th scope="col">اسم الحصه</th>
-                                                <th scope="col">فديو</th>
-                                                <th scope="col">عدد مرات المشاهده</th>
-                                                <th scope="col">نسبة اكتمال المشاهده</th>
+                                        <div class="table-responsive">
+                                            <div class="table_details">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">اسم الكورس</th>
+                                                            <th scope="col">اسم الحصه</th>
+                                                            <th scope="col">فديو</th>
+                                                            <th scope="col">عدد مرات المشاهده</th>
+                                                            <th scope="col">نسبة اكتمال المشاهده</th>
 
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr>
-                                                <th scope="row">تجريبي</th>
-                                                <td>محاسبه</td>
-                                                <td>فديو تجريبي</td>
-                                                <td>3 مرات</td>
-                                                <td>60%</td>
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">تجريبي</th>
-                                                <td>محاسبه</td>
-                                                <td>فديو تجريبي</td>
-                                                <td>3 مرات</td>
-                                                <td>60%</td>
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">تجريبي</th>
-                                                <td>محاسبه</td>
-                                                <td>فديو تجريبي</td>
-                                                <td>3 مرات</td>
-                                                <td>60%</td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">تجريبي</th>
+                                                            <td>محاسبه</td>
+                                                            <td>فديو تجريبي</td>
+                                                            <td>3 مرات</td>
+                                                            <td>60%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">تجريبي</th>
+                                                            <td>محاسبه</td>
+                                                            <td>فديو تجريبي</td>
+                                                            <td>3 مرات</td>
+                                                            <td>60%</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">تجريبي</th>
+                                                            <td>محاسبه</td>
+                                                            <td>فديو تجريبي</td>
+                                                            <td>3 مرات</td>
+                                                            <td>60%</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                      </div>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-                       </div>
+                        </div>
                         {{-- <div class="row">
                             <h6>الايميل:</h6>
                             <p>{{ $student->email }}</p>

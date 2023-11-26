@@ -44,7 +44,7 @@ class StudentController extends Controller
             $user->update([
                 "is_online" => (int)$request->is_online,
                 "online_date" => (int)$request->is_online == 1 ? now() : null,
-                "offline_date" =>  (int)$request->is_online == 0 ?  null : now(),
+                "offline_date" =>  (int)$request->is_online == 0 ?  now() : null,
             ]);
             return $this->successResponse("User was updated");
         } catch (\Throwable $th) {
