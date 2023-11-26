@@ -394,8 +394,8 @@
                             </div> --}}
                             <!-- ofline -->
                             <!-- <div class="ofline">
-                                                    <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
-                                                   </div> -->
+                                                        <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
+                                                       </div> -->
                             <!-- ofline -->
                             <h5 class="title"> {{ $student->name }}</h5>
                             <p class="text">
@@ -536,138 +536,22 @@
 
                                     </div>
                                     <div class="tab-pane fade" id="pills-exams" role="tabpanel"
-                                    aria-labelledby="pills-exams-tab">
-                                    @include('dashboard.students.profile-student-includes.__exam')
-                                        <div class="header-table">
-                                            <h3>امتحانات</h3>
-                                            <div class="form-group">
-                                                <input type="date" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <div class="table_details">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">ID</th>
-                                                            <th scope="col">اسم الامتحان</th>
-                                                            <th scope="col">تارخ الامتحان</th>
-                                                            <th scope="col">الدرجه</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1564115</th>
-                                                            <td>المحاسبه</td>
-                                                            <td>15/10/2023</td>
-                                                            <td>30</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1564115</th>
-                                                            <td>المحاسبه</td>
-                                                            <td>15/10/2023</td>
-                                                            <td>30</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1564115</th>
-                                                            <td>المحاسبه</td>
-                                                            <td>15/10/2023</td>
-                                                            <td>30</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        aria-labelledby="pills-exams-tab">
+
+                                        @include('dashboard.students.profile-student-includes.__exam')
+
                                     </div>
                                     <div class="tab-pane fade" id="pills-History" role="tabpanel"
                                         aria-labelledby="pills-History-tab">
-                                        <div class="header-table">
-                                            <h3>History</h3>
-                                            <div class="form-group">
-                                                <input type="date" class="form-control">
-                                            </div>
-                                        </div>
-                                        {{-- <div class="table-responsive">
-                                        <div class="table_details">
-                                          <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                                        </div>
-                                      </div> --}}
+
+                                        @include('dashboard.students.profile-student-includes.__history')
+
                                     </div>
                                     <div class="tab-pane fade" id="pills-viwe" role="tabpanel"
                                         aria-labelledby="pills-viwe-tab">
-                                        <div class="header-table">
-                                            <h3>المشاهدات</h3>
-                                            <div class="form-group">
-                                                <input type="date" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <div class="table_details">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">اسم الكورس</th>
-                                                            <th scope="col">اسم الحصه</th>
-                                                            <th scope="col">فديو</th>
-                                                            <th scope="col">عدد مرات المشاهده</th>
-                                                            <th scope="col">نسبة اكتمال المشاهده</th>
 
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">تجريبي</th>
-                                                            <td>محاسبه</td>
-                                                            <td>فديو تجريبي</td>
-                                                            <td>3 مرات</td>
-                                                            <td>60%</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">تجريبي</th>
-                                                            <td>محاسبه</td>
-                                                            <td>فديو تجريبي</td>
-                                                            <td>3 مرات</td>
-                                                            <td>60%</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">تجريبي</th>
-                                                            <td>محاسبه</td>
-                                                            <td>فديو تجريبي</td>
-                                                            <td>3 مرات</td>
-                                                            <td>60%</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                        @include('dashboard.students.profile-student-includes.__viwe')
+
                                     </div>
                                 </div>
                             </div>
@@ -839,3 +723,7 @@
         <!--end foter-->
     </div>
 @endsection
+
+
+@section
+
