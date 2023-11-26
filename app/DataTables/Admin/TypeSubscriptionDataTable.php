@@ -24,101 +24,102 @@ class TypeSubscriptionDataTable extends DataTable
     public function dataTable($query, HttpRequest $request)
     {
         return datatables()
-        ->eloquent($query)
+            ->eloquent($query)
 
-        // ->addColumn('action', 'dashboard.type_subscribtions.action')
+            // ->addColumn('action', 'dashboard.type_subscribtions.action')
 
-        ->editColumn("student_name",function($query){
-            return $query->student->name ?? "";
-        })
-        ->editColumn("student_phone",function($query){
-            return $query->student->phone ?? "" ?? "";
-        })
-        ->editColumn("center_name",function($query){
-            return $query->type_course ? ($query->type_course->center->name ?? "المنصه العامه") : "";
-        })
-        ->editColumn("teacher_name",function($query){
-            return $query->type_course ? ($query->type_course->user->name ?? "") : "";
-        })
-        ->editColumn("year_name",function($query){
-            return $query->type_course ? ($query->type_course->year->year_ar ?? " ") : "";
-        })
-        ->editColumn("subject_name",function($query){
-            return $query->type_course ? ($query->type_course->subject->name_ar ?? " ") : "";
-        })
-        ->editColumn("course_name",function($query){
-            return $query->type_course->name_ar ?? "";
-        })
-        ->editColumn('created_at', function ($row) {
-            if ($row->created_at != null) {
-                return Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('Y-m-d');
-            } else {
-                return 'no date';
-            }
-        })
-        ->editColumn("admin_name",function($query){
-            return $query->user->name ?? "";
-        })
-        ->filter(function ($query) use ($request) {
-            if (
-                $request->has('search') && isset($request->input('search')['value'])
-                && !empty($request->input('search')['value'])
-            ) {
-                $searchValue = $request->input('search')['value'];
-                $query->where(function ($query) use ($searchValue) {
-                    $query->whereHas('student',function($q) use ($searchValue){
-                        $q->where('name', 'LIKE', "%$searchValue%")
-                        ->orWhere('phone', 'LIKE', "%$searchValue%");
+            ->editColumn("student_name", function ($query) {
+                return $query->student->name ?? "";
+            })
+            ->editColumn("student_phone", function ($query) {
+                return $query->student->phone ?? "" ?? "";
+            })
+            ->editColumn("center_name", function ($query) {
+                return $query->type_course ? ($query->type_course->center->name ?? "المنصه العامه") : "";
+            })
+            ->editColumn("teacher_name", function ($query) {
+                return $query->type_course ? ($query->type_course->user->name ?? "") : "";
+            })
+            ->editColumn("year_name", function ($query) {
+                return $query->type_course ? ($query->type_course->year->year_ar ?? " ") : "";
+            })
+            ->editColumn("subject_name", function ($query) {
+                return $query->type_course ? ($query->type_course->subject->name_ar ?? " ") : "";
+            })
+            ->editColumn("course_name", function ($query) {
+                return $query->type_course->name_ar ?? "";
+            })
+            ->editColumn('created_at', function ($row) {
+                if ($row->created_at != null) {
+                    return Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('Y-m-d');
+                } else {
+                    return 'no date';
+                }
+            })
+            ->editColumn("admin_name", function ($query) {
+                return $query->user->name ?? "";
+            })
+            ->filter(function ($query) use ($request) {
+                if (
+                    $request->has('search') && isset($request->input('search')['value'])
+                    && !empty($request->input('search')['value'])
+                ) {
+                    $searchValue = $request->input('search')['value'];
+                    $query->where(function ($query) use ($searchValue) {
+                        $query->whereHas('student', function ($q) use ($searchValue) {
+                            $q->where('name', 'LIKE', "%$searchValue%")
+                                ->orWhere('phone', 'LIKE', "%$searchValue%");
+                        });
+                    })->orwhereHas('stdcenters', function ($q) use ($searchValue) {
+                        $q->where('name', 'LIKE', "%$searchValue%");
                     });
-                })->orwhereHas('stdcenters', function ($q) use ($searchValue) {
-                    $q->where('name', 'LIKE', "%$searchValue%");
+                }
+                $query->whereHas('student', function ($q) use ($request) {
+
+                    $q->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
+                        // dd($request->all());
+                        return $q->where('stage_id', (int)$request->stage_id);
+                    })
+                        ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
+                            dd($request->year_id);
+                            return $q->where('year_id', (int)$request->year_id);
+                        })
+                        ->when($request->subject_id != null && $request->subject_id != 0, function ($q) use ($request) {
+                            return $q->where('subject_id', (int)$request->subject_id);
+                        })
+                        ->when($request->type_id != null, function ($q) use ($request) {
+
+                            return $q->whereHas('stutypes', function ($typeq) use ($request) {
+                                return $typeq->where('types.id', (int)$request->type_id);
+                            });
+                        })
+                        ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
+                            return $q->where('university_id', (int)$request->university_id);
+                        })
+                        ->when($request->college_id != null && $request->college_id != 0, function ($q) use ($request) {
+                            return $q->where('college_id', (int)$request->college_id);
+                        })
+                        ->when($request->division_id != null && $request->division_id != 0, function ($q) use ($request) {
+                            return $q->where('division_id', (int)$request->division_id);
+                        })
+                        ->when($request->section_id != null && $request->section_id != 0, function ($q) use ($request) {
+                            return $q->where('section_id', (int)$request->section_id);
+                        })
+                        ->when($request->type_college_id != null && $request->type_college_id != 0, function ($q) use ($request) {
+                            return $q->whereHas('stutypescollege', function ($typeq) use ($request) {
+                                return $typeq->where('typescollege.id', (int)$request->type_college_id);
+                            });
+                        });
                 });
-            }
-            $query->whereHas('student',function($q) use ($request) {
-
-            $q->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
-                    // dd($request->all());
-                    return $q->where('stage_id', (int)$request->stage_id);
-                })
-                ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
-                    return $q->where('year_id', (int)$request->year_id);
-                })
-                ->when($request->subject_id != null && $request->subject_id != 0, function ($q) use ($request) {
-                    return $q->where('subject_id', (int)$request->subject_id);
-                })
-                ->when($request->type_id != null, function ($q) use ($request) {
-
-                    return $q->whereHas('stutypes', function ($typeq) use ($request) {
-                        return $typeq->where('types.id', (int)$request->type_id);
-                    });
-                })
-                ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
-                    return $q->where('university_id', (int)$request->university_id);
-                })
-                ->when($request->college_id != null && $request->college_id != 0, function ($q) use ($request) {
-                    return $q->where('college_id', (int)$request->college_id);
-                })
-                ->when($request->division_id != null && $request->division_id != 0, function ($q) use ($request) {
-                    return $q->where('division_id', (int)$request->division_id);
-                })
-                ->when($request->section_id != null && $request->section_id != 0, function ($q) use ($request) {
-                    return $q->where('section_id', (int)$request->section_id);
-                })
-                ->when($request->type_college_id != null && $request->type_college_id != 0, function ($q) use ($request) {
-                    return $q->whereHas('stutypescollege', function ($typeq) use ($request) {
-                        return $typeq->where('typescollege.id', (int)$request->type_college_id);
-                    });
-                });
-            });
-        })
+            })
 
 
 
 
-        ->rawColumns([
+            ->rawColumns([
 
-            'action',
-        ]);
+                'action',
+            ]);
     }
     /**
      * Get query source of dataTable.
@@ -139,16 +140,16 @@ class TypeSubscriptionDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-        ->columns($this->getColumns())
-        ->minifiedAjax()
-        ->parameters([
-            // 'dom' => 'Blfrtip',
-            'order' => [0, 'desc'],
-            'lengthMenu' => [
-                [10,25,50,-1],[10,25,50,'all record']
-            ],
-       'buttons'      => ['export'],
-   ]);
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->parameters([
+                // 'dom' => 'Blfrtip',
+                'order' => [0, 'desc'],
+                'lengthMenu' => [
+                    [10, 25, 50, -1], [10, 25, 50, 'all record']
+                ],
+                'buttons'      => ['export'],
+            ]);
     }
 
     /**
@@ -159,19 +160,19 @@ class TypeSubscriptionDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            ["data" => "student_name" ,"title" => 'اسم الطالب','exportable'=>false,'orderable'=>false],
-             ["data" => "student_phone" ,"title" => 'رقم الطالب','exportable'=>false,'orderable'=>false],
-             ["data" => "center_name" ,"title" => 'المنصه','exportable'=>false,'orderable'=>false],
-             ["data" => "teacher_name" ,"title" => 'المدرس','exportable'=>false,'orderable'=>false],
-             ["data" => "year_name" ,"title" => 'السنه','exportable'=>false,'orderable'=>false],
-             ["data" => "subject_name" ,"title" => 'الماده','exportable'=>false,'orderable'=>false],
-             ["data" => "course_name" ,"title" => 'الكورس','exportable'=>false,'orderable'=>false],
-             ["data" => "created_at" ,"title" => 'تاريخ الانضمام','exportable'=>false,'orderable'=>false],
-             ["data" => "admin_name" ,"title" => 'الادمن','exportable'=>false,'orderable'=>false],
-             ["data" => "type_format" ,"title" => 'طريقه الاشتراك','exportable'=>false,'orderable'=>false],
+            ["data" => "student_name", "title" => 'اسم الطالب', 'exportable' => false, 'orderable' => false],
+            ["data" => "student_phone", "title" => 'رقم الطالب', 'exportable' => false, 'orderable' => false],
+            ["data" => "center_name", "title" => 'المنصه', 'exportable' => false, 'orderable' => false],
+            ["data" => "teacher_name", "title" => 'المدرس', 'exportable' => false, 'orderable' => false],
+            ["data" => "year_name", "title" => 'السنه', 'exportable' => false, 'orderable' => false],
+            ["data" => "subject_name", "title" => 'الماده', 'exportable' => false, 'orderable' => false],
+            ["data" => "course_name", "title" => 'الكورس', 'exportable' => false, 'orderable' => false],
+            ["data" => "created_at", "title" => 'تاريخ الانضمام', 'exportable' => false, 'orderable' => false],
+            ["data" => "admin_name", "title" => 'الادمن', 'exportable' => false, 'orderable' => false],
+            ["data" => "type_format", "title" => 'طريقه الاشتراك', 'exportable' => false, 'orderable' => false],
 
             //  ['data'=>'action','title'=>"الاعدادات",'printable'=>false,'exportable'=>false,'orderable'=>false,'searchable'=>false],
-           ];
+        ];
     }
 
     /**
