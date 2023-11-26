@@ -162,7 +162,7 @@ p.text-online {
   margin-top: 2rem;
 }
 .basic_information .info .text {
-  font-family: "bold";
+  font-family: "reg";
   color: #909295;
   margin-bottom: 0
 }
@@ -189,15 +189,15 @@ span.number {
 }
 button#exams-tab {
   color: black;
-  font-family: 'regular';
+  font-family: 'reg';
 }
 button#coruses-tab {
   color: black;
-  font-family: 'regular';
+  font-family: 'reg';
 }
 button#History-tab{
   color: black;
-  font-family: 'regular';
+  font-family: 'reg';
 }
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
  border: unset;
@@ -208,10 +208,10 @@ button#History-tab{
   justify-content: space-between;
   margin-top: 15PX;
   align-items: center;
-  font-family: "regular";
+  font-family: "reg";
 }
 table.table {
-  font-family: "regular";
+  font-family: "reg";
   font-size: 0.8rem;
 }
     </style>
