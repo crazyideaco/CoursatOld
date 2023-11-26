@@ -41,7 +41,7 @@ class PointController extends Controller
         $data['points'] = $request->points;
         if($request->image)
         {
-            $data['image'] = $request->image;
+            $data['image'] = base64_encode(file_get_contents($request->image));
             // $image = $request->image;
             // $image->move('uploads' , time(). '.'.$image->getClientOriginalExtension());
             // $data['image'] =time(). '.'.$image->getClientOriginalExtension();
