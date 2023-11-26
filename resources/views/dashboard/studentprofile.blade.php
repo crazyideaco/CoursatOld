@@ -387,7 +387,7 @@ table.table {
 
                             </div>
                             <div class="info">
-                              <p class="title">منصة مستر </p>
+                              <p class="title">منصة  </p>
                               <p class="text">د/ محمود العفيفي</p>
                             </div>
 
@@ -420,26 +420,32 @@ table.table {
                                                 <th scope="col">ID</th>
                                                 <th scope="col">اسم الكورس</th>
                                                 <th scope="col">تاريخ اشتراك الكورس</th>
-                                                <th scope="col">Handle</th>
+                                                <th scope="col">نوع الاشتراك</th>
+                                                <th scope="col">نوع المنصه</th>
+
                                               </tr>
                                             </thead>
                                             <tbody>
                                               <tr>
                                                 <th scope="row">1564115</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
+                                                <td>المحاسبه</td>
+                                                <td>15/10/2023</td>
+                                                <td>--</td>
+                                                <td>--</td>
                                               </tr>
                                               <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
+                                                <th scope="row">1564115</th>
+                                                <td>المحاسبه</td>
+                                                <td>15/10/2023</td>
+                                                <td>--</td>
+                                                <td>--</td>
                                               </tr>
                                               <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
+                                                <th scope="row">1564115</th>
+                                                <td>المحاسبه</td>
+                                                <td>15/10/2023</td>
+                                                <td>--</td>
+                                                <td>--</td>
                                               </tr>
                                             </tbody>
                                           </table>
@@ -460,28 +466,29 @@ table.table {
                                               <tr>
                                                 <th scope="col">ID</th>
                                                 <th scope="col">اسم الامتحان</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
+                                                <th scope="col">تارخ الامتحان</th>
+                                                <th scope="col">الدرجه</th>
                                               </tr>
                                             </thead>
                                             <tbody>
-                                              <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                              </tr>
-                                              <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                              </tr>
+                                                <tr>
+                                                    <th scope="row">1564115</th>
+                                                    <td>المحاسبه</td>
+                                                    <td>15/10/2023</td>
+                                                    <td>30</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th scope="row">1564115</th>
+                                                    <td>المحاسبه</td>
+                                                    <td>15/10/2023</td>
+                                                    <td>30</td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th scope="row">1564115</th>
+                                                    <td>المحاسبه</td>
+                                                    <td>15/10/2023</td>
+                                                    <td>30</td>
+                                                  </tr>
                                             </tbody>
                                           </table>
                                         </div>
@@ -494,7 +501,7 @@ table.table {
                                           <input type="date" class="form-control">
                                         </div>
                                       </div>
-                                      <div class="table-responsive">
+                                      {{-- <div class="table-responsive">
                                         <div class="table_details">
                                           <table class="table">
                                             <thead>
@@ -526,7 +533,7 @@ table.table {
                                             </tbody>
                                           </table>
                                         </div>
-                                      </div>
+                                      </div> --}}
                                 </div>
                               </div>
                             </div>
