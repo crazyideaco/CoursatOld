@@ -164,7 +164,7 @@ p.text-online {
 .basic_information .info .text {
   font-family: "semibold";
   color: #909295;
-  margin-bottom: 0;
+  margin-bottom: 0
 }
 .details_student .details .info svg {
   margin-inline-end: 5px;
