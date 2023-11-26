@@ -214,6 +214,10 @@ table.table {
   font-family: "reg";
   font-size: 0.8rem;
 }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: unset !important;
+    color: black !important;
+}
     </style>
     <!--start page-body-->
     <div class="page-body">
