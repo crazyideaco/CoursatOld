@@ -79,7 +79,7 @@
             <!--start setting-->
             <div class="setting all-products typs">
                 <div class="container">
-                    
+
                     <div class="all-infor">
                         <div class="row" id="category_id_basic">
                             <h4 class="hederre">
