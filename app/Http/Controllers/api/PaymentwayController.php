@@ -28,6 +28,7 @@ class PaymentwayController extends Controller
             $payments = PaymentWay::get();
         }
 
+        return $payments;
         return  $this->dataResponse("payments collection", paymentwayResource::collection($payments));
     }
 }
