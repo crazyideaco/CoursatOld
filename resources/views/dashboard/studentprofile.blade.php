@@ -336,7 +336,7 @@ table.table {
                     <div class="col-8">
 
                         <div class="basic_information">
-                            <h4 class="title">البيانات الاساسية</h4>
+                            <h3 class="title">البيانات الاساسية</h3>
                             <div class="info">
                               <p class="title">رقم الهاتف</p>
                               <p class="text">01027003762</p>
