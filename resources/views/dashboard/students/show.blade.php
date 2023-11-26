@@ -377,14 +377,25 @@
                             @if ($student->image)
                                 <img src="{{ url('uploads/' . $student->image) }}">
                             @endif
-                            <div class="online">
+                            @if ($student->is_online == 1)
+                                <div class="online">
+                                    <p class="text-online">{{ $student->online_status }}<i class="fas fa-circle online"></i>
+                                    </p>
+                                </div>
+                            @else
+                                <div class="ofline">
+                                    <p class="text-ofline">{{ $student->online_status }}<i
+                                            class="fa-solid fa-circle ofline"></i></p>
+                                </div>
+                            @endif
+                            {{-- <div class="online">
 
-                                <p class="text-online">online<i class="fas fa-circle online"></i></p>
-                            </div>
+                                <p class="text-online">{{ $student->online_status }}<i class="fas fa-circle online"></i></p>
+                            </div> --}}
                             <!-- ofline -->
                             <!-- <div class="ofline">
-                                    <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
-                                   </div> -->
+                                            <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
+                                           </div> -->
                             <!-- ofline -->
                             <h5 class="title"> {{ $student->name }}</h5>
                             <p class="text">
