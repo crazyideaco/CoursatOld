@@ -35,6 +35,183 @@
             position: absolute;
             top: 15%;
         }
+
+
+
+
+        .details_student {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+}
+.details_student img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.details_student .title {
+  text-align: center;
+  font-family: "semibold";
+  color: #011c1e;
+  margin-top: 1rem;
+}
+.details_student .text {
+  font-family: "regular";
+  color: #06797e;
+  text-align: center;
+}
+.details_student .text-1 {
+  font-family: "regular";
+  color: #06797e;
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #828c8d;
+}
+.details_student .details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+}
+ .details_student .details .info.date {
+  margin-inline-end: 0;
+  width: fit-content;
+}
+.details_student .details .info {
+  background-color: rgba(6,121,126,.1);
+  font-family: "regular";
+  color: #64666a;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  margin-inline-end: 1rem;
+  width: 80%;
+  font-size: .7rem;
+  text-align: center;
+  width: fit-content;
+}
+h5.title_section {
+  font-family: 'bold';
+}
+svg.svg-inline--fa.fa-circle.online {
+  color: green;
+  margin: 0 auto;
+  margin-inline-start: 8px;
+}
+svg.svg-inline--fa.fa-circle.ofline {
+  color: rgb(175, 180, 175);
+  margin: 0 auto;
+  margin-inline-start: 8px;
+}
+p.text-online {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 7px;
+  color: black;
+  font-family: 'regular';
+  width: fit-content;
+  padding: 0.1rem;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  color: green;
+}
+.text-ofline {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 7px;
+  color: black;
+  font-family: 'regular';
+  width: fit-content;
+  padding: 0.1rem;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  color: rgb(103, 107, 103);
+
+}
+ .basic_information .title {
+  font-family: "semibold";
+  color: #011c1e;
+  width: 100%;
+}
+ .basic_information {
+  padding: 2.5rem;
+  background-color: #fff;
+  border: 1px solid #ebeaed;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 15px;
+}
+ .basic_information .info {
+  width: 25%;
+  text-align: start;
+  font-size: .8rem;
+  margin-top: 2rem;
+}
+.basic_information .info .text {
+  font-family: "semibold";
+  color: #909295;
+  margin-bottom: 0;
+}
+.details_student .details .info svg {
+  margin-inline-end: 10px;
+}
+span.number {
+  color: red;
+  font-family: bold;
+}
+.basic_information {
+  background-color: white;
+  padding: 0.5rem 0.5rem;
+}
+.table_details {
+  background-color: white;
+  margin-top: 13px;
+  padding: 0.5rem 0.5rem;
+}
+ .table_details .nav-tabs .nav-link.active, .table_data .nav-tabs .nav-link.active {
+  border-color: rgba(0,0,0,0);
+  border-bottom: 2px solid #06797e;
+
+}
+button#exams-tab {
+  color: black;
+  font-family: 'regular';
+}
+button#coruses-tab {
+  color: black;
+  font-family: 'regular';
+}
+button#History-tab{
+  color: black;
+  font-family: 'regular';
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+ border: unset;
+  border-color:unset;
+}
+.header-table {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15PX;
+  align-items: center;
+  font-family: "regular";
+}
+table.table {
+  font-family: "regular";
+  font-size: 0.8rem;
+}
     </style>
     <!--start page-body-->
     <div class="page-body">
