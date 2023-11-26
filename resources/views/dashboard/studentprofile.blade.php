@@ -289,7 +289,9 @@ table.table {
                 <div class="row fl bg-white">
                     <div class="col-4">
                         <div class="details_student">
-                            <img src="./photo/student.png" alt="group_img" />
+                            @if ($student->image)
+                                <img src="{{ url('uploads/' . $student->image) }}">
+                            @endif
                            <div class="online">
 
                             <p class="text-online">online<i class="fa-solid fa-circle online"></i></p>
@@ -299,7 +301,7 @@ table.table {
                             <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
                            </div> -->
                             <!-- ofline -->
-                                        <h5 class="title">أحمد أمجد</h5>
+                                        <h5 class="title"> {{ $student->name }}</h5>
                             <p class="text">أساسي</p>
                             <p class="text-1">عدد النقاط:<span class="number">25</span></p>
                             <div class="details">
