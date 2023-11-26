@@ -231,6 +231,10 @@ table.table {
     padding: 1rem;
     border-radius: 10px;
 }
+svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
+    color: red;
+    cursor: pointer;
+}
 
     </style>
     <!--start page-body-->
@@ -451,7 +455,7 @@ table.table {
                                                 <td>15/10/2023</td>
                                                 <td>--</td>
                                                 <td>--</td>
-                                                <td><i class="fas fa-trash-alt deletl"></i></td>
+                                                <td><i class="fas fa-trash-alt delet"></i></td>
 
                                               </tr>
                                             </tbody>
