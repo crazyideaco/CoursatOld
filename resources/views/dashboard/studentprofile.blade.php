@@ -242,6 +242,22 @@ svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
 .name-cor {
     width: 100%;
 }
+.form-group.names {
+    font-family: "reg";
+}
+button.btn.btn-success.names {
+    margin: 0 auto;
+    display: block;
+    font-family: "reg";
+    width: 100%;
+}
+.name-cor {
+    width: 100%;
+    background-color: #fafafa;
+    margin-top: 15px;
+    padding: 1rem;
+    border-radius: 12px;
+}
 
     </style>
     <!--start page-body-->
@@ -363,7 +379,7 @@ svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
                                       <option>5</option>
                                     </select>
                                   </div>
-                                  <button type="button" class="btn btn-success">اضف</button>
+                                  <button type="button" class="btn btn-success names">اضافه</button>
                             </div>
                          </div>
 
