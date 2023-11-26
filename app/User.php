@@ -29,6 +29,7 @@ use App\Video;
 use App\GroupType;
 use App\GroupTypescollege;
 use App\GroupCourse;
+use App\Models\PaymentWay;
 use App\Models\QrCode;
 use Laratrust\Traits\LaratrustUserTrait;
 
@@ -196,11 +197,11 @@ class User extends Authenticatable
     }
     public function stutypes()
     {
-        return $this->belongsToMany(Type::class, 'students_types', 'student_id', 'type_id')->withPivot('active', "created_at", "updated_at");//->using(Student_Type::class);
+        return $this->belongsToMany(Type::class, 'students_types', 'student_id', 'type_id')->withPivot('active', "created_at", "updated_at"); //->using(Student_Type::class);
     }
     public function stutypescollege()
     {
-        return $this->belongsToMany(TypesCollege::class, 'students_typescollege', 'student_id', 'typecollege_id')->withPivot('active', "created_at", "updated_at");//->using(Student_Typecollege::class);
+        return $this->belongsToMany(TypesCollege::class, 'students_typescollege', 'student_id', 'typecollege_id')->withPivot('active', "created_at", "updated_at"); //->using(Student_Typecollege::class);
     }
     public function stucourses()
     {
@@ -223,7 +224,7 @@ class User extends Authenticatable
         return $this->belongsTo(Year::class, 'year_id');
     }
     /**
-     * this is the centers that the students/users belong
+     * this is the centers that the students/users belong to
      */
     public function stdcenters()
     {
@@ -252,6 +253,20 @@ class User extends Authenticatable
     public function typecollege_joins()
     {
         return $this->belongsToMany(TypesCollege::class, 'typecollege_joins', 'student_id', 'typecollege_id ')->withPivot('status');
+    }
+
+    /**
+     * Defines a many-to-many relationship with the PaymentWay model through the 'centers_paymentway' pivot table.
+     *
+     * @param string $related The related model class name.
+     * @param string $table The name of the pivot table.
+     * @param string $foreignPivotKey The foreign key column for the parent model in the pivot table.
+     * @param string $relatedPivotKey The foreign key column for the related model in the pivot table.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function paymentways()
+    {
+        return $this->belongsToMany(PaymentWay::class, 'centers_paymentway', 'center_id', 'paymentway_id');
     }
     public function getTypeSellNumberAttribute()
     {
@@ -287,15 +302,17 @@ class User extends Authenticatable
         }
     }
 
-    public function getOnlineStatusAttribute(){
-        if($this->is_online == 1){
+    public function getOnlineStatusAttribute()
+    {
+        if ($this->is_online == 1) {
             return "Online";
-        }else{
+        } else {
             return "Offline";
         }
     }
 
-    public function getCenterNameAttribute(){
+    public function getCenterNameAttribute()
+    {
         $centers = "المنصة العامة";
         if (count($this->stdcenters) > 0) {
             $centers = implode('-', $this->stdcenters->pluck('name')->toArray());
@@ -303,7 +320,8 @@ class User extends Authenticatable
         return $centers;
     }
 
-    public function getYearNameAttribute(){
+    public function getYearNameAttribute()
+    {
         switch ($this->category_id) {
             case config('project_types.system_category_type.category_id_basic'):
                 if ($this->year_id != null) {
