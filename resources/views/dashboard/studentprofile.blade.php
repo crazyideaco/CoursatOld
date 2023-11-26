@@ -200,6 +200,10 @@ a#pills-History-tab{
   color: black;
   font-family: 'reg';
 }
+a#pills-viwe-tab{
+    color: black;
+  font-family: 'reg';
+}
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
  border: unset;
   border-color:unset;
@@ -344,10 +348,26 @@ svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
 
                             </div>
                           </div>
+                         <div class="row">
+                            <div class="name-cor">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">اسم الكورس</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                    </select>
+                                  </div>
+                                  <button type="button" class="btn btn-success">اضف</button>
+                            </div>
+                         </div>
 
 
 
-                        {{-- <div class="img">
+
+                          {{-- <div class="img">
                             @if ($student->image)
                                 <img src="{{ url('uploads/' . $student->image) }}">
                             @endif
