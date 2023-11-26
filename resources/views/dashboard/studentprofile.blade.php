@@ -407,6 +407,9 @@ svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
                                 <li class="nav-item">
                                   <a class="nav-link" id="pills-History-tab" data-toggle="pill" href="#pills-History" role="tab" aria-controls="pills-History" aria-selected="false">History</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-viwe-tab" data-toggle="pill" href="#pills-viwe" role="tab" aria-controls="pills-viwe" aria-selected="false">مشاهدات</a>
+                                  </li>
                               </ul>
                               <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel" aria-labelledby="pills-coruses-tab">
@@ -545,6 +548,53 @@ svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
                                           </table>
                                         </div>
                                       </div> --}}
+                                </div>
+                                <div class="tab-pane fade" id="pills-viwe" role="tabpanel" aria-labelledby="pills-viwe-tab">
+                                    <div class="header-table">
+                                        <h3>المشاهدات</h3>
+                                        <div class="form-group">
+                                          <input type="date" class="form-control">
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <div class="table_details">
+                                          <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">اسم الكورس</th>
+                                                <th scope="col">اسم الحصه</th>
+                                                <th scope="col">فديو</th>
+                                                <th scope="col">عدد مرات المشاهده</th>
+                                                <th scope="col">نسبة اكتمال المشاهده</th>
+
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <th scope="row">تجريبي</th>
+                                                <td>محاسبه</td>
+                                                <td>فديو تجريبي</td>
+                                                <td>3 مرات</td>
+                                                <td>60%</td>
+                                              </tr>
+                                              <tr>
+                                                <th scope="row">تجريبي</th>
+                                                <td>محاسبه</td>
+                                                <td>فديو تجريبي</td>
+                                                <td>3 مرات</td>
+                                                <td>60%</td>
+                                              </tr>
+                                              <tr>
+                                                <th scope="row">تجريبي</th>
+                                                <td>محاسبه</td>
+                                                <td>فديو تجريبي</td>
+                                                <td>3 مرات</td>
+                                                <td>60%</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
                                 </div>
                               </div>
                             </div>
