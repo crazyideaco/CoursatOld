@@ -40,7 +40,7 @@
 
 
         .details_student {
-  background-color: #fff;
+            background-color: #fafafa;
   border-radius: 10px;
   padding: 2rem;
 }
@@ -303,18 +303,18 @@ table.table {
                             <!-- ofline -->
                                         <h5 class="title"> {{ $student->name }}</h5>
                             <p class="text">أساسي</p>
-                            <p class="text-1">عدد النقاط:<span class="number">25</span></p>
+                            <p class="text-1">عدد النقاط:<span class="number">{{ $student->points }}</span></p>
                             <div class="details">
                               <p class="info date">
-                                <i class="fa-solid fa-calendar-days"></i>
+                                <i class="far fa-calendar"></i>
                                 تاريخ الانضمام : 22 مايو, 2023
                               </p>
                               <p class="info">
-                                <i class="fa-solid fa-calendar-days"></i>
+                                <i class="far fa-calendar"></i>
                                 تاريخ اخر ظهور علي التطبيق : 24 مايو, 2024
                               </p>
                               <p class="info">
-                                <i class="fa-solid fa-star"></i>
+                                <i class="fas fa-star"></i>
                                 التقيم العام
                               </p>
 
