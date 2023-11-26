@@ -15,20 +15,21 @@ class PaymentwayController extends Controller
     use ApiTrait;
     public function fetchPaymentWays()
     {
-        $payments = [];
-        $authuser = auth()->user();
-        if (count($authuser->stdcenters) > 0) {
-            $centers = $authuser->stdcenters;
-            foreach ($centers as $key => $value) {
-                array_push($payments, $value->paymentways);
-                // $payments[] = $value->paymentway;
-            }
-            // $payments = $centersArray;
-        } else {
-            $payments = PaymentWay::get();
-        }
+        // $payments = [];
+        // $authuser = auth()->user();
+        // if (count($authuser->stdcenters) > 0) {
+        //     $centers = $authuser->stdcenters;
+        //     foreach ($centers as $key => $value) {
+        //         array_push($payments, $value->paymentways);
+        //         // $payments[] = $value->paymentway;
+        //     }
+        //     // $payments = $centersArray;
+        // } else {
+        //     $payments = PaymentWay::get();
+        // }
+        $payments = PaymentWay::get();
 
-        return $payments;
+        // return $payments;
         return  $this->dataResponse("payments collection", paymentwayResource::collection($payments));
     }
 }
