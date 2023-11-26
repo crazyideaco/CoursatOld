@@ -96,7 +96,7 @@
                                     @enderror
                                 </div>
 
-                                @if (auth()->user()->isAdmin === 'admin')
+                                {{-- @if (auth()->user()->isAdmin === 'admin')
                                     <div class="form-group col-3">
                                         <label> رقم المركز</label>
                                         <select class="form-control" multiple name="center_id[]">
@@ -108,7 +108,7 @@
                                             <div style="color:red;">{{ $message }} </div>
                                         @enderror
                                     </div>
-                                @endif
+                                @endif --}}
 
                                 <div class="form-group col-3">
                                     <label>صورة الوسيلة </label>

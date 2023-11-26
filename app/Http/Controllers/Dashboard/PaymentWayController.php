@@ -57,12 +57,12 @@ class PaymentWayController extends Controller
         }
         $paymentway = PaymentWay::create($data);
 
-        if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
-            $paymentway->update(['center_id' => auth()->id()]); // center_id = auth()->id();
-            $paymentway->centers()->attach(auth()->id());
-        } else {
-            $paymentway->centers()->attach($request->center_id);
-        }
+        // if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
+        //     $paymentway->update(['center_id' => auth()->id()]); // center_id = auth()->id();
+        //     $paymentway->centers()->attach(auth()->id());
+        // } else {
+        //     $paymentway->centers()->attach($request->center_id);
+        // }
 
         return redirect()->route("paymentways.index");
     }
@@ -119,13 +119,13 @@ class PaymentWayController extends Controller
             $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
             $data['image'] = time() . '.' . $image->getClientOriginalExtension();
         }
-        if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
-            $data['center_id'] = auth()->id();
-            // $paymentway->update(['center_id' => auth()->id()]);
-            $paymentway->centers()->sync(auth()->id());
-        } else {
-            $paymentway->centers()->sync($request->center_id);
-        }
+        // if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
+        //     $data['center_id'] = auth()->id();
+        //     // $paymentway->update(['center_id' => auth()->id()]);
+        //     $paymentway->centers()->sync(auth()->id());
+        // } else {
+        //     $paymentway->centers()->sync($request->center_id);
+        // }
         $paymentway->update($data);
         return redirect()->route("paymentways.index");
     }
