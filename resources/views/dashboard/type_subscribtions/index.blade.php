@@ -95,23 +95,7 @@
                                 نوع الاشتراك
                             </h4>
                             {{-- انا عملت ملف جديد هنا عشان افصل كل حاجة لوحدها عشان متبوظش حاجة هنا  ^_^ --}}
-                            {{-- @include('dashboard.type_subscribtions.includes.__subscription_type') --}}
-
-                            <div class="form-group col-lg-2 col-md-6 col-12">
-                                {{-- <label>الكورسات </label> --}}
-                                <select class="form-control selectpicker" name="subscription_type" id="subscription_type" onchange="filter_students();"
-                                    title="اختر نوع الاشتراك">
-                                    <option value="0">اشتراك</option>
-                                    <option value="1">شراء</option>
-                                    <option value="2">طلب انضمام</option>
-                                    <option value="3">scan Qrcode</option>
-                                    <option value="4">Dashboard</option>
-
-                                </select>
-                                @error('subscription_type')
-                                    <p style="color:red;">{{ $message }}</p>
-                                @enderror
-                            </div>
+                            @include('dashboard.type_subscribtions.includes.__subscription_type')
 
                         </div>
 
@@ -160,14 +144,14 @@
     {{ $dataTable->scripts() }}
     <script>
         function filter_students() {
-            console.log("filtering",$("#subscription_type :selected").val());
-            console.log("filtering_2",$("#stage_id").val());
+            // console.log("filtering",$("#subscription_type :selected").val());
+            // console.log("filtering_2",$("#stage_id").val());
             $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
                 //basic filters
                 data.stage_id = $("#stage_id").val();
                 data.year_id = $("#years_id").val();
                 data.subject_id = $("#subjects_id").val();
-                data.subscription_type = $("#subscription_type").val();
+                data.subscription_type = $("#subscription_type :selected").val();
                 // data.user_id = $("#teachers").val();
                 // //college filters
 

@@ -170,7 +170,7 @@
                 data.division_id = $("#division_id").val();
                 data.section_id = $("#section_id").val();
                 data.type_college_id = $("#type_college_id").val();
-                data.subscription_type = $("#subscription_type").val();
+                data.subscription_type = $("#subscription_type :selected").val();
             });
             $('#dataTableBuilder').DataTable().ajax.reload();
         }
