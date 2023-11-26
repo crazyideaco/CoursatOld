@@ -239,6 +239,9 @@ svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
     color: red;
     cursor: pointer;
 }
+.name-cor {
+    width: 100%;
+}
 
     </style>
     <!--start page-body-->
@@ -350,7 +353,7 @@ svg.svg-inline--fa.fa-trash-alt.fa-w-14.delet {
                           </div>
                          <div class="row">
                             <div class="name-cor">
-                                <div class="form-group">
+                                <div class="form-group names">
                                     <label for="exampleFormControlSelect1">اسم الكورس</label>
                                     <select class="form-control" id="exampleFormControlSelect1">
                                       <option>1</option>
