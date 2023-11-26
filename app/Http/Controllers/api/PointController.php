@@ -41,9 +41,10 @@ class PointController extends Controller
         $data['points'] = $request->points;
         if($request->image)
         {
-            $image = $request->image;
-            $image->move('uploads' , time(). '.'.$image->getClientOriginalExtension());
-            $data['image'] =time(). '.'.$image->getClientOriginalExtension();
+            $data['image'] = $request->image;
+            // $image = $request->image;
+            // $image->move('uploads' , time(). '.'.$image->getClientOriginalExtension());
+            // $data['image'] =time(). '.'.$image->getClientOriginalExtension();
         }
 
         PointRequest::create($data);
