@@ -215,7 +215,7 @@ table.table {
   font-size: 0.8rem;
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: unset !important;
+    background-color: #fafafa !important;
     color: black !important;
 }
     </style>
