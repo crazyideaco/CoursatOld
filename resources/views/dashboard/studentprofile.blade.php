@@ -329,7 +329,7 @@ table.table {
                             <p> {{ $student->code }}</p>
                         </div> --}}
                     </div>
-                    <div class="col-9">
+                    <div class="col-8">
                         <div class="row">
                             <h6>الايميل:</h6>
                             <p>{{ $student->email }}</p>
