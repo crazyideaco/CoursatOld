@@ -218,6 +218,16 @@ table.table {
     background-color: #fafafa !important;
     color: black !important;
 }
+.table tbody tr td {
+    color: black !important;
+    color: black;
+    padding: 0.5rem !important;
+    font-family: "reg" !important;
+    font-size: 0.9rem !important;
+}
+
+
+}
     </style>
     <!--start page-body-->
     <div class="page-body">
