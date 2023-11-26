@@ -403,7 +403,7 @@ table.table {
                               <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel" aria-labelledby="pills-coruses-tab">
                                     <div class="header-table">
-                                        <h4>كورسات</h4>
+                                        <h3>كورسات</h3>
                                         <div class="form-group">
                                           <input type="date" class="form-control">
                                         </div>
@@ -444,7 +444,7 @@ table.table {
                                 </div>
                                 <div class="tab-pane fade" id="pills-exams" role="tabpanel" aria-labelledby="pills-exams-tab">
                                     <div class="header-table">
-                                        <h4>امتحانات</h4>
+                                        <h3>امتحانات</h3>
                                         <div class="form-group">
                                           <input type="date" class="form-control">
                                         </div>
@@ -485,7 +485,7 @@ table.table {
                                 </div>
                                 <div class="tab-pane fade" id="pills-History" role="tabpanel" aria-labelledby="pills-History-tab">
                                     <div class="header-table">
-                                        <h4>History</h4>
+                                        <h3>History</h3>
                                         <div class="form-group">
                                           <input type="date" class="form-control">
                                         </div>
