@@ -725,5 +725,6 @@
 @endsection
 
 
-@section
+@section('script')
+@endsection
 
