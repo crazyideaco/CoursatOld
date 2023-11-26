@@ -972,8 +972,8 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#studentsYajra" data-toggle="collapse"> النقاط</a>
-                                    <div id="studentsYajra"
+                                    <a href="#studentsYajra-9" data-toggle="collapse"> النقاط</a>
+                                    <div id="studentsYajra-9"
                                         >
 
                                         <a href="{{ route('point_requests') }}"
