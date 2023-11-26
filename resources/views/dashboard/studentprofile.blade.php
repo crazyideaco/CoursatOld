@@ -100,11 +100,13 @@ svg.svg-inline--fa.fa-circle.online {
   color: green;
   margin: 0 auto;
   margin-inline-start: 8px;
+  margin-top: 4px;
 }
 svg.svg-inline--fa.fa-circle.ofline {
   color: rgb(175, 180, 175);
   margin: 0 auto;
   margin-inline-start: 8px;
+  margin-top: 4px;
 }
 p.text-online {
   display: block;
@@ -114,7 +116,7 @@ p.text-online {
   color: black;
   font-family: 'reg';
   width: fit-content;
-  padding: 0.1rem;
+  padding: 0.3rem;
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -130,7 +132,7 @@ p.text-online {
   color: black;
   font-family: 'reg';
   width: fit-content;
-  padding: 0.1rem;
+  padding: 0.3rem;
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -165,7 +167,7 @@ p.text-online {
   margin-bottom: 0;
 }
 .details_student .details .info svg {
-  margin-inline-end: 10px;
+  margin-inline-end: 5px;
 }
 span.number {
   color: red;
