@@ -53,17 +53,17 @@
 }
 .details_student .title {
   text-align: center;
-  font-family: "semibold";
+  font-family: "reg";
   color: #011c1e;
   margin-top: 1rem;
 }
 .details_student .text {
-  font-family: "regular";
+    font-family: "reg";
   color: #06797e;
   text-align: center;
 }
 .details_student .text-1 {
-  font-family: "regular";
+    font-family: "reg";
   color: #06797e;
   text-align: center;
   padding-bottom: 1rem;
@@ -83,7 +83,7 @@
 }
 .details_student .details .info {
   background-color: rgba(6,121,126,.1);
-  font-family: "regular";
+  font-family: "reg";
   color: #64666a;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -329,7 +329,7 @@ table.table {
                             <p> {{ $student->code }}</p>
                         </div> --}}
                     </div>
-                    <div class="col-9">
+                    <div class="col-8">
                         <div class="row">
                             <h6>الايميل:</h6>
                             <p>{{ $student->email }}</p>
