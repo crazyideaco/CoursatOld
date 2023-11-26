@@ -187,15 +187,15 @@ span.number {
   border-bottom: 2px solid #06797e;
 
 }
-button#exams-tab {
+a.button#exams-tab {
   color: black;
   font-family: 'reg';
 }
-button#coruses-tab {
+a.button#coruses-tab {
   color: black;
   font-family: 'reg';
 }
-button#History-tab{
+a.button#History-tab{
   color: black;
   font-family: 'reg';
 }
