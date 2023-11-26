@@ -434,7 +434,7 @@ table.table {
                                                 <td>15/10/2023</td>
                                                 <td>--</td>
                                                 <td>--</td>
-                                                <td><i class="fas fa-trash-alt"></i></td>
+                                                <td><i class="fas fa-trash-alt delet"></i></td>
                                               </tr>
                                               <tr>
                                                 <th scope="row">1564115</th>
@@ -442,7 +442,7 @@ table.table {
                                                 <td>15/10/2023</td>
                                                 <td>--</td>
                                                 <td>--</td>
-                                                <td><i class="fas fa-trash-alt"></i></td>
+                                                <td><i class="fas fa-trash-alt delet"></i></td>
 
                                               </tr>
                                               <tr>
@@ -451,7 +451,7 @@ table.table {
                                                 <td>15/10/2023</td>
                                                 <td>--</td>
                                                 <td>--</td>
-                                                <td><i class="fas fa-trash-alt"></i></td>
+                                                <td><i class="fas fa-trash-alt deletl"></i></td>
 
                                               </tr>
                                             </tbody>
