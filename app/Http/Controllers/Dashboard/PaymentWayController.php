@@ -47,49 +47,23 @@ class PaymentWayController extends Controller
             'image' => "nullable|image|mimes:png,jpg,jpeg",
         ]);
 
-        $paymentway = new paymentWay;
-        // if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
-        //     $paymentway->center_id = auth()->id();
-        //     $paymentway->title = $request->title;
-        //     $paymentway->number = $request->number;
-        //     $paymentway->creator_id = auth()->id();
-        //     if ($request->image) {
-        //         $image = $request->image;
-        //         $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
-        //         $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
-        //     }
-        //     $paymentway->save();
-        // } else {
-        //     $paymentway->center_id = $request->center_id;
-        //     $paymentway->title = $request->title;
-        //     $paymentway->number = $request->number;
-        //     $paymentway->creator_id = auth()->id();
-        //     if ($request->image) {
-        //         $image = $request->image;
-        //         $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
-        //         $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
-        //     }
-        //     $paymentway->save();
-        // }
-
-
-
-        $paymentway->title = $request->title;
-        $paymentway->number = $request->number;
-        $paymentway->creator_id = auth()->id();
+        $data['title'] =  $request->title;
+        $data['number'] = $request->number;
+        $data['creator_id'] = auth()->id();
         if ($request->image) {
             $image = $request->image;
             $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
-            $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
+            $data['image'] = time() . '.' . $image->getClientOriginalExtension();
         }
-        $paymentway->save();
+        $paymentway = PaymentWay::create($data);
+
         if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
-            $paymentway->center_id = auth()->id();
+            $paymentway->update(['center_id' => auth()->id()]); // center_id = auth()->id();
             $paymentway->centers()->attach(auth()->id());
         } else {
             $paymentway->centers()->attach($request->center_id);
         }
-        $paymentway->save();
+
         return redirect()->route("paymentways.index");
     }
 
@@ -133,25 +107,26 @@ class PaymentWayController extends Controller
             'image' => "nullable|image|mimes:png,jpg,jpeg",
         ]);
 
-        $paymentway =  paymentWay::where("id", $id)->first();
+        $paymentway =  paymentWay::find($id);
+
+
+
+        $data['title'] =  $request->title;
+        $data['number'] = $request->number;
+        $data['creator_id'] = auth()->id();
+        if ($request->image) {
+            $image = $request->image;
+            $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
+            $data['image'] = time() . '.' . $image->getClientOriginalExtension();
+        }
         if (auth()->user()->is_student == config('project_types.auth_user_is_student.center')) {
-            $paymentway->center_id = auth()->id();
+            $data['center_id'] = auth()->id();
+            // $paymentway->update(['center_id' => auth()->id()]);
             $paymentway->centers()->sync(auth()->id());
         } else {
             $paymentway->centers()->sync($request->center_id);
         }
-
-
-        $paymentway->title = $request->title;
-        $paymentway->number = $request->number;
-        $paymentway->creator_id = auth()->id();
-        if ($request->image) {
-            $image = $request->image;
-            $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
-            $paymentway->image = time() . '.' . $image->getClientOriginalExtension();
-        }
-        $paymentway->save();
-
+        $paymentway->update($data);
         return redirect()->route("paymentways.index");
     }
 
