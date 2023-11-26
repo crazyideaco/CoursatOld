@@ -94,6 +94,7 @@ class TypeSubscriptionDataTable extends DataTable
                             });
                         })
                         ->when($request->subscription_type != null, function ($q) use ($request) {
+                            dd($request->subscription_type);
                             return $q->where('type', (int)$request->subscription_type);
                         })
                         ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
