@@ -81,7 +81,6 @@ class TypeSubscriptionDataTable extends DataTable
                         return $q->where('stage_id', (int)$request->stage_id);
                     })
                         ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
-                            dd($request->year_id);
                             return $q->where('year_id', (int)$request->year_id);
                         })
                         ->when($request->subject_id != null && $request->subject_id != 0, function ($q) use ($request) {
