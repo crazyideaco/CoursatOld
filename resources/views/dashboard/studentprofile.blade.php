@@ -416,6 +416,10 @@ button.btn.btn-success.names {
                                 {{ $student->year->year_ar }}
                             @endif</p>
                             </div>
+                            <div class="info">
+                                <p class="title">نوع الهاتف</p>
+                                <p class="text"> ios</p>
+                              </div>
 
                           </div>
                           <div class="basic_information">
