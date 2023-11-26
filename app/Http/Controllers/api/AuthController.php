@@ -28,6 +28,7 @@ use App\Lesson;
 use App\Message;
 use App\Center_Teacher;
 use App\Center_Doctor;
+use App\Http\Resources\AppResource;
 use App\Notification;
 use App\Offer;
 use App\Stage;
@@ -35,6 +36,7 @@ use App\Sub;
 use App\Subject;
 use App\SubjectsCollege;
 use App\Subtype;
+use App\Traits\ApiTrait;
 use App\Type;
 use App\Typecollege_Rate;
 use App\TypesCollege;
@@ -47,11 +49,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 
 class AuthController extends Controller
 {
+    use ApiTrait;
     public function mynotifications()
     {
         $user = auth()->user();
@@ -238,6 +242,7 @@ class AuthController extends Controller
                 return response()->json(['status' => false, 'message_ar' => 'هذا
                 المستخدم ليس مفعل'], 401);
             } else {
+                DB::beginTransaction();
 
                 // comment 1 line for device id
                 if ($user->device_id == null || $user->device_id == $request->device_id) {
@@ -248,26 +253,22 @@ class AuthController extends Controller
                             return response()->json(['status' => false, 'message' => 'لا يوجد سنتر هذا الكود']);
                         }
                     }
-                    $user->device_token = $request->device_token;
-                    $user->device_id = $request->device_id;
-                    $user->save();
+                    $data = [
+                        "device_token" => $request->device_token,
+                        "device_id" => $request->device_id,
+                        "ios_version" => $request->ios_version ?? null,
+                        "android_version" => $request->android_version ?? null,
+                    ];
+                    $user->update($data);
+
+                    DB::commit();
                     return [
                         'status' => 'true',
                         'data' => new UserResource($user),
 
                     ];
-                    // comment 1 line for device id
-                    //          }elseif($user->device_id == $request->device_id ){
-                    //                 $user->device_token = $request->device_token;
-                    //  $user->device_id = $request->device_id;
-                    //  $user->save();
-                    //            return [
-                    //           'status'     =>  'true',
-                    //            'data'=> new UserResource($user) ,
-
-                    //         ];
-                    // comment 6 line for device id
                 } else {
+                    DB::rollBack();
                     return response()->json([
                         'status' => false,
                         'message_ar' => 'هذا المستخدم ليس له حق الدخول',
@@ -434,7 +435,7 @@ class AuthController extends Controller
             }
 
             /**
-                // Convert the collection to an array
+                //Convert the collection to an array
                 $subjectsArray = $subjects->toArray();
 
                 // Initialize the special subject
@@ -1160,9 +1161,11 @@ class AuthController extends Controller
     }
     public function app_status()
     {
-        return response()->json([
-            "status" => true, "old_app_status" => 1,
-            "new_app_status" => 0,
-        ]);
+        return $this->dataResponse("تم إرجاع الداتا بنجاح", AppResource::make(0));
+        // return response()->json([
+        //     "status" => true,
+        //     "old_app_status" => 1,
+        //     "new_app_status" => 0,
+        // ]);
     }
 }
