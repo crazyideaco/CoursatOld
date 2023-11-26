@@ -422,6 +422,8 @@ table.table {
                                                 <th scope="col">تاريخ اشتراك الكورس</th>
                                                 <th scope="col">نوع الاشتراك</th>
                                                 <th scope="col">نوع المنصه</th>
+                                                <th scope="col"></th>
+
 
                                               </tr>
                                             </thead>
@@ -432,6 +434,7 @@ table.table {
                                                 <td>15/10/2023</td>
                                                 <td>--</td>
                                                 <td>--</td>
+                                                <td><i class="fas fa-trash-alt"></i></td>
                                               </tr>
                                               <tr>
                                                 <th scope="row">1564115</th>
@@ -439,6 +442,8 @@ table.table {
                                                 <td>15/10/2023</td>
                                                 <td>--</td>
                                                 <td>--</td>
+                                                <td><i class="fas fa-trash-alt"></i></td>
+
                                               </tr>
                                               <tr>
                                                 <th scope="row">1564115</th>
@@ -446,6 +451,8 @@ table.table {
                                                 <td>15/10/2023</td>
                                                 <td>--</td>
                                                 <td>--</td>
+                                                <td><i class="fas fa-trash-alt"></i></td>
+
                                               </tr>
                                             </tbody>
                                           </table>
