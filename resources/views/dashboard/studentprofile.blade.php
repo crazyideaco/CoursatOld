@@ -358,32 +358,36 @@ table.table {
                             <h3 class="title">البيانات الاساسية</h3>
                             <div class="info">
                               <p class="title">رقم الهاتف</p>
-                              <p class="text">01027003762</p>
+                              <p class="text">{{ $student->phone }}</p>
                             </div>
                             <div class="info">
                               <p class="title">المرحله</p>
-                              <p class="text">ثانوي</p>
+                              <p class="text"> @if ($student->stage)
+                                {{ $student->stage['stage_ar'] }}
+                            @endif</p>
 
                             </div>
                             <div class="info">
                               <p class="title">السنه</p>
-                              <p class="text">ثالثه ثانوي</p>
+                              <p class="text">  @if ($student->year)
+                                {{ $student->year->year_ar }}
+                            @endif</p>
                             </div>
 
                           </div>
                           <div class="basic_information">
                             <h3 class="title">المنصات</h3>
                             <div class="info">
-                              <p class="title"></p>
+                              <p class="title">المنصه العامه</p>
                               <p class="text"></p>
                             </div>
                             <div class="info">
-                              <p class="title"></p>
+                              <p class="title">منصة مستر محمد حسين</p>
                               <p class="text"></p>
 
                             </div>
                             <div class="info">
-                              <p class="title"></p>
+                              <p class="title">منصة مستر د/ محمود العفيفي</p>
                               <p class="text"></p>
                             </div>
 
