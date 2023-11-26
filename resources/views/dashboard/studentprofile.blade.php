@@ -181,6 +181,7 @@ span.number {
   background-color: white;
   margin-top: 13px;
   padding: 0.5rem 0.5rem;
+  border-radius: 10px;
 }
  .table_details .nav-tabs .nav-link.active, .table_data .nav-tabs .nav-link.active {
   border-color: rgba(0,0,0,0);
@@ -227,8 +228,9 @@ table.table {
 }
 .basc {
     background-color: #fafafa;
+    padding: 1rem;
+    border-radius: 10px;
 }
-
 
     </style>
     <!--start page-body-->
