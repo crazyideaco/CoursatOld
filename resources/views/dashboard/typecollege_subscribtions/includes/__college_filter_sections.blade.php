@@ -66,7 +66,7 @@
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>الماده </label> --}}
-    <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " id="subject_college"
+    <select class="form-control selectpicker" name="subjects_college_id" title="اختر الماده " id="subject_college_id"
         onchange="getSubject_teacherCollege(this)">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
@@ -78,7 +78,7 @@
 
 <div class="form-group col-lg-3 col-md-6 col-12">
     {{-- <label>المدرسين </label> --}}
-    <select class="form-control selectpicker" name="teacher_id" requir title="اختر المدرس"ed id="teachers_college"
+    <select class="form-control selectpicker" name="teacher_id"  title="اختر المدرس" id="teachers_college_id"
         onchange="getTeacher_typescollege(this)">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
@@ -182,9 +182,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#subject_college').empty();
-                $('#subject_college').html(result);
-                $('#subject_college').selectpicker('refresh');
+                $('#subject_college_id').empty();
+                $('#subject_college_id').html(result);
+                $('#subject_college_id').selectpicker('refresh');
             }
 
         });
@@ -205,17 +205,17 @@
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#teachers_college').empty();
-                $('#teachers_college').html(result);
-                $('#teachers_college').selectpicker('refresh');
+                $('#teachers_college_id').empty();
+                $('#teachers_college_id').html(result);
+                $('#teachers_college_id').selectpicker('refresh');
             }
         });
     }
 
 
     function getTeacher_typescollege(teacherId) {
-        let subjectId = $('#subject_college').val();
-        let teacher_id = $('#teachers_college').val();
+        let subjectId = $('#subject_college_id').val();
+        let teacher_id = $('#teachers_college_id').val();
 
         $.ajaxSetup({
             headers: {
@@ -228,9 +228,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#typescollege').empty();
-                $('#typescollege').html(result);
-                $('#typescollege').selectpicker('refresh');
+                $('#type_college_id').empty();
+                $('#type_college_id').html(result);
+                $('#type_college_id').selectpicker('refresh');
             }
 
         });

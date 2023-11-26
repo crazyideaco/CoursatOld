@@ -121,9 +121,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#subject').empty();
-                $('#subject').html(result);
-                $('#subject').selectpicker('refresh');
+                $('#subjects_id').empty();
+                $('#subjects_id').html(result);
+                $('#subjects_id').selectpicker('refresh');
             }
 
         });
@@ -152,7 +152,7 @@
     }
 
     function getTeacher_types(teacherId) {
-        let subjectId = $('#subject').val();
+        let subjectId = $('#subjects_id').val();
         let teacher_id = $('#teachers').val();
         $.ajaxSetup({
             headers: {
