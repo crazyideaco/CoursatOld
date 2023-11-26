@@ -30,7 +30,13 @@ class SubscriptionController extends Controller
         ]);
     }
 
-
+    /**
+     * Retrieves the basic subscription data for a campaign.
+     *
+     * @param CampainSubscriptionBasicDataTable $dataTable The data table used to retrieve the subscription data.
+     * @param int $id The ID of the campaign.
+     * @return string The rendered view of the subscription data.
+     */
     public function subscribtionsBasic(CampainSubscriptionBasicDataTable $dataTable, $id)
     {
 
@@ -40,6 +46,13 @@ class SubscriptionController extends Controller
         ]);
     }
 
+    /**
+     * Retrieves the subscriptions for a specific college campaign.
+     *
+     * @param CampainSubscriptionCollegeDataTable $dataTable The data table instance for retrieving the subscriptions.
+     * @param int $id The ID of the college campaign.
+     * @return \Illuminate\Http\Response The rendered view of the student subscription index with the college campaign.
+     */
     public function subscribtionsCollege(CampainSubscriptionCollegeDataTable $dataTable, $id)
     {
 
