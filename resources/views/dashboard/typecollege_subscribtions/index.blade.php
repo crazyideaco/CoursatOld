@@ -1,13 +1,13 @@
 @extends('App.dash')
 @section('style')
-<style>
-    #example_wrapper {
-        width: 100% !important;
-    }
-</style>
+    <style>
+        #example_wrapper {
+            width: 100% !important;
+        }
+    </style>
 @endsection
 @section('content')
-	<!--begin::Card-->
+    <!--begin::Card-->
     <div class="page-body">
         <div class="container">
             <!--start heed-->
@@ -95,7 +95,7 @@
 
 
                     <div class="all-infor">
-                        
+
 
 
                         <div class="row" id="category_id_college">
@@ -148,8 +148,7 @@
     <!--end::Card-->
 @endsection
 @section('scripts')
-
-<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
 
@@ -160,13 +159,13 @@
                 //basic filters
 
                 // //college filters
-                data.university_id = $("#university").val();
-                data.college_id = $("#college").val();
-                data.division_id = $("#division").val();
-                data.section_id = $("#section").val();
-                data.type_college_id = $("#typescollege").val();
+                data.university_id = $("#university_id").val();
+                data.college_id = $("#college_id").val();
+                data.division_id = $("#division_id").val();
+                data.section_id = $("#section_id").val();
+                data.type_college_id = $("#type_college_id").val();
             });
             $('#dataTableBuilder').DataTable().ajax.reload();
         }
     </script>
- @endsection
+@endsection
