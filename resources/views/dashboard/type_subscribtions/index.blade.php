@@ -160,7 +160,7 @@
     {{ $dataTable->scripts() }}
     <script>
         function filter_students() {
-            console.log("filtering",$("#subscription_type").val());
+            console.log("filtering",$("#subscription_type :selected").text());
             console.log("filtering_2",$("#stage_id").val());
             $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
                 //basic filters
