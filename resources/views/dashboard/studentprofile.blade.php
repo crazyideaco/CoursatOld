@@ -142,7 +142,7 @@ p.text-online {
 
 }
  .basic_information .title {
-  font-family: "blod";
+  font-family: "reg";
   color: #011c1e;
   width: 100%;
 }
