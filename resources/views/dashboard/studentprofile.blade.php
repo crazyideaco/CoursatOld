@@ -156,7 +156,7 @@ p.text-online {
   border-radius: 15px;
 }
  .basic_information .info {
-  width: 25%;
+  width: 33%;
   text-align: start;
   font-size: .8rem;
   margin-top: 2rem;
