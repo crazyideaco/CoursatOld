@@ -142,7 +142,7 @@ p.text-online {
 
 }
  .basic_information .title {
-  font-family: "semibold";
+  font-family: "blod";
   color: #011c1e;
   width: 100%;
 }
@@ -162,7 +162,7 @@ p.text-online {
   margin-top: 2rem;
 }
 .basic_information .info .text {
-  font-family: "semibold";
+  font-family: "bold";
   color: #909295;
   margin-bottom: 0
 }
@@ -353,7 +353,7 @@ table.table {
 
                           </div>
                           <div class="basic_information">
-                            <h4 class="title">المنصات</h4>
+                            <h3 class="title">المنصات</h3>
                             <div class="info">
                               <p class="title"></p>
                               <p class="text"></p>
