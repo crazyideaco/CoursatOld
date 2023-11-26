@@ -143,6 +143,7 @@
     {{ $dataTable->scripts() }}
     <script>
         function filter_students() {
+            console.log("filtering",$("#subscription_type").val());
             $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
                 //basic filters
                 data.stage_id = $("#stage_id").val();
