@@ -87,7 +87,7 @@
   color: #64666a;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  margin-inline-end: 1rem;
+
   width: 80%;
   font-size: .7rem;
   text-align: center;
@@ -112,7 +112,7 @@ p.text-online {
   text-align: center;
   margin-top: 7px;
   color: black;
-  font-family: 'regular';
+  font-family: 'reg';
   width: fit-content;
   padding: 0.1rem;
   border-radius: 15px;
@@ -128,7 +128,7 @@ p.text-online {
   text-align: center;
   margin-top: 7px;
   color: black;
-  font-family: 'regular';
+  font-family: 'reg';
   width: fit-content;
   padding: 0.1rem;
   border-radius: 15px;
