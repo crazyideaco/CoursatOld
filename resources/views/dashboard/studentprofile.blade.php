@@ -110,14 +110,47 @@
             <!--start setting-->
             <div class="col-12 studentprofile">
                 <div class="row fl bg-white">
-                    <div class="col-3">
-                        <div class="img">
+                    <div class="col-4">
+                        <div class="details_student">
+                            <img src="./photo/student.png" alt="group_img" />
+                           <div class="online">
+
+                            <p class="text-online">online<i class="fa-solid fa-circle online"></i></p>
+                           </div>
+                           <!-- ofline -->
+                           <!-- <div class="ofline">
+                            <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
+                           </div> -->
+                            <!-- ofline -->
+                                        <h5 class="title">أحمد أمجد</h5>
+                            <p class="text">أساسي</p>
+                            <p class="text-1">عدد النقاط:<span class="number">25</span></p>
+                            <div class="details">
+                              <p class="info date">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                تاريخ الانضمام : 22 مايو, 2023
+                              </p>
+                              <p class="info">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                تاريخ اخر ظهور علي التطبيق : 24 مايو, 2024
+                              </p>
+                              <p class="info">
+                                <i class="fa-solid fa-star"></i>
+                                التقيم العام
+                              </p>
+
+                            </div>
+                          </div>
+
+
+
+                        {{-- <div class="img">
                             @if ($student->image)
                                 <img src="{{ url('uploads/' . $student->image) }}">
                             @endif
                             <p> {{ $student->name }}</p>
                             <p> {{ $student->code }}</p>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="col-9">
                         <div class="row">
