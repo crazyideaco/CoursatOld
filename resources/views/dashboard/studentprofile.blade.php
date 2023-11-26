@@ -169,7 +169,7 @@ p.text-online {
 }
 span.number {
   color: red;
-  font-family: bold;
+  font-family: "reg";
 }
 .basic_information {
   background-color: white;
@@ -294,7 +294,7 @@ table.table {
                             @endif
                            <div class="online">
 
-                            <p class="text-online">online<i class="fa-solid fa-circle online"></i></p>
+                            <p class="text-online">online<i class="fas fa-circle online"></i></p>
                            </div>
                            <!-- ofline -->
                            <!-- <div class="ofline">
