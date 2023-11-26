@@ -381,8 +381,8 @@
                                 <img src="{{ asset('images/qenoicon/setting.svg') }}" id="img">
                             </div>
                             <div class="col-6">
-                                <a href="#setting2" data-toggle="collapse">الرئيسية</a>
-                                <div id="setting2"
+                                <a href="#main" data-toggle="collapse">الرئيسية</a>
+                                <div id="main"
                                     class="collapse
                                 @if (request()->is('main_page_basic') || request()->is('main_page_college')) show @endif">
 
@@ -418,8 +418,8 @@
                                 <img src="{{ asset('images/qenoicon/setting.svg') }}" id="img">
                             </div>
                             <div class="col-6">
-                                <a href="#setting" data-toggle="collapse">البروفايل</a>
-                                <div id="setting" class="collapse @if (request()->is('editprofile') || request()->is('editpassword') || request()->is('edityourinformation')) show @endif">
+                                <a href="#profie" data-toggle="collapse">البروفايل</a>
+                                <div id="profie" class="collapse @if (request()->is('editprofile') || request()->is('editpassword') || request()->is('edityourinformation')) show @endif">
                                     <a href="{{ route('editprofile') }}"
                                         style="color: #aa7700;
     font-family: med;
@@ -937,8 +937,8 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#studentsYajra" data-toggle="collapse"> كل الطلاب </a>
-                                    <div id="studentsYajra"
+                                    <a href="#studentsYaj" data-toggle="collapse"> كل الطلاب </a>
+                                    <div id="studentsYaj"
                                         class="collapse @if (request()->is('allstudents')) show @endif">
 
                                         <a href="{{ route('allstudents') }}"
