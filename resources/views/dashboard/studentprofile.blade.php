@@ -378,17 +378,17 @@ table.table {
                           <div class="basic_information">
                             <h3 class="title">المنصات</h3>
                             <div class="info">
-                              <p class="title">المنصه العامه</p>
-                              <p class="text"></p>
+                              <p class="title">المنصه </p>
+                              <p class="text">العامه</p>
                             </div>
                             <div class="info">
-                              <p class="title">منصة مستر محمد حسين</p>
-                              <p class="text"></p>
+                              <p class="title">منصة مستر </p>
+                              <p class="text">محمد حسين</p>
 
                             </div>
                             <div class="info">
-                              <p class="title">منصة مستر د/ محمود العفيفي</p>
-                              <p class="text"></p>
+                              <p class="title">منصة مستر </p>
+                              <p class="text">د/ محمود العفيفي</p>
                             </div>
 
                           </div>
