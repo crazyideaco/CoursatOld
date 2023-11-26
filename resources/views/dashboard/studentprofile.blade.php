@@ -187,15 +187,15 @@ span.number {
   border-bottom: 2px solid #06797e;
 
 }
-a.button#exams-tab {
+a#pills-exams-tab{
   color: black;
   font-family: 'reg';
 }
-a.button#coruses-tab {
+a#pills-coruses-tab {
   color: black;
   font-family: 'reg';
 }
-a.button#History-tab{
+a#pills-History-tab{
   color: black;
   font-family: 'reg';
 }
