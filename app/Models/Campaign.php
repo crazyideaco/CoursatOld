@@ -11,24 +11,56 @@ use Illuminate\Database\Eloquent\Model;
 class Campaign extends Model
 {
     use HasFactory;
-    protected $fillable = ["title", "description", "start_date", "end_date", "category_id","college_id","university_id","stage_id","year_id"];
+    protected $fillable = ["title", "description", "start_date", "end_date", "category_id", "college_id", "university_id", "stage_id", "year_id"];
     protected $table = "campaigns";
 
+    /**
+     * Retrieve the platforms associated with this entity.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function Platforms()
     {
-        return $this->belongsToMany(Platform::class,"campaign_platform","campaign_id","platform_id");
+        return $this->belongsToMany(Platform::class, "campaign_platform", "campaign_id", "platform_id");
     }
 
-    public function college () {
+    /**
+     * Retrieves the college that this belongs to.
+     *
+     * @return College
+     */
+    public function college()
+    {
         return $this->belongsTo(College::class);
     }
-    public function university () {
+
+    /**
+     * Retrieves the university associated with this instance.
+     *
+     * @return University The university associated with this instance.
+     */
+    public function university()
+    {
         return $this->belongsTo(University::class);
     }
-    public function stage () {
+
+    /**
+     * Retrieves the related Stage model for this instance.
+     *
+     * @return Stage The related Stage model.
+     */
+    public function stage()
+    {
         return $this->belongsTo(Stage::class);
     }
-    public function year () {
+
+    /**
+     * Retrieves the associated Year model for this object.
+     *
+     * @return Year The associated Year model.
+     */
+    public function year()
+    {
         return $this->belongsTo(Year::class);
     }
 }
