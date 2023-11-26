@@ -977,11 +977,11 @@
                                         >
 
                                         <a href="{{ route('point_requests') }}"
-                                            >
+                                            style="color: #aa6e38">
                                             طلبات النقاط</a>
 
                                         <a href="{{ route('point_requests.point_histories') }}"
-                                            >
+                                        style="color: #aa6e38">
                                             تاريخ طلبات النقاط</a>
 
                                     </div>
