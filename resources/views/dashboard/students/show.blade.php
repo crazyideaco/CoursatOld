@@ -394,8 +394,8 @@
                             </div> --}}
                             <!-- ofline -->
                             <!-- <div class="ofline">
-                                            <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
-                                           </div> -->
+                                                    <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
+                                                   </div> -->
                             <!-- ofline -->
                             <h5 class="title"> {{ $student->name }}</h5>
                             <p class="text">
@@ -461,6 +461,8 @@
                                     <p class="text">
                                         @if ($student->stage)
                                             {{ $student->stage['stage_ar'] }}
+                                        @else
+                                            --
                                         @endif
                                     </p>
                                 </div>
@@ -469,7 +471,10 @@
                                     <p class="text">
                                         @if ($student->year)
                                             {{ $student->year->year_ar }}
+                                        @else
+                                            --
                                         @endif
+
                                     </p>
                                 </div>
                                 <div class="info">
@@ -526,61 +531,13 @@
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
                                         aria-labelledby="pills-coruses-tab">
-                                        <div class="header-table">
-                                            <h3>كورسات</h3>
-                                            <div class="form-group">
-                                                <input type="date" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <div class="table_details">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">ID</th>
-                                                            <th scope="col">اسم الكورس</th>
-                                                            <th scope="col">تاريخ اشتراك الكورس</th>
-                                                            <th scope="col">نوع الاشتراك</th>
-                                                            <th scope="col">نوع المنصه</th>
-                                                            <th scope="col"></th>
 
+                                        @include('dashboard.students.profile-student-includes.__courses')
 
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1564115</th>
-                                                            <td>المحاسبه</td>
-                                                            <td>15/10/2023</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                            <td><i class="fas fa-trash-alt delet"></i></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1564115</th>
-                                                            <td>المحاسبه</td>
-                                                            <td>15/10/2023</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                            <td><i class="fas fa-trash-alt delet"></i></td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">1564115</th>
-                                                            <td>المحاسبه</td>
-                                                            <td>15/10/2023</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                            <td><i class="fas fa-trash-alt delet"></i></td>
-
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="pills-exams" role="tabpanel"
-                                        aria-labelledby="pills-exams-tab">
+                                    aria-labelledby="pills-exams-tab">
+                                    @include('dashboard.students.profile-student-includes.__exam')
                                         <div class="header-table">
                                             <h3>امتحانات</h3>
                                             <div class="form-group">
