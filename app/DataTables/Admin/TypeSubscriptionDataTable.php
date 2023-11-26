@@ -76,10 +76,11 @@ class TypeSubscriptionDataTable extends DataTable
                 }
                 $query->whereHas('student', function ($q) use ($request) {
 
-                    $q->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
-                        // dd($request->all());
-                        return $q->where('stage_id', (int)$request->stage_id);
-                    })
+                    $q
+                        ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
+                            // dd($request->all());
+                            return $q->where('stage_id', (int)$request->stage_id);
+                        })
                         ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
                             return $q->where('year_id', (int)$request->year_id);
                         })
@@ -91,6 +92,9 @@ class TypeSubscriptionDataTable extends DataTable
                             return $q->whereHas('stutypes', function ($typeq) use ($request) {
                                 return $typeq->where('types.id', (int)$request->type_id);
                             });
+                        })
+                        ->when($request->subscription_type != null, function ($q) use ($request) {
+                            return $q->where('type', (int)$request->subscription_type);
                         })
                         ->when($request->university_id != null && $request->university_id != 0, function ($q) use ($request) {
                             return $q->where('university_id', (int)$request->university_id);

@@ -85,6 +85,12 @@
 </div>
 
 
+
+
+{{-- <div class="form-group col-lg-2 col-md-6 col-12">
+    <button class="btn btn-primary pob" onclick="reset_basic_selects();filter_students()">reset</button>
+</div> --}}
+
 {{-- basic filters --}}
 <script>
     function getstage_years(selected) {
@@ -174,6 +180,12 @@
     }
 </script>
 
+<script>
+    function  reset_basic_selects(){
+        $('.selectpicker').selectpicker('deselectAll');
+        $('.selectpicker').selectpicker('refresh');
+    }
+</script>
 {{-- function getsubjects_types(selected) {
         let id = selected.value;
         $.ajaxSetup({
@@ -194,3 +206,5 @@
 
         });
     } --}}
+
+

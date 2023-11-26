@@ -102,15 +102,21 @@
                             <h4 class="hederre">
                                 المرحله الجامعيه
                             </h4>
-                            @include('dashboard.students.includes.__college_filter_sections')
+                            @include('dashboard.typecollege_subscribtions.includes.__college_filter_sections')
                         </div>
-                        {{-- <div class="row">
-                            <div class="col-3 mx-auto">
 
 
-                                <span class="btn btn-primary" onclick="filterbasicstudents()">بحث</span>
-                            </div>
-                        </div> --}}
+                        <div class="row" id="subscription_type">
+                            <h4 class="hederre">
+                                نوع الاشتراك
+                            </h4>
+                            {{-- انا عملت ملف جديد هنا عشان افصل كل حاجة لوحدها عشان متبوظش حاجة هنا  ^_^ و ممكن اعمل
+                                parent ليهم هما الاتنين
+                                اساسي والجامعي  --}}
+                            @include('dashboard.typecollege_subscribtions.includes.__subscription_type')
+                        </div>
+
+
                         <div class="row">
                             <div class="table-responsive">
 
@@ -164,6 +170,7 @@
                 data.division_id = $("#division_id").val();
                 data.section_id = $("#section_id").val();
                 data.type_college_id = $("#type_college_id").val();
+                data.subscription_type = $("#subscription_type").val();
             });
             $('#dataTableBuilder').DataTable().ajax.reload();
         }

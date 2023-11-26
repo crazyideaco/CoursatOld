@@ -79,22 +79,7 @@
             <!--start setting-->
             <div class="setting all-products typs">
                 <div class="container">
-                    {{-- <div class="row def">
-
-                    <img src="images/all-products.svg">
-                    <h5>الطلاب</h5>
-
-
-
-                </div> --}}
-
-                    <div class="products-search typs1">
-
-
-                    </div>
-
-
-
+                    
                     <div class="all-infor">
                         <div class="row" id="category_id_basic">
                             <h4 class="hederre">
@@ -102,6 +87,15 @@
                             </h4>
                             {{-- انا عملت ملف جديد هنا عشان افصل كل حاجة لوحدها عشان متبوظش حاجة هنا  ^_^ --}}
                             @include('dashboard.type_subscribtions.includes.__basic_filter_sections')
+                        </div>
+
+
+                        <div class="row" id="subscription_type">
+                            <h4 class="hederre">
+                                نوع الاشتراك
+                            </h4>
+                            {{-- انا عملت ملف جديد هنا عشان افصل كل حاجة لوحدها عشان متبوظش حاجة هنا  ^_^ --}}
+                            @include('dashboard.type_subscribtions.includes.__subscription_type')
                         </div>
 
 
@@ -154,6 +148,7 @@
                 data.stage_id = $("#stage_id").val();
                 data.year_id = $("#years_id").val();
                 data.subject_id = $("#subjects_id").val();
+                data.subscription_type = $("#subscription_type").val();
                 // data.user_id = $("#teachers").val();
                 // //college filters
 
