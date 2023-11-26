@@ -208,7 +208,7 @@ a#pills-History-tab{
   display: flex;
   justify-content: space-between;
   margin-top: 15PX;
-  align-items: center;
+  /* align-items: center; */
   font-family: "reg";
 }
 table.table {
