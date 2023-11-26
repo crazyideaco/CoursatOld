@@ -383,20 +383,24 @@
                             </div>
                             <!-- ofline -->
                             <!-- <div class="ofline">
-                                <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
-                               </div> -->
+                                    <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
+                                   </div> -->
                             <!-- ofline -->
                             <h5 class="title"> {{ $student->name }}</h5>
-                            <p class="text">أساسي</p>
+                            <p class="text">
+                                {{ $student->category_id == config('project_types.system_category_type.category_id_basic') ? 'أساسي' : 'جامعي' }}
+                            </p>
                             <p class="text-1">عدد النقاط:<span class="number">{{ $student->points }}</span></p>
                             <div class="details">
                                 <p class="info date">
                                     <i class="far fa-calendar"></i>
-                                    تاريخ الانضمام : 22 مايو, 2023
+                                    تاريخ الانضمام :
+                                    {{ \Carbon\Carbon::parse($student->created_at)->locale('ar')->translatedFormat('d F Y') }}
                                 </p>
                                 <p class="info">
                                     <i class="far fa-calendar"></i>
-                                    تاريخ اخر ظهور علي التطبيق : 24 مايو, 2024
+                                    تاريخ اخر ظهور علي التطبيق :
+                                    {{ $student->is_online == 1? \Carbon\Carbon::parse($student->online_date)->locale('ar')->translatedFormat('d F Y'): \Carbon\Carbon::parse($student->offline_date)->locale('ar')->translatedFormat('d F Y') }}
                                 </p>
                                 <p class="info">
                                     <i class="fas fa-star"></i>
@@ -459,17 +463,24 @@
                                 </div>
                                 <div class="info">
                                     <p class="title">نوع الهاتف</p>
-                                    <p class="text"> ios</p>
+                                    <p class="text"> {{ $student->device_id }}</p>
                                 </div>
 
                             </div>
                             <div class="basic_information">
                                 <h3 class="title">المنصات</h3>
-                                <div class="info">
-                                    <p class="title">المنصه </p>
-                                    <p class="text">العامه</p>
-                                </div>
-                                <div class="info">
+                                @forelse ($student->stdcenters as $center)
+                                    <div class="info">
+                                        <p class="title">{{ $center->name ?? '-' }} </p>
+                                        {{-- <p class="text">العامه</p> --}}
+                                    </div>
+                                @empty
+                                    <div class="info">
+                                        <p class="title">المنصه </p>
+                                        <p class="text">العامه</p>
+                                    </div>
+                                @endforelse
+                                {{-- <div class="info">
                                     <p class="title">منصة مستر </p>
                                     <p class="text">محمد حسين</p>
 
@@ -477,7 +488,7 @@
                                 <div class="info">
                                     <p class="title">منصة </p>
                                     <p class="text">د/ محمود العفيفي</p>
-                                </div>
+                                </div> --}}
 
                             </div>
                             <div class="table_details">
