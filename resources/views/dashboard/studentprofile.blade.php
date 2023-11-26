@@ -370,149 +370,22 @@ table.table {
 
                           </div>
                           <div class="table_details">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                              <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="coruses-tab" data-bs-toggle="tab" data-bs-target="#coruses-tab-pane" type="button" role="tab" aria-controls="coruses-tab-pane" aria-selected="true">الكورسات</button>
-                              </li>
-                              <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="exams-tab" data-bs-toggle="tab" data-bs-target="#exams-tab-pane" type="button" role="tab" aria-controls="exams-tab-pane" aria-selected="false">الامتحانات</button>
-                              </li>
-                              <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="History-tab" data-bs-toggle="tab" data-bs-target="#History-tab-pane" type="button" role="tab" aria-controls="History-tab-pane" aria-selected="false">History</button>
-                              </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                              <!-- كورسات -->
-                              <div class="tab-pane fade show active" id="coruses-tab-pane" role="tabpanel" aria-labelledby="coruses-tab" tabindex="0">
-                                <div class="header-table">
-                                  <h4>كورسات</h4>
-                                  <div class="form-group">
-                                    <input type="date" class="form-control">
-                                  </div>
-                                </div>
-                                <div class="table-responsive">
-                                  <div class="table_details">
-                                    <table class="table">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col">ID</th>
-                                          <th scope="col">اسم الكورس</th>
-                                          <th scope="col">تاريخ اشتراك الكورس</th>
-                                          <th scope="col">Handle</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th scope="row">1564115</th>
-                                          <td>Mark</td>
-                                          <td>Otto</td>
-                                          <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">2</th>
-                                          <td>Jacob</td>
-                                          <td>Thornton</td>
-                                          <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">3</th>
-                                          <td colspan="2">Larry the Bird</td>
-                                          <td>@twitter</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                                </li>
+                              </ul>
+                              <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
                               </div>
-                              <!-- كورسات -->
-                              <!-- امتحانات -->
-                              <div class="tab-pane fade" id="exams-tab-pane" role="tabpanel" aria-labelledby="exams-tab" tabindex="0">
-                                <div class="header-table">
-                                  <h4>امتحانات</h4>
-                                  <div class="form-group">
-                                    <input type="date" class="form-control">
-                                  </div>
-                                </div>
-                                <div class="table-responsive">
-                                  <div class="table_details">
-                                    <table class="table">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col">ID</th>
-                                          <th scope="col">اسم الامتحان</th>
-                                          <th scope="col">Last</th>
-                                          <th scope="col">Handle</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th scope="row">1</th>
-                                          <td>Mark</td>
-                                          <td>Otto</td>
-                                          <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">2</th>
-                                          <td>Jacob</td>
-                                          <td>Thornton</td>
-                                          <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">3</th>
-                                          <td colspan="2">Larry the Bird</td>
-                                          <td>@twitter</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- امتحانات -->
-                              <!-- history -->
-                              <div class="tab-pane fade" id="History-tab-pane" role="tabpanel" aria-labelledby="History-tab" tabindex="0">
-                                <div class="header-table">
-                                  <h4>History</h4>
-                                  <div class="form-group">
-                                    <input type="date" class="form-control">
-                                  </div>
-                                </div>
-                                <div class="table-responsive">
-                                  <div class="table_details">
-                                    <table class="table">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col">ID</th>
-                                          <th scope="col">First</th>
-                                          <th scope="col">Last</th>
-                                          <th scope="col">Handle</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th scope="row">1</th>
-                                          <td>Mark</td>
-                                          <td>Otto</td>
-                                          <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">2</th>
-                                          <td>Jacob</td>
-                                          <td>Thornton</td>
-                                          <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">3</th>
-                                          <td colspan="2">Larry the Bird</td>
-                                          <td>@twitter</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- history -->
-                            </div>
                             </div>
                         {{-- <div class="row">
                             <h6>الايميل:</h6>
