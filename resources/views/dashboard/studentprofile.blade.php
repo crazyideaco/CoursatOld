@@ -225,9 +225,11 @@ table.table {
     font-family: "reg" !important;
     font-size: 0.9rem !important;
 }
-
-
+.basc {
+    background-color: #fafafa;
 }
+
+
     </style>
     <!--start page-body-->
     <div class="page-body">
@@ -349,6 +351,7 @@ table.table {
                     </div>
                     <div class="col-8">
 
+                       <div class="basc">
                         <div class="basic_information">
                             <h3 class="title">البيانات الاساسية</h3>
                             <div class="info">
@@ -521,6 +524,7 @@ table.table {
                                 </div>
                               </div>
                             </div>
+                       </div>
                         {{-- <div class="row">
                             <h6>الايميل:</h6>
                             <p>{{ $student->email }}</p>
