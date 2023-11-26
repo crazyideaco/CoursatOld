@@ -334,7 +334,7 @@ button.btn.btn-success.names {
             <!--start setting-->
             <div class="col-12 studentprofile">
                 <div class="row fl bg-white">
-                    <div class="col-4">
+                    <div class="col-lg-4 col-md-12 col-12">
                         <div class="details_student">
                             @if ($student->image)
                                 <img src="{{ url('uploads/' . $student->image) }}">
@@ -394,7 +394,7 @@ button.btn.btn-success.names {
                             <p> {{ $student->code }}</p>
                         </div> --}}
                     </div>
-                    <div class="col-8">
+                    <div class="col-lg-8 col-md-12 col-12">
 
                        <div class="basc">
                         <div class="basic_information">
