@@ -848,6 +848,7 @@
 
     <script>
         $(document).ready(function() {
+            console.log("get courses ready", {{ $student->id }});
             get_courses({{ $student->id }});
         });
 
