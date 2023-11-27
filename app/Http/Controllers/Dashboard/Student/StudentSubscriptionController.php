@@ -68,7 +68,7 @@ class StudentSubscriptionController extends Controller
         } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
             $courses = $student->stutypes;
         }
-
+dd('ddsdsfsf');
         dd($courses);
         return view('dashboard.students.profile-student-includes.__courses', [
             'courses' => $courses,
