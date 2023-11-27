@@ -734,6 +734,19 @@ class VideoController extends Controller
         return response(['status' => true]);
     }
 
+    public function delete_video_video($id)
+    {
+        $video =  Video::where('id', $id)->first();
+        if (public_path() . '/uploads/' . $video->url) {
+            $link1 = public_path() . '/uploads/' . $video->url;
+            File::delete($link1);
+            $video->update([
+                'url' => null,
+            ]);
+        }
+        return response(['status' => true]);
+    }
+
     public function addvideospecial($id)
     {
         $subtype = Subtype::where("id", $id)->firstOrFail();
