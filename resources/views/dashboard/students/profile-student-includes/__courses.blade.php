@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody id="courses">
-                @forelse ($courses as $item)
+                @forelse ($student_courses as $item)
                     <tr>
                         <th scope="row" id="course_row{{ $item->id }}">{{ $item->id }}</th>
                         <td>{{ $item->name_ar }}</td>
@@ -60,7 +60,7 @@
             dataType: "Json",
             data: {
                 "student_id": student_id,
-                "course_date": $('#course_date').val(),
+                "course_date": $('#course_date :selected').val(),
             },
             success: function(result) {
                 if (result.status == true) {

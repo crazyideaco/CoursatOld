@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard\Student;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentSubscriptionController extends Controller
 {
@@ -35,6 +36,7 @@ class StudentSubscriptionController extends Controller
     }
 
 
+
     public function deleteuser_from_stutypescollege(Request $request)
     {
         $rules = [
@@ -58,6 +60,49 @@ class StudentSubscriptionController extends Controller
         ]);
     }
 
+    public function addUserToCourse(Request $request)
+    {
+        DB::beginTransaction();
+        $rules = [
+            "course_id" => "required",
+        ];
+        $validator = validator()->make($request->all(), $rules);
+        if ($validator->fails()) {
+            $msg = $validator->errors()->first();
+            return response()->json([
+                'status' => false,
+                'message' => $msg,
+            ], 422);
+        }
+        $student = User::find($request->student_id);
+        if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
+            $course_exists = !contains()->check($request->course_id, $student->stutypescollege()->pluck('id')->toArray());
+            if ($course_exists) {
+                DB::commit();
+                $student->stutypescollege()->attach($request->course_id);
+            } else {
+                DB::rollBack();
+                $msg = "الطالب مسجل في الكورس بالفعل";
+                return response()->json([
+                    'status' => false,
+                    'message' => $msg,
+                ]);
+            }
+        } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
+            $course_exists = !contains()->check($request->course_id, $student->stutypes()->pluck('id')->toArray());
+            if ($course_exists) {
+                DB::commit();
+                $student->stutypes()->attach($request->course_id);
+            } else {
+                DB::rollBack();
+                $msg = "الطالب مسجل في الكورس بالفعل";
+                return response()->json([
+                    'status' => false,
+                    'message' => $msg,
+                ], 422);
+            }
+        }
+    }
     /** get the courses of specific student based on category */
     public function get_courses(Request $request)
     {
@@ -71,8 +116,8 @@ class StudentSubscriptionController extends Controller
 
         $text = "";
         $courses()->when($request->course_date, function ($q) use ($request) {
-            $q->wherePivot('created_at', '>=', $request->course_date);
-        });
+            return $q->wherePivot('created_at', '>=', $request->course_date);
+        })->get();
         foreach ($courses as $item) {
             $text .= '<tr>
             <th scope="row" id="course_row' . $item->id . '">' . $item->id . '</th>
