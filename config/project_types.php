@@ -26,11 +26,19 @@ return [
 
     "storage_type" => [
         "Videocollege" => 1,
-        
+
     ],
 
     "is_public_platform_or_private_platform" => [
         "public" => 1,
         "private" => 2,
+    ],
+
+    "pivot_type_in_student_type" => [
+        "dashboard" => 4,
+        "scan_qrcode" => 3,
+        "subscription_request" => 2,
+        "purchase" => 1,
+        "subscription_default" => 0,
     ],
 ];

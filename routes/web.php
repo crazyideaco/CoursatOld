@@ -64,6 +64,7 @@
         Route::post('students/deleteuser_from_stutypes', [StudentSubscriptionController::class, 'deleteuser_from_stutypes'])->name('stutypes.deleteuser_from_stutypes');
         Route::post('students/deleteuser_from_stutypescollege', [StudentSubscriptionController::class, 'deleteuser_from_stutypescollege'])->name('stutypescollege.deleteuser_from_stutypescollege');
         Route::any('students/subscribtions/courses', [StudentSubscriptionController::class, 'get_courses'])->name('students.subscribtions.get_courses');
+        Route::any('students/addUserToCourse', [StudentSubscriptionController::class, 'addUserToCourse'])->name('students.subscribtions.addUserToCourse');
 
         // route for Campaign subscribtions----------
         Route::get('campaigns/{id}/subscribtionsBasic', [SubscriptionController::class, 'subscribtionsBasic'])->name('campaigns.subscribtionsBasic.index');

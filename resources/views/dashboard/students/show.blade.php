@@ -866,7 +866,7 @@
         function addcourse() {
             var student_id = {{ $student->id }};
             var course_id = $("#course_id").val();
-            var url = "{{ route('students.subscribtions.get_courses') }}";
+            var url = "{{ route('students.subscribtions.addUserToCourse') }}";
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
