@@ -140,7 +140,7 @@
                                 <input id="myPdf" type="file" class="form-control ehabtalaat" name="pdf">
 
                                 <span class="d-block mx-2">
-                                    {{ pathinfo($video->pdf, PATHINFO_FILENAME) ?? '' }}
+                                    {{ pathinfo($video->pdf, PATHINFO_BASENAME) ?? '' }}
                                 </span>
 
                                 {{-- <span class="d-block mx-2">{{ $video->pdf->getClientOriginalName() ?? '' }}
