@@ -884,7 +884,6 @@ class VideosCollegeController extends Controller
     public function delete_video_college_video($id)
 {
     $video = VideosCollege::whereId($id)->first();
-    dd($video);
     // Check if $video is not null before trying to access its properties
     if ($video) {
         $link1 = public_path() . '/uploads/' . $video->url;
