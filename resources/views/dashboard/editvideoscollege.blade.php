@@ -768,7 +768,7 @@ success: function(data) {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_college_video/${id}`,
+                        url: `delete_video_college_video/${id}`,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
