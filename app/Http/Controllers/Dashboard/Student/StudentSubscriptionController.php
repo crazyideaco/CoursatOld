@@ -76,10 +76,10 @@ class StudentSubscriptionController extends Controller
         }
         // dd($request->course_id);
         $student = User::find($request->student_id);
-        dd($student);
+        // dd($student);
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
-
+dd($courseExists);
             if ($courseExists) {
                 $student->stutypescollege()->attach($request->course_id);
                 // $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
