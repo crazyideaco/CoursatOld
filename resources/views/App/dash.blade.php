@@ -972,7 +972,7 @@
                                     <img src="{{ asset('images/qenoicon/users.svg') }}" id="img">
                                 </div>
                                 <div class="col-6">
-                                    <a href="#point" data-toggle="collapse"> النقاط</a>
+                                    <a href="#point" data-toggle="collapse"> قسم الاشتراكات</a>
                                     <div id="point"
                                         >
 
@@ -984,6 +984,13 @@
                                         style="color: #aa6e38">
                                             تاريخ طلبات النقاط</a>
 
+                                            <a href="{{ route('new_type_joins.index') }}"
+                                            class="@if (request()->is('allstudents')) active @endif nas">
+                                            طلبات الانضمام الاساسي</a>
+
+                                            <a href="{{ route('new_typecollege_joins.index') }}"
+                                            class="@if (request()->is('allstudents')) active @endif nas">
+                                            طلبات الانضمام الجامعي</a>
                                     </div>
                                 </div>
                                 <div class="col-2">
