@@ -418,7 +418,8 @@
                             <div class="name-cor">
                                 <div class="form-group names">
                                     <label for="course_id">اختر الكورس</label>
-                                    <select class="form-control selectpicker " id="course_id" title="اختر الكورس" data-live-search="true">
+                                    <select class="form-control selectpicker " id="course_id" title="اختر الكورس"
+                                        data-live-search="true">
                                         @foreach ($courses as $item)
                                             <option value="{{ $item->id }}">{{ $item->name_ar }}</option>
                                         @endforeach
@@ -867,6 +868,7 @@
             var student_id = {{ $student->id }};
             var course_id = $("#course_id").val();
             var url = "{{ route('students.subscribtions.addUserToCourse') }}";
+            console.log("student id", student_id, "course id", course_id, "url", url);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -880,21 +882,22 @@
                     'course_id': course_id,
                 },
                 dataType: "Json",
-            }).success(function(result) {
-                if (result.status == true) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '',
-                        text: result.message,
-                    });
-                } else if (result.status == false) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: result.message,
-                    });
+                success: function(result) {
+                    if (result.status == true) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '',
+                            text: result.message,
+                        });
+                    } else if (result.status == false) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: result.message,
+                        });
+                    }
                 }
-            })
+            });
         }
     </script>
     {{--
