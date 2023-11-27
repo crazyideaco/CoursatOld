@@ -70,8 +70,6 @@ class TypeJoinDataTable extends DataTable
                             $q->where('name', 'LIKE', "%$searchValue%")
                                 ->orWhere('phone', 'LIKE', "%$searchValue%");
                         });
-                    })->orwhereHas('stdcenters', function ($q) use ($searchValue) {
-                        $q->where('name', 'LIKE', "%$searchValue%");
                     });
                 }
                 // $query->whereHas('student', function ($q) use ($request) {
