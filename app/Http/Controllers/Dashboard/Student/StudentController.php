@@ -72,6 +72,10 @@ class StudentController extends Controller
             $student_courses = $student->stutypes;
             $student_exams = $student->stypeexams_users;
             $courses = Type::where('stage_id', $student->stage_id)->where('years_id', $student->year_id)->get();
+        }else{
+            $student_courses = [];
+            $student_exams = [];
+            $courses = [];
         }
 
 dd($student_exams);
