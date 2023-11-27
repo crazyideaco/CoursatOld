@@ -69,7 +69,8 @@ class StudentSubscriptionController extends Controller
             $courses = $student->stutypes;
         }
 
-        return view($this->view . '__courses', [
+        dd($courses);
+        return view('dashboard.students.profile-student-includes.__courses', [
             'courses' => $courses,
             'student' => $student
         ])->render();
