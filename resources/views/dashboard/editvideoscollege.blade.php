@@ -373,7 +373,122 @@
     <!--end page-body-->
 @endsection
 @section('scripts')
+<script>
+    function delete_video_college_video(selected) {
+        let id = selected.value;
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    url: `../delete_video_college_video/${id}`,
+                    //    contentType: "application/json; charset=utf-8",
+                    dataType: "Json",
+                    success: function(result) {
+                        if (result.status == true) {
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your pdf has been deleted.',
+                                'success'
+                            )
+                        }
+                    }
+
+                });
+            }
+
+
+        })
+    }
+
+</script>
     <script>
+        $('form').ajaxForm({
+
+beforeSend: function() {
+
+    $('#success').empty();
+
+    <?php
+    $msg = null;
+    $type = \App\TypesCollege::where('id', $video->typescollege_id)->first();
+    if (auth()->user() && auth()->user()->isAdmin == 'admin') {
+        $paqauser = \App\Paqa_User::with('paqa')
+            ->where('user_id', $type->doctor_id)
+            ->first();
+        if ($paqauser == null) {
+            $msg = 'انت غير مشترك في باقه برجا الاشتراك في باقه';
+            //   return response()->json(['status' => false,'errors' => $msg]);
+        } elseif ($paqauser->expired_at == \Carbon\Carbon::now()->format('Y-m-d')) {
+            $msg = 'انتهت صلاحه الباقه';
+            //return response()->json(['status' => false,'errors' => $msg]);
+        }
+    } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+        $paqauser = \App\Paqa_User::with('paqa')
+            ->where('user_id', auth()->user()->id)
+            ->first();
+        if ($paqauser == null) {
+            $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+            //  return response()->json(['status' => false,'errors' => $msg]);
+        } elseif ($paqauser->expired_at == \Carbon\Carbon::now()->format('Y-m-d')) {
+            $msg = 'انتهت صلاحيه الباقه';
+            //return response()->json(['status' => false,'errors' => $msg]);
+        }
+    }
+    if (Auth::user() && Auth::user()->is_student == 2) {
+        $paqauser = \App\Paqa_User::with('paqa')
+            ->where('user_id', auth()->user()->id)
+            ->first();
+        if ($paqauser == null) {
+            $msg = 'انت غير مشترك في باقه برجاء الاشتراك في باقه';
+            // return response()->json(['status' => false,'errors' => $msg]);
+        } elseif ($paqauser->expired_at == \Carbon\Carbon::now()->format('Y-m-d')) {
+            $msg = 'انتهت صلاحيه البقه';
+            //return response()->json(['status' => false,'errors' => $msg]);
+        }
+    } ?>
+    /* $('.progress-bar').text('Uploaded');
+     $('.progress-bar').css('width', '100%');*/
+    var message = '<?php echo $msg; ?>';
+    $('#success').html('<span class="text-danger"><b>' + message + '</b></span><br /><br />');
+},
+<?php   if($msg){
+}else{ ?>
+uploadProgress: function(event, position, total, percentComplete) {
+    $('.progress-bar').text(percentComplete + '%');
+    $('.progress-bar').css('width', percentComplete + '%');
+},
+success: function(data) {
+    if (data.errors) {
+        $('.progress-bar').text('0%');
+        $('.progress-bar').css('width', '0%');
+        $('#success').html('<span class="text-danger"><b>' + data.errors + '</b></span>');
+    }
+    if (data.success) {
+        $('.progress-bar').text('Uploaded');
+        $('.progress-bar').css('width', '100%');
+        $('#success').html('<span class="text-success"><b>' + data.success +
+            '</b></span><br /><br />');
+        location.href = '../typescolleges';
+    }
+}
+<?php  }?>
+});
+
         function getdocsection(selected) {
             let id = selected.value;
             $.ajaxSetup({
@@ -634,7 +749,7 @@
     </script>
     <script>
         function delete_video_college_video(selected) {
-            let id = sel;
+            let id = selected.value;
 
             $.ajaxSetup({
                 headers: {
@@ -653,7 +768,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_college_video/${id}`,
+                        url: `delete_video_college_video/${id}`,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
