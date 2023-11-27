@@ -780,10 +780,11 @@ class VideosCollegeController extends Controller
     public function deletevideoscollege($id)
     {
         $video =  VideosCollege::where('id', $id)->first();
-
+        if($video && $video->image){
         if (public_path() . '/uploads/' . $video->image) {
             $link1 = public_path() . '/uploads/' . $video->image;
             File::delete($link1);
+        }
         }
         $this->delete_video($video);
         if (public_path() . '/uploads/' . $video->board) {
