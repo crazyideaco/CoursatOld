@@ -866,7 +866,6 @@
                 data: {
                     'student_id': student_id,
                 },
-                contentType: "application/json; charset=utf-8",
                 dataType: "Json",
             }).done(function(result) {
                 console.log('tasks done from ajax');
