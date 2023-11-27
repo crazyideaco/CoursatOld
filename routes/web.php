@@ -520,7 +520,7 @@
 
         Route::get('delete_video_college_pdf/{id}', 'VideosCollegeController@delete_video_college_pdf')->name('delete_video_college_pdf');
         Route::get('delete_video_college_board/{id}', 'VideosCollegeController@delete_video_college_board')->name('delete_video_college_board');
-        Route::get('deletevideoscollege/{id}', 'VideosCollegeController@delete_video_college_video')->name('delete_video_college_video');
+        Route::get('deletevideoscollege/{id}', 'VideosCollegeController@deletevideoscollege')->name('delete_video_college_video');
 
         //typecollege ajax
         Route::get('getsection_subjectsCollege/{id}', 'Dashboard\Filter\SectionController@getsection_subjectsCollege')->name('getsection_subjectsCollege');
