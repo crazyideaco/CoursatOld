@@ -138,6 +138,9 @@
                             <div class="col-6 text-center set-img">
                                 <canvas id="pdfViewer" style="width:200px;height:200px"></canvas>
                                 <input id="myPdf" type="file" class="form-control ehabtalaat" name="pdf">
+                                <img src="{{ asset('assets/media/image/icon/pdf.png') }}" alt="pdf" />
+                                <span class="d-block mx-2">{{ $video->pdf ?? '' }}
+                                </span>
                                 <br>
                                 <label for="myPdf" class="ahmed">اضافة pdf</label>
                                 @error('pdf')
@@ -707,8 +710,8 @@
     <script>
         function delete_video_college_video(sel) {
             let id = sel;
-            var url = `{{ route('delete_video_college_video',':id') }}`;
-            url = url.replace(':id',id);
+            var url = `{{ route('delete_video_college_video', ':id') }}`;
+            url = url.replace(':id', id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
