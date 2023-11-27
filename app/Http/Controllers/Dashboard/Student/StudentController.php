@@ -78,7 +78,6 @@ class StudentController extends Controller
             $courses = [];
         }
 
-dd($student_exams);
         return view('dashboard.students.show', [
             "courses" => $courses,
             'student' => $student,
