@@ -485,7 +485,7 @@
     </script>
     <script>
         function delete_video_video(selected) {
-            let id = sel;
+            let id = selected.value;
 
             $.ajaxSetup({
                 headers: {
@@ -534,7 +534,7 @@
         });
 
         function delete_video_pdf(sel) {
-            let id = sel;
+            let id = selected.value;
 
             $.ajaxSetup({
                 headers: {
@@ -575,7 +575,7 @@
         }
 
         function delete_video_board(sel) {
-            let id = sel;
+            let id = selected.value;
 
             $.ajaxSetup({
                 headers: {
