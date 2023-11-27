@@ -417,8 +417,8 @@
                         <div class="row">
                             <div class="name-cor">
                                 <div class="form-group names">
-                                    <label for="course_id">اسم الكورس</label>
-                                    <select class="form-control selectpicker " id="course_id">
+                                    <label for="course_id">اختر الكورس</label>
+                                    <select class="form-control selectpicker " id="course_id" title="اختر الكورس" data-live-search="true">
                                         @foreach ($courses as $item)
                                             <option value="{{ $item->id }}">{{ $item->name_ar }}</option>
                                         @endforeach
