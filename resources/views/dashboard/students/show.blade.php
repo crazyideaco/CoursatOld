@@ -867,11 +867,12 @@
                 },
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
-                success: function(result) {
-                    $('#pills-coruses').empty();
-                    $('#pills-coruses').html(result);
-                }
-
+            }).done(function(result) {
+                console.log('tasks done from ajax');
+                $('#pills-coruses').html(result);
+            }).fail(function(result) {
+                console.log('tasks fail from ajax');
+                $('#pills-coruses').html(result);
             });
         }
     </script>
