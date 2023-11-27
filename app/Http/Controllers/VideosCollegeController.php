@@ -813,8 +813,8 @@ class VideosCollegeController extends Controller
     //         }
     //     }}
     //     $video->delete();
-        return response()->json(['status' => true]);
-    }
+    return response(['status' => true]);
+}
     public function videoscolleges($id)
     {
         $lesson = Lesson::where('id', $id)->firstOrFail();
