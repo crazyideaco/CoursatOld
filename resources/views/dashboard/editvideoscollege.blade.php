@@ -705,8 +705,8 @@
         });
     </script>
     <script>
-        function delete_video_college_video(selected) {
-            let id = selected.value;
+        function delete_video_college_video(sel) {
+            let id = sel;
             var url = `{{ route('delete_video_college_video',':id') }}`;
             url = url.replace(':id',id);
             $.ajaxSetup({
