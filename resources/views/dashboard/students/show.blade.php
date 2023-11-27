@@ -861,7 +861,7 @@
             });
             $.ajax({
                 type: "post",
-                url: url ,
+                url: url,
                 data: {
                     'student_id': student_id,
                 },

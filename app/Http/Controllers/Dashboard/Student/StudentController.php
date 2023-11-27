@@ -67,7 +67,7 @@ class StudentController extends Controller
 
         return view('dashboard.students.show', [
             // 'student' => $student,
-            'courses' => $courses,
+            // 'courses' => $courses,
             'id' => $student->id,
         ]);
     }
