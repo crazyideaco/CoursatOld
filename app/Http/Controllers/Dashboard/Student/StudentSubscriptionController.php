@@ -76,20 +76,16 @@ class StudentSubscriptionController extends Controller
                 'message' => $msg,
             ], 422);
         }
-        // dd($request->course_id);
         $student = User::find($request->student_id);
-        dd($student->category_id);
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
-// dd($courseExists);
             if ($courseExists) {
-                // dd($student->stutypescollege);
-                Student_Typecollege::create([
-                    'student_id' => $student->id,
-                    'typecollege_id' => $request->course_id,
-                    'type' => config('project_types.pivot_type_in_student_type.dashboard'),
-                ]);
-                // $student->stutypescollege()->attach($request->course_id);
+                // Student_Typecollege::create([
+                //     'student_id' => $student->id,
+                //     'typecollege_id' => $request->course_id,
+                //     'type' => config('project_types.pivot_type_in_student_type.dashboard'),
+                // ]);
+                $student->stutypescollege()->sync($request->course_id);
                 // $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
                 $msg = "تمت العملية بنجاح";
