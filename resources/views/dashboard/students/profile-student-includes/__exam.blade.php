@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (count($student_exams) > 0)
+                @if (!is_null($student_exams))
                     @forelse ($student_exams as $item)
                         <tr>
                             <th scope="row">{{ $item->id }}</th>
