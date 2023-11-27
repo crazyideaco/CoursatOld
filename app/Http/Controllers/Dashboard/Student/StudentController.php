@@ -62,6 +62,7 @@ class StudentController extends Controller
     public function studentprofile(User $student)
     {
         $student_courses = [];
+        $courses = [];
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $student_courses = $student->stutypescollege;
             $courses = Type::where('stage_id', $student->stage_id)->where('year_id', $student->year_id)->get();
