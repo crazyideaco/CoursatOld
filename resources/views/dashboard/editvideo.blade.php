@@ -111,6 +111,9 @@
                             <div class="col-6 text-center set-img">
                                 <canvas id="pdfViewer" style="width:200px;height:200px"></canvas>
                                 <input id="myPdf" type="file" class="form-control ehabtalaat" name="pdf">
+                                <span class="d-block mx-2">
+                                    {{ pathinfo($video->pdf, PATHINFO_BASENAME) ?? '' }}
+                                </span>
                                 <br>
                                 <br>
                                 <label for="myPdf" class="ahmed">اضافة pdf</label>
