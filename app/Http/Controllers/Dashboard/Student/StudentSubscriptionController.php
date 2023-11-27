@@ -79,11 +79,16 @@ class StudentSubscriptionController extends Controller
         // dd($student);
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
-dd($courseExists);
+// dd($courseExists);
             if ($courseExists) {
-                $student->stutypescollege()->attach($request->course_id);
+                $student->stutypescollege->attach($request->course_id);
                 // $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
+                $msg = "تمت العملية بنجاح";
+                return response()->json([
+                    'status' => true,
+                    'message' => $msg,
+                ]);
             } else {
                 DB::rollBack();
                 $msg = "الطالب مسجل في الكورس بالفعل";
@@ -98,6 +103,11 @@ dd($courseExists);
                 $student->stutypes()->attach($request->course_id);
                 $student->stutypes()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
+                $msg = "تمت العملية بنجاح";
+                return response()->json([
+                    'status' => true,
+                    'message' => $msg,
+                ]);
             } else {
                 DB::rollBack();
                 $msg = "الطالب مسجل في الكورس بالفعل";
