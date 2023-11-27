@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Dashboard\Student;
 
 use App\College;
 use App\DataTables\Admin\StudentDataTable;
@@ -56,5 +56,8 @@ class StudentController extends Controller
             return response()->json(['status' => false, 'message' => $th->getMessage()]);
         }
     }
+
+    
+
 
 }//End of controller

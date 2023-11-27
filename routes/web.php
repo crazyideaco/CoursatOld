@@ -198,8 +198,8 @@
         Route::get('typesStudentSubscription', 'Dashboard\SubscriptionController@typesStudentSubscription')->name('typesStudentSubscription');
 
         //students
-        Route::get('allstudents', 'Dashboard\StudentController@allstudents')->name('allstudents');
-        Route::post('resetStudentPassword/{student}', 'Dashboard\StudentController@resetStudentPassword')->name('resetStudentPassword');
+        Route::get('allstudents', 'Dashboard\Student\StudentController@allstudents')->name('allstudents');
+        Route::post('resetStudentPassword/{student}', 'Dashboard\Student\StudentController@resetStudentPassword')->name('resetStudentPassword');
         Route::get('students', 'StudentController@students')->name('students');
         Route::get('basicstudents', 'StudentController@basicstudents')->name('basicstudents');
         Route::post('filterbasicstudents', 'StudentController@filterbasicstudents')->name('filterbasicstudents');

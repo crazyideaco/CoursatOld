@@ -10,12 +10,7 @@ use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\StudentT;
 
 class StudentExportController extends Controller
 {
-    // private $excel;
 
-    // public function __construct(Excel $excel)
-    // {
-    //     $this->excel = $excel;
-    // }
 
     public function export(Request $request)
     {

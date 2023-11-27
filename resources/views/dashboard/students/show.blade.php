@@ -383,20 +383,14 @@
                                     </p>
                                 </div>
                             @else
+                            <!-- ofline -->
                                 <div class="ofline">
                                     <p class="text-ofline">{{ $student->online_status }}<i
                                             class="fa-solid fa-circle ofline"></i></p>
                                 </div>
+                                <!-- ofline -->
                             @endif
-                            {{-- <div class="online">
 
-                                <p class="text-online">{{ $student->online_status }}<i class="fas fa-circle online"></i></p>
-                            </div> --}}
-                            <!-- ofline -->
-                            <!-- <div class="ofline">
-                                                        <p class="text-ofline">ofline<i class="fa-solid fa-circle ofline"></i></p>
-                                                       </div> -->
-                            <!-- ofline -->
                             <h5 class="title"> {{ $student->name }}</h5>
                             <p class="text">
                                 {{ $student->category_id == config('project_types.system_category_type.category_id_basic') ? 'أساسي' : 'جامعي' }}
@@ -512,7 +506,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" id="pills-coruses-tab" data-toggle="pill"
                                             href="#pills-coruses" role="tab" aria-controls="pills-coruses"
-                                            aria-selected="true">كورسات</a>
+                                            aria-selected="true" onclick="getCoruses()">الكورسات</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="pills-exams-tab" data-toggle="pill" href="#pills-exams"
@@ -726,5 +720,10 @@
 
 
 @section('script')
+<script>
+    function getCoruses() {
+        console.log('getCoruses');
+    }
+</script>
 @endsection
 
