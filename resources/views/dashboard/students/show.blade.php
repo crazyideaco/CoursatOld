@@ -424,7 +424,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <button type="button" onclick="addCourse()" class="btn btn-success names">اضافه</button>
+                                <button type="button" onclick="addcourse()" class="btn btn-success names">اضافه</button>
                             </div>
                         </div>
 
