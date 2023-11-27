@@ -341,4 +341,15 @@ class User extends Authenticatable
                 break;
         }
     }
+/** the exams of the basic student */
+    public function typeexams_users()
+    {
+        return $this->belongsToMany(TypeExam::class, 'typeexams_results', 'student_id', 'exam_id');
+    }
+
+    /** the exams of the basic student */
+    public function typecollegeexam_users()
+    {
+        return $this->belongsToMany(TypescollegeExam::class, 'typescollegeexams_results', 'student_id', 'exam_id');
+    }
 }

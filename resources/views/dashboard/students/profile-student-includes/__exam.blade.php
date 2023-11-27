@@ -16,24 +16,18 @@
                 </tr>
             </thead>
             <tbody>
+                @forelse ($student_exams as $item)
                 <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>30</td>
+                    <th scope="row">{{ $item->id }}</th>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ \Carbon\Carbon::parse($item->pivot->created_at)->format('Y-m-d g:i A') }}</td>
+                    <td>{{ $item->pivot->student_score ?? 0 }}</td>
                 </tr>
-                <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>30</td>
-                </tr>
+                @empty
+
+                @endforelse
+
+
             </tbody>
         </table>
     </div>

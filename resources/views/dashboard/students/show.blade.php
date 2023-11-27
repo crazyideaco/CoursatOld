@@ -534,7 +534,10 @@
                                     <div class="tab-pane fade" id="pills-exams" role="tabpanel"
                                         aria-labelledby="pills-exams-tab">
 
-                                        @include('dashboard.students.profile-student-includes.__exam')
+                                        @include('dashboard.students.profile-student-includes.__exam',[
+                                            'student_exams' => $student_exams,
+                                            'student' => $student,
+                                        ])
 
                                     </div>
                                     <div class="tab-pane fade" id="pills-History" role="tabpanel"
@@ -889,6 +892,7 @@
                             title: '',
                             text: result.message,
                         });
+                        location.reload();
                     } else if (result.status == false) {
                         Swal.fire({
                             icon: 'error',
