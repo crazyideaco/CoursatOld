@@ -76,7 +76,7 @@ class StudentSubscriptionController extends Controller
         }
         $student = User::find($request->student_id);
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
-            $courseExists = !$student->stutypescollege()->where('id', $request->course_id)->exists();
+            $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
 
             if ($courseExists) {
                 $student->stutypescollege()->attach($request->course_id);
@@ -91,7 +91,7 @@ class StudentSubscriptionController extends Controller
                 ]);
             }
         } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
-            $course_exists = !contains()->check($request->course_id, $student->stutypes()->pluck('id')->toArray());
+            $course_exists = !$student->stutypes()->where('types.id', $request->course_id)->exists();
             if ($course_exists) {
                 $student->stutypes()->attach($request->course_id);
                 $student->stutypes()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
