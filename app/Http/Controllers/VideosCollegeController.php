@@ -780,34 +780,39 @@ class VideosCollegeController extends Controller
     public function deletevideoscollege($id)
     {
         $video =  VideosCollege::where('id', $id)->first();
-        if($video && $video->image){
-        if (public_path() . '/uploads/' . $video->image) {
-            $link1 = public_path() . '/uploads/' . $video->image;
+        if (public_path() . '/uploads/' . $video->url) {
+            $link1 = public_path() . '/uploads/' . $video->url;
             File::delete($link1);
         }
 
-        $this->delete_video($video);
-        }
-        if($video && $video->board){
-        if (public_path() . '/uploads/' . $video->board) {
-            $link1 = public_path() . '/uploads/' . $video->board;
-            File::delete($link1);
-        }}
-        if($video && $video->pdf){
+    //     if($video && $video->image){
+    //     if (public_path() . '/uploads/' . $video->image) {
+    //         $link1 = public_path() . '/uploads/' . $video->image;
+    //         File::delete($link1);
+    //     }
 
-        if (public_path() . '/uploads/' . $video->pdf) {
-            $link1 = public_path() . '/uploads/' . $video->pdf;
-            File::delete($link1);
-        }
-    }
-        if($video && $video->url){
-        if ($video->original == 1) {
-            if (public_path() . '/uploads/' . $video->url) {
-                $link1 = public_path() . '/uploads/' . $video->url;
-                File::delete($link1);
-            }
-        }}
-        $video->delete_video($video);
+    //     $this->delete_video($video);
+    //     }
+    //     if($video && $video->board){
+    //     if (public_path() . '/uploads/' . $video->board) {
+    //         $link1 = public_path() . '/uploads/' . $video->board;
+    //         File::delete($link1);
+    //     }}
+    //     if($video && $video->pdf){
+
+    //     if (public_path() . '/uploads/' . $video->pdf) {
+    //         $link1 = public_path() . '/uploads/' . $video->pdf;
+    //         File::delete($link1);
+    //     }
+    // }
+    //     if($video && $video->url){
+    //     if ($video->original == 1) {
+    //         if (public_path() . '/uploads/' . $video->url) {
+    //             $link1 = public_path() . '/uploads/' . $video->url;
+    //             File::delete($link1);
+    //         }
+    //     }}
+    //     $video->delete();
         return response()->json(['status' => true]);
     }
     public function videoscolleges($id)
