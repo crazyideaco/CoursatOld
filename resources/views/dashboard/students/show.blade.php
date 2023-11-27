@@ -848,7 +848,7 @@
 
     <script>
         $(document).ready(function() {
-            get_courses();
+            get_courses({{ $student->id }});
         });
 
         function get_courses(student_id) {
