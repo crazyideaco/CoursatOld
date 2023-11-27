@@ -120,6 +120,7 @@ class TypeJoinDataTable extends DataTable
             ->rawColumns([
 
                 'action',
+                'student_name',
             ]);
     }
     /**
