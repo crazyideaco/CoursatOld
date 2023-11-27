@@ -749,7 +749,7 @@ success: function(data) {
     </script>
     <script>
         function delete_video_college_video(selected) {
-            let id = sel;
+            let id = selected.value;
 
             $.ajaxSetup({
                 headers: {
