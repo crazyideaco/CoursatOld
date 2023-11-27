@@ -527,8 +527,8 @@
                                         aria-labelledby="pills-coruses-tab" onclick="get_courses({{ $student->id }})">
 
                                         {{-- @include('dashboard.students.profile-student-includes.__courses', [
-                                            'courses' => $courses,
-                                            'student' => $student,
+                                                'courses' => $courses,
+                                                'student' => $student,
                                         ]) --}}
 
                                     </div>
@@ -551,9 +551,11 @@
 
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-                        {{-- <div class="row">
+                    {{--
+                        <div class="row">
                             <h6>الايميل:</h6>
                             <p>{{ $student->email }}</p>
                         </div>
@@ -702,7 +704,8 @@
                                     {{ implode('-', $student->stdcenters->pluck('name')->toArray()) }}
                                 </p>
                             @endif
-                        </div> --}}
+                        </div>
+                    --}}
                     </div>
                 </div>
             </div>
