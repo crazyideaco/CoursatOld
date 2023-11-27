@@ -468,7 +468,8 @@ class VideosCollegeController extends Controller
             return response()->json(['status' => false, 'errors' => $msg]);
         }
     }*/
-    public function storevideoscollege($id, Request $request){
+    public function storevideoscollege($id, Request $request)
+    {
         $store_function = new StorevideoscollegeService();
         return $store_function->storevideoscollege($id, $request);
     }
@@ -773,7 +774,8 @@ class VideosCollegeController extends Controller
             return response()->json(['status' => false, 'message' => $msg]);
         }
     }*/
-    public function updatevideoscollege($id, Request $request){
+    public function updatevideoscollege($id, Request $request)
+    {
         $update_function = new UpdateVideoscollegeService();
         return $update_function->updatevideoscollege($id, $request);
     }
@@ -871,35 +873,35 @@ class VideosCollegeController extends Controller
             return response(['status' => 'active']);
         }
     }
+    public function delete_video_college_video($id)
+    {
+        $video =  VideosCollege::where('id', $id)->first();
+        if (public_path() . '/uploads/' . $video->url) {
+            $link1 = public_path() . '/uploads/' . $video->url;
+            File::delete($link1);
+        }
+        return response(['status' => true]);
+    }
+
     // public function delete_video_college_video($id)
     // {
-    //     $video =  VideosCollege::where('id', $id)->first();
-    //     if (public_path() . '/uploads/' . $video->url) {
+    //     $video = VideosCollege::whereId($id)->first();
+    //     // Check if $video is not null before trying to access its properties
+    //     if ($video) {
     //         $link1 = public_path() . '/uploads/' . $video->url;
-    //         File::delete($link1);
+
+    //         // Check if the file exists before attempting to delete it
+    //         if (file_exists($link1)) {
+    //             File::delete($link1);
+    //             return response(['status' => true, 'message' => 'Video deleted successfully.']);
+    //         } else {
+    //             return response(['status' => false, 'message' => 'Video file not found.']);
+    //         }
+    //     } else {
+    //         // Handle the case where $video is null (no record found)
+    //         return response(['status' => false, 'message' => 'Video not found.']);
     //     }
-    //     return response(['status' => true]);
     // }
-
-    public function delete_video_college_video($id)
-{
-    $video = VideosCollege::whereId($id)->first();
-    // Check if $video is not null before trying to access its properties
-    if ($video) {
-        $link1 = public_path() . '/uploads/' . $video->url;
-
-        // Check if the file exists before attempting to delete it
-        if (file_exists($link1)) {
-            File::delete($link1);
-            return response(['status' => true, 'message' => 'Video deleted successfully.']);
-        } else {
-            return response(['status' => false, 'message' => 'Video file not found.']);
-        }
-    } else {
-        // Handle the case where $video is null (no record found)
-        return response(['status' => false, 'message' => 'Video not found.']);
-    }
-}
 
 
     public function delete_video_college_pdf($id)
