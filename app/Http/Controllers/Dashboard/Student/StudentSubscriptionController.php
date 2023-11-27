@@ -80,7 +80,7 @@ class StudentSubscriptionController extends Controller
 
             if ($courseExists) {
                 $student->stutypescollege()->attach($request->course_id);
-                $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
+                // $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
             } else {
                 DB::rollBack();
