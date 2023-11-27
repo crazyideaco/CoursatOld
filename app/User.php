@@ -195,10 +195,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'centers_lecturers', 'center_id', 'lecturer_id');
     }
+    /** relation between the course of the basic and the basic students that subscribed to  */
     public function stutypes()
     {
         return $this->belongsToMany(Type::class, 'students_types', 'student_id', 'type_id')->withPivot('type', 'active', "created_at", "updated_at"); //->using(Student_Type::class);
     }
+
+    /** relation between the course of the college and the college students that subscribed to  */
     public function stutypescollege()
     {
         return $this->belongsToMany(TypesCollege::class, 'students_typescollege', 'student_id', 'typecollege_id')->withPivot('type', 'active', "created_at", "updated_at"); //->using(Student_Typecollege::class);

@@ -524,7 +524,7 @@
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
-                                        aria-labelledby="pills-coruses-tab" onclick="get_courses({{ $student->id }})">
+                                        aria-labelledby="pills-coruses-tab"  {{-- onclick="get_courses({{ $student->id }})" --}} >
 
                                         @include('dashboard.students.profile-student-includes.__courses', [
                                                 'courses' => $courses,
@@ -846,7 +846,7 @@
             })
         }
     </script>
-
+{{--
     <script>
         $(document).ready(function() {
             console.log("get courses ready", {{ $student->id }});
@@ -876,5 +876,5 @@
                 $('#pills-coruses').html(result);
             });
         }
-    </script>
+    </script> --}}
 @endsection

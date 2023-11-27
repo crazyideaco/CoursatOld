@@ -1,7 +1,7 @@
 <div class="header-table">
     <h3>كورسات</h3>
     <div class="form-group">
-        <input type="date" class="form-control">
+        <input type="date" id="course_date" onclick="filter_courses({{ $student->id }})" class="form-control">
     </div>
 </div>
 <div class="table-responsive">
@@ -42,3 +42,12 @@
         </table>
     </div>
 </div>
+
+
+{{-- window.location.href = '{{ route('dashboard.students.show', ':student_id') }}'.replace(':student_id', student_id) + '?course_date=' + course_date; --}}
+<script>
+    function filter_courses(student_id) {
+        var course_date = $('#course_date').val();
+        
+    }
+</script>
