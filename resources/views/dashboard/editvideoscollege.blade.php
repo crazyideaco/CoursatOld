@@ -138,9 +138,11 @@
                             <div class="col-6 text-center set-img">
                                 <canvas id="pdfViewer" style="width:200px;height:200px"></canvas>
                                 <input id="myPdf" type="file" class="form-control ehabtalaat" name="pdf">
-                                
-                                <span class="d-block mx-2">{{ $video->pdf->getClientOriginalName() ?? '' }}
-                                </span>
+
+                                <span class="d-block mx-2">{{ $video->original_pdf_name }}</span>
+
+                                {{-- <span class="d-block mx-2">{{ $video->pdf->getClientOriginalName() ?? '' }}
+                                </span> --}}
                                 <br>
                                 <label for="myPdf" class="ahmed">اضافة pdf</label>
                                 @error('pdf')
