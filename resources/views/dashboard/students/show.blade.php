@@ -383,7 +383,7 @@
                                     </p>
                                 </div>
                             @else
-                            <!-- ofline -->
+                                <!-- ofline -->
                                 <div class="ofline">
                                     <p class="text-ofline">{{ $student->online_status }}<i
                                             class="fa-solid fa-circle ofline"></i></p>
@@ -526,7 +526,10 @@
                                     <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
                                         aria-labelledby="pills-coruses-tab">
 
-                                        @include('dashboard.students.profile-student-includes.__courses')
+                                        @include('dashboard.students.profile-student-includes.__courses', [
+                                            'courses' => $courses,
+                                            'student' => $student,
+                                        ])
 
                                     </div>
                                     <div class="tab-pane fade" id="pills-exams" role="tabpanel"
@@ -719,11 +722,119 @@
 @endsection
 
 
-@section('script')
-<script>
-    function getCoruses() {
-        console.log('getCoruses');
-    }
-</script>
-@endsection
+@section('scripts')
+    <script>
+        function deleteuser_from_stutypes(student_id, type_id) {
 
+            console.log("type student ", student_id);
+            console.log("type id", type_id);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            Swal.fire({
+                title: ' هل انت متاكد من حذف الطالب من هذا المحتوي ؟',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+
+                    var url = "{{ route('stutypes.deleteuser_from_stutypes') }}";
+
+                    var table = $('.table').DataTable();
+
+                    $.ajax({
+                        type: "post",
+                        url: url,
+
+                        //  contentType: "application/json; charset=utf-8",
+                        dataType: "Json",
+                        data: {
+                            'student_id': student_id,
+                            'type_id': type_id,
+                        },
+                        //    contentType: "application/json; charset=utf-8",
+                        dataType: "Json",
+                        success: function(result) {
+                            if (result.status == true) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'تم مسح المستخدم بنجاح',
+                                    'success'
+                                )
+                            }
+                        }
+
+                    });
+                }
+            })
+        }
+    </script>
+
+
+    <script>
+        function deleteuser_from_stutypescollege(student_id, typecollege_id) {
+            console.log("typecolege student ", student_id);
+            console.log("typecolege id", typecollege_id);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            Swal.fire({
+                title: ' هل انت متاكد من حذف الطالب من هذا المحتوي ؟',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+
+                    var url = "{{ route('stutypescollege.deleteuser_from_stutypescollege') }}";
+
+                    var table = $('.table').DataTable();
+
+                    $.ajax({
+                        type: "post",
+                        url: url,
+
+                        //  contentType: "application/json; charset=utf-8",
+                        dataType: "Json",
+                        data: {
+                            'student_id': student_id,
+                            'typecollege_id': typecollege_id,
+                        },
+                        //    contentType: "application/json; charset=utf-8",
+                        dataType: "Json",
+                        success: function(result) {
+                            if (result.status == true) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    result.message,
+                                    'success'
+                                )
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    result.message,
+                                    'error'
+                                )
+                            }
+                        }
+
+                    });
+                }
+            })
+        }
+    </script>
+@endsection
