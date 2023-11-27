@@ -61,6 +61,8 @@ class StudentSubscriptionController extends Controller
     /** get the courses of specific student based on category */
     public function get_courses(Request $request)
     {
+        dd($request->all());
+
         $student = User::find($request->student_id);
 
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
