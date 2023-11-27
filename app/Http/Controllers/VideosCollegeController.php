@@ -807,7 +807,7 @@ class VideosCollegeController extends Controller
                 File::delete($link1);
             }
         }}
-        $video->delete();
+        $this->delete_video($video);
         return response()->json(['status' => true]);
     }
     public function videoscolleges($id)
