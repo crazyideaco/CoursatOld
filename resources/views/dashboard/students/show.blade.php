@@ -524,11 +524,11 @@
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
-                                        aria-labelledby="pills-coruses-tab" onclick="get_courses()">
+                                        aria-labelledby="pills-coruses-tab" onclick="get_courses({{ $student->id }})">
 
                                         @include('dashboard.students.profile-student-includes.__courses', [
                                             'courses' => $courses,
-                                            'student' => $student,          
+                                            'student' => $student,
                                         ])
 
                                     </div>
@@ -723,16 +723,6 @@
 
 
 @section('scripts')
-
-    <script>
-        $(document).ready(function() {
-            get_courses();
-        });
-
-        function get_courses() {
-            console.log("get courses");
-        }
-    </script>
     <script>
         function deleteuser_from_stutypes(student_id, type_id) {
 
@@ -764,8 +754,6 @@
                         type: "post",
                         url: url,
 
-                        //  contentType: "application/json; charset=utf-8",
-                        dataType: "Json",
                         data: {
                             'student_id': student_id,
                             'type_id': type_id,
@@ -774,21 +762,21 @@
                         dataType: "Json",
                         success: function(result) {
                             success: function(result) {
-                            if (result.status == true) {
-                                Swal.fire(
-                                    'Deleted!',
-                                    result.message,
-                                    'success'
-                                );
-                                course_row.remove();
-                            } else {
-                                Swal.fire(
-                                    'Error!',
-                                    result.message,
-                                    'error'
-                                )
+                                if (result.status == true) {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        result.message,
+                                        'success'
+                                    );
+                                    course_row.remove();
+                                } else {
+                                    Swal.fire(
+                                        'Error!',
+                                        result.message,
+                                        'error'
+                                    )
+                                }
                             }
-                        }
                         }
 
                     });
@@ -855,6 +843,36 @@
                     });
                 }
             })
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            get_courses();
+        });
+
+        function get_courses(student_id) {
+            console.log("get courses");
+            var url = "{{ route('students.subscribtions.get_courses') }}";
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: url ,
+                data: {
+                    'student_id': student_id,
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "Json",
+                success: function(result) {
+                    $('#pills-coruses').empty();
+                    $('#pills-coruses').html(result);
+                }
+
+            });
         }
     </script>
 @endsection
