@@ -22,10 +22,10 @@
             <tbody>
                 @forelse ($courses as $item)
                     <tr>
-                        <th scope="row">{{ $item->id }}</th>
+                        <th scope="row" id="course_row{{ $item->id }}">{{ $item->id }}</th>
                         <td>{{ $item->name_ar }}</td>
                         <td>{{ $item->pivot->created_at }}</td>
-                        <td>{{ $item->pivot->type }}</td>
+                        <td>{{ $item->pivot->type_format }}</td>
                         <td>{{ $item->center_id ? $item->center->name : '--' }}</td>
                         @if ($student->category_id == config('project_types.system_category_type.category_id_college'))
                             <td onclick="deleteuser_from_stutypescollege({{ $student->id }},{{ $item->id }})"
@@ -36,24 +36,7 @@
                         @endif
                     </tr>
                 @empty
-                    {{-- <tr>
-                        <th scope="row">1564115</th>
-                        <td>المحاسبه</td>
-                        <td>15/10/2023</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td><i class="fas fa-trash-alt delet"></i></td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">1564115</th>
-                        <td>المحاسبه</td>
-                        <td>15/10/2023</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td><i class="fas fa-trash-alt delet"></i></td>
-
-                    </tr> --}}
+                    <tr>الطالب لا يمتلك اي كورس</tr>
                 @endforelse
             </tbody>
         </table>

@@ -524,11 +524,11 @@
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
-                                        aria-labelledby="pills-coruses-tab">
+                                        aria-labelledby="pills-coruses-tab" onclick="get_courses()">
 
                                         @include('dashboard.students.profile-student-includes.__courses', [
                                             'courses' => $courses,
-                                            'student' => $student,
+                                            'student' => $student,          
                                         ])
 
                                     </div>
@@ -723,6 +723,16 @@
 
 
 @section('scripts')
+
+    <script>
+        $(document).ready(function() {
+            get_courses();
+        });
+
+        function get_courses() {
+            console.log("get courses");
+        }
+    </script>
     <script>
         function deleteuser_from_stutypes(student_id, type_id) {
 
@@ -748,7 +758,7 @@
 
                     var url = "{{ route('stutypes.deleteuser_from_stutypes') }}";
 
-                    var table = $('.table').DataTable();
+                    var course_row = $('#course_row' + type_id);
 
                     $.ajax({
                         type: "post",
@@ -763,13 +773,22 @@
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
+                            success: function(result) {
                             if (result.status == true) {
                                 Swal.fire(
                                     'Deleted!',
-                                    'تم مسح المستخدم بنجاح',
+                                    result.message,
                                     'success'
+                                );
+                                course_row.remove();
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    result.message,
+                                    'error'
                                 )
                             }
+                        }
                         }
 
                     });
@@ -802,7 +821,7 @@
 
                     var url = "{{ route('stutypescollege.deleteuser_from_stutypescollege') }}";
 
-                    var table = $('.table').DataTable();
+                    var course_row = $('#course_row' + typecollege_id);
 
                     $.ajax({
                         type: "post",
@@ -822,7 +841,8 @@
                                     'Deleted!',
                                     result.message,
                                     'success'
-                                )
+                                );
+                                course_row.remove();
                             } else {
                                 Swal.fire(
                                     'Error!',

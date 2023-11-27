@@ -113,15 +113,23 @@ class AuthController extends Controller
                     return response()->json(['status' => false, 'message_ar' => $validator->messages()->first()]);
                 }
             }
-            $user = new User;
-            $user->password = Hash::make($request->password);
-            $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->state_id = $request->state_id;
-            $user->city_id = $request->city_id;
-            $user->is_student = 1;
-            $user->email = $request->email;
-            $user->code = $request->phone;
+            $data = [];
+            $data['api_token'] = Hash::make(rand(0, 999999) . time());
+            $data['password'] = Hash::make($request->password);
+            $data['name'] = $request->name;
+            $data['phone'] = $request->phone;
+            $data['state_id'] = $request->state_id;
+            $data['city_id'] = $request->city_id;
+            $data['is_student'] = 1;
+            $data['email'] = $request->email;
+            $data['code'] = $request->phone;
+            $data['device_type'] = $request->device_type ?? null;
+            $data["ios_version"] = $request->ios_version ?? null;
+            $data["android_version"] = $request->android_version ?? null;
+            $data['device_token'] = $request->device_token ?? null;
+            $data['device_id'] = $request->device_id ?? null;
+
+            $user = User::create($data);
 
             //         if($request->hasFile('image'))
             //         {
@@ -130,10 +138,6 @@ class AuthController extends Controller
             //             $user->image = $request->image->getClientOriginalName();
             //         }
 
-            $user->api_token = Hash::make(rand(0, 999999) . time());
-            $user->device_token = $request->device_token;
-            $user->device_id = $request->device_id;
-            $user->save();
             if ($request->code) {
                 $u = User::where('code', $request->code)->first();
                 $u->centerstudents()->attach($user->id);
@@ -254,6 +258,7 @@ class AuthController extends Controller
                         }
                     }
                     $data = [
+                        "device_type" => $request->device_type ?? null,
                         "device_token" => $request->device_token,
                         "device_id" => $request->device_id,
                         "ios_version" => $request->ios_version ?? null,
