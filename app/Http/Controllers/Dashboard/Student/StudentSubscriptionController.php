@@ -76,8 +76,9 @@ class StudentSubscriptionController extends Controller
         }
         $student = User::find($request->student_id);
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
-            $course_exists = !contains()->check($request->course_id, $student->stutypescollege()->pluck('id')->toArray());
-            if ($course_exists) {
+            $courseExists = !$student->stutypescollege()->where('id', $request->course_id)->exists();
+
+            if ($courseExists) {
                 $student->stutypescollege()->attach($request->course_id);
                 $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
