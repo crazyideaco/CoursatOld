@@ -780,8 +780,20 @@ class VideosCollegeController extends Controller
     public function deletevideoscollege($id)
     {
         $video =  VideosCollege::where('id', $id)->first();
-        
 
+        if (public_path() . '/uploads/' . $video->image) {
+            $link1 = public_path() . '/uploads/' . $video->image;
+            File::delete($link1);
+        }
+        $this->delete_video($video);
+        if (public_path() . '/uploads/' . $video->board) {
+            $link1 = public_path() . '/uploads/' . $video->board;
+            File::delete($link1);
+        }
+        if (public_path() . '/uploads/' . $video->pdf) {
+            $link1 = public_path() . '/uploads/' . $video->pdf;
+            File::delete($link1);
+        }
         if ($video->original == 1) {
             if (public_path() . '/uploads/' . $video->url) {
                 $link1 = public_path() . '/uploads/' . $video->url;
@@ -789,36 +801,8 @@ class VideosCollegeController extends Controller
             }
         }
         $video->delete();
-    //     if($video && $video->image){
-    //     if (public_path() . '/uploads/' . $video->image) {
-    //         $link1 = public_path() . '/uploads/' . $video->image;
-    //         File::delete($link1);
-    //     }
-
-    //     $this->delete_video($video);
-    //     }
-    //     if($video && $video->board){
-    //     if (public_path() . '/uploads/' . $video->board) {
-    //         $link1 = public_path() . '/uploads/' . $video->board;
-    //         File::delete($link1);
-    //     }}
-    //     if($video && $video->pdf){
-
-    //     if (public_path() . '/uploads/' . $video->pdf) {
-    //         $link1 = public_path() . '/uploads/' . $video->pdf;
-    //         File::delete($link1);
-    //     }
-    // }
-    //     if($video && $video->url){
-    //     if ($video->original == 1) {
-    //         if (public_path() . '/uploads/' . $video->url) {
-    //             $link1 = public_path() . '/uploads/' . $video->url;
-    //             File::delete($link1);
-    //         }
-    //     }}
-    //     $video->delete();
-    return response(['status' => true]);
-}
+        return response()->json(['status' => true]);
+    }
     public function videoscolleges($id)
     {
         $lesson = Lesson::where('id', $id)->firstOrFail();
@@ -886,6 +870,15 @@ class VideosCollegeController extends Controller
             $video->save();
             return response(['status' => 'active']);
         }
+    }
+    public function delete_video_college_video($id)
+    {
+        $video =  VideosCollege::where('id', $id)->first();
+        if (public_path() . '/uploads/' . $video->url) {
+            $link1 = public_path() . '/uploads/' . $video->url;
+            File::delete($link1);
+        }
+        return response(['status' => true]);
     }
     public function delete_video_college_pdf($id)
     {
