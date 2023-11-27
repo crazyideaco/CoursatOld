@@ -74,7 +74,7 @@ class StudentController extends Controller
             $courses = Type::where('stage_id', $student->stage_id)->where('years_id', $student->year_id)->get();
         }
 
-
+dd($student_exams);
         return view('dashboard.students.show', [
             "courses" => $courses,
             'student' => $student,
