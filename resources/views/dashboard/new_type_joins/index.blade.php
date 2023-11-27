@@ -80,8 +80,7 @@
 
 
 
-                        <div class="row">
-                            <div class="table-responsive">
+
 
                                 {!! $dataTable->table(
                                     [
@@ -90,8 +89,7 @@
                                     true,
                                 ) !!}
 
-                            </div>
-                        </div>
+
 
             <!--end setting-->
 
