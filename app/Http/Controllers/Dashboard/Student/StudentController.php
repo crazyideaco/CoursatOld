@@ -62,6 +62,7 @@ class StudentController extends Controller
     public function studentprofile(User $student)
     {
         $student_courses = [];
+        $student_exams = [];
         $courses = [];
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $student_courses = $student->stutypescollege;
