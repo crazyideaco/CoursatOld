@@ -852,7 +852,7 @@
         });
 
         function get_courses(student_id) {
-            console.log("get courses");
+            console.log("get courses", student_id);
             var url = "{{ route('students.subscribtions.get_courses') }}";
             $.ajaxSetup({
                 headers: {
