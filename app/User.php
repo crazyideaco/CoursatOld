@@ -344,12 +344,12 @@ class User extends Authenticatable
 /** the exams of the basic student */
     public function typeexams_users()
     {
-        return $this->belongsToMany(TypeExam::class, 'typeexams_results', 'student_id', 'exam_id');
+        return $this->belongsToMany(TypeExam::class, 'typeexams_results', 'student_id', 'exam_id')->withPivot('exam_score', 'student_score', 'created_at');
     }
 
-    /** the exams of the basic student */
+    /** the exams of the college student */
     public function typecollegeexam_users()
     {
-        return $this->belongsToMany(TypescollegeExam::class, 'typescollegeexams_results', 'student_id', 'exam_id');
+        return $this->belongsToMany(TypescollegeExam::class, 'typescollegeexams_results', 'student_id', 'exam_id')->withPivot('exam_score', 'student_score', 'created_at');
     }
 }
