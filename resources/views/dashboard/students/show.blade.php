@@ -846,6 +846,23 @@
             })
         }
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "order": [
+                    [0, "desc"]
+                ], // Order on init. # is the column, starting at 0});
+                columnDefs: [{
+                    targets: 0,
+                    visible: false,
+
+
+                }, ]
+
+            });
+        });
+    </script>
 {{--
     <script>
         $(document).ready(function() {

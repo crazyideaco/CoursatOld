@@ -68,11 +68,31 @@ class StudentSubscriptionController extends Controller
         } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
             $courses = $student->stutypes;
         }
-// dd('ddsdsfsf');
-        // dd("student",$student,"courses",$courses);
-        return view('dashboard.students.profile-student-includes.__courses', [
-            'courses' => $courses,
-            'student' => $student
-        ])->render();
+
+        $text = "";
+        $courses->when($request->course_date, function ($q) use ($request) {
+            $q->wherePivot('created_at', '>=', $request->course_date);
+        });
+        foreach ($courses as $item) {
+            $text .= '<tr>
+            <th scope="row" id="course_row' . $item->id . '">' . $item->id . '</th>
+                <td>' .  $item->name_ar . '</td>
+                <td>' .  $item->pivot->created_at . '</td>
+                <td>' .  $item->pivot->type_format . '</td>
+                <td>' .  $item->center_id ? $item->center->name : "--" . '</td>';
+            if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
+                $text .= '<td onclick="deleteuser_from_stutypescollege(' .  $student->id . ',' .  $item->id . ')" title="حذف الطالب من هذا الكورس"><i class="fas fa-trash-alt delet"></i></td>';
+            } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
+                $text .= '<td onclick="deleteuser_from_stutypes(' .  $student->id . ',' .  $item->id . ')" title="حذف الطالب من هذا الكورس"><i class="fas fa-trash-alt delet"></i></td>';
+            }
+            $text .=
+                '</tr>';
+        }
+
+        return response()->json(['status' => true, 'data' => $text]);
+        // return view('dashboard.students.profile-student-includes.__courses', [
+        //     'courses' => $courses,
+        //     'student' => $student
+        // ])->render();
     }
 }//End of class

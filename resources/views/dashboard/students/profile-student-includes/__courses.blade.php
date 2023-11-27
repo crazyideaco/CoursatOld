@@ -6,7 +6,7 @@
 </div>
 <div class="table-responsive">
     <div class="table_details">
-        <table class="table">
+        <table id="example" class="table">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -19,7 +19,7 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="courses">
                 @forelse ($courses as $item)
                     <tr>
                         <th scope="row" id="course_row{{ $item->id }}">{{ $item->id }}</th>
@@ -47,7 +47,31 @@
 {{-- window.location.href = '{{ route('dashboard.students.show', ':student_id') }}'.replace(':student_id', student_id) + '?course_date=' + course_date; --}}
 <script>
     function filter_courses(student_id) {
-        var course_date = $('#course_date').val();
-        
+        var url = `{{ route('students.subscribtions.get_courses') }}`;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: "post",
+            url: url,
+            //   contentType: "application/json; charset=utf-8",
+            dataType: "Json",
+            data: {
+                "student_id": student_id,
+                "course_date": $('#course_date').val(),
+            },
+            success: function(result) {
+                if (result.status == true) {
+                    $('#example').DataTable().destroy();
+                    $("#courses").empty();
+                    $("#courses").append(result.data);
+                    $('#example').DataTable().draw();
+                }
+
+            }
+
+        });
     }
 </script>
