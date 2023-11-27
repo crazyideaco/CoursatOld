@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class StudentSubscriptionController extends Controller
 {
 
+    protected $view = "dashboard.students.profile-student-includes.";
 
     public function deleteuser_from_stutypes(Request $request)
     {
@@ -55,5 +56,23 @@ class StudentSubscriptionController extends Controller
             'status' => true,
             'message' => $msg,
         ]);
+    }
+
+    /** get the courses of specific student based on category */
+    public function get_courses(Request $request)
+    {
+        dd('ddcouse student');
+        $student = User::find($request->student_id);
+
+        if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
+            $courses = $student->stutypescollege;
+        } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
+            $courses = $student->stutypes;
+        }
+
+        return view($this->view . '__courses', [
+            'courses' => $courses,
+            'student' => $student
+        ])->render();
     }
 }//End of class
