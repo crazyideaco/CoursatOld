@@ -16,16 +16,21 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse ($student_exams as $item)
-                <tr>
-                    <th scope="row">{{ $item->id }}</th>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->pivot->created_at)->format('Y-m-d g:i A') }}</td>
-                    <td>{{ $item->pivot->student_score ?? 0 }}</td>
-                </tr>
-                @empty
+                @if (count($student_exams) > 0)
+                    @forelse ($student_exams as $item)
+                        <tr>
+                            <th scope="row">{{ $item->id }}</th>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->pivot->created_at)->format('Y-m-d g:i A') }}</td>
+                            <td>{{ $item->pivot->student_score ?? 0 }}</td>
+                        </tr>
+                    @empty
+                        <tr>الطالب لا يمتلك اي امتحان</tr>
+                    @endforelse
+                @else
+                    <tr>الطالب لا يمتلك اي امتحان</tr>
 
-                @endforelse
+                @endif
 
 
             </tbody>
