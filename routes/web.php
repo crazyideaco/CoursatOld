@@ -705,6 +705,9 @@
     Route::resource("type_subscribtions", 'TypeSubscriptionController');
     Route::resource("typecollege_subscribtions", 'TypeCollegeSubscriptionController');
 
+    Route::resource("new_type_joins", 'NewTypeJoinController');
+    // Route::resource("new_typecollege_joins", 'NewTypeCollegeJoinController');
+
 
 
     /*Route::get("uploadVideos", function () {
