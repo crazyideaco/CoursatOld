@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($courses as $item)
+                @forelse ($courses as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
                         <td>{{ $item->name_ar }}</td>
@@ -35,25 +35,26 @@
                                 title="حذف الطالب من هذا الكورس"><i class="fas fa-trash-alt delet"></i></td>
                         @endif
                     </tr>
-                @endforeach
-                {{-- <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>--</td>
-                    <td>--</td>
-                    <td><i class="fas fa-trash-alt delet"></i></td>
+                @empty
+                    {{-- <tr>
+                        <th scope="row">1564115</th>
+                        <td>المحاسبه</td>
+                        <td>15/10/2023</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><i class="fas fa-trash-alt delet"></i></td>
 
-                </tr>
-                <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>--</td>
-                    <td>--</td>
-                    <td><i class="fas fa-trash-alt delet"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">1564115</th>
+                        <td>المحاسبه</td>
+                        <td>15/10/2023</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><i class="fas fa-trash-alt delet"></i></td>
 
-                </tr> --}}
+                    </tr> --}}
+                @endforelse
             </tbody>
         </table>
     </div>
