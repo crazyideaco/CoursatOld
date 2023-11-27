@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard\Student;
 
 use App\Http\Controllers\Controller;
+use App\Student_Type;
+use App\Student_Typecollege;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -81,8 +83,13 @@ class StudentSubscriptionController extends Controller
             $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
 // dd($courseExists);
             if ($courseExists) {
-                dd($student->stutypescollege);
-                $student->stutypescollege()->attach($request->course_id);
+                // dd($student->stutypescollege);
+                Student_Typecollege::create([
+                    'student_id' => $student->id,
+                    'typecollege_id' => $request->course_id,
+                    'type' => config('project_types.pivot_type_in_student_type.dashboard'),
+                ]);
+                // $student->stutypescollege()->attach($request->course_id);
                 // $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
                 $msg = "تمت العملية بنجاح";
@@ -101,8 +108,13 @@ class StudentSubscriptionController extends Controller
         } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
             $course_exists = !$student->stutypes()->where('types.id', $request->course_id)->exists();
             if ($course_exists) {
-                $student->stutypes()->attach($request->course_id);
-                $student->stutypes()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
+                Student_Type::create([
+                    'student_id' => $student->id,
+                    'type_id' => $request->course_id,
+                    'type' => config('project_types.pivot_type_in_student_type.dashboard'),
+                ]);
+                // $student->stutypes()->attach($request->course_id);
+                // $student->stutypes()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
                 $msg = "تمت العملية بنجاح";
                 return response()->json([
