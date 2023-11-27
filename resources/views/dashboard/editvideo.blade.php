@@ -120,7 +120,7 @@
                                 @error('pdf')
                                     <p style="color:red;">{{ $message }}</p>
                                 @enderror
-                                {{-- <span class="btn btn-danger" onclick="delete_video_pdf({{ $video->id }})">حذف pdf</span> --}}
+                                <span class="btn btn-danger" onclick="delete_video_pdf({{ $video->id }})">حذف pdf</span>
                             </div>
                             <div class="col-6 text-center set-img">
                                 <img src="{{ asset('uploads/' . $video->image) }}" id="realimg">
