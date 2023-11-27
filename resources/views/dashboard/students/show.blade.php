@@ -761,21 +761,19 @@
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
-                            success: function(result) {
-                                if (result.status == true) {
-                                    Swal.fire(
-                                        'Deleted!',
-                                        result.message,
-                                        'success'
-                                    );
-                                    course_row.remove();
-                                } else {
-                                    Swal.fire(
-                                        'Error!',
-                                        result.message,
-                                        'error'
-                                    )
-                                }
+                            if (result.status == true) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    result.message,
+                                    'success'
+                                );
+                                course_row.remove();
+                            } else {
+                                Swal.fire(
+                                    'Error!',
+                                    result.message,
+                                    'error'
+                                )
                             }
                         }
 
