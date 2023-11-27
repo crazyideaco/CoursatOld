@@ -907,7 +907,7 @@
     </script>
     <script>
         function delete_video_college_pdf(selected) {
-            let id = selected.value;
+            let id = selected;
             var url = `{{ route('delete_video_college_pdf',':id') }}`;
             url = url.replace(':id',id);
             $.ajaxSetup({
@@ -949,7 +949,7 @@
         }
 
         function delete_video_college_board(selected) {
-            let id = selected.value;
+            let id = selected;
             var url = `{{ route('delete_video_college_board',':id') }}`;
             url = url.replace(':id',id);
             $.ajaxSetup({
