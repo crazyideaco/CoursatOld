@@ -373,6 +373,49 @@
     <!--end page-body-->
 @endsection
 @section('scripts')
+<script>
+    function delete_video_college_video(selected) {
+        let id = sel;
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "get",
+                    url: `../delete_video_college_video/${id}`,
+                    //    contentType: "application/json; charset=utf-8",
+                    dataType: "Json",
+                    success: function(result) {
+                        if (result.status == true) {
+
+                            Swal.fire(
+                                'Deleted!',
+                                'Your pdf has been deleted.',
+                                'success'
+                            )
+                        }
+                    }
+
+                });
+            }
+
+
+        })
+    }
+
+</script>
     <script>
         $('form').ajaxForm({
 
