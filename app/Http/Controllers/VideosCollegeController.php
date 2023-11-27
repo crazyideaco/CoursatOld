@@ -879,6 +879,7 @@ class VideosCollegeController extends Controller
         if (public_path() . '/uploads/' . $video->url) {
             $link1 = public_path() . '/uploads/' . $video->url;
             File::delete($link1);
+            $video->url->delete();
         }
         return response(['status' => true]);
     }
