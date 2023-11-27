@@ -29,7 +29,7 @@ class TypeJoinDataTable extends DataTable
             ->addColumn('action', 'dashboard.new_type_joins.action')
 
             ->editColumn("student_name", function ($query) {
-                return $query->student->name ?? "";
+                return '<a href="'.route("studentprofile",$query->student->id).'">'.$query->student->name ?? "".'</a>';
             })
             ->editColumn("student_phone", function ($query) {
                 return $query->student->phone ?? "" ?? "";
