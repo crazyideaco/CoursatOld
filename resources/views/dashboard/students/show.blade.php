@@ -526,10 +526,10 @@
                                     <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
                                         aria-labelledby="pills-coruses-tab" onclick="get_courses({{ $student->id }})">
 
-                                        @include('dashboard.students.profile-student-includes.__courses', [
+                                        {{-- @include('dashboard.students.profile-student-includes.__courses', [
                                             'courses' => $courses,
                                             'student' => $student,
-                                        ])
+                                        ]) --}}
 
                                     </div>
                                     <div class="tab-pane fade" id="pills-exams" role="tabpanel"
