@@ -707,7 +707,8 @@
     <script>
         function delete_video_college_video(selected) {
             let id = selected.value;
-
+            var url = `{{ route('delete_video_college_video',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -725,7 +726,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_college_video/${id}`,
+                        url: url,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
@@ -907,7 +908,8 @@
     <script>
         function delete_video_college_pdf(selected) {
             let id = selected.value;
-
+            var url = `{{ route('delete_video_college_pdf',':id') }}`;
+            url = url.replace(':id',id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -925,7 +927,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_college_pdf/${id}`,
+                        url: url,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
