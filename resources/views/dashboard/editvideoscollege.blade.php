@@ -675,7 +675,7 @@
         }
 
     </script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script>
         // Loaded via <script> tag, create shortcut to access PDF.js exports.
@@ -915,5 +915,5 @@
 
             })
         }
-    </script> --}}
+    </script>
 @endsection
