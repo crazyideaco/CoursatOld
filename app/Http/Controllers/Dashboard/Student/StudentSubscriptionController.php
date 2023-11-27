@@ -74,8 +74,9 @@ class StudentSubscriptionController extends Controller
                 'message' => $msg,
             ], 422);
         }
-        dd($request->course_id);
+        // dd($request->course_id);
         $student = User::find($request->student_id);
+        dd($student);
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
 
