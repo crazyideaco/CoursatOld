@@ -76,29 +76,9 @@
 
 
             <!--start setting-->
-            <div class="setting all-products typs">
-                <div class="container">
-                    {{-- <div class="row def">
-
-                        <img src="images/all-products.svg">
-                        <h5>الطلاب</h5>
 
 
 
-                    </div> --}}
-
-                    <div class="products-search typs1">
-
-
-                    </div>
-
-
-
-                    <div class="all-infor">
-
-
-
-                       
 
                         <div class="row">
                             <div class="table-responsive">
@@ -113,11 +93,6 @@
                             </div>
                         </div>
 
-                    </div>
-
-                </div>
-
-            </div>
             <!--end setting-->
 
 
