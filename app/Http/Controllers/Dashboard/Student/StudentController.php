@@ -65,7 +65,7 @@ class StudentController extends Controller
         $courses = [];
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $student_courses = $student->stutypescollege;
-            $courses = Type::where('stage_id', $student->stage_id)->where('year_id', $student->year_id)->get();
+            $courses = Type::where('stage_id', $student->stage_id)->where('years_id', $student->year_id)->get();
         } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
             $student_courses = $student->stutypes;
             $courses = TypesCollege::where('university_id', $student->university_id)->where('college_id', $student->college_id)->where('division_id', $student->division_id)->get();
