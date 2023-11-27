@@ -150,8 +150,8 @@
                                 @error('pdf')
                                     <div class="alert alert-danger">هذا الحقل مطلوب</div>
                                 @enderror
-                                <span class="btn btn-danger" onclick="delete_video_college_pdf({{ $video->id }})">حذف
-                                    pdf</span>
+                                {{-- <span class="btn btn-danger" onclick="delete_video_college_pdf({{ $video->id }})">حذف
+                                    pdf</span> --}}
 
                             </div>
 
