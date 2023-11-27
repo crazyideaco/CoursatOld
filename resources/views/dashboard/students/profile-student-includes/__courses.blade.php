@@ -24,8 +24,8 @@
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
                         <td>{{ $item->name_ar }}</td>
-                        <td>{{ $item->pivot()->created_at }}</td>
-                        <td>{{ $item->pivot()->type }}</td>
+                        <td>{{ $item->pivot->created_at }}</td>
+                        <td>{{ $item->pivot->type }}</td>
                         <td>{{ $item->center_id ? $item->center->name : '--' }}</td>
                         @if ($student->category_id == config('project_types.system_category_type.category_id_college'))
                             <td onclick="deleteuser_from_stutypescollege({{ $student->id }},{{ $item->id }})"
