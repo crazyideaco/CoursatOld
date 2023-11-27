@@ -115,7 +115,7 @@
         Route::get('editprofile', 'ProfileController@editprofile')->name('editprofile');
         Route::post('updateprofile', 'ProfileController@updateprofile')->name('updateprofile');
         Route::get('admins', 'AdminController@admins')->name('admins');
-        Route::get('studentprofile/{id}', 'ProfileController@studentprofile')->name('studentprofile');
+        // Route::get('studentprofile/{id}', 'ProfileController@studentprofile')->name('studentprofile');
         Route::get('teacherprofile/{id}', 'ProfileController@teacherprofile')->name('teacherprofile');
         Route::get('centerprofile/{id}', 'ProfileController@centerprofile')->name('centerprofile');
         Route::get('doctorprofile/{id}', 'ProfileController@doctorprofile')->name('doctorprofile');
@@ -200,6 +200,9 @@
         //students
         Route::get('allstudents', 'Dashboard\Student\StudentController@allstudents')->name('allstudents');
         Route::post('resetStudentPassword/{student}', 'Dashboard\Student\StudentController@resetStudentPassword')->name('resetStudentPassword');
+        Route::post('resetStudentPassword/{student}', 'Dashboard\Student\StudentController@resetStudentPassword')->name('resetStudentPassword');
+        Route::get('studentprofile/{student}', 'Dashboard\Student\StudentController@studentprofile')->name('studentprofile');
+
         Route::get('students', 'StudentController@students')->name('students');
         Route::get('basicstudents', 'StudentController@basicstudents')->name('basicstudents');
         Route::post('filterbasicstudents', 'StudentController@filterbasicstudents')->name('filterbasicstudents');

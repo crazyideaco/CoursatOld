@@ -57,7 +57,18 @@ class StudentController extends Controller
         }
     }
 
-    
+    public function studentprofile(User $student)
+    {
+        if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
+            $courses = $student->stutypescollege;
+        } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
+            $courses = $student->stutypes;
+        }
 
-
+        return view('dashboard.students.show', [
+            // 'student' => $student,
+            'courses' => $courses,
+            'id' => $student->id,
+        ]);
+    }
 }//End of controller

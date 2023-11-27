@@ -192,10 +192,7 @@ class ProfileController extends Controller
     {
         return view('dashboard.lecturerprofile')->with('id', $id);
     }
-    public function studentprofile($id)
-    {
-        return view('dashboard.students.show')->with('id', $id);
-    }
+    
     public function teacherprofile($id)
     {
         return view('dashboard.teacherprofile')->with('id', $id);

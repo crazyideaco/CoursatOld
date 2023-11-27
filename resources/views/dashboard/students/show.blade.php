@@ -506,7 +506,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" id="pills-coruses-tab" data-toggle="pill"
                                             href="#pills-coruses" role="tab" aria-controls="pills-coruses"
-                                            aria-selected="true" onclick="getCoruses()">الكورسات</a>
+                                            aria-selected="true">الكورسات</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="pills-exams-tab" data-toggle="pill" href="#pills-exams"
