@@ -1,16 +1,16 @@
 <?php
-$join = \App\TypecollegeJoin::whereId($id)->first();
+$join = \App\TypeJoin::whereId($id)->first();
 ?>
 
 <div id="status{{ $join->id }}">
     @if ($join->status == 0)
         <button type="button" class="btn btn-success
  btn-light-success w-30"
-            onclick="accept_typecollege_join({{ $join->id }})">
+            onclick="accept_type_join({{ $join->id }})">
             قبول </button>
         <button type="button" class="btn btn-danger
  btn-light-danger w-30 "
-            onclick="refuse_typecollege_join({{ $join->id }})">
+            onclick="refuse_type_join({{ $join->id }})">
             رفض </button>
     @elseif($join->status == 1)
         <span class="badge badge-success p-2">تم القبول</span>
@@ -21,7 +21,7 @@ $join = \App\TypecollegeJoin::whereId($id)->first();
 
 
 <script>
-    function accept_typecollege_join(sel) {
+    function accept_type_join(sel) {
         let id = sel;
 
         $.ajaxSetup({
@@ -32,7 +32,7 @@ $join = \App\TypecollegeJoin::whereId($id)->first();
 
         $.ajax({
             type: "get",
-            url: `accept_typecollege_join/${id}`,
+            url: `accept_type_join/${id}`,
             //    contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
@@ -50,7 +50,7 @@ $join = \App\TypecollegeJoin::whereId($id)->first();
         });
     }
 
-    function refuse_typecollege_join(sel) {
+    function refuse_type_join(sel) {
         let id = sel;
 
         $.ajaxSetup({
@@ -61,7 +61,7 @@ $join = \App\TypecollegeJoin::whereId($id)->first();
 
         $.ajax({
             type: "get",
-            url: `refuse_typecollege_join/${id}`,
+            url: `refuse_type_join/${id}`,
             //    contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
