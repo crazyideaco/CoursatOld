@@ -417,16 +417,14 @@
                         <div class="row">
                             <div class="name-cor">
                                 <div class="form-group names">
-                                    <label for="exampleFormControlSelect1">اسم الكورس</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <label for="course_id">اسم الكورس</label>
+                                    <select class="form-control selectpicker " id="course_id">
+                                        @foreach ($courses as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name_ar }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <button type="button" class="btn btn-success names">اضافه</button>
+                                <button type="button" onclick="addCourse()" class="btn btn-success names">اضافه</button>
                             </div>
                         </div>
 
@@ -473,7 +471,7 @@
                                 </div>
                                 <div class="info">
                                     <p class="title">نوع الهاتف</p>
-                                    <p class="text"> {{ $student->device_id }}</p>
+                                    <p class="text"> {{ $student->device_type }}</p>
                                 </div>
 
                             </div>
@@ -524,11 +522,11 @@
                                 </ul>
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="pills-coruses" role="tabpanel"
-                                        aria-labelledby="pills-coruses-tab"  {{-- onclick="get_courses({{ $student->id }})" --}} >
+                                        aria-labelledby="pills-coruses-tab" {{-- onclick="get_courses({{ $student->id }})" --}}>
 
                                         @include('dashboard.students.profile-student-includes.__courses', [
-                                                'courses' => $courses,
-                                                'student' => $student,
+                                            'student_courses' => $student_courses,
+                                            'student' => $student,
                                         ])
 
                                     </div>
@@ -554,7 +552,7 @@
 
                             </div>
                         </div>
-                    {{--
+                        {{--
                         <div class="row">
                             <h6>الايميل:</h6>
                             <p>{{ $student->email }}</p>
@@ -863,7 +861,43 @@
             });
         });
     </script>
-{{--
+
+    <script>
+        function addcourse() {
+            var student_id = {{ $student->id }};
+            var course_id = $("#course_id").val();
+            var url = "{{ route('students.subscribtions.addUserToCourse') }}";
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "post",
+                url: url,
+                data: {
+                    'student_id': student_id,
+                    'course_id': course_id,
+                },
+                dataType: "Json",
+            }).success(function(result) {
+                if (result.status == true) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '',
+                        text: result.message,
+                    });
+                } else if (result.status == false) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: result.message,
+                    });
+                }
+            })
+        }
+    </script>
+    {{--
     <script>
         $(document).ready(function() {
             console.log("get courses ready", {{ $student->id }});

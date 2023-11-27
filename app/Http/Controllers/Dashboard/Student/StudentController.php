@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Section;
 use App\Services\AuthDataService;
 use App\Stage;
+use App\Type;
+use App\TypesCollege;
 use App\University;
 use App\User;
 use App\Year;
@@ -59,15 +61,20 @@ class StudentController extends Controller
 
     public function studentprofile(User $student)
     {
+        $student_courses = [];
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
-            $courses = $student->stutypescollege;
+            $student_courses = $student->stutypescollege;
+            $courses = Type::where('stage_id', $student->stage_id)->where('year_id', $student->year_id)->get();
         } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
-            $courses = $student->stutypes;
+            $student_courses = $student->stutypes;
+            $courses = TypesCollege::where('university_id', $student->university_id)->where('college_id', $student->college_id)->where('division_id', $student->division_id)->get();
         }
 
+
         return view('dashboard.students.show', [
+            "courses" => $courses,
             'student' => $student,
-            'courses' => $courses,
+            'student_courses' => $student_courses,
             'id' => $student->id,
         ]);
     }

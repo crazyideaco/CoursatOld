@@ -20,12 +20,12 @@
                 </tr>
             </thead>
             <tbody id="courses">
-                @forelse ($courses as $item)
+                @forelse ($student_courses as $item)
                     <tr>
                         <th scope="row" id="course_row{{ $item->id }}">{{ $item->id }}</th>
                         <td>{{ $item->name_ar }}</td>
-                        <td>{{ $item->pivot->created_at }}</td>
-                        <td>{{ $item->pivot->type_format }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->pivot->created_at)->format('Y-m-d g:i A') }}</td>
+                        <td>{{ $item->pivot->getTypeFormatAttribute() }}</td>
                         <td>{{ $item->center_id ? $item->center->name : '--' }}</td>
                         @if ($student->category_id == config('project_types.system_category_type.category_id_college'))
                             <td onclick="deleteuser_from_stutypescollege({{ $student->id }},{{ $item->id }})"
@@ -60,7 +60,7 @@
             dataType: "Json",
             data: {
                 "student_id": student_id,
-                "course_date": $('#course_date').val(),
+                "course_date": $('#course_date :selected').val(),
             },
             success: function(result) {
                 if (result.status == true) {
