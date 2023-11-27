@@ -81,7 +81,7 @@ class StudentSubscriptionController extends Controller
             $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
 // dd($courseExists);
             if ($courseExists) {
-                $student->stutypescollege->attach($request->course_id);
+                $student->stutypescollege()->attach($request->course_id);
                 // $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
                 $msg = "تمت العملية بنجاح";
