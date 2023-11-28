@@ -721,6 +721,9 @@ class VideoController extends Controller
         if (public_path() . '/uploads/' . $video->pdf) {
             $link1 = public_path() . '/uploads/' . $video->pdf;
             File::delete($link1);
+            $video->update([
+                'pdf' => null,
+            ]);
         }
         return response(['status' => true]);
     }
@@ -730,6 +733,9 @@ class VideoController extends Controller
         if (public_path() . '/uploads/' . $video->board) {
             $link1 = public_path() . '/uploads/' . $video->board;
             File::delete($link1);
+            $video->update([
+                'board' => null,
+            ]);
         }
         return response(['status' => true]);
     }

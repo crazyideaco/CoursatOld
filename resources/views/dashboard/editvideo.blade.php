@@ -120,7 +120,7 @@
                                 @error('pdf')
                                     <p style="color:red;">{{ $message }}</p>
                                 @enderror
-                                {{-- <span class="btn btn-danger" onclick="delete_video_pdf({{ $video->id }})">حذف pdf</span> --}}
+                                <span class="btn btn-danger" onclick="delete_video_pdf({{ $video->id }})">حذف pdf</span>
                             </div>
                             <div class="col-6 text-center set-img">
                                 <img src="{{ asset('uploads/' . $video->image) }}" id="realimg">
@@ -140,8 +140,8 @@
                                 @error('board')
                                     <p style="color:red;">{{ $message }}</p>
                                 @enderror
-                                {{-- <span class="btn btn-danger" onclick="delete_video_board({{ $video->id }})">حذف
-                                    السبوره</span> --}}
+                                <span class="btn btn-danger" onclick="delete_video_board({{ $video->id }})">حذف
+                                    السبوره</span>
 
                             </div>
 
@@ -538,8 +538,9 @@
         });
 
         function delete_video_pdf(sel) {
-            let id = selected.value;
-
+            let id = sel;
+            var url = `{{ route('delete_video_pdf', ':id') }}`;
+            url = url.replace(':id', id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -557,7 +558,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_pdf/${id}`,
+                        url: url,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
@@ -579,7 +580,9 @@
         }
 
         function delete_video_board(sel) {
-            let id = selected.value;
+            let id = sel;
+            var url = `{{ route('delete_video_board', ':id') }}`;
+            url = url.replace(':id', id);
 
             $.ajaxSetup({
                 headers: {
@@ -598,7 +601,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_board/${id}`,
+                        url: url,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
