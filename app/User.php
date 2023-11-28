@@ -86,10 +86,10 @@ class User extends Authenticatable
 
     public function getImageLinkAttribute()
     {
-        return $this->image ? asset($this->image) : '';
+        return $this->image ? asset('uploads/' . $this->image) : '';
     }
 
-    
+
     public function videos()
     {
         return $this->hasMany(Video::class, 'user_id');
