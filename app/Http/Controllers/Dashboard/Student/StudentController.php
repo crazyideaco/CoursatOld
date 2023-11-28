@@ -62,20 +62,27 @@ class StudentController extends Controller
     public function studentprofile(User $student)
     {
         $student_courses = [];
+        $student_exams = [];
         $courses = [];
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $student_courses = $student->stutypescollege;
-            $courses = Type::where('stage_id', $student->stage_id)->where('years_id', $student->year_id)->get();
+            $student_exams = $student->typecollegeexam_users;
+            $courses = TypesCollege::where('university_id', $student->university_id)->where('college_id', $student->college_id)->where('division_id', $student->division_id)->get();
         } elseif ($student->category_id == config('project_types.system_category_type.category_id_basic')) {
             $student_courses = $student->stutypes;
-            $courses = TypesCollege::where('university_id', $student->university_id)->where('college_id', $student->college_id)->where('division_id', $student->division_id)->get();
+            $student_exams = $student->stypeexams_users;
+            $courses = Type::where('stage_id', $student->stage_id)->where('years_id', $student->year_id)->get();
+        }else{
+            $student_courses = [];
+            $student_exams = [];
+            $courses = [];
         }
-
 
         return view('dashboard.students.show', [
             "courses" => $courses,
             'student' => $student,
             'student_courses' => $student_courses,
+            'student_exams' => $student_exams,
             'id' => $student->id,
         ]);
     }

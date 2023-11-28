@@ -150,10 +150,10 @@
                 //basic filters
                 data.stage_id = $("#stage_id").val();
                 data.year_id = $("#years_id").val();
-                data.subject_id = $("#subjects_id").val();
+                data.subjects_id = $("#subjects_id").val();
                 data.subscription_type = $("#subscription_type :selected").val();
-                // data.user_id = $("#teachers").val();
-                // //college filters
+                data.type_id = $("#type_id").val();
+                
 
             });
             $('#dataTableBuilder').DataTable().ajax.reload();

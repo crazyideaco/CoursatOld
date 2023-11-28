@@ -9,6 +9,7 @@ class Student_Typecollege extends Model
 {
     use SoftDeletes;
     protected  $guarded = [];
+    
     protected $table = "students_typescollege";
     public function student(){
         return $this->belongsTo(User::class, 'student_id');
@@ -18,7 +19,7 @@ class Student_Typecollege extends Model
     {
         return $this->belongsTo(TypesCollege::class, 'typecollege_id');
     }
-    
+
     protected $appends = ['type_format'];
 
     public function getTypeFormatAttribute()

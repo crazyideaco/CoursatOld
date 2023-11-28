@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard\Student;
 
 use App\Http\Controllers\Controller;
+use App\Student_Type;
+use App\Student_Typecollege;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -74,15 +76,18 @@ class StudentSubscriptionController extends Controller
                 'message' => $msg,
             ], 422);
         }
-        dd($request->course_id);
         $student = User::find($request->student_id);
         if ($student->category_id == config('project_types.system_category_type.category_id_college')) {
             $courseExists = !$student->stutypescollege()->where('typescollege.id', $request->course_id)->exists();
-
             if ($courseExists) {
                 $student->stutypescollege()->attach($request->course_id);
-                // $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
+                $student->stutypescollege()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
+                $msg = "تمت العملية بنجاح";
+                return response()->json([
+                    'status' => true,
+                    'message' => $msg,
+                ]);
             } else {
                 DB::rollBack();
                 $msg = "الطالب مسجل في الكورس بالفعل";
@@ -97,6 +102,11 @@ class StudentSubscriptionController extends Controller
                 $student->stutypes()->attach($request->course_id);
                 $student->stutypes()->updateExistingPivot($request->course_id, ['type' => config('project_types.pivot_type_in_student_type.dashboard')]);
                 DB::commit();
+                $msg = "تمت العملية بنجاح";
+                return response()->json([
+                    'status' => true,
+                    'message' => $msg,
+                ]);
             } else {
                 DB::rollBack();
                 $msg = "الطالب مسجل في الكورس بالفعل";

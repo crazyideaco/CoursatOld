@@ -111,6 +111,9 @@
                             <div class="col-6 text-center set-img">
                                 <canvas id="pdfViewer" style="width:200px;height:200px"></canvas>
                                 <input id="myPdf" type="file" class="form-control ehabtalaat" name="pdf">
+                                <span class="d-block mx-2">
+                                    {{ pathinfo($video->pdf, PATHINFO_BASENAME) ?? '' }}
+                                </span>
                                 <br>
                                 <br>
                                 <label for="myPdf" class="ahmed">اضافة pdf</label>
@@ -485,8 +488,9 @@
     </script>
     <script>
         function delete_video_video(selected) {
-            let id = selected.value;
-
+            let id = selected;
+            var url = `{{ route('delete_video_video', ':id') }}`;
+            url = url.replace(':id', id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -504,7 +508,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_video/${id}`,
+                        url: url,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
@@ -534,8 +538,9 @@
         });
 
         function delete_video_pdf(sel) {
-            let id = selected.value;
-
+            let id = sel;
+            var url = `{{ route('delete_video_pdf', ':id') }}`;
+            url = url.replace(':id', id);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -553,7 +558,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_pdf/${id}`,
+                        url: url,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {
@@ -575,7 +580,9 @@
         }
 
         function delete_video_board(sel) {
-            let id = selected.value;
+            let id = sel;
+            var url = `{{ route('delete_video_board', ':id') }}`;
+            url = url.replace(':id', id);
 
             $.ajaxSetup({
                 headers: {
@@ -594,7 +601,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "get",
-                        url: `../delete_video_board/${id}`,
+                        url: url,
                         //    contentType: "application/json; charset=utf-8",
                         dataType: "Json",
                         success: function(result) {

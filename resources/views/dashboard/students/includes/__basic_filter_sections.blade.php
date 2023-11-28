@@ -45,7 +45,7 @@ h4.hederre {
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>الماده </label> --}}
-    <select class="form-control selectpicker" name="subjects_id"  id="subject" onchange="getSubject_teacher(this)" title="اختر الماده">
+    <select class="form-control selectpicker" name="subjects_id"  id="subjects_id" onchange="getSubject_teacher(this)" title="اختر الماده">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
     </select>
@@ -67,11 +67,11 @@ h4.hederre {
 
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>الكورسات </label> --}}
-    <select class="form-control selectpicker" name="types"  id="types" onchange="filter_students();" title="اختر الكورسات">
+    <select class="form-control selectpicker" name="type_id"  id="type_id" onchange="filter_students();" title="اختر الكورسات">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option> --}}
 
     </select>
-    @error('types')
+    @error('type_id')
         <p style="color:red;">{{ $message }}</p>
     @enderror
 </div>
@@ -113,9 +113,9 @@ h4.hederre {
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#subject').empty();
-                $('#subject').html(result);
-                $('#subject').selectpicker('refresh');
+                $('#subjects_id').empty();
+                $('#subjects_id').html(result);
+                $('#subjects_id').selectpicker('refresh');
             }
 
         });
@@ -144,7 +144,7 @@ h4.hederre {
     }
 
     function getTeacher_types(teacherId) {
-        let subjectId = $('#subject').val();
+        let subjectId = $('#subjects_id').val();
         let teacher_id = $('#teachers').val();
         $.ajaxSetup({
             headers: {
@@ -157,9 +157,9 @@ h4.hederre {
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#types').empty();
-                $('#types').html(result);
-                $('#types').selectpicker('refresh');
+                $('#type_id').empty();
+                $('#type_id').html(result);
+                $('#type_id').selectpicker('refresh');
             }
 
         });
@@ -179,9 +179,9 @@ h4.hederre {
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#types').empty();
-                $('#types').html(result);
-                $('#types').selectpicker('refresh');
+                $('#type_id').empty();
+                $('#type_id').html(result);
+                $('#type_id').selectpicker('refresh');
             }
 
         });

@@ -16,24 +16,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>30</td>
-                </tr>
-                <tr>
-                    <th scope="row">1564115</th>
-                    <td>المحاسبه</td>
-                    <td>15/10/2023</td>
-                    <td>30</td>
-                </tr>
+                @if (!is_null($student_exams))
+                    @forelse ($student_exams as $item)
+                        <tr>
+                            <th scope="row">{{ $item->id }}</th>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->pivot->created_at)->format('Y-m-d g:i A') }}</td>
+                            <td>{{ $item->pivot->student_score ?? 0 }}</td>
+                        </tr>
+                    @empty
+                        <tr>الطالب لا يمتلك اي امتحان</tr>
+                    @endforelse
+                @else
+                    <tr>الطالب لا يمتلك اي امتحان</tr>
+
+                @endif
+
+
             </tbody>
         </table>
     </div>
