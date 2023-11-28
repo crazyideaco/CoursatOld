@@ -43,6 +43,7 @@ class PointController extends Controller
             $data['user_id'] = auth()->id();
             $data['payment_way_id'] = $request->payment_method_id;
             $data['points'] = $request->points;
+            dd($request->image);
             if ($request->image) {
                 $data['image'] = base64_encode(file_get_contents($request->image));
                 // $image = $request->image;
@@ -54,7 +55,7 @@ class PointController extends Controller
             DB::commit();
             $msg = "تم طلب " . $request->points . " نقاط";
             return $this->successResponse($msg);
-            
+
         } catch (\Throwable $th) {
             return $this->errorResponse($th->getMessage());
         }
