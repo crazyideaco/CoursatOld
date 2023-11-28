@@ -25,9 +25,11 @@ class SetAvatarController extends Controller
         $user = auth()->user();
         $user->update($data);
         // $user->image = base64_decode($img);
+        $data = (object)[
+            'image' => $user->image
+        ];
 
 
-
-        return $this->successResponse("image uploaded");
+        return $this->dataResponse("image uploaded",$data );
     }
 }
