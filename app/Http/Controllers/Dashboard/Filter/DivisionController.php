@@ -12,7 +12,7 @@ class DivisionController extends Controller
     {
         $divisions = Division::where('college_id', $id)->get();
         $text = "";
-        $text .= '<option value="0" selected="selected"  disabled="disabled">ادخل القسم</option>';
+        // $text .= '<option value="0" selected="selected"  disabled="disabled">ادخل القسم</option>';
         foreach ($divisions as $division) {
             $text .= '<option value="' . $division->id . '">' . $division->name_ar . '</option>';
         }
