@@ -83,6 +83,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getImageLinkAttribute()
+    {
+        return $this->image ? asset($this->image) : '';
+    }
+
+    
     public function videos()
     {
         return $this->hasMany(Video::class, 'user_id');

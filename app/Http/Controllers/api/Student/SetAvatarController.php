@@ -26,7 +26,7 @@ class SetAvatarController extends Controller
         $user->update($data);
         // $user->image = base64_decode($img);
         $data = (object)[
-            'image' => $user->imageLink
+            'image' => $user->imageLink,
         ];
 
 
