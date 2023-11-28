@@ -11,6 +11,7 @@ use App\Users;
 use App\Category;
 use App\Models\PaymentWay;
 use App\User;
+use Carbon\Carbon;
 
 class PointRequest extends Model
 {
@@ -23,7 +24,7 @@ class PointRequest extends Model
     {
         return $this->image ? asset($this->image) : '';
     }
-    
+
     public function user()
     {
         return $this->belongsto(User::class, 'user_id');
@@ -31,5 +32,8 @@ class PointRequest extends Model
     public function payment_way()
     {
         return $this->belongsto(PaymentWay::class, 'payment_way_id');
+    }
+    public function getDateFormatAttribute(){
+        return Carbon::parse($this->created_at)->format('Y-m-d g:i A') ;
     }
 }

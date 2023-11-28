@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PointRequestResource;
 use App\Models\PointRequest;
 use App\Traits\ApiTrait;
 use Validator;
@@ -54,5 +55,17 @@ class PointController extends Controller
         //     "status" => true,
         //     "message" => $msg,
         // ]);
+    }
+
+    public function fetch_buy_points(Request $request)
+    {
+        $user_id = auth()->id();
+
+        $points = PointRequest::whereUserId($user_id)->get();
+
+        $msg ="fetch_buy_points";
+        $data = PointRequestResource::collection($points);
+        return $this->dataResponse($msg, $data, 200);
+
     }
 }
