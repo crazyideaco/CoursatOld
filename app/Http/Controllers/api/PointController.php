@@ -43,13 +43,14 @@ class PointController extends Controller
             $data['user_id'] = auth()->id();
             $data['payment_way_id'] = $request->payment_method_id;
             $data['points'] = $request->points;
-            dd(base64_encode($request->image));
+            // dd(base64_encode($request->image));
             if ($request->image) {
-                $data['image'] = base64_encode(file_get_contents($request->image));
-                // $image = $request->image;
-                // $image->move('uploads' , time(). '.'.$image->getClientOriginalExtension());
-                // $data['image'] =time(). '.'.$image->getClientOriginalExtension();
+                // $data['image'] = base64_encode(file_get_contents($request->image));
+                $image = $request->image;
+                $image->move('uploads' , time(). '.'.$image->getClientOriginalExtension());
+                $data['image'] =time(). '.'.$image->getClientOriginalExtension();
             }
+            dd( $data['image']);
 
             PointRequest::create($data);
             DB::commit();
