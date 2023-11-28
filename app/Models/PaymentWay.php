@@ -23,7 +23,7 @@ class PaymentWay extends Model
      */
     public function getImageLinkAttribute()
     {
-        return $this->image ? asset('uploads' . $this->image) : '';
+        return $this->image ? asset('uploads/' . $this->image) : '';
     }
 
     /**
