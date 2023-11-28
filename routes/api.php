@@ -40,6 +40,7 @@ Route::group(['namespace' => 'api'], function () {
     Route::post('forget_password', 'AuthController@forget_password');
     Route::get('get_points', 'PointController@get_points')->middleware('auth:api');
     Route::post('buy_points', 'PointController@buy_points')->middleware('auth:api');
+    Route::get('fetch_buy_points', 'PointController@fetch_buy_points')->middleware('auth:api');
     Route::get('tags', 'TagController@tags')->name('tags');
     Route::get('phone_verify', 'AuthController@phone_verify')->middleware('auth:api');
     Route::post('change_password', 'AuthController@change_password')->middleware('auth:api');
