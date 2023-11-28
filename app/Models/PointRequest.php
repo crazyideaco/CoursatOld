@@ -22,7 +22,7 @@ class PointRequest extends Model
 
     public function getImageLinkAttribute()
     {
-        return $this->image ? asset($this->image) : '';
+        return $this->image ? asset('uploads/' . $this->image) : '';
     }
 
     public function user()
