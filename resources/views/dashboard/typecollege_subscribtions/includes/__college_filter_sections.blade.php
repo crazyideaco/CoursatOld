@@ -58,7 +58,7 @@
 </div>
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>اسم الفرقه </label> --}}
-    <select name="section_id" class="form-control selectpicker" id="section"
+    <select name="section_id" class="form-control selectpicker" id="section_id"
         onchange="getsection_subjectsCollege(this);filter_students();" title="اختر فرقه">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر فرقه</option> --}}
 
@@ -148,8 +148,8 @@
         });
     }
 
-    function getsection(selected) {
-        let id = selected.value;
+    function getsection(division_id) {
+        let id = division_id.value;
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
