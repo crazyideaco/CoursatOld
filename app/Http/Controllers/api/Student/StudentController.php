@@ -51,4 +51,23 @@ class StudentController extends Controller
             return $this->errorResponse($th->getMessage(), 400);
         }
     }
+
+
+    public function fetch_online_status(Request $request)
+    {
+
+        try {
+            $user = auth()->user();
+
+            $online_status = (object)[
+                "is_online" => $user->is_online,
+                "online_date" => $user->online_date,
+                "offline_date" => $user->offline_date,
+            ];
+
+            return $this->dataResponse("User status returned successfully", $online_status);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage(), 400);
+        }
+    }
 }
