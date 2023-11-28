@@ -28,7 +28,7 @@ class PointRequestDataTable extends DataTable
             ->editColumn("image",function($query){
                 if($query->image_link){
                 $image = $query->image_link;
-                $status = '<img src="'.$image.'">';
+                $status = '<img src="'.$image.'" style="width: 50px; height: 50px;">';
                 }else{
                     $status ='';
                 }
