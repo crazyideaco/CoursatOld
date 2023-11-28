@@ -62,7 +62,7 @@
 
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>المدرسين </label> --}}
-    <select class="form-control selectpicker" name="teachers" id="teachers" onchange="getTeacher_types(this)"
+    <select class="form-control selectpicker" name="teacher_id" id="teacher_id" onchange="getTeacher_types(this)"
         title="اختر المدرس">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر المدرس</option> --}}
 
@@ -74,12 +74,12 @@
 
 <div class="form-group col-lg-2 col-md-6 col-12">
     {{-- <label>الكورسات </label> --}}
-    <select class="form-control selectpicker" name="types" id="types" onchange="filter_students();"
+    <select class="form-control selectpicker" name="type_id" id="type_id" onchange="filter_students();"
         title="اختر الكورسات">
         {{-- <option value="0" selected="selected" disabled="disabled">اختر الكورسات</option> --}}
 
     </select>
-    @error('types')
+    @error('type_id')
         <p style="color:red;">{{ $message }}</p>
     @enderror
 </div>
@@ -150,16 +150,16 @@
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#teachers').empty();
-                $('#teachers').html(result);
-                $('#teachers').selectpicker('refresh');
+                $('#teacher_id').empty();
+                $('#teacher_id').html(result);
+                $('#teacher_id').selectpicker('refresh');
             }
         });
     }
 
     function getTeacher_types(teacherId) {
         let subjectId = $('#subjects_id').val();
-        let teacher_id = $('#teachers').val();
+        let teacher_id = $('#teacher_id').val();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -171,9 +171,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "Json",
             success: function(result) {
-                $('#types').empty();
-                $('#types').html(result);
-                $('#types').selectpicker('refresh');
+                $('#type_id').empty();
+                $('#type_id').html(result);
+                $('#type_id').selectpicker('refresh');
             }
 
         });

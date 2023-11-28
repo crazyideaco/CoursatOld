@@ -129,7 +129,7 @@
 
 
                         </form>
-                        
+
                         <div class="row">
                             <div class="table-responsive">
 
@@ -339,7 +339,7 @@
                 //basic filters
                 data.stage_id = $("#stage_id").val();
                 data.years_id = $("#years_id").val();
-                data.type_id = $("#types").val();
+                data.type_id = $("#type_id").val();
                 // //college filters
                 data.university_id = $("#university_id").val();
                 data.college_id = $("#college_id").val();
@@ -361,7 +361,7 @@
             //basic filters
             var stage_id = $("#stage_id").val();
             var years_id = $("#years_id").val();
-            var type_id = $("#types").val();
+            var type_id = $("#type_id").val();
             // //college filters
             var university_id = $("#university_id").val();
             var college_id = $("#college_id").val();
