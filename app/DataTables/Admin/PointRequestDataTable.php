@@ -15,6 +15,7 @@ use Yajra\DataTables\Services\DataTable;
 
 class PointRequestDataTable extends DataTable
 {
+    protected $view = "dashboard.point_requests.";
     /**
      * Build the DataTable class.
      *
@@ -25,15 +26,15 @@ class PointRequestDataTable extends DataTable
         return datatables()
             ->eloquent($query)
 
-            ->editColumn("image",function($query){
-                if($query->image_link){
-                $image = $query->image_link;
-                $status = '<img src="'.$image.'" style="width: 50px; height: 50px;">';
-                }else{
-                    $status ='';
-                }
-                return $status;
-            })
+            // ->editColumn("image",function($query){
+            //     if($query->image_link){
+            //     $image = $query->image_link;
+            //     $status = '<img src="'.$image.'" style="width: 50px; height: 50px;">';
+            //     }else{
+            //         $status ='';
+            //     }
+            //     return $status;
+            // })
 
             ->editColumn("student_name", function ($query) {
                 return $query->user->name ?? "";
@@ -41,7 +42,8 @@ class PointRequestDataTable extends DataTable
             ->editColumn("payment_way", function ($query) {
                 return $query->payment_way->title ?? "";
             })
-            ->addColumn('action', 'dashboard.point_requests.action')
+            ->addColumn('action', $this->view . 'action')
+            ->editColumn('image', $this->view . 'image')
             ->rawColumns([
                 'image',
                 'action',

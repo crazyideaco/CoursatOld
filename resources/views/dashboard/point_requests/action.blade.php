@@ -1,20 +1,18 @@
-<?php
+{{-- <?php
 $point = \App\Models\PointRequest::whereId($id)->first();
-?>
+?> --}}
 
-<div id="status{{ $point->id }}">
-    @if ($point->status == 0)
-        <button type="button" class="btn btn-success
- btn-light-success w-30"
-            onclick="accept_point_request({{ $point->id }})">
+<div id="status{{ $id }}">
+    @if ($status == 0)
+        <button type="button" class="btn btn-success btn-light-success w-30"
+            onclick="accept_point_request({{ $id }})">
             قبول </button>
-        <button type="button" class="btn btn-danger
- btn-light-danger w-30 "
-            onclick="refuse_point_request({{ $point->id }})">
+        <button type="button" class="btn btn-danger btn-light-danger w-30 "
+            onclick="refuse_point_request({{ $id }})">
             رفض </button>
-    @elseif($point->status == 1)
+    @elseif($status == 1)
         <span class="badge badge-success p-2">تم القبول</span>
-    @elseif($point->status == 2)
+    @elseif($status == 2)
         <span class="badge badge-danger p-2">تم الرفض</span>
     @endif
 </div>
