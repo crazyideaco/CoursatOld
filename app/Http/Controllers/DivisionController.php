@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\State;
 use App\Point;
@@ -56,82 +58,85 @@ use App\Paqa;
 use App\Paqa_User;
 use App\Student_Course;
 use Illuminate\Support\Facades\Hash;
+
 class DivisionController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
         $this->middleware(['permission:divisions-create'])->only('adddivision');
         $this->middleware(['permission:divisions-read'])->only('divisions');
         $this->middleware(['permission:divisions-update'])->only('editdivision');
-      $this->middleware(['permission:divisions-delete'])->only('deletedivision');
+        $this->middleware(['permission:divisions-delete'])->only('deletedivision');
     }
-     public function adddivision(){
-     return view('dashboard.adddivision')->with('colleges',College::all())->with('universities',University::all());
- }
- public function storedivision(Request $request){
-	 //|unique:division,name_ar,college_id
-     $request->validate([
-         'name_ar' => 'required',
-         'college_id' => 'required',
-         'name_en' =>'required',
-         'university_id' => 'required'
-         ],[
+    public function adddivision()
+    {
+        return view('dashboard.adddivision')->with('colleges', College::all())->with('universities', University::all());
+    }
+    public function storedivision(Request $request)
+    {
+        //|unique:division,name_ar,college_id
+        $request->validate([
+            'name_ar' => 'required',
+            'college_id' => 'required',
+            'name_en' => 'required',
+            'university_id' => 'required'
+        ], [
             'required' => 'هذا الحقل مطلوب',
-			'unique' => 'هذا القسم موجود فى هذه الكليه'
-             ]);
-	 foreach($request->college_id as $value){
-     $division = new Division;
-       $division->college_id = $value;
-       $division->university_id = $request->university_id;
-        $division->name_ar = $request->name_ar;
-           $division->name_en = $request->name_en;
-        $division->save();}
-     return redirect()->route('divisions');
-} public function deletedivision($id){
+            'unique' => 'هذا القسم موجود فى هذه الكليه'
+        ]);
+        foreach ($request->college_id as $value) {
+            $division = new Division;
+            $division->college_id = $value;
+            $division->university_id = $request->university_id;
+            $division->name_ar = $request->name_ar;
+            $division->name_en = $request->name_en;
+            $division->save();
+        }
+        return redirect()->route('divisions');
+    }
+    public function deletedivision($id)
+    {
 
-     $division =  Division::where('id',$id)->first();
-	 $division->delete();
-   return response()->json(['status' => true]);
-}
-public function divisions(){
-    return view('dashboard.divisions')->with('divisions',Division::orderBy('created_at','Desc')->get());
-}
-   public function editdivision($id){
-     return view('dashboard.editdivision')->with('division',Division::where('id',$id)->first())
-     ->with('colleges',College::all())->with('universities',University::all());
- }
- public function updatedivision($id,Request $request){
-       $request->validate([
-         'name_ar' => 'required',
-         'college_id' => 'required',
-         'name_en' => 'required',
-         'university_id' => 'required'
-         ],[
+        $division =  Division::where('id', $id)->first();
+        $division->delete();
+        return response()->json(['status' => true]);
+    }
+    public function divisions()
+    {
+        return view('dashboard.divisions')->with('divisions', Division::orderBy('created_at', 'Desc')->get());
+    }
+    public function editdivision($id)
+    {
+        return view('dashboard.editdivision')->with('division', Division::where('id', $id)->first())
+            ->with('colleges', College::all())->with('universities', University::all());
+    }
+    public function updatedivision($id, Request $request)
+    {
+        $request->validate([
+            'name_ar' => 'required',
+            'college_id' => 'required',
+            'name_en' => 'required',
+            'university_id' => 'required'
+        ], [
             'required' => 'هذا الحقل مطلوب'
-             ]);
-     $division = Division::where('id',$id)->first();
-       $division->college_id = $request->college_id;
-          $division->university_id = $request->university_id;
-         $division->name_ar = $request->name_ar;
-           $division->name_en = $request->name_en;
+        ]);
+        $division = Division::where('id', $id)->first();
+        $division->college_id = $request->college_id;
+        $division->university_id = $request->university_id;
+        $division->name_ar = $request->name_ar;
+        $division->name_en = $request->name_en;
         $division->save();
-     return redirect()->route('divisions');
-}public function getdivision($id){
-    $divisions = Division::where('college_id',$id)->get();
-     $text = "";
-        $text .='<option value="0" selected="selected"  disabled="disabled">ادخل القسم</option>';
-                foreach($divisions as $division){
-                       $text .= '<option value="'.$division->id.'">'.$division->name_ar.'</option>';
-            }
-            return response()->json($text);
-}public function getdivision2($id){
-    $divisions = Division::where('college_id',$id)->get();
-     $text = "";
-        $text .='<option value="0"   disabled="disabled">ادخل القسم</option>';
-                foreach($divisions as $division){
-                       $text .= '<option value="'.$division->id.'">'.$division->name_ar.'</option>';
-            }
-            return response()->json($text);
-}
-
+        return redirect()->route('divisions');
+    }
+    
+    public function getdivision2($id)
+    {
+        $divisions = Division::where('college_id', $id)->get();
+        $text = "";
+        $text .= '<option value="0"   disabled="disabled">ادخل القسم</option>';
+        foreach ($divisions as $division) {
+            $text .= '<option value="' . $division->id . '">' . $division->name_ar . '</option>';
+        }
+        return response()->json($text);
+    }
 }
