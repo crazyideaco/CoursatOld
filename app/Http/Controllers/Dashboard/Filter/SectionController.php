@@ -16,7 +16,7 @@ class SectionController extends Controller
         $sections = Section::where('division_id', $id)->get();
 
         $text = "";
-
+dd($sections);
         // $text .= '<option value="0"   disabled="disabled">ادخل الفرقه</option>';
         foreach ($sections as $section) {
             $text .= '<option value="' . $section->id . '">' . $section->name_ar . '</option>';

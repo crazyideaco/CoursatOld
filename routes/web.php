@@ -240,6 +240,8 @@
         Route::get('editdivision/{id}', 'DivisionController@editdivision')->name('editdivision');
         Route::post('updatedivision/{id}', 'DivisionController@updatedivision')->name('updatedivision');
         Route::get('deletedivision/{id}', 'DivisionController@deletedivision')->name('deletedivision');
+        Route::get('getdivision/{id}', 'Dashboard\Filter\DivisionController@getdivision')->name('getdivision');
+
         //addsection
         Route::get('addsection', 'SectionController@addsection')->name('addsection');
         Route::post('storesection', 'SectionController@storesection')->name('storesection');
@@ -432,7 +434,6 @@
         Route::post('updatesubcollege/{id}', 'SubjectsCollegeController@updatesubcollege')->name('updatesubcollege');
         Route::get('deletesubcollege/{id}', 'SubjectsCollegeController@deletesubcollege')->name('deletesubcollege');
 
-        Route::get('getdivision/{id}', 'DivisionController@getdivision')->name('getdivision');
 
         //groupstypescolleges
         Route::get('groupstypescollege/{id}', 'GroupTypescollegeController@groupstypescollege')->name('groupstypescollege');
