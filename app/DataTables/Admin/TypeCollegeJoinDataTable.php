@@ -90,7 +90,7 @@ class TypeCollegeJoinDataTable extends DataTable
      */
     public function query(TypecollegeJoin $model)
     {
-        return $model->newQuery()->orderBy("id", "desc");
+        return $model->newQuery()->orderBy("id", "desc")->where('status' , 0);
     }
 
     /**

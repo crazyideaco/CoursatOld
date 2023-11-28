@@ -131,7 +131,7 @@ class TypeJoinDataTable extends DataTable
      */
     public function query(TypeJoin $model)
     {
-        return $model->newQuery()->orderBy("id", "desc");
+        return $model->newQuery()->orderBy("id", "desc")->where('status' , 0);
     }
 
     /**
