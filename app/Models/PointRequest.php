@@ -20,6 +20,7 @@ class PointRequest extends Model
 
     protected $appends  = ["image_link"];
 
+    /** images in this project uploaded in uploads folder unless we change it */
     public function getImageLinkAttribute()
     {
         return $this->image ? asset('uploads/' . $this->image) : '';

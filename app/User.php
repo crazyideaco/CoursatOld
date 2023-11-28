@@ -84,6 +84,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /** images in this project uploaded in uploads folder unless we change it */
     public function getImageLinkAttribute()
     {
         return $this->image ? asset('uploads/' . $this->image) : '';
