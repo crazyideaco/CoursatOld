@@ -158,7 +158,8 @@
                                                     <span class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
                                                         id="btning{{ $student->id }}"
                                                         onclick="activestudentcourse({{ $student->id }},{{ $id }})">
-                                                        @if ($studenttype?->active == 1)
+                                                        @dd($studenttype)
+                                                        @if ($studenttype->active == 1)
                                                             الغاء التفعيل
                                                         @else
                                                             تفعيل
