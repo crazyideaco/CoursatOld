@@ -162,9 +162,9 @@
 
                                                         @php
                                                             if ($studenttype && $studenttype->active == 1){
-                                                                "الغاء التفعيل"
+                                                                "الغاء التفعيل";
                                                             }else{
-                                                                "تفعيل"
+                                                                "تفعيل";
                                                             }
                                                         @endphp
                                                     </span>
