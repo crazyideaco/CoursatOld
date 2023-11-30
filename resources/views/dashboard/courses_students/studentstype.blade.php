@@ -131,11 +131,14 @@
                                                 <td scope="col" class="text-center">
                                                     @if ($student->city)
                                                         {{ $student->city['city'] }}
+                                                    @else
+                                                    --
                                                     @endif
                                                 </td>
-                                                {{-- <td scope="col" class="text-center">
-                                                    {{ $student->pivot->created_at->format('Y-m-d') }}
-                                                </td> --}}
+                                                <td scope="col" class="text-center">
+                                                    {{-- {{ $student->pivot->created_at->format('Y-m-d') }} --}}
+                                                    --
+                                                </td>
 
 
                                                 <td class="text-center">
