@@ -157,7 +157,8 @@
 
                                                     <span class="btn btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
                                                         id="btning{{ $student->id }}"
-                                                        onclick="activestudentcourse({{ $student->id }},{{ $id }})"> {{ $studenttype->active == 1 ?  "الغاء التفعيل" : "تفعيل" }}
+                                                        onclick="activestudentcourse({{ $student->id }},{{ $id }})">
+                                                        {{-- {{ $studenttype->active == 1 ?  "الغاء التفعيل" : "تفعيل" }} --}}
 
                                                         @php
                                                             $is_active_student_type_column = $studenttype->active;
