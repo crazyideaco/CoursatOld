@@ -155,13 +155,13 @@
                                                         }
                                                     @endphp
 
-                                                    <span
-                                                        class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
+                                                    <span class="btn btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
                                                         id="btning{{ $student->id }}"
-                                                        onclick="activestudentcourse({{ $student->id }},{{ $id }})">
+                                                        onclick="activestudentcourse({{ $student->id }},{{ $id }})"> {{ $studenttype->active == 1 ?  "الغاء التفعيل" : "تفعيل" }}
 
                                                         @php
-                                                            if ($studenttype && $studenttype->active == 1){
+                                                            $is_active_student_type_column = $studenttype->active;
+                                                            if ($studenttype && $is_active_student_type_column == 1){
                                                                 "الغاء التفعيل";
                                                             }else{
                                                                 "تفعيل";
