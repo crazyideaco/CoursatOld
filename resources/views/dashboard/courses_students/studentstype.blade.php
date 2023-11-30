@@ -133,9 +133,9 @@
                                                         {{ $student->city['city'] }}
                                                     @endif
                                                 </td>
-                                                <td scope="col" class="text-center">
+                                                {{-- <td scope="col" class="text-center">
                                                     {{ $student->pivot->created_at->format('Y-m-d') }}
-                                                </td>
+                                                </td> --}}
 
 
                                                 <td class="text-center">
