@@ -126,10 +126,6 @@ button.btn.first.save {
                         </div>
                     </div>
                 </div>
-            </div>
-                <!-- finish input -->
-
-                <!-- main education -->
                 <div class="main_education" id="mainEducation" style="display: none";>
                     <h4>اساسي</h4>
                     <div class="row">
@@ -340,6 +336,11 @@ button.btn.first.save {
                         </div>
                     </div>
                 </div>
+            </div>
+                <!-- finish input -->
+
+                <!-- main education -->
+
                 <!-- finish input -->
                 <div class="row">
                     <div class="col-lg-6">
