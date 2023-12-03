@@ -31,7 +31,7 @@ button.btn.first.save {
     padding: 0.5rem;
     border-radius: 15px;
 }
-.sec-three {
+.sec-there {
     margin-top: 10px;
     background-color: #ffffff;
     padding: 0.5rem;
