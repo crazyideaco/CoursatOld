@@ -209,7 +209,7 @@ button.btn.first.save {
 
 
                 <!-- university education -->
-                <div class="university_education" id="universityEducation">
+                <div class="university_education" id="universityEducation" style="display: none">
                     <h4>جامعي</h4>
                     <div class="row">
 
@@ -625,6 +625,7 @@ button.btn.first.save {
         let mainEducation =document.getElementById("mainEducation")
         radio.onclick=function(){
             mainEducation.style.display="block"
+            mainEducation.style.display="none"
         }
     </script>
     <script>
@@ -632,6 +633,7 @@ button.btn.first.save {
         let mainEducation1 =document.getElementById("universityEducation")
         radio.onclick=function(){
             mainEducation.style.display="block"
+            mainEducation.style.display="none"
         }
     </script>
 @endsection
