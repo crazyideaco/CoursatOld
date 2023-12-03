@@ -10,7 +10,7 @@
 @section('content')
 	<!--begin::Card-->
     <div class="container">
-
+        <div class="table-resonsive">
     <div class="card card-custom gutter-b">
 
         <div class="card-header flex-wrap py-3">
@@ -24,16 +24,17 @@
 
 
             <!--begin: Datatable-->
-<div class="table-resonsive">
+
     {!! $dataTable->table([
 
         ],true) !!}
-</div>
+
 
             <!--end: Datatable-->
 
 
     <!--end::Card-->
+        </div>
     </div>
 @endsection
 @section('scripts')
