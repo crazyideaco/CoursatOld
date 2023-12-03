@@ -18,19 +18,23 @@
 											<h3 class="card-label">طلبات النقاط
 </h3>
 										</div>
-										
+
 									</div>
+    </div>
 
 
             <!--begin: Datatable-->
-
+<div class="table-resonsive">
     {!! $dataTable->table([
 
-                     ],true) !!}
+        ],true) !!}
+</div>
+
             <!--end: Datatable-->
 
 
     <!--end::Card-->
+    </div>
 @endsection
 @section('scripts')
 
