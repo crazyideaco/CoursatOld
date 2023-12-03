@@ -111,7 +111,7 @@ button.btn.first.save {
                 <!-- finish input -->
 
                 <!-- main education -->
-                <div class="main_education" id="mainEducation">
+                <div class="main_education" id="mainEducation" style="display: none";>
                     <h4>اساسي</h4>
                     <div class="row">
                         {{-- <div class="col-12">
@@ -618,6 +618,20 @@ button.btn.first.save {
                 }
 
             });
+        }
+    </script>
+    <script>
+        let radio = document.getElementById("radio1")
+        let mainEducation =document.getElementById("mainEducation")
+        radio.onclick=function(){
+            mainEducation.style.display="block"
+        }
+    </script>
+    <script>
+        let radio1 = document.getElementById("radio2")
+        let mainEducation1 =document.getElementById("universityEducation")
+        radio.onclick=function(){
+            mainEducation.style.display="block"
         }
     </script>
 @endsection
