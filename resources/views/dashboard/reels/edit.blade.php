@@ -20,6 +20,23 @@ button.btn.first.save {
     color: white;
     width: 40%;
 }
+.one-sec {
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
+.sec-tow {
+    margin-top: 10px;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
+.sec-three {
+    margin-top: 10px;
+    background-color: #ffffff;
+    padding: 0.5rem;
+    border-radius: 15px;
+}
 </style>
 @endsection
 @section('content')
@@ -34,6 +51,7 @@ button.btn.first.save {
                 @csrf
                 @method('PUT')
                 <!-- start input -->
+                <div class="one-sec">
                 <div class="row">
                     <div class="col-12 mx-auto">
                         <div class="form-group upload_file">
@@ -61,7 +79,8 @@ button.btn.first.save {
                     </div>
 
                 </div>
-
+            </div>
+            <div class="sec-tow">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="input-group">
@@ -78,11 +97,12 @@ button.btn.first.save {
                         </div>
                     </div>
                 </div>
+            </div>
                 <!-- finish input -->
 
                 <!-- start input -->
 
-
+                <div class="sec-there">
                 <div class="row">
                     <div class="col-12">
                         <div class="input-group">
@@ -106,6 +126,7 @@ button.btn.first.save {
                         </div>
                     </div>
                 </div>
+            </div>
                 <!-- finish input -->
 
                 <!-- main education -->
