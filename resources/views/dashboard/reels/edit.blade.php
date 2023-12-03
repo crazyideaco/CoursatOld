@@ -4,6 +4,22 @@
     #example_wrapper {
         width: 100% !important;
     }
+    .form-group.upload_file .upload_file_label {
+    background-color: #f5f8fa;
+    border: 1px dashed #d1d3d6;
+    width: 100%;
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: -14px;
+    cursor: pointer;
+}
+button.btn.first.save {
+    margin-top: 10px;
+    background-color: #243e56;
+    color: white;
+    width: 40%;
+}
 </style>
 @endsection
 @section('content')
@@ -20,19 +36,10 @@
                 <!-- start input -->
                 <div class="row">
                     <div class="col-8 mx-auto">
-                        <div class="uploadOuter">
-                            <span class="dragBox">
-
-
-                                <input type="file" name="image" onChange="dragNdrop(event)" ondragover="drag()"
-                                    ondrop="drop()" id="uploadFile" />
-                            </span>
-                        </div>
                         <div class="form-group upload_file">
-                            <label for="">* اضافة صوره</label>
                             <label for="imageCover" class="upload_file_label">
-                              <i class="fa-regular fa-image"></i>
-                              <p>Darg and Drop image here</p>
+
+                              <p>اسحب فديو معبر واسقطها هنا</p>
                               <span id="fileNameImage">او اضغط هنا</span>
                             </label>
                             <input
@@ -318,7 +325,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            class="btn first">حفظ</button>
+                            class="btn first save">حفظ</button>
                     </div>
                 </div>
 
