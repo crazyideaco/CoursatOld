@@ -112,7 +112,7 @@
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>المرحله</label>
-                                <select class="form-control selectpicker" name="stage_id" onchange="getstage(this)">
+                                <select class="form-control selectpicker new" name="stage_id" onchange="getstage(this)">
                                     <option value="0" selected="selected" required disabled="disabled">ادخل المرحله
                                     </option>
                                     @foreach ($stages as $stage)
@@ -125,7 +125,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>سنه الماده</label>
-                                <select class="form-control selectpicker" name="years_id" required id="year"
+                                <select class="form-control selectpicker new" name="years_id" required id="year"
                                     onchange="getyear(this)">
                                     <option value="0" selected="selected" disabled="disabled">اختر السنه</option>
 
@@ -136,7 +136,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>الماده </label>
-                                <select class="form-control selectpicker" name="subjects_id" required id="subject"
+                                <select class="form-control selectpicker new" name="subjects_id" required id="subject"
                                     onchange="getteacher(this)">
                                     <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
 
@@ -205,38 +205,40 @@
                                             </td>
                                             <td class="text-center">{{ $type->created_at->format('Y-m-d') }}</td>
                                             <td class="text-center">
+                                              <div class="opitions">
                                                 <a href="{{ route('edittype', $type->id) }}"> <img
-                                                        src="{{ asset('images/pen.svg') }}" id="pen"
-                                                        style="cursor: pointer"></a>
-                                                @if (auth()->user()->hasPermission('types-delete'))
-                                                    <img src="{{ asset('images/trash.svg') }}" id="trash"
-                                                        onclick="deletetype('{{ $type->id }}')"
-                                                        style="cursor:pointer;">
+                                                    src="{{ asset('images/pen.svg') }}" id="pen"
+                                                    style="cursor: pointer"></a>
+                                            @if (auth()->user()->hasPermission('types-delete'))
+                                                <img src="{{ asset('images/trash.svg') }}" id="trash"
+                                                    onclick="deletetype('{{ $type->id }}')"
+                                                    style="cursor:pointer;">
+                                            @endif
+                                            <span class="btn bg-success btn-success text-white btn-sm"
+                                                id="btn{{ $type->id }}"
+                                                onclick="activetype({{ $type->id }})">
+                                                @if ($type->active == 1)
+                                                    الغاء التفعيل
+                                                @else
+                                                    تفعيل
                                                 @endif
-                                                <span class="btn bg-success btn-success text-white btn-sm"
-                                                    id="btn{{ $type->id }}"
-                                                    onclick="activetype({{ $type->id }})">
-                                                    @if ($type->active == 1)
-                                                        الغاء التفعيل
-                                                    @else
-                                                        تفعيل
-                                                    @endif
 
-                                                </span>
-                                                <a href="{{ route('grouptypes', $type->id) }}"
-                                                    class="btn btn-success btn-sm">المجموعات</a>
-                                                <a href="{{ route('studentstype', $type->id) }}"
-                                                    class="btn btn-success btn-sm">الطلاب</a>
-                                                <a href="{{ route('bannedStudentstype', $type->id) }}"
-                                                    class="btn btn-danger btn-sm"> الطلاب المحذوفين </a>
-                                                <a href="{{ route('typeexams', $type->id) }}"
-                                                    class="btn btn-success btn-sm">الامتحانات</a>
-                                                <span class="btn btn-success btn-sm" data-toggle="modal"
-                                                    data-target="#myModal{{ $type->id }}">create qrcode</span>
-                                                <a href="{{ route('types.patches', $type->id) }}" title="QrCode History"
-                                                    class="text-dark ml-2"><i class="fas fa-cog"></i></a>
-                                                <a href="{{ route('security', $type->id) }}" title="اعدادات الامان"
-                                                    class="text-dark ml-2"><i class="fas fa-cog"></i></a>
+                                            </span>
+                                            <a href="{{ route('grouptypes', $type->id) }}"
+                                                class="btn btn-success btn-sm">المجموعات</a>
+                                            <a href="{{ route('studentstype', $type->id) }}"
+                                                class="btn btn-success btn-sm">الطلاب</a>
+                                            <a href="{{ route('bannedStudentstype', $type->id) }}"
+                                                class="btn btn-danger btn-sm"> الطلاب المحذوفين </a>
+                                            <a href="{{ route('typeexams', $type->id) }}"
+                                                class="btn btn-success btn-sm">الامتحانات</a>
+                                            <span class="btn btn-success btn-sm" data-toggle="modal"
+                                                data-target="#myModal{{ $type->id }}">create qrcode</span>
+                                            <a href="{{ route('types.patches', $type->id) }}" title="QrCode History"
+                                                class="text-dark ml-2"><i class="fas fa-cog"></i></a>
+                                            <a href="{{ route('security', $type->id) }}" title="اعدادات الامان"
+                                                class="text-dark ml-2"><i class="fas fa-cog"></i></a>
+                                              </div>
                                             </td>
                                         </tr>
                                         <div class="modal" id="myModal{{ $type->id }}" tabindex="-1"
