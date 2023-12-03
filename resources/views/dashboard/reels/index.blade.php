@@ -38,6 +38,11 @@ div#dataTableBuilder_length {
 .more {
     margin-top: 76px;
 }
+@media (min-width: 1024px){
+    .container {
+        max-width: 960px !important;
+}
+}
 @media (min-width: 1200px){
     .container {
         max-width: 960px !important;
