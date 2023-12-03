@@ -155,9 +155,7 @@
                 data.type_id = $("#type_id").val();
 
             });
-            console.log("filtering", "stage_id", stage_id "years_id", years_id "subjects_id",
-                subjects_id "subscription_type", subscription_type "type_id", type_id
-            );
+
             $('#dataTableBuilder').DataTable().ajax.reload();
         }
     </script>
