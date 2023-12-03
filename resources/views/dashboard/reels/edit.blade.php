@@ -35,7 +35,7 @@ button.btn.first.save {
                 @method('PUT')
                 <!-- start input -->
                 <div class="row">
-                    <div class="col-8 mx-auto">
+                    <div class="col-12 mx-auto">
                         <div class="form-group upload_file">
                             <label for="imageCover" class="upload_file_label">
 
@@ -63,7 +63,7 @@ button.btn.first.save {
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-6 col-md-12 col-12">
                         <div class="input-group">
                             <label class="form-label"> الاسم</label>
                             <input required type="text" value="{{$reel->name ?? ''}}" name="name" placeholder="الاسم" class="form-control">
@@ -71,7 +71,7 @@ button.btn.first.save {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-lg-6 col-md-12 col-12">
                         <div class="input-group">
                             <label class="form-label"> لينك الفيديو</label>
                             <input required type="text" value="{{$reel->video ?? ''}}" name="video" placeholder="لينك الفيديو" class="form-control">
