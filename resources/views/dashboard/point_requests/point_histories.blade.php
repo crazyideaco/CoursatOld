@@ -6,7 +6,7 @@
          width: 100% !important;
      }
      .more {
-        margin-top: 50px;
+        margin-top: 76px;
      }
  </style>
  @endsection
