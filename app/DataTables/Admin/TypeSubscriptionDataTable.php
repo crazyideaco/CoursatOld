@@ -78,14 +78,14 @@ class TypeSubscriptionDataTable extends DataTable
                 //filter
                 $query
                     ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
-                        dd($request->all());
+                        // dd($request->all());
                         return $q->whereHas('student', function ($stuentd_q) use ($request) {
-                            return $stuentd_q->where('stage_id', (int)$request->stage_id);
+                            return $stuentd_q->where('users.stage_id', (int)$request->stage_id);
                         });
                     })
                     ->when($request->years_id != null && $request->years_id != 0, function ($q) use ($request) {
-                        return $q->whereHas('student', function ($stuentd_q) use ($request) {
-                            return $stuentd_q->where('year_id', (int)$request->years_id);
+                        return $q->whereHas('type_course.year', function ($stuentd_q) use ($request) {
+                            return $stuentd_q->where('years.id', (int)$request->years_id);
                         });
                     })
                     ->when($request->subject_id != null && $request->subject_id != 0, function ($q) use ($request) {
@@ -93,8 +93,8 @@ class TypeSubscriptionDataTable extends DataTable
                             return $subject_q->where('subjects.id', (int)$request->subject_id);
                         });
                     })
-                    ->when($request->type_id != null && $request->type_id != 0, function ($stuentd_q) use ($request) {
-                        return $stuentd_q->where('type_id', (int)$request->type_id);
+                    ->when($request->type_id != null && $request->type_id != 0, function ($q) use ($request) {
+                        return $q->where('type_id', (int)$request->type_id);
                     })
                     ->when($request->subscription_type != null, function ($stuentd_q) use ($request) {
                         return $stuentd_q->where('type', (int)$request->subscription_type);
