@@ -78,6 +78,7 @@ class TypeSubscriptionDataTable extends DataTable
                 //filter
                 $query
                     ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
+                        dd($request->all());
                         return $q->whereHas('student', function ($stuentd_q) use ($request) {
                             return $stuentd_q->where('stage_id', (int)$request->stage_id);
                         });
