@@ -9,7 +9,7 @@
         margin-top: 76px;
      }
      .card-label h3 {
-        font-family: "reg";
+        font-family: "reg" !important;
      }
      .table tr td {
         font-family: "reg";
