@@ -20,6 +20,10 @@
     .main_education h4 {
         font-family: "reg"
     }
+    .mansa {
+    display: flex;
+    gap: 18px;
+}
     @media only screen and (max-width: 600px) {
         .form-group.nasra {
             flex-wrap: wrap;
