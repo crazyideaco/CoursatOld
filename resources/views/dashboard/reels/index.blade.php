@@ -40,7 +40,7 @@ div#dataTableBuilder_length {
 }
 @media (min-width: 1024px){
     .container {
-        max-width: 960px !important;
+        max-width: 1024px !important;
 }
 }
 @media (min-width: 1200px){
