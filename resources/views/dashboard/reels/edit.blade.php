@@ -625,14 +625,14 @@ button.btn.first.save {
         let mainEducation =document.getElementById("mainEducation")
         radio.onclick=function(){
             mainEducation.style.display="block"
-            mainEducation.style.display="none"
+            mainEducation1.style.display="none"
         }
     </script>
     <script>
         let radio1 = document.getElementById("radio2")
         let mainEducation1 =document.getElementById("universityEducation")
         radio.onclick=function(){
-            mainEducation.style.display="block"
+            mainEducation1.style.display="block"
             mainEducation.style.display="none"
         }
     </script>
