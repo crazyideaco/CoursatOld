@@ -50,7 +50,11 @@ class MainPageController extends Controller
                 $students1_numbers[] = $student->stutypes_count;
             }
         } elseif (Auth::user() && Auth::user()->is_student == 3) {
+            // $teachers = 0;
+            // $types = count(Type::where("doctor_id", auth()->id())->get());
+            return view('dashboard.mainpage.empty_main');
         } elseif (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 2) {
+            return view('dashboard.mainpage.empty_main');
         }
         return view('dashboard.mainpage.basic', compact(
             "teachers",
@@ -72,13 +76,9 @@ class MainPageController extends Controller
             $teachers = count(User::where("is_student", 3)->get());
             $types = count(TypesCollege::get());
             $students = count(User::where("is_student", 1)->where("university_id", "!=", null)->get());
-            $user_types = User::withCount("typescollege")->orderByDesc('typescollege_count')
-                ->take('5')->get();
-            $types_users = TypesCollege::withCount("studentscollege")->orderByDesc('studentscollege_count')
-                ->take('5')->get();
-            $students_type = User::withCount("stutypescollege")->where("name", "!=", null)
-                ->orderByDesc('stutypescollege_count')
-                ->take('5')->get();
+            $user_types = User::withCount("typescollege")->orderByDesc('typescollege_count')->take('5')->get();
+            $types_users = TypesCollege::withCount("studentscollege")->orderByDesc('studentscollege_count')->take('5')->get();
+            $students_type = User::withCount("stutypescollege")->where("name", "!=", null)->orderByDesc('stutypescollege_count')->take('5')->get();
             $teachers_names = [];
             $types_numbers = [];
             foreach ($user_types as $user_type) {
