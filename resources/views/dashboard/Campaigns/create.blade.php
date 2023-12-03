@@ -162,8 +162,10 @@
                                 <div class="col-lg-6 col-md-12 col-12">
                                     <div class="form-group nasra">
                                         @foreach ($platforms as $platform)
+                                           <div class="mansa">
                                             <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
                                             <label>{{ $platform->title }}</label>
+                                           </div>
                                         @endforeach
                                         @error('center_id')
                                             <div style="color:red;">{{ $message }} </div>
