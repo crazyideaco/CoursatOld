@@ -35,6 +35,9 @@ button:hover {
 div#dataTableBuilder_length {
     margin-top: 19px;
 }
+.more {
+    margin-top: 76px;
+}
 </style>
 
 
@@ -51,6 +54,7 @@ div#dataTableBuilder_length {
 	<!--begin::Card-->
     <div class="container">
 
+  <div class="more">
     <div class="card card-custom gutter-b">
 
         <div class="card-header flex-wrap py-3">
@@ -69,9 +73,12 @@ div#dataTableBuilder_length {
 
             <!--begin: Datatable-->
 
+  <div class="table-responsive">
     {!! $dataTable->table([
 
-                     ],true) !!}
+        ],true) !!}
+  </div>
+  </div>
             <!--end: Datatable-->
 
 
