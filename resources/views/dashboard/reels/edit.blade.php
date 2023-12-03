@@ -69,8 +69,8 @@ button.btn.first.save {
                             <input required type="text" value="{{$reel->name ?? ''}}" name="name" placeholder="الاسم" class="form-control">
                         </div>
                     </div>
-                </div>
-                <div class="row">
+
+
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="input-group">
                             <label class="form-label"> لينك الفيديو</label>
