@@ -145,11 +145,13 @@
 
                             {{-- input for campaign platform type --}}
                             <div class="row">
+                               <div class="col-lg-12 col-md-12 col-12">
                                 <div class="hed">
                                     <h5> نوع المنصه </h5>
 
                                 </div>
-                                <div class="col-2">
+                               </div>
+                                <div class="col-2 col-md-12 col-12">
                                     <div class="form-group nasra">
                                         @foreach ($platforms as $platform)
                                             <input type="checkbox" name="platform[]" value="{{ $platform->id }}">
