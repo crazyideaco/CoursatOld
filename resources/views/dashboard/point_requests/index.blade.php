@@ -8,6 +8,9 @@
     .more {
         margin-top: 76px
     }
+    .card-label h3{
+     font-family: "reg";
+    }
 </style>
 @endsection
 @section('content')
