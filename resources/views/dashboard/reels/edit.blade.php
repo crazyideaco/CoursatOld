@@ -89,15 +89,13 @@ button.btn.first.save {
                             <label class="form-label">نوع التعليم</label>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="category_id" id="radio1"
-                                    onchange="toggleRow()" value="1" @if($reel->category_id == 1) checked @endif>
+                                <input class="form-check-input" type="radio" name="category_id" id="radioMainEducation" value="1">
                                 <label class="form-check-label" for="radio1">اساسي</label>
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="category_id" id="radio2"
-                                    onchange="toggleRow()" value="2" @if($reel->category_id == 2) checked @endif>
-                                <label class="form-check-label" for="radio2">جامعي</label>
+                                <input class="form-check-input" type="radio" name="category_id" id="radioUniversityEducation" value="2">
+                                <label class="form-check-label" for="radioUniversityEducation">جامعي</label>
                             </div>
 
                             {{-- <div class="form-check form-check-inline">
@@ -621,19 +619,19 @@ button.btn.first.save {
         }
     </script>
     <script>
-        let radio = document.getElementById("radio1")
-        let mainEducation =document.getElementById("mainEducation")
-        radio.onclick=function(){
-            mainEducation.style.display="block"
-            mainEducation1.style.display="none"
+        let radioMainEducation = document.getElementById("radioMainEducation");
+        let divMainEducation= document.getElementById("mainEducation");
+        radioMainEducation.onclick = function(){
+            divMainEducation.style.display = "block";
+            divuniversityEducation.style.display = "none";
         }
     </script>
     <script>
-        let radio1 = document.getElementById("radio2")
-        let mainEducation1 =document.getElementById("universityEducation")
-        radio.onclick=function(){
-            mainEducation1.style.display="block"
-            mainEducation.style.display="none"
+        let radioUniversityEducation = document.getElementById("radioUniversityEducation");
+        let divuniversityEducation = document.getElementById("universityEducation");
+        radioUniversityEducation.onclick = function(){
+            divuniversityEducation.style.display = "block";
+            divMainEducation.style.display = "none";
         }
     </script>
 @endsection
