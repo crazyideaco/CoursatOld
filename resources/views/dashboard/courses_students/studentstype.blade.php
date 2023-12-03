@@ -131,10 +131,13 @@
                                                 <td scope="col" class="text-center">
                                                     @if ($student->city)
                                                         {{ $student->city['city'] }}
+                                                    @else
+                                                    --
                                                     @endif
                                                 </td>
                                                 <td scope="col" class="text-center">
-                                                    {{ $student->pivot->created_at->format('Y-m-d') }}
+                                                    {{-- {{ $student->pivot->created_at->format('Y-m-d') }} --}}
+                                                    --
                                                 </td>
 
 
@@ -145,24 +148,28 @@
                                                         onclick="deletestudentcourse({{ $student->id }},{{ $id }})">
                                                         حذف
                                                     </span>
-                                                    <?php if ($status == 0) {
-                                                        $studenttype = \App\Student_Type::where([['student_id', '=', $student->id], ['type_id', '=', $id]])->first();
-                                                    } elseif ($status == 1) {
-                                                        $studenttype = \App\Student_Typecollege::where([['student_id', '=', $student->id], ['typecollege_id', '=', $id]])->first();
-                                                    } elseif ($status == 2) {
-                                                        $studenttype = \App\Student_Course::where([['student_id', '=', $student->id], ['course_id', '=', $id]])->first();
-                                                    }
-                                                    ?>
+                                                    @php
+                                                        if ($status == 0) {
+                                                            $studenttype = \App\Student_Type::where([['student_id', '=', $student->id], ['type_id', '=', $id]])->first();
+                                                        } elseif ($status == 1) {
+                                                            $studenttype = \App\Student_Typecollege::where([['student_id', '=', $student->id], ['typecollege_id', '=', $id]])->first();
+                                                        } elseif ($status == 2) {
+                                                            $studenttype = \App\Student_Course::where([['student_id', '=', $student->id], ['course_id', '=', $id]])->first();
+                                                        }
+                                                    @endphp
 
                                                     <span
                                                         class="btn  btn-sm"style="border:1px solid #222; margin-bottom:10px; padding:6px 45px"
                                                         id="btning{{ $student->id }}"
                                                         onclick="activestudentcourse({{ $student->id }},{{ $id }})">
-                                                        @if ($studenttype->active == 1)
-                                                            الغاء التفعيل
-                                                        @else
-                                                            تفعيل
-                                                        @endif
+
+                                                        @php
+                                                            if ($studenttype && $studenttype->active == 1){
+                                                                "الغاء التفعيل";
+                                                            }else{
+                                                                "تفعيل";
+                                                            }
+                                                        @endphp
                                                     </span>
                                                 </td>
 

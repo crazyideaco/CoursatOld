@@ -167,75 +167,75 @@
             </div>
             <!-- أكثر الكورسات طلبا -->
 
-            <!--  أكثر المدرسين طلبا -->
-            <div class="col-lg-6 col-md-6 col-12 mt-5">
-                <canvas id="myChart4" style="transform: scale(.8);"></canvas>
-                <script>
-                    const zyx4 = document.getElementById("myChart4").getContext('2d');
-                    const labels5 = <?php echo json_encode($students1_names); ?>;
-                    const data5 = {
-                        labels: labels5,
-                        datasets: [{
-                            label: 'أكثر الطلاب طلبا',
-                            data: <?php echo json_encode($students1_numbers); ?>,
-                            backgroundColor: [
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(133, 73, 186 ,.2)'
-                            ],
-                            borderColor: [
-                                'rgb(54, 162, 235)',
-                                'rgb(255, 99, 132)',
-                                '#8549ba'
-                            ],
-                            borderWidth: 1,
-                            barPercentage: 0.5,
-                            // barThickness: 50,
-                            // maxBarThickness: 15,
-                            minBarLength: 3,
-                        }]
-                    };
-                    const config5 = {
-                        type: 'pie',
-                        data: data5,
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
+        <!--  أكثر المدرسين طلبا -->
+        <div class="col-lg-6 col-md-6 col-12 mt-5">
+            <canvas id="myChart4" style="transform: scale(.8);"></canvas>
+            <script>
+                const zyx4 = document.getElementById("myChart4").getContext('2d');
+                const labels5 = <?php echo json_encode($students1_names);?>;
+                const data5 = {
+                    labels: labels5,
+                    datasets: [{
+                        label: 'أكثر الطلاب طلبا',
+                        data: <?php echo json_encode($students1_numbers);?>,
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(133, 73, 186 ,.2)'
+                        ],
+                        borderColor: [
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 99, 132)',
+                            '#8549ba'
+                        ],
+                        borderWidth: 1,
+                        barPercentage: 0.5,
+                        // barThickness: 50,
+                        // maxBarThickness: 15,
+                        minBarLength: 3,
+                    }]
+                };
+                const config5 = {
+                    type: 'pie',
+                    data: data5,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
                             }
-                        },
-                    };
-                    const myChart5 = new Chart(zyx4, config5);
-                </script>
-            </div>
-            <!--  أكثر المدرسين طلبا -->
+                        }
+                    },
+                };
+                const myChart5 = new Chart(zyx4, config5);
+            </script>
         </div>
-        <!-- <div class="row">
-            <table class="table w-100" id="example">
-                <thead>
-                    <tr>
-                        <th>اسم الطالب</th>
-                        <th>اسم الكورس</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>أحمد</td>
-                        <td>Computer science</td>
-                        <td class="text-center">
-                            <a href="#"> <img src="{{ asset('images/pen.svg') }}" id="pen" style="cursor: pointer"></a>
-                             @if (auth()->user()->hasPermission('stages-delete'))
-    -->
-        <!-- <img src="{{ asset('images/trash.svg') }}" id="trash" style="cursor:pointer;"> -->
-        <!--
-    @endif -->
-        </td>
-        </tr>
-        </tbody>
+        <!--  أكثر المدرسين طلبا -->
+    </div>
+    <!-- <div class="row">
+      <div class= "table-responsive">
+        <table class="table w-100" id="example">
+            <thead>
+                <tr>
+                    <th>اسم الطالب</th>
+                    <th>اسم الكورس</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>أحمد</td>
+                    <td>Computer science</td>
+                    <td class="text-center">
+                        <a href="#"> <img src="{{asset('images/pen.svg')}}" id="pen" style="cursor: pointer"></a>
+                         @if(auth()->user()->hasPermission("stages-delete")) -->
+                        <!-- <img src="{{asset('images/trash.svg')}}" id="trash" style="cursor:pointer;"> -->
+                        <!-- @endif -->
+                    </td>
+                </tr>
+            </tbody>
         </table>
+        </div>
     </div> -->
     </div>
 @endsection
