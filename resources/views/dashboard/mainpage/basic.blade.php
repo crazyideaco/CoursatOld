@@ -200,7 +200,7 @@
         </div>
         <!--  أكثر المدرسين طلبا -->
     </div>
-     <div class="row">
+    <!-- <div class="row">
       <div class= "table-responsive">
         <table class="table w-100" id="example">
             <thead>
@@ -224,7 +224,7 @@
             </tbody>
         </table>
         </div>
-    </div> 
+    </div> -->
 </div>
 @endsection
 
