@@ -5,28 +5,33 @@
      #example_wrapper {
          width: 100% !important;
      }
+     .more {
+        margin-top: 50px;
+     }
  </style>
  @endsection
  @section('content')
      <!--begin::Card-->
      <div class="container">
 
-     <div class="card card-custom gutter-b">
+  <div class="more">
+    <div class="card card-custom gutter-b">
 
-         <div class="card-header flex-wrap py-3">
-                                         <div class="card-title">
-                                             <h3 class="card-label">تاريخ النقاط
- </h3>
-                                         </div>
-
-                                     </div>
+        <div class="card-header flex-wrap py-3">
+             <div class="card-title">
+                <h3 class="card-label">تاريخ النقاط</h3>
+             </div>
+              </div>
 
 
-             <!--begin: Datatable-->
+            <!--begin: Datatable-->
 
-     {!! $dataTable->table([
+  <div class="table-responsive">
+   {!! $dataTable->table([
 
-                      ],true) !!}
+       ],true) !!}
+  </div>
+  </div>
              <!--end: Datatable-->
 
 
