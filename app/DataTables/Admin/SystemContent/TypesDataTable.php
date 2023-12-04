@@ -60,7 +60,7 @@ class TypesDataTable extends DataTable
                 }
             })
             ->editColumn('created_at', function ($query) {
-                return Carbon::parse($query->created_at)->diffForHumans();
+                return Carbon::parse($query->created_at)->format('Y-m-d');
             })
             ->rawColumns([
                 'action',
@@ -113,11 +113,11 @@ class TypesDataTable extends DataTable
                     })
                     ->when($request->center_id != null && $request->center_id == 0, function ($q) use ($request) {
                         return  $q->orWhereDoesntHave('center');
-                    })
-                    ->when($request->month != null && $request->month != 0, function ($q) use ($request) {
-                        $next_month = Carbon::parse($request->month)->addMonth()->format('Y-m');
-                        return $q->whereMonth('created_at', '>=',  $next_month)->whereMonth('created_at', '<=',  $request->month);
                     });
+                    // ->when($request->month != null && $request->month != 0, function ($q) use ($request) {
+                    //     $next_month = Carbon::parse($request->month)->addMonth()->format('Y-m');
+                    //     return $q->whereMonth('created_at', '>=',  $next_month)->whereMonth('created_at', '<=',  $request->month);
+                    // });
             });
     }
 
