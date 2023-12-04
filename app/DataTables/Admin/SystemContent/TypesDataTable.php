@@ -114,13 +114,14 @@ class TypesDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name_ar'),
-            Column::make('user'),
-            Column::make('center'),
-            Column::make('subject'),
-            Column::make('year'),
-            Column::make('created_at'),
+            Column::make('name_ar')->title('الدوره االتعلميه الشهريه'),
+            Column::make('user')->title('المدرس'),
+            Column::make('center')->title('نوع المنصة'),
+            Column::make('subject')->title('الماده'),
+            Column::make('year')->title('السنه'),
+            Column::make('created_at')->title('تاريخ إنشاء الكورس'),
             Column::computed('action')
+                ->title('الاعدادات')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
