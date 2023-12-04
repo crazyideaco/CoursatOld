@@ -150,7 +150,7 @@
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>الشهر </label>
                                 <input type="month" class="form-control" id="month" name="month"
-                                    value="{{ \Carbon\Carbon::now()->format('Y-m') }}" />
+                                    {{-- value="{{ \Carbon\Carbon::now()->format('Y-m') }}" --}} />
                                 @error('month')
                                     <p style="color:red;">{{ $message }}</p>
                                 @enderror

@@ -102,11 +102,11 @@ class TypesDataTable extends DataTable
                     ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
                         return $q->where('stage_id', $request->stage_id);
                     })
-                    ->when($request->subject_id != null && $request->subject_id != 0, function ($q) use ($request) {
-                        return $q->where('subject_id', $request->subject_id);
+                    ->when($request->subjects_id != null && $request->subjects_id != 0, function ($q) use ($request) {
+                        return $q->where('subjects_id', $request->subjects_id);
                     })
-                    ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
-                        return $q->where('year_id', $request->year_id);
+                    ->when($request->years_id != null && $request->years_id != 0, function ($q) use ($request) {
+                        return $q->where('years_id', $request->years_id);
                     })
                     ->when($request->center_id != null && $request->center_id != 0, function ($q) use ($request) {
                         return  $q->where('center_id', $request->center_id);
