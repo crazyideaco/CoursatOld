@@ -10,6 +10,7 @@ class StageController extends Controller
 {
     public function getstage($id)
     {
+        dd('0');
         $years = Year::where('stage_id', $id)->get();
         $text = "";
         // $text .= '<option value="0"   disabled="disabled">ادخل السنه</option>';

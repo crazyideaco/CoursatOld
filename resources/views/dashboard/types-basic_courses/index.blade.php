@@ -350,6 +350,7 @@
                     $('#years_id').empty();
                     $('#years_id').html(result);
                     $('#years_id').selectpicker('refresh');
+                    $('#subjects_id').selectpicker('refresh');
                 }
 
             });
