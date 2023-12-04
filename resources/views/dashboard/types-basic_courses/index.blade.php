@@ -112,7 +112,8 @@
                         <div class="row">
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>المرحله</label>
-                                <select class="form-control selectpicker new" name="stage_id" onchange="getstage(this)">
+                                <select class="form-control selectpicker new" name="stage_id" id="stage_id"
+                                    onchange="getstage(this); filtertypes()">
                                     <option value="0" selected="selected" required disabled="disabled">ادخل المرحله
                                     </option>
                                     @foreach ($stages as $stage)
@@ -125,8 +126,8 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>سنه الماده</label>
-                                <select class="form-control selectpicker new" name="years_id" required id="year"
-                                    onchange="getyear(this)">
+                                <select class="form-control selectpicker new" name="years_id" required id="years_id"
+                                    onchange="getyear(this); filtertypes()">
                                     <option value="0" selected="selected" disabled="disabled">اختر السنه</option>
 
                                 </select>
@@ -136,8 +137,8 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>الماده </label>
-                                <select class="form-control selectpicker new" name="subjects_id" required id="subject"
-                                    onchange="getteacher(this)">
+                                <select class="form-control selectpicker new" name="subjects_id" required id="subjects_id"
+                                    onchange="getteacher(this); filtertypes()">
                                     <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
 
                                 </select>
@@ -346,9 +347,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
-                    $('#year').empty();
-                    $('#year').html(result);
-                    $('#year').selectpicker('refresh');
+                    $('#years_id').empty();
+                    $('#years_id').html(result);
+                    $('#years_id').selectpicker('refresh');
                 }
 
             });
@@ -367,14 +368,26 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "Json",
                 success: function(result) {
-                    $('#subject').empty();
-                    $('#subject').html(result);
-                    $('#subject').selectpicker('refresh');
+                    $('#subjects_id').empty();
+                    $('#subjects_id').html(result);
+                    $('#subjects_id').selectpicker('refresh');
                 }
 
             });
         }
+    </script>
 
-        
+    <script>
+        function filtertypes() {
+            $('#dataTableBuilder').on('preXhr.dt', function(e, settings, data) {
+                //basic filters
+                data.stage_id = $("#stage_id").val();
+                data.years_id = $("#years_id").val();
+                data.subjects_id = $("#subjects_id").val();
+                data.month = $("#month").val();
+
+            });
+            $('#dataTableBuilder').DataTable().ajax.reload();
+        }
     </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\DataTables\Admin\SystemContent;
 
 use App\Type;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -20,7 +21,7 @@ class TypesDataTable extends DataTable
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable($query, Request $request)
     {
         return datatables()
             ->eloquent($query)
@@ -69,7 +70,55 @@ class TypesDataTable extends DataTable
                 'subject',
                 'year',
                 'created_at',
-            ]);
+            ])->filter(function ($query) use ($request) {
+                //search
+                if (
+                    $request->has('search') && isset($request->input('search')['value'])
+                    && !empty($request->input('search')['value'])
+                ) {
+                    $searchValue = $request->input('search')['value'];
+                    $query
+                        ->where(function ($query) use ($searchValue) {
+                            $query->where('name_ar', 'LIKE', "%$searchValue%")
+                                ->orWhere('id', 'LIKE', "%$searchValue%")
+                                ->orWhereDate('created_at', 'LIKE', "%$searchValue%");
+                        })
+                        ->orwhereHas('user', function ($q) use ($searchValue) {
+                            $q->where('name', 'LIKE', "%$searchValue%");
+                        })
+                        ->orwhereHas('subject', function ($q) use ($searchValue) {
+                            $q->where('name_ar', 'LIKE', "%$searchValue%");
+                        })
+                        ->orwhereHas('year', function ($q) use ($searchValue) {
+                            $q->where('year_ar', 'LIKE', "%$searchValue%");
+                        })
+                        ->orwhereHas('center', function ($q) use ($searchValue) {
+                            $q->where('name', 'LIKE', "%$searchValue%");
+                        });
+                        // ->orWhereDoesntHave('center');
+                }
+                //query
+                $query
+                    ->when($request->stage_id != null && $request->stage_id != 0, function ($q) use ($request) {
+                        return $q->where('stage_id', $request->stage_id);
+                    })
+                    ->when($request->subject_id != null && $request->subject_id != 0, function ($q) use ($request) {
+                        return $q->where('subject_id', $request->subject_id);
+                    })
+                    ->when($request->year_id != null && $request->year_id != 0, function ($q) use ($request) {
+                        return $q->where('year_id', $request->year_id);
+                    })
+                    ->when($request->center_id != null && $request->center_id != 0, function ($q) use ($request) {
+                        return  $q->where('center_id', $request->center_id);
+                    })
+                    ->when($request->center_id != null && $request->center_id == 0, function ($q) use ($request) {
+                        return  $q->orWhereDoesntHave('center');
+                    })
+                    ->when($request->month != null && $request->month != 0, function ($q) use ($request) {
+                        $next_month = Carbon::parse($request->month)->addMonth()->format('Y-m');
+                        return $q->whereMonth('created_at', '>=',  $next_month)->whereMonth('created_at', '<=',  $request->month);
+                    });
+            });
     }
 
     /**
