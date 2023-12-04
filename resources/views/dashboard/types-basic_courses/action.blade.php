@@ -1,29 +1,87 @@
-<div class="opitions">
-    <a href="{{ route('edittype', $id) }}"> <img src="{{ asset('images/pen.svg') }}" id="pen"
-            style="cursor: pointer"></a>
-    @if (auth()->user()->hasPermission('types-delete'))
-        <img src="{{ asset('images/trash.svg') }}" id="trash" onclick="deletetype('{{ $id }}')"
-            style="cursor:pointer;">
-    @endif
-    <span class="btn bg-success btn-success text-white btn-sm" id="btn{{ $id }}"
-        onclick="activetype({{ $id }})">
-        @if ($active == 1)
-            الغاء التفعيل
-        @else
-            تفعيل
-        @endif
+<style>
+    td.text-center {
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        min-width: 200px;
+    }
 
-    </span>
-    <a href="{{ route('grouptypes', $id) }}" class="btn btn-success btn-sm">المجموعات</a>
-    <a href="{{ route('studentstype', $id) }}" class="btn btn-success btn-sm">الطلاب</a>
-    <a href="{{ route('bannedStudentstype', $id) }}" class="btn btn-danger btn-sm"> الطلاب المحذوفين </a>
-    <a href="{{ route('typeexams', $id) }}" class="btn btn-success btn-sm">الامتحانات</a>
-    <span class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal{{ $id }}">create
-        qrcode</span>
-    <a href="{{ route('types.patches', $id) }}" title="QrCode History" class="text-dark ml-2"><i
-            class="fas fa-cog"></i></a>
-    <a href="{{ route('security', $id) }}" title="اعدادات الامان" class="text-dark ml-2"><i class="fas fa-cog"></i></a>
-</div>
+    td.text-center {
+        width: 30%;
+    }
+
+    .table-bordered.dataTable tbody th,
+    table.table-bordered.dataTable tbody td {
+        border-bottom-width: 0;
+        font-size: 0.8rem;
+        padding: 0.5rem !important;
+    }
+
+    .width_30 {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        width: 30%;
+    }
+
+    .width_30 img {
+        width: 25px;
+    }
+</style>
+
+<td class="opitions">
+
+    <div class="width_30">
+        <a href="{{ route('edittype', $id) }}">
+            <img src="{{ asset('images/pen.svg') }}" id="pen" style="cursor: pointer">
+        </a>
+    </div>
+
+    @if (auth()->user()->hasPermission('types-delete'))
+        <div class="width_30">
+            <img src="{{ asset('images/trash.svg') }}" id="trash" onclick="deletetype('{{ $id }}')"
+                style="cursor:pointer;">
+        </div>
+    @endif
+    <div class="width_30">
+        <span class="btn bg-success btn-success text-white btn-sm" id="btn{{ $id }}"
+            onclick="activetype({{ $id }})">
+            @if ($active == 1)
+                الغاء التفعيل
+            @else
+                تفعيل
+            @endif
+
+        </span>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('grouptypes', $id) }}" class="btn btn-success btn-sm">المجموعات</a>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('studentstype', $id) }}" class="btn btn-success btn-sm">الطلاب</a>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('bannedStudentstype', $id) }}" class="btn btn-danger btn-sm"> الطلاب المحذوفين </a>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('typeexams', $id) }}" class="btn btn-success btn-sm">الامتحانات</a>
+    </div>
+    <div class="width_30">
+        <span class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal{{ $id }}">create
+            qrcode</span>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('types.patches', $id) }}" title="QrCode History" class="text-dark ml-2">
+            <i class="fas fa-cog"></i>
+        </a>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('security', $id) }}" title="اعدادات الامان" class="text-dark ml-2">
+            <i class="fas fa-cog"></i>
+        </a>
+    </div>
+
+</td>
 
 
 <div class="modal" id="myModal{{ $id }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -132,7 +190,6 @@
     }
 </script>
 <script>
-
     function activetype(id) {
         $.ajaxSetup({
             headers: {
