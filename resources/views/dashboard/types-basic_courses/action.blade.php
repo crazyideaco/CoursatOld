@@ -29,7 +29,7 @@
     }
 </style>
 
-<td class="opitions">
+<td class="text-center"> {{-- opitions  --}}
 
     <div class="width_30">
         <a href="{{ route('edittype', $id) }}">
