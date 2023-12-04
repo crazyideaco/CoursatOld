@@ -1,4 +1,4 @@
-<style>
+{{-- <style>
     td.text-center {
         display: flex !important;
         justify-content: center;
@@ -27,9 +27,8 @@
     .width_30 img {
         width: 25px;
     }
-</style>
-
-<div class="text-center"> {{-- opitions  --}}
+</style> --}}
+{{-- <div class="text-center">
 
     <div class="width_30">
         <a href="{{ route('edittype', $id) }}">
@@ -81,7 +80,69 @@
         </a>
     </div>
 
+</div> --}}
+<div class="text-center">
+
+    <!-- Edit -->
+    <div class="width_30">
+        <a href="{{ route('edittype', $id) }}" title="Edit">
+            <img src="{{ asset('images/pen.svg') }}" id="pen" style="cursor: pointer">
+        </a>
+    </div>
+
+    <!-- Delete (if user has permission) -->
+    @if (auth()->user()->hasPermission('types-delete'))
+        <div class="width_30">
+            <img src="{{ asset('images/trash.svg') }}" id="trash" onclick="deletetype('{{ $id }}')" style="cursor:pointer;" title="Delete">
+        </div>
+    @endif
+
+    <!-- Activate/Deactivate -->
+    <div class="width_30">
+        <span class="btn bg-success btn-success text-white btn-sm" id="btn{{ $id }}" onclick="activetype({{ $id }})" title="{{ $active == 1 ? 'Deactivate' : 'Activate' }}">
+            @if ($active == 1)
+                الغاء التفعيل
+            @else
+                تفعيل
+            @endif
+        </span>
+    </div>
+
+    <!-- Groups, Students, Deleted Students, Exams -->
+    <div class="width_30">
+        <a href="{{ route('grouptypes', $id) }}" class="btn btn-success btn-sm" title="المجموعات">المجموعات</a>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('studentstype', $id) }}" class="btn btn-success btn-sm" title="الطلاب">الطلاب</a>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('bannedStudentstype', $id) }}" class="btn btn-danger btn-sm" title="الطلاب المحذوفين"> الطلاب المحذوفين </a>
+    </div>
+    <div class="width_30">
+        <a href="{{ route('typeexams', $id) }}" class="btn btn-success btn-sm" title="الامتحانات">الامتحانات</a>
+    </div>
+
+    <!-- Create QR Code -->
+    <div class="width_30">
+        <span class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal{{ $id }}" title="Create QR Code">Create QR Code</span>
+    </div>
+
+    <!-- QrCode History -->
+    <div class="width_30">
+        <a href="{{ route('types.patches', $id) }}" title="QrCode History" class="text-dark ml-2">
+            <i class="fas fa-cog"></i>
+        </a>
+    </div>
+
+    <!-- Security Settings -->
+    <div class="width_30">
+        <a href="{{ route('security', $id) }}" title="اعدادات الامان" class="text-dark ml-2">
+            <i class="fas fa-cog"></i>
+        </a>
+    </div>
+
 </div>
+
 
 
 <div class="modal" id="myModal{{ $id }}" tabindex="-1" role="dialog" aria-hidden="true">
