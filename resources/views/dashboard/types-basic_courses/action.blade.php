@@ -29,7 +29,7 @@
     }
 </style>
 
-<td class="text-center d-flex p-2 "> {{-- opitions  --}}
+<div class="text-center"> {{-- opitions  --}}
 
     <div class="width_30">
         <a href="{{ route('edittype', $id) }}">
@@ -81,7 +81,7 @@
         </a>
     </div>
 
-</td>
+</div>
 
 
 <div class="modal" id="myModal{{ $id }}" tabindex="-1" role="dialog" aria-hidden="true">
