@@ -113,9 +113,8 @@
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>المرحله</label>
                                 <select class="form-control selectpicker new" name="stage_id" id="stage_id"
-                                    onchange="getstage(this); filtertypes()">
-                                    <option value="0" selected="selected" required disabled="disabled">ادخل المرحله
-                                    </option>
+                                    onchange="getstage(this); filtertypes()" title="ادخل المرحله">
+                                    {{-- <option value="0" selected="selected" required disabled="disabled">ادخل المرحله</option> --}}
                                     @foreach ($stages as $stage)
                                         <option value='{{ $stage->id }}'>{{ $stage->name_ar }}</option>
                                     @endforeach
@@ -127,8 +126,8 @@
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>سنه الماده</label>
                                 <select class="form-control selectpicker new" name="years_id" required id="years_id"
-                                    onchange="getyear(this); filtertypes()">
-                                    <option value="0" selected="selected" disabled="disabled">اختر السنه</option>
+                                    onchange="getyear(this); filtertypes()" title="اختر السنه">
+                                    {{-- <option value="0" selected="selected" disabled="disabled">اختر السنه</option> --}}
 
                                 </select>
                                 @error('years_id')
@@ -138,8 +137,8 @@
                             <div class="form-group col-lg-3 col-md-6 col-12">
                                 <label>الماده </label>
                                 <select class="form-control selectpicker new" name="subjects_id" required id="subjects_id"
-                                    onchange="getteacher(this); filtertypes()">
-                                    <option value="0" selected="selected" disabled="disabled">اختر الماده</option>
+                                    onchange="getteacher(this); filtertypes()" title="اختر الماده">
+                                    {{-- <option value="0" selected="selected" disabled="disabled">اختر الماده</option> --}}
 
                                 </select>
                                 @error('subjects_id')
