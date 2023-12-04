@@ -114,9 +114,12 @@ class TypesDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('name_ar'),
+            Column::make('user'),
+            Column::make('center'),
+            Column::make('subject'),
+            Column::make('year'),
             Column::make('created_at'),
-            Column::make('updated_at'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
