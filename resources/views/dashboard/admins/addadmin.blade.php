@@ -212,9 +212,9 @@
                                 </div>
                           	</div>
                             <div class="col-xl-12">
-                                <label class="mb-3">الصلاحيات</label>
+                                <h4 class="mb-3">الصلاحيات</h4>
 
-                                <ul class="nav nav-tabs">
+                                /* <ul class="nav nav-tabs">
                                     @foreach($models as $index => $model)
                                     <li class="nav-item">
                                         <a href="#{{$model}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$index == 0 ? 'active' : ''}}">
@@ -282,7 +282,7 @@
                                          @endforeach
                                     </div>
                                   @endforeach
-                                </div>
+                                </div> */
                             </div><!-- end col -->
                             </div>
 
