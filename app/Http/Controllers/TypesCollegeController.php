@@ -273,14 +273,20 @@ class TypesCollegeController extends Controller
         if ($request->hasFile('image')) {
             if (public_path() . '/uploads/' . $typescollege->image) {
                 $link = public_path() . '/uploads/' . $typescollege->image;
-                unlink($link);
+                File::delete($link);
             }
-            $image = $request->image;
+
+            /**$image = $request->image;
             $file = $image->getClientOriginalName();
             $fileName = pathinfo($file, PATHINFO_FILENAME);
             $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
             $image->move('uploads', $fileName . '_' . time() . '.' . $fileExtension);
-            $typescollege->image = $fileName . '_' . time() . '.' . $fileExtension;
+            $typescollege->image = $fileName . '_' . time() . '.' . $fileExtension;*/
+
+            $image = $request->image;
+            $image->move('uploads', time() . '.' . $image->getClientOriginalExtension());
+            $typescollege->image = time() . '.' . $image->getClientOriginalExtension();
+
         }
         if ($request->hasFile('intro')) {
             if (public_path() . '/uploads/' . $typescollege->intro) {
