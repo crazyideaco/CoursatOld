@@ -132,9 +132,9 @@ class TypesDataTable extends DataTable
         if (Auth::user() && Auth::user()->isAdmin == 'admin') {
             return $model->newQuery()->orderBy('created_at', 'desc');
         } else if (Auth::user() && Auth::user()->is_student == config('project_types.auth_user_is_student.basic_lecturer')) {
-            return $model->newQuery()->orderBy('created_at', 'desc')->where('user_id', Auth::user()->id)->get();
+            return $model->newQuery()->orderBy('created_at', 'desc')->where('user_id', Auth::user()->id);
         } else if (Auth::user() && Auth::user()->is_student == config('project_types.auth_user_is_student.center') && Auth::user()->category_id = config('project_types.system_category_type.category_id_basic')) {
-            return $model->newQuery()->orderBy('created_at', 'desc')->where('center_id', Auth::user()->id)->get();
+            return $model->newQuery()->orderBy('created_at', 'desc')->where('center_id', Auth::user()->id);
         } else {
             return $model->newQuery();
         }
