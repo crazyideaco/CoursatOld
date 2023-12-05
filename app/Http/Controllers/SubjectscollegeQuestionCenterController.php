@@ -104,6 +104,7 @@ class SubjectscollegeQuestionCenterController extends Controller
     }
     public function storesubjectscollegequestionscenter(Request $request)
     {
+        // dd($request->all());
         $part = new SubjectscollegePart;
 
         $part->division_id  = $request->division_id;
@@ -241,7 +242,7 @@ class SubjectscollegeQuestionCenterController extends Controller
     public function updatesubjectscollegequestionscenter(Request $request, $id)
     {
 
-        dd($request->all());
+        // dd($request->all());
         $part =  SubjectscollegePart::where('id', $id)->first();
 
 
