@@ -171,35 +171,45 @@ class StudentController extends Controller
     }
     public function mytypestudents()
     {
-        if (Auth::user() && Auth::user()->is_student == 5 && Auth::user()->category_id == 1) {
+        if (
+            Auth::user() &&
+            Auth::user()->is_student == config('project_types.auth_user_is_student.center') &&
+            Auth::user()->category_id == config('project_types.system_category_type.category_id_basic')
+        ) {
             $types1 = auth()->user()->centertypes->pluck('id')->toArray();
             $types = auth()->user()->centertypes;
             $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
             $students1 = User::whereIn('id', $students_ids)->get();
             $students = $students1->merge(auth()->user()->centerstudents);
-        } else if (Auth::user() && Auth::user()->is_student == 2) {
+        } else if (
+            Auth::user() &&
+            Auth::user()->is_student == config('project_types.auth_user_is_student.basic_lecturer')
+        ) {
             $types1 = auth()->user()->types->pluck('id')->toArray();
             $types = auth()->user()->types;
             $students_ids = Student_Type::whereIn('type_id', $types1)->get()->pluck('student_id')->unique();
             $students1 = User::whereIn('id', $students_ids)->get();
             $students = $students1->merge(auth()->user()->centerstudents);
         } else if (
-            Auth::user() && Auth::user()->is_student == 5 &&
-            Auth::user()->category_id == 2
+            Auth::user() && Auth::user()->is_student == config('project_types.auth_user_is_student.center') &&
+            Auth::user()->category_id == config('project_types.system_category_type.category_id_college')
         ) {
             $types1 = auth()->user()->centertypescollege->pluck('id')->toArray();
             $types = auth()->user()->centertypescollege;
             $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
             $students1 = User::whereIn('id', $students_ids)->get();
             $students = $students1->merge(auth()->user()->centerstudents);
-        } else if (Auth::user() && Auth::user()->is_student == 3) {
+        } else if (
+            Auth::user() &&
+            Auth::user()->is_student == config('project_types.auth_user_is_student.doctor')
+        ) {
             $types1 = auth()->user()->typescollege->pluck('id')->toArray();
             $types = auth()->user()->typescollege;
             $students_ids = Student_Typecollege::whereIn('typecollege_id', $types1)->get()->pluck('student_id')->unique();
             $students1 = User::whereIn('id', $students_ids)->get();
             $students = $students1->merge(auth()->user()->centerstudents);
         } else if (
-            Auth::user() && Auth::user()->is_student == 5 &&
+            Auth::user() && Auth::user()->is_student == config('project_types.auth_user_is_student.center') &&
             Auth::user()->category_id == 3
         ) {
             $types1 = auth()->user()->centercourses->pluck('id')->toArray();
@@ -207,7 +217,10 @@ class StudentController extends Controller
             $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
             $students1 = User::whereIn('id', $students_ids)->get();
             $students = $students1->merge(auth()->user()->centerstudents);
-        } else if (Auth::user() && Auth::user()->is_student == 4) {
+        } else if (
+            Auth::user() &&
+            Auth::user()->is_student == config('project_types.auth_user_is_student.private_course_lecturer')
+        ) {
             $types1 = auth()->user()->courses->pluck('id')->toArray();
             $types = auth()->user()->courses;
             $students_ids = Student_Course::whereIn('course_id', $types1)->get()->pluck('student_id')->unique();
