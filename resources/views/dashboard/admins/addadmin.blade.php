@@ -214,14 +214,47 @@
                             <div class="col-xl-12">
                                 <h4 class="mb-3">الصلاحيات</h4>
 
+                                <table class="table">
+                                        {{--<thead>
+                                            <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                            </tr>
+                                        </thead>--}}
+                                        <tbody>
+                                            <tr>
+                                            <th scope="row">المشرف</th>
+                                            <td><div class="form-group form-check">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                            </div>
+                                           </td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                            </tr>
+                                        </tbody>
+                                </table>
 
 
 
 
 
 
-
-                              <ul class="nav nav-tabs">
+                              {{--<ul class="nav nav-tabs">
                                     @foreach($models as $index => $model)
                                     <li class="nav-item">
                                         <a href="#{{$model}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$index == 0 ? 'active' : ''}}">
@@ -290,7 +323,7 @@
                                     </div>
                                   @endforeach
                                 </div>
-                            </div>
+                            </div>--}}
                             </div>
 
           </div>
