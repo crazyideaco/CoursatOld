@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="form-group col-lg-3 col-md-6 col-12">
                                     <label>المرحله</label>
-                                    <select name="state_id" class="form-control" onchange="getstage(this)" required>
+                                    <select name="stage_id" class="form-control" onchange="getstage(this)" required>
                                         <option value="stage_id" selected="selected" disabled>اختر مرحله</option>
                                         @foreach ($stages as $stage)
                                             <option value="{{ $stage->id }}">{{ $stage->name_ar }}</option>

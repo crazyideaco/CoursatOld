@@ -241,6 +241,7 @@ class SubjectscollegeQuestionCenterController extends Controller
     public function updatesubjectscollegequestionscenter(Request $request, $id)
     {
 
+        dd($request->all());
         $part =  SubjectscollegePart::where('id', $id)->first();
 
 
