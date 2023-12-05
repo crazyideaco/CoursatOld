@@ -1190,14 +1190,11 @@
                                     </table>
                                 </div>
 
-                                <hr>
-
-                                <h4 class="mb-3">الاشعارات</h4>
-
-
-
 
                             </div>
+                            <hr>
+                            <h4 class="mb-3">الاشعارات</h4>
+
                             <div class="col-lg-12">
                                 <div class="table-responsive">
                                     <table class="table">
@@ -1255,6 +1252,44 @@
 
                                             </tr>
                                             {{-- end --}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr>
+                            <h4 class="mb-3">طلبات الانضمام</h4>
+
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            {{-- start --}}
+                                            <tr>
+                                                <td>طلبات الأنضمام الأساسي</td>
+                                                <td>
+                                                    <div class="form-group form-check nas">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                        <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                                    </div>
+                                                </td>
+
+
+                                            </tr>
+                                            {{-- end --}}
+                                            {{-- start --}}
+                                            <tr>
+                                                <td>طلبات الأنضمام الجامعي</td>
+                                                <td>
+                                                    <div class="form-group form-check nas">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                        <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                                    </div>
+                                                </td>
+
+
+                                            </tr>
+                                            {{-- end --}}
+
                                         </tbody>
                                     </table>
                                 </div>
