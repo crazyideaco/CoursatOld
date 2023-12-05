@@ -221,7 +221,7 @@
                                             <span>{{__('messages.'.$model)}}</span>
                                         </a>
                                     </li>
-                                    @endforeach--}}
+                                    @endforeach
 
                                 </ul>
                                 <div class="tab-content">
@@ -283,7 +283,7 @@
                                     </div>
                                   @endforeach
                                 </div>
-                            </div>
+                            </div>--}}
                             </div>
 
           </div>
