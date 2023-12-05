@@ -136,8 +136,8 @@
                                                     @endif
                                                 </td>
                                                 <td scope="col" class="text-center">
-                                                    {{-- {{ $student->pivot->created_at->format('Y-m-d') }} --}}
-                                                    --
+                                                    {{ $student->pivot->created_at->format('Y-m-d') ?? '--' }}
+                                                    
                                                 </td>
 
 
