@@ -224,16 +224,35 @@
                                             </tr>
                                         </thead>--}}
                                         <tbody>
+                                            /* start */
                                             <tr>
-                                            <th scope="row">المشرف</th>
-                                            <td><div class="form-group form-check">
+                                            <td>المشرف</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
                                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
                                             </div>
                                            </td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
                                             </tr>
+                                            /* end */
                                             <tr>
                                             <th scope="row">2</th>
                                             <td>Jacob</td>
