@@ -214,14 +214,14 @@
                             <div class="col-xl-12">
                                 <h4 class="mb-3">الصلاحيات</h4>
 
-                                /* <ul class="nav nav-tabs">
+                                {{--<ul class="nav nav-tabs">
                                     @foreach($models as $index => $model)
                                     <li class="nav-item">
                                         <a href="#{{$model}}" data-toggle="tab" aria-expanded="false" class="nav-link {{$index == 0 ? 'active' : ''}}">
                                             <span>{{__('messages.'.$model)}}</span>
                                         </a>
                                     </li>
-                                    @endforeach
+                                    @endforeach--}}
 
                                 </ul>
                                 <div class="tab-content">
@@ -282,8 +282,8 @@
                                          @endforeach
                                     </div>
                                   @endforeach
-                                </div> */
-                            </div><!-- end col -->
+                                </div>
+                            </div>
                             </div>
 
           </div>
