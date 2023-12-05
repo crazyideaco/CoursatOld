@@ -132,7 +132,7 @@
                                                     @if ($student->city)
                                                         {{ $student->city['city'] }}
                                                     @else
-                                                    --
+                                                        --
                                                     @endif
                                                 </td>
                                                 <td scope="col" class="text-center">
@@ -163,13 +163,11 @@
                                                         id="btning{{ $student->id }}"
                                                         onclick="activestudentcourse({{ $student->id }},{{ $id }})">
 
-                                                        @php
-                                                            if ($studenttype && $studenttype->active == 1){
-                                                                "الغاء التفعيل";
-                                                            }else{
-                                                                "تفعيل";
-                                                            }
-                                                        @endphp
+                                                        @if ($studenttype && $studenttype->active == 1)
+                                                            الغاء التفعيل
+                                                        @else
+                                                            تفعيل
+                                                        @endif
                                                     </span>
                                                 </td>
 
