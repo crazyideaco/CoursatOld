@@ -255,7 +255,7 @@ class StudentController extends Controller
         $students = [];
         $students_joins = Student_Type::where("type_id", $id)->onlyTrashed()->get();
         foreach ($students_joins as $join) {
-            $students [] = $join->student;
+            $students[] = $join->student;
         }
         // $students = Type::where("id", $id)->first()->studentstype()->onlyTrashed()->get();
         $status = 0;
@@ -273,7 +273,7 @@ class StudentController extends Controller
         $students = [];
         $students_joins = Student_Typecollege::where("typecollege_id", $id)->onlyTrashed()->get();
         foreach ($students_joins as $join) {
-            $students [] = $join->student;
+            $students[] = $join->student;
         }
         // $students = TypesCollege::with(['studentscollege' => function ($query) {
         //     $query->onlyTrashed();
@@ -437,9 +437,10 @@ class StudentController extends Controller
         return view('dashboard.students.unverified_students', compact('students'));
     }
 
-    public function verify_all_students(){
+    public function verify_all_students()
+    {
         $students = User::where('phone_verify', 0)->whereIn("is_student", [1, 2])->where("is_visitor", 0)->whereNotNull("name")->get();
-        foreach($students as $student){
+        foreach ($students as $student) {
             $student->update([
                 "phone_verify" => 1
             ]);
