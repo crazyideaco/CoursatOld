@@ -224,7 +224,7 @@
                                             </tr>
                                         </thead>--}}
                                         <tbody>
-                                            /* start */
+                                            {{--start--}}
                                             <tr>
                                             <td>المشرف</td>
                                             <td>
@@ -252,19 +252,819 @@
                                             </div>
                                            </td>
                                             </tr>
-                                            /* end */
+                                            {{--end--}}
+                                            {{--start--}}
                                             <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <td>المدرسيين</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
                                             </tr>
+                                            {{--end--}}
+                                            {{--start--}}
                                             <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
+                                            <td>المدرسين</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
                                             </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>الدكاتره</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>المحاضرين</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>المراكز</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>المحافظات</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>المدن</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>العروض</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>المراحل</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>السنوات</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>مواد الأساسي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>حصص الأساسي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>فديوهات الأساسي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>بنك الأسئله</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>الجامعات</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>الكليات</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>الأقسام</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>الفرق</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>مواد الجامعي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>كورسات الجامعي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>حصص الجامعي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>فديوهات الجامعي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>بنك الأسئله الجامعي</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>الأقسام الرئسيه</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>الأقسام الفرعيه</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>كورسات عام</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>فديوهات عام</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
+                                            {{--start--}}
+                                            <tr>
+                                            <td>بنك أسئله عام</td>
+                                            <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">اضافة</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">عرض</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">تعديل</label>
+                                            </div>
+                                           </td>
+                                           <td>
+                                                <div class="form-group form-check nas">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">حذف</label>
+                                            </div>
+                                           </td>
+                                            </tr>
+                                            {{--end--}}
                                         </tbody>
                                 </table>
 
