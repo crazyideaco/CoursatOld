@@ -11,6 +11,11 @@
   .info .inputDetails input{
     width: 100%;
   }
+  .form-group.form-check.nas {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
 
 	/* ====== Tablet style ====== */
 	@media only screen and (max-width: 991.98px){
@@ -29,6 +34,7 @@
       .notifcation .nav-item{
           width: 25%;
         }
+    }
     /* ====== Mobile style ====== */
 
       @media only screen and (max-width: 767.98px) {
@@ -282,7 +288,7 @@
                                            </td>
                                             </tr>
                                             {{--end--}}
-                                           
+
                                             {{--start--}}
                                             <tr>
                                             <td>الدكاتره</td>
