@@ -285,9 +285,12 @@ class StudentController extends Controller
 
         $students = [];
         $students_joins = Student_Typecollege::where("typecollege_id", $id)->onlyTrashed()->get();
-        foreach ($students_joins as $join) {
-            $students[] = $join->student;
-        }
+        $students = $students_joins->map(function ($item) {
+            return $item->student;
+        });
+        // foreach ($students_joins as $join) {
+        //     $students[] = $join->student;
+        // }
         // $students = TypesCollege::with(['studentscollege' => function ($query) {
         //     $query->onlyTrashed();
         // }])->find($id)->studentscollege;

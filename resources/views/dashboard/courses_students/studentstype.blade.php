@@ -136,7 +136,7 @@
                                                     @endif
                                                 </td>
                                                 <td scope="col" class="text-center">
-                                                    {{ \Carbon\Carbon::parse($student->pivot->created_at)->format('Y-m-d') ?? '--' }}
+                                                    {{ is_object($student) ? \Carbon\Carbon::parse($student->pivot->created_at)->format('Y-m-d') : '--' }}
 
                                                 </td>
 
