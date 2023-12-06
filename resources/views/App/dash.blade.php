@@ -910,9 +910,9 @@
                                         <a href="{{ route('centers') }}"
                                             class="@if (request()->is('centers')) active @endif">
                                             المراكز</a>
-                                        <a href="{{ route('students') }}"
+                                        {{-- <a href="{{ route('students') }}"
                                             class="@if (request()->is('students')) active @endif">
-                                            الطلاب</a>
+                                            الطلاب</a> --}}
 
                                         <a href="{{ route('basicstudents') }}"
                                             class="@if (request()->is('basicstudents')) active @endif">
