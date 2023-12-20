@@ -195,7 +195,7 @@
                         </div>
 
 
-
+<input type="hidden" name="id" value="{{$video->youtube_link }}">
 
 
                         @if (Auth::user() && Auth::user()->isAdmin == 'admin')
