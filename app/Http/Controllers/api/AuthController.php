@@ -93,7 +93,6 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        dd("2".$request->phone);
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:users',
             'phone' => 'required|min:7|unique:users',
@@ -145,6 +144,7 @@ class AuthController extends Controller
             $this->whatsappService->send_whatsapp([
                 "2".$request->phone,
                 $verification_code,
+                "default"
             ]);
             ////         if($request->hasFile('image'))
             //         {
