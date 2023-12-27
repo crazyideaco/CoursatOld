@@ -400,8 +400,13 @@ class AuthController extends Controller
             if ($validator->passes()) {
                 $user = User::where('phone', $request->phone)->first();
                 if ($user) {
+                    $verification_code = rand(100000, 999999);
                     $user->password = Hash::make($request->password);
+                    $user->verification_code = $verification_code;
                     $user->save();
+                    $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2'. $user->phone . '&text=' . $verification_code . '&session=default';
+
+                    Http::get($apiUrl);
                     return response()->json(['status' => true, 'message' => 'تم تغيير كم السر بنجح ']);
                 } else {
                     $msg = 'ا يو مستخدم بهذ الرقم';
