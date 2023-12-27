@@ -25,7 +25,7 @@ class WhatsappService
             ];
 
 
-            $response = $this->apiService->withHeaders($headers)->postApiData($apiUrl, $request->all());
+            $response = $this->apiService->withHeaders($headers)->postApiData($apiUrl, $request->phone, $request->code);
             $responseData = $response->json();
             // dd($response);
 
