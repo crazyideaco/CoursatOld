@@ -14,7 +14,7 @@ class WhatsappService
     {
         $this->apiService = $apiService;
     }
-    public function send_whatsapp(Request $request){
+    public function send_whatsapp($data){
         try{
 
             $apiUrl = 'crazyidea.online:3001/api/sendText';
@@ -25,7 +25,7 @@ class WhatsappService
             ];
 
 
-            $response = $this->apiService->withHeaders($headers)->postApiData($apiUrl, request()->all());
+            $response = $this->apiService->withHeaders($headers)->postApiData($apiUrl, $data);
             $responseData = $response->json();
             // dd($response);
 

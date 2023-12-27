@@ -141,7 +141,7 @@ class AuthController extends Controller
             $user = User::create($data);
 
             $this->whatsappService->send_whatsapp(
-                request()->phone,
+                $request->phone,
                 $verification_code,
             );
             ////         if($request->hasFile('image'))
