@@ -98,11 +98,9 @@ class AuthController extends Controller
 
 
 
-        $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=201212648022&text=test100&session=default';
 
-        Http::get($apiUrl);
 
-       return 0;
+    //    return 0;
 
 
 
@@ -153,12 +151,15 @@ class AuthController extends Controller
 
             $user = User::create($data);
 
+            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2'. $user->phone . '&text=' . $verification_code . '&session=default';
 
-            $this->whatsappService->send_whatsapp([
-                "chatId" => "201212648022",
-                "text" => $verification_code,
-                "session" => "default"
-            ]);
+            Http::get($apiUrl);
+
+            // $this->whatsappService->send_whatsapp([
+            //     "chatId" => "201212648022",
+            //     "text" => $verification_code,
+            //     "session" => "default"
+            // ]);
             ////         if($request->hasFile('image'))
             //         {
             //             $image = $request->image;
