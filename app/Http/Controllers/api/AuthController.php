@@ -141,7 +141,7 @@ class AuthController extends Controller
             $user = User::create($data);
 
             $this->whatsappService->send_whatsapp(
-                "2".$request->phone,
+                $request->phone,
                 "رمز التفعيل الخاص بك هو : " . $verification_code,
             );
             ////         if($request->hasFile('image'))
