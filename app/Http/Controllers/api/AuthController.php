@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use Illuminate\Support\Facades\Http;
 use App\Services\ApiMethodsService;
 use App\Course;
 use App\Course_Rate;
@@ -95,16 +96,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
 
-        $apiService = new ApiMethodsService();
+
 
         $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=201212648022&text=test100&session=default';
 
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-        ];
+        Http::get($apiUrl);
 
-        $apiService->withHeaders($headers)->getApiData($apiUrl);
+       return 0;
+
+
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|unique:users',
