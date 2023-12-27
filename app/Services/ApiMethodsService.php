@@ -29,9 +29,7 @@ class ApiMethodsService
     {
         $response = Http::withHeaders($this->headers)->withQueryParameters($this->queryParameters)
             ->get($url, [$this->queryParameters]);
-
         return $response;
-
         // Handle the response as before
     }
 

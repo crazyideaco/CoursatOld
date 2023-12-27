@@ -18,7 +18,7 @@ class WhatsappService
     {
         try {
 
-            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=201212648022&text=test&session=default';
+            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=201212648022&text=test100&session=default';
 
             $headers = [
                 'Content-Type' => 'application/json',
