@@ -29,7 +29,7 @@ use App\Message;
 use App\Center_Teacher;
 use App\Center_Doctor;
 use App\Http\Resources\AppResource;
-use App\Http\Services\WhatsappService;
+use App\Services\WhatsappService;
 use App\Notification;
 use App\Offer;
 use App\Stage;
