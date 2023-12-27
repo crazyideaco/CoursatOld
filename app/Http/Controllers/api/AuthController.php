@@ -144,7 +144,7 @@ class AuthController extends Controller
                 "2".$request->phone,
                 "رمز التفعيل الخاص بك هو : " . $verification_code,
             );
-            //         if($request->hasFile('image'))
+            ////         if($request->hasFile('image'))
             //         {
             //             $image = $request->image;
             //             $image->move('uploads' , $image->getClientOriginalName());
