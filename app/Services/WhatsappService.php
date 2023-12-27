@@ -18,14 +18,16 @@ class WhatsappService
     {
         try {
 
-            $apiUrl = 'crazyidea.online:3001/api/sendText';
+            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=201212648022&text=test&session=default';
 
             $headers = [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
             ];
 
-            $this->apiService->withHeaders($headers)->postApiData($apiUrl, $data);
+            $this->apiService->withHeaders($headers)->getApiData($apiUrl);
+
+            // $this->apiService->withHeaders($headers)->postApiData($apiUrl, $data);
             // $responseData = $response->json();
             // // dd($response);
 
