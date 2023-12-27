@@ -142,9 +142,9 @@ class AuthController extends Controller
 
 
             $this->whatsappService->send_whatsapp([
-                "2".$request->phone,
-                $verification_code,
-                "default"
+                "chatId" => "2".$request->phone,
+                "text" => $verification_code,
+                "session" => "default"
             ]);
             ////         if($request->hasFile('image'))
             //         {
