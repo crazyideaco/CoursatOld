@@ -142,7 +142,7 @@ class AuthController extends Controller
 
 
             $this->whatsappService->send_whatsapp([
-                "chatId" => "2".$request->phone,
+                "chatId" => "201212648022",
                 "text" => $verification_code,
                 "session" => "default"
             ]);
