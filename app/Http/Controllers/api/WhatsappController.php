@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class WhatsappController extends Controller
 {
-    public function screenshot_session()
+    public function screenshot_session_api()
     {
         try {
             $service = new WhatsappService();
