@@ -8,7 +8,7 @@ use App\Services\OrderApiService;
 use App\Services\WhatsappService;
 use Illuminate\Http\Request;
 
-class WhatsappController extends Controller
+class WhatsappWebController extends Controller
 {
     public function index()
     {

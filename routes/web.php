@@ -704,9 +704,10 @@
 
 
     Route::resource("reels", 'ReelController');
-    Route::resource("scan_whatsapp", 'WhatsappController');
+    Route::resource("scan_whatsapp", 'WhatsappWebController');
+
     //screenshot_session
-    Route::get('screenshot_session', 'WhatsappController@screenshot_session')->name('screenshot_session');
+    Route::get('screenshot_session', 'WhatsappWebController@screenshot_session')->name('screenshot_session');
 
     Route::resource("type_subscribtions", 'TypeSubscriptionController');
     Route::resource("typecollege_subscribtions", 'TypeCollegeSubscriptionController');
