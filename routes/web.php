@@ -677,7 +677,7 @@
     Route::post('store_qrcode', 'QrCodeController@store')->name('store_qrcode');
 
     //screenshot_session
-    Route::post('screenshot_session', 'WhatsappController@screenshot_session')->name('screenshot_session');
+    Route::get('screenshot_session', 'WhatsappController@screenshot_session')->name('screenshot_session');
 
     //patches
     Route::get('patches/{id}', 'QrCodeController@patch_index')->name('types.patches');
