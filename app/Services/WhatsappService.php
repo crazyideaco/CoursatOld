@@ -10,35 +10,35 @@ class WhatsappService
 {
     use ApiTrait;
     protected $apiService;
-    public function __construct(ApiMethodsService $apiService)
-    {
-        $this->apiService = $apiService;
-    }
-    public function send_whatsapp($data)
-    {
-        try {
+    // public function __construct(ApiMethodsService $apiService)
+    // {
+    //     $this->apiService = $apiService;
+    // }
+    // public function send_whatsapp($data)
+    // {
+    //     try {
 
-            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=201212648022&text=test100&session=default';
+    //         $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=201212648022&text=test100&session=default';
 
-            $headers = [
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ];
+    //         $headers = [
+    //             'Content-Type' => 'application/json',
+    //             'Accept' => 'application/json',
+    //         ];
 
-            $this->apiService->withHeaders($headers)->getApiData($apiUrl);
+    //         $this->apiService->withHeaders($headers)->getApiData($apiUrl);
 
-            // $this->apiService->withHeaders($headers)->postApiData($apiUrl, $data);
-            // $responseData = $response->json();
-            // // dd($response);
+    //         // $this->apiService->withHeaders($headers)->postApiData($apiUrl, $data);
+    //         // $responseData = $response->json();
+    //         // // dd($response);
 
-            // $message = "send_whatsapp";
+    //         // $message = "send_whatsapp";
 
-            // return $this->dataResponse($message, $responseData, 200);
+    //         // return $this->dataResponse($message, $responseData, 200);
 
-        } catch (\Exception $ex) {
-            return $this->returnException($ex->getMessage(), 500);
-        }
-    }
+    //     } catch (\Exception $ex) {
+    //         return $this->returnException($ex->getMessage(), 500);
+    //     }
+    // }
 
     public function screenshot_session()
     {
