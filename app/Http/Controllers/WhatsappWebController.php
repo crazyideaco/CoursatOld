@@ -29,12 +29,10 @@ class WhatsappWebController extends Controller
 
             // Return the image data as a response
             return response($imageData)->header('Content-Type', 'image/png');
+            
         } catch (\Exception $ex) {
             // Handle any exceptions that might occur
             return response()->json(['error' => $ex->getMessage()], 500);
         }
-
-        // $service = new WhatsappService();
-        // return $service->screenshot_session();
     }
 }
