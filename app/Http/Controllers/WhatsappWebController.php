@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Services\OrderApiService;
 use App\Services\WhatsappService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class WhatsappWebController extends Controller
 {
@@ -25,18 +24,17 @@ class WhatsappWebController extends Controller
     public function screenshot_session()
     {
         try {
-            $apiUrl = 'http://crazyidea.online:3001/api/screenshot?session=default';
+            $service = new WhatsappService();
+            $imageData = $service->screenshot_session();
 
-            $headers = [
-                'Accept' => 'image/png',
-            ];
-
-            $response = Http::withHeaders($headers)->get($apiUrl);
-
-            return $response->body();
-
+            // Return the image data as a response
+            return response($imageData)->header('Content-Type', 'image/png');
         } catch (\Exception $ex) {
-            return $this->returnException($ex->getMessage(), 500);
+            // Handle any exceptions that might occur
+            return response()->json(['error' => $ex->getMessage()], 500);
         }
+
+        // $service = new WhatsappService();
+        // return $service->screenshot_session();
     }
 }
