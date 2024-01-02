@@ -25,7 +25,7 @@ Route::group(['namespace' => 'api'], function () {
     Route::get('app_status', 'AuthController@app_status');
 
     // route for setting avatar
-    Route::get('screenshot_session_api', 'WhatsappController@screenshot_session_api');
+    Route::get('screenshot_session_api', 'WhatsappController@screenshot_session_api')->name('screenshot_session_api');
 
     Route::post("setAvatar", "Student\SetAvatarController@setAvatar")->middleware('auth:api');
     // Route for switching centers
