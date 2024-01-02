@@ -4,7 +4,6 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 
-use App\Services\OrderApiService;
 use App\Services\WhatsappService;
 use Illuminate\Http\Request;
 
@@ -22,6 +21,7 @@ class WhatsappController extends Controller
             // Handle any exceptions that might occur
             return response()->json(['error' => $ex->getMessage()], 500);
         }
+
 
     }
 
