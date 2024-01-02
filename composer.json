@@ -22,8 +22,7 @@
         "santigarcor/laratrust": "^6.3",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "symfony/symfony": "5.4.x",
-        "yajra/laravel-datatables": "^1.5",
-        "intervention/image": "^2.7"
+        "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
