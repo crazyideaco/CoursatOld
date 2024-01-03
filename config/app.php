@@ -178,7 +178,7 @@ return [
         ProtoneMedia\LaravelFFMpeg\Support\ServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        // Intervention\Image\ImageServiceProviderLaravelRecent::class,
     ],
 
     /*
