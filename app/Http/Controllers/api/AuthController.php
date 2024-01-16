@@ -150,8 +150,12 @@ class AuthController extends Controller
             $data['device_id'] = $request->device_id ?? null;
 
             $user = User::create($data);
+            try{
+                            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2'. $user->phone . '&text=' . $verification_code . '&session=default';
 
-            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2'. $user->phone . '&text=' . $verification_code . '&session=default';
+            }catch(\Exception $e){
+                
+            }
 
             Http::get($apiUrl);
 
