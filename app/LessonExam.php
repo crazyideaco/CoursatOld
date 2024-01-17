@@ -12,6 +12,7 @@ use App\Lesson;
 use App\TypesCollege;
 use App\SubjectsCollege;
 use App\LessonexamQuestion;
+use Carbon\Carbon;
 
 class LessonExam extends Model
 {
@@ -53,5 +54,15 @@ class LessonExam extends Model
     public function students()
     {
         return $this->belongsToMany(User::class, 'lessonexams_results', 'exam_id', 'student_id')->withPivot('exam_score', 'student_score', 'created_at');
+    }
+
+    public function getStartDateTimeAttribute()
+    {
+        return  Carbon::parse($this->date_time)->format('g:i A');
+    }
+
+    public function getEndDateTimeAttribute()
+    {
+        return  Carbon::parse($this->date_time)->addMinutes($this->duration_time)->format('g:i A');
     }
 }

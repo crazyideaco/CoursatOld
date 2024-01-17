@@ -28,8 +28,8 @@ class ExamResource extends JsonResource
 
             'id' => $this->id,
             'title' => $this->name,
-            'from' => $this->getStartDateTimeAttribute()->format('Y-m-d g:i A'),//Carbon::parse($this->date_time)->format('g:i A'),
-            'to' => $this->getEndDateTimeAttribute()->format('Y-m-d g:i A'),//Carbon::parse($this->date_time)->addMinutes($this->duration_time)->format('g:i A'),
+            'from' => $this->getStartDateTimeAttribute(),//->format('Y-m-d g:i A'),//Carbon::parse($this->date_time)->format('g:i A'),
+            'to' => $this->getEndDateTimeAttribute(),//->format('Y-m-d g:i A'),//Carbon::parse($this->date_time)->addMinutes($this->duration_time)->format('g:i A'),
             // 'duration' => intval($this->duration),
             'duration' => intval($this->duration_time),
             'degree' =>  intval($this->score),
