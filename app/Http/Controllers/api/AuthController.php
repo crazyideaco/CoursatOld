@@ -152,12 +152,12 @@ class AuthController extends Controller
             $user = User::create($data);
             try{
                             $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2'. $user->phone . '&text=' . $verification_code . '&session=default';
-
+            Http::get($apiUrl);
             }catch(\Exception $e){
-                
+
             }
 
-            Http::get($apiUrl);
+
 
             // $this->whatsappService->send_whatsapp([
             //     "chatId" => "201212648022",
