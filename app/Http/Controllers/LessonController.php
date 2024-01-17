@@ -31,7 +31,6 @@ class LessonController extends Controller
     }
     public function addlesson($id)
     {
-        dd($id);
         if (auth()->user() && auth()->user()->isAdmin == 'admin') {
             $divisions = Division::all();
             $sections = Section::all();
