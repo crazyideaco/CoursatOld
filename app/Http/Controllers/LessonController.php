@@ -54,6 +54,7 @@ class LessonController extends Controller
             $users = User::where('id', auth()->user()->id)->first()->doctors;
         }
         $tags = Tag::all();
+        dd($tags);
         return view('dashboard.addlesson')->with('colleges', College::all())->with('divisions', $divisions)->
             with('sections', $sections)->with('subcolleges', $subcolleges)->with('tags', $tags)
             ->with('typescolleges', $typescolleges)->with('users', $users)->with('universities', University::all())->with('id', $id);
