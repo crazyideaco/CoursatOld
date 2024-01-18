@@ -44,16 +44,16 @@ class TypeExam extends Model
 
     public function getStartDateTimeAttribute()
     {
-        $from = Carbon::parse("{$this->date_day} {$this->date_time}");//->format('Y-m-d H:i:s');
+        $from = Carbon::parse("{$this->date_day} {$this->date_time}")->format('Y-m-d H:i:s');
 
         return $from;
     }
     public function getEndDateTimeAttribute()
     {
-        $to = Carbon::parse("{$this->end_date} {$this->end_time}");//->format('Y-m-d H:i:s');
+        $to = Carbon::parse("{$this->end_date} {$this->end_time}")->format('Y-m-d H:i:s');
 
         return $to;
     }
-    
+
 
 }//End of model

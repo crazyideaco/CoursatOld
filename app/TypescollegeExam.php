@@ -54,18 +54,18 @@ class TypescollegeExam extends Model
         return $this->belongsToMany(User::class, 'typescollegeexams_results', 'exam_id', 'student_id')->withPivot('exam_score', 'student_score', 'created_at');
     }
 
-    
+
 
     public function getStartDateTimeAttribute()
     {
-        $from = Carbon::parse("{$this->date_day} {$this->date_time}");//->format('Y-m-d H:i:s');
+        $from = Carbon::parse("{$this->date_day} {$this->date_time}")->format('Y-m-d H:i:s');
 
 
         return $from;
     }
     public function getEndDateTimeAttribute()
     {
-        $to = Carbon::parse("{$this->end_date} {$this->end_time}");//->format('Y-m-d H:i:s');
+        $to = Carbon::parse("{$this->end_date} {$this->end_time}")->format('Y-m-d H:i:s');
 
 
         return $to;
