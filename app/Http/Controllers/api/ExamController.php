@@ -302,7 +302,9 @@ class ExamController extends Controller
     {
         $now = Carbon::now();
         if (auth()->user()->category_id == 1) {
-            $exams = TypeExam::whereDate('date_day', Carbon::now())->whereIn('type_id', auth()->user()->stutypes->pluck('id'))->get()
+            $exams = TypeExam::whereDate('date_day', Carbon::now())
+            ->whereIn('type_id', auth()->user()->stutypes->pluck('id'))
+            ->get()
                 ->each(function ($type) {
                     $from = Carbon::parse($type->date_time);
                     $to = Carbon::parse($type->date_time)->addMinutes($type->duration_time);
