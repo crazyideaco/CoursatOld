@@ -39,6 +39,7 @@ class TypeCollegeSecuritySettingController extends Controller
         }
 
         $data['simulator'] = $request->simulator;
+        $data['phone_color'] = $request->phone_color;
 
 
         $data['typeable_id'] = $id;

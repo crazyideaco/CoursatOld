@@ -1,51 +1,58 @@
 <style>
     h3.card-label {
-    font-family: 'med';
-}
-.card-toolbar a.btn.first {
-    background-color: #243e56;
-    color: white;
-    font-family: 'reg';
+        font-family: 'med';
+    }
 
-}
-.table tbody tr td {
-    background: unset !important;
-}
-.table thead tr th {
-    background: unset !important;
-}
-div#dataTableBuilder_wrapper {
-    font-family: 'med';
-}
-button {
-    background-color: #243e56 !important;
-    color: white !important;
-    border: unset !important;
-    font-family: 'reg';
-    border-radius: 10px !important;
-    padding: 0.5rem 1rem !important;
-    margin-right: 27px !important;
-    cursor: pointer !important;
-    transition: 0.7s
-}
-button:hover {
-    background-color: white;
-    color: #243e56;
-}
-div#dataTableBuilder_length {
-    margin-top: 19px;
-}
+    .card-toolbar a.btn.first {
+        background-color: #243e56;
+        color: white;
+        font-family: 'reg';
+
+    }
+
+    .table tbody tr td {
+        background: unset !important;
+    }
+
+    .table thead tr th {
+        background: unset !important;
+    }
+
+    div#dataTableBuilder_wrapper {
+        font-family: 'med';
+    }
+
+    button {
+        background-color: #243e56 !important;
+        color: white !important;
+        border: unset !important;
+        font-family: 'reg';
+        border-radius: 10px !important;
+        padding: 0.5rem 1rem !important;
+        margin-right: 27px !important;
+        cursor: pointer !important;
+        transition: 0.7s
+    }
+
+    button:hover {
+        background-color: white;
+        color: #243e56;
+    }
+
+    div#dataTableBuilder_length {
+        margin-top: 19px;
+    }
 </style>
 
 
 
 @extends('App.dash')
 @section('style')
-<style>
-    #example_wrapper {
-        width: 100% !important;
-    }
-</style>
+    <style>
+        #example_wrapper {
+            width: 100% !important;
+        }
+    </style>
 @endsection
 @section('content')
     <!---------------------- start content -------------------------------------------->
@@ -55,7 +62,8 @@ div#dataTableBuilder_length {
             <div class="main_topic">
                 <h4> اعدادات الامان</h4>
             </div>
-            <form method="post" class="form_topic" action="{{ route('college_security.update', $id) }}" enctype="multipart/form-data">
+            <form method="post" class="form_topic" action="{{ route('college_security.update', $id) }}"
+                enctype="multipart/form-data">
                 @csrf
 
                 <!-- start input -->
@@ -66,15 +74,15 @@ div#dataTableBuilder_length {
                         <div class="input-group">
                             <label class="form-label"> كود الفيديوهات</label>
                             <div class="form-check form-check-inline">
-                                <input {{ $security_setting->show_video_code == '1' ? 'checked' : '' }} onchange="toggleCode()"
-                                    class="form-check-input" type="radio" id="inlineCheckbox6" value="1"
-                                    name="show_video_code">
+                                <input {{ $security_setting->show_video_code == '1' ? 'checked' : '' }}
+                                    onchange="toggleCode()" class="form-check-input" type="radio" id="inlineCheckbox6"
+                                    value="1" name="show_video_code">
                                 <label class="form-check-label" for="inlineCheckbox6">عرض</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input {{ $security_setting->show_video_code == '0' ? 'checked' : '' }} onchange="toggleCode()"
-                                    name="show_video_code" class="form-check-input" type="radio" id="inlineCheckbox7"
-                                    value="0">
+                                <input {{ $security_setting->show_video_code == '0' ? 'checked' : '' }}
+                                    onchange="toggleCode()" name="show_video_code" class="form-check-input" type="radio"
+                                    id="inlineCheckbox7" value="0">
                                 <label class="form-check-label" for="inlineCheckbox7"> اخفاء</label>
                             </div>
 
@@ -162,7 +170,16 @@ div#dataTableBuilder_length {
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <label class="form-label">لون الكود</label>
+                            <input type="color" name="phone_color"
+                                value="{{ $security_setting ? $security_setting->phone_color : '' }}"
+                                class="form-control @error('phone_color') is-invalid @enderror">
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-6">
                         <button type="submit" class="btn first">حفظ</button>
@@ -219,6 +236,7 @@ div#dataTableBuilder_length {
             togglePrice();
 
         }, 2000);
+
         function toggleCode() {
             var checkbox = document.getElementById('inlineCheckbox6');
             var checkboxSec = document.getElementById('inlineCheckbox7');
@@ -234,7 +252,6 @@ div#dataTableBuilder_length {
         }
     </script>
     <script>
-
         function togglePrice() {
             var fixedbox = document.getElementById('radio4');
             var dynamicbox = document.getElementById('radio5');
