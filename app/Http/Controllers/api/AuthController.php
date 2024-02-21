@@ -54,7 +54,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -100,7 +100,7 @@ class AuthController extends Controller
 
 
 
-    //    return 0;
+        //    return 0;
 
 
 
@@ -150,11 +150,10 @@ class AuthController extends Controller
             $data['device_id'] = $request->device_id ?? null;
 
             $user = User::create($data);
-            try{
-                            $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2'. $user->phone . '&text=' . $verification_code . '&session=default';
-            Http::get($apiUrl);
-            }catch(\Exception $e){
-
+            try {
+                $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2' . $user->phone . '&text=' . $verification_code . '&session=default';
+                Http::get($apiUrl);
+            } catch (\Exception $e) {
             }
 
 
@@ -408,7 +407,7 @@ class AuthController extends Controller
                     $user->password = Hash::make($request->password);
                     $user->verification_code = $verification_code;
                     $user->save();
-                    $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2'. $user->phone . '&text=' . $verification_code . '&session=default';
+                    $apiUrl = 'http://crazyidea.online:3001/api/sendText?phone=2' . $user->phone . '&text=' . $verification_code . '&session=default';
 
                     Http::get($apiUrl);
                     return response()->json(['status' => true, 'message' => 'تم تغيير كم السر بنجح ']);
@@ -530,6 +529,7 @@ class AuthController extends Controller
             }
         }
 
+
         return response()->json([
             'status' => true,
             'message' => 'محتوي هوم',
@@ -538,6 +538,7 @@ class AuthController extends Controller
             'centeroffers' => OfferResource::collection($offers),
 
         ]);
+
     }
     public function course_classes(Request $request)
     {
